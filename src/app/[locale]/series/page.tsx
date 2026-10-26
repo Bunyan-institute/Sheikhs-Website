@@ -23,7 +23,7 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-12 md:py-20">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <div className="mb-12 space-y-4">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#2D3436]">
             Series
@@ -40,7 +40,7 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
             <p className="text-[#636E72]">Check back later for newly published scholarly series.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {series.map((s: PublicSeries) => (
               <Link key={s.id} href={`/series/${s.slug}`} className="group flex flex-col h-full bg-white border border-[#E0D8CE] rounded-md overflow-hidden hover:border-[#1B5E20] hover:shadow-sm transition-all">
                 <div className="relative aspect-video bg-[#E0D8CE] overflow-hidden">

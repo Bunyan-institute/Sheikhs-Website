@@ -54,7 +54,7 @@ export default async function LecturesPage({ params, searchParams }: LecturesPag
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-12 md:py-20">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <div className="mb-12 space-y-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
@@ -106,7 +106,7 @@ export default async function LecturesPage({ params, searchParams }: LecturesPag
             <p className="text-[#636E72]">Try adjusting your format or category filters.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {lectures.map((lecture: PublicLecture) => (
               <Link key={lecture.id} href={`/lectures/${lecture.slug}`} className="group flex flex-col h-full bg-white border border-[#E0D8CE] rounded-md overflow-hidden hover:border-[#1B5E20] hover:shadow-sm transition-all">
                 <div className="relative aspect-video bg-[#2D3436] overflow-hidden">

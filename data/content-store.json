@@ -1,0 +1,4571 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-26T07:38:37.615Z",
+  "profile": {
+    "object": "profile",
+    "id": "sheikh-ferej",
+    "name": "Sheikh Muhammed Ferej Megeno",
+    "headline": "Islamic Scholar, Educator & Sharia Consultant",
+    "biography": "Sheikh Muhammed Ferej Megeno (الشيخ محمد فرج مجنو) is a prominent Ethiopian Islamic scholar, educator, and certified AAOIFI Sharia consultant. With over 35 years devoted to traditional Islamic knowledge circles (Halaqat), curriculum design, and public education across Ethiopia and the Horn of Africa, he serves as President of the Al-Fajr Islamic Foundation, Member of the African Scholars Union, and resident Sharia Consultant at Wegagen Bank.",
+    "languages": [
+      "ar",
+      "am",
+      "en",
+      "om"
+    ],
+    "locale": "en",
+    "direction": "ltr",
+    "photo": {
+      "object": "media",
+      "id": "med_portrait",
+      "kind": "image",
+      "url": "/images/sheikh-portrait.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 1280,
+      "duration_seconds": null
+    },
+    "sections": {
+      "lectures": true,
+      "articles": true,
+      "fatwas": true,
+      "courses": true,
+      "library": true,
+      "events": true,
+      "questions": true
+    },
+    "socials": {
+      "tiktok": "https://www.tiktok.com/@ustazmuhammadferej0",
+      "youtube": "https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3",
+      "facebook": "https://web.facebook.com/p/Ustaz-Muhammad-ferej-100064605885257/?_rdc=1&_rdr#",
+      "telegram": "https://t.me/ustazmuhammadferej"
+    },
+    "location": "Addis Ababa, Ethiopia",
+    "updated_at": "2026-10-26T07:11:33.925Z"
+  },
+  "journey": [
+    {
+      "year": "Traditional",
+      "title": "Traditional Islamic Circles (Halaqat)",
+      "institution": "Scholars of Silti & Jimma Regions",
+      "description": "Rigorous study in traditional knowledge circles mastering Shafi'i jurisprudence, Quranic exegesis (Tafsir), Hadith, Usul al-Fiqh, and classical Arabic linguistics under senior local scholars.",
+      "type": "education"
+    },
+    {
+      "year": "2001",
+      "title": "Diploma in Islamic Sciences",
+      "institution": "Al-Ansar Sharia Institute (1422H)",
+      "description": "Graduated with an Excellent Grade in foundational Islamic jurisprudence, theology, and prophetic traditions.",
+      "type": "education"
+    },
+    {
+      "year": "2003",
+      "title": "Projects & Preachers Supervisor",
+      "institution": "Al-Ansar Dawah Center",
+      "description": "Commenced supervising charitable development projects, community welfare, and coordinating field efforts of regional preachers.",
+      "type": "teaching"
+    },
+    {
+      "year": "2004",
+      "title": "Diploma in Management",
+      "institution": "Noor Salam Academic College",
+      "description": "Completed professional studies in organizational management and institutional administration.",
+      "type": "education"
+    },
+    {
+      "year": "2008",
+      "title": "Diploma in Arabic Language",
+      "institution": "Khartoum International Arabic Institute / Sindbad Center (1429H)",
+      "description": "Advanced certification in Arabic grammar, rhetoric, and classical literature.",
+      "type": "education"
+    },
+    {
+      "year": "2008",
+      "title": "Media & Broadcast Preacher",
+      "institution": "Africa TV, Zawiya TV & Noor Al-Huda TV",
+      "description": "Began presenting televised educational Islamic programs, delivering live fatwas, and broadcasting scholarly lectures across the Horn of Africa.",
+      "type": "teaching"
+    },
+    {
+      "year": "2023",
+      "title": "Certified Sharia Auditor (AAOIFI)",
+      "institution": "Max Breg Foundation",
+      "description": "Earned Certified Sharia Auditor and Controller diploma with Excellent Grade adhering to global AAOIFI Sharia accounting and governance standards.",
+      "type": "education"
+    },
+    {
+      "year": "2023",
+      "title": "Sharia Banking Consultant",
+      "institution": "Wegagen Bank — Islamic Banking Window",
+      "description": "Providing Sharia governance, compliance auditing, and structuring advisory for Islamic financial windows and digital banking frameworks.",
+      "type": "current"
+    },
+    {
+      "year": "2025",
+      "title": "Bachelor's in Sharia and Law",
+      "institution": "Islamic University of Minnesota",
+      "description": "Graduated with Excellent Grade in Islamic Jurisprudence, Comparative Law, and Legal Foundations.",
+      "type": "education"
+    },
+    {
+      "year": "2026",
+      "title": "Master’s in Islamic Studies",
+      "institution": "Islamic University of Minnesota",
+      "description": "Completing postgraduate degree in advanced Islamic sciences with high distinction, focusing on contemporary Islamic issues.",
+      "type": "current"
+    }
+  ],
+  "qualifications": [
+    {
+      "id": "masters-islamic-studies",
+      "title": "Master's in Islamic Studies (Distinction)",
+      "issuer": "Islamic University of Minnesota",
+      "year": "2026",
+      "type": "academic",
+      "description": "Postgraduate thesis focusing on contemporary Islamic issues, Sharia governance, and classical legal reasoning."
+    },
+    {
+      "id": "bachelor-sharia-law",
+      "title": "Bachelor's in Sharia and Law (Excellent Grade)",
+      "issuer": "Islamic University of Minnesota",
+      "year": "2025",
+      "type": "academic",
+      "description": "Rigorous academic study in Islamic Jurisprudence (Fiqh), Usul al-Fiqh, and comparative legal systems with top honors."
+    },
+    {
+      "id": "aaoifi-sharia-auditor",
+      "title": "Diploma in Sharia Standards (AAOIFI)",
+      "issuer": "Max Breg Foundation",
+      "year": "2023",
+      "type": "certificate",
+      "description": "Certified Sharia Auditor and Controller diploma with Excellent Grade, accredited for Islamic finance compliance and governance."
+    },
+    {
+      "id": "arabic-institute-diploma",
+      "title": "Diploma in Arabic Language",
+      "issuer": "Khartoum International Arabic Institute & Sindbad Center",
+      "year": "2008",
+      "type": "certificate",
+      "description": "Comprehensive qualification in classical Arabic morphology, syntax, rhetoric, and Arabic literary translation."
+    },
+    {
+      "id": "diploma-management",
+      "title": "Diploma in Management",
+      "issuer": "Noor Salam Academic College",
+      "year": "2004",
+      "type": "academic",
+      "description": "Specialized in administrative leadership, institutional management, and organizational coordination."
+    },
+    {
+      "id": "islamic-sciences-diploma",
+      "title": "Diploma in Islamic Sciences (Excellent Grade)",
+      "issuer": "Al-Ansar Sharia Institute (1422H)",
+      "year": "2001",
+      "type": "certificate",
+      "description": "Foundational mastery in Islamic sciences, Hadith classification, and Shafi'i legal manuals."
+    },
+    {
+      "id": "tot-educators",
+      "title": "Trainer of Trainers (ToT) Certification",
+      "issuer": "Islamic Preaching & Mosque Development Board",
+      "year": "Certified",
+      "type": "certificate",
+      "description": "Specialized certification for training mosque Imams, public preachers, educators, and community scholars."
+    },
+    {
+      "id": "traditional-ijazah",
+      "title": "Traditional Knowledge Transmission (Sanad & Halaqat)",
+      "issuer": "Senior Traditional Scholars of Silti & Jimma",
+      "year": "Traditional",
+      "type": "ijazah",
+      "description": "Connected chains of knowledge transmission across Quranic Tafsir, Sahih collections, and classical Shafi'i jurisprudence."
+    }
+  ],
+  "lectures": [
+    {
+      "object": "lecture",
+      "id": "lec_yt_nebyu",
+      "title": "Nebyu (s.a.w) Beleloch Andebet | ነቢዩ በሌሎች አንደበት (The Prophet in the Words of Others)",
+      "slug": "nebyu-beleloch-andebet",
+      "summary": "Comprehensive discourse exploring historical testimonies, classical non-Muslim accounts, and scholarly evaluations recognizing the character and legacy of Prophet Muhammad (ﷺ).",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3600,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_nebyu",
+        "kind": "image",
+        "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=5hlykYaVcn4",
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. Nebyu (s.a.w) Beleloch Andebet | ነቢዩ በሌሎች አንደበት (The Prophet in the Words of Others) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "seerah",
+        "dawah"
+      ],
+      "tags": [
+        "seerah",
+        "prophet-muhammad",
+        "dawah"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_andinet",
+      "title": "Eslamawi Andinet | ኢስላማዊ አንድነት (Islamic Unity and Brotherhood)",
+      "slug": "eslamawi-andinet",
+      "summary": "A vital lecture on preserving Muslim brotherhood, avoiding sectarian discord, and holding firmly to the rope of Allah in light of Quranic directives.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2820,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_andinet",
+        "kind": "image",
+        "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=F3r8LwKVUL0",
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. Eslamawi Andinet | ኢስላማዊ አንድነት (Islamic Unity and Brotherhood) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "tarbiyah",
+        "society"
+      ],
+      "tags": [
+        "unity",
+        "brotherhood",
+        "ethiopia"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_kelb",
+      "title": "Selamawi Kelb | ሰላማዊ ቀልብ (The Sound and Peaceful Heart)",
+      "slug": "selamawi-kelb",
+      "summary": "Explaining the spiritual reality of 'Qalbun Saleem' (Sound Heart) referenced in Surah Ash-Shu'ara (88-89), diagnosing diseases of malice, envy, and heedlessness.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3120,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_kelb",
+        "kind": "image",
+        "url": "/images/photo_1_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=6LE8RQZS130",
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. Selamawi Kelb | ሰላማዊ ቀልብ (The Sound and Peaceful Heart) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "spirituality",
+        "tarbiyah"
+      ],
+      "tags": [
+        "tazkiyah",
+        "heart",
+        "quran-reflection"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_ljoch",
+      "title": "YeLjoch Astedadeg | የልጆች አስተዳደግ በኢስላም (Islamic Parenting and Child Rearing)",
+      "slug": "yeljoch-astedadeg-be-islam",
+      "summary": "Essential parental guidance on raising children with righteous character, love of the Sunnah, and emotional intelligence in modern society.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2940,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_ljoch",
+        "kind": "image",
+        "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=hCNwsu-lbCM",
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. YeLjoch Astedadeg | የልጆች አስተዳደግ በኢስላም (Islamic Parenting and Child Rearing) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "family",
+        "parenting"
+      ],
+      "tags": [
+        "parenting",
+        "family",
+        "education"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_selef",
+      "title": "Nebaru Yeselefoch Menged | ነባሩ የሰለፎች መንገድ (The Methodology of the Pious Predecessors)",
+      "slug": "nebaru-yeselefoch-menged",
+      "summary": "Firm adherence to the authentic Sunnah as understood by the Companions (Sahabah) and the earliest righteous generations of Islam.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3480,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_selef",
+        "kind": "image",
+        "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=qDnsb22QKmQ",
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. Nebaru Yeselefoch Menged | ነባሩ የሰለፎች መንገድ (The Methodology of the Pious Predecessors) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "manhaj",
+        "aqeedah"
+      ],
+      "tags": [
+        "salaf",
+        "manhaj",
+        "sunnah"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_wudu",
+      "title": "ትክክለኛ የውዱዕ አደራረግ ትምህርት (Proper Performance of Wudu)",
+      "slug": "tikikilena-ye-wudu-aderareg",
+      "summary": "Practical step-by-step masterclass demonstrating the obligatory elements (Fara'id) and recommended etiquettes (Sunan) of ablution.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1860,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_wudu",
+        "kind": "image",
+        "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=alSRvXh9ZpE",
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትክክለኛ የውዱዕ አደራረግ ትምህርት (Proper Performance of Wudu) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "fiqh",
+        "taharah"
+      ],
+      "tags": [
+        "wudu",
+        "fiqh",
+        "worship"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_salah",
+      "title": "ትክክለኛ የዉዱእ አደርእራረግና ትክክለኛ የሰላት አሰጋገድ ትምህርት (Wudu and Salah Complete Guide)",
+      "slug": "wudu-enna-salah-complete-guide",
+      "summary": "Comprehensive audio-visual practical guide teaching the exact prayers, postures, recitations, and common mistakes to avoid in daily Salah.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 4200,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_salah",
+        "kind": "image",
+        "url": "/images/photo_17_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=CHWj6ZZEQyg",
+        "transcript": "ቢስሚላሂር ረሕማኒር ረሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትክክለኛ የውዱእ አደራረግና ትክክለኛ የሰላት አሰጋገድ ትምህርት (Wudu and Salah Complete Guide) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "fiqh",
+        "salah"
+      ],
+      "tags": [
+        "salah",
+        "worship",
+        "fiqh"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_mizan",
+      "title": "Mizan Agudayoch Weyolachew | ሚዛን አጉዳዮች ወዮላቸው (Woe to the Defrauders)",
+      "slug": "mizan-agudayoch-weyolachew",
+      "summary": "ጥልቅ የቁርኣን ተፍሲር በሱረቱል ሙጠፊፊን ላይ፤ በንግድ፣ በቃል ኪዳንና በሰው ልጆች ግንኙነት ውስጥ ፍትሕንና ታማኝነትን ስለመጠበቅ የተሰጠ ወሳኝ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2400,
+      "published_at": "2024-02-15T12:00:00Z",
+      "updated_at": "2024-02-15T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_mizan",
+        "kind": "image",
+        "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=5hlykYaVcn4",
+        "transcript": "ቢስሚላሂር ረሕማኒር ረሒም. {وَيْلٌ لِّلْمُطَفِّفِينَ ۝ الَّذِينَ إِذَا اكْتَالُوا عَلَى النَّاسِ يَسْتَوْفُونَ ۝ وَإِذَا كَالُوهُمْ أَو وَّزَنُوهُمْ يُخْسِرُونَ} — ሚዛን አጉዳዮች፣ የሰዎችን ሀቅ የሚቀሙ እና በንግድ ላይ የሚያጭበረብሩ ከባድ ቅጣት ይጠብቃቸዋል። በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የሱረቱል ሙጠፊፊን ማብራሪያ።"
+      },
+      "series": null,
+      "categories": [
+        "tafsir",
+        "ethics",
+        "quran"
+      ],
+      "tags": [
+        "ተፍሲር",
+        "ሙጠፊፊን",
+        "ንግድ",
+        "ፍትሕ"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_yaleallah",
+      "title": "Yale Allah Man Alen | ያለ አላህ ማን አለን (Who Do We Have Besides Allah?)",
+      "slug": "yale-allah-man-alen",
+      "summary": "በፈተና እና በጭንቀት ወቅት ሙሉ በሙሉ በአላህ ላይ መመካት (ተውኩል)፣ ልብን ከፍጡራን ጥገኝነት ነጻ ማድረግና ወደ ፈጣሪ መመለስ።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2100,
+      "published_at": "2024-02-20T12:00:00Z",
+      "updated_at": "2024-02-20T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_yaleallah",
+        "kind": "image",
+        "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=F3r8LwKVUL0",
+        "transcript": "ቢስሚላሂር ረሕማኒር ረሒም. ያለ አላህ ረዳትም ሆነ ጠባቂ የለንም። በሰው ልጆች ታሪክ ውስጥ ትልቁ ድልና መጽናናት የሚገኘው ልብን ከአላህ ጋር በማስተሳሰርና በዱዓእ በመበርታት ነው። በኡስታዝ ሙሐመድ ፈረጅ የቀረበ መንፈሳዊ ትምህርት።"
+      },
+      "series": null,
+      "categories": [
+        "aqeedah",
+        "iman",
+        "spirituality"
+      ],
+      "tags": [
+        "ተውኩል",
+        "ኢማን",
+        "ዱዓእ",
+        "ተስፋ"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_eznet",
+      "title": "Eznet BeIslam | እዝነት በእስላም (The Quality of Mercy & Compassion)",
+      "slug": "eznet-be-islam",
+      "summary": "የእዝነት ምንነት፣ ነቢዩ ﷺ ለሰው ልጆች ያሳዩት ርኅራኄ፣ እና በሙስሊም ማህበረሰብ ውስጥ እርስ በርስ የመተዛዘን አስፈላጊነት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1980,
+      "published_at": "2024-03-01T12:00:00Z",
+      "updated_at": "2024-03-01T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_eznet",
+        "kind": "image",
+        "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=6LE8RQZS130",
+        "transcript": "ቢስሚላሂር ረሕማኒር ረሒም. ነቢዩ ﷺ እንዲህ ብለዋል፦ «አዛኞች የሆኑትን አል-ረሕማን (እጅግ ሩኅሩሁ አላህ) ያዝንላቸዋል፤ በምድር ላይ ላሉት እዘኑ በሰማይ ያለው ያዝንላችኋልና።» እዝነት የሙእሚን ዋነኛ መገለጫ ነው።"
+      },
+      "series": null,
+      "categories": [
+        "akhlaq",
+        "tarbiyah",
+        "dawah"
+      ],
+      "tags": [
+        "እዝነት",
+        "አኽላቅ",
+        "ነቢዩ",
+        "ርኅራኄ"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_kebedayoch",
+      "title": "Kebedayoch Athun | ከበዳዮች አትሁን (Warning Against Oppression & Injustice)",
+      "slug": "kebedayoch-athun",
+      "summary": "የበደል (ዙልም) ከባድነት፣ በሰዎች ሀቅ ላይ መረማመድ የሚያስከትለው አደጋ እና በትንሣኤ ቀን የሚያመጣው ጨለማ።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2520,
+      "published_at": "2024-03-10T12:00:00Z",
+      "updated_at": "2024-03-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_kebedayoch",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=CHWj6ZZEQyg",
+        "transcript": "ቢስሚላሂር ረሕማኒር ረሒም. «اتَّقُوا الظُّلْمَ فَإِنَّ الظُّلْمَ ظُلُمَاتٌ يَوْምَ الْقِيَامَةِ» — በደልን ተጠንቀቁ፤ በደል በትንሣኤ ቀን ድቅድቅ ጨለማ ነውና። ማንንም ሰው በገንዘቡ፣ በደሙ ወይም በክብሩ ላይ ከመበደል መራቅ የዲን መሠረት ነው። በኡስታዝ ሙሐመድ ፈረጅ።"
+      },
+      "series": null,
+      "categories": [
+        "akhlaq",
+        "adab",
+        "warning"
+      ],
+      "tags": [
+        "ዙልም",
+        "በደል",
+        "ፍትሕ",
+        "አኺራ"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_yt_ethiopia_dua",
+      "title": "Ethiopia Eyemekerch New BeDua Enberta | ኢትዮጵያ እየመከረች ነው በዱዓ እንበርታ",
+      "slug": "ethiopia-eyemekerch-new-bedua-enberta",
+      "summary": "ሀገራዊ ሰላም፣ መተሳሰብ፣ የጋራ አብሮነት እና ሀገርን ከአደጋ ለመጠበቅ የአላህን እዝነት በዱዓእ የመለመን ጥሪ።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2700,
+      "published_at": "2024-03-20T12:00:00Z",
+      "updated_at": "2024-03-20T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_yt_ethiopia_dua",
+        "kind": "image",
+        "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": null,
+        "video": "https://www.youtube.com/watch?v=alSRvXh9ZpE",
+        "transcript": "ቢስሚላሂር ረሕማኒር ረሒም. በፈተና ወቅት ህዝቦች አንድ ሆነው ወደ አላህ ሊመለሱ ይገባል። ሀገራችንን ሰላምና በረከት እንዲያወርድላት ሁላችንም በዱዓእ፣ በኢስቲግፋር እና ሰደቃ በመስጠት ልንተባበር ይገባል። በኡስታዝ ሙሐመድ ፈረጅ የተላለፈ ሀገራዊ መልእክት።"
+      },
+      "series": null,
+      "categories": [
+        "society",
+        "dua",
+        "ethiopia"
+      ],
+      "tags": [
+        "ኢትዮጵያ",
+        "ዱዓእ",
+        "ሰላም",
+        "አንድነት"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_01",
+      "title": "كتاب التوحيد — درس 01: كتاب التوحيد وقول الله تعالى: {وما خلقت الجن والإنس إلا ليعبدون} (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-01",
+      "summary": "The foundational obligation of Monotheism and the primary purpose of human creation.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1837,
+      "published_at": "2024-03-02T09:00:00Z",
+      "updated_at": "2024-03-02T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_01",
+        "kind": "image",
+        "url": "/images/photo_2_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-01.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 1፦ كتاب التوحيد وقول الله تعالى: {وما خلقت الجن والإنس إلا ليعبدون}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 1
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_02",
+      "title": "كتاب التوحيد — درس 02: باب فضل التوحيد وما يكفر من الذنوب (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-02",
+      "summary": "The immense virtue of Tawheed and its power to expiate major and minor sins.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1874,
+      "published_at": "2024-03-03T09:00:00Z",
+      "updated_at": "2024-03-03T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_02",
+        "kind": "image",
+        "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-02.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 2፦ باب فضل التوحيد وما يكفر من الذنوب። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 2
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_03",
+      "title": "كتاب التوحيد — درس 03: باب من حقق التوحيد دخل الجنة بغير حساب (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-03",
+      "summary": "Those who realize Tawheed in its purest form entering Paradise without reckoning.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1911,
+      "published_at": "2024-03-04T09:00:00Z",
+      "updated_at": "2024-03-04T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_03",
+        "kind": "image",
+        "url": "/images/photo_4_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-03.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 3፦ باب من حقق التوحيد دخل الجنة بغير حساب። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 3
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_04",
+      "title": "كتاب التوحيد — درس 04: باب الخوف من الشرك (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-04",
+      "summary": "Cultivating the necessary spiritual fear of falling into subtle and open Shirk.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1948,
+      "published_at": "2024-03-05T09:00:00Z",
+      "updated_at": "2024-03-05T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_04",
+        "kind": "image",
+        "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-04.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 4፦ باب الخوف من الشرك። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 4
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_05",
+      "title": "كتاب التوحيد — درس 05: باب الدعاء إلى شهادة أن لا إله إلا الله (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-05",
+      "summary": "The prophetic obligation of calling creation to the testimony of Tawheed.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1985,
+      "published_at": "2024-03-06T09:00:00Z",
+      "updated_at": "2024-03-06T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_05",
+        "kind": "image",
+        "url": "/images/photo_6_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-05.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 5፦ باب الدعاء إلى شهادة أن لا إله إلا الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 5
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_06",
+      "title": "كتاب التوحيد — درس 06: باب تفسير التوحيد وشهادة أن لا إله إلا الله (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-06",
+      "summary": "Precise linguistic and theological definitions of the Shahadah.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2022,
+      "published_at": "2024-03-07T09:00:00Z",
+      "updated_at": "2024-03-07T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_06",
+        "kind": "image",
+        "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-06.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 6፦ باب تفسير التوحيد وشهادة أن لا إله إلا الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 6
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_07",
+      "title": "كتاب التوحيد — درس 07: باب من الشرك لبس الحلقة والخيط لرفع البلاء (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-07",
+      "summary": "Prohibition of wearing amulets, strings, and charms to repel misfortune.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2059,
+      "published_at": "2024-03-08T09:00:00Z",
+      "updated_at": "2024-03-08T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_07",
+        "kind": "image",
+        "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-07.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 7፦ باب من الشرك لبس الحلقة والخيط لرفع البلاء። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 7
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_08",
+      "title": "كتاب التوحيد — درس 08: باب ما جاء في الرقى والتمائم (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-08",
+      "summary": "Differentiating between permissible Quranic Ruqyah and polytheistic incantations.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2096,
+      "published_at": "2024-03-09T09:00:00Z",
+      "updated_at": "2024-03-09T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_08",
+        "kind": "image",
+        "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-08.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 8፦ باب ما جاء في الرقى والتمائم። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 8
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_09",
+      "title": "كتاب التوحيد — درس 09: باب من تبرك بشجرة أو حجر ونحوهما (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-09",
+      "summary": "Prohibition of seeking devotional blessings from trees, stones, and monuments.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2133,
+      "published_at": "2024-03-10T09:00:00Z",
+      "updated_at": "2024-03-10T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_09",
+        "kind": "image",
+        "url": "/images/photo_10_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-09.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 9፦ باب من تبرك بشجرة أو حجر ونحوهما። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 9
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_10",
+      "title": "كتاب التوحيد — درس 10: باب ما جاء في الذبح لغير الله (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-10",
+      "summary": "The ruling on sacrificial slaughter directed towards jinn, shrines, or departed spirits.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2170,
+      "published_at": "2024-03-11T09:00:00Z",
+      "updated_at": "2024-03-11T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_10",
+        "kind": "image",
+        "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-10.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 10፦ باب ما جاء في الذبح لغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 10
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_11",
+      "title": "كتاب التوحيد — درس 11: باب لا يذبح لله بمكان يذبح فيه لغير الله (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-11",
+      "summary": "Preventative jurisprudence: avoiding slaughter for Allah in locations of pagan ritual.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2207,
+      "published_at": "2024-03-12T09:00:00Z",
+      "updated_at": "2024-03-12T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_11",
+        "kind": "image",
+        "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-11.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 11፦ باب لا يذبح لله بمكان يذبح فيه لغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 11
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_12",
+      "title": "كتاب التوحيد — درس 12: باب من الشرك النذر لغير الله (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-12",
+      "summary": "Solemn vows: why dedicating vows to creation constitutes a violation of Tawheed.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2244,
+      "published_at": "2024-03-13T09:00:00Z",
+      "updated_at": "2024-03-13T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_12",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-12.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 12፦ باب من الشرك النذر لغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 12
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_13",
+      "title": "كتاب التوحيد — درس 13: باب من الشرك الاستعاذة بغير الله (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-13",
+      "summary": "Seeking refuge (Istiadhah): the exclusivity of turning to Allah for spiritual protection.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2281,
+      "published_at": "2024-03-14T09:00:00Z",
+      "updated_at": "2024-03-14T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_13",
+        "kind": "image",
+        "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-13.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 13፦ باب من الشرك الاستعاذة بغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 13
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_14",
+      "title": "كتاب التوحيد — درس 14: باب من الشرك أن يستغيث بغير الله أو يدعو غيره (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-14",
+      "summary": "Supplication and plea for deliverance (Istighathah): directed only to the Creator.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2318,
+      "published_at": "2024-03-15T09:00:00Z",
+      "updated_at": "2024-03-15T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_14",
+        "kind": "image",
+        "url": "/images/photo_15_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-14.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 14፦ باب من الشرك أن يستغيث بغير الله أو يدعو غيره። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 14
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_15",
+      "title": "كتاب التوحيد — درس 15: باب قول الله تعالى: {أيشـركون ما لا يخلق شيئا وهم يخلقون} (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-15",
+      "summary": "The absolute helplessness of created beings compared to Divine Majesty.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2355,
+      "published_at": "2024-03-16T09:00:00Z",
+      "updated_at": "2024-03-16T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_15",
+        "kind": "image",
+        "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-15.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 15፦ باب قول الله تعالى: {أيشـركون ما لا يخلق شيئا وهم يخلقون}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 15
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_16",
+      "title": "كتاب التوحيد — درس 16: باب قول الله تعالى: {حتى إذا فزع عن قلوبهم قالوا ماذا قال ربكم} (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-16",
+      "summary": "The awe and submission of the angels when Allah speaks the revelation.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2392,
+      "published_at": "2024-03-17T09:00:00Z",
+      "updated_at": "2024-03-17T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_16",
+        "kind": "image",
+        "url": "/images/photo_17_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-16.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 16፦ باب قول الله تعالى: {حتى إذا فزع عن قلوبهم قالوا ماذا قال ربكم}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 16
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_17",
+      "title": "كتاب التوحيد — درس 17: باب الشفاعة (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-17",
+      "summary": "The affirmed Shafa'ah on the Day of Judgment versus the rejected polytheistic intercession.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1829,
+      "published_at": "2024-03-18T09:00:00Z",
+      "updated_at": "2024-03-18T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_17",
+        "kind": "image",
+        "url": "/images/photo_1_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-17.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 17፦ باب الشفاعة። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 17
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_18",
+      "title": "كتاب التوحيد — درس 18: باب قول الله تعالى: {إنك لا تهدي من أحببت} (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-18",
+      "summary": "Guidance (Hidayah) belongs exclusively to Allah; the limits of human affection.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1866,
+      "published_at": "2024-03-19T09:00:00Z",
+      "updated_at": "2024-03-19T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_18",
+        "kind": "image",
+        "url": "/images/photo_2_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-18.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 18፦ باب قول الله تعالى: {إنك لا تهدي من أحببت}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 18
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_19",
+      "title": "كتاب التوحيد — درس 19: باب ما جاء أن سبب كفر بني آدم هو الغلو في الصالحين (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-19",
+      "summary": "Excessive veneration of righteous individuals as the root cause of historical idolatry.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1903,
+      "published_at": "2024-03-20T09:00:00Z",
+      "updated_at": "2024-03-20T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_19",
+        "kind": "image",
+        "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-19.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 19፦ باب ما جاء أن سبب كفر بني آدم هو الغلو في الصالحين። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 19
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_20",
+      "title": "كتاب التوحيد — درس 20: باب التغليظ فيمن عبد الله عند قبر رجل صالح (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-20",
+      "summary": "Strict prohibition against turning graves into places of worship.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1940,
+      "published_at": "2024-03-21T09:00:00Z",
+      "updated_at": "2024-03-21T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_20",
+        "kind": "image",
+        "url": "/images/photo_4_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-20.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 20፦ باب التغليظ فيمن عبد الله عند قبر رجل صالح። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 20
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_21",
+      "title": "كتاب التوحيد — درس 21: باب أن الغلو في قبور الصالحين يصيرها أوثانا (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-21",
+      "summary": "Preventing graves from transforming into worshipped idols and sanctuaries.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1977,
+      "published_at": "2024-03-22T09:00:00Z",
+      "updated_at": "2024-03-22T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_21",
+        "kind": "image",
+        "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-21.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 21፦ باب أن الغلو في قبور الصالحين يصيرها أوثانا። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 21
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_22",
+      "title": "كتاب التوحيد — درس 22: باب حماية المصطفى صلى الله عليه وسلم حمى التوحيد (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-22",
+      "summary": "The Prophet's comprehensive barriers blocking all paths leading to polytheism.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2014,
+      "published_at": "2024-03-23T09:00:00Z",
+      "updated_at": "2024-03-23T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_22",
+        "kind": "image",
+        "url": "/images/photo_6_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-22.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 22፦ باب حماية المصطفى صلى الله عليه وسلم حمى التوحيد። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 22
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_23",
+      "title": "كتاب التوحيد — درس 23: باب ما جاء في الرقى والتمائم (تتمة) (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-23",
+      "summary": "Detailed rulings on superstitious charms and the Islamic alternative of reliance upon Allah.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2051,
+      "published_at": "2024-03-24T09:00:00Z",
+      "updated_at": "2024-03-24T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_23",
+        "kind": "image",
+        "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/kitab-at-tawheed-23.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 23፦ باب ما جاء في الرقى والتمائم (تتمة)። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 23
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_24",
+      "title": "كتاب التوحيد — درس 24: باب من تبرك بشجرة أو حجر ونحوهما (تتمة) (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-24",
+      "summary": "Historical lessons from the incident of Dhat Anwat during the conquest of Hunayn.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2088,
+      "published_at": "2024-03-25T09:00:00Z",
+      "updated_at": "2024-03-25T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_24",
+        "kind": "image",
+        "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/kitab-at-tawheed-24.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 24፦ باب من تبرك بشجرة أو حجر ونحوهما (تتمة)። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 24
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_25",
+      "title": "كتاب التوحيد — درس 25: باب ما جاء في الذبح لغير الله (تتمة) (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-25",
+      "summary": "The danger of offering even minor sacrifices for superstitious appeasement.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2125,
+      "published_at": "2024-03-26T09:00:00Z",
+      "updated_at": "2024-03-26T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_25",
+        "kind": "image",
+        "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/kitab-at-tawheed-25.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 25፦ باب ما جاء في الذبح لغير الله (تتمة)። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 25
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_26",
+      "title": "كتاب التوحيد — درس 26: باب ما جاء في التطير والتطير من الشرك (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-26",
+      "summary": "Bad omens (Tiyarah) and their cure through steadfast trust in Divine Decree (Tawakkul).",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2162,
+      "published_at": "2024-03-27T09:00:00Z",
+      "updated_at": "2024-03-27T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_26",
+        "kind": "image",
+        "url": "/images/photo_10_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/kitab-at-tawheed-26.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 26፦ باب ما جاء في التطير والتطير من الشرك። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 26
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_27",
+      "title": "كتاب التوحيد — درس 27: باب ما جاء في الكهان ونحوهم (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-27",
+      "summary": "Prohibition of fortune-tellers, soothsayers, and astrology in Islamic law.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2199,
+      "published_at": "2024-03-28T09:00:00Z",
+      "updated_at": "2024-03-28T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_27",
+        "kind": "image",
+        "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-27.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 27፦ باب ما جاء في الكهان ونحوهم። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 27
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_28",
+      "title": "كتاب التوحيد — درس 28: باب ما جاء في النشرة (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-28",
+      "summary": "The ruling on Nusrah: dismantling sorcery with lawful Quranic remedies versus demonic means.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2236,
+      "published_at": "2024-03-01T09:00:00Z",
+      "updated_at": "2024-03-01T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_28",
+        "kind": "image",
+        "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-28.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 28፦ باب ما جاء في النشرة። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 28
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_29",
+      "title": "كتاب التوحيد — درس 29: باب ما جاء في التنجيم (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-29",
+      "summary": "Astrology vs. astronomy: theological assessment of celestial bodies and human destinies.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2273,
+      "published_at": "2024-03-02T09:00:00Z",
+      "updated_at": "2024-03-02T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_29",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-29.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 29፦ باب ما جاء في التنجيم። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 29
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_30",
+      "title": "كتاب التوحيد — درس 30: باب ما جاء في الاستسقاء بالأنواء (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-30",
+      "summary": "Attributing rainfall and climate sustenance to stars instead of the Provider.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2310,
+      "published_at": "2024-03-03T09:00:00Z",
+      "updated_at": "2024-03-03T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_30",
+        "kind": "image",
+        "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-30.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 30፦ باب ما جاء في الاستسقاء بالأنواء። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 30
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_31",
+      "title": "كتاب التوحيد — درس 31: باب قول الله تعالى: {ومن الناس من يتخذ من دون الله أندادا} (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-31",
+      "summary": "Devotional love (Mahabbah): the distinction between love for Allah and loving equals with Him.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2347,
+      "published_at": "2024-03-04T09:00:00Z",
+      "updated_at": "2024-03-04T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_31",
+        "kind": "image",
+        "url": "/images/photo_15_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "https://learning-content-theta.vercel.app/lessons/lesson-31.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 31፦ باب قول الله تعالى: {ومن الناس من يتخذ من دون الله أندادا}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 31
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_tawheed_32",
+      "title": "كتاب التوحيد — درس 32: باب حماية النبي صلى الله عليه وسلم حمى التوحيد وسد كل طريق للشرك (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed-lesson-32",
+      "summary": "Comprehensive conclusion: guarding Tawheed against verbal exaggeration and closing pretexts.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2384,
+      "published_at": "2024-03-05T09:00:00Z",
+      "updated_at": "2024-03-05T09:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_taw_32",
+        "kind": "image",
+        "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/kitab-at-tawheed-32.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 32፦ باب حماية النبي صلى الله عليه وسلم حمى التوحيد وسد كل طريق للشرك። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+      },
+      "series": {
+        "id": "ser-kitab-at-tawheed",
+        "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+        "position": 32
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "tawheed",
+        "kitab-at-tawheed",
+        "aqeedah",
+        "darse"
+      ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khutbah_sincerity",
+      "title": "Friday Khutbah: Sincerity and Purity of Heart (የጁምዓ ኹጥባህ — ኢኽላስና የልብ ንጽሕና)",
+      "slug": "friday-khutbah-importance-of-sincerity",
+      "summary": "Recorded Friday Khutbah delivered by Sheikh Muhammed Ferej on August 25, 2023, addressing the indispensable requirement of sincerity (Ikhlas) in all righteous deeds.",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3360,
+      "published_at": "2023-08-25T10:45:00Z",
+      "updated_at": "2023-08-25T10:45:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_khutbah",
+        "kind": "image",
+        "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khutbah-importance-of-sincerity.mp3",
+        "video": null,
+        "transcript": "خطبة الجمعة في الإخلاص وسلامة القلب من الشرك والرياء. ألقاها الشيخ محمد فرج مجنو حفظه الله."
+      },
+      "series": null,
+      "categories": [
+        "khutbah",
+        "spirituality"
+      ],
+      "tags": [
+        "khutbah",
+        "jumah",
+        "ikhlas",
+        "addis-ababa"
+      ]
+    }
+  ],
+  "series": [
+    {
+      "object": "series",
+      "id": "ser-kitab-at-tawheed",
+      "title": "Explanation of Kitab At-Tawheed (شرح كتاب التوحيد / ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed",
+      "description": "A comprehensive verse-by-verse and chapter-by-chapter exposition of the seminal work Kitab At-Tawheed by Sheikh al-Islam Muhammad ibn Abd al-Wahhab, presented in Amharic with classical Arabic textual readings by Sheikh Muhammed Ferej Megeno.",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_ser_cover",
+        "kind": "image",
+        "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1270,
+        "height": 1280,
+        "duration_seconds": null
+      },
+      "lecture_count": 32,
+      "published_at": "2024-03-01T08:00:00Z",
+      "updated_at": "2024-05-15T08:00:00Z",
+      "lectures": [
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_01",
+          "title": "كتاب التوحيد — درس 01: كتاب التوحيد وقول الله تعالى: {وما خلقت الجن والإنس إلا ليعبدون} (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-01",
+          "summary": "The foundational obligation of Monotheism and the primary purpose of human creation.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1837,
+          "published_at": "2024-03-02T09:00:00Z",
+          "updated_at": "2024-03-02T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_01",
+            "kind": "image",
+            "url": "/images/photo_2_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-01.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 1፦ كتاب التوحيد وقول الله تعالى: {وما خلقت الجن والإنس إلا ليعبدون}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 1
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_02",
+          "title": "كتاب التوحيد — درس 02: باب فضل التوحيد وما يكفر من الذنوب (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-02",
+          "summary": "The immense virtue of Tawheed and its power to expiate major and minor sins.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1874,
+          "published_at": "2024-03-03T09:00:00Z",
+          "updated_at": "2024-03-03T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_02",
+            "kind": "image",
+            "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-02.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 2፦ باب فضل التوحيد وما يكفر من الذنوب። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 2
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_03",
+          "title": "كتاب التوحيد — درس 03: باب من حقق التوحيد دخل الجنة بغير حساب (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-03",
+          "summary": "Those who realize Tawheed in its purest form entering Paradise without reckoning.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1911,
+          "published_at": "2024-03-04T09:00:00Z",
+          "updated_at": "2024-03-04T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_03",
+            "kind": "image",
+            "url": "/images/photo_4_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-03.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 3፦ باب من حقق التوحيد دخل الجنة بغير حساب። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 3
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_04",
+          "title": "كتاب التوحيد — درس 04: باب الخوف من الشرك (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-04",
+          "summary": "Cultivating the necessary spiritual fear of falling into subtle and open Shirk.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1948,
+          "published_at": "2024-03-05T09:00:00Z",
+          "updated_at": "2024-03-05T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_04",
+            "kind": "image",
+            "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-04.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 4፦ باب الخوف من الشرك። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 4
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_05",
+          "title": "كتاب التوحيد — درس 05: باب الدعاء إلى شهادة أن لا إله إلا الله (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-05",
+          "summary": "The prophetic obligation of calling creation to the testimony of Tawheed.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1985,
+          "published_at": "2024-03-06T09:00:00Z",
+          "updated_at": "2024-03-06T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_05",
+            "kind": "image",
+            "url": "/images/photo_6_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-05.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 5፦ باب الدعاء إلى شهادة أن لا إله إلا الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 5
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_06",
+          "title": "كتاب التوحيد — درس 06: باب تفسير التوحيد وشهادة أن لا إله إلا الله (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-06",
+          "summary": "Precise linguistic and theological definitions of the Shahadah.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2022,
+          "published_at": "2024-03-07T09:00:00Z",
+          "updated_at": "2024-03-07T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_06",
+            "kind": "image",
+            "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-06.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 6፦ باب تفسير التوحيد وشهادة أن لا إله إلا الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 6
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_07",
+          "title": "كتاب التوحيد — درس 07: باب من الشرك لبس الحلقة والخيط لرفع البلاء (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-07",
+          "summary": "Prohibition of wearing amulets, strings, and charms to repel misfortune.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2059,
+          "published_at": "2024-03-08T09:00:00Z",
+          "updated_at": "2024-03-08T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_07",
+            "kind": "image",
+            "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-07.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 7፦ باب من الشرك لبس الحلقة والخيط لرفع البلاء። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 7
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_08",
+          "title": "كتاب التوحيد — درس 08: باب ما جاء في الرقى والتمائم (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-08",
+          "summary": "Differentiating between permissible Quranic Ruqyah and polytheistic incantations.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2096,
+          "published_at": "2024-03-09T09:00:00Z",
+          "updated_at": "2024-03-09T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_08",
+            "kind": "image",
+            "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-08.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 8፦ باب ما جاء في الرقى والتمائم። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 8
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_09",
+          "title": "كتاب التوحيد — درس 09: باب من تبرك بشجرة أو حجر ونحوهما (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-09",
+          "summary": "Prohibition of seeking devotional blessings from trees, stones, and monuments.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2133,
+          "published_at": "2024-03-10T09:00:00Z",
+          "updated_at": "2024-03-10T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_09",
+            "kind": "image",
+            "url": "/images/photo_10_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-09.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 9፦ باب من تبرك بشجرة أو حجر ونحوهما። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 9
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_10",
+          "title": "كتاب التوحيد — درس 10: باب ما جاء في الذبح لغير الله (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-10",
+          "summary": "The ruling on sacrificial slaughter directed towards jinn, shrines, or departed spirits.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2170,
+          "published_at": "2024-03-11T09:00:00Z",
+          "updated_at": "2024-03-11T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_10",
+            "kind": "image",
+            "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-10.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 10፦ باب ما جاء في الذبح لغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 10
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_11",
+          "title": "كتاب التوحيد — درس 11: باب لا يذبح لله بمكان يذبح فيه لغير الله (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-11",
+          "summary": "Preventative jurisprudence: avoiding slaughter for Allah in locations of pagan ritual.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2207,
+          "published_at": "2024-03-12T09:00:00Z",
+          "updated_at": "2024-03-12T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_11",
+            "kind": "image",
+            "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-11.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 11፦ باب لا يذبح لله بمكان يذبح فيه لغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 11
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_12",
+          "title": "كتاب التوحيد — درس 12: باب من الشرك النذر لغير الله (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-12",
+          "summary": "Solemn vows: why dedicating vows to creation constitutes a violation of Tawheed.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2244,
+          "published_at": "2024-03-13T09:00:00Z",
+          "updated_at": "2024-03-13T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_12",
+            "kind": "image",
+            "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-12.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 12፦ باب من الشرك النذر لغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 12
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_13",
+          "title": "كتاب التوحيد — درس 13: باب من الشرك الاستعاذة بغير الله (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-13",
+          "summary": "Seeking refuge (Istiadhah): the exclusivity of turning to Allah for spiritual protection.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2281,
+          "published_at": "2024-03-14T09:00:00Z",
+          "updated_at": "2024-03-14T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_13",
+            "kind": "image",
+            "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-13.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 13፦ باب من الشرك الاستعاذة بغير الله። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 13
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_14",
+          "title": "كتاب التوحيد — درس 14: باب من الشرك أن يستغيث بغير الله أو يدعو غيره (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-14",
+          "summary": "Supplication and plea for deliverance (Istighathah): directed only to the Creator.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2318,
+          "published_at": "2024-03-15T09:00:00Z",
+          "updated_at": "2024-03-15T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_14",
+            "kind": "image",
+            "url": "/images/photo_15_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-14.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 14፦ باب من الشرك أن يستغيث بغير الله أو يدعو غيره። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 14
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_15",
+          "title": "كتاب التوحيد — درس 15: باب قول الله تعالى: {أيشـركون ما لا يخلق شيئا وهم يخلقون} (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-15",
+          "summary": "The absolute helplessness of created beings compared to Divine Majesty.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2355,
+          "published_at": "2024-03-16T09:00:00Z",
+          "updated_at": "2024-03-16T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_15",
+            "kind": "image",
+            "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-15.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 15፦ باب قول الله تعالى: {أيشـركون ما لا يخلق شيئا وهم يخلقون}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 15
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_16",
+          "title": "كتاب التوحيد — درس 16: باب قول الله تعالى: {حتى إذا فزع عن قلوبهم قالوا ماذا قال ربكم} (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-16",
+          "summary": "The awe and submission of the angels when Allah speaks the revelation.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2392,
+          "published_at": "2024-03-17T09:00:00Z",
+          "updated_at": "2024-03-17T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_16",
+            "kind": "image",
+            "url": "/images/photo_17_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-16.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 16፦ باب قول الله تعالى: {حتى إذا فزع عن قلوبهم قالوا ماذا قال ربكم}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 16
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_17",
+          "title": "كتاب التوحيد — درس 17: باب الشفاعة (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-17",
+          "summary": "The affirmed Shafa'ah on the Day of Judgment versus the rejected polytheistic intercession.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1829,
+          "published_at": "2024-03-18T09:00:00Z",
+          "updated_at": "2024-03-18T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_17",
+            "kind": "image",
+            "url": "/images/photo_1_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-17.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 17፦ باب الشفاعة። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 17
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_18",
+          "title": "كتاب التوحيد — درس 18: باب قول الله تعالى: {إنك لا تهدي من أحببت} (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-18",
+          "summary": "Guidance (Hidayah) belongs exclusively to Allah; the limits of human affection.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1866,
+          "published_at": "2024-03-19T09:00:00Z",
+          "updated_at": "2024-03-19T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_18",
+            "kind": "image",
+            "url": "/images/photo_2_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-18.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 18፦ باب قول الله تعالى: {إنك لا تهدي من أحببت}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 18
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_19",
+          "title": "كتاب التوحيد — درس 19: باب ما جاء أن سبب كفر بني آدم هو الغلو في الصالحين (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-19",
+          "summary": "Excessive veneration of righteous individuals as the root cause of historical idolatry.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1903,
+          "published_at": "2024-03-20T09:00:00Z",
+          "updated_at": "2024-03-20T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_19",
+            "kind": "image",
+            "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-19.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 19፦ باب ما جاء أن سبب كفر بني آدم هو الغلو في الصالحين። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 19
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_20",
+          "title": "كتاب التوحيد — درس 20: باب التغليظ فيمن عبد الله عند قبر رجل صالح (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-20",
+          "summary": "Strict prohibition against turning graves into places of worship.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1940,
+          "published_at": "2024-03-21T09:00:00Z",
+          "updated_at": "2024-03-21T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_20",
+            "kind": "image",
+            "url": "/images/photo_4_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-20.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 20፦ باب التغليظ فيمن عبد الله عند قبر رجل صالح። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 20
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_21",
+          "title": "كتاب التوحيد — درس 21: باب أن الغلو في قبور الصالحين يصيرها أوثانا (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-21",
+          "summary": "Preventing graves from transforming into worshipped idols and sanctuaries.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 1977,
+          "published_at": "2024-03-22T09:00:00Z",
+          "updated_at": "2024-03-22T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_21",
+            "kind": "image",
+            "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-21.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 21፦ باب أن الغلو في قبور الصالحين يصيرها أوثانا። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 21
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_22",
+          "title": "كتاب التوحيد — درس 22: باب حماية المصطفى صلى الله عليه وسلم حمى التوحيد (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-22",
+          "summary": "The Prophet's comprehensive barriers blocking all paths leading to polytheism.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2014,
+          "published_at": "2024-03-23T09:00:00Z",
+          "updated_at": "2024-03-23T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_22",
+            "kind": "image",
+            "url": "/images/photo_6_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-22.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 22፦ باب حماية المصطفى صلى الله عليه وسلم حمى التوحيد። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 22
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_23",
+          "title": "كتاب التوحيد — درس 23: باب ما جاء في الرقى والتمائم (تتمة) (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-23",
+          "summary": "Detailed rulings on superstitious charms and the Islamic alternative of reliance upon Allah.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2051,
+          "published_at": "2024-03-24T09:00:00Z",
+          "updated_at": "2024-03-24T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_23",
+            "kind": "image",
+            "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "/audio/kitab-at-tawheed-23.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 23፦ باب ما جاء في الرقى والتمائم (تتمة)። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 23
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_24",
+          "title": "كتاب التوحيد — درس 24: باب من تبرك بشجرة أو حجر ونحوهما (تتمة) (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-24",
+          "summary": "Historical lessons from the incident of Dhat Anwat during the conquest of Hunayn.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2088,
+          "published_at": "2024-03-25T09:00:00Z",
+          "updated_at": "2024-03-25T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_24",
+            "kind": "image",
+            "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "/audio/kitab-at-tawheed-24.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 24፦ باب من تبرك بشجرة أو حجر ونحوهما (تتمة)። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 24
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_25",
+          "title": "كتاب التوحيد — درس 25: باب ما جاء في الذبح لغير الله (تتمة) (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-25",
+          "summary": "The danger of offering even minor sacrifices for superstitious appeasement.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2125,
+          "published_at": "2024-03-26T09:00:00Z",
+          "updated_at": "2024-03-26T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_25",
+            "kind": "image",
+            "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "/audio/kitab-at-tawheed-25.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 25፦ باب ما جاء في الذبح لغير الله (تتمة)። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 25
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_26",
+          "title": "كتاب التوحيد — درس 26: باب ما جاء في التطير والتطير من الشرك (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-26",
+          "summary": "Bad omens (Tiyarah) and their cure through steadfast trust in Divine Decree (Tawakkul).",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2162,
+          "published_at": "2024-03-27T09:00:00Z",
+          "updated_at": "2024-03-27T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_26",
+            "kind": "image",
+            "url": "/images/photo_10_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "/audio/kitab-at-tawheed-26.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 26፦ باب ما جاء في التطير والتطير من الشرك። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 26
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_27",
+          "title": "كتاب التوحيد — درس 27: باب ما جاء في الكهان ونحوهم (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-27",
+          "summary": "Prohibition of fortune-tellers, soothsayers, and astrology in Islamic law.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2199,
+          "published_at": "2024-03-28T09:00:00Z",
+          "updated_at": "2024-03-28T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_27",
+            "kind": "image",
+            "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-27.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 27፦ باب ما جاء في الكهان ونحوهم። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 27
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_28",
+          "title": "كتاب التوحيد — درس 28: باب ما جاء في النشرة (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-28",
+          "summary": "The ruling on Nusrah: dismantling sorcery with lawful Quranic remedies versus demonic means.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2236,
+          "published_at": "2024-03-01T09:00:00Z",
+          "updated_at": "2024-03-01T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_28",
+            "kind": "image",
+            "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-28.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 28፦ باب ما جاء في النشرة። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 28
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_29",
+          "title": "كتاب التوحيد — درس 29: باب ما جاء في التنجيم (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-29",
+          "summary": "Astrology vs. astronomy: theological assessment of celestial bodies and human destinies.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2273,
+          "published_at": "2024-03-02T09:00:00Z",
+          "updated_at": "2024-03-02T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_29",
+            "kind": "image",
+            "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-29.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 29፦ باب ما جاء في التنجيم። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 29
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_30",
+          "title": "كتاب التوحيد — درس 30: باب ما جاء في الاستسقاء بالأنواء (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-30",
+          "summary": "Attributing rainfall and climate sustenance to stars instead of the Provider.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2310,
+          "published_at": "2024-03-03T09:00:00Z",
+          "updated_at": "2024-03-03T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_30",
+            "kind": "image",
+            "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-30.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 30፦ باب ما جاء في الاستسقاء بالأنواء። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 30
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_31",
+          "title": "كتاب التوحيد — درس 31: باب قول الله تعالى: {ومن الناس من يتخذ من دون الله أندادا} (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-31",
+          "summary": "Devotional love (Mahabbah): the distinction between love for Allah and loving equals with Him.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2347,
+          "published_at": "2024-03-04T09:00:00Z",
+          "updated_at": "2024-03-04T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_31",
+            "kind": "image",
+            "url": "/images/photo_15_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "https://learning-content-theta.vercel.app/lessons/lesson-31.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 31፦ باب قول الله تعالى: {ومن الناس من يتخذ من دون الله أندادا}። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 31
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        },
+        {
+          "object": "lecture",
+          "id": "lec_tawheed_32",
+          "title": "كتاب التوحيد — درس 32: باب حماية النبي صلى الله عليه وسلم حمى التوحيد وسد كل طريق للشرك (ኪታቡ አተውሂድ)",
+          "slug": "kitab-at-tawheed-lesson-32",
+          "summary": "Comprehensive conclusion: guarding Tawheed against verbal exaggeration and closing pretexts.",
+          "locale": "am",
+          "direction": "ltr",
+          "duration_seconds": 2384,
+          "published_at": "2024-03-05T09:00:00Z",
+          "updated_at": "2024-03-05T09:00:00Z",
+          "cover": {
+            "object": "media",
+            "id": "med_cov_taw_32",
+            "kind": "image",
+            "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+            "mime_type": "image/jpeg",
+            "width": 1280,
+            "height": 853,
+            "duration_seconds": null
+          },
+          "media": {
+            "audio": "/audio/kitab-at-tawheed-32.mp3",
+            "video": null,
+            "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ትምህርት 32፦ باب حماية النبي صلى الله عليه وسلم حمى التوحيد وسد كل طريق للشرك። በኡስታዝ ሙሐመድ ፈረጅ መጀኖ የተሰጠ ጥልቅ የኪታቡ አተውሂድ ማብራሪያ።"
+          },
+          "series": {
+            "id": "ser-kitab-at-tawheed",
+            "title": "Explanation of Kitab At-Tawheed (ኪታቡ አተውሂድ)",
+            "position": 32
+          },
+          "categories": [
+            "aqeedah",
+            "tawheed"
+          ],
+          "tags": [
+            "tawheed",
+            "kitab-at-tawheed",
+            "aqeedah",
+            "darse"
+          ]
+        }
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "object": "article",
+      "id": "art_charity_half_date",
+      "title": "«የተምር ስንጣቂ በመለገስም ቢሆን እሳትን ተከላከሉ» — የሶደቃህ እና የመልካም ንግግር ትሩፋት",
+      "slug": "shield-from-fire-charity-good-words",
+      "summary": "የአላህ መልክተኛ (ሰለላሁ ዐለይሂ ወሰለም) እንዲህ ብለዋል፦ «የተምር ስንጣቂ በመለገስም ቢሆን እሳትን (ጀሀነምን) ተከላከሉ፤ ይህንን ያላገኘ ሰው ግን በመልካም ንግግር ራሱን ይጠብቅ።» (ቡኻሪና ሙስሊም)",
+      "body": "<div class=\"space-y-6\">\n  <div class=\"bg-[#FAF8F5] border border-[#E0D8CE] p-6 rounded-md\">\n    <div class=\"text-xs uppercase font-bold text-[#1B5E20] tracking-wider mb-2\">النص العربي الأصلي • Arabic Text</div>\n    <p class=\"font-heading text-xl md:text-2xl text-right leading-loose text-[#2D3436] font-semibold\" dir=\"rtl\">\n      عَنْ عَدِيِّ بْنِ حَاتِمٍ رَضِيَ اللَّهُ عَنْهُ قَالَ : قَالَ رَسُولُ اللَّهِ ﷺ : \n      <br/>\n      «<strong>اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ فَمَنْ لَمْ يَجِدْ فَبِكَلِمَةٍ طَيِّبَةٍ</strong>»\n    </p>\n    <div class=\"text-right text-xs text-[#636E72] mt-2 font-medium\" dir=\"rtl\">\n      [متفقٌ عليه — رواه البخاري (1417) ومسلم (1016)]\n    </div>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#1B5E20] pl-4 py-2\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] mb-1 font-heading\">የትርጉም ማብራሪያ (Amharic)</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      የአላህ መልክተኛ (ሰለላሁ ዐለይሂ ወሰለም) እንዲህ ብለዋል፦ \n      <em>«የተምር ስንጣቂ በመለገስም ቢሆን እሳትን (ጀሀነምን) ተከላከሉ፤ ይህንን ያላገኘ ሰው ግን በመልካም ንግግር (ራሱን ከእሳት ይጠብቅ)።»</em>\n      <span class=\"text-xs text-[#636E72] block mt-1\">(ቡኻሪና ሙስሊም የተስማሙበት)</span>\n    </p>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#B8860B] pl-4 py-2\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] mb-1 font-heading\">English Translation & Commentary</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      Narrated by Adi bin Hatim (may Allah be pleased with him): The Messenger of Allah (ﷺ) said:\n      <em>\"Guard yourselves against the Fire, even if with half a date-fruit; and whoever cannot afford even that, then with a good and kind word.\"</em>\n      <span class=\"text-xs text-[#636E72] block mt-1\">(Agreed upon — Sahih al-Bukhari & Sahih Muslim)</span>\n    </p>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#636E72] pl-4 py-2\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] mb-1 font-heading\">Hiikkaa Afaan Oromoo (Oromo)</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      Ergamaan Rabbii (nagaa fi rahmanni irratti haa jiraatu) akkana jedhan:\n      <em>\"Cabbii timiraatiinuu taatu ibiddarraa eeggadhaa; namni san dhabe immoo dubbii gaariidhaan (lubbuu isaa haa baraarsu).\"</em>\n      <span class=\"text-xs text-[#636E72] block mt-1\">(Bukhaarii fi Muslim irratti waliigalan)</span>\n    </p>\n  </div>\n\n  <div class=\"pt-4 border-t border-[#E0D8CE] space-y-4\">\n    <h3 class=\"font-heading font-bold text-xl text-[#2D3436]\">ከዚህ ታላቅ ሐዲስ የምንቀስማቸው ቁልፍ ትምህርቶች</h3>\n    <ul class=\"list-disc list-inside space-y-2 text-[#636E72]\">\n      <li><strong class=\"text-[#2D3436]\">ምንም አይነት መልካም ስራ አነስተኛ ተብሎ አይናቅም፦</strong> የተምር ስንጣቂ እንኳን በአላህ ዘንድ በቅን ልብ ሲሰጥ ከአደጋ የምትታደግ ዋጋ አላት።</li>\n      <li><strong class=\"text-[#2D3436]\">ሶደቃህ እሳትን ታጠፋለች፦</strong> ልግስና ውሃ እሳትን እንደሚያጠፋ ወንጀልን ያብሳል።</li>\n      <li><strong class=\"text-[#2D3436]\">የመልካም ንግግር ምንዳ፦</strong> የሚሰጠው ያጣ ሰው ፊቱን አበርቶ፣ አጽናንቶና በመልካም ቃል ተናግሮ ማለፉ ልክ እንደ ገንዘብ ልገሳ ይቆጠራል።</li>\n    </ul>\n  </div>\n</div>",
+      "reading_minutes": 3,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_half_date",
+        "kind": "image",
+        "url": "/images/photo_2_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "hadith",
+        "charity",
+        "ethics"
+      ],
+      "tags": [
+        "ሶደቃህ",
+        "ሐዲስ",
+        "ቡኻሪ",
+        "መልካም-ንግግር"
+      ],
+      "published_at": "2026-06-26T15:02:00Z",
+      "updated_at": "2026-06-26T15:02:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_salawat_on_friday",
+      "title": "የጁምዓ ቀንና ሌሊት በነቢዩ ላይ ሰለዋት የማውረድ ትሩፋት እና በላጩ የሰለዋት አባባል",
+      "slug": "virtues-of-salawat-on-friday-ibrahimiyyah",
+      "summary": "በዓርብ ቀንና በዓርብ ሌሊት በነቢዩ ﷺ ላይ ሰለዋትን የማብዛት ታላቅ ደረጃ፤ የሰለዋት ኡመቴ በየሳምንቱ ዓርብ ለእኔ ይቀርብልኛል፤ እንዲሁም ነቢዩ ያስተማሯት በላጭ የሰለዋተል ኢብራሂሚያህ አባባል ማብራሪያ።",
+      "body": "<div class=\"space-y-6\">\n  <div class=\"bg-[#FAF8F5] border border-[#E0D8CE] p-6 rounded-md space-y-4\">\n    <div class=\"text-xs uppercase font-bold text-[#1B5E20] tracking-wider\">🌟 فضل الصلاة على النبي ﷺ يوم الجمعة وليلته • Arabic Text</div>\n    \n    <p class=\"font-heading text-lg md:text-xl text-right leading-loose text-[#2D3436]\" dir=\"rtl\">\n      قال النبي ﷺ : «<strong>أَكْثِرُوا الصَّلَاةَ عَلَيَّ يَوْمَ الْجُمُعَةِ وَلَيْلَةَ الْجُمُعَةِ، فَمَنْ صَلَّى عَلَيَّ صَلَاةً صَلَّى اللهُ عَلَيْهِ بِهَا عَشْرًا</strong>» [أخرجه: البيهقي]\n    </p>\n\n    <p class=\"font-heading text-lg md:text-xl text-right leading-loose text-[#2D3436]\" dir=\"rtl\">\n      وقال ﷺ : «<strong>أكثِروا عليَّ منَ الصَّلاةِ يومِ الجمعةِ؛ فإنَّ صلاةَ أمَّتي تُعرَضُ عليَّ في كلِّ يومِ جمعةٍ</strong>» [أخرجه: البيهقي]\n    </p>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#1B5E20] pl-4 py-2 space-y-3\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] font-heading\">የጁምዓ ቀንና ሌሊት በነቢዩ ላይ ሰለዋት የማውረድ ትሩፋት (Amharic)</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      ነቢዩ ﷺ እንዲህ ብለዋል፦ <em>\"በዓርብ ቀንና በዓርብ ሌሊት በእኔ ላይ ሰለዋትን አብዙ፤ በእኔ ላይ አንድ ጊዜ ሰለዋት ያወረደ አላህ በእርሱ ላይ አስር ጊዜ እዝነቱን ያወርዳል።\"</em> [አል-በይሀቂ]\n    </p>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      እንዲሁም ነቢዩ ﷺ እንዲህ ብለዋል፦ <em>\"በዓርብ ቀን በእኔ ላይ ሰለዋትን አብዙ፤ የኡመቴ ሰለዋት በየሳምንቱ ዓርብ ለእኔ ይቀርብልኛልና።\"</em> [አል-በይሀቂ]\n    </p>\n  </div>\n\n  <div class=\"bg-[#1B5E20]/5 border border-[#1B5E20]/20 p-6 rounded-md\">\n    <h3 class=\"text-lg font-bold text-[#1B5E20] mb-3 font-heading\">📜 الصيغة المفضلة / በላጩ የሰለዋት አባባል (الصلاة الإبراهيمية)</h3>\n    <p class=\"text-sm text-[#636E72] mb-3\">وهي الصيغة التي علّمها النبي ﷺ لأصحابه (البخاري ومسلم) / ይህች ነቢዩ ﷺ ለሶሃቦቻቸው ያስተማሯት በላጭ ሰለዋት ናት፦</p>\n    \n    <div class=\"bg-white p-4 rounded border border-[#E0D8CE] mb-4 text-right\" dir=\"rtl\">\n      <p class=\"font-heading text-lg text-[#2D3436] leading-loose font-bold\">\n        \"اللَّهُمَّ صَلِّ على مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ\"\n      </p>\n    </div>\n\n    <div class=\"space-y-3 text-sm text-[#2D3436]\">\n      <p>\n        <strong>በአማርኛ፦</strong> <em>\"አላህ ሆይ! በኢብራሂምና በኢብራሂም ቤተሰቦች ላይ እዝነትህን እንዳወረድክ ሁሉ በሙሐመድና በሙሐመድ ቤተሰቦች ላይ እዝነትህን አውርድ፤ አንተ ምስጉንና የላቅክ ነህና። አላህ ሆይ! በኢብራሂምና በኢብራሂም ቤተሰቦች ላይ በረከትህን እንደባረክክ ሁሉ በሙሐመድና በሙሐመድ ቤተሰቦች ላይ በረከትህን አውርድ፤ አንተ ምስጉንና የላቅክ ነህና።\"</em>\n      </p>\n      <p>\n        <strong>In English:</strong> <em>\"O Allah, bestow Your favor upon Muhammad and upon the family of Muhammad, as You bestowed favor upon Ibrahim and upon the family of Ibrahim; indeed, You are Praiseworthy and Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Ibrahim and the family of Ibrahim; indeed, You are Praiseworthy and Glorious.\"</em>\n      </p>\n      <p>\n        <strong>Afaan Oromoo:</strong> <em>\"Yaa Rabbi! Akkuma Ibraahiimii fi maatii Ibraahiim irratti rahmata buufte, Muhammad fi maatii Muhammad irrattis rahmata buusi; ati faarfamaa fi guddaadha. Yaa Rabbi! Akkuma Ibraahiimii fi maatii Ibraahiim eebbiste, Muhammad fi maatii Muhammadis eebbisi; ati faarfamaa fi guddaadha.\"</em>\n      </p>\n    </div>\n  </div>\n</div>",
+      "reading_minutes": 4,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_salawat",
+        "kind": "image",
+        "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "jumah",
+        "salawat",
+        "sunnah"
+      ],
+      "tags": [
+        "ጁምዓ",
+        "ሰለዋት",
+        "ኢብራሂሚያህ",
+        "ዱዓእ"
+      ],
+      "published_at": "2026-06-26T15:04:00Z",
+      "updated_at": "2026-06-26T15:04:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_pleasing_allah_above_people",
+      "title": "#ለሰው_ብለህ_አኼራህን_አታበላሽ — የአላህን ውዴታ ከሰዎች ይሁንታ ማስቀደም",
+      "slug": "do-not-ruin-hereafter-for-people",
+      "summary": "ከዓኢሻ (ረዲየላሁ ዐንሃ) የተላለፈው ታላቅ የነቢዩ ﷺ መመሪያ፦ ሰዎች ቢቆጡም እንኳ የአላህን ውዴታ ያስቀደመ ሰው አላህ ይወደዋል፣ ሰዎችንም እንዲወዱት ያደርጋል፤ አላህን በማስቆጣት የሰዎችን ውዴታ የፈለገ ግን አላህም ይቆጣበታል ሰዎችም እንዲጠሉት ያደርጋል።",
+      "body": "<div class=\"space-y-6\">\n  <div class=\"bg-[#FAF8F5] border border-[#E0D8CE] p-6 rounded-md\">\n    <div class=\"text-xs uppercase font-bold text-[#1B5E20] tracking-wider mb-2\">#لا_تفسد_آخرتك_لمرضاة_الناس • Arabic Text</div>\n    <p class=\"font-heading text-lg md:text-xl text-right leading-loose text-[#2D3436]\" dir=\"rtl\">\n      عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا أَنَّ النَّبِيَّ ﷺ قَالَ : \n      <br/>\n      «<strong>مَنِ الْتَمَسَ رِضَى اللَّهِ بِسَخَطِ النَّاسِ، رَضِيَ اللَّهُ عَنْهُ وَأَرْضَى عَنْهُ النَّاسَ، وَمَنِ الْتَمَسَ رِضَا النَّاسِ بِسَخَطِ اللَّهِ، سَخَطَ اللَّهُ عَلَيْهِ وَأَسْخَطَ عَلَيْهِ النَّاسَ</strong>»\n    </p>\n    <div class=\"text-right text-xs text-[#636E72] mt-2 font-medium\" dir=\"rtl\">\n      [رواه ابن حبان في صحيحه والترمذي]\n    </div>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#1B5E20] pl-4 py-2\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] mb-1 font-heading\">#ለሰው_ብለህ_አኼራህን_አታበላሽ (Amharic)</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      ከዓኢሻ (ረዲየላሁ ዐንሃ) እንደተላለፈው የአላህ መልክተኛ ﷺ እንዲህ ብለዋል፦\n      <br/>\n      <em>«ሰዎች ቢቆጡም እንኳ የአላህን ውዴታ ያስቀደመ ሰው፣ አላህ ይወደዋል፤ ሰዎችንም እርሱን እንዲወዱ ያደርጋቸዋል። በአንጻሩ አላህን በማስቆጣት የሰዎችን ውዴታ የፈለገ ሰው ግን፣ አላህ በእርሱ ላይ ይቆጣል፤ ሰዎችም በእርሱ ላይ እንዲቆጡና እንዲጠሉት ያደርጋቸዋል።»</em>\n      <span class=\"text-xs text-[#636E72] block mt-1\">(ኢብኑ ሒባን በሶሒሐቸው ዘግበውታል)</span>\n    </p>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#B8860B] pl-4 py-2\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] mb-1 font-heading\">English Translation & Ethical Principle</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      Narrated by Aisha (may Allah be pleased with her): The Prophet (ﷺ) said:\n      <br/>\n      <em>\"Whoever seeks the pleasure of Allah at the risk of people's displeasure, Allah will be pleased with him and will make the people pleased with him. And whoever seeks the pleasure of people at the cost of Allah's displeasure, Allah will be displeased with him and will make the people displeased with him.\"</em>\n      <span class=\"text-xs text-[#636E72] block mt-1\">(Reported by Ibn Hibban and at-Tirmidhi)</span>\n    </p>\n  </div>\n\n  <div class=\"bg-white border-l-4 border-[#636E72] pl-4 py-2\">\n    <h3 class=\"text-lg font-bold text-[#2D3436] mb-1 font-heading\">Hiikkaa Afaan Oromoo (Oromo)</h3>\n    <p class=\"text-[#2D3436] text-base leading-relaxed\">\n      Aa'ishaa (ra) irraa akka dhufeetti, Ergamaan Rabbii (saw) akkana jedhan:\n      <br/>\n      <em>\"Namni dallansuu namootaatiin jaalala Rabbii barbaade, Rabbiin isa jaalata; namootas akka isa jaalatan godha. Namni ammoo dallansuu Rabbiitiin jaalala namaa barbaade, Rabbiin isarratti dallana; namootas akka isarratti dallanan godha.\"</em>\n      <span class=\"text-xs text-[#636E72] block mt-1\">(Ibnu Hibbaan Sahiiha isaanii keessatti gabaasan)</span>\n    </p>\n  </div>\n\n  <div class=\"pt-4 border-t border-[#E0D8CE] space-y-4\">\n    <h3 class=\"font-heading font-bold text-xl text-[#2D3436]\">መንፈሳዊ ማስታወሻና ተግሣጽ</h3>\n    <p class=\"text-[#636E72] leading-relaxed\">\n      በህይወታችን ውስጥ ትልቁ ፈተና የሰዎችን ይሁንታ ለማግኘት ስንል የፈጣሪን ህግና መርህ መጣስ ነው። \n      ሰዎች ዛሬ አሞግሰው ነገ ሊያወግዙህ ይችላሉ፤ የአላህ ውዴታ ግን ቋሚና የማያልፍ ክብር ነው። \n      የአላህን ውዴታ ከልብ የቀደመ ሰው፣ አላህ የሰዎችንም ልብ በእጁ ስለሆነ ያዘነብልለታል። \n      ስለዚህ ለሰው ይሉኝታ ተብሎ ዲንና አኼራን መስዋዕት ከማድረግ እንጠንቀቅ!\n    </p>\n  </div>\n</div>",
+      "reading_minutes": 4,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_pleasing_allah",
+        "kind": "image",
+        "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "tarbiyah",
+        "akhlaq",
+        "iman"
+      ],
+      "tags": [
+        "አኼራ",
+        "ተግሣጽ",
+        "ኢኽላስ",
+        "ኢብኑ-ሒባን"
+      ],
+      "published_at": "2026-06-26T15:06:00Z",
+      "updated_at": "2026-06-26T15:06:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_selamawi_qelb",
+      "title": "ሰላማዊ ቀልብ — የልብ ንጽሕና እና መንፈሳዊ እርጋታ በኢስላም (The Sound Heart)",
+      "slug": "selamawi-qelb-spiritual-purity",
+      "summary": "በአላህ ዘንድ ዋጋ ያለው ንጹሕ ልብ (ቀልቡን ሰሊም) እንዴት ይገነባል? የልብ በሽታዎች፣ ቂም፣ ምቀኝነት እና ከንቱ ምኞቶችን የማከሚያ ቁርኣናዊ መፍትሔዎች።",
+      "body": "### መግቢያ — የሰላማዊ ቀልብ ምንነት\n\nአላህ (ሱብሃነሁ ወተዓላ) በቅዱስ ቁርኣን በሱረቱ አል-ሹዐራእ እንዲህ ይላል፦\n\n> **يَوْمَ لَا يَنفَعُ مَالٌ وَلَا بَنُونَ ۝ إِلَّا مَنْ أَتَى اللَّهَ بِقَلْبٍ سَلِيمٍ**  \n> *\"ገንዘብም ልጆችም የማይጠቅሙበት ቀን፤ ወደ አላህ በሰላማዊ (ንጹሕ) ልብ የመጣ ሰው ብቻ ሲቀር።\"* (አል-ሹዐራእ 88-89)\n\nበዚህ አንቀጽ ላይ \"ቀልቡን ሰሊም\" ተብሎ የተገለጸው ልብ ከሽርክ፣ ከተንኮል፣ ከምቀኝነት፣ ከክፋትና ከማስመሰል የጸዳ እውነተኛ የኢማን ማረፊያ ነው።\n\n---\n\n### 1. የልብ በሽታዎች ምልክቶችና አደጋቸው\n\nልብ በሰውነታችን ውስጥ የሁሉም ስሜቶችና ድርጊቶች ንጉሥ ነው። ነቢዩ (ሰለላሁ ዐለይሂ ወሰለም) በአስተማሩት ሐዲስ፦  \n*\"በሰውነት ውስጥ አንዲት ቁራጭ ስጋ አለች፤ እርሷ ከተስተካከለች መላው አካል ይስተካከላል፣ እርሷ ከተበላሸች ግን መላው አካል ይበላሻል፤ እርሷም ልብ ናት።\"* (ቡኻሪና ሙስሊም)\n\nዋና ዋናዎቹ የልብ ህመሞች የሚከተሉት ናቸው፦\n- **ምቀኝነት (ሐሰድ)፦** የአላህን ችሮታ በሌሎች ላይ ማየት አለመፈለግና መጥፋቱን መመኘት።\n- **ኩራትና እብሪት (ኪብር)፦** እውነትን መቃወምና ሰዎችን በንቀት መመልከት።\n- **ይዩልኝ ይስሙልኝ (ሪያእ)፦** የአምልኮ ስራዎችን ለአላህ ብሎ ከማድረግ ይልቅ የሰዎችን ምስጋና መፈለግ።\n- **ቂምና ጥላቻ፦** ወንድምንና እህትን በክፋት መያዝና ይቅርታን አለማድረግ።\n\n---\n\n### 2. ቀልብን የማከሚያና የማንጻት መንገዶች\n\nሰላማዊ ልብ በድንገት የሚገኝ ሳይሆን ቀጣይነት ባለው መንፈሳዊ ትግል (ሙጃሃዳህ) የሚገነባ ነው።\n\n1. **ተውሂድን ማጥራት፦** ሁሉንም ጉዳይ ለአላህ ብቻ አሳልፎ መስጠት። ከአላህ ውጭ ምንም አይነት ፍራቻም ሆነ ከንቱ ተስፋ በልብ ውስጥ አለማኖር።\n2. **አላህን አዘውትሮ ማውሳት (ዚክር)፦**  \n   *«አላህን በማውሳት ልቦች ይረጋጋሉ!»* (አር-ረዕድ 28)። ቁርኣንን በተደብቡር (በማስተንተን) ማንበብና የጠዋት/ማታ አዝካሮችን ማዘውተር።\n3. **ይቅር ባይነትን መላበስ፦** በሰዎች ላይ ያለብንን ቅሬታ ለአላህ ብለን ይቅር ማለት፤ አላህ የኛን ወንጀል ይቅር እንዲለን።\n4. **ለሙስሊም ወንድሞች በጎ መመኘት (ነሲሓህ)፦** ለራስህ የምትወደውን በጎ ነገር ለሌሎችም መውደድ።\n\n---\n\n### ማጠቃለያ\n\nበዚህ ምድራዊ ቆይታችን ትልቁ ስኬት ገንዘብ መቆለል ወይም ታዋቂነት ማትረፍ ሳይሆን፣ ከአላህ ጋር በሰላማዊና ንጹሕ ልብ መገናኘት ነው። አላህ ልባችንን በኢማንና በተውሂድ ያረጋጋልን!",
+      "reading_minutes": 6,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_1",
+        "kind": "image",
+        "url": "/images/photo_1_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "spirituality",
+        "tarbiyah",
+        "heart"
+      ],
+      "tags": [
+        "ቀልብ",
+        "ኢማን",
+        "ተዝኪያህ",
+        "ዱዓእ"
+      ],
+      "published_at": "2024-05-10T10:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_mercy_fath_ahqaf",
+      "title": "ምህረትና እዝነት በቁርኣን አስተምህሮ — የሱረቱል ፈትህ እና ሱረቱል አሕቃፍ ማብራሪያ",
+      "slug": "mercy-and-victory-surah-fath-ahqaf",
+      "summary": "በሱረቱል ፈትህ ላይ የተገለጸው ግልጽ ድልና የአላህ ጽናት፣ በችግር ጊዜ የሚሰጥ ተስፋ እና በአሕቃፍ የተካተቱ ተግሣጾች ትንታኔ።",
+      "body": "### መግቢያ\n\nቁርኣን ለሰው ልጆች ሁሉ የህይወት ብርሃንና የመመሪያ መጽሐፍ ነው። ሱረቱል ፈትህ እና ሱረቱል አሕቃፍ በውስጣቸው በርካታ ጥልቅ የሆኑ የእምነት፣ የተስፋ እና የተግሣጽ ትምህርቶችን ይዘዋል።\n\n---\n\n### የሱረቱል ፈትህ ቁልፍ መልእክት\n\nአላህ ለነቢዩ (ሰለላሁ ዐለይሂ ወሰለም) እና ለታማኝ ሰሃቦቻቸው የሰጠውን ታላቅ የተስፋ ቃል ሲያስታውስ፦\n\n> **إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا**  \n> *\"እኛ ለአንተ ግልጽ የሆነን ድል ከፈትንልህ።\"* (አል-ፈትህ 1)\n\nይህ አንቀጽ የወረደው በሁደይቢያህ ስምምነት ወቅት ነበር። በውጫዊ መልክ ለሙስሊሞች ከባድና አስቸጋሪ የመሰለው ሁኔታ፣ በአላህ ጥበብ ታላቅ የዲን መስፋፋትና የልቦች መከፈት ምክንያት ሆነ። \n\nእዚህ ላይ የምንማረው ትምህርት፦\n- **የአላህ ፈተና ጀርባ ያለውን ጥበብ ማመን፦** አንዳንድ ጊዜ የምንጠላው ነገር ለኛ የተሻለ መልካምነት ይዞ ሊመጣ ይችላል።\n- **የአላህ ጽናት (ሰኪናህ)፦** አላህ በምእመናን ልቦች ላይ መረጋጋትን ያወርዳል፤ በችግር ወቅት ጽናት የሚገኘው ከዚሁ ሰኪናህ ነው።\n\n---\n\n### የሱረቱል አሕቃፍ ተግሣጾች\n\nሱረቱል አሕቃፍ ደግሞ የሰው ልጅ ለወላጆቹ ሊኖረው የሚገባውን መልካም ውለታ እና ያለፈውን የዓድ ህዝቦች ታሪክ በማውሳት ትልቅ ማሳሰቢያ ይሰጣል፦\n\n> **وَوَصَّيْنَا الْإِنسَانَ بِوَالِدَيْهِ إِحْسَانًا ۖ حَمَلَتْهُ أُمُّهُ كُرْهًا وَوَضَعَتْهُ كُرْهًا**  \n> *\"ሰውንም በወላጆቹ መልካም እንዲውል አዘዝነው፤ እናቱ በድካም አረገዘችው፣ በችግርም ወለደችው...\"* (አል-አሕቃፍ 15)\n\nየወላጆች ሐቅ በአላህ ዘንድ እጅግ የገዘፈ ነው። ለወላጆች በደግነት መቅረብ፣ መታዘዝ፣ በህይወትም ሆነ ከሞቱ በኋላ መልካም ዱዓእ ማድረግ የወጣቱ ትውልድ ቀዳሚ ግዴታ ነው።",
+      "reading_minutes": 7,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_2",
+        "kind": "image",
+        "url": "/images/photo_4_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "tafsir",
+        "quran"
+      ],
+      "tags": [
+        "ተፍሲር",
+        "ሱረቱል-ፈትህ",
+        "አሕቃፍ",
+        "ቁርኣን"
+      ],
+      "published_at": "2024-04-18T14:30:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_dua_conditions",
+      "title": "ዱዓእ ተቀባይነት የሚያገኝባቸው ቁልፍ ሁኔታዎችና ስነ-ስርዓቶች",
+      "slug": "keys-to-accepted-dua-adab",
+      "summary": "ዱዓእ የኢባዳህ አስኳል ነው። ተቀባይነት የሚያገኝባቸው የተወደዱ ወቅቶች፣ ውስጣዊ ትህትና፣ ሀላል ገቢና የአላህን ውሳኔ በትዕግስት መጠበቅ።",
+      "body": "### ዱዓእ — የሙእሚን ዋነኛ መሳሪያ\n\nነቢዩ (ሰለላሁ ዐለይሂ ወሰለም) እንዲህ ብለዋል፦  \n**«الدُّعَاءُ هُوَ الْعِبَادَةُ»**  \n*\"ዱዓእ እርሱ ራሱ አምልኮት ነው።\"* (ቲርሚዚ)\n\nአላህ ዘንድ በሮችን የሚያንኳኳ፣ ችግሮችን የሚያስወግድ፣ ምህረትን የሚያጎናጽፍ ትልቅ ጸጋ ዱዓእ ነው። ነገር ግን ዱዓችን ተቀባይነት እንዲያገኝ ልናሟላቸው የሚገቡ ቁልፍ ስነ-ስርዓቶች (አዳብ) አሉ።\n\n---\n\n### ተቀባይነት የሚያስገኙ ሁኔታዎች\n\n1. **ኢኽላስ (ንጹሕ እምነት)፦** አላህን ብቻ በመለመንና ከእርሱ ውጭ ለማንም ጥሪ ሳያደርጉ መለመን።\n2. **ሀላል ሲሳይ፦** የሚበላው፣ የሚጠጣውና የሚለብሰው ከሀላል ገቢ መሆን አለበት። ነቢዩ (ሰለላሁ ዐለይሂ ወሰለም) በሐዲሳቸው እንዳስተማሩት ረጅም መንገድ ተጉዞ እጆቹን ወደ ሰማይ ዘርግቶ \"ያ ረብ! ያ ረብ!\" እያለ የሚለምነውን ሰው ምግቡ ሀራም፣ መጠጡ ሀራም ሆኖ ሳለ ዱዓው እንዴት ይሰማል ሲሉ አስጠንቅቀዋል።\n3. **ከወንጀልና ዝምድናን ከመቁረጥ መራቅ፦** ክፉ ነገርን ወይም በደልን አለመመኘት።\n4. **እርግጠኝነትና አለመቸኮል፦** \"ለመንኩ አልተመለሰልኝም\" ብሎ ተስፋ ከመቁረጥ መቆጠብ፤ አላህ በተገቢው ጊዜና ወቅት መልስ እንደሚሰጥ ማመን።\n\n---\n\n### ዱዓእ የሚሰማባቸው ምርጥ ወቅቶች\n\n- **የሌሊቱ የመጨረሻ አንድ ሶስተኛ ክፍል (ሱጁድ ላይ ሆኖ)**\n- **በአዛን እና በኢቃማ መካከል ያለው ጊዜ**\n- **በጁምዓ ቀን የመጨረሻዋ ሰዓት (ከአስር በኋላ እስከ መግሪብ)**\n- **ዝናብ በሚዘንብበት ወቅት እና በጾም ወቅት**",
+      "reading_minutes": 5,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_3",
+        "kind": "image",
+        "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "worship",
+        "dua"
+      ],
+      "tags": [
+        "ዱዓእ",
+        "ኢባዳህ",
+        "ስነ-ስርዓት",
+        "ሲሳይ"
+      ],
+      "published_at": "2024-03-25T08:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_tarbiyat_al_awlad",
+      "title": "የልጆች አስተዳደግ በኢስላማዊ መመሪያ — መሠረታዊ የቤተሰብ መርሆዎች",
+      "slug": "islamic-parenting-tarbiyat-al-awlad",
+      "summary": "ልጆችን በተውሂድ፣ በመልካም ስነ-ምግባር እና በአርአያነት ማሳደግ። የወላጆች ሃላፊነት፣ ሩህሩህ አቀራረብና ከዘመናዊ አፍራሽ ተጽእኖዎች የመጠበቅ ስልቶች።",
+      "body": "### ልጆች የአላህ አደራ ናቸው\n\nልጆች በቤተሰብ ውስጥ የአላህ ታላቅ ስጦታና ከባዱ አደራ ናቸው። አላህ እንዲህ ብሏል፦\n\n> **يَا أَيُّهَا الَّذِينَ آمَنُوا قُوا أَنفُسَكُمْ وَأَهْلِيكُمْ نَارًا**  \n> *\"እናንተ ያመናችሁ ሆይ! ነፍሶቻችሁንና ቤተሰቦቻችሁን ከእሳት ጠብቁ...\"* (አት-ተሕሪም 6)\n\n---\n\n### 1. ተውሂድ እና እምነትን ቀድሞ ማስተማር\n\nየሉቅማንን ጥበብ በተመለከተ ቁርኣን ሲገልጽ ልጁን መጀመሪያ ያስተማረው ተውሂድን ነበር፦  \n*«ልጄ ሆይ! በአላህ ላይ አታጋራ፤ ማጋራት ታላቅ በደል ነውና።»*  \nህጻናት ገና ንግግር ሲጀምሩ ስለ አላህ ታላቅነት፣ ስለ ፈጣሪነቱ፣ ስለ ነቢዩ (ሰ.ዐ.ወ) ውዴታ ማስገንዘብ ይገባል።\n\n### 2. አርአያ በመሆን ማስተማር (ቁድዋህ)\n\nህጻናት ከምንነግራቸው ይልቅ የምንሰራውን ይማራሉ። አባት ሶላቱን በሰዓቱ ሲሰግድ፣ እናት ቁርኣን ስታነብ፣ እውነትን ሲናገሩ ያየ ልጅ በተፈጥሮው ይህን መልካም ባህሪ ይቀስማል።\n\n### 3. ማዳመጥ እና በፍቅር መቅረብ\n\nነቢዩ (ሰለላሁ ዐለይሂ ወሰለም) ህጻናትን ያቅፉ፣ ይስማሙ፣ ሰላምታ ይሰጡ ነበር። በጭካኔና በቁጣ ብቻ የተያዘ ልጅ በውስጡ ፍርሃትንና ውሸትን ያዳብራል። ምክር በፍቅርና በምሳሌ ሲሆን ልብ ውስጥ ይሰርጻል።",
+      "reading_minutes": 6,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_4",
+        "kind": "image",
+        "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "family",
+        "parenting",
+        "tarbiyah"
+      ],
+      "tags": [
+        "ልጆች",
+        "ቤተሰብ",
+        "አስተዳደግ",
+        "ተርቢያህ"
+      ],
+      "published_at": "2024-02-14T09:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_islamic_unity",
+      "title": "ኢስላማዊ አንድነት እና የሰለፎች የትብብር መመሪያ",
+      "slug": "islamic-unity-manhaj-salaf",
+      "summary": "አንድነት የሚመሠረተው በቁርኣንና ሐዲስ ትክክለኛ ግንዛቤ ላይ ነው። ጥቃቅን ልዩነቶችን በጥበብ ማስተናገድና ለኡማው የጋራ ህልውና መትጋት።",
+      "body": "### የኡማው አንድነት ጥሪ\n\nአላህ በቁርኣን እንዲህ ያዘናል፦\n\n> **وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا**  \n> *\"የአላህንም ገመድ (ቁርኣንን) ሁላችሁም ተጨባበጡ፤ አትለያዩም።\"* (ኣሊ-ዒምራን 103)\n\nኢስላም አንድነትን የዲን ማገር አድርጎታል። ሙስሊሞች በተለያዩ ሀገራት፣ ዘሮችና ቋንቋዎች ቢኖሩም በላኢላሀ ኢለላህ ጥላ ስር አንድ አካል ናቸው።\n\n---\n\n### የሰለፎች መመሪያ በልዩነት ወቅት\n\nታላላቆቹ የሰለፍ ሊቃውንት በአመለካከትና በፈትዋ ልዩነቶች ሲያጋጥሟቸው የተከተሉት መርህ ለዛሬው ትውልድ ምርጥ አብነት ነው፦\n\n1. **መሠረታዊ የእምነት ጉዳዮች (ኡሱል) ላይ መጽናት** — ተውሂድ፣ ሱናህና የሰሃቦችን ፈለግ አጥብቆ መያዝ።\n2. **በፍርዒይ (ቅርንጫፋዊ) የፊቅህ ጉዳዮች መተሳሰብ** — በኢጅቲሃድ ጉዳዮች ወንድምን አለማውገዝና ክብርን አለመንካት።\n3. **ከስሜታዊነት መራቅ** — ለዲን መቆርቆር በጥበብ (ሂክማህ) እና በመልካም ተግሣጽ መመራት አለበት።\n\nአንድነታችን ጥንካሬያችን ነው፤ መለያየታችን ግን ውድቀታችንን ያፋጥናል።",
+      "reading_minutes": 5,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_5",
+        "kind": "image",
+        "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "unity",
+        "dawah",
+        "society"
+      ],
+      "tags": [
+        "አንድነት",
+        "ሰለፎች",
+        "ኡማህ",
+        "ዳዕዋ"
+      ],
+      "published_at": "2024-01-20T11:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "article",
+      "id": "art_islamic_finance",
+      "title": "የሸሪዓዊ የፋይናንስ መርሆዎች እና ከወለድ የጸዳ የባንክ አገልግሎት በኢትዮጵያ",
+      "slug": "principles-islamic-finance-ethiopia",
+      "summary": "ከወለድ ነፃ የባንክ አገልግሎት (Interest-free Banking) ምንነት፣ የአማናህ መስኮቶች አሰራር እና የAAOIFI የሸሪዓ ደረጃዎች ተግባራዊ ፋይዳ።",
+      "body": "### መግቢያ — እስላማዊ ፋይናንስ ምንድነው?\n\nእስላማዊ ፋይናንስ በፍትሕ፣ በእኩልነትና በእውነተኛ ኢኮኖሚያዊ ምርታማነት ላይ የተመሠረተ የፋይናንስ ስርዓት ነው። በሸሪዓዊ መርሆዎች መሠረት ገንዘብ ራሱ ሸቀጥ ሳይሆን የልውውጥና የዋጋ መለኪያ መሳሪያ ብቻ ነው።\n\n---\n\n### ዋና ዋና የሸሪዓ መርሆዎች\n\n1. **የሪባ (ወለድ) ክልከላ፦**  \n   አላህ እንዲህ ብሏል፦ *«አላህ ንግድን ፈቅዷል፤ ወለድን ግን እርም አድርጓል።»* (አል-በቀራህ 275)። ያለምንም ጥረትና ስጋት በገንዘብ ብድር ላይ የሚጨመር ትርፍ በሸሪዓ የተወገዘ ነው።\n2. **የገረር (እርግጠኛ ያልሆነ ማጭበርበር) ክልከላ፦** ግልጽነት የጎደላቸው፣ ውል ያልተቋጨባቸው ወይም በቁማር መልክ የተገነቡ ግብይቶች አይፈቀዱም።\n3. **ሀላል በሆኑ ዘርፎች ላይ ብቻ መዋዕለ-ነዋይ ማፍሰስ፦** ለህብረተሰብ ጤናና ስነ-ምግባር ጎጂ በሆኑ (እንደ አልኮል፣ ቁማር ወዘተ) ላይ መሰማራት አይቻልም።\n\n---\n\n### በኢትዮጵያ የሸሪዓ የባንክ አገልግሎቶች አሰራር\n\nበኢትዮጵያ የባንክ ኢንዱስትሪ ውስጥ የሚሰሩ ከወለድ ነፃ አገልግሎቶች (ለምሳሌ በወጋገን ባንክ አማናህ መስኮት) የሚከተሉትን ዋና ዋና ሸሪዓዊ ውሎች ይጠቀማሉ፦\n\n- **ሙራበሃ (Murabaha)፦** ባንኩ ደንበኛው የሚፈልገውን እቃ ገዝቶ በተስማሙበት የትርፍ ህዳግ በብድር መሸጥ።\n- **ሙዳረባ (Mudaraba)፦** አንደኛው ወገን ካፒታል ሲያቀርብ ሌላኛው ወገን እውቀቱንና ስራውን አስተዋጽኦ በማድረግ ትርፍን መጋራት።\n- **ኢጃራህ (Ijarah)፦** ኪራይ ወይም ለተወሰነ ጊዜ የንብረት አጠቃቀም መብትን ማስተላለፍ።\n\nእነዚህ አገልግሎቶች በታዋቂው ዓለም አቀፍ የAAOIFI የሸሪዓ መመዘኛዎች መሰረት ጥብቅ ቁጥጥር እየተደረገባቸው ይተገበራሉ።",
+      "reading_minutes": 8,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_art_6",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "islamic-finance",
+        "sharia-governance"
+      ],
+      "tags": [
+        "ኢስላሚክ-ባንክ",
+        "ፋይናንስ",
+        "AAOIFI",
+        "ወጋገን-አማናህ"
+      ],
+      "published_at": "2023-11-05T12:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    }
+  ],
+  "fatwas": [
+    {
+      "object": "fatwa",
+      "id": "fat_zakat_fitr",
+      "title": "ስለ ዘካተል ፊጥር አከፋፈል እና የተፈቀዱ ምግቦች",
+      "slug": "rules-and-commodities-zakat-al-fitr",
+      "summary": "ዘካተል ፊጥር በማን ላይ ግዴታ ይሆናል? በገንዘብ ይፈቀዳል ወይስ በምግብ እህል ብቻ ነው መውጣት ያለበት?",
+      "question": "ዘካተል ፊጥር በገንዘብ መክፈል ይፈቀዳል ወይስ በምግብ እህል ብቻ ነው መውጣት ያለበት? በማን ላይስ ግዴታ ይሆናል?",
+      "answer": "### መልስ በኡስታዝ ሙሐመድ ፈረጅ\n\nቢስሚላሂር ረሕማኒር ረሒም፤ አልሐምዱሊላሂ ረቢል ዓለሚን።\n\n1. **የዘካተል ፊጥር ግዴታነት፦**  \n   ዘካተል ፊጥር በረመዳን መጨረሻ በእያንዳንዱ ሙስሊም (ወንድ፣ ሴት፣ ትልቅም ሆነ ትንሽ) ላይ ግዴታ (ዋጂብ) ነው። አላማውም የጾመኛውን ጾም ከአላስፈላጊ ቃላትና ጉድለቶች ማጥራት እንዲሁም ድሆች በዒድ ቀን እንዳይለምኑ ማስቻል ነው።\n\n2. **የሚሰጠው አይነት (በእህል ወይስ በገንዘብ?)፦**  \n   - **የአብዛኞቹ ዑለሞች አቋም (ጁምሁር)፦** በነቢዩ (ሰ.ዐ.ወ) ሐዲስ በቀጥታ እንደተገለጸው በሀገሩ ዋና የምግብ እህል (ስንዴ፣ ጤፍ፣ ሩዝ፣ በቆሎ) በአንድ ሰው አንድ ሳዕ (ወደ 2.5 እስከ 3 ኪሎ ግራም) መስጠት የተሻለና ከጥርጣሬ የጸዳ ነው።\n   - **የአቡ ሀኒፋህና የአንዳንድ ታላላቅ ሊቃውንት እይታ፦** ለድሀው ተጠቃሚነት ሲባል በገንዘብ ዋጋውን መክፈል አስፈላጊ በሆነበት ወቅት ይፈቀዳል። ነገር ግን የመጀመሪያው ምርጫ እህል መስጠት ነው።\n\n3. **የመክፈያ ጊዜ፦**  \n   የተወደደው ሰዓት የዒድ ቀን ጧት ወደ ዒድ ሶላት ከመውጣታችን በፊት ነው። ከዒድ አንድ ወይም ሁለት ቀን ቀደም ብሎ መስጠትም ይፈቀዳል።",
+      "locale": "am",
+      "direction": "ltr",
+      "categories": [
+        "fiqh",
+        "zakat",
+        "fasting"
+      ],
+      "tags": [
+        "ዘካ",
+        "ዘካተል-ፊጥር",
+        "ረመዳን",
+        "ዒድ"
+      ],
+      "published_at": "2024-04-05T10:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "fatwa",
+      "id": "fat_digital_banking",
+      "title": "በሞባይልና ዲጂታል ባንኪንግ የሚፈጸሙ የፋይናንስ ግብይቶች ሸሪዓዊ ብይን",
+      "slug": "sharia-rulings-digital-banking-fees",
+      "summary": "በሞባይል ባንኪንግ የሚደረጉ የገንዘብ ዝውውሮች እና የሚወሰዱ የአገልግሎት ክፍያዎች (Service charges) በሸሪዓ ተፈቅደዋልን?",
+      "question": "በሞባይል ባንኪንግ ወይም በኤሌክትሮኒክ ክፍያ ወቅት ባንኮች ወይም የቴሌኮም ተቋማት የሚቆርጡት የአገልግሎት ክፍያ (Transfer fee) እንደ ሪባ (ወለድ) ይቆጠራል ወይስ የተፈቀደ ነው?",
+      "answer": "### መልስ በሸሪዓ አማካሪ ኡስታዝ ሙሐመድ ፈረጅ\n\nበአላህ ስም እጅግ በጣም ሩኅሩህ በጣም አዛኝ በሆነው።\n\nበዘመናዊ ዲጂታል ቴክኖሎጂ ገንዘብ ከአንዱ ሂሳብ ወደ ሌላው ለማስተላለፍ የሚከፈል የአገልግሎት ክፍያ (Fee for service / ጁዕላህ ወይም ኡጅረት) እና ወለድ (ሪባ) መሠረታዊ ልዩነት አላቸው፦\n\n1. **የአገልግሎት ክፍያ (Service Fee)፦** ባንኩ ወይም አገልግሎት ሰጪው ተቋም የኔትወርክ፣ የመረጃ ደህንነት፣ የአገልጋይ (Server) እና የቴክኖሎጂ ስራ ስለሚያከናውን ለዚያ ድካሙ ትክክለኛ ወጪውን የሚመጥን ተመጣጣኝ ክፍያ መውሰዱ በሸሪዓ የተፈቀደ ነው። ይህም በAAOIFI የሸሪዓ መመዘኛ ቁጥር 8 ላይ በግልጽ ተቀምጧል።\n2. **ሪባ የሚሆነው መቼ ነው?፦** ክፍያው በተበደረው ገንዘብ መጠንና በጊዜ ብዛት ላይ ተመስርቶ የሚጨምር ተጨማሪ ትርፍ ሲሆን ነው።\n3. ስለዚህ በዲጂታል ባንኪንግ ለሚደረግ ዝውውር የሚቆረጥ ቋሚና ተመጣጣኝ የአገልግሎት ክፍያ በሸሪዓ የተፈቀደና ምንም አይነት የሪባ ጥርጣሬ የሌለበት ነው።",
+      "locale": "am",
+      "direction": "ltr",
+      "categories": [
+        "islamic-finance",
+        "muamalat"
+      ],
+      "tags": [
+        "ኢስላሚክ-ባንክ",
+        "ዲጂታል-ባንኪንግ",
+        "AAOIFI",
+        "ሙዓመላት"
+      ],
+      "published_at": "2024-02-18T12:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "fatwa",
+      "id": "fat_travel_salah",
+      "title": "በጉዞ ወቅት የሶላት ማሳጠርና ማሰባሰብ ድንጋጌዎች",
+      "slug": "shortening-combining-prayers-travel",
+      "summary": "የጉዞ ርቀት ምን ያህል ሲሆን ነው ሶላትን ማሳጠርና ማሰባሰብ (ጀምዕና ቀስር) የሚፈቀደው? ለምን ያህል ቀናትስ ይፈቀዳል?",
+      "question": "አንድ ሰው ለስራ ወይም ለጉብኝት ሲጓዝ ጀምዕና ቀስር ማድረግ የሚችለው ከስንት ኪሎሜትር ጉዞ በኋላ ነው? በሄደበት ቦታ ለስንት ቀናት ማሳጠር ይችላል?",
+      "answer": "### መልስ በኡስታዝ ሙሐመድ ፈረጅ\n\nአላህ ለባሮቹ እዝነትንና እፎይታን የሻ ጌታ ነው። በጉዞ ወቅት ሶላትን ማሳጠርና ማሰባሰብ ከአላህ የተሰጠ ችሮታ (ሩኽሷህ) ነው።\n\n1. **የጉዞ ርቀት፦**  \n   በአብዛኞቹ የፊቅህ ሊቃውንት ዘንድ አንድ ጉዞ እንደ \"ጉዞ (ሰፈር)\" የሚቆጠረው ከ80 ኪሎሜትር በላይ ሲሆን ነው። በዘመናዊ አረዳድ አንድ ሰው ከከተማው ክልል ወጥቶ መንገደኛ ተብሎ የሚታወቅበት ርቀት ላይ ሲደርስ ይጀምራል።\n\n2. **የሚሳጠሩ ሶላቶች (ቀስር)፦**  \n   አራት ረከዓ የሆኑት ሶላቶች (ዙህር፣ ዐስር እና ዒሻእ) ወደ ሁለት ረከዓ ያጥራሉ። ፈጅርና መግሪብ ግን አይሳጠሩም።\n\n3. **የሚሰባሰቡ ሶላቶች (ጀምዕ)፦**  \n   ዙህርና ዐስርን በአንድ ላይ፤ መግሪብና ዒሻእን በአንድ ላይ ማሰባሰብ ይቻላል (ቀድሞ ወይም አዘግይቶ)።\n\n4. **የቆይታ ጊዜ፦**  \n   የሚቆይበትን ትክክለኛ ቀን የሚያውቅ ከሆነ (ለምሳሌ 4 ቀናት ወይም ከዚያ በታች) ማሳጠር ይችላል። ነገር ግን ከዚያ በላይ በቋሚነት ለመቀመጥ ካሰበ እንደ አገር ነዋሪ ሙሉውን ይሰግዳል።",
+      "locale": "am",
+      "direction": "ltr",
+      "categories": [
+        "fiqh",
+        "salah",
+        "travel"
+      ],
+      "tags": [
+        "ሶላት",
+        "ጉዞ",
+        "ጀምዕ",
+        "ቀስር"
+      ],
+      "published_at": "2023-12-10T15:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "fatwa",
+      "id": "fat_wudu_socks",
+      "title": "ትክክለኛ የውዱዕ አደራረግ እና ካልሲ ላይ የማበስ መስፈርቶች",
+      "slug": "proper-wudu-wiping-over-socks",
+      "summary": "በውዱዕ ወቅት እግርን ማጠብ እና ካልሲ ላይ ማበስ የሚፈቀደው በምን መስፈርቶች ነው?",
+      "question": "በብርድ ጊዜ ወይም በስራ ቦታ ካልሲ አውልቆ እግር መታጠብ ሲከብድ ካልሲ ላይ ማበስ (መስሕ) ይፈቀዳል ወይ? መስፈርቶቹስ ምንድናቸው?",
+      "answer": "### መልስ በኡስታዝ ሙሐመድ ፈረጅ\n\nበካልሲ ወይም በቆዳ ጫማ (ኹፍ) ላይ ማበስ ከነቢዩ (ሰ.ዐ.ወ) በሰፊው የተረጋገጠ ሱናህና የዲናችን ምቾት ነው።\n\n**ማሟላት ያለባቸው ቅድመ ሁኔታዎች፦**\n1. **በሙሉ ውዱዕ መልበስ፦** ካልሲውን ከመልበሱ በፊት እግሩን ታጥቦ ሙሉ ውዱዕ ያደረገ መሆን አለበት።\n2. **ንጹሕ መሆን፦** ካልሲው ከነጃሳ የጸዳ መሆን አለበት።\n3. **የሚያጠራጥር ክፍተት የሌለውና እግርን የሚሸፍን መሆን፦** ተረከዝንና ቁርጭምጭሚትን የሚሸፍን መሆን አለበት።\n4. **የጊዜ ገደብ፦**  \n   - በአገር ውስጥ ላለ ሰው (ሙቂም)፦ ካበሰበት የመጀመሪያ ጊዜ ጀምሮ 24 ሰዓት (አንድ ቀንና አንድ ሌሊት)።\n   - ለመንገደኛ (ሙሳፊር)፦ 72 ሰዓት (ሶስት ቀንና ሶስት ሌሊት)።\n5. **የማበስ ስልት፦** እርጥብ እጅን ከካልሲው የላይኛው ክፍል (ከጣቶች ጀምሮ ወደ ላይ) ብቻ ማሳለፍ፤ የታችኛውን ክፍል ማበስ አይፈለግም።",
+      "locale": "am",
+      "direction": "ltr",
+      "categories": [
+        "fiqh",
+        "wudu",
+        "taharah"
+      ],
+      "tags": [
+        "ውዱዕ",
+        "ጣሃራ",
+        "ካልሲ",
+        "ሶላት"
+      ],
+      "published_at": "2023-11-22T09:30:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    },
+    {
+      "object": "fatwa",
+      "id": "fat_business_zakat",
+      "title": "የንግድ እና የኢንቨስትመንት እቃዎች ዘካ ስሌት መመሪያ",
+      "slug": "calculating-zakat-commercial-merchandise",
+      "summary": "በሱቅ ውስጥ የሚሸጡ እቃዎች እና የንግድ ካፒታል ዘካ እንዴት ይሰላል?",
+      "question": "አንድ ነጋዴ በሱቁ ውስጥ ያሉ ሸቀጦችንና የንግድ ካፒታሉን ዘካ እንዴት ነው የሚያሰላው? ዕዳ ካለበትስ ይቀነሳል ወይ?",
+      "answer": "### መልስ በኡስታዝ ሙሐመድ ፈረጅ\n\nየንግድ እቃዎች (ዑሩዱት-ቲጃራህ) በሸሪዓ የዘካ ግዴታ ያለባቸው ሀብቶች ናቸው።\n\n**ቀላሉ የስሌት ቀመር፦**\n1. **የአመቱ መሟላት (ሐውል)፦** ንግዱ ከተጀመረ ወይም ኒሷብ ከሞላ አንድ አመት (የሂጅራ ካላንደር) ሲሞላው።\n2. **የሸቀጦችን ዋጋ መገመት፦** በአመቱ መጨረሻ በሱቁ ውስጥ የሚሸጡትን እቃዎች በወቅታዊ የጅምላ ዋጋቸው (Current wholesale value) ማስላት።\n3. **ጥሬ ገንዘብ ማከል፦** በካዝናና በባንክ ያለውን ዝግጁ ጥሬ ገንዘብ እንዲሁም በእርግጠኝነት የሚሰበሰብ የደንበኞች ውዝፍ እዳ (Receivables) መደመር።\n4. **አስቸኳይ እዳን መቀነስ፦** በአመቱ ውስጥ መከፈል ያለበትን የቅርብ ጊዜ እዳ (Payables) መቀነስ።\n5. **የመጨረሻ ሂሳብ፦** የተገኘው ቀሪ ሀብት ከኒሷብ (ከ85 ግራም ወርቅ ዋጋ) ጋር እኩል ወይም የሚበልጥ ከሆነ **2.5% (አንድ አርባኛ)** ለድሆች ዘካ ይወጣል።",
+      "locale": "am",
+      "direction": "ltr",
+      "categories": [
+        "islamic-finance",
+        "zakat",
+        "business"
+      ],
+      "tags": [
+        "ዘካ",
+        "ንግድ",
+        "ስሌት",
+        "ኒሷብ"
+      ],
+      "published_at": "2023-10-15T11:00:00Z",
+      "updated_at": "2026-09-30T10:00:00Z"
+    }
+  ],
+  "courses": [
+    {
+      "object": "course",
+      "id": "crs_kitab_tawheed",
+      "title": "የኪታቡ አተውሂድ የተሟላ ትምህርት (Comprehensive Study of Kitab At-Tawheed)",
+      "slug": "comprehensive-kitab-at-tawheed",
+      "summary": "32+ ክፍሎች ያሉት የተሟላ የተውሂድ ትምህርት፤ የእምነት ማዕዘናት፣ የሽርክ አደጋዎችና የተውሂድ ጥበቃ በኡስታዝ ሙሐመድ ፈረጅ።",
+      "description": "ኪታቡ አተውሂድ በኢስላማዊ እምነት (ዐቂዳህ) ውስጥ እጅግ መሠረታዊ የሆነ ኪታብ ነው። በዚህ ተከታታይ የትምህርት ኮርስ ኡስታዝ ሙሐመድ ፈረጅ መጽሐፉን ከነማስረጃው በዝርዝር በማብራራት ለዘመናችን ሙስሊም ህብረተሰብ በሚገባ መልኩ ያቀርቡታል። የድምጽና የጽሑፍ ማብራሪያዎችን አካቷል።",
+      "enrolment_open": true,
+      "lesson_count": 32,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_crs_1",
+        "kind": "image",
+        "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed",
+        "classical-studies"
+      ],
+      "tags": [
+        "ኪታቡ-አተውሂድ",
+        "ዐቂዳህ",
+        "ተውሂድ",
+        "ደርስ"
+      ],
+      "lessons": [
+        {
+          "object": "lesson",
+          "id": "les_tawheed_23",
+          "title": "ትምህርት 23፦ የእምነት ንጽሕና እና የሽርክ አደጋዎች (ክፍል 23)",
+          "summary": "በአላህ ላይ ከማጋራት መጠበቅና የተውሂድ ድንበሮች ማብራሪያ።",
+          "duration_seconds": 1912,
+          "position": 1
+        },
+        {
+          "object": "lesson",
+          "id": "les_tawheed_24",
+          "title": "ትምህርት 24፦ የኢኽላስና የቅንነት መርሆዎች (ክፍል 24)",
+          "summary": "አምልኮትን ለአላህ ብቻ የማጥራትና የውሸት ተስፋዎችን የማስወገድ ድንጋጌዎች።",
+          "duration_seconds": 1974,
+          "position": 2
+        },
+        {
+          "object": "lesson",
+          "id": "les_tawheed_25",
+          "title": "ትምህርት 25፦ አንደበትን መጠበቅና በአላህ ብቻ መማል (ክፍል 25)",
+          "summary": "በፍጡራን መማል ክልከላና በአንደበት የሚፈጸሙ የሽርክ አይነቶች።",
+          "duration_seconds": 1813,
+          "position": 3
+        },
+        {
+          "object": "lesson",
+          "id": "les_tawheed_26",
+          "title": "ትምህርት 26፦ በፈተና ወቅት መጽናትና የአላህ ውሳኔ (ክፍል 26)",
+          "summary": "በቀደር (በአላህ ውሳኔ) ማመንና በችግር ወቅት ትዕግስትን መላበስ።",
+          "duration_seconds": 2503,
+          "position": 4
+        },
+        {
+          "object": "lesson",
+          "id": "les_tawheed_32",
+          "title": "ትምህርት 32፦ የተውሂድ ማጠቃለያና የመጨረሻ ምዕራፎች (ክፍል 32)",
+          "summary": "የመጽሐፉ ማጠቃለያ፣ የተውሂድ ፍሬዎችና የጽናት መመሪያዎች።",
+          "duration_seconds": 2084,
+          "position": 5
+        }
+      ],
+      "published_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "object": "course",
+      "id": "crs_fiqh_worship",
+      "title": "ትክክለኛ የውዱዕና የሰላት አሰጋገድ ትምህርት (Fiqh of Wudu & Salah)",
+      "slug": "fiqh-of-wudu-and-salah",
+      "summary": "የውዱዕ አደራረግ ደረጃ በደረጃ፣ የሶላት ማዕዘናት፣ ዋጂባቶች፣ ሱናዎችና አፍራሾች በዝርዝር።",
+      "description": "ሶላት የእምነታችን ምሰሶ ናት። ነቢዩ (ሰለላሁ ዐለይሂ ወሰለም) «እኔ ስሰግድ እንዳያችሁኝ ስገዱ» ባሉት መሠረት፣ በዚህ ኮርስ ላይ ትክክለኛ የውዱዕ አደራረግ፣ የሶላት አቋቋም፣ ሩኩዕ፣ ሱጁድና ተሻሁድ በምስልና በማብራሪያ ተካቷል።",
+      "enrolment_open": true,
+      "lesson_count": 8,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_crs_2",
+        "kind": "image",
+        "url": "/images/photo_17_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "fiqh",
+        "salah",
+        "worship"
+      ],
+      "tags": [
+        "ሶላት",
+        "ውዱዕ",
+        "ጣሃራ",
+        "ፊቅህ"
+      ],
+      "lessons": [
+        {
+          "object": "lesson",
+          "id": "les_wudu_practical",
+          "title": "ክፍል 1፦ ትክክለኛ የውዱዕ አደራረግ ተግባራዊ ትምህርት",
+          "summary": "ከእጅ መታጠብ ጀምሮ እስከ እግር ማጠብ ያለው የውዱዕ ቅደም ተከተልና ሱናዎች።",
+          "duration_seconds": 2400,
+          "position": 1
+        },
+        {
+          "object": "lesson",
+          "id": "les_salah_conditions",
+          "title": "ክፍል 2፦ የሶላት ቅድመ-ሁኔታዎችና ማዕዘናት (አርካን)",
+          "summary": "የሶላት ሸርጦች፣ ተክቢረተል ኢሕራም፣ ፋቲሃህና ሩኩዕ።",
+          "duration_seconds": 2700,
+          "position": 2
+        },
+        {
+          "object": "lesson",
+          "id": "les_salah_mistakes",
+          "title": "ክፍል 3፦ በሶላት ውስጥ የሚፈጸሙ የተለመዱ ስህተቶችና ማረሚያቸው",
+          "summary": "በሱጁድ፣ በእርጋታ ማጣትና በንባብ የሚከሰቱ ግድፈቶች።",
+          "duration_seconds": 2500,
+          "position": 3
+        }
+      ],
+      "published_at": "2023-08-10T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "object": "course",
+      "id": "crs_islamic_banking",
+      "title": "የሸሪዓዊ የፋይናንስና የባንክ ስራ መርሆዎች — AAOIFI Standards",
+      "slug": "islamic-banking-aaoifi-standards",
+      "summary": "ከወለድ የጸዳ የባንክ አገልግሎት ህጎች፣ የሙራበሃ፣ ሙዳረባና ኢጃራህ ኮንትራቶች አሰራር።",
+      "description": "የAAOIFI ሰርቲፋይድ የሸሪዓ ኦዲተር በሆኑት በሼክ ሙሐመድ ፈረጅ የሚሰጥ ፕሮፌሽናል ስልጠና። የኢትዮጵያ የባንክ ስራ ከሸሪዓ ጋር የተጣጣመ እንዲሆን የሚያስችሉ ተግባራዊ መመሪያዎችንና የውል ቅጾችን ያስተምራል።",
+      "enrolment_open": true,
+      "lesson_count": 10,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_crs_3",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "islamic-finance",
+        "aaoifi",
+        "banking"
+      ],
+      "tags": [
+        "ኢስላሚክ-ባንክ",
+        "AAOIFI",
+        "ሙራበሃ",
+        "ፋይናንስ"
+      ],
+      "lessons": [
+        {
+          "object": "lesson",
+          "id": "les_bank_intro",
+          "title": "ክፍል 1፦ የእስላማዊ ፋይናንስ መሰረቶችና የሪባ ክልከላ",
+          "summary": "የወለድ አይነቶች፣ የሸሪዓዊ የፍትሕ ሚዛንና የካፒታል ሚና።",
+          "duration_seconds": 3000,
+          "position": 1
+        },
+        {
+          "object": "lesson",
+          "id": "les_bank_murabaha",
+          "title": "ክፍል 2፦ የሙራበሃ ውልና የሸቀጦች ግዢ አፈጻጸም",
+          "summary": "የአማናህ ባንኪንግ የሙራበሃ ፋይናንሲንግ ደንቦች።",
+          "duration_seconds": 3200,
+          "position": 2
+        }
+      ],
+      "published_at": "2023-11-01T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    }
+  ],
+  "books": [
+    {
+      "object": "book",
+      "id": "bok_kitab_tawheed",
+      "title": "Kitab At-Tawheed — The Book of Monotheism (ኪታቡ አተውሂድ)",
+      "slug": "kitab-at-tawheed",
+      "summary": "The foundational classical treatise on Islamic Monotheism, systematically taught and explained by Sheikh Muhammed Ferej Megeno in Addis Ababa, accompanied by authentic audio lessons.",
+      "description": "Kitab At-Tawheed clarifies the essence of worship, the rights of Allah over His creation, and protects against modern forms of polytheism and superstition. This verified syllabus and curriculum guide outlines the core themes, chapter divisions, and commentary recorded by Sheikh Muhammed Ferej across 32+ classroom lessons.",
+      "author": "Imam Muhammad ibn Abd al-Wahhab (Commentary by Sheikh Muhammed Ferej)",
+      "publisher": "Bunyan Scholarly Publishing & Al-Fajr Foundation",
+      "year": 2024,
+      "isbn": "978-99944-10-82-6",
+      "kind": "book",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_tawheed",
+        "kind": "image",
+        "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "file": {
+        "object": "media",
+        "id": "med_doc_tawheed",
+        "kind": "document",
+        "url": "/documents/kitabu-tawhid-complete.pdf",
+        "mime_type": "application/pdf",
+        "width": null,
+        "height": null,
+        "duration_seconds": null
+      },
+      "external_url": null,
+      "categories": [
+        "aqeedah",
+        "tawheed",
+        "classical-texts"
+      ],
+      "tags": [
+        "kitab-at-tawheed",
+        "aqeedah",
+        "tawheed",
+        "sheikh-muhammed-ferej"
+      ],
+      "published_at": "2024-03-15T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "object": "book",
+      "id": "bok_cv",
+      "title": "Official Curriculum Vitae — Sheikh Muhammed Ferej Megeno (የግል መገለጫ)",
+      "slug": "curriculum-vitae-sheikh-muhammed-ferej",
+      "summary": "Complete scholarly and professional resume detailing 35+ years in Islamic education, university degrees, Sharia advisory positions, broadcast media, and community leadership.",
+      "description": "The verified scholarly curriculum vitae of Sheikh Muhammed Ferej Megeno, Sharia consultant at Wegagen Bank, African Scholars Union member, and graduate of the Islamic University of Minnesota in Sharia and Law. Available as an authenticated PDF document.",
+      "author": "Sheikh Muhammed Ferej Megeno",
+      "publisher": "Scholarly Office of Sheikh Muhammed Ferej",
+      "year": 2026,
+      "isbn": null,
+      "kind": "document",
+      "locale": "en",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_cv",
+        "kind": "image",
+        "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 960,
+        "height": 1280,
+        "duration_seconds": null
+      },
+      "file": {
+        "object": "media",
+        "id": "med_doc_cv",
+        "kind": "document",
+        "url": "/documents/My CV.pdf",
+        "mime_type": "application/pdf",
+        "width": null,
+        "height": null,
+        "duration_seconds": null
+      },
+      "external_url": null,
+      "categories": [
+        "biography",
+        "credentials"
+      ],
+      "tags": [
+        "cv",
+        "credentials",
+        "biography"
+      ],
+      "published_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "object": "book",
+      "id": "bok_mukhtasar_tafsir",
+      "title": "Summary Interpretation of the Holy Quran (የተመረጡ የቁርኣን አንቀጾች ማብራሪያ - ሙኽተሰር ተፍሲር)",
+      "slug": "summary-interpretation-holy-quran-amharic",
+      "summary": "Authorized Amharic co-translation of the renowned 'Al-Mukhtasar fi Tafsir al-Quran al-Kareem' providing lucid commentary and linguistic derivations for Ethiopian Muslims.",
+      "description": "A comprehensive project co-translated by Sheikh Muhammed Ferej Megeno alongside distinguished scholars, translating the meanings and classical concise exegesis of the Noble Quran into accessible, accurate Amharic.",
+      "author": "Tafsir Translation Committee (Co-translator: Sheikh Muhammed Ferej)",
+      "publisher": "Dar al-Tafsir Foundation",
+      "year": 2021,
+      "isbn": "978-99944-88-21-4",
+      "kind": "book",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_tafsir",
+        "kind": "image",
+        "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1055,
+        "height": 1062,
+        "duration_seconds": null
+      },
+      "file": null,
+      "external_url": "https://quran.com",
+      "categories": [
+        "tafsir",
+        "quran"
+      ],
+      "tags": [
+        "tafsir",
+        "quran",
+        "amharic-translation"
+      ],
+      "published_at": "2021-06-10T00:00:00Z",
+      "updated_at": "2021-06-10T00:00:00Z"
+    },
+    {
+      "object": "book",
+      "id": "bok_usool_thalathah",
+      "title": "Al-Usool Ath-Thalathah — The Three Fundamental Principles (ሦስቱ መሠረታዊ መርሆዎች)",
+      "slug": "al-usool-ath-thalathah",
+      "summary": "The essential primer teaching every Muslim the three questions of the grave: knowing Allah, knowing Islam with evidence, and knowing the Prophet Muhammad (s.a.w).",
+      "description": "A staple in the educational curriculum taught by Sheikh Muhammed Ferej at Al-Fajr Islamic Foundation and Mosques in Addis Ababa. Includes analytical explanations of Tawheed ar-Rububiyyah, Uluhiyyah, and Asma wa Sifat.",
+      "author": "Imam Muhammad ibn Abd al-Wahhab (Taught by Sheikh Muhammed Ferej)",
+      "publisher": "Al-Fajr Islamic Foundation",
+      "year": 2022,
+      "isbn": "978-99944-99-15-2",
+      "kind": "book",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_usool",
+        "kind": "image",
+        "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "file": null,
+      "external_url": null,
+      "categories": [
+        "aqeedah",
+        "basics"
+      ],
+      "tags": [
+        "usool-ath-thalathah",
+        "aqeedah",
+        "foundations"
+      ],
+      "published_at": "2022-04-12T00:00:00Z",
+      "updated_at": "2022-04-12T00:00:00Z"
+    },
+    {
+      "object": "book",
+      "id": "bok_aaoifi_guide",
+      "title": "AAOIFI Sharia Governance and Ethical Finance Framework for Islamic Windows",
+      "slug": "aaoifi-sharia-governance-framework",
+      "summary": "Foundational Sharia auditing guide and governance principles for Islamic banking windows, contracts, and digital financial transactions.",
+      "description": "Referenced by Sheikh Muhammed Ferej in his Sharia advisory work at Wegagen Bank, highlighting the operational implementation of AAOIFI standards in Ethiopian Islamic financial institutions.",
+      "author": "Accounting and Auditing Organization for Islamic Financial Institutions (AAOIFI)",
+      "publisher": "AAOIFI Standards Board",
+      "year": 2023,
+      "isbn": "978-99901-44-12-8",
+      "kind": "recommended_text",
+      "locale": "en",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_cov_aaoifi",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 853,
+        "duration_seconds": null
+      },
+      "file": null,
+      "external_url": "https://aaoifi.com",
+      "categories": [
+        "islamic-finance",
+        "sharia-governance"
+      ],
+      "tags": [
+        "aaoifi",
+        "islamic-banking",
+        "fiqh-muamalat"
+      ],
+      "published_at": "2023-09-01T00:00:00Z",
+      "updated_at": "2023-09-01T00:00:00Z"
+    }
+  ],
+  "events": [
+    {
+      "object": "event",
+      "id": "evt_jumah_alfajr",
+      "title": "የጁምዓ ኹጥባህ — የተውሂድና የተረጋጋ ልብ ፋይዳ (Friday Khutbah)",
+      "slug": "friday-khutbah-importance-of-sincerity",
+      "summary": "በአል-ፈጅር መስጂድ የሚካሄድ ሳምንታዊ የጁምዓ ኹጥባህ በኡስታዝ ሙሐመድ ፈረጅ፤ የኢኽላስና የቅንነት መርሆዎች።",
+      "description": "ሳምንታዊ የጁምዓ ሰላት ኹጥባህ በአዲስ አበባ አል-ፈጅር መስጂድ የሚካሄድ ሲሆን በዕለቱም የልብ ንጽሕና፣ የአላህ ፍራቻ እና የህብረተሰብ አንድነት ዙሪያ ሰፊ ማብራሪያ ይሰጣል። በድረ-ገጹ የቀጥታ ስርጭትና የድምጽ ቅጂ ይቀርባል።",
+      "starts_at": "2026-10-09T09:30:00Z",
+      "ends_at": "2026-10-09T10:30:00Z",
+      "timezone": "Africa/Addis_Ababa",
+      "venue_name": "Al-Fajr Mosque",
+      "venue_address": "Addis Ababa, Ethiopia",
+      "online_url": "https://youtube.com/@muhammadferej",
+      "registration_required": false,
+      "capacity": null,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_evt_1",
+        "kind": "image",
+        "url": "/images/photo_15_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "khutbah",
+        "jumah"
+      ],
+      "tags": [
+        "ጁምዓ",
+        "ኹጥባህ",
+        "አል-ፈጅር",
+        "አዲስ-አበባ"
+      ],
+      "published_at": "2026-09-25T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "object": "event",
+      "id": "evt_tawheed_seminar",
+      "title": "የኪታቡ አተውሂድ ዓመታዊ ሴሚናር (Annual Kitab At-Tawheed Intensive)",
+      "slug": "annual-kitab-at-tawheed-seminar",
+      "summary": "ለሶስት ተከታታይ ቀናት የሚቆይ ጥልቅ የተውሂድ ትምህርት ሴሚናር፤ ከነማስረጃውና የዘመናዊ ጥያቄዎች ምላሽ ጋር።",
+      "description": "በየዓመቱ የሚዘጋጅ ልዩ የተውሂድ ትምህርት ሴሚናር። ተሳታፊዎች የኪታቡ አተውሂድን ዋና ዋና ምዕራፎች ከኡስታዝ ሙሐመድ ፈረጅ ጋር በአካልና በበይነመረብ ይማራሉ። በሴሚናሩ ማጠናቀቂያ ላይ የተሳትፎ ሰርተፊኬት ይሰጣል።",
+      "starts_at": "2026-10-25T06:00:00Z",
+      "ends_at": "2026-10-27T15:00:00Z",
+      "timezone": "Africa/Addis_Ababa",
+      "venue_name": "Addis Ababa Cultural & Conference Hall",
+      "venue_address": "Addis Ababa, Ethiopia",
+      "online_url": "https://youtube.com/@muhammadferej",
+      "registration_required": true,
+      "capacity": 500,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_evt_2",
+        "kind": "image",
+        "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "seminar",
+        "aqeedah"
+      ],
+      "tags": [
+        "ሴሚናር",
+        "ኪታቡ-አተውሂድ",
+        "ደርስ",
+        "ኮንፈረንስ"
+      ],
+      "published_at": "2026-09-20T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "object": "event",
+      "id": "evt_aaoifi_workshop",
+      "title": "እስላማዊ ባንኪንግና የሸሪዓ አስተዳደር አውደ ጥናት (Islamic Banking Workshop)",
+      "slug": "islamic-banking-sharia-governance-workshop",
+      "summary": "በወጋገን ባንክ አማናህ መስኮት አስተባባሪነት ለባንክ ባለሙያዎችና ለነጋዴዎች የሚዘጋጅ የሸሪዓዊ ፋይናንስ ስልጠና።",
+      "description": "የAAOIFI ዓለም አቀፍ የሸሪዓ መመዘኛዎችን መሠረት ያደረገ ተግባራዊ አውደ-ጥናት። ከወለድ የጸዳ የፋይናንስ አማራጮች፣ የሙራበሃ ውሎችና የኦዲት ስርዓቶች ይዳሰሳሉ። አቅራቢ፦ ሼክ ሙሐመድ ፈረጅ (የሸሪዓ አማካሪና ኦዲተር)።",
+      "starts_at": "2026-11-15T06:30:00Z",
+      "ends_at": "2026-11-15T13:30:00Z",
+      "timezone": "Africa/Addis_Ababa",
+      "venue_name": "Wegagen Bank Headquarters Hall",
+      "venue_address": "Addis Ababa, Ethiopia",
+      "online_url": null,
+      "registration_required": true,
+      "capacity": 120,
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_evt_3",
+        "kind": "image",
+        "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 960,
+        "duration_seconds": null
+      },
+      "categories": [
+        "workshop",
+        "islamic-finance"
+      ],
+      "tags": [
+        "ወጋገን-አማናህ",
+        "ኢስላሚክ-ባንክ",
+        "AAOIFI",
+        "አውደ-ጥናት"
+      ],
+      "published_at": "2026-09-15T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z"
+    }
+  ],
+  "media": [
+    {
+      "object": "media",
+      "id": "med_portrait",
+      "kind": "image",
+      "url": "/images/sheikh-portrait.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 1280,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_1",
+      "kind": "image",
+      "url": "/images/photo_1_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_2",
+      "kind": "image",
+      "url": "/images/photo_2_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_3",
+      "kind": "image",
+      "url": "/images/photo_3_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_4",
+      "kind": "image",
+      "url": "/images/photo_4_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_5",
+      "kind": "image",
+      "url": "/images/photo_5_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_6",
+      "kind": "image",
+      "url": "/images/photo_6_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_7",
+      "kind": "image",
+      "url": "/images/photo_7_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_8",
+      "kind": "image",
+      "url": "/images/photo_8_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_9",
+      "kind": "image",
+      "url": "/images/photo_9_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_10",
+      "kind": "image",
+      "url": "/images/photo_10_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_11",
+      "kind": "image",
+      "url": "/images/photo_11_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_12",
+      "kind": "image",
+      "url": "/images/photo_12_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_13",
+      "kind": "image",
+      "url": "/images/photo_13_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_14",
+      "kind": "image",
+      "url": "/images/photo_14_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_15",
+      "kind": "image",
+      "url": "/images/photo_15_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_16",
+      "kind": "image",
+      "url": "/images/photo_16_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_gallery_photo_17",
+      "kind": "image",
+      "url": "/images/photo_17_2026-09-30_23-42-17.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1280,
+      "height": 960,
+      "duration_seconds": null
+    },
+    {
+      "object": "media",
+      "id": "med_pdf_kitab_tawheed",
+      "kind": "document",
+      "url": "https://ia800305.us.archive.org/24/items/KitabAtTawheedAmharic/KitabAtTawheed.pdf",
+      "mime_type": "application/pdf",
+      "width": null,
+      "height": null,
+      "duration_seconds": null
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq_1793000317615",
+      "question": "This is an automated verification test inquiry regarding Zakat calculation.",
+      "name": "Ahmad Tester",
+      "email": "ahmad@example.com",
+      "is_anonymous": false,
+      "locale": "en",
+      "created_at": "2026-10-26T07:38:37.615Z",
+      "status": "pending"
+    },
+    {
+      "id": "inq_initial_sample_1",
+      "question": "አሰላሙ አለይኩም ኡስታዝ፤ በዘመናዊ የሞባይል ባንኪንግና ዲጂታል ክፍያዎች ላይ የሚቆረጡ የአገልግሎት ክፍያዎች በሸሪዓ እንዴት ይታያሉ?",
+      "name": "አብዱረህማን ከማል",
+      "email": "abdurahman@example.com",
+      "is_anonymous": false,
+      "locale": "am",
+      "created_at": "2026-10-24T12:00:00Z",
+      "status": "answered",
+      "notes": "Answered and published under Fatwas: Sharia Rulings on Digital Banking Fees."
+    },
+    {
+      "id": "inq_initial_sample_2",
+      "question": "Regarding travel prayers (Salah al-Safar): if I am staying in a city for 5 days for work, when do I discontinue shortening and combining prayers according to classical consensus?",
+      "name": "Bilal Ahmed",
+      "email": "bilal.ahmed@example.com",
+      "is_anonymous": false,
+      "locale": "en",
+      "created_at": "2026-10-25T14:30:00Z",
+      "status": "pending",
+      "notes": "Pending review by Sheikh's office."
+    }
+  ]
+}

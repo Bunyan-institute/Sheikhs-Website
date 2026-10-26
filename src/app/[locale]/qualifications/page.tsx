@@ -25,15 +25,15 @@ export default async function QualificationsPage({ params }: { params: Promise<{
   // For now, rendering in a clean grid as requested
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-16 md:py-24">
       <div className="mb-12 space-y-4">
-        <h1 className="font-heading text-4xl font-bold text-[#2D3436]">Qualifications & Ijazat</h1>
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#2D3436]">Qualifications & Ijazat</h1>
         <p className="text-lg text-[#636E72] max-w-3xl">
           Academic achievements and traditional authorizations granted by esteemed institutions and scholars.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {qualifications.map((qual) => {
           const config = typeConfig[qual.type] || typeConfig.other;
 

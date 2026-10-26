@@ -24,11 +24,21 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E0D8CE]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
-          <div className="flex-1 min-w-0 me-2 sm:me-4">
-            <Link href="/" className="font-heading text-base sm:text-xl font-bold text-[#2D3436] truncate block max-w-[210px] sm:max-w-none">
-              {profile.name}
+      <header className="sticky top-0 z-40 w-full bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E0D8CE] shadow-2xs">
+        <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-6">
+          <div className="flex-1 min-w-0 me-2 sm:me-6">
+            <Link href="/" className="group inline-flex items-center gap-3">
+              <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-[4px] bg-[#1B5E20] text-[#FAF8F5] flex items-center justify-center font-heading font-bold text-base sm:text-lg shadow-sm border border-[#154a19] shrink-0 group-hover:scale-105 transition-transform">
+                م
+              </span>
+              <div className="min-w-0">
+                <span className="font-heading text-base sm:text-xl font-bold text-[#2D3436] group-hover:text-[#1B5E20] transition-colors truncate block max-w-[210px] sm:max-w-none">
+                  {profile.name}
+                </span>
+                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#B8860B] font-semibold hidden sm:block">
+                  Islamic Scholar & AAOIFI Sharia Consultant
+                </span>
+              </div>
             </Link>
           </div>
           

@@ -15,7 +15,7 @@ export default async function JourneyPage({ params }: { params: Promise<{ locale
   setRequestLocale(locale);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-20">
       <div className="text-center mb-16 space-y-4">
         <h1 className="font-heading text-4xl font-bold text-[#2D3436]">Educational Journey</h1>
         <p className="text-lg text-[#636E72] max-w-2xl mx-auto">

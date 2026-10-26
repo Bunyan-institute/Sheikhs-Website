@@ -83,8 +83,8 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
 
   return (
     <footer className="w-full bg-[#F4F1EB] border-t border-[#E0D8CE] mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
+      <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Column 1: Scholar Name & Info */}
           <div className="sm:col-span-2 lg:col-span-2 flex flex-col space-y-4">
             <Link href="/" className="font-heading text-xl font-bold text-[#2D3436] hover:text-[#1B5E20] transition-colors break-words">

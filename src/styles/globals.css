@@ -107,3 +107,19 @@ body {
 .prose-scholarly p {
   margin-bottom: 1.5em;
 }
+
+/* Scholarly card & Islamic motif accents */
+.islamic-border-accent {
+  position: relative;
+}
+
+.islamic-border-accent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #1B5E20, #B8860B, transparent);
+}
+

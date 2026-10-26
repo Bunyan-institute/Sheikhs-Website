@@ -28,25 +28,14 @@ export const AUTHENTIC_SERIES: PublicSeries[] = [
   },
 ];
 
+import { getAllSeries, getSeriesByIdOrSlug, getAllLectures } from "@/lib/db/repository";
+
 export async function getSeriesList(params: { limit?: string; cursor?: string; locale?: string; sort?: string } = {}): Promise<ListResponse<PublicSeries>> {
   try {
-    const res = await bunyan<ListResponse<PublicSeries>>({
-      path: "/series",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        sort: params.sort ?? "-published_at",
-      },
-      tags: ["series"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return res;
-    }
+    const list = getAllSeries();
     return {
       object: "list",
-      data: AUTHENTIC_SERIES,
+      data: list,
       has_more: false,
       next_cursor: null,
     };
@@ -62,24 +51,23 @@ export async function getSeriesList(params: { limit?: string; cursor?: string; l
 
 export async function getSeriesDetail(reference: string, locale?: string): Promise<PublicSeries> {
   try {
-    const res = await bunyan<PublicSeries>({
-      path: `/series/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["series", `series-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return res;
+    const found = getSeriesByIdOrSlug(reference);
+    if (found) {
+      const allLecs = getAllLectures();
+      return {
+        ...found,
+        lectures: allLecs.filter((l) => l.series?.id === found.id || l.series?.id === found.slug),
+      };
     }
   } catch {
     // fallback
   }
 
-  const found = AUTHENTIC_SERIES.find(
+  const foundFallback = AUTHENTIC_SERIES.find(
     (s) => s.slug === reference || s.id === reference
   );
-  if (found) {
-    return found;
+  if (foundFallback) {
+    return foundFallback;
   }
 
   throw new Error(`Series ${reference} not found`);

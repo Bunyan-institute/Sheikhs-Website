@@ -40,18 +40,21 @@ export default function AskPage(props: { params: Promise<{ locale: string }> }) 
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      <header className="mb-12 text-center">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-20">
+      <header className="mb-12 text-center max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 text-xs uppercase font-bold text-[#1B5E20] tracking-wider mb-2">
+          <span>۞ Fatwa & Advisory Desk</span>
+        </div>
         <h1 className="text-4xl md:text-5xl font-heading text-[#2D3436] font-bold tracking-tight mb-4">
           Ask the Sheikh
         </h1>
-        <p className="text-lg md:text-xl text-[#636E72] font-body max-w-2xl mx-auto">
-          Submit your questions regarding Islamic jurisprudence, creed, or spiritual guidance.
+        <p className="text-lg md:text-xl text-[#636E72] font-body">
+          Submit your questions regarding Islamic jurisprudence, creed, ethical finance, or spiritual guidance.
         </p>
       </header>
 
       {success ? (
-        <div className="bg-[#FAF8F5] border border-[#1B5E20]/30 rounded-lg p-6 sm:p-8 md:p-12 text-center shadow-xs">
+        <div className="max-w-2xl mx-auto bg-[#FAF8F5] border border-[#1B5E20]/30 rounded-lg p-6 sm:p-8 md:p-12 text-center shadow-xs">
            <CheckCircle className="w-16 h-16 text-[#1B5E20] mx-auto mb-6" />
            <h2 className="text-2xl font-heading font-bold text-[#2D3436] mb-4">Question Received</h2>
            <p className="text-base sm:text-lg text-[#636E72] mb-6">
@@ -68,7 +71,37 @@ export default function AskPage(props: { params: Promise<{ locale: string }> }) 
            </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="bg-white border border-[#E0D8CE] rounded-lg p-5 sm:p-8 md:p-10 shadow-xs">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Scholarly Guidance Sidebar */}
+          <aside className="lg:col-span-4 bg-[#FAF8F5] border border-[#E0D8CE] rounded-lg p-6 sm:p-8 space-y-6">
+            <h3 className="font-heading text-lg font-bold text-[#2D3436] border-b border-[#E0D8CE] pb-3">
+              Adab & Submission Guidelines
+            </h3>
+            
+            <div className="space-y-4 text-sm text-[#636E72] leading-relaxed">
+              <div className="flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B5E20]/10 text-[#1B5E20] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <p><strong className="text-[#2D3436]">Clarity & Specifics:</strong> State your question clearly, mentioning relevant background details without unnecessary length.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B5E20]/10 text-[#1B5E20] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <p><strong className="text-[#2D3436]">Sharia Authenticity:</strong> All answers are grounded in the Quran, authentic Sunnah, and classical consensus.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#1B5E20]/10 text-[#1B5E20] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <p><strong className="text-[#2D3436]">Confidentiality:</strong> Inquiries may be submitted anonymously. Personal identifiers are never disclosed.</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-md bg-white border border-[#E0D8CE] text-xs text-[#636E72] space-y-2">
+              <span className="font-bold text-[#1B5E20] block">Specialized Guidance</span>
+              <p>For urgent Sharia audit or ethical banking consultations with Wegagen Bank, you may also reach the scholarly office directly via the contact page.</p>
+            </div>
+          </aside>
+
+          {/* Question Form */}
+          <div className="lg:col-span-8">
+            <form onSubmit={handleSubmit} className="bg-white border border-[#E0D8CE] rounded-lg p-6 sm:p-8 md:p-10 shadow-xs">
           <div className="mb-6">
             <label htmlFor="question" className="block text-sm font-bold text-[#2D3436] mb-2">
               Your Question <span className="text-red-500">*</span>
@@ -152,7 +185,9 @@ export default function AskPage(props: { params: Promise<{ locale: string }> }) 
             </button>
           </div>
         </form>
-      )}
+      </div>
     </div>
+  )}
+</div>
   );
 }

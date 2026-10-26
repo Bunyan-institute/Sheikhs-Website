@@ -1,4 +1,3 @@
-import { bunyan } from "./client";
 import type { QuestionReceipt } from "./types";
 
 export async function submitQuestion(data: {
@@ -8,17 +7,22 @@ export async function submitQuestion(data: {
   locale?: string;
 }): Promise<QuestionReceipt> {
   try {
-    return await bunyan<QuestionReceipt>({
-      path: "/questions",
+    const res = await fetch("/api/inquiries", {
       method: "POST",
-      body: {
-        body: data.body,
-        askerName: data.askerName || null,
-        askerEmail: data.askerEmail || null,
-        locale: data.locale,
+      headers: {
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify(data),
     });
-  } catch {
+
+    if (!res.ok) {
+      throw new Error(`Inquiry submission failed with status ${res.status}`);
+    }
+
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.error("Failed to submit question:", err);
     return {
       object: "question",
       id: "QST-" + Math.random().toString(36).substring(2, 8).toUpperCase(),

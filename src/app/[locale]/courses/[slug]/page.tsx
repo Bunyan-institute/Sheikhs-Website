@@ -49,7 +49,7 @@ export default async function CoursePage({
   const lessons = course.lessons || [];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-16">
       <div className="mb-8">
         <Link 
           href="/courses" 

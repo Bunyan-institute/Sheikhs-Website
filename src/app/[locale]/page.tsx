@@ -158,7 +158,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const audioLessons = latestLectures.filter(l => !l.media?.video && Boolean(l.media?.audio)).slice(0, 3);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pb-24">
       <ScholarHero 
         name={profile.name}
         headline={profile.headline}
@@ -260,8 +260,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videoLectures.slice(1, 7).map((lec) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {videoLectures.slice(1, 9).map((lec) => (
             <div key={lec.id} className="border border-[#E0D8CE] rounded-[6px] overflow-hidden bg-white shadow-sm flex flex-col group hover:border-[#1B5E20] transition-colors">
               <div className="aspect-video bg-[#2D3436] relative">
                 <LecturePlayer media={lec.media} title={lec.title} coverUrl={lec.cover?.url} />

@@ -133,27 +133,17 @@ export const AUTHENTIC_FATWAS: PublicFatwa[] = [
   },
 ];
 
+import { getAllFatwas, getFatwaByIdOrSlug } from "@/lib/db/repository";
+
 export async function getFatwas(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicFatwa>> {
   try {
-    const res = await bunyan<ListResponse<PublicFatwa>>({
-      path: "/fatwas",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        category: params.category,
-        tag: params.tag,
-        sort: params.sort ?? "-published_at",
-      },
-      tags: ["fatwas"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return res;
+    let list = getAllFatwas();
+    if (params.category && params.category.length > 0) {
+      list = list.filter((f) => f.categories.some((c) => params.category!.includes(c)));
     }
     return {
       object: "list",
-      data: AUTHENTIC_FATWAS,
+      data: list,
       has_more: false,
       next_cursor: null,
     };
@@ -169,24 +159,19 @@ export async function getFatwas(params: { limit?: string; cursor?: string; local
 
 export async function getFatwa(reference: string, locale?: string): Promise<PublicFatwa> {
   try {
-    const res = await bunyan<PublicFatwa>({
-      path: `/fatwas/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["fatwas", `fatwa-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return res;
+    const found = getFatwaByIdOrSlug(reference);
+    if (found) {
+      return found;
     }
   } catch {
     // fallback
   }
 
-  const found = AUTHENTIC_FATWAS.find(
+  const foundFallback = AUTHENTIC_FATWAS.find(
     (f) => f.slug === reference || f.id === reference
   );
-  if (found) {
-    return found;
+  if (foundFallback) {
+    return foundFallback;
   }
 
   throw new Error(`Fatwa ${reference} not found`);

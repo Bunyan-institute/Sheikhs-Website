@@ -63,7 +63,7 @@ export default async function FatwaPage({
   }
 
   return (
-    <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+    <article className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
       <div className="mb-8 sm:mb-10">
         <Link 
           href="/fatwas" 

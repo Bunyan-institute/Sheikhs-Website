@@ -30,7 +30,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   }
 
   if (!profile) return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-[#636E72]">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-20 text-center text-[#636E72]">
       <p>Failed to load profile information.</p>
     </div>
   );
@@ -38,7 +38,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const photoUrl = profile.photo?.url;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-20">
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
         <aside className="lg:w-1/3 shrink-0 space-y-6 sm:space-y-8">
           <div className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-none mx-auto lg:mx-0 aspect-square rounded-[4px] overflow-hidden bg-[#FAF8F5] border border-[#E0D8CE] flex items-center justify-center relative shadow-sm">

@@ -168,27 +168,17 @@ export const AUTHENTIC_COURSES: PublicCourse[] = [
   },
 ];
 
+import { getAllCourses, getCourseByIdOrSlug } from "@/lib/db/repository";
+
 export async function getCourses(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicCourse>> {
   try {
-    const res = await bunyan<ListResponse<PublicCourse>>({
-      path: "/courses",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        category: params.category,
-        tag: params.tag,
-        sort: params.sort ?? "-published_at",
-      },
-      tags: ["courses"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return res;
+    let list = getAllCourses();
+    if (params.category && params.category.length > 0) {
+      list = list.filter((c) => c.categories.some((cat) => params.category!.includes(cat)));
     }
     return {
       object: "list",
-      data: AUTHENTIC_COURSES,
+      data: list,
       has_more: false,
       next_cursor: null,
     };
@@ -204,24 +194,19 @@ export async function getCourses(params: { limit?: string; cursor?: string; loca
 
 export async function getCourse(reference: string, locale?: string): Promise<PublicCourse> {
   try {
-    const res = await bunyan<PublicCourse>({
-      path: `/courses/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["courses", `course-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return res;
+    const found = getCourseByIdOrSlug(reference);
+    if (found) {
+      return found;
     }
   } catch {
     // fallback
   }
 
-  const found = AUTHENTIC_COURSES.find(
+  const foundFallback = AUTHENTIC_COURSES.find(
     (c) => c.slug === reference || c.id === reference
   );
-  if (found) {
-    return found;
+  if (foundFallback) {
+    return foundFallback;
   }
 
   throw new Error(`Course ${reference} not found`);

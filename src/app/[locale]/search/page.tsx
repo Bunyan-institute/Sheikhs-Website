@@ -42,7 +42,7 @@ export default async function SearchPage(props: { params: Promise<{ locale: stri
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-20">
       <header className="mb-10 text-center">
         <h1 className="text-3xl md:text-4xl font-heading text-[#2D3436] font-bold tracking-tight mb-4">
           Search Knowledge

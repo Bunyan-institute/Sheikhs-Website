@@ -43,30 +43,24 @@ His foundational training took place in traditional knowledge circles (Halaqat) 
   updated_at: new Date().toISOString(),
 };
 
+import { getProfile as getStoredProfile } from "@/lib/db/repository";
+
 export async function getProfile(locale?: string): Promise<PublicProfile> {
   const isArabic = locale === "ar";
-  const name = isArabic ? "الشيخ محمد فرج مجنو" : "Sheikh Muhammed Ferej Megeno";
+  const name = isArabic ? "الشيخ محمد فرج مجنو" : undefined;
 
   try {
-    const res = await bunyan<PublicProfile>({
-      path: "/profile",
-      params: locale ? { locale } : undefined,
-      tags: ["profile"],
-      revalidate: 300,
-    });
-    if (!res || !res.name) {
-      return {
-        ...FALLBACK_PROFILE,
-        name,
-        locale: locale || "en",
-        direction: isArabic ? "rtl" : "ltr",
-      };
-    }
-    return res;
+    const stored = getStoredProfile();
+    return {
+      ...stored,
+      name: name || stored.name,
+      locale: locale || stored.locale || "en",
+      direction: isArabic ? "rtl" : "ltr",
+    };
   } catch {
     return {
       ...FALLBACK_PROFILE,
-      name,
+      name: name || FALLBACK_PROFILE.name,
       locale: locale || "en",
       direction: isArabic ? "rtl" : "ltr",
     };

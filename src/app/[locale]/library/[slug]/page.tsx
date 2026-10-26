@@ -29,13 +29,13 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
   if (!item) return notFound();
 
   return (
-    <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+    <article className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
       <Link href="/library" className="inline-flex items-center text-sm font-medium text-[#636E72] hover:text-[#1B5E20] transition-colors mb-8">
         <ArrowLeft className="w-4 h-4 me-2 rtl:rotate-180" />
         Back to Library & Kitab Archives
       </Link>
 
-      <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] gap-8 md:gap-10 lg:gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr] gap-8 md:gap-12 lg:gap-16">
         <div className="md:sticky md:top-8 self-start w-full">
            <div className="aspect-[2/3] max-w-[240px] sm:max-w-[280px] md:max-w-none mx-auto md:mx-0 bg-[#FAF8F5] flex items-center justify-center border border-[#E0D8CE] shadow-md rounded-md overflow-hidden relative">
                {item.cover?.url ? (

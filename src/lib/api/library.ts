@@ -177,27 +177,17 @@ export const AUTHENTIC_BOOKS: PublicBook[] = [
   },
 ];
 
+import { getAllBooks, getBookByIdOrSlug } from "@/lib/db/repository";
+
 export async function getLibrary(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicBook>> {
   try {
-    const res = await bunyan<ListResponse<PublicBook>>({
-      path: "/library",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        category: params.category,
-        tag: params.tag,
-        sort: params.sort ?? "-published_at",
-      },
-      tags: ["library"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return res;
+    let list = getAllBooks();
+    if (params.category && params.category.length > 0) {
+      list = list.filter((b) => b.categories.some((cat) => params.category!.includes(cat)));
     }
     return {
       object: "list",
-      data: AUTHENTIC_BOOKS,
+      data: list,
       has_more: false,
       next_cursor: null,
     };
@@ -213,24 +203,19 @@ export async function getLibrary(params: { limit?: string; cursor?: string; loca
 
 export async function getLibraryItem(reference: string, locale?: string): Promise<PublicBook> {
   try {
-    const res = await bunyan<PublicBook>({
-      path: `/library/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["library", `book-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return res;
+    const found = getBookByIdOrSlug(reference);
+    if (found) {
+      return found;
     }
   } catch {
     // fallback
   }
 
-  const found = AUTHENTIC_BOOKS.find(
+  const foundFallback = AUTHENTIC_BOOKS.find(
     (b) => b.slug === reference || b.id === reference
   );
-  if (found) {
-    return found;
+  if (foundFallback) {
+    return foundFallback;
   }
 
   throw new Error(`Library item ${reference} not found`);

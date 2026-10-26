@@ -100,29 +100,17 @@ export const AUTHENTIC_EVENTS: PublicEvent[] = [
   },
 ];
 
+import { getAllEvents, getEventByIdOrSlug } from "@/lib/db/repository";
+
 export async function getEvents(params: { limit?: string; cursor?: string; locale?: string; from?: string; to?: string; sort?: string; category?: string[]; tag?: string[] } = {}): Promise<ListResponse<PublicEvent>> {
   try {
-    const res = await bunyan<ListResponse<PublicEvent>>({
-      path: "/events",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        from: params.from,
-        to: params.to,
-        sort: params.sort,
-        category: params.category,
-        tag: params.tag,
-      },
-      tags: ["events"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return res;
+    let list = getAllEvents();
+    if (params.category && params.category.length > 0) {
+      list = list.filter((e) => e.categories.some((cat) => params.category!.includes(cat)));
     }
     return {
       object: "list",
-      data: AUTHENTIC_EVENTS,
+      data: list,
       has_more: false,
       next_cursor: null,
     };
@@ -138,24 +126,19 @@ export async function getEvents(params: { limit?: string; cursor?: string; local
 
 export async function getEvent(reference: string, locale?: string): Promise<PublicEvent> {
   try {
-    const res = await bunyan<PublicEvent>({
-      path: `/events/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["events", `event-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return res;
+    const found = getEventByIdOrSlug(reference);
+    if (found) {
+      return found;
     }
   } catch {
     // fallback
   }
 
-  const found = AUTHENTIC_EVENTS.find(
+  const foundFallback = AUTHENTIC_EVENTS.find(
     (e) => e.slug === reference || e.id === reference
   );
-  if (found) {
-    return found;
+  if (foundFallback) {
+    return foundFallback;
   }
 
   throw new Error(`Event ${reference} not found`);

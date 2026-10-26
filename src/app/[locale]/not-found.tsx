@@ -3,7 +3,7 @@ import { BookOpen, Compass, Home, Search, Video } from "lucide-react";
 
 export default function LocaleNotFound() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-20 md:py-28 text-center">
       <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#FAF8F5] border border-[#E0D8CE] text-[#1B5E20] mb-6 shadow-sm">
         <Compass className="w-10 h-10 stroke-[1.5]" />
       </div>

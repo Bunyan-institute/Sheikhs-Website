@@ -33,7 +33,7 @@ export default async function EventItemPage(props: { params: Promise<{ locale: s
   const isOnline = !!event.online_url;
 
   return (
-    <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+    <article className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
       <Link href="/events" className="inline-flex items-center text-sm font-medium text-[#636E72] hover:text-[#1B5E20] transition-colors mb-8">
         <ArrowLeft className="w-4 h-4 me-2 rtl:rotate-180" />
         Back to Events Schedule

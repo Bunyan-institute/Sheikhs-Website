@@ -60,7 +60,7 @@ export default async function SeriesDetailPage({ params }: SeriesDetailPageProps
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-8 md:py-16">
-      <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+      <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <Link 
           href="/series" 
           className="inline-flex items-center gap-2 text-sm font-medium text-[#636E72] hover:text-[#1B5E20] transition-colors mb-8"

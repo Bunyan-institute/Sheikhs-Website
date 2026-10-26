@@ -47,7 +47,7 @@ export default async function ArticlePage({
   }
 
   return (
-    <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <article className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-16">
       <div className="mb-10">
         <Link 
           href="/articles" 

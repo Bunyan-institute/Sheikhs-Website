@@ -452,28 +452,15 @@ function localizeArticle(art: PublicArticle, locale?: string): PublicArticle {
   };
 }
 
+import { getAllArticles, getArticleByIdOrSlug } from "@/lib/db/repository";
+
 export async function getArticles(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicArticle>> {
-  const localizedData = AUTHENTIC_ARTICLES.map((a) => localizeArticle(a, params.locale));
   try {
-    const res = await bunyan<ListResponse<PublicArticle>>({
-      path: "/articles",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        category: params.category,
-        tag: params.tag,
-        sort: params.sort ?? "-published_at",
-      },
-      tags: ["articles"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return {
-        ...res,
-        data: res.data.map((a) => localizeArticle(a, params.locale)),
-      };
+    let list = getAllArticles();
+    if (params.category && params.category.length > 0) {
+      list = list.filter((a) => a.categories.some((c) => params.category!.includes(c)));
     }
+    const localizedData = list.map((a) => localizeArticle(a, params.locale));
     return {
       object: "list",
       data: localizedData,
@@ -481,6 +468,7 @@ export async function getArticles(params: { limit?: string; cursor?: string; loc
       next_cursor: null,
     };
   } catch {
+    const localizedData = AUTHENTIC_ARTICLES.map((a) => localizeArticle(a, params.locale));
     return {
       object: "list",
       data: localizedData,
@@ -492,24 +480,19 @@ export async function getArticles(params: { limit?: string; cursor?: string; loc
 
 export async function getArticle(reference: string, locale?: string): Promise<PublicArticle> {
   try {
-    const res = await bunyan<PublicArticle>({
-      path: `/articles/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["articles", `article-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return localizeArticle(res, locale);
+    const found = getArticleByIdOrSlug(reference);
+    if (found) {
+      return localizeArticle(found, locale);
     }
   } catch {
     // fallback
   }
 
-  const found = AUTHENTIC_ARTICLES.find(
+  const foundFallback = AUTHENTIC_ARTICLES.find(
     (a) => a.slug === reference || a.id === reference
   );
-  if (found) {
-    return localizeArticle(found, locale);
+  if (foundFallback) {
+    return localizeArticle(foundFallback, locale);
   }
 
   throw new Error(`Article ${reference} not found`);

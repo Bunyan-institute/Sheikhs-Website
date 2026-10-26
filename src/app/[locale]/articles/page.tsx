@@ -34,7 +34,7 @@ export default async function ArticlesPage({
   const latestArticles = category ? articles : articles.slice(1);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-16">
       <header className="mb-12">
         <h1 className="font-heading text-4xl font-bold text-[#2D3436] mb-4">Articles</h1>
         <p className="text-lg text-[#636E72] max-w-2xl">
@@ -110,7 +110,7 @@ export default async function ArticlesPage({
 
       <section>
         {latestArticles.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {latestArticles.map((article) => (
               <Link key={article.id} href={`/articles/${article.slug}`} className="group block h-full">
                 <article className="border border-[#E0D8CE] bg-white rounded-[4px] p-5 sm:p-6 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">

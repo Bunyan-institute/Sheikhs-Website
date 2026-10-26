@@ -1498,29 +1498,20 @@ export const AUTHENTIC_LECTURES: PublicLecture[] = [
   },
 ];
 
+import { getAllLectures, getLectureByIdOrSlug } from "@/lib/db/repository";
+
 export async function getLectures(params: LectureListParams = {}): Promise<ListResponse<PublicLecture>> {
   try {
-    const res = await bunyan<ListResponse<PublicLecture>>({
-      path: "/lectures",
-      params: {
-        limit: params.limit ?? "12",
-        cursor: params.cursor,
-        locale: params.locale,
-        category: params.category,
-        tag: params.tag,
-        sort: params.sort ?? "-published_at",
-        series: params.series,
-        published_after: params.published_after,
-      },
-      tags: ["lectures"],
-      revalidate: 60,
-    });
-    if (res && res.data && res.data.length > 0) {
-      return res;
+    let list = getAllLectures();
+    if (params.series) {
+      list = list.filter((l) => l.series?.id === params.series);
+    }
+    if (params.category && params.category.length > 0) {
+      list = list.filter((l) => l.categories.some((c) => params.category!.includes(c)));
     }
     return {
       object: "list",
-      data: AUTHENTIC_LECTURES,
+      data: list,
       has_more: false,
       next_cursor: null,
     };
@@ -1536,24 +1527,19 @@ export async function getLectures(params: LectureListParams = {}): Promise<ListR
 
 export async function getLecture(reference: string, locale?: string): Promise<PublicLecture> {
   try {
-    const res = await bunyan<PublicLecture>({
-      path: `/lectures/${encodeURIComponent(reference)}`,
-      params: locale ? { locale } : undefined,
-      tags: ["lectures", `lecture-${reference}`],
-      revalidate: 120,
-    });
-    if (res && res.title) {
-      return res;
+    const found = getLectureByIdOrSlug(reference);
+    if (found) {
+      return found;
     }
   } catch {
-    // fallback to local lecture
+    // fallback
   }
 
-  const found = AUTHENTIC_LECTURES.find(
+  const foundFallback = AUTHENTIC_LECTURES.find(
     (l) => l.slug === reference || l.id === reference
   );
-  if (found) {
-    return found;
+  if (foundFallback) {
+    return foundFallback;
   }
 
   throw new Error(`Lecture ${reference} not found`);
