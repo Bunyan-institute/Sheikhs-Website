@@ -38,6 +38,12 @@ export function loadDatabase(): PortalDatabase {
       const raw = fs.readFileSync(filePath, "utf-8");
       const parsed = JSON.parse(raw) as PortalDatabase;
       if (parsed && parsed.version && Array.isArray(parsed.lectures)) {
+        // Ensure new learning/certificate collections exist if loading older store format
+        const seedFallback = getInitialSeedDatabase();
+        parsed.event_registrations = parsed.event_registrations || seedFallback.event_registrations || [];
+        parsed.course_enrollments = parsed.course_enrollments || seedFallback.course_enrollments || [];
+        parsed.course_exams = parsed.course_exams || seedFallback.course_exams || {};
+        parsed.certificates = parsed.certificates || seedFallback.certificates || [];
         memoryCache = parsed;
         return parsed;
       }

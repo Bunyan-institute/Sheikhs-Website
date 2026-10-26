@@ -1,9 +1,15 @@
+import crypto from "crypto";
 import { loadDatabase, saveDatabase, resetDatabase, exportDatabaseJson, importDatabaseJson } from "./store";
 import type {
   PortalDatabase,
   InquiryRecord,
   JourneyMilestone,
   QualificationRecord,
+  EventRegistrationRecord,
+  CourseEnrollmentRecord,
+  CourseExamConfig,
+  IssuedCertificateRecord,
+  ExamQuestion,
 } from "./types";
 import type {
   PublicLecture,
@@ -604,6 +610,384 @@ export function updateQualifications(quals: QualificationRecord[]): Qualificatio
   return db.qualifications;
 }
 
+// ── Event Registrations ──
+
+export function getAllEventRegistrations(): EventRegistrationRecord[] {
+  const db = loadDatabase();
+  return [...db.event_registrations].sort((a, b) => {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+}
+
+export function getRegistrationsByEventId(eventIdOrSlug: string): EventRegistrationRecord[] {
+  const db = loadDatabase();
+  return db.event_registrations.filter(
+    (r) => r.event_id === eventIdOrSlug || r.event_slug === eventIdOrSlug
+  );
+}
+
+export function createEventRegistration(payload: {
+  event_id: string;
+  event_slug: string;
+  event_title: string;
+  name: string;
+  email: string;
+  phone?: string;
+  city?: string;
+  attendees_count?: number;
+  notes?: string;
+}): EventRegistrationRecord {
+  const db = loadDatabase();
+  const registration: EventRegistrationRecord = {
+    id: `evtr_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    event_id: payload.event_id,
+    event_slug: payload.event_slug,
+    event_title: payload.event_title,
+    name: payload.name.trim(),
+    email: payload.email.trim().toLowerCase(),
+    phone: payload.phone?.trim() || undefined,
+    city: payload.city?.trim() || undefined,
+    attendees_count: payload.attendees_count && payload.attendees_count > 0 ? payload.attendees_count : 1,
+    created_at: new Date().toISOString(),
+    status: "confirmed",
+    notes: payload.notes?.trim() || undefined,
+  };
+
+  db.event_registrations.unshift(registration);
+  saveDatabase(db);
+  return registration;
+}
+
+export function updateEventRegistrationStatus(
+  id: string,
+  status: EventRegistrationRecord["status"]
+): EventRegistrationRecord | null {
+  const db = loadDatabase();
+  const record = db.event_registrations.find((r) => r.id === id);
+  if (!record) return null;
+  record.status = status;
+  saveDatabase(db);
+  return record;
+}
+
+export function deleteEventRegistration(id: string): boolean {
+  const db = loadDatabase();
+  const initialLen = db.event_registrations.length;
+  db.event_registrations = db.event_registrations.filter((r) => r.id !== id);
+  if (db.event_registrations.length !== initialLen) {
+    saveDatabase(db);
+    return true;
+  }
+  return false;
+}
+
+// ── Course Enrollments ──
+
+export function getAllCourseEnrollments(): CourseEnrollmentRecord[] {
+  const db = loadDatabase();
+  return [...db.course_enrollments].sort((a, b) => {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+}
+
+export function getEnrollmentByEmail(
+  courseIdOrSlug: string,
+  email: string
+): CourseEnrollmentRecord | null {
+  const db = loadDatabase();
+  const normalizedEmail = email.trim().toLowerCase();
+  return (
+    db.course_enrollments.find(
+      (e) =>
+        (e.course_id === courseIdOrSlug || e.course_slug === courseIdOrSlug) &&
+        e.student_email.toLowerCase() === normalizedEmail
+    ) || null
+  );
+}
+
+export function createCourseEnrollment(payload: {
+  course_id: string;
+  course_slug: string;
+  course_title: string;
+  student_name: string;
+  student_email: string;
+  student_phone?: string;
+  city?: string;
+}): CourseEnrollmentRecord {
+  const db = loadDatabase();
+  const existing = getEnrollmentByEmail(payload.course_slug, payload.student_email);
+  if (existing) {
+    return existing;
+  }
+
+  const enrollment: CourseEnrollmentRecord = {
+    id: `enr_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    course_id: payload.course_id,
+    course_slug: payload.course_slug,
+    course_title: payload.course_title,
+    student_name: payload.student_name.trim(),
+    student_email: payload.student_email.trim().toLowerCase(),
+    student_phone: payload.student_phone?.trim() || undefined,
+    city: payload.city?.trim() || undefined,
+    created_at: new Date().toISOString(),
+    completed_lessons: [],
+    exam_attempts: [],
+    certificate_id: null,
+    status: "enrolled",
+  };
+
+  db.course_enrollments.unshift(enrollment);
+  saveDatabase(db);
+  return enrollment;
+}
+
+export function toggleLessonProgress(
+  enrollmentId: string,
+  lessonId: string
+): CourseEnrollmentRecord | null {
+  const db = loadDatabase();
+  const enr = db.course_enrollments.find((e) => e.id === enrollmentId);
+  if (!enr) return null;
+
+  if (enr.completed_lessons.includes(lessonId)) {
+    enr.completed_lessons = enr.completed_lessons.filter((l) => l !== lessonId);
+  } else {
+    enr.completed_lessons.push(lessonId);
+  }
+
+  if (enr.completed_lessons.length > 0 && enr.status === "enrolled") {
+    enr.status = "in_progress";
+  }
+
+  saveDatabase(db);
+  return enr;
+}
+
+// ── Course Exams & Grading ──
+
+export function getCourseExam(courseIdOrSlug: string): CourseExamConfig | null {
+  const db = loadDatabase();
+  return (
+    db.course_exams[courseIdOrSlug] ||
+    db.course_exams["comprehensive-kitab-at-tawheed"] ||
+    null
+  );
+}
+
+export function saveCourseExam(
+  courseIdOrSlug: string,
+  examConfig: CourseExamConfig
+): CourseExamConfig {
+  const db = loadDatabase();
+  db.course_exams[courseIdOrSlug] = examConfig;
+  saveDatabase(db);
+  return examConfig;
+}
+
+function computeHijriDate(): string {
+  try {
+    return (
+      new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date()) + " AH"
+    );
+  } catch {
+    return "1448 AH";
+  }
+}
+
+function generateCertificateVerificationToken(
+  studentName: string,
+  courseId: string,
+  issueDate: string
+): string {
+  const secret = process.env.CERTIFICATE_SECRET || "sheikh_muhammed_ferej_scholarly_seal_2026";
+  const data = `${studentName.trim().toLowerCase()}|${courseId.trim().toLowerCase()}|${issueDate}`;
+  return crypto.createHmac("sha256", secret).update(data).digest("hex");
+}
+
+function generateCertificateCode(courseSlug: string): string {
+  const year = new Date().getFullYear();
+  let acronym = "GEN";
+  const lower = courseSlug.toLowerCase();
+  if (lower.includes("tawheed")) acronym = "TWH";
+  else if (lower.includes("fiqh")) acronym = "FQH";
+  else if (lower.includes("hadith")) acronym = "HDT";
+  else if (lower.includes("aqeedah")) acronym = "AQD";
+  else if (lower.includes("quran")) acronym = "QRN";
+
+  const rand = Math.floor(1000 + Math.random() * 9000);
+  return `MFM-${year}-${acronym}-${rand}`;
+}
+
+export function submitCourseExam(payload: {
+  course_id: string;
+  student_email: string;
+  student_name?: string;
+  answers: Record<string, number>;
+}): {
+  score: number;
+  passed: boolean;
+  correct_count: number;
+  total_questions: number;
+  certificate?: IssuedCertificateRecord;
+  enrollment?: CourseEnrollmentRecord;
+} {
+  const db = loadDatabase();
+  const exam = getCourseExam(payload.course_id);
+  if (!exam || !exam.questions || exam.questions.length === 0) {
+    throw new Error("Exam configuration not found for this course.");
+  }
+
+  let correctCount = 0;
+  for (const q of exam.questions) {
+    const selected = payload.answers[q.id];
+    if (selected !== undefined && selected === q.correct_option_index) {
+      correctCount++;
+    }
+  }
+
+  const score = Math.round((correctCount / exam.questions.length) * 100);
+  const passed = score >= (exam.passing_percentage || 70);
+
+  // Find or create enrollment
+  let enrollment = getEnrollmentByEmail(payload.course_id, payload.student_email);
+  if (!enrollment && payload.student_name) {
+    const course = db.courses.find((c) => c.id === payload.course_id || c.slug === payload.course_id);
+    enrollment = createCourseEnrollment({
+      course_id: payload.course_id,
+      course_slug: course?.slug || payload.course_id,
+      course_title: course?.title || "Comprehensive Islamic Studies",
+      student_name: payload.student_name,
+      student_email: payload.student_email,
+    });
+  }
+
+  let certificate: IssuedCertificateRecord | undefined;
+
+  if (passed) {
+    const course = db.courses.find((c) => c.id === payload.course_id || c.slug === payload.course_id);
+    const studentName = enrollment ? enrollment.student_name : (payload.student_name || "Enrolled Student");
+
+    let gradeTitle = "Jayyid Jiddan (Very Good / جيد جداً)";
+    if (score === 100) {
+      gradeTitle = "Mumtaz with Highest Distinction (ممتاز مع مرتبة الشرف الأولى)";
+    } else if (score >= 90) {
+      gradeTitle = "Mumtaz with Distinction (ممتاز)";
+    }
+
+    certificate = issueCertificate({
+      course_id: payload.course_id,
+      course_slug: course?.slug || payload.course_id,
+      course_title: course?.title || "Comprehensive Islamic Studies",
+      student_name: studentName,
+      student_email: payload.student_email,
+      score_percentage: score,
+      grade_title: gradeTitle,
+    });
+
+    if (enrollment) {
+      enrollment.certificate_id = certificate.id;
+      enrollment.status = "completed";
+    }
+  }
+
+  if (enrollment) {
+    enrollment.exam_attempts.push({
+      attempt_date: new Date().toISOString(),
+      score,
+      passed,
+    });
+    saveDatabase(db);
+  }
+
+  return {
+    score,
+    passed,
+    correct_count: correctCount,
+    total_questions: exam.questions.length,
+    certificate,
+    enrollment: enrollment || undefined,
+  };
+}
+
+// ── Certificates & Public Verification ──
+
+export function getAllCertificates(): IssuedCertificateRecord[] {
+  const db = loadDatabase();
+  return [...db.certificates].sort((a, b) => {
+    return new Date(b.issued_at).getTime() - new Date(a.issued_at).getTime();
+  });
+}
+
+export function getCertificateByCode(code: string): IssuedCertificateRecord | null {
+  const db = loadDatabase();
+  const cleanCode = code.trim().toUpperCase();
+  return db.certificates.find((c) => c.id.toUpperCase() === cleanCode) || null;
+}
+
+export function issueCertificate(payload: {
+  course_id: string;
+  course_slug: string;
+  course_title: string;
+  student_name: string;
+  student_email: string;
+  score_percentage: number;
+  grade_title?: string;
+}): IssuedCertificateRecord {
+  const db = loadDatabase();
+
+  // Check if a certificate already exists for this student & course
+  const existing = db.certificates.find(
+    (c) =>
+      c.course_slug === payload.course_slug &&
+      c.student_email.toLowerCase() === payload.student_email.toLowerCase() &&
+      !c.revoked
+  );
+  if (existing) {
+    return existing;
+  }
+
+  const issuedAt = new Date().toISOString();
+  const id = generateCertificateCode(payload.course_slug);
+  const token = generateCertificateVerificationToken(payload.student_name, payload.course_id, issuedAt);
+
+  const cert: IssuedCertificateRecord = {
+    id,
+    verification_token: token,
+    course_id: payload.course_id,
+    course_slug: payload.course_slug,
+    course_title: payload.course_title,
+    student_name: payload.student_name.trim(),
+    student_email: payload.student_email.trim().toLowerCase(),
+    issued_at: issuedAt,
+    hijri_date: computeHijriDate(),
+    score_percentage: payload.score_percentage,
+    grade_title: payload.grade_title || (payload.score_percentage >= 90 ? "Mumtaz (Distinction)" : "Jayyid Jiddan (Very Good)"),
+    instructor_name: "Sheikh Muhammed Ferej Megeno",
+    authority_seal: "Al-Fajr Islamic Foundation & AAOIFI Sharia Council Accreditation",
+    revoked: false,
+    revoked_reason: null,
+  };
+
+  db.certificates.unshift(cert);
+  saveDatabase(db);
+  return cert;
+}
+
+export function revokeCertificate(id: string, reason?: string): IssuedCertificateRecord | null {
+  const db = loadDatabase();
+  const cert = db.certificates.find((c) => c.id.toUpperCase() === id.trim().toUpperCase());
+  if (!cert) return null;
+
+  cert.revoked = true;
+  cert.revoked_reason = reason?.trim() || "Revoked by Scholarly Accreditation Board.";
+  saveDatabase(db);
+  return cert;
+}
+
 // ── Metrics ──
 
 export function getSystemMetrics() {
@@ -625,6 +1009,9 @@ export function getSystemMetrics() {
     mediaCount: db.media.length,
     inquiriesTotal: db.inquiries.length,
     pendingInquiries,
+    enrollmentsCount: db.course_enrollments.length,
+    certificatesCount: db.certificates.length,
+    eventRegistrationsCount: db.event_registrations.length,
     lastUpdated: db.updated_at,
     version: db.version,
   };

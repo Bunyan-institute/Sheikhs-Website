@@ -3,6 +3,7 @@ import { getEvent, AUTHENTIC_EVENTS } from '@/lib/api/events';
 import { Link } from '@/i18n/navigation';
 import { notFound } from 'next/navigation';
 import { Calendar, MapPin, Video, Clock, ArrowLeft, Users, Info } from 'lucide-react';
+import { EventRegisterButton } from './event-register-button';
 
 export async function generateStaticParams() {
   const locales = ["en", "ar", "am", "om"];
@@ -91,6 +92,15 @@ export default async function EventItemPage(props: { params: Promise<{ locale: s
               ) : (
                  <p className="text-[#636E72] mt-1">Open attendance. No registration required.</p>
               )}
+
+              <EventRegisterButton
+                eventId={event.id}
+                eventSlug={event.slug}
+                eventTitle={event.title}
+                startsAt={event.starts_at}
+                venueName={event.venue_name}
+                registrationRequired={event.registration_required}
+              />
            </div>
         </div>
 

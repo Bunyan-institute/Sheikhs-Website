@@ -15,9 +15,13 @@ import {
   Loader2,
   CheckCircle,
   Tag,
+  Users,
+  Mail,
+  Phone,
 } from "lucide-react";
 import { saveEventAction, deleteEventAction } from "../actions";
 import type { PublicEvent } from "@/lib/api/types";
+import type { EventRegistrationRecord } from "@/lib/db/types";
 
 function toDatetimeLocal(isoString?: string | null): string {
   if (!isoString) return "";
@@ -32,10 +36,18 @@ function toDatetimeLocal(isoString?: string | null): string {
   }
 }
 
-export function EventsClient({ initialEvents }: { initialEvents: PublicEvent[] }) {
+export function EventsClient({
+  initialEvents,
+  initialRegistrations = [],
+}: {
+  initialEvents: PublicEvent[];
+  initialRegistrations?: EventRegistrationRecord[];
+}) {
   const [events, setEvents] = useState<PublicEvent[]>(initialEvents);
+  const [registrations] = useState<EventRegistrationRecord[]>(initialRegistrations);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEventForAttendees, setSelectedEventForAttendees] = useState<PublicEvent | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [editingEvent, setEditingEvent] = useState<PublicEvent | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -218,6 +230,9 @@ export function EventsClient({ initialEvents }: { initialEvents: PublicEvent[] }
         {filteredEvents.map((evt) => {
           const startDate = new Date(evt.starts_at);
           const isUpcoming = startDate.getTime() > Date.now();
+          const eventAttendees = registrations.filter(
+            (r) => r.event_id === evt.id || r.event_slug === evt.slug
+          );
 
           return (
             <div
@@ -307,14 +322,25 @@ export function EventsClient({ initialEvents }: { initialEvents: PublicEvent[] }
               </div>
 
               <div className="flex items-center justify-between pt-3 border-t border-[#F0EAE1] mt-2">
-                <Link
-                  href={`/events/${evt.slug}`}
-                  target="_blank"
-                  className="text-xs text-[#1B5E20] hover:text-[#154a19] font-medium inline-flex items-center gap-1"
-                >
-                  <span>Public View</span>
-                  <ExternalLink className="w-3 h-3" />
-                </Link>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/events/${evt.slug}`}
+                    target="_blank"
+                    className="text-xs text-[#1B5E20] hover:text-[#154a19] font-medium inline-flex items-center gap-1"
+                  >
+                    <span>Public View</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </Link>
+
+                  <button
+                    onClick={() => setSelectedEventForAttendees(evt)}
+                    className="inline-flex items-center gap-1 text-[10px] font-bold text-[#1B5E20] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded transition-colors cursor-pointer"
+                    title="View registered attendees"
+                  >
+                    <Users className="w-3 h-3 text-[#C5A059]" />
+                    <span>{eventAttendees.length} Registered</span>
+                  </button>
+                </div>
 
                 <div className="flex items-center gap-1">
                   <button
@@ -539,6 +565,98 @@ export function EventsClient({ initialEvents }: { initialEvents: PublicEvent[] }
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* Attendee Roster Modal */}
+      {selectedEventForAttendees && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-lg max-w-2xl w-full p-6 space-y-4 shadow-xl my-8">
+            <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-3">
+              <div>
+                <h2 className="font-heading font-bold text-lg text-[#2D3436]">
+                  Registered Attendees
+                </h2>
+                <p className="text-xs text-[#636E72]">
+                  {selectedEventForAttendees.title}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedEventForAttendees(null)}
+                className="text-[#636E72] hover:text-[#2D3436]"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="divide-y divide-[#F0EAE1] max-h-96 overflow-y-auto">
+              {registrations
+                .filter(
+                  (r) =>
+                    r.event_id === selectedEventForAttendees.id ||
+                    r.event_slug === selectedEventForAttendees.slug
+                )
+                .map((attendee) => (
+                  <div key={attendee.id} className="py-3 flex items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="font-heading font-bold text-sm text-[#2D3436]">
+                        {attendee.name}
+                      </div>
+                      <div className="text-xs text-[#636E72] flex flex-wrap items-center gap-3">
+                        <span className="flex items-center gap-1">
+                          <Mail className="w-3 h-3 text-[#636E72]" />
+                          {attendee.email}
+                        </span>
+                        {attendee.phone && (
+                          <span className="flex items-center gap-1">
+                            <Phone className="w-3 h-3 text-[#1B5E20]" />
+                            {attendee.phone}
+                          </span>
+                        )}
+                        {attendee.city && (
+                          <span className="flex items-center gap-1">
+                            <MapPin className="w-3 h-3 text-[#C5A059]" />
+                            {attendee.city}
+                          </span>
+                        )}
+                      </div>
+                      {attendee.notes && (
+                        <p className="text-[11px] text-[#636E72] italic bg-[#FAF8F5] p-1.5 rounded">
+                          &ldquo;{attendee.notes}&rdquo;
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="text-right shrink-0">
+                      <span className="inline-block bg-[#FAF8F5] border border-[#E0D8CE] text-xs font-semibold px-2 py-0.5 rounded text-[#1B5E20]">
+                        {attendee.attendees_count} {attendee.attendees_count > 1 ? "Seats" : "Seat"}
+                      </span>
+                      <span className="block text-[10px] text-[#636E72] font-mono mt-1">
+                        {attendee.id}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+
+              {registrations.filter(
+                (r) =>
+                  r.event_id === selectedEventForAttendees.id ||
+                  r.event_slug === selectedEventForAttendees.slug
+              ).length === 0 && (
+                <div className="py-8 text-center text-xs text-[#636E72]">
+                  No attendees have registered for this event yet.
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-end pt-3 border-t border-[#E0D8CE]">
+              <button
+                onClick={() => setSelectedEventForAttendees(null)}
+                className="px-4 py-2 text-xs font-semibold bg-[#FAF8F5] hover:bg-[#F5F1EB] text-[#2D3436] rounded border border-[#E0D8CE]"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

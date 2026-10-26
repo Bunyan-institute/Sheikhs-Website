@@ -24,6 +24,10 @@ import {
   updateProfile,
   updateJourney,
   updateQualifications,
+  issueCertificate,
+  revokeCertificate,
+  updateEventRegistrationStatus,
+  deleteEventRegistration,
   importDatabaseJson,
   resetDatabase,
 } from "@/lib/db/repository";
@@ -533,5 +537,47 @@ export async function restoreDatabaseAction(jsonString: string) {
 export async function resetDatabaseAction() {
   await assertAuthenticated();
   const db = resetDatabase();
+  refreshCache();
   return { success: true, version: db.version };
+}
+
+// ── Certificate & Registration Admin Actions ──
+
+export async function revokeCertificateAction(id: string, reason?: string) {
+  await assertAuthenticated();
+  const cert = revokeCertificate(id, reason);
+  refreshCache();
+  return { success: Boolean(cert), certificate: cert };
+}
+
+export async function issueCertificateAction(data: {
+  course_id: string;
+  course_slug: string;
+  course_title: string;
+  student_name: string;
+  student_email: string;
+  score_percentage: number;
+  grade_title?: string;
+}) {
+  await assertAuthenticated();
+  const cert = issueCertificate(data);
+  refreshCache();
+  return { success: true, certificate: cert };
+}
+
+export async function updateEventRegistrationStatusAction(
+  id: string,
+  status: "confirmed" | "cancelled" | "attended"
+) {
+  await assertAuthenticated();
+  const updated = updateEventRegistrationStatus(id, status);
+  refreshCache();
+  return { success: Boolean(updated), registration: updated };
+}
+
+export async function deleteEventRegistrationAction(id: string) {
+  await assertAuthenticated();
+  const deleted = deleteEventRegistration(id);
+  refreshCache();
+  return { success: deleted };
 }

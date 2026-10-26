@@ -4,6 +4,8 @@ import { getCourse, AUTHENTIC_COURSES } from "@/lib/api/courses";
 import { formatDuration } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getCourseExam } from "@/lib/db/repository";
+import { CourseLearningView } from "./course-learning-view";
 
 export async function generateStaticParams() {
   const locales = ["en", "ar", "am", "om"];
@@ -46,7 +48,7 @@ export default async function CoursePage({
     notFound();
   }
 
-  const lessons = course.lessons || [];
+  const examConfig = getCourseExam(slug);
 
   return (
     <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-16">
@@ -142,49 +144,10 @@ export default async function CoursePage({
       )}
 
       <section>
-        <h2 className="font-heading text-2xl font-bold text-[#2D3436] mb-6 border-b border-[#E0D8CE] pb-2 flex items-center justify-between">
-          <span>Course Syllabus</span>
-        </h2>
-        
-        <div className="bg-[#FAF8F5] border border-[#E0D8CE] rounded-[4px] p-4 mb-8 text-sm text-[#636E72] flex items-start gap-3">
-          <svg className="w-5 h-5 text-[#B8860B] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <p>This is the public syllabus outline. Enrolled course materials and lectures are provided through the dedicated student portal.</p>
-        </div>
-
-        {lessons.length > 0 ? (
-          <div className="space-y-4">
-            {lessons.map((lesson, index) => (
-              <div key={lesson.id} className="border border-[#E0D8CE] bg-white rounded-[4px] p-4 sm:p-5 shadow-sm flex gap-3 sm:gap-4 hover:border-[#1B5E20] transition-colors">
-                <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FAF8F5] border border-[#E0D8CE] flex items-center justify-center font-heading font-bold text-[#2D3436] text-xs sm:text-sm">
-                  {lesson.position ?? (index + 1)}
-                </div>
-                <div className="flex-grow min-w-0">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-4 mb-2">
-                    <h3 className="font-heading font-semibold text-base sm:text-lg text-[#2D3436] break-words">
-                      {lesson.title}
-                    </h3>
-                    {lesson.duration_seconds && (
-                      <span className="self-start sm:self-auto text-[#636E72] text-xs font-medium whitespace-nowrap bg-[#FAF8F5] px-2 py-0.5 sm:py-1 rounded-[4px] border border-[#E0D8CE] shrink-0">
-                        {formatDuration(lesson.duration_seconds)}
-                      </span>
-                    )}
-                  </div>
-                  {lesson.summary && (
-                    <p className="text-[#636E72] text-xs sm:text-sm break-words">
-                      {lesson.summary}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="py-12 text-center border border-[#E0D8CE] bg-white rounded-[4px]">
-            <p className="text-[#636E72]">Syllabus will be published soon.</p>
-          </div>
-        )}
+        <CourseLearningView
+          course={course}
+          initialExam={examConfig}
+        />
       </section>
     </div>
   );

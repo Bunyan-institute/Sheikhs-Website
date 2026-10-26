@@ -1,7 +1,8 @@
-import { getAllEvents } from "@/lib/db/repository";
+import { getAllEvents, getAllEventRegistrations } from "@/lib/db/repository";
 import { EventsClient } from "./events-client";
 
 export default function AdminEventsPage() {
   const events = getAllEvents();
-  return <EventsClient initialEvents={events} />;
+  const registrations = getAllEventRegistrations();
+  return <EventsClient initialEvents={events} initialRegistrations={registrations} />;
 }

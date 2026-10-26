@@ -69,6 +69,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
   const libraryLinks = [
     { href: "/library", labelKey: "nav.library" },
     { href: "/events", labelKey: "nav.events" },
+    { href: "/verify", labelKey: "nav.verify" },
     { href: "/media", labelKey: "nav.media" },
     { href: "/ask", labelKey: "nav.ask" },
     { href: "/search", labelKey: "nav.search" },

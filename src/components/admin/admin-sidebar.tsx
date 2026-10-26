@@ -18,6 +18,8 @@ import {
   ExternalLink,
   LogOut,
   X,
+  Users,
+  Award,
 } from "lucide-react";
 
 interface AdminSidebarProps {
@@ -35,6 +37,8 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
     { label: "Articles & Hadith", href: "/admin/articles", icon: FileText },
     { label: "Fatwas & Rulings", href: "/admin/fatwas", icon: HelpCircle },
     { label: "Courses & Programs", href: "/admin/courses", icon: GraduationCap },
+    { label: "Student Enrollments", href: "/admin/enrollments", icon: Users },
+    { label: "Issued Certificates", href: "/admin/certificates", icon: Award },
     { label: "Kitabs & Documents", href: "/admin/library", icon: BookOpen },
     { label: "Events & Khutbahs", href: "/admin/events", icon: Calendar },
     { label: "Media Gallery", href: "/admin/media", icon: ImageIcon },

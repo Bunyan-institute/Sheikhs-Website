@@ -78,6 +78,7 @@ export function buildMoreItems(sections?: Partial<SectionMap> | null): NavItem[]
   const items: NavItem[] = [
     { key: "journey", href: "/journey", labelKey: "nav.journey" },
     { key: "qualifications", href: "/qualifications", labelKey: "nav.qualifications" },
+    { key: "verify", href: "/verify", labelKey: "nav.verify" },
     { key: "media", href: "/media", labelKey: "nav.media" },
   ];
 
