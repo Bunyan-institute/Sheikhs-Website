@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { searchContent } from '@/lib/api/search';
 import { Link } from '@/i18n/navigation';
 import { Search as SearchIcon, ArrowRight } from 'lucide-react';
@@ -8,6 +8,7 @@ export default async function SearchPage(props: { params: Promise<{ locale: stri
   const params = await props.params;
   const searchParams = await props.searchParams;
   setRequestLocale(params.locale);
+  const t = await getTranslations({ locale: params.locale, namespace: "search" });
   
   const query = searchParams.q || '';
   const typeFilter = searchParams.type || 'all';
@@ -57,11 +58,11 @@ export default async function SearchPage(props: { params: Promise<{ locale: stri
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Search Knowledge Archives
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Search instantaneously across all 32 Kitab At-Tawheed lessons, recorded halaqat, published fatwas, and treatises.
+            {t("placeholder")}
           </p>
         </div>
       </header>

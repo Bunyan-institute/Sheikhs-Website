@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ShieldCheck, Search, Award, CheckCircle, ArrowRight, Lock } from "lucide-react";
 
 export default function CertificateVerificationPage() {
   const router = useRouter();
+  const t = useTranslations("verify");
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +21,7 @@ export default function CertificateVerificationPage() {
     router.push(`/verify/${encodeURIComponent(clean)}`);
   };
 
-  const sampleCode = "MFM-2026-TWH-1001";
+  const sampleCode = "MFM-2026-RIYAD-1001";
 
   return (
     <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
@@ -28,14 +30,14 @@ export default function CertificateVerificationPage() {
         <div className="text-center space-y-3 pb-6 border-b border-[#E6E0D8]">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[2px] bg-white border border-[#E6E0D8] text-[#1A4D2E] text-xs font-semibold">
             <ShieldCheck className="w-4 h-4 text-[#B8860B]" />
-            <span>Anti-Forgery Scholarly Verification Desk • التحقق من الإجازات والشهادات</span>
+            <span>{t("arabicBadge")} • {t("subtitle")}</span>
           </div>
 
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-            Verify Scholarly Certificate
+            {t("title")}
           </h1>
           <p className="text-xs sm:text-sm text-[#555E61] max-w-xl mx-auto leading-relaxed">
-            Validate authentic certificates and academic credentials issued by Sheikh Muhammed Ferej Megeno and the Al-Fajr Islamic Foundation.
+            {t("description")}
           </p>
         </div>
 
@@ -44,7 +46,7 @@ export default function CertificateVerificationPage() {
           <form onSubmit={handleVerify} className="space-y-4">
             <div>
               <label htmlFor="certCode" className="block text-xs font-bold text-[#2D3436] uppercase tracking-wider mb-2">
-                Certificate Verification Serial Code *
+                {t("inputPlaceholder")} *
               </label>
               <div className="relative">
                 <input
@@ -56,7 +58,7 @@ export default function CertificateVerificationPage() {
                     setCode(e.target.value);
                     setError(null);
                   }}
-                  placeholder="e.g. MFM-2026-TWH-1001"
+                  placeholder="e.g. MFM-2026-RIYAD-1001"
                   className="w-full text-xs sm:text-sm font-mono uppercase px-4 py-3 pe-12 border border-[#E6E0D8] rounded-[3px] focus:outline-none focus:border-[#1A4D2E] bg-[#FAF8F5] tracking-wider"
                 />
                 <button
@@ -75,7 +77,7 @@ export default function CertificateVerificationPage() {
               className="w-full py-3 bg-[#1A4D2E] hover:bg-[#143d24] text-white font-semibold text-xs sm:text-sm rounded-[3px] flex items-center justify-center gap-2 cursor-pointer"
             >
               <ShieldCheck className="w-4 h-4 text-[#B8860B]" />
-              <span>Verify Authenticity Now</span>
+              <span>{t("verifyButton")}</span>
             </button>
           </form>
 

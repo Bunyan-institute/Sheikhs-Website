@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getProfile } from '@/lib/api/profile';
 import { Link } from '@/i18n/navigation';
 import { MapPin, MessageSquare, ArrowRight, Building, Mail } from 'lucide-react';
@@ -6,6 +6,7 @@ import { MapPin, MessageSquare, ArrowRight, Building, Mail } from 'lucide-react'
 export default async function ContactPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   setRequestLocale(params.locale);
+  const t = await getTranslations({ locale: params.locale, namespace: "contact" });
   const profile = await getProfile(params.locale).catch(() => null);
   const socialsList = profile?.socials 
     ? Object.entries(profile.socials).map(([platform, url]) => ({ platform, url }))
@@ -19,19 +20,19 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                التواصل مع المكتب العلمي والأمانة
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Secretariat &amp; Institutional Office
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Contact &amp; Inquiries
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Direct channels for religious questions, academic conferences, Sharia banking advisory, and institutional partnerships.
+            {t("description")}
           </p>
         </div>
       </header>
