@@ -77,9 +77,13 @@ export function ScholarHero({ name, headline, biography, photoUrl, locale }: Sch
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-[4px] bg-[#1A4D2E] text-[#FAF8F5] font-bold text-sm sm:text-base border border-[#143d24] shadow-xs hover:bg-[#143d24]"
             >
-              <svg className="w-5 h-5 text-[#B8860B]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.609 1.814L13.793 12 3.61 22.186c-.33-.2-.533-.564-.533-.969V2.783c0-.405.203-.769.532-.969zm11.597 11.598l2.38 2.38-12.062 6.845 9.682-9.225zm0-2.824L5.524 1.363l12.062 6.845-2.38 2.38zm1.414 1.412l3.473 1.968c.84.476.84 1.258 0 1.734l-3.473 1.968-2.121-2.121 2.121-2.121z"/>
-              </svg>
+              <Image
+                src="/images/sheikh-app-icon.png"
+                alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
+                width={24}
+                height={24}
+                className="rounded-[4px] shadow-2xs shrink-0"
+              />
               <span>Download &ldquo;ሸይኽ ሙሃመድ ፈረጅ&rdquo; App</span>
             </a>
             <Link 

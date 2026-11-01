@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import HeaderNav from './header-nav';
 import LocaleSwitcher from './locale-switcher';
@@ -50,12 +51,16 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
               href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] bg-[#1A4D2E] text-white text-xs font-bold hover:bg-[#143d24] transition-colors"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[3px] bg-[#1A4D2E] text-white text-xs font-bold hover:bg-[#143d24] transition-colors shadow-2xs"
               title="Download Official Android App from Google Play Store"
             >
-              <svg className="w-3.5 h-3.5 text-[#B8860B]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.609 1.814L13.793 12 3.61 22.186c-.33-.2-.533-.564-.533-.969V2.783c0-.405.203-.769.532-.969zm11.597 11.598l2.38 2.38-12.062 6.845 9.682-9.225zm0-2.824L5.524 1.363l12.062 6.845-2.38 2.38zm1.414 1.412l3.473 1.968c.84.476.84 1.258 0 1.734l-3.473 1.968-2.121-2.121 2.121-2.121z"/>
-              </svg>
+              <Image
+                src="/images/sheikh-app-icon.png"
+                alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
+                width={18}
+                height={18}
+                className="rounded-[3px] shrink-0"
+              />
               <span>ሸይኽ ሙሃመድ ፈረጅ App</span>
             </a>
 
@@ -71,13 +76,17 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
               href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 text-[#1A4D2E]"
+              className="p-1 text-[#1A4D2E] flex items-center"
               aria-label="Google Play App"
-              title="Download App"
+              title="Download ሸይኽ ሙሃመድ ፈረጅ App"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.609 1.814L13.793 12 3.61 22.186c-.33-.2-.533-.564-.533-.969V2.783c0-.405.203-.769.532-.969zm11.597 11.598l2.38 2.38-12.062 6.845 9.682-9.225zm0-2.824L5.524 1.363l12.062 6.845-2.38 2.38zm1.414 1.412l3.473 1.968c.84.476.84 1.258 0 1.734l-3.473 1.968-2.121-2.121 2.121-2.121z"/>
-              </svg>
+              <Image
+                src="/images/sheikh-app-icon.png"
+                alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
+                width={22}
+                height={22}
+                className="rounded-[3px] shadow-2xs"
+              />
             </a>
             <Link href="/search" className="p-2 text-[#636E72] hover:text-[#2D3436] transition-colors" aria-label="Search">
               <Search className="w-5 h-5" />
