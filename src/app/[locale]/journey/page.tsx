@@ -1,18 +1,20 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { journeyData } from "@/data/journey";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "journey" });
   return {
-    title: "Educational Journey & Milestones | Sheikh Muhammed Ferej",
-    description: "Chronological timeline of educational and scholarly milestones over 35+ years.",
+    title: `${t("title")} | Sheikh Muhammed Ferej`,
+    description: t("subtitle"),
   };
 }
 
 export default async function JourneyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "journey" });
 
   return (
     <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
@@ -22,19 +24,19 @@ export default async function JourneyPage({ params }: { params: Promise<{ locale
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                المحطات العلمية والمسيرة الدعوية
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                35+ Year Chronology
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Educational Journey
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Chronological progression from traditional regional halaqat in Silti and Jimma to university honors and international Sharia governance.
+            {t("timelineTitle")}
           </p>
         </div>
       </header>

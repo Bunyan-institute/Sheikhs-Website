@@ -1,13 +1,14 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { qualifications } from "@/data/qualifications";
 import { Award, GraduationCap, ShieldCheck, CheckCircle } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "qualifications" });
   return {
-    title: "Qualifications & Ijazat | Sheikh Muhammed Ferej",
-    description: "Academic degrees, traditional Islamic authorizations, and AAOIFI auditor certification.",
+    title: `${t("title")} | Sheikh Muhammed Ferej`,
+    description: t("verifiedCertifications"),
   };
 }
 
@@ -21,6 +22,7 @@ const typeConfig: Record<string, { label: string, color: string }> = {
 export default async function QualificationsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "qualifications" });
 
   return (
     <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
@@ -30,19 +32,19 @@ export default async function QualificationsPage({ params }: { params: Promise<{
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                الإجازات العلمية والشهادات الأكاديمية
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Sanad &amp; Accreditations
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Qualifications &amp; Ijazat
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Official academic degrees and traditional authorizations (Ijazat) granted with continuous chains of transmission (Sanad).
+            {t("verifiedCertifications")}
           </p>
         </div>
       </header>
