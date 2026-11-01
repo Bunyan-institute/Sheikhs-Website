@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getEvents } from '@/lib/api/events';
 import { Link } from '@/i18n/navigation';
 import { Calendar, MapPin, Video, Clock, ArrowRight } from 'lucide-react';
@@ -7,6 +7,7 @@ import type { PublicEvent } from '@/lib/api/types';
 export default async function EventsPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   setRequestLocale(params.locale);
+  const t = await getTranslations({ locale: params.locale, namespace: "events" });
 
   let eventList: PublicEvent[] = [];
   try {
@@ -24,19 +25,19 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                جدول اللقاءات والندوات العلمية
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Dawrahs &amp; Seminars Calendar
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Events &amp; Halaqat Schedule
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Public lectures, Friday Khutbahs, and residential intensive seminars led by Sheikh Muhammed Ferej Megeno.
+            {t("details")}
           </p>
         </div>
       </header>

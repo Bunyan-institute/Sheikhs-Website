@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getMedia } from '@/lib/api/media';
 import { Link } from '@/i18n/navigation';
 import { MediaCard } from '@/components/media/media-card';
@@ -12,6 +12,7 @@ interface MediaPageProps {
 export default async function MediaPage({ params, searchParams }: MediaPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "media" });
 
   const resolvedSearchParams = await searchParams;
   const currentKind = typeof resolvedSearchParams.kind === "string" ? resolvedSearchParams.kind : "all";
@@ -43,19 +44,19 @@ export default async function MediaPage({ params, searchParams }: MediaPageProps
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                الخزانة الصوتية والمرئية والوثائق
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Audiovisual &amp; Archival Gallery
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Media Gallery
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            High-fidelity recordings, manuscripts, and photographic documentation of Sheikh Muhammed Ferej Megeno.
+            {t("description")}
           </p>
         </div>
       </header>
