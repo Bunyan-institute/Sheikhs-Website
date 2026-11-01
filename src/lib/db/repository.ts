@@ -769,7 +769,7 @@ export function getCourseExam(courseIdOrSlug: string): CourseExamConfig | null {
   const db = loadDatabase();
   return (
     db.course_exams[courseIdOrSlug] ||
-    db.course_exams["comprehensive-kitab-at-tawheed"] ||
+    db.course_exams["comprehensive-riyadus-saliheen"] ||
     null
   );
 }
@@ -812,9 +812,10 @@ function generateCertificateCode(courseSlug: string): string {
   const year = new Date().getFullYear();
   let acronym = "GEN";
   const lower = courseSlug.toLowerCase();
-  if (lower.includes("tawheed")) acronym = "TWH";
-  else if (lower.includes("fiqh")) acronym = "FQH";
+  if (lower.includes("riyad") || lower.includes("saliheen")) acronym = "RDS";
+  else if (lower.includes("tafsir")) acronym = "TFS";
   else if (lower.includes("hadith")) acronym = "HDT";
+  else if (lower.includes("fiqh")) acronym = "FQH";
   else if (lower.includes("aqeedah")) acronym = "AQD";
   else if (lower.includes("quran")) acronym = "QRN";
 

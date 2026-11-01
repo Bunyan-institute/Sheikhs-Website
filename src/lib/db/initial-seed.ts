@@ -166,25 +166,25 @@ export function getInitialSeedDatabase(): PortalDatabase {
     course_enrollments: [
       {
         id: "enr_sample_201",
-        course_id: "crs_kitab_tawheed",
-        course_slug: "comprehensive-kitab-at-tawheed",
-        course_title: "የኪታቡ አተውሂድ የተሟላ ትምህርት (Comprehensive Study of Kitab At-Tawheed)",
+        course_id: "crs_riyadus_saliheen",
+        course_slug: "comprehensive-riyadus-saliheen",
+        course_title: "የሪያዱ ሷሊሂን የተሟላ ትምህርት (Comprehensive Study of Riyad us-Saliheen)",
         student_name: "Ahmad Ibn Yusuf al-Habashi",
         student_email: "ahmad.yusuf@example.com",
         student_phone: "+251 91 445 5667",
         city: "Addis Ababa",
         created_at: "2026-10-15T10:00:00Z",
         completed_lessons: [
-          "les_tawheed_23",
-          "les_tawheed_24",
-          "les_tawheed_25",
-          "les_tawheed_26",
-          "les_tawheed_27",
-          "les_tawheed_28",
-          "les_tawheed_29",
-          "les_tawheed_30",
-          "les_tawheed_31",
-          "les_tawheed_32",
+          "les_riyad_23",
+          "les_riyad_24",
+          "les_riyad_25",
+          "les_riyad_26",
+          "les_riyad_27",
+          "les_riyad_28",
+          "les_riyad_29",
+          "les_riyad_30",
+          "les_riyad_31",
+          "les_riyad_32",
         ],
         exam_attempts: [
           {
@@ -193,121 +193,121 @@ export function getInitialSeedDatabase(): PortalDatabase {
             passed: true,
           },
         ],
-        certificate_id: "MFM-2026-TWH-1001",
+        certificate_id: "MFM-2026-RDS-1001",
         status: "completed",
       },
     ],
     course_exams: {
-      "comprehensive-kitab-at-tawheed": {
-        course_id: "comprehensive-kitab-at-tawheed",
+      "comprehensive-riyadus-saliheen": {
+        course_id: "comprehensive-riyadus-saliheen",
         passing_percentage: 70,
         questions: [
           {
             id: "q1",
-            question: "What is the primary division of Tawheed that was the core dispute between the Messengers and their peoples?",
+            question: "According to the famous Hadith of Umar ibn al-Khattab (رضي الله عنه) opening Riyad us-Saliheen, how are actions evaluated by Allah?",
             options: [
-              "Tawheed al-Uluhiyyah (Singling out Allah exclusively in worship and devotion)",
-              "Tawheed ar-Rububiyyah (Recognizing Allah as sole Creator and Provider)",
-              "Tawheed al-Asma wa as-Sifat (Affirming Divine Names and Attributes)",
-              "Philosophical scholastic theology (Ilm al-Kalam)"
+              "Actions are judged exclusively by their intentions (Innama al-A'malu bin-Niyyat)",
+              "Actions are judged purely by their physical appearance and social outcome",
+              "Actions are judged by ancestral tradition and tribal consensus",
+              "Actions are judged by financial cost and magnitude alone"
             ],
             correct_option_index: 0,
-            explanation: "All pagan nations admitted Allah was the Creator (Rububiyyah), but refused to direct all worship exclusively to Him (Uluhiyyah)."
+            explanation: "The Prophet (ﷺ) declared that all actions are judged by intention, and each person receives what they intended."
           },
           {
             id: "q2",
-            question: "According to the principles elucidated in Kitab At-Tawheed, what constitutes Major Shirk (Ash-Shirk al-Akbar)?",
+            question: "In the Chapter on Repentance (Bab at-Tawbah), what are the fundamental conditions when a sin involves the rights of another human being?",
             options: [
-              "Directing any act of worship (supplication, sacrifice, vows, fear, reliance) to other than Allah",
-              "Showing off in voluntary righteous deeds (Ar-Riyaa)",
-              "Swearing unintentionally by the Ka'bah",
-              "Committing a major sin while acknowledging its prohibition"
+              "Ceasing the sin, sincere remorse, firm determination not to return, and restoring or seeking pardon for the usurped right",
+              "Merely fasting three consecutive days without reimbursing stolen wealth",
+              "Asking public forgiveness on social media while retaining another person's property",
+              "Supplication alone without restitution"
             ],
             correct_option_index: 0,
-            explanation: "Major Shirk invalidates all good deeds and expels one from the fold of Islam if died upon without repentance."
+            explanation: "When sins violate human rights (money, honor, injury), repentance requires returning the right or obtaining genuine absolution."
           },
           {
             id: "q3",
-            question: "What does the testimony 'La ilaha illallah' necessitate structurally?",
+            question: "How did Sheikh Muhammed Ferej elucidate the three dimensions of Patience (As-Sabr) in his Riyad us-Saliheen discourses?",
             options: [
-              "Absolute negation of divinity from all creation (An-Nafy) and exclusive affirmation for Allah alone (Al-Ithbat)",
-              "Affirming Allah as Creator while permitting seeking spiritual intercession through graves",
-              "Merely verbal utterance without requirement of understanding or action",
-              "Negating all attributes of Allah to avoid anthropomorphism"
+              "Patience upon obeying Allah, patience from disobeying Allah, and patience upon painful decrees of Allah",
+              "Patience with wealth, patience with food, and patience with sleep",
+              "Patience only when one has no strength to retaliate",
+              "Patience confined exclusively to physical illness"
             ],
             correct_option_index: 0,
-            explanation: "'La ilaha' negates all false gods; 'illallah' affirms true worship solely to Allah."
+            explanation: "Classical Ahlus-Sunnah scholars classify Sabr into: Sabr upon obedience, Sabr from sins, and Sabr upon tribulations."
           },
           {
             id: "q4",
-            question: "What is the ruling on wearing amulets, charms, or strings (Tama'im) believing they ward off harm independently?",
+            question: "What prophetic consequence is affirmed in Riyad us-Saliheen regarding Truthfulness (As-Sidq)?",
             options: [
-              "Prohibited and considered a manifestation of Shirk that compromises pure Tawakkul",
-              "Permissible and recommended for travelers and infants",
-              "A mandatory traditional custom",
-              "Permitted provided it is concealed underneath garments"
+              "Truthfulness leads to righteousness (Birr), and righteousness leads to Paradise",
+              "Truthfulness causes loss of worldly status and reputation",
+              "Truthfulness is recommended only in legal disputes",
+              "Truthfulness is superseded by expediency"
             ],
             correct_option_index: 0,
-            explanation: "The Prophet (peace be upon him) said: 'Whoever wears an amulet has committed an act of Shirk' (Ahmad)."
+            explanation: "The Prophet (ﷺ) stated: 'Truthfulness leads to righteousness, and righteousness leads to Paradise' (Bukhari & Muslim)."
           },
           {
             id: "q5",
-            question: "How did the Prophet (peace and blessings be upon him) classify subtle ostentation (Ar-Riyaa)?",
+            question: "What is the comprehensive meaning of the Hadith 'The Religion is Sincere Advice' (Ad-Deenu An-Naseehah)?",
             options: [
-              "Lesser Shirk (Ash-Shirk al-Asghar), more concealed than the crawling of an ant",
-              "A minor cultural custom with no theological consequence",
-              "A praiseworthy practice to motivate others",
-              "An act that completely invalidates all previous good deeds forever"
+              "Sincerity towards Allah, His Book, His Messenger, the leaders of the Muslims, and their common folk",
+              "Only offering criticism to political figures in public gatherings",
+              "Private advice limited exclusively to family members",
+              "A formal judicial procedure restricted to courts"
             ],
             correct_option_index: 0,
-            explanation: "The Prophet expressed greatest fear for his Ummah regarding Lesser Shirk: Ar-Riyaa (showing off)."
+            explanation: "The Prophet (ﷺ) explained that Naseehah encompasses devotion to Allah, His Book, His Messenger, leaders, and all Muslims."
           },
           {
             id: "q6",
-            question: "What is the status of slaughtering (Adh-Dhabh) for spirits, jinn, or tombs?",
+            question: "According to the Hadith on God-consciousness (Taqwa), where is Taqwa primarily seated as demonstrated by the Prophet (ﷺ)?",
             options: [
-              "Major Shirk that places the perpetrator under the curse of Allah",
-              "Disliked (Makruh) but permissible as cultural respect",
-              "Permitted during regional reconciliation ceremonies",
-              "A minor sin that does not affect Tawheed"
+              "In the heart, as the Prophet pointed three times to his chest: 'At-Taqwa hahuna'",
+              "Exclusively in outward garment style and length",
+              "Solely in eloquent public speaking and oratory",
+              "In physical residence in specific geographic locations"
             ],
             correct_option_index: 0,
-            explanation: "The Prophet (pbuh) said: 'May Allah curse whoever slaughters for other than Allah' (Sahih Muslim)."
+            explanation: "The Prophet (peace and blessings be upon him) pointed to his heart and said: 'God-fearing piety is here' three times."
           },
           {
             id: "q7",
-            question: "What constitutes sincere reliance on Allah (Tawakkul) in Islamic creed?",
+            question: "How does authentic Islamic doctrine reconcile Sincere Reliance upon Allah (Tawakkul) with adopting material means (Al-Asbab)?",
             options: [
-              "Placing full heart trust in Allah while taking lawful worldly means",
-              "Abandoning all worldly means, work, and medical treatments completely",
-              "Relying solely on material means without remembering Allah",
-              "Wishing for success without practical effort or devotion"
+              "Tawakkul relies completely with the heart on Allah while dutifully exerting lawful worldly means (like tying the camel)",
+              "Tawakkul requires total abandonment of medicine, employment, and planning",
+              "Believing material means produce results independent of Allah's Will",
+              "Only adopting means without prayer or reliance on Allah"
             ],
             correct_option_index: 0,
-            explanation: "True Tawakkul combines spiritual trust in the Divine Decree with adopting appropriate means."
+            explanation: "True Tawakkul unites spiritual reliance on Allah with adopting appropriate lawful means, as in the Hadith: 'Tie her and rely upon Allah.'"
           },
           {
             id: "q8",
-            question: "What are the two inseparable conditions for any deed to be accepted by Allah?",
+            question: "What does the prophetic guidance in Riyad us-Saliheen teach regarding maintaining ties of kinship (Silat ar-Rahim)?",
             options: [
-              "Sincerity for Allah alone (Ikhlas) and conformity to the Sunnah (Mutaba'ah)",
-              "Popular consensus and large financial expenditure",
-              "Severe physical exertion and difficulty",
-              "Strict adherence to ancestral traditional norms"
+              "It expands sustenance, elongates righteous lifespan, and is maintained even towards relatives who sever relations",
+              "It is only required towards relatives who reciprocate visits and gifts",
+              "It is prohibited if relatives live in different towns",
+              "It is limited strictly to siblings only"
             ],
             correct_option_index: 0,
-            explanation: "Allah accepts only deeds performed purely for His Face and in strict accordance with the prophetic guidance."
+            explanation: "The true maintainer of kinship is one who reconciles and upholds ties even when relatives sever them (Sahih Bukhari)."
           }
         ]
       }
     },
     certificates: [
       {
-        id: "MFM-2026-TWH-1001",
+        id: "MFM-2026-RDS-1001",
         verification_token: "d8f3a1b9e2c40586719a84f3e2b1098475a6c3d2e1f0b9a876543210fedcba98",
-        course_id: "comprehensive-kitab-at-tawheed",
-        course_slug: "comprehensive-kitab-at-tawheed",
-        course_title: "የኪታቡ አተውሂድ የተሟላ ትምህርት (Comprehensive Study of Kitab At-Tawheed)",
+        course_id: "comprehensive-riyadus-saliheen",
+        course_slug: "comprehensive-riyadus-saliheen",
+        course_title: "የሪያዱ ሷሊሂን የተሟላ ትምህርት (Comprehensive Study of Riyad us-Saliheen)",
         student_name: "Ahmad Ibn Yusuf al-Habashi",
         student_email: "ahmad.yusuf@example.com",
         issued_at: "2026-10-20T14:05:00Z",
