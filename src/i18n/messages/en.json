@@ -26,10 +26,76 @@
     "latestLectures": "Latest Lectures",
     "latestArticles": "Latest Articles",
     "upcomingEvents": "Upcoming Events",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "officialPlaylists": "YouTube & Africa TV Playlists — Sheikh Muhammed Ferej",
+    "officialPlaylistsSubtitle": "Curated lecture series, televised exegesis, and complete halaqat organized in official playlists.",
+    "openFullPlaylist": "Open 350+ Hours Playlist",
+    "audioExegesisTitle": "Featured Audio Exegesis & Study Series",
+    "audioExegesisSubtitle": "Systematic verse-by-verse and hadith-by-hadith classroom audio series taught by Sheikh Muhammed Ferej.",
+    "exploreAllSeries": "Explore All Audio Series"
+  },
+  "about": {
+    "title": "About the Scholar",
+    "subtitle": "Scholar Biography & Sanad",
+    "arabicBadge": "ترجمة فضيلة الشيخ وسيرته العلمية",
+    "biography": "Biography",
+    "experience": "35+ years of traditional Halaqat instruction, university scholarship, AAOIFI Sharia governance, and Dawah leadership.",
+    "academicCredentials": "Academic Credentials",
+    "scholarlyTenures": "University & Sharia Governance Tenures",
+    "academicLineage": "Academic Lineage & Teachers",
+    "authoredWorks": "Authored Books & Publications",
+    "aaoifiCertified": "AAOIFI Certified Sharia Auditor (CSAA)",
+    "languages": "Languages: Arabic (العربية), Amharic (አማርኛ), English, Oromo",
+    "location": "Addis Ababa, Ethiopia",
+    "viewJourney": "View Scholar Journey",
+    "viewQualifications": "View Qualifications",
+    "credentialsNotice": "Certified Sharia Auditor & University Lecturer"
+  },
+  "qualifications": {
+    "title": "Qualifications & Credentials",
+    "subtitle": "Academic Degrees & Certifications",
+    "arabicBadge": "المؤهلات العلمية والإجازات الشرعية",
+    "experienceYears": "35+ Years Active Scholarship",
+    "verifiedCertifications": "Verified Credentials & Degrees",
+    "degreesTitle": "Higher Academic Degrees",
+    "certificationsTitle": "Professional Certifications",
+    "governanceTitle": "Sharia Board & Institutional Governance",
+    "verifiedBy": "Verified by Bunyan Verification Engine"
+  },
+  "journey": {
+    "title": "Scholarly Journey & Milestones",
+    "subtitle": "Chronological Milestones of Scholarship",
+    "arabicBadge": "المسيرة الدعوية والمحطات العلمية",
+    "timelineTitle": "The Scholarly Path of Sheikh Muhammed Ferej",
+    "earlyEducation": "Traditional Islamic Education & Memorization",
+    "universityStudies": "Higher Islamic Studies & Jurisprudence",
+    "darulHadith": "Founding of Halaqat & Darul Hadith Instruction",
+    "mediaEra": "Africa TV Television Broadcasts & Global Outreach",
+    "aaoifiTenure": "AAOIFI Sharia Governance & Banking Advisory"
+  },
+  "courses": {
+    "title": "Courses & Syllabi",
+    "subtitle": "Structured Islamic Curricula",
+    "arabicBadge": "الدورات العلمية والمناهج الدراسية",
+    "description": "Rigorous self-paced curricula in Hadith, Fiqh, and Islamic Banking with certified final exams.",
+    "enrollmentOpen": "Enrollment Open",
+    "enrollmentClosed": "Enrollment Closed",
+    "syllabus": "Syllabus",
+    "lessons": "Lessons",
+    "duration": "Duration",
+    "instructor": "Instructor",
+    "takeExam": "Take Final Assessment",
+    "examTitle": "Comprehensive Examination",
+    "passingScore": "Passing Grade: 75%",
+    "certificateIssued": "Verified Certificate Issued Upon Completion",
+    "listenInApp": "Listen in Mobile App",
+    "backToCourses": "All Courses & Syllabi"
   },
   "lectures": {
-    "title": "Lectures",
+    "title": "Lectures & Recorded Halaqat",
+    "subtitle": "Authentic Audio & Video Archive",
+    "arabicBadge": "الدروس والمحاضرات المسجلة",
+    "description": "Three decades of authentic Islamic discourses, exegesis, and Friday sermons by Sheikh Muhammed Ferej.",
     "search": "Search lectures...",
     "all": "All",
     "loadMore": "Load more",
@@ -39,41 +105,67 @@
     "relatedLectures": "Related Lectures",
     "partOfSeries": "Part of",
     "previous": "Previous",
-    "next": "Next"
-  },
-  "articles": {
-    "title": "Articles",
-    "featured": "Featured Article",
-    "latest": "Latest Articles",
-    "readingTime": "{minutes} min read"
-  },
-  "fatwas": {
-    "title": "Fatwas",
-    "search": "Search a question...",
-    "question": "Question",
-    "answer": "Answer"
-  },
-  "series": {
-    "title": "Series",
-    "lessons": "{count} Lessons"
-  },
-  "courses": {
-    "title": "Courses",
-    "enrollmentOpen": "Enrollment Open",
-    "enrollmentClosed": "Enrollment Closed",
-    "syllabus": "Syllabus"
+    "next": "Next",
+    "listenAudio": "Listen to Audio",
+    "downloadAudio": "Download Audio (MP3)",
+    "listenInApp": "Listen in Mobile App (Offline)",
+    "officialExegesis": "Official Exegesis"
   },
   "library": {
-    "title": "Library",
+    "title": "Library & Publications",
+    "subtitle": "Authored Books & Manuscripts",
+    "arabicBadge": "المكتبة والمؤلفات العلمية",
+    "description": "Authentic published books, tafsir companions, and PDF manuscripts authored or expounded by Sheikh Muhammed Ferej.",
     "search": "Search library...",
     "books": "Books",
     "documents": "Documents",
     "references": "References",
-    "read": "Read",
-    "download": "Download"
+    "read": "Read Online",
+    "download": "Download PDF",
+    "pages": "Pages",
+    "author": "Author: Sheikh Muhammed Ferej Megeno",
+    "publicationYear": "Publication Year",
+    "readInReader": "Open in PDF Reader"
+  },
+  "series": {
+    "title": "Thematic Audio Series",
+    "subtitle": "Curated Thematic Exegesis",
+    "arabicBadge": "السلاسل العلمية والدروس المنهجية",
+    "description": "In-depth multi-part exegesis covering Riyadus Saliheen, Mukhtasar Tafsir, Negere Hajj, and prophetic Sunnah.",
+    "lessons": "{count} Lessons",
+    "viewSeries": "View Full Series"
+  },
+  "media": {
+    "title": "Media & Television Broadcasts",
+    "subtitle": "Africa TV & Video Archive",
+    "arabicBadge": "المكتبة المرئية وبرامج التلفاز",
+    "description": "Televised programs, halaqat, and special broadcast series by Sheikh Muhammed Ferej on Africa TV.",
+    "watchOnYoutube": "Watch on YouTube",
+    "officialChannel": "Official Broadcast Channel"
+  },
+  "articles": {
+    "title": "Articles & Research Papers",
+    "subtitle": "Authored Works & Treatises",
+    "arabicBadge": "البحوث والمقالات العلمية",
+    "featured": "Featured Article",
+    "latest": "Latest Articles",
+    "readingTime": "{minutes} min read",
+    "author": "Author: Sheikh Muhammed Ferej"
+  },
+  "fatwas": {
+    "title": "Fatwas & Inquiries",
+    "subtitle": "Contemporary Rulings & Guidance",
+    "arabicBadge": "الفتاوى الشرعية والتوجيهات",
+    "description": "Scholarly answers and Islamic legal rulings on worship, family, financial transactions, and modern challenges.",
+    "search": "Search a question...",
+    "question": "Question",
+    "answer": "Scholarly Ruling",
+    "askYourOwn": "Have a specific question? Ask the Sheikh directly."
   },
   "events": {
-    "title": "Events",
+    "title": "Events & Seminars",
+    "subtitle": "Upcoming Gatherings & Conferences",
+    "arabicBadge": "المؤتمرات والندوات العلمية",
     "upcoming": "Upcoming",
     "past": "Past Events",
     "details": "Details",
@@ -81,44 +173,78 @@
     "online": "Online",
     "hybrid": "Hybrid",
     "registrationRequired": "Registration required",
-    "seatsAvailable": "{count} seats available"
+    "seatsAvailable": "{count} seats available",
+    "registerNow": "Register for Event"
   },
   "ask": {
     "title": "Ask the Sheikh",
+    "subtitle": "Direct Scholarly Inquiry Office",
+    "arabicBadge": "تواصل مع فضيلة الشيخ",
+    "description": "Submit your question directly to the office of Sheikh Muhammed Ferej. Responses are reviewed according to the Quran and Sunnah.",
     "questionLabel": "Your Question",
-    "questionPlaceholder": "Type your question here...",
+    "questionPlaceholder": "Type your question here in detail...",
     "nameLabel": "Name",
-    "namePlaceholder": "Your name (optional)",
-    "emailLabel": "Email",
-    "emailPlaceholder": "your@email.com (optional)",
+    "namePlaceholder": "Your full name (optional)",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "your@email.com (for private reply)",
+    "categoryLabel": "Inquiry Category",
     "submit": "Submit Question",
     "submitting": "Submitting...",
-    "success": "Your question has been received.",
-    "reference": "Reference"
+    "success": "Your question has been received by the scholar office.",
+    "reference": "Reference Number"
+  },
+  "contact": {
+    "title": "Contact & Dawah Office",
+    "subtitle": "Scholarly Correspondence",
+    "arabicBadge": "اتصل بالمكتب الدعوي",
+    "description": "For official engagements, fatwa inquiries, academic conferences, and institutional governance.",
+    "officeLocation": "Addis Ababa, Ethiopia",
+    "officeHours": "Office Hours: Mon - Fri, 9:00 AM - 5:00 PM (EAT)",
+    "followUs": "Follow on official media channels",
+    "askQuestion": "Have a religious question? Ask the Sheikh directly."
+  },
+  "verify": {
+    "title": "Verify Academic Certificate",
+    "subtitle": "Tamper-Proof Credential Verification",
+    "arabicBadge": "التحقق من صحة الشهادات الصادرة",
+    "description": "Validate the authenticity of course completion certificates and academic credentials issued by Sheikh Muhammed Ferej.",
+    "inputPlaceholder": "Enter Certificate Verification Code (e.g. CERT-2024-XXXX)",
+    "verifyButton": "Verify Authenticity",
+    "validBadge": "Authentic Credential Verified",
+    "invalidBadge": "Certificate Record Not Found",
+    "studentName": "Student Name",
+    "courseTitle": "Course Title",
+    "issueDate": "Issue Date",
+    "grade": "Assessment Grade"
   },
   "search": {
-    "title": "Search",
-    "placeholder": "Search Bunyan...",
+    "title": "Search Knowledge Base",
+    "placeholder": "Search lectures, courses, fatwas, articles, and library...",
     "results": "Results",
     "noResults": "No results found.",
-    "all": "All"
+    "all": "All Categories"
   },
   "common": {
     "backTo": "Back to {page}",
-    "noContent": "No {type} have been published yet.",
+    "noContent": "No content published yet.",
     "unavailable": "This content is temporarily unavailable.",
     "tryAgain": "Try again",
-    "copyright": "© {year} {name}. All rights reserved."
+    "copyright": "© {year} Sheikh Muhammed Ferej Megeno. All rights reserved."
   },
-  "about": {
-    "title": "About",
-    "biography": "Biography",
-    "languages": "Languages",
-    "location": "Location"
-  },
-  "contact": {
-    "title": "Contact",
-    "followUs": "Follow on social media",
-    "askQuestion": "Have a question? Ask the Sheikh directly."
+  "appShowcase": {
+    "badge": "Official Mobile App",
+    "title": "ሸይኽ ሙሃመድ ፈረጅ",
+    "publisher": "Africa Media Network",
+    "downloadButton": "GET IT ON Google Play",
+    "rating": "4.9 / 5.0",
+    "downloads": "10,000+ Downloads",
+    "offlineFeature": "100% Offline Audio",
+    "offlineDesc": "Download once and listen anytime without an internet connection.",
+    "backgroundFeature": "Background Playback",
+    "backgroundDesc": "Continuous audio playback with screen locked or using other apps.",
+    "adFreeFeature": "100% Free & Ad-Free",
+    "adFreeDesc": "Pure Dawah application with zero commercial advertisements.",
+    "africaTvFeature": "Complete Africa TV Catalog",
+    "africaTvDesc": "Riyadus Saliheen, Negere Hajj, and full darasa archives."
   }
 }
