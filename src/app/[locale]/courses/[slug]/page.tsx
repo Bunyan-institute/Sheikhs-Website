@@ -116,7 +116,7 @@ export default async function CoursePage({
         </section>
       )}
 
-      {(course.slug === "comprehensive-riyadus-saliheen" || course.slug === "comprehensive-kitab-at-tawheed") && (
+      {course.slug === "comprehensive-riyadus-saliheen" && (
         <div className="mb-10 bg-[#FAF8F5] border border-[#1A4D2E]/30 rounded-[4px] p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h3 className="font-heading font-bold text-lg text-[#1A4D2E] mb-1">

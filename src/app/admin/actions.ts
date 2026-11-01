@@ -83,7 +83,7 @@ export async function saveLectureAction(data: {
     series: data.seriesId
       ? {
           id: data.seriesId,
-          title: data.seriesTitle || "Kitab At-Tawheed",
+          title: data.seriesTitle || "Riyad us-Saliheen",
           position: 1,
         }
       : null,
