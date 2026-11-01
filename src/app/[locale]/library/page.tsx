@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getLibrary } from '@/lib/api/library';
 import { Link } from '@/i18n/navigation';
 import { Book, FileText, Bookmark, ArrowRight } from 'lucide-react';
@@ -7,6 +7,8 @@ import type { PublicBook } from '@/lib/api/types';
 export default async function LibraryPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   setRequestLocale(params.locale);
+  const t = await getTranslations({ locale: params.locale, namespace: "library" });
+
   let bookList: PublicBook[] = [];
   try {
     const items = await getLibrary({ locale: params.locale });
@@ -23,19 +25,19 @@ export default async function LibraryPage(props: { params: Promise<{ locale: str
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                المكتبة والبحوث العلمية
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Authentic Works of Sheikh Muhammed Ferej
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading text-[#2D3436] font-bold tracking-tight">
-              Scholarly Treatises &amp; Documents
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Authenticated profile, Quranic exegesis (Mukhtasar Tafsir), and legal treatises authored or co-translated by Sheikh Muhammed Ferej Megeno.
+            {t("description")}
           </p>
         </div>
       </header>

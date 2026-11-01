@@ -1,6 +1,6 @@
 import { getLectures } from "@/lib/api/lectures";
 import { getCategories } from "@/lib/api/taxonomy";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FilterBar } from "@/components/ui/filter-bar";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
@@ -16,6 +16,7 @@ interface LecturesPageProps {
 export default async function LecturesPage({ params, searchParams }: LecturesPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "lectures" });
 
   const resolvedSearchParams = await searchParams;
   const categorySlug = typeof resolvedSearchParams.category === "string" ? resolvedSearchParams.category : undefined;
@@ -60,18 +61,18 @@ export default async function LecturesPage({ params, searchParams }: LecturesPag
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                  المحاضرات والدروس العلمية
+                  {t("arabicBadge")}
                 </span>
                 <span className="text-[#B8860B]">۞</span>
                 <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                  Audio &amp; Video Halaqat
+                  {t("subtitle")}
                 </span>
               </div>
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-                Lectures &amp; Discourses
+                {t("title")}
               </h1>
               <p className="text-sm sm:text-base text-[#555E61] max-w-2xl font-body mt-2">
-                Comprehensive archive of sermons, Africa TV televised series, and authenticated audio halaqat by Sheikh Muhammed Ferej Megeno.
+                {t("description")}
               </p>
             </div>
             

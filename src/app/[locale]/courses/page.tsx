@@ -1,13 +1,18 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCourses } from "@/lib/api/courses";
 import type { Metadata } from "next";
 import { GraduationCap, ArrowRight, BookOpen } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Academic Courses & Halaqat | Sheikh Ferej",
-  description: "Academic Islamic courses, structured curricula, and study programs by Sheikh Muhammed Ferej Megeno.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "courses" });
+  return {
+    title: `${t("title")} | Sheikh Muhammed Ferej`,
+    description: t("description"),
+  };
+}
 
 export default async function CoursesPage({ 
   params 
@@ -16,6 +21,7 @@ export default async function CoursesPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "courses" });
 
   const coursesRes = await getCourses({ locale });
   const courses = coursesRes?.data || [];
@@ -28,19 +34,19 @@ export default async function CoursesPage({
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                البرامج والمنظومات التعليمية
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Structured Islamic Curricula
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Courses &amp; Educational Programs
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Comprehensive learning paths in Aqeedah, Shafi&apos;i Fiqh, Usul, and Quranic Exegesis.
+            {t("description")}
           </p>
         </div>
       </header>
