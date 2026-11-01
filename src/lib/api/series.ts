@@ -5,10 +5,10 @@ import { AUTHENTIC_LECTURES } from "./lectures";
 export const AUTHENTIC_SERIES: PublicSeries[] = [
   {
     object: "series",
-    id: "ser-kitab-at-tawheed",
-    title: "Explanation of Kitab At-Tawheed (شرح كتاب التوحيد / ኪታቡ አተውሂድ)",
-    slug: "kitab-at-tawheed",
-    description: "A comprehensive verse-by-verse and chapter-by-chapter exposition of the seminal work Kitab At-Tawheed by Sheikh al-Islam Muhammad ibn Abd al-Wahhab, presented in Amharic with classical Arabic textual readings by Sheikh Muhammed Ferej Megeno.",
+    id: "ser-riyadus-saliheen",
+    title: "Explanation of Riyad us-Saliheen (شرح رياض الصالحين / ሪያዱ ሷሊሂን)",
+    slug: "riyadus-saliheen",
+    description: "A comprehensive Hadith exegesis of Riyad us-Saliheen by Imam an-Nawawi, expounded by Sheikh Muhammed Ferej Megeno on Africa TV and Darul Hadith, focusing on prophetic manners, authentic Sunnah, and character purification.",
     locale: "am",
     direction: "ltr",
     cover: {
@@ -24,7 +24,7 @@ export const AUTHENTIC_SERIES: PublicSeries[] = [
     lecture_count: 32,
     published_at: "2024-03-01T08:00:00Z",
     updated_at: "2024-05-15T08:00:00Z",
-    lectures: AUTHENTIC_LECTURES.filter((l) => l.series?.id === "ser-kitab-at-tawheed"),
+    lectures: AUTHENTIC_LECTURES.filter((l) => l.series?.id === "ser-riyadus-saliheen"),
   },
 ];
 

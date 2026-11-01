@@ -116,7 +116,7 @@ export default async function CoursePage({
         </section>
       )}
 
-      {course.slug === "comprehensive-kitab-at-tawheed" && (
+      {(course.slug === "comprehensive-riyadus-saliheen" || course.slug === "comprehensive-kitab-at-tawheed") && (
         <div className="mb-10 bg-[#FAF8F5] border border-[#1A4D2E]/30 rounded-[4px] p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h3 className="font-heading font-bold text-lg text-[#1A4D2E] mb-1">
@@ -127,11 +127,17 @@ export default async function CoursePage({
             </p>
           </div>
           <div className="flex flex-wrap gap-3 shrink-0">
-            <a 
+            <Link
+              href="/series"
+              className="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#1A4D2E] border border-[#1A4D2E] hover:bg-[#1A4D2E]/10 rounded-[2px] transition-colors"
+            >
+              Browse Audio Series
+            </Link>
+            <a
               href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-[#1A4D2E] text-white rounded-[3px] text-xs font-semibold hover:bg-[#143d24] transition-colors inline-flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#1A4D2E] text-white rounded-[2px] text-xs font-semibold hover:bg-[#143d24] transition-colors inline-flex items-center gap-1.5"
             >
               <span>Listen in Mobile App &rarr;</span>
             </a>
