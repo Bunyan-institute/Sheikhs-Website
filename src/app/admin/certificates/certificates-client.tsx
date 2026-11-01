@@ -35,7 +35,7 @@ export function CertificatesClient({
   const [feedback, setFeedback] = useState<string | null>(null);
 
   // Manual Issue Form State
-  const [selectedCourseSlug, setSelectedCourseSlug] = useState(courses[0]?.slug || "comprehensive-kitab-at-tawheed");
+  const [selectedCourseSlug, setSelectedCourseSlug] = useState(courses[0]?.slug || "comprehensive-riyadus-saliheen");
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
   const [scorePercentage, setScorePercentage] = useState(100);

@@ -116,7 +116,7 @@ export default function AdminLecturesPage() {
         audioUrl: audioUrl || undefined,
         durationSeconds: durationMinutes * 60,
         seriesId: seriesId || undefined,
-        seriesTitle: seriesId ? "Explanation of Kitab At-Tawheed" : undefined,
+        seriesTitle: seriesId ? "Explanation of Riyad us-Saliheen" : undefined,
         categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
         tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
         transcript: transcript || undefined,
@@ -165,7 +165,7 @@ export default function AdminLecturesPage() {
             Lectures & Discourses ({lectures.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage televised broadcasts, YouTube videos, and Kitab At-Tawheed audio lessons.
+            Manage televised broadcasts, YouTube videos, and Riyad us-Saliheen audio lessons.
           </p>
         </div>
 
@@ -445,7 +445,7 @@ export default function AdminLecturesPage() {
                     className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
                   >
                     <option value="">No Series (Standalone Lecture)</option>
-                    <option value="ser-kitab-at-tawheed">Kitab At-Tawheed (ኪታቡ አተውሂድ)</option>
+                    <option value="ser-riyadus-saliheen">Riyad us-Saliheen (ሪያዱ ሷሊሂን)</option>
                   </select>
                 </div>
                 <div>
@@ -454,7 +454,7 @@ export default function AdminLecturesPage() {
                     type="text"
                     value={categories}
                     onChange={(e) => setCategories(e.target.value)}
-                    placeholder="Tawheed, Aqeedah"
+                    placeholder="Hadith, Akhlaq, Tazkiyah"
                     className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
                   />
                 </div>

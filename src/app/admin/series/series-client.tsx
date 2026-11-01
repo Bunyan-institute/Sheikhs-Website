@@ -102,7 +102,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
             Series & Curriculums ({series.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Organize multi-part educational series like Kitab At-Tawheed.
+            Organize multi-part educational series like Riyad us-Saliheen.
           </p>
         </div>
 
