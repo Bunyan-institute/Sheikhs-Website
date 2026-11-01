@@ -1,14 +1,19 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFatwas } from "@/lib/api/fatwas";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { ArrowRight, HelpCircle, CheckCircle } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Fatwas & Legal Rulings | Sheikh Ferej",
-  description: "Scholarly fatwas, Islamic jurisprudence, and answers to inquiries by Sheikh Muhammed Ferej Megeno.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "fatwas" });
+  return {
+    title: `${t("title")} | Sheikh Muhammed Ferej`,
+    description: t("description"),
+  };
+}
 
 export default async function FatwasPage({ 
   params,
@@ -19,6 +24,7 @@ export default async function FatwasPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "fatwas" });
   
   const { category } = await searchParams;
 
@@ -33,19 +39,19 @@ export default async function FatwasPage({
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                الفتاوى والمسائل الفقهية المعاصرة
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Authentic Fatawa &amp; Jurisprudence
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Fatwas &amp; Sharia Rulings
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Formal jurisprudential rulings and answers on contemporary Sharia, Islamic finance, ethics, and ritual obligations.
+            {t("description")}
           </p>
         </div>
       </header>

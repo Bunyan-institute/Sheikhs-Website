@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getArticles } from "@/lib/api/articles";
 import { getCategories } from "@/lib/api/taxonomy";
@@ -6,10 +6,15 @@ import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { ArrowRight, BookOpen } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Scholarly Treatises & Articles | Sheikh Ferej",
-  description: "Read authentic Islamic articles, exegesis, and legal essays by Sheikh Muhammed Ferej Megeno.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "articles" });
+  return {
+    title: `${t("title")} | Sheikh Muhammed Ferej`,
+    description: t("subtitle"),
+  };
+}
 
 export default async function ArticlesPage({ 
   params,
@@ -20,6 +25,7 @@ export default async function ArticlesPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "articles" });
   
   const { category } = await searchParams;
 
@@ -42,19 +48,19 @@ export default async function ArticlesPage({
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                البحوث والمقالات الشرعية
+                {t("arabicBadge")}
               </span>
               <span className="text-[#B8860B]">۞</span>
               <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                Authentic Exegesis &amp; Treatises
+                {t("subtitle")}
               </span>
             </div>
             <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-              Articles &amp; Hadith Studies
+              {t("title")}
             </h1>
           </div>
           <p className="text-sm text-[#555E61] max-w-xl font-body">
-            Peer-reviewed essays, Hadith commentaries, and legal treatises authored by Sheikh Muhammed Ferej Megeno.
+            {t("author")}
           </p>
         </div>
       </header>

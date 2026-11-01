@@ -1,5 +1,5 @@
 import { getSeriesList } from "@/lib/api/series";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Layers, LibraryBig, ArrowRight } from "lucide-react";
@@ -12,6 +12,7 @@ interface SeriesPageProps {
 export default async function SeriesPage({ params }: SeriesPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "series" });
 
   let series: PublicSeries[] = [];
   try {
@@ -30,19 +31,19 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
-                  السلاسل العلمية والدروس المنهجية
+                  {t("arabicBadge")}
                 </span>
                 <span className="text-[#B8860B]">۞</span>
                 <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
-                  Multi-Part Halaqat Series
+                  {t("subtitle")}
                 </span>
               </div>
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
-                Curriculum Series
+                {t("title")}
               </h1>
             </div>
             <p className="text-sm text-[#555E61] max-w-xl font-body">
-              Structured multi-part lecture series, including Kitab At-Tawheed (32 lessons) and comprehensive Seerah studies.
+              {t("description")}
             </p>
           </div>
         </div>
