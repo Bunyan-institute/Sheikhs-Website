@@ -6,6 +6,8 @@ import { getArticles } from "@/lib/api/articles";
 import { getEvents } from "@/lib/api/events";
 import { ScholarHero } from "@/components/profile/scholar-hero";
 import { LecturePlayer } from "@/components/lectures/lecture-player";
+import { AfricaTvPlaylists } from "@/components/media/africa-tv-playlists";
+import { AppShowcaseSection } from "@/components/profile/app-showcase-section";
 import { formatDuration, formatDate } from "@/lib/utils";
 import type { PublicLecture, PublicArticle, PublicEvent } from "@/lib/api/types";
 import { 
@@ -250,61 +252,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         locale={locale}
       />
 
-      {/* ── HIGH VISIBILITY OFFICIAL ANDROID APP SHOWCASE ── */}
-      <section className="my-10">
-        <div className="bg-[#FAF8F5] border-2 border-[#1A4D2E] rounded-[4px] p-6 sm:p-8 lg:p-10 shadow-sm relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between">
-            {/* App Mockup Badge */}
-            <div className="w-full lg:w-auto flex flex-col sm:flex-row items-center gap-6">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-[#1A4D2E] border-2 border-[#B8860B] shadow-md flex items-center justify-center p-3 shrink-0">
-                <div className="w-full h-full border border-[#B8860B]/60 rounded-xl flex flex-col items-center justify-center text-center p-1">
-                  <span className="text-[#B8860B] font-bold text-xl leading-none">م</span>
-                  <span className="text-white text-[10px] font-bold mt-1">ሸይኽ ሙሃመድ</span>
-                  <span className="text-[#FAF8F5]/80 text-[8px]">ፈረጅ</span>
-                </div>
-              </div>
-              <div className="space-y-2 text-center sm:text-start">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[2px] bg-white border border-[#E6E0D8] text-xs font-bold text-[#1A4D2E]">
-                  <Smartphone className="w-3.5 h-3.5 text-[#1A4D2E]" />
-                  <span>Official Mobile App • ኦፊሴላዊ የሞባይል መተግበሪያ</span>
-                </div>
-                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#2D3436]">
-                  &ldquo;ሸይኽ ሙሃመድ ፈረጅ&rdquo; — Video &amp; Audio App
-                </h2>
-                <p className="text-xs sm:text-sm text-[#555E61] max-w-xl leading-relaxed">
-                  The verified official Android app by Africa Media Network Ltd. Access all televised lectures from Africa TV, audio halaqat, and discourses with full offline listening and zero registration.
-                </p>
-                <div className="flex flex-wrap items-center gap-4 pt-1 text-xs text-[#7A8285]">
-                  <span className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-[#1A4D2E]" /> 100% Free &amp; Offline Audio</span>
-                  <span className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-[#1A4D2E]" /> Africa TV Video Series</span>
-                  <span className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-[#1A4D2E]" /> No Account Required</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Direct Google Play Download Action */}
-            <div className="shrink-0 w-full lg:w-auto flex flex-col items-center lg:items-end gap-3">
-              <a
-                href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-[4px] bg-[#1A4D2E] hover:bg-[#143d24] text-white font-bold text-base shadow-md border border-[#143d24] transition-colors"
-              >
-                <svg className="w-6 h-6 text-[#B8860B]" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3.609 1.814L13.793 12 3.61 22.186c-.33-.2-.533-.564-.533-.969V2.783c0-.405.203-.769.532-.969zm11.597 11.598l2.38 2.38-12.062 6.845 9.682-9.225zm0-2.824L5.524 1.363l12.062 6.845-2.38 2.38zm1.414 1.412l3.473 1.968c.84.476.84 1.258 0 1.734l-3.473 1.968-2.121-2.121 2.121-2.121z"/>
-                </svg>
-                <span>GET IT ON Google Play</span>
-              </a>
-              <span className="text-[11px] text-[#7A8285] font-mono">
-                Package: com.sheikhmuhammedferej
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── HIGH VISIBILITY OFFICIAL GOOGLE PLAY APP SHOWCASE ── */}
+      <AppShowcaseSection />
 
       {/* ── AFRICA TV & YOUTUBE OFFICIAL PLAYLISTS SHOWCASE ── */}
-      <section className="py-10 border-b border-[#E6E0D8]">
+      <section className="py-12 border-b border-[#E6E0D8]">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -335,55 +287,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </a>
         </div>
 
-        {/* Playlists Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {OFFICIAL_PLAYLISTS.map((pl) => (
-            <a
-              key={pl.id}
-              href={pl.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col bg-white border border-[#E6E0D8] rounded-[4px] overflow-hidden hover:border-[#1A4D2E] transition-colors"
-            >
-              <div className="aspect-video relative bg-[#FAF8F5] overflow-hidden border-b border-[#E6E0D8]">
-                <img 
-                  src={pl.cover} 
-                  alt={pl.title} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                  <div className="w-12 h-12 rounded-full bg-[#1A4D2E] text-white flex items-center justify-center shadow-lg border border-[#B8860B]/60">
-                    <Play className="w-5 h-5 ms-0.5 text-[#B8860B]" />
-                  </div>
-                </div>
-                <div className="absolute top-2.5 end-2.5 bg-black/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-[2px] flex items-center gap-1">
-                  <Layers className="w-3 h-3 text-[#B8860B]" />
-                  <span>{pl.episodes}</span>
-                </div>
-                <div className="absolute bottom-2.5 start-2.5 bg-[#FAF8F5]/95 text-[#1A4D2E] text-[10px] font-bold px-2 py-0.5 rounded-[2px] border border-[#E6E0D8]">
-                  {pl.platform}
-                </div>
-              </div>
-
-              <div className="p-5 flex flex-col flex-1 justify-between space-y-3">
-                <div className="space-y-1.5">
-                  <span className="text-[11px] text-[#8C6D23] font-semibold block">{pl.platform}</span>
-                  <h3 className="font-heading font-bold text-sm sm:text-base text-[#2D3436] group-hover:text-[#1A4D2E] transition-colors line-clamp-2">
-                    {pl.title}
-                  </h3>
-                  <p className="text-xs text-[#555E61] line-clamp-2 leading-relaxed">
-                    {pl.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-[#FAF8F5] flex items-center justify-between text-xs text-[#8C6D23] font-semibold">
-                  <span>Open Full Playlist</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
+        <AfricaTvPlaylists />
       </section>
 
       {/* Featured Broadcast Halaqah Section */}
@@ -458,28 +362,31 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </section>
       )}
 
-      {/* Video Discourses Section */}
+      {/* Audio Halaqat & Authentic Series */}
       <section className="py-12 border-b border-[#E6E0D8]">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <div className="text-xs uppercase font-bold text-[#1A4D2E] tracking-widest mb-1">
-              Recorded Discourses • الدروس والمحاضرات
+              Audio Exegesis Archive • سلسلة الدروس الصوتية
             </div>
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#2D3436]">
-              Recent Video Exegesis &amp; Halaqat
+              Featured Audio Exegesis &amp; Study Series
             </h2>
+            <p className="text-xs sm:text-sm text-[#555E61] mt-1">
+              Systematic verse-by-verse and hadith-by-hadith classroom audio series taught by Sheikh Muhammed Ferej.
+            </p>
           </div>
           <Link 
-            href="/lectures" 
+            href="/series" 
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#1A4D2E] hover:text-[#8C6D23] font-semibold"
           >
-            <span>View All Lectures</span>
+            <span>Explore All Audio Series</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {videoLectures.slice(1, 9).map((lec) => (
+          {latestLectures.filter(l => !l.media?.video).slice(0, 4).map((lec) => (
             <LectureCard key={lec.id} lecture={lec} />
           ))}
         </div>
