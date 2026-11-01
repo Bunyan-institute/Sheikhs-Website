@@ -117,28 +117,24 @@ export default async function CoursePage({
       )}
 
       {course.slug === "comprehensive-kitab-at-tawheed" && (
-        <div className="mb-10 bg-emerald-50/60 border border-[#1B5E20]/30 rounded-[4px] p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="mb-10 bg-[#FAF8F5] border border-[#1A4D2E]/30 rounded-[4px] p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h3 className="font-heading font-bold text-lg text-[#1B5E20] mb-1">
-              Accompanying Audio Lessons & Classical PDF
+            <h3 className="font-heading font-bold text-lg text-[#1A4D2E] mb-1">
+              Audio Exposition by Sheikh Muhammed Ferej
             </h3>
-            <p className="text-sm text-[#636E72]">
-              Access the complete 32-chapter audio exposition and download the full 132-page classical treatise.
+            <p className="text-sm text-[#555E61]">
+              Listen to the comprehensive classroom audio exposition and study series by Sheikh Muhammed Ferej.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 shrink-0">
-            <Link 
-              href="/series/kitab-at-tawheed"
-              className="px-4 py-2 bg-[#1B5E20] text-white rounded text-sm font-semibold hover:bg-[#154a19] transition-colors"
+            <a 
+              href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-[#1A4D2E] text-white rounded-[3px] text-xs font-semibold hover:bg-[#143d24] transition-colors inline-flex items-center gap-1.5"
             >
-              Listen to 32 Lessons &rarr;
-            </Link>
-            <Link 
-              href="/library/kitab-at-tawheed"
-              className="px-4 py-2 bg-white border border-[#E0D8CE] text-[#2D3436] rounded text-sm font-semibold hover:border-[#1B5E20] transition-colors"
-            >
-              Download PDF &rarr;
-            </Link>
+              <span>Listen in Mobile App &rarr;</span>
+            </a>
           </div>
         </div>
       )}

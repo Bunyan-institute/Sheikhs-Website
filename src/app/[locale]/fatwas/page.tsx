@@ -3,10 +3,11 @@ import { Link } from "@/i18n/navigation";
 import { getFatwas } from "@/lib/api/fatwas";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
+import { ArrowRight, HelpCircle, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Fatwas & Rulings | Sheikh Ferej",
-  description: "Scholarly fatwas, Islamic rulings, and answers to inquiries.",
+  title: "Fatwas & Legal Rulings | Sheikh Ferej",
+  description: "Scholarly fatwas, Islamic jurisprudence, and answers to inquiries by Sheikh Muhammed Ferej Megeno.",
 };
 
 export default async function FatwasPage({ 
@@ -25,79 +26,102 @@ export default async function FatwasPage({
   const fatwas = fatwasRes?.data || [];
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-16">
-      <header className="mb-12 border-b border-[#E0D8CE] pb-10 text-center">
-        <h1 className="font-heading text-4xl font-bold text-[#2D3436] mb-4">Fatwas & Rulings</h1>
-        <p className="text-lg text-[#636E72] max-w-2xl mx-auto">
-          Formal scholarly answers and rulings provided by the Sheikh on various contemporary and classical issues.
-        </p>
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
+      {/* Classical Scholarly Header */}
+      <header className="mb-10 pb-6 border-b border-[#E6E0D8]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
+                الفتاوى والمسائل الفقهية المعاصرة
+              </span>
+              <span className="text-[#B8860B]">۞</span>
+              <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
+                Authentic Fatawa &amp; Jurisprudence
+              </span>
+            </div>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
+              Fatwas &amp; Sharia Rulings
+            </h1>
+          </div>
+          <p className="text-sm text-[#555E61] max-w-xl font-body">
+            Formal jurisprudential rulings and answers on contemporary Sharia, Islamic finance, ethics, and ritual obligations.
+          </p>
+        </div>
       </header>
 
       <section className="mb-16">
         {fatwas.length > 0 ? (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {fatwas.map((fatwa) => (
               <Link key={fatwa.id} href={`/fatwas/${fatwa.slug}`} className="block group">
-                <div className="border border-[#E0D8CE] bg-white rounded-[4px] p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
-                  <div className="absolute start-0 top-0 bottom-0 w-1 bg-[#B8860B] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  
-                  <div className="flex flex-wrap items-center gap-3 mb-4 text-xs font-medium">
+                <div className="border border-[#E6E0D8] bg-white rounded-[4px] p-5 sm:p-6 hover:border-[#1A4D2E] transition-colors relative overflow-hidden">
+                  <div className="flex flex-wrap items-center gap-2.5 mb-3 text-xs">
                     {fatwa.categories?.[0] && (
-                      <span className="text-[#1B5E20] uppercase tracking-wide">
+                      <span className="text-[#1A4D2E] font-bold uppercase tracking-wider text-[11px] bg-[#FAF8F5] border border-[#E6E0D8] px-2.5 py-0.5 rounded-[2px]">
                         {fatwa.categories[0]}
                       </span>
                     )}
-                    <span className="text-[#E0D8CE]">&bull;</span>
-                    <span className="text-[#636E72]">
+                    <span className="text-[#7A8285]">
                       {formatDate(fatwa.published_at, locale)}
+                    </span>
+                    <span className="text-[#1A4D2E] font-semibold ms-auto flex items-center gap-1 text-[11px]">
+                      <CheckCircle className="w-3.5 h-3.5" /> Verified Ruling
                     </span>
                   </div>
                   
-                  <h3 className="font-heading text-xl md:text-2xl font-bold text-[#2D3436] mb-3 group-hover:text-[#1B5E20] transition-colors break-words">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-[#2D3436] mb-3 group-hover:text-[#1A4D2E] transition-colors break-words">
                     {fatwa.title}
                   </h3>
                   
                   {fatwa.question && (
-                    <div className="bg-[#FAF8F5] border border-[#E0D8CE] rounded-[4px] p-4 mb-4">
-                      <p className="text-[#2D3436] font-medium text-sm line-clamp-2 break-words">
-                        <span className="text-[#636E72] font-bold me-2">Q:</span>
+                    <div className="bg-[#FAF8F5] border border-[#E6E0D8] rounded-[3px] p-3.5 mb-3">
+                      <p className="text-[#2D3436] text-xs sm:text-sm line-clamp-2 break-words leading-relaxed">
+                        <span className="text-[#8C6D23] font-bold me-2">Inquiry:</span>
                         {fatwa.question}
                       </p>
                     </div>
                   )}
                   
                   {fatwa.summary && (
-                    <p className="text-[#636E72] mb-4 line-clamp-2">
+                    <p className="text-[#555E61] text-xs sm:text-sm mb-4 line-clamp-2 leading-relaxed">
                       {fatwa.summary}
                     </p>
                   )}
                   
-                  <div className="text-[#1B5E20] font-semibold text-sm flex items-center gap-2">
-                    <span>Read ruling</span>
-                    <span aria-hidden="true">&rarr;</span>
+                  <div className="text-[#8C6D23] font-semibold text-xs flex items-center gap-1.5 pt-2 border-t border-[#FAF8F5]">
+                    <span>Read Jurisprudential Ruling &amp; Evidences</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </Link>
             ))}
           </div>
         ) : (
-          <div className="py-20 text-center border border-[#E0D8CE] bg-white rounded-[4px]">
-            <p className="text-[#636E72] text-lg">No fatwas found matching your criteria.</p>
+          <div className="py-20 text-center border border-[#E6E0D8] bg-white rounded-[4px]">
+            <p className="text-[#555E61] text-sm">No fatwas recorded in this category.</p>
           </div>
         )}
       </section>
 
-      <section className="bg-[#FAF8F5] border border-[#E0D8CE] rounded-[4px] p-8 text-center max-w-3xl mx-auto">
-        <h2 className="font-heading text-2xl font-bold text-[#2D3436] mb-3">Have a question?</h2>
-        <p className="text-[#636E72] mb-6">
-          Submit an inquiry through Ask the Sheikh. All questions are treated with confidentiality.
+      {/* Direct Scholarly Inquiry Section */}
+      <section className="bg-white border border-[#E6E0D8] rounded-[4px] p-8 text-center max-w-3xl mx-auto space-y-4">
+        <HelpCircle className="w-10 h-10 text-[#1A4D2E] mx-auto" />
+        <h2 className="font-heading text-xl sm:text-2xl font-bold text-[#2D3436]">
+          Submit a Jurisprudential Question
+        </h2>
+        <p className="text-[#555E61] text-sm max-w-xl mx-auto leading-relaxed">
+          Questions regarding worship, transactions, Islamic inheritance, or modern banking can be directly submitted to Sheikh Muhammed Ferej Megeno.
         </p>
-        <Link 
-          href="/ask" 
-          className="inline-block bg-[#1B5E20] text-white px-6 py-3 rounded-[4px] font-medium hover:bg-[#2D3436] transition-colors"
-        >
-          Submit Inquiry
-        </Link>
+        <div className="pt-2">
+          <Link 
+            href="/ask" 
+            className="inline-flex items-center gap-2 bg-[#1A4D2E] text-white px-6 py-3 rounded-[4px] font-semibold text-xs sm:text-sm hover:bg-[#143d24]"
+          >
+            <span>Submit Inquiry to the Sheikh</span>
+            <ArrowRight className="w-4 h-4 text-[#B8860B]" />
+          </Link>
+        </div>
       </section>
     </div>
   );

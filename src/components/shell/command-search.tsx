@@ -19,7 +19,8 @@ const QUICK_LINKS: QuickLink[] = [
   { title: "Educational Journey & Timeline", href: "/journey", category: "Scholar", icon: GraduationCap },
   { title: "Academic Qualifications & Traditional Ijazat", href: "/qualifications", category: "Scholar", icon: Award },
   { title: "Lectures & Sermons Archive", href: "/lectures", category: "Knowledge", icon: Video },
-  { title: "Kitab At-Tawheed Series (32 Chapters)", href: "/series/kitab-at-tawheed", category: "Knowledge", icon: Layers },
+  { title: "Africa TV & YouTube Playlists", href: "/lectures", category: "Knowledge", icon: Video },
+  { title: "ሸይኽ ሙሃመድ ፈረጅ Official App (Google Play)", href: "https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej", category: "Resources", icon: Layers },
   { title: "Scholarly Articles & Hadith Studies", href: "/articles", category: "Knowledge", icon: FileText },
   { title: "Fatwas & Sharia Rulings", href: "/fatwas", category: "Knowledge", icon: CheckCircle },
   { title: "Structured Academic Courses", href: "/courses", category: "Knowledge", icon: Book },
@@ -64,33 +65,33 @@ export function CommandSearch() {
     <>
       <button 
         onClick={() => setOpen(true)}
-        className="flex items-center text-[#636E72] hover:text-[#2D3436] transition-colors px-3 py-1.5 rounded-md border border-[#E0D8CE] bg-white/60 text-sm shadow-xs"
+        className="flex items-center text-[#555E61] hover:text-[#2D3436] transition-colors px-3 py-1.5 rounded-[3px] border border-[#E6E0D8] bg-white text-sm"
         aria-label="Search content"
       >
-        <Search className="w-4 h-4 me-2 text-[#1B5E20]" />
-        <span className="hidden sm:inline-block me-4 font-body">Quick search...</span>
-        <kbd className="hidden sm:inline-block font-sans text-xs font-semibold px-1.5 py-0.5 bg-[#FAF8F5] border border-[#E0D8CE] rounded-sm text-[#636E72]">
+        <Search className="w-4 h-4 me-2 text-[#1A4D2E]" />
+        <span className="hidden sm:inline-block me-4 font-body text-xs">Search scholar library...</span>
+        <kbd className="hidden sm:inline-block font-sans text-[11px] font-semibold px-1.5 py-0.5 bg-[#FAF8F5] border border-[#E6E0D8] rounded-[2px] text-[#7A8285]">
           ⌘K
         </kbd>
       </button>
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-3 sm:px-4">
-          <div className="fixed inset-0 bg-[#2D3436]/50 backdrop-blur-xs" onClick={() => setOpen(false)} />
-          <div className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-[#E0D8CE] overflow-hidden">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-xs" onClick={() => setOpen(false)} />
+          <div className="relative w-full max-w-2xl bg-white rounded-[4px] shadow-2xl border border-[#E6E0D8] overflow-hidden">
             <Command className="w-full" label="Command Menu" shouldFilter={false}>
-              <div className="flex items-center border-b border-[#E0D8CE] px-3 sm:px-4 py-3 bg-[#FAF8F5]">
-                <Search className="w-5 h-5 text-[#1B5E20] shrink-0" />
+              <div className="flex items-center border-b border-[#E6E0D8] px-3 sm:px-4 py-3 bg-[#FAF8F5]">
+                <Search className="w-5 h-5 text-[#1A4D2E] shrink-0" />
                 <Command.Input 
                   value={query}
                   onValueChange={setQuery}
-                  placeholder="Search pages, lectures, kitabs, rulings..." 
-                  className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-sm sm:text-base px-3 font-body text-[#2D3436] placeholder-[#636E72]/60" 
+                  placeholder="Search treatises, lectures, kitabs, rulings..." 
+                  className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-sm sm:text-base px-3 font-body text-[#2D3436] placeholder-[#7A8285]" 
                   autoFocus
                 />
                 <button 
                   onClick={() => setOpen(false)} 
-                  className="text-[#636E72] hover:text-[#2D3436] p-1.5 rounded-md hover:bg-black/5 transition-colors"
+                  className="text-[#7A8285] hover:text-[#2D3436] p-1.5 rounded-[3px] hover:bg-black/5"
                   aria-label="Close"
                 >
                   <X className="w-5 h-5" />

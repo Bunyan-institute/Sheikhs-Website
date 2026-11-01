@@ -15,9 +15,9 @@ export function MediaCard({ item }: { item: MediaItem }) {
   const isFacebook = item.url?.includes("facebook.com");
 
   return (
-    <div className="group flex flex-col bg-white rounded-md border border-[#E0D8CE] overflow-hidden hover:border-[#1B5E20] hover:shadow-sm transition-all duration-200">
+    <div className="group flex flex-col bg-white rounded-[4px] border border-[#E6E0D8] overflow-hidden hover:border-[#1A4D2E] transition-colors">
       {/* Media Top Container */}
-      <div className="aspect-video bg-[#2D3436] relative flex items-center justify-center overflow-hidden">
+      <div className="aspect-video bg-[#FAF8F5] relative flex items-center justify-center overflow-hidden border-b border-[#E6E0D8]">
         {isYouTube ? (
           <iframe
             src={isYouTube}
@@ -30,31 +30,31 @@ export function MediaCard({ item }: { item: MediaItem }) {
           <img
             src={item.thumbnail_url}
             alt={item.title}
-            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+            className="w-full h-full object-cover"
           />
         ) : (
-          <div className="text-white/20">
-            {item.kind === "video" && <PlayCircle className="w-16 h-16" />}
-            {item.kind === "audio" && <Headphones className="w-16 h-16" />}
-            {item.kind === "image" && <ImageIcon className="w-16 h-16" />}
-            {item.kind === "document" && <FileText className="w-16 h-16" />}
+          <div className="text-[#1A4D2E]/30">
+            {item.kind === "video" && <PlayCircle className="w-12 h-12" />}
+            {item.kind === "audio" && <Headphones className="w-12 h-12" />}
+            {item.kind === "image" && <ImageIcon className="w-12 h-12" />}
+            {item.kind === "document" && <FileText className="w-12 h-12" />}
           </div>
         )}
 
         {/* Type Badge */}
         {!isYouTube && (
-          <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-sm text-xs font-semibold text-white flex items-center gap-1.5 uppercase tracking-wide">
+          <div className="absolute top-2.5 right-2.5 bg-[#FAF8F5]/90 border border-[#E6E0D8] px-2 py-0.5 rounded-[2px] text-[10px] font-bold text-[#1A4D2E] flex items-center gap-1 uppercase tracking-wider">
             {isTikTok ? (
-              <span className="text-[#00F2FE]">TikTok</span>
+              <span>TikTok</span>
             ) : isFacebook ? (
-              <span className="text-[#1877F2]">Facebook</span>
+              <span>Facebook</span>
             ) : (
               <>
-                {item.kind === "video" && <PlayCircle className="w-3.5 h-3.5 text-red-500" />}
-                {item.kind === "audio" && <Headphones className="w-3.5 h-3.5 text-emerald-400" />}
-                {item.kind === "image" && <ImageIcon className="w-3.5 h-3.5" />}
-                {item.kind === "document" && <FileText className="w-3.5 h-3.5" />}
-                <span>{item.kind === "image" ? "photo" : item.kind}</span>
+                {item.kind === "video" && <PlayCircle className="w-3 h-3 text-[#B8860B]" />}
+                {item.kind === "audio" && <Headphones className="w-3 h-3 text-[#1A4D2E]" />}
+                {item.kind === "image" && <ImageIcon className="w-3 h-3 text-[#8C6D23]" />}
+                {item.kind === "document" && <FileText className="w-3 h-3 text-[#1A4D2E]" />}
+                <span>{item.kind === "image" ? "Photo" : item.kind}</span>
               </>
             )}
           </div>
@@ -62,62 +62,38 @@ export function MediaCard({ item }: { item: MediaItem }) {
       </div>
 
       {/* Media Details */}
-      <div className="p-5 flex flex-col flex-grow bg-[#FAF8F5]/30">
-        <h3 className="font-heading font-bold text-lg text-[#2D3436] mb-2 line-clamp-2 group-hover:text-[#1B5E20] transition-colors">
+      <div className="p-4 flex flex-col flex-grow">
+        <h3 className="font-heading font-bold text-sm sm:text-base text-[#2D3436] mb-1.5 line-clamp-2 group-hover:text-[#1A4D2E] transition-colors break-words">
           {item.title}
         </h3>
-        <p className="text-sm text-[#636E72] line-clamp-2 mb-4 font-body">
+        <p className="text-xs text-[#555E61] line-clamp-2 mb-3 font-body leading-relaxed">
           {item.description || "Scholarly resource from the official archive of Sheikh Muhammed Ferej."}
         </p>
 
-        <div className="mt-auto pt-4 border-t border-[#E0D8CE] flex items-center justify-between">
+        <div className="mt-auto pt-3 border-t border-[#FAF8F5] flex items-center justify-between text-xs">
           {item.url ? (
             <a
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-sm font-bold transition-colors uppercase tracking-wider inline-flex items-center gap-1.5 ${
-                isTikTok
-                  ? "text-black hover:text-[#1B5E20]"
-                  : isFacebook
-                  ? "text-[#1877F2] hover:text-[#1260c7]"
-                  : "text-[#1B5E20] hover:text-[#B8860B]"
-              }`}
+              className="text-xs font-semibold text-[#8C6D23] hover:text-[#1A4D2E] inline-flex items-center gap-1.5"
             >
               {item.kind === "document" ? (
                 <>
-                  <Download className="w-4 h-4" /> Download PDF
+                  <Download className="w-3.5 h-3.5 text-[#1A4D2E]" /> Download PDF
                 </>
               ) : item.kind === "audio" ? (
                 <>
-                  <Headphones className="w-4 h-4" /> Listen Audio
-                </>
-              ) : isTikTok ? (
-                <>
-                  <PlayCircle className="w-4 h-4" /> Watch on TikTok
-                </>
-              ) : isFacebook ? (
-                <>
-                  <PlayCircle className="w-4 h-4" /> Watch on Facebook
-                </>
-              ) : isYouTube ? (
-                <>
-                  <ExternalLink className="w-4 h-4" /> Watch on YouTube
+                  <Headphones className="w-3.5 h-3.5 text-[#1A4D2E]" /> Listen Lesson
                 </>
               ) : (
                 <>
-                  <ExternalLink className="w-4 h-4" /> View Full Resolution
+                  <ExternalLink className="w-3.5 h-3.5 text-[#8C6D23]" /> View Archive
                 </>
               )}
             </a>
           ) : (
-            <span className="text-xs text-[#636E72] uppercase tracking-wider">Archived</span>
-          )}
-
-          {isYouTube && (
-            <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded font-semibold">
-              HD Video
-            </span>
+            <span className="text-[11px] text-[#7A8285]">Archived Document</span>
           )}
         </div>
       </div>

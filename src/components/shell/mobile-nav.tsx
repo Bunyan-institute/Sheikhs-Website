@@ -93,13 +93,13 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
         tabIndex={-1}
         className="relative ms-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-[#FAF8F5] pb-6 shadow-xl outline-none transition-transform"
       >
-        <div className="flex items-center justify-between px-4 py-5 border-b border-[#E0D8CE]">
+        <div className="flex items-center justify-between px-4 py-5 border-b border-[#E6E0D8]">
           <span className="font-heading text-lg font-bold text-[#2D3436] truncate px-2">
             {profile.name}
           </span>
           <button
             type="button"
-            className="rounded-md p-2 text-[#636E72] hover:text-[#2D3436] transition-colors"
+            className="rounded-[3px] p-2 text-[#7A8285] hover:text-[#2D3436]"
             onClick={onClose}
           >
             <span className="sr-only">Close menu</span>
@@ -115,16 +115,16 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
                 return (
                   <div key={item.key} className="flex flex-col">
                     {isGroup ? (
-                      <span className="font-heading text-xs font-bold uppercase tracking-wider text-[#1B5E20] px-2 pt-2 pb-1">
+                      <span className="font-heading text-xs font-bold uppercase tracking-wider text-[#1A4D2E] px-2 pt-2 pb-1">
                         {t(item.labelKey as any)}
                       </span>
                     ) : (
                       <Link
                         href={item.href}
                         onClick={onClose}
-                        className={`font-body text-base font-medium px-2 py-1.5 rounded hover:bg-black/5 ${
+                        className={`font-body text-base font-medium px-2 py-1.5 rounded-[3px] hover:bg-black/5 ${
                           pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
-                            ? 'text-[#1B5E20] font-semibold bg-emerald-50/50' 
+                            ? 'text-[#1A4D2E] font-bold bg-[#1A4D2E]/10 border-s-2 border-[#1A4D2E]' 
                             : 'text-[#2D3436]'
                         }`}
                       >
@@ -132,7 +132,7 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
                       </Link>
                     )}
                     {item.children && item.children.length > 0 && (
-                      <div className="flex flex-col ps-3 mt-1 space-y-1 border-s-2 border-[#E0D8CE] ms-2">
+                      <div className="flex flex-col ps-3 mt-1 space-y-1 border-s-2 border-[#E6E0D8] ms-2">
                         {item.children.map((child) => {
                           const isChildActive = pathname === child.href;
                           return (
@@ -140,8 +140,8 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
                               key={child.key}
                               href={child.href}
                               onClick={onClose}
-                              className={`font-body text-sm py-1.5 px-2 rounded hover:bg-black/5 transition-colors ${
-                                isChildActive ? 'text-[#1B5E20] font-semibold bg-emerald-50' : 'text-[#636E72]'
+                              className={`font-body text-sm py-1.5 px-2 rounded-[3px] hover:bg-black/5 ${
+                                isChildActive ? 'text-[#1A4D2E] font-bold bg-[#1A4D2E]/10' : 'text-[#555E61]'
                               }`}
                             >
                               {t(child.labelKey as any)}
@@ -157,7 +157,7 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
           </nav>
         </div>
 
-        <div className="mt-auto px-6 py-6 border-t border-[#E0D8CE]">
+        <div className="mt-auto px-6 py-6 border-t border-[#E6E0D8]">
           <LocaleSwitcher />
         </div>
       </div>

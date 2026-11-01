@@ -1,7 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getProfile } from '@/lib/api/profile';
 import { Link } from '@/i18n/navigation';
-import { MapPin, Globe, MessageSquare } from 'lucide-react';
+import { MapPin, MessageSquare, ArrowRight, Building, Mail } from 'lucide-react';
 
 export default async function ContactPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
@@ -12,73 +12,96 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
     : [];
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 md:py-16 lg:py-24">
-      <header className="mb-16 text-center">
-        <h1 className="text-4xl md:text-5xl font-heading text-[#2D3436] font-bold tracking-tight mb-4">
-          Contact & Connect
-        </h1>
-        <p className="text-lg md:text-xl text-[#636E72] max-w-2xl mx-auto font-body">
-          Reach out for inquiries, media requests, or spiritual guidance.
-        </p>
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
+      {/* Classical Scholarly Header */}
+      <header className="mb-10 pb-6 border-b border-[#E6E0D8]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
+                التواصل مع المكتب العلمي والأمانة
+              </span>
+              <span className="text-[#B8860B]">۞</span>
+              <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
+                Secretariat &amp; Institutional Office
+              </span>
+            </div>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
+              Contact &amp; Inquiries
+            </h1>
+          </div>
+          <p className="text-sm text-[#555E61] max-w-xl font-body">
+            Direct channels for religious questions, academic conferences, Sharia banking advisory, and institutional partnerships.
+          </p>
+        </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
-        <div className="bg-[#FAF8F5] border border-[#E0D8CE] p-5 sm:p-8 rounded-lg">
-          <h2 className="text-2xl font-heading font-bold text-[#2D3436] mb-6">Direct Channels</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="bg-white border border-[#E6E0D8] p-6 sm:p-8 rounded-[4px] space-y-6">
+          <h2 className="font-heading text-xl font-bold text-[#2D3436] pb-3 border-b border-[#E6E0D8]">
+            Scholarly Office Channels
+          </h2>
           
           <div className="space-y-6">
-             <div className="flex items-start">
-               <div className="w-10 h-10 rounded-full bg-white border border-[#E0D8CE] flex items-center justify-center shrink-0 me-4 shadow-sm">
-                  <MapPin className="w-5 h-5 text-[#1B5E20]" />
+             <div className="flex items-start gap-4">
+               <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-[#1A4D2E]" />
                </div>
                <div>
-                  <h3 className="font-bold text-[#2D3436] text-sm uppercase tracking-wider mb-1">Office Location</h3>
-                  <p className="text-[#636E72] font-medium">{profile?.location || "Addis Ababa, Ethiopia"}</p>
-                  <p className="text-sm text-[#636E72]/70 mt-1">Official scholarly office and primary teaching institute.</p>
+                  <h3 className="font-heading font-bold text-sm text-[#2D3436] mb-1">Office Location</h3>
+                  <p className="text-xs text-[#555E61] font-medium">{profile?.location || "Addis Ababa, Ethiopia"}</p>
+                  <p className="text-xs text-[#7A8285] mt-1">Al-Fajr Islamic Foundation headquarters &amp; traditional teaching circle.</p>
                </div>
              </div>
              
-             <div className="flex items-start">
-               <div className="w-10 h-10 rounded-full bg-white border border-[#E0D8CE] flex items-center justify-center shrink-0 me-4 shadow-sm">
-                  <MessageSquare className="w-5 h-5 text-[#1B5E20]" />
+             <div className="flex items-start gap-4">
+               <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+                  <Building className="w-5 h-5 text-[#8C6D23]" />
                </div>
                <div>
-                  <h3 className="font-bold text-[#2D3436] text-sm uppercase tracking-wider mb-1">Ask the Sheikh</h3>
-                  <p className="text-[#636E72] font-medium mb-2">For religious questions and fatwas.</p>
-                  <Link href="/ask" className="inline-block text-sm font-bold bg-[#1B5E20] text-white px-4 py-2 rounded hover:bg-[#1B5E20]/90 transition-colors">
-                    Submit a Question
+                  <h3 className="font-heading font-bold text-sm text-[#2D3436] mb-1">Sharia Advisory Desk</h3>
+                  <p className="text-xs text-[#555E61] font-medium">Wegagen Bank — Amanah Window Sharia Board</p>
+                  <p className="text-xs text-[#7A8285] mt-1">AAOIFI standards governance and ethical banking audit inquiries.</p>
+               </div>
+             </div>
+
+             <div className="flex items-start gap-4">
+               <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+                  <MessageSquare className="w-5 h-5 text-[#1A4D2E]" />
+               </div>
+               <div>
+                  <h3 className="font-heading font-bold text-sm text-[#2D3436] mb-1">Ask the Sheikh</h3>
+                  <p className="text-xs text-[#555E61] font-medium mb-2">For personal religious inquiries, fatwa questions, and spiritual advice.</p>
+                  <Link href="/ask" className="inline-flex items-center gap-1.5 text-xs font-semibold bg-[#1A4D2E] text-white px-3.5 py-1.5 rounded-[3px] hover:bg-[#143d24]">
+                    <span>Submit Inquiry</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#B8860B]" />
                   </Link>
                </div>
              </div>
           </div>
         </div>
 
-        <div>
-          <h2 className="text-2xl font-heading font-bold text-[#2D3436] mb-6">Official Social Media</h2>
-          <p className="text-[#636E72] font-body mb-8">
-            Follow the Sheikh on official platforms for the latest lectures, announcements, and short reminders.
+        <div className="bg-white border border-[#E6E0D8] p-6 sm:p-8 rounded-[4px] space-y-6">
+          <h2 className="font-heading text-xl font-bold text-[#2D3436] pb-3 border-b border-[#E6E0D8]">
+            Official Broadcast &amp; Social Archives
+          </h2>
+          <p className="text-xs text-[#555E61] leading-relaxed">
+            Direct access to official channels broadcasting the Sheikh&apos;s lectures, short reminders, and weekly halaqat.
           </p>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
              {socialsList.map((social, idx: number) => (
                 <a 
                   key={idx} 
                   href={social.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center p-4 border border-[#E0D8CE] rounded hover:border-[#1B5E20] hover:bg-[#FAF8F5] transition-colors group"
+                  className="flex items-center p-3.5 border border-[#E6E0D8] rounded-[3px] hover:border-[#1A4D2E] bg-[#FAF8F5] transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-full bg-[#FAF8F5] border border-[#E0D8CE] flex items-center justify-center me-3 group-hover:bg-[#1B5E20] group-hover:text-white transition-colors">
-                    <Globe className="w-4 h-4" />
-                  </div>
-                  <span className="font-bold text-[#2D3436] capitalize">{social.platform}</span>
+                  <span className="font-heading font-bold text-xs text-[#2D3436] capitalize group-hover:text-[#1A4D2E]">{social.platform} Channel</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#8C6D23] ms-auto" />
                 </a>
              ))}
-             {!socialsList.length && (
-                <div className="col-span-2 p-6 border border-[#E0D8CE] border-dashed rounded text-center text-[#636E72]">
-                   Verified social channels will be updated soon.
-                </div>
-             )}
           </div>
         </div>
       </div>

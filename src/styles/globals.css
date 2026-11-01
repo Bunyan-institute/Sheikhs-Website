@@ -2,24 +2,24 @@
 
 @theme {
   --color-surface: #FAF8F5;
-  --color-surface-2: #F5F0EB;
-  --color-surface-3: #EDE6DD;
+  --color-surface-2: #F4EFEA;
+  --color-surface-3: #EAE3D9;
   --color-surface-card: #FFFFFF;
 
-  --color-text: #2D3436;
-  --color-text-secondary: #636E72;
-  --color-text-tertiary: #9DA3A7;
+  --color-text: #1C1917;
+  --color-text-secondary: #57534E;
+  --color-text-tertiary: #A8A29E;
   --color-text-inverse: #FFFFFF;
 
-  --color-accent: #1B5E20;
-  --color-accent-hover: #2E7D32;
-  --color-accent-muted: #E8F5E9;
+  --color-accent: #1A4D2E;
+  --color-accent-hover: #133A22;
+  --color-accent-muted: #EBF2ED;
 
   --color-brass: #B8860B;
-  --color-brass-muted: #FFF8E1;
+  --color-brass-muted: #FBF6EB;
 
-  --color-border: #E0D8CE;
-  --color-border-light: #EDE6DD;
+  --color-border: #E6E0D8;
+  --color-border-light: #F0ECE4;
 
   --font-heading: "Manrope", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -30,7 +30,7 @@
 
 /* Base styles */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto !important;
   overflow-x: clip;
   max-width: 100%;
 }
@@ -63,16 +63,13 @@ body {
   outline-offset: 2px;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* ZERO ANIMATION POLICY for serious, dignified scholarly aesthetic */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transform: none !important;
+  transition-duration: 0.1s !important;
 }
 
 /* Scrollbar styling */
@@ -86,7 +83,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-border);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 /* Typography utilities */
@@ -108,7 +105,14 @@ body {
   margin-bottom: 1.5em;
 }
 
-/* Scholarly card & Islamic motif accents */
+/* Classical Islamic Double Border Frame */
+.islamic-frame {
+  position: relative;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 0 3px #FAF8F5, 0 0 0 4px var(--color-border-light);
+}
+
+/* Classical Top Accent Rule */
 .islamic-border-accent {
   position: relative;
 }
@@ -120,6 +124,5 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #1B5E20, #B8860B, transparent);
+  background: linear-gradient(90deg, transparent, #1A4D2E, #B8860B, transparent);
 }
-

@@ -1,62 +1,76 @@
 import { setRequestLocale } from "next-intl/server";
 import { qualifications } from "@/data/qualifications";
+import { Award, GraduationCap, ShieldCheck, CheckCircle } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return {
-    title: "Qualifications & Ijazat",
-    description: "Academic degrees and traditional Islamic authorizations.",
+    title: "Qualifications & Ijazat | Sheikh Muhammed Ferej",
+    description: "Academic degrees, traditional Islamic authorizations, and AAOIFI auditor certification.",
   };
 }
 
 const typeConfig: Record<string, { label: string, color: string }> = {
-  ijazah: { label: "Ijazah", color: "bg-[#1B5E20]/10 text-[#1B5E20] border-[#1B5E20]/20" },
-  academic: { label: "Academic Degree", color: "bg-[#B8860B]/10 text-[#B8860B] border-[#B8860B]/20" },
-  certificate: { label: "Certificate", color: "bg-[#2D3436]/10 text-[#2D3436] border-[#2D3436]/20" },
-  other: { label: "Other", color: "bg-gray-100 text-gray-700 border-gray-200" }
+  ijazah: { label: "Traditional Ijazah", color: "bg-[#FAF8F5] text-[#1A4D2E] border-[#1A4D2E]/30" },
+  academic: { label: "University Degree", color: "bg-[#FAF8F5] text-[#8C6D23] border-[#B8860B]/40" },
+  certificate: { label: "Certified Qualification", color: "bg-[#FAF8F5] text-[#2D3436] border-[#E6E0D8]" },
+  other: { label: "Accreditation", color: "bg-[#FAF8F5] text-[#555E61] border-[#E6E0D8]" }
 };
 
 export default async function QualificationsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Grouping the qualifications could be done here if needed
-  // For now, rendering in a clean grid as requested
-
   return (
-    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-16 md:py-24">
-      <div className="mb-12 space-y-4">
-        <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#2D3436]">Qualifications & Ijazat</h1>
-        <p className="text-lg text-[#636E72] max-w-3xl">
-          Academic achievements and traditional authorizations granted by esteemed institutions and scholars.
-        </p>
-      </div>
+    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
+      {/* Classical Scholarly Header */}
+      <header className="mb-10 pb-6 border-b border-[#E6E0D8]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
+                الإجازات العلمية والشهادات الأكاديمية
+              </span>
+              <span className="text-[#B8860B]">۞</span>
+              <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
+                Sanad &amp; Accreditations
+              </span>
+            </div>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D3436]">
+              Qualifications &amp; Ijazat
+            </h1>
+          </div>
+          <p className="text-sm text-[#555E61] max-w-xl font-body">
+            Official academic degrees and traditional authorizations (Ijazat) granted with continuous chains of transmission (Sanad).
+          </p>
+        </div>
+      </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {qualifications.map((qual) => {
           const config = typeConfig[qual.type] || typeConfig.other;
 
           return (
-            <div key={qual.id} className="bg-white border border-[#E0D8CE] rounded-[4px] p-5 sm:p-6 hover:shadow-sm transition-shadow">
-              <div className="flex justify-between items-start mb-4">
-                <span className={`px-2.5 py-1 text-xs font-medium rounded-full border ${config.color}`}>
+            <div key={qual.id} className="bg-white border border-[#E6E0D8] rounded-[4px] p-5 sm:p-6 hover:border-[#1A4D2E] transition-colors">
+              <div className="flex justify-between items-start mb-3">
+                <span className={`px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-[2px] border ${config.color}`}>
                   {config.label}
                 </span>
-                <span className="text-[#636E72] text-sm font-medium bg-[#FAF8F5] px-2 py-1 rounded border border-[#E0D8CE]">
+                <span className="text-[#7A8285] text-xs font-semibold bg-[#FAF8F5] px-2 py-0.5 rounded-[2px] border border-[#E6E0D8]">
                   {qual.year}
                 </span>
               </div>
               
-              <h3 className="font-heading text-lg sm:text-xl font-semibold text-[#2D3436] mb-2 break-words">
+              <h3 className="font-heading text-base sm:text-lg font-bold text-[#2D3436] mb-1.5 break-words">
                 {qual.title}
               </h3>
               
-              <p className="text-[#B8860B] font-medium text-sm mb-4 pb-4 border-b border-[#E0D8CE] break-words">
+              <p className="text-[#8C6D23] font-semibold text-xs mb-3 pb-3 border-b border-[#FAF8F5] break-words">
                 {qual.issuer}
               </p>
               
-              <p className="text-[#636E72] leading-relaxed text-sm sm:text-base break-words">
+              <p className="text-[#555E61] leading-relaxed text-xs sm:text-sm break-words">
                 {qual.description}
               </p>
             </div>
