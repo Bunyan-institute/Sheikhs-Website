@@ -10,6 +10,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@libsql/client": "^0.18.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.1.0",
     "lucide-react": "^1.27.0",
