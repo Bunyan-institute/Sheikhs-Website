@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   HelpCircle,
   Clock,
@@ -25,6 +26,10 @@ import {
 import type { InquiryRecord } from "@/lib/db/types";
 
 export function InquiriesClient({ initialInquiries }: { initialInquiries: InquiryRecord[] }) {
+  const t = useTranslations("admin.inquiries");
+  const tCommon = useTranslations("admin.common");
+  const tFatwas = useTranslations("admin.fatwas");
+
   const [inquiries, setInquiries] = useState<InquiryRecord[]>(initialInquiries);
   const [statusFilter, setStatusFilter] = useState<"all" | "pending" | "answered" | "archived">("pending");
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,21 +66,21 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
         setInquiries((prev) =>
           prev.map((i) => (i.id === id ? { ...i, status: newStatus } : i))
         );
-        setFeedback(`Inquiry marked as ${newStatus}.`);
+        setFeedback(tCommon("success"));
       }
     } catch (err: any) {
-      alert("Error: " + err.message);
+      alert(tCommon("error") + ": " + err.message);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this community inquiry?")) return;
+    if (!confirm(tCommon("deleteConfirm"))) return;
     try {
       await deleteInquiryAction(id);
       setInquiries((prev) => prev.filter((i) => i.id !== id));
-      setFeedback("Inquiry deleted.");
+      setFeedback(tCommon("success"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      alert(tCommon("error") + ": " + err.message);
     }
   };
 
@@ -125,10 +130,10 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
           )
         );
         setIsConvertModalOpen(false);
-        setFeedback(`Successfully created public Fatwa: "${res.fatwa.title}"`);
+        setFeedback(`${tCommon("success")}: "${res.fatwa.title}"`);
       }
     } catch (err: any) {
-      alert("Error converting to fatwa: " + err.message);
+      alert(tCommon("error") + ": " + err.message);
     } finally {
       setIsConverting(false);
     }
@@ -144,10 +149,10 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Community Inquiries & Questions ({inquiries.length})
+            {t("heading")} ({inquiries.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Public queries submitted by students and seekers from the /ask page. Review, respond, and publish scholarly fatwas.
+            {t("subheading")}
           </p>
         </div>
 
@@ -156,7 +161,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
           target="_blank"
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[4px] border border-[#E0D8CE] bg-white text-[#2D3436] hover:border-[#1B5E20] text-xs font-semibold transition-colors self-start sm:self-auto"
         >
-          <span>View Public Ask Page</span>
+          <span>{tCommon("viewLiveSite")} (/ask)</span>
           <ExternalLink className="w-3.5 h-3.5 text-[#1B5E20]" />
         </Link>
       </div>
@@ -178,10 +183,10 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
         <div className="flex flex-wrap items-center gap-1.5">
           {(
             [
-              { id: "pending", label: "Pending", count: pendingCount, color: "text-amber-700 bg-amber-50" },
-              { id: "answered", label: "Answered", count: answeredCount, color: "text-emerald-700 bg-emerald-50" },
-              { id: "archived", label: "Archived", count: archivedCount, color: "text-zinc-600 bg-zinc-50" },
-              { id: "all", label: "All Questions", count: inquiries.length, color: "text-[#2D3436] bg-transparent" },
+              { id: "pending", label: t("statusPending"), count: pendingCount },
+              { id: "answered", label: t("statusReplied"), count: answeredCount },
+              { id: "archived", label: t("statusArchived"), count: archivedCount },
+              { id: "all", label: tCommon("all"), count: inquiries.length },
             ] as const
           ).map((tab) => (
             <button
@@ -200,7 +205,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
 
         <input
           type="text"
-          placeholder="Search question text, sender name, email..."
+          placeholder={t("searchPlaceholder")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="text-xs px-3 py-1.5 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20] md:w-72"
@@ -229,7 +234,11 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                           : "bg-zinc-100 text-zinc-700"
                       }`}
                     >
-                      {inq.status}
+                      {inq.status === "pending"
+                        ? t("statusPending")
+                        : inq.status === "answered"
+                        ? t("statusReplied")
+                        : t("statusArchived")}
                     </span>
 
                     <span className="text-[11px] font-mono text-[#636E72]">
@@ -248,7 +257,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                     </span>
 
                     <span className="text-[10px] uppercase font-bold text-[#1B5E20] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                      Locale: {inq.locale}
+                      {inq.locale}
                     </span>
                   </div>
 
@@ -265,9 +274,9 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                       <User className="w-3.5 h-3.5 text-[#C5A059]" />
                       <span>
                         {inq.is_anonymous ? (
-                          <span className="italic text-zinc-500">Anonymous Seeker</span>
+                          <span className="italic text-zinc-500">{t("colName")}</span>
                         ) : (
-                          <span className="font-semibold text-[#2D3436]">{inq.name || "Anonymous"}</span>
+                          <span className="font-semibold text-[#2D3436]">{inq.name || t("colName")}</span>
                         )}
                       </span>
                     </div>
@@ -298,10 +307,10 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                   <button
                     onClick={() => openConvertModal(inq)}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-semibold transition-colors cursor-pointer w-full md:w-auto justify-center"
-                    title="Publish as public Fatwa"
+                    title={tFatwas("modalTitleNew")}
                   >
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Convert to Fatwa</span>
+                    <span>{tFatwas("newFatwa")}</span>
                   </button>
 
                   <div className="flex items-center gap-1">
@@ -309,7 +318,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                       <button
                         onClick={() => handleStatusChange(inq.id, "answered")}
                         className="p-1.5 text-[#636E72] hover:text-emerald-700 hover:bg-emerald-50 rounded transition-colors"
-                        title="Mark as Answered"
+                        title={t("statusReplied")}
                       >
                         <CheckCircle className="w-4 h-4" />
                       </button>
@@ -319,7 +328,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                       <button
                         onClick={() => handleStatusChange(inq.id, "pending")}
                         className="p-1.5 text-[#636E72] hover:text-amber-700 hover:bg-amber-50 rounded transition-colors"
-                        title="Mark as Pending"
+                        title={t("statusPending")}
                       >
                         <RefreshCw className="w-4 h-4" />
                       </button>
@@ -329,7 +338,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                       <button
                         onClick={() => handleStatusChange(inq.id, "archived")}
                         className="p-1.5 text-[#636E72] hover:text-zinc-700 hover:bg-zinc-100 rounded transition-colors"
-                        title="Archive Inquiry"
+                        title={t("statusArchived")}
                       >
                         <Archive className="w-4 h-4" />
                       </button>
@@ -338,7 +347,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                     <button
                       onClick={() => handleDelete(inq.id)}
                       className="p-1.5 text-[#636E72] hover:text-red-600 hover:bg-red-50 rounded transition-colors"
-                      title="Delete Inquiry"
+                      title={tCommon("delete")}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -351,7 +360,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
 
         {filteredInquiries.length === 0 && (
           <div className="py-12 text-center text-[#636E72] bg-white border border-[#E0D8CE] rounded-lg">
-            No inquiries found matching this filter.
+            {tCommon("noRecordsFound")}
           </div>
         )}
       </div>
@@ -363,10 +372,10 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
             <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-3">
               <div>
                 <h2 className="font-heading font-bold text-lg text-[#2D3436]">
-                  Convert Inquiry to Public Fatwa
+                  {tFatwas("modalTitleNew")}
                 </h2>
                 <p className="text-xs text-[#636E72]">
-                  This will publish an authoritative Islamic ruling accessible to all Muslims worldwide on the portal.
+                  {tFatwas("subheading")}
                 </p>
               </div>
               <button
@@ -380,7 +389,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
             <form onSubmit={handleConvertSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Fatwa Title / Question Summary *
+                  {tFatwas("fieldTitle")} *
                 </label>
                 <input
                   type="text"
@@ -394,7 +403,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    URL Slug *
+                    {tFatwas("fieldSlug")} *
                   </label>
                   <input
                     type="text"
@@ -406,7 +415,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Jurisprudence Category
+                    {tFatwas("colCategory")}
                   </label>
                   <select
                     value={fatwaCategory}
@@ -424,7 +433,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Sheikh&apos;s Authoritative Ruling & Answer *
+                  {tFatwas("fieldAnswer")} *
                 </label>
                 <textarea
                   rows={8}
@@ -441,7 +450,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                   onClick={() => setIsConvertModalOpen(false)}
                   className="px-4 py-2 text-xs font-medium text-[#636E72] hover:bg-[#F5F1EB] rounded transition-colors"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
@@ -449,7 +458,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
                   className="inline-flex items-center gap-2 px-5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs transition-colors cursor-pointer disabled:opacity-60"
                 >
                   {isConverting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>Publish Fatwa</span>
+                  <span>{tFatwas("saveFatwa")}</span>
                 </button>
               </div>
             </form>

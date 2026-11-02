@@ -16,10 +16,14 @@ import {
   Loader2,
   CheckCircle,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { saveMediaAction, deleteMediaAction } from "../actions";
 import type { MediaRef } from "@/lib/api/types";
 
 export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
+  const t = useTranslations("admin.media");
+  const tCommon = useTranslations("admin.common");
+
   const [mediaList, setMediaList] = useState<MediaRef[]>(initialMedia);
   const [activeFilter, setActiveFilter] = useState<"all" | "image" | "audio" | "video" | "document">("all");
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -66,7 +70,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
 
       setMediaList((prev) => [res.media, ...prev.filter((m) => m.id !== res.media.id)]);
       setIsModalOpen(false);
-      setFeedback("Media asset registered successfully!");
+      setFeedback(tCommon("successSave"));
     } catch (err: any) {
       alert("Error: " + err.message);
     } finally {
@@ -75,11 +79,11 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to remove this media reference?")) return;
+    if (!confirm(tCommon("confirmDelete"))) return;
     try {
       await deleteMediaAction(id);
       setMediaList((prev) => prev.filter((m) => m.id !== id));
-      setFeedback("Media item removed.");
+      setFeedback(tCommon("successDelete"));
     } catch (err: any) {
       alert("Error: " + err.message);
     }
@@ -91,10 +95,10 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Media Assets & Documents ({mediaList.length})
+            {t("heading")} ({mediaList.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage imagery, audio recitations, PDF treatises, and multimedia references across the portal.
+            {t("subheading")}
           </p>
         </div>
 
@@ -103,7 +107,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto cursor-pointer"
         >
           <Plus className="w-4 h-4" />
-          <span>Add Media Asset</span>
+          <span>{t("uploadMedia")}</span>
         </button>
       </div>
 
@@ -123,10 +127,10 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
       <div className="flex flex-wrap items-center gap-2 border-b border-[#E0D8CE] pb-3">
         {(
           [
-            { id: "all", label: "All Media", count: mediaList.length },
-            { id: "image", label: "Images", count: mediaList.filter((m) => m.kind === "image").length },
-            { id: "audio", label: "Audio", count: mediaList.filter((m) => m.kind === "audio").length },
-            { id: "video", label: "Videos", count: mediaList.filter((m) => m.kind === "video").length },
+            { id: "all", label: t("tabAll"), count: mediaList.length },
+            { id: "image", label: t("tabImages"), count: mediaList.filter((m) => m.kind === "image").length },
+            { id: "audio", label: t("tabAudios"), count: mediaList.filter((m) => m.kind === "audio").length },
+            { id: "video", label: t("tabVideos"), count: mediaList.filter((m) => m.kind === "video").length },
             { id: "document", label: "Documents", count: mediaList.filter((m) => m.kind === "document").length },
           ] as const
         ).map((tab) => (
@@ -211,14 +215,14 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-1 text-[#636E72] hover:text-[#1B5E20]"
-                    title="Open in new tab"
+                    title={tCommon("viewLive")}
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                   <button
                     onClick={() => handleDelete(item.id)}
                     className="p-1 text-[#636E72] hover:text-red-600"
-                    title="Delete item"
+                    title={tCommon("delete")}
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -230,17 +234,16 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
 
         {filteredItems.length === 0 && (
           <div className="col-span-full py-12 text-center text-[#636E72] bg-white border border-[#E0D8CE] rounded-lg">
-            No media assets found in this filter.
+            {tCommon("noRecords")}
           </div>
         )}
       </div>
 
-      {/* Add Media Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg max-w-lg w-full p-6 space-y-4 shadow-xl">
             <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-3">
-              <h2 className="font-heading font-bold text-lg text-[#2D3436]">Register Media Asset</h2>
+              <h2 className="font-heading font-bold text-lg text-[#2D3436]">{t("modalTitle")}</h2>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-[#636E72] hover:text-[#2D3436]"
@@ -252,7 +255,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
             <form onSubmit={handleSave} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Media Type *
+                  {t("fieldType")} *
                 </label>
                 <div className="grid grid-cols-4 gap-2">
                   {(["image", "audio", "video", "document"] as const).map((k) => (
@@ -274,7 +277,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  URL / Asset Path *
+                  {t("fieldUrl")} *
                 </label>
                 <input
                   type="text"
@@ -288,7 +291,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Asset Identifier (Optional)
+                  {t("fieldTitle")}
                 </label>
                 <input
                   type="text"
@@ -305,7 +308,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 text-xs font-medium text-[#636E72] hover:bg-[#F5F1EB] rounded transition-colors"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
@@ -313,7 +316,7 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
                   className="inline-flex items-center gap-2 px-5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs transition-colors cursor-pointer disabled:opacity-60"
                 >
                   {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>Save Media</span>
+                  <span>{t("saveMedia")}</span>
                 </button>
               </div>
             </form>

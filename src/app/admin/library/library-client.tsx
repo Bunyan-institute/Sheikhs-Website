@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Edit2, Trash2, ExternalLink, BookOpen, FileText, X, Loader2, CheckCircle, Download } from "lucide-react";
+import { Plus, Edit2, Trash2, ExternalLink, FileText, X, Loader2, CheckCircle, Download } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { saveBookAction, deleteBookAction } from "../actions";
 import type { PublicBook } from "@/lib/api/types";
 
 export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) {
+  const t = useTranslations("admin.library");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [books, setBooks] = useState<PublicBook[]>(initialBooks);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -99,7 +104,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
       }
 
       setIsModalOpen(false);
-      setFeedback("Kitab/Document saved successfully!");
+      setFeedback(tCommon("successSave"));
     } catch (err: any) {
       alert("Error: " + err.message);
     } finally {
@@ -108,11 +113,11 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
   };
 
   const handleDelete = async (id: string, bTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${bTitle}"?`)) return;
+    if (!confirm(`${tCommon("confirmDelete")} (${bTitle})`)) return;
     try {
       await deleteBookAction(id);
       setBooks((prev) => prev.filter((b) => b.id !== id));
-      setFeedback(`Kitab "${bTitle}" removed.`);
+      setFeedback(tCommon("successDelete"));
     } catch (err: any) {
       alert("Error: " + err.message);
     }
@@ -123,10 +128,10 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Public Library & Treatises ({books.length})
+            {t("heading")} ({books.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage classical Arabic kitabs, PDF syllabus documents, authorized translations, and CV treatises.
+            {t("subheading")}
           </p>
         </div>
 
@@ -135,7 +140,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
-          <span>Upload / Add Kitab</span>
+          <span>{t("newBook")}</span>
         </button>
       </div>
 
@@ -173,10 +178,10 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
                     </a>
                   )}
                   <Link
-                    href={`/library/${b.slug}`}
+                    href={`/${locale}/library/${b.slug}`}
                     target="_blank"
                     className="text-[#636E72] hover:text-[#1B5E20] p-1"
-                    title="View Public Page"
+                    title={tCommon("viewLive")}
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                   </Link>
@@ -195,19 +200,19 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
             </div>
 
             <div className="pt-4 border-t border-[#FAF8F5] flex items-center justify-between text-xs text-[#636E72]">
-              <span>{b.year || "Year —"}</span>
+              <span>{b.year || "—"}</span>
               <div className="space-x-2">
                 <button
                   onClick={() => openEditModal(b)}
                   className="px-3 py-1.5 rounded bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 font-semibold text-xs"
                 >
-                  Edit
+                  {tCommon("edit")}
                 </button>
                 <button
                   onClick={() => handleDelete(b.id, b.title)}
                   className="px-3 py-1.5 rounded bg-red-50 text-red-600 hover:bg-red-100 font-semibold text-xs"
                 >
-                  Delete
+                  {tCommon("delete")}
                 </button>
               </div>
             </div>
@@ -221,7 +226,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg z-10 border border-[#E0D8CE] overflow-hidden">
             <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5]">
               <h3 className="font-heading font-bold text-sm text-[#2D3436]">
-                {editingBook ? "Edit Treatise / Kitab" : "New Treatise / Kitab"}
+                {editingBook ? tCommon("edit") : t("newBook")}
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-[#636E72]">
                 <X className="w-4 h-4" />
@@ -230,7 +235,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
 
             <form onSubmit={handleSave} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Title *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldTitle")} *</label>
                 <input
                   type="text"
                   required
@@ -252,7 +257,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Type</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{tCommon("category")}</label>
                   <select
                     value={kind}
                     onChange={(e) => setKind(e.target.value as any)}
@@ -266,7 +271,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Summary / Excerpt</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{tCommon("title")}</label>
                 <textarea
                   rows={2}
                   value={summary}
@@ -277,7 +282,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Author</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldAuthor")}</label>
                   <input
                     type="text"
                     value={author}
@@ -298,7 +303,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">PDF File URL</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldPdfUrl")}</label>
                   <input
                     type="text"
                     value={fileUrl}
@@ -308,7 +313,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">External Link (optional)</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">External Link</label>
                   <input
                     type="url"
                     value={externalUrl}
@@ -319,31 +324,20 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
                 </div>
               </div>
 
-              <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Cover Image URL</label>
-                <input
-                  type="text"
-                  value={coverUrl}
-                  onChange={(e) => setCoverUrl(e.target.value)}
-                  placeholder="/images/photo_11_...jpg"
-                  className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-white focus:outline-none focus:border-[#1B5E20]"
-                />
-              </div>
-
               <div className="pt-4 border-t border-[#E0D8CE] flex justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-[#E0D8CE] rounded text-[#636E72]"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
                   className="px-6 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white rounded font-bold"
                 >
-                  {isSaving ? "Saving..." : "Save Kitab"}
+                  {isSaving ? tCommon("saving") : t("saveBook")}
                 </button>
               </div>
             </form>
