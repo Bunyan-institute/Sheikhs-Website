@@ -34,7 +34,7 @@ export default function LocaleSwitcher() {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#EDF2EE]/85 hover:text-[#E6D3A3] transition-colors border border-[#EDF2EE]/15 hover:border-[#BF9A45]/50 rounded-full px-2.5 py-1"
+        className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-[#EDF4F0]/85 hover:text-[#E6D3A3] transition-colors border border-[#EDF4F0]/20 hover:border-[#BF9A45]/50 rounded-full px-2.5 py-1 min-h-[32px]"
         aria-expanded={isOpen}
       >
         <Globe className="w-3.5 h-3.5 text-[#BF9A45]" />
@@ -42,15 +42,15 @@ export default function LocaleSwitcher() {
       </button>
 
       {isOpen && localeLabels && (
-        <div className="absolute end-0 mt-2 w-44 rounded-xl bg-[#0A2532] shadow-2xl border border-[#BF9A45]/30 py-1.5 z-50 text-xs sm:text-sm">
+        <div className="absolute end-0 mt-2 w-44 rounded-xl bg-[#072118] shadow-2xl border border-[#BF9A45]/30 py-1.5 z-50 text-xs sm:text-sm backdrop-blur-md">
           {Object.entries(localeLabels).map(([key, label]) => (
             <button
               key={key}
               onClick={() => handleLocaleChange(key)}
               className={`w-full text-start px-4 py-2 font-sans transition-colors ${
                 locale === key 
-                  ? 'text-[#E6D3A3] font-semibold bg-[#0F3446] border-s-2 border-[#BF9A45]' 
-                  : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3] hover:bg-[#0F3446]/60'
+                  ? 'text-[#E6D3A3] font-semibold bg-[#0D3E2F] border-s-2 border-[#BF9A45]' 
+                  : 'text-[#EDF4F0]/80 hover:text-[#E6D3A3] hover:bg-[#0D3E2F]/60'
               }`}
             >
               {label as string}

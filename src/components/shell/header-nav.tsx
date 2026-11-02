@@ -37,7 +37,7 @@ export default function HeaderNav({ items }: { items: NavItem[] }) {
             key={item.key}
             href={item.href}
             className={`font-sans text-sm font-medium transition-colors ${
-              isActive ? 'text-[#E6D3A3] font-semibold border-b-2 border-[#BF9A45] pb-0.5' : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3]'
+              isActive ? 'text-[#E6D3A3] font-semibold border-b-2 border-[#BF9A45] pb-0.5' : 'text-[#EDF4F0]/85 hover:text-[#E6D3A3]'
             }`}
           >
             {t(item.labelKey as any)}
@@ -72,7 +72,7 @@ function DropdownNavItem({ item, isActive, label, alignEnd }: { item: NavItem, i
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center font-sans text-sm font-medium transition-colors ${
-          isActive || isOpen ? 'text-[#E6D3A3] font-semibold' : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3]'
+          isActive || isOpen ? 'text-[#E6D3A3] font-semibold' : 'text-[#EDF4F0]/85 hover:text-[#E6D3A3]'
         }`}
         aria-expanded={isOpen}
       >
@@ -81,7 +81,7 @@ function DropdownNavItem({ item, isActive, label, alignEnd }: { item: NavItem, i
       </button>
 
       {isOpen && (
-        <div className={`absolute top-full ${alignEnd ? 'end-0' : 'start-0'} mt-2 w-52 rounded-xl bg-[#0A2532] shadow-2xl border border-[#BF9A45]/30 py-1.5 z-50`}>
+        <div className={`absolute top-full ${alignEnd ? 'end-0' : 'start-0'} mt-2 w-52 rounded-xl bg-[#072118] shadow-2xl border border-[#BF9A45]/30 py-1.5 z-50 backdrop-blur-md`}>
           {item.children?.map((child) => {
             const isChildActive = pathname === child.href;
             return (
@@ -90,8 +90,8 @@ function DropdownNavItem({ item, isActive, label, alignEnd }: { item: NavItem, i
                 href={child.href}
                 className={`block px-4 py-2 font-sans text-sm transition-colors ${
                   isChildActive 
-                    ? 'text-[#E6D3A3] font-semibold bg-[#0F3446] border-s-2 border-[#BF9A45]' 
-                    : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3] hover:bg-[#0F3446]/60'
+                    ? 'text-[#E6D3A3] font-semibold bg-[#0D3E2F] border-s-2 border-[#BF9A45]' 
+                    : 'text-[#EDF4F0]/80 hover:text-[#E6D3A3] hover:bg-[#0D3E2F]/60'
                 }`}
                 onClick={() => setIsOpen(false)}
               >
