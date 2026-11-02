@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Edit2, Trash2, ExternalLink, HelpCircle, X, Loader2, CheckCircle, Search } from "lucide-react";
+import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Search } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { saveFatwaAction, deleteFatwaAction } from "../actions";
 import type { PublicFatwa } from "@/lib/api/types";
 
 export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }) {
+  const t = useTranslations("admin.fatwas");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [fatwas, setFatwas] = useState<PublicFatwa[]>(initialFatwas);
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,7 +85,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
       }
 
       setIsModalOpen(false);
-      setFeedback("Fatwa published successfully!");
+      setFeedback(tCommon("successSave"));
     } catch (err: any) {
       alert("Error: " + err.message);
     } finally {
@@ -89,11 +94,11 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
   };
 
   const handleDelete = async (id: string, fTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${fTitle}"?`)) return;
+    if (!confirm(`${tCommon("confirmDelete")} (${fTitle})`)) return;
     try {
       await deleteFatwaAction(id);
       setFatwas((prev) => prev.filter((f) => f.id !== id));
-      setFeedback(`Fatwa "${fTitle}" removed.`);
+      setFeedback(tCommon("successDelete"));
     } catch (err: any) {
       alert("Error: " + err.message);
     }
@@ -110,10 +115,10 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Fatwas & Scholarly Rulings ({fatwas.length})
+            {t("heading")} ({fatwas.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage practical answers to questions on worship, ethical finance, and contemporary issues.
+            {t("subheading")}
           </p>
         </div>
 
@@ -122,7 +127,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
-          <span>New Fatwa</span>
+          <span>{t("newFatwa")}</span>
         </button>
       </div>
 
@@ -142,7 +147,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
           <Search className="w-4 h-4 text-[#636E72] absolute start-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search fatwas by topic or ruling..."
+            placeholder={t("searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full ps-9 pe-4 py-2 bg-[#FAF8F5] border border-[#E0D8CE] rounded text-xs text-[#2D3436] focus:outline-none focus:border-[#1B5E20]"
@@ -156,10 +161,10 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
           <table className="w-full text-start text-xs">
             <thead className="bg-[#FAF8F5] text-[#2D3436] font-heading font-bold uppercase tracking-wider text-[10px] border-b border-[#E0D8CE]">
               <tr>
-                <th className="py-3 px-4 text-start">Ruling Title & Question</th>
-                <th className="py-3 px-4 text-start">Categories</th>
-                <th className="py-3 px-4 text-start">Published</th>
-                <th className="py-3 px-4 text-end">Actions</th>
+                <th className="py-3 px-4 text-start">{t("colTitle")}</th>
+                <th className="py-3 px-4 text-start">{t("colCategory")}</th>
+                <th className="py-3 px-4 text-start">{t("colDate")}</th>
+                <th className="py-3 px-4 text-end">{t("colActions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#E0D8CE]/60">
@@ -170,7 +175,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
                     <div className="text-[11px] text-[#636E72] font-mono mt-0.5">/{fat.slug}</div>
                     {fat.question && (
                       <div className="text-[11px] text-[#636E72] line-clamp-1 mt-1 italic">
-                        Q: {fat.question}
+                        {t("fieldQuestion")}: {fat.question}
                       </div>
                     )}
                   </td>
@@ -191,24 +196,24 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
                   </td>
                   <td className="py-3.5 px-4 whitespace-nowrap text-end space-x-2">
                     <Link
-                      href={`/fatwas/${fat.slug}`}
+                      href={`/${locale}/fatwas/${fat.slug}`}
                       target="_blank"
                       className="inline-block p-1.5 rounded hover:bg-gray-100 text-[#636E72] hover:text-[#1B5E20]"
-                      title="View Public Fatwa"
+                      title={tCommon("viewLive")}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </Link>
                     <button
                       onClick={() => openEditModal(fat)}
                       className="p-1.5 rounded hover:bg-emerald-50 text-[#636E72] hover:text-[#1B5E20]"
-                      title="Edit"
+                      title={tCommon("edit")}
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => handleDelete(fat.id, fat.title)}
                       className="p-1.5 rounded hover:bg-red-50 text-[#636E72] hover:text-red-600"
-                      title="Delete"
+                      title={tCommon("delete")}
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -227,7 +232,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col z-10 border border-[#E0D8CE]">
             <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5] rounded-t-xl">
               <h3 className="font-heading font-bold text-sm text-[#2D3436]">
-                {editingFatwa ? "Edit Fatwa" : "New Fatwa"}
+                {editingFatwa ? t("modalTitleEdit") : t("modalTitleNew")}
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-[#636E72]">
                 <X className="w-4 h-4" />
@@ -236,20 +241,19 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
 
             <form onSubmit={handleSave} className="p-6 overflow-y-auto space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Fatwa Title *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldTitle")} *</label>
                 <input
                   type="text"
                   required
                   value={title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  placeholder="e.g. Sharia Rulings on Digital Banking Fees"
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Slug *</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSlug")} *</label>
                   <input
                     type="text"
                     required
@@ -259,7 +263,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Categories (comma-separated)</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldCategories")}</label>
                   <input
                     type="text"
                     value={categories}
@@ -270,25 +274,23 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Inquirer's Question *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldQuestion")} *</label>
                 <textarea
                   rows={3}
                   required
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  placeholder="The original community inquiry..."
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Sheikh's Scholarly Ruling / Answer *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldAnswer")} *</label>
                 <textarea
                   rows={8}
                   required
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
-                  placeholder="Detailed Islamic jurisprudence answer, Quran/Sunnah evidence, and references..."
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -299,7 +301,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-[#E0D8CE] rounded text-[#636E72]"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
@@ -307,7 +309,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
                   className="px-6 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white rounded font-bold flex items-center gap-1.5"
                 >
                   {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>Save & Publish</span>
+                  <span>{isSaving ? tCommon("saving") : t("saveFatwa")}</span>
                 </button>
               </div>
             </form>
