@@ -103,25 +103,24 @@ export const AUTHENTIC_EVENTS: PublicEvent[] = [
 import { getAllEvents, getEventByIdOrSlug } from "@/lib/db/repository";
 
 export async function getEvents(params: { limit?: string; cursor?: string; locale?: string; from?: string; to?: string; sort?: string; category?: string[]; tag?: string[] } = {}): Promise<ListResponse<PublicEvent>> {
+  let list: PublicEvent[] = [];
   try {
-    let list = getAllEvents();
-    if (params.category && params.category.length > 0) {
-      list = list.filter((e) => e.categories.some((cat) => params.category!.includes(cat)));
-    }
-    return {
-      object: "list",
-      data: list,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = getAllEvents();
   } catch {
-    return {
-      object: "list",
-      data: AUTHENTIC_EVENTS,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = AUTHENTIC_EVENTS;
   }
+  if (!list || list.length === 0) {
+    list = AUTHENTIC_EVENTS;
+  }
+  if (params.category && params.category.length > 0) {
+    list = list.filter((e) => e.categories.some((cat) => params.category!.includes(cat)));
+  }
+  return {
+    object: "list",
+    data: list,
+    has_more: false,
+    next_cursor: null,
+  };
 }
 
 export async function getEvent(reference: string, locale?: string): Promise<PublicEvent> {

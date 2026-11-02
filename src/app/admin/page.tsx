@@ -301,6 +301,10 @@ export default async function AdminDashboardPage() {
             </div>
             <div className="space-y-1.5 text-[#636E72]">
               <div className="flex justify-between py-1 border-b border-[#E0D8CE]/50">
+                <span>Database Engine:</span>
+                <span className="font-semibold text-[#1B5E20]">SQLite (WAL Enabled)</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#E0D8CE]/50">
                 <span>{tDash("systemStatusDesc")}</span>
               </div>
               <div className="flex justify-between py-1">
