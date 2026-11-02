@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { AlertCircle, AudioLines, Music } from "lucide-react";
 import Image from "next/image";
 
@@ -20,6 +21,9 @@ function getYouTubeEmbedUrl(url: string): string | null {
 }
 
 export function LecturePlayer({ media, title, coverUrl }: LecturePlayerProps) {
+  const t = useTranslations("lectureDetail");
+  const tCommon = useTranslations("common");
+
   if (media.video) {
     const ytEmbed = getYouTubeEmbedUrl(media.video);
 
@@ -70,7 +74,7 @@ export function LecturePlayer({ media, title, coverUrl }: LecturePlayerProps) {
           <div>
             <h3 className="font-heading text-base sm:text-lg font-semibold text-[#2D3436] break-words">{title}</h3>
             <p className="text-xs sm:text-sm text-[#636E72] flex items-center gap-2 mt-1">
-              <AudioLines className="w-4 h-4 text-[#1B5E20] shrink-0" /> Official Audio Recording
+              <AudioLines className="w-4 h-4 text-[#1B5E20] shrink-0" /> {t("listenAudio")}
             </p>
           </div>
           <audio controls className="w-full">
@@ -85,9 +89,9 @@ export function LecturePlayer({ media, title, coverUrl }: LecturePlayerProps) {
   return (
     <div className="flex flex-col items-center justify-center w-full rounded-md bg-[#FAF8F5] border border-[#E0D8CE] p-6 sm:p-12 text-center space-y-3">
       <AlertCircle className="w-10 h-10 text-[#B8860B]" />
-      <h3 className="font-heading text-lg font-semibold text-[#2D3436]">Media Unavailable</h3>
+      <h3 className="font-heading text-lg font-semibold text-[#2D3436]">{tCommon("unavailable")}</h3>
       <p className="text-sm text-[#636E72] max-w-md">
-        The audio or video recording for this lecture is not currently available in our digital archive.
+        {tCommon("noContent")}
       </p>
     </div>
   );

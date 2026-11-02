@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCertificateByCode } from "@/lib/db/repository";
 import { CertificateView } from "@/components/certificate/certificate-view";
@@ -21,6 +21,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
   const { locale, code } = await props.params;
   setRequestLocale(locale);
 
+  const t = await getTranslations({ locale, namespace: "verify" });
   const cleanCode = decodeURIComponent(code).trim().toUpperCase();
   const certificate = getCertificateByCode(cleanCode);
 
@@ -32,8 +33,8 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
             href="/verify"
             className="inline-flex items-center text-xs sm:text-sm font-semibold text-[#1B6A50] hover:text-[#0D3E2F] transition-colors py-1"
           >
-            <ArrowLeft className="w-4 h-4 me-1.5 text-[#BF9A45]" />
-            <span>Back to Verification Search</span>
+            <ArrowLeft className="w-4 h-4 me-1.5 rtl:rotate-180 text-[#BF9A45]" />
+            <span>{t("verifyButton")}</span>
           </Link>
         </div>
 
@@ -47,20 +48,20 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
                 </div>
                 <div>
                   <span className="inline-block text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-[#1B6A50] bg-white border border-[#1B6A50]/30 px-3 py-0.5 rounded-full mb-1">
-                    Official Scholarly Record Verified
+                    {t("validBadge")}
                   </span>
                   <h1 className="font-display text-lg sm:text-2xl font-bold text-[#0F241C]">
-                    Authentic Certificate of Islamic Studies
+                    {t("title")}
                   </h1>
                   <p className="text-xs text-[#0F241C]/70 mt-0.5">
-                    This certificate has been matched against the official registry of Sheikh Muhammed Ferej Megeno.
+                    {t("description")}
                   </p>
                 </div>
               </div>
 
               <div className="text-left md:text-right shrink-0">
                 <span className="text-[10px] sm:text-[11px] text-[#0F241C]/60 uppercase font-semibold block">
-                  Certificate Serial
+                  Serial
                 </span>
                 <span className="font-mono text-base sm:text-lg font-bold text-[#BF9A45]">
                   {certificate.id}
@@ -73,7 +74,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               <div className="space-y-1">
                 <span className="text-[10px] text-[#0F241C]/60 uppercase font-semibold flex items-center gap-1">
                   <User className="w-3.5 h-3.5 text-[#BF9A45]" />
-                  <span>Student Name</span>
+                  <span>{t("studentName")}</span>
                 </span>
                 <p className="font-display font-semibold text-sm sm:text-base text-[#0F241C] truncate">
                   {certificate.student_name}
@@ -83,7 +84,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               <div className="space-y-1">
                 <span className="text-[10px] text-[#0F241C]/60 uppercase font-semibold flex items-center gap-1">
                   <BookOpen className="w-3.5 h-3.5 text-[#BF9A45]" />
-                  <span>Course Title</span>
+                  <span>{t("courseTitle")}</span>
                 </span>
                 <p className="font-display font-semibold text-sm sm:text-base text-[#0F241C] truncate">
                   {certificate.course_title}
@@ -93,7 +94,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               <div className="space-y-1">
                 <span className="text-[10px] text-[#0F241C]/60 uppercase font-semibold flex items-center gap-1">
                   <Award className="w-3.5 h-3.5 text-[#BF9A45]" />
-                  <span>Score &amp; Merit</span>
+                  <span>{t("grade")}</span>
                 </span>
                 <p className="font-display font-semibold text-sm sm:text-base text-[#1B6A50]">
                   {certificate.score_percentage}% • {certificate.grade_title}
@@ -103,7 +104,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               <div className="space-y-1">
                 <span className="text-[10px] text-[#0F241C]/60 uppercase font-semibold flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-[#BF9A45]" />
-                  <span>Issue Date</span>
+                  <span>{t("issueDate")}</span>
                 </span>
                 <p className="font-display font-semibold text-sm sm:text-base text-[#0F241C]">
                   {new Date(certificate.issued_at).toLocaleDateString(undefined, {
@@ -141,7 +142,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               href="/verify"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-amber-800 text-white text-xs font-semibold hover:bg-amber-900 transition-colors"
             >
-              Verify Another Certificate
+              {t("verifyButton")}
             </Link>
           </div>
         ) : (
@@ -151,7 +152,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               <ShieldAlert className="w-7 h-7" />
             </div>
             <h1 className="font-display text-xl sm:text-2xl font-bold text-[#0F241C]">
-              Certificate Record Not Found
+              {t("invalidBadge")}
             </h1>
             <p className="text-xs sm:text-sm text-[#0F241C]/70 leading-relaxed font-sans">
               No official record matching code <span className="font-mono font-semibold text-[#0F241C]">&ldquo;{cleanCode}&rdquo;</span> exists in the scholarly database of Sheikh Muhammed Ferej Megeno.
@@ -163,7 +164,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
               href="/verify"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#1B6A50] text-white text-xs font-bold hover:bg-[#0D3E2F] transition-colors"
             >
-              Try Another Code
+              {t("verifyButton")}
             </Link>
           </div>
         )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, Calendar, MapPin, CheckCircle, Loader2, Users, Ticket, Printer } from "lucide-react";
 import type { EventRegistrationRecord } from "@/lib/db/types";
 
@@ -21,6 +22,8 @@ export function EventRegistrationModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("eventDetail");
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -98,22 +101,22 @@ export function EventRegistrationModal({
 
             <div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                Attendance Confirmed
+                {t("registerSuccess")}
               </span>
               <h2 className="font-heading font-bold text-xl sm:text-2xl text-[#2D3436] mt-1.5">
-                Seat Reserved Successfully!
+                {confirmedRegistration.name}
               </h2>
               <p className="text-xs text-[#636E72] mt-1">
-                Barakallahu Feekum. Your attendance has been registered with Sheikh Muhammed Ferej&apos;s event team.
+                {t("registerSuccess")}
               </p>
             </div>
 
             {/* Event Ticket Pass */}
-            <div className="bg-[#FAF8F5] border-2 border-dashed border-[#1B5E20]/40 rounded-lg p-5 text-left space-y-3 font-sans">
+            <div className="bg-[#FAF8F5] border-2 border-dashed border-[#1B5E20]/40 rounded-lg p-5 text-left rtl:text-right space-y-3 font-sans">
               <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-2">
                 <span className="text-[11px] font-bold text-[#1B5E20] uppercase tracking-wider flex items-center gap-1">
                   <Ticket className="w-4 h-4 text-[#C5A059]" />
-                  <span>Official Event Pass</span>
+                  <span>{t("modalTitle")}</span>
                 </span>
                 <span className="font-mono text-xs font-bold text-[#2D3436]">
                   {confirmedRegistration.id}
@@ -146,7 +149,7 @@ export function EventRegistrationModal({
                   <div className="flex items-center gap-2">
                     <Users className="w-3.5 h-3.5 text-[#636E72]" />
                     <span>
-                      {confirmedRegistration.name} ({confirmedRegistration.attendees_count} {confirmedRegistration.attendees_count > 1 ? "attendees" : "attendee"})
+                      {confirmedRegistration.name} ({confirmedRegistration.attendees_count})
                     </span>
                   </div>
                 </div>
@@ -178,10 +181,10 @@ export function EventRegistrationModal({
               </div>
               <div>
                 <h2 className="font-heading font-bold text-lg text-[#2D3436]">
-                  Register for Event
+                  {t("modalTitle")}
                 </h2>
                 <p className="text-xs text-[#636E72]">
-                  Reserve your attendee seat for this scheduled gathering
+                  {t("register")}
                 </p>
               </div>
             </div>
@@ -212,7 +215,7 @@ export function EventRegistrationModal({
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                  Attendee Full Name *
+                  {t("fullName")} *
                 </label>
                 <input
                   type="text"
@@ -226,7 +229,7 @@ export function EventRegistrationModal({
 
               <div>
                 <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                  Email Address *
+                  {t("email")} *
                 </label>
                 <input
                   type="email"
@@ -241,7 +244,7 @@ export function EventRegistrationModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                    Phone / Telegram
+                    {t("phone")}
                   </label>
                   <input
                     type="tel"
@@ -254,7 +257,7 @@ export function EventRegistrationModal({
 
                 <div>
                   <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                    Number of Attendees
+                    {t("seatsAvailable")}
                   </label>
                   <select
                     value={attendeesCount}
@@ -263,7 +266,7 @@ export function EventRegistrationModal({
                   >
                     {[1, 2, 3, 4, 5].map((n) => (
                       <option key={n} value={n}>
-                        {n} {n === 1 ? "Person (Individual)" : `People (Group of ${n})`}
+                        {n} {n === 1 ? "Person" : `People (${n})`}
                       </option>
                     ))}
                   </select>
@@ -272,26 +275,13 @@ export function EventRegistrationModal({
 
               <div>
                 <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                  City / Location
+                  {t("location")}
                 </label>
                 <input
                   type="text"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   placeholder="Addis Ababa, Ethiopia"
-                  className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                  Special Notes or Requests (Optional)
-                </label>
-                <textarea
-                  rows={2}
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Transport, elderly seating, etc..."
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -305,10 +295,10 @@ export function EventRegistrationModal({
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Confirming Registration...</span>
+                      <span>{t("registering")}</span>
                     </>
                   ) : (
-                    <span>Confirm Event Reservation</span>
+                    <span>{t("confirmRegistration")}</span>
                   )}
                 </button>
               </div>
