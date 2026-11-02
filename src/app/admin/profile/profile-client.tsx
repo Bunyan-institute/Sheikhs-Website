@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   User,
   GraduationCap,
@@ -33,6 +34,9 @@ export function ProfileClient({
   initialJourney: JourneyMilestone[];
   initialQualifications: QualificationRecord[];
 }) {
+  const t = useTranslations("admin.profile");
+  const tCommon = useTranslations("admin.common");
+
   const [activeTab, setActiveTab] = useState<"profile" | "qualifications" | "journey">("profile");
   const [feedback, setFeedback] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -73,9 +77,9 @@ export function ProfileClient({
           telegram,
         },
       });
-      setFeedback("Scholar profile details updated successfully!");
+      setFeedback(t("savedNotice"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      alert(tCommon("error") + ": " + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -86,9 +90,9 @@ export function ProfileClient({
     setFeedback(null);
     try {
       await updateQualificationsAction(qualifications);
-      setFeedback("Scholarly qualifications updated successfully!");
+      setFeedback(t("savedNotice"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      alert(tCommon("error") + ": " + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -123,9 +127,9 @@ export function ProfileClient({
     setFeedback(null);
     try {
       await updateJourneyAction(journey);
-      setFeedback("Dawah journey milestones saved successfully!");
+      setFeedback(t("savedNotice"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      alert(tCommon("error") + ": " + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -160,10 +164,10 @@ export function ProfileClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Scholar Profile & Bio Management
+            {t("heading")}
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Configure Sheikh Muhammed Ferej&apos;s biography, official social channels, credentials, and dawah journey.
+            {t("subheading")}
           </p>
         </div>
 
@@ -172,7 +176,7 @@ export function ProfileClient({
           target="_blank"
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[4px] border border-[#E0D8CE] bg-white text-[#2D3436] hover:border-[#1B5E20] text-xs font-semibold transition-colors self-start sm:self-auto"
         >
-          <span>View Public Biography</span>
+          <span>{tCommon("viewLiveSite")} (/about)</span>
           <ExternalLink className="w-3.5 h-3.5 text-[#1B5E20]" />
         </Link>
       </div>
@@ -200,7 +204,7 @@ export function ProfileClient({
           }`}
         >
           <User className="w-4 h-4" />
-          <span>Biographical Identity & Socials</span>
+          <span>{t("name")} & {t("socials")}</span>
         </button>
 
         <button
@@ -212,7 +216,7 @@ export function ProfileClient({
           }`}
         >
           <GraduationCap className="w-4 h-4" />
-          <span>Qualifications & Ijazahs ({qualifications.length})</span>
+          <span>{t("credentials")} ({qualifications.length})</span>
         </button>
 
         <button
@@ -224,7 +228,7 @@ export function ProfileClient({
           }`}
         >
           <Milestone className="w-4 h-4" />
-          <span>Dawah Journey ({journey.length})</span>
+          <span>{tCommon("series")} ({journey.length})</span>
         </button>
       </div>
 
@@ -235,13 +239,13 @@ export function ProfileClient({
             {/* Left 2 Cols: Main Info */}
             <div className="lg:col-span-2 space-y-4 bg-white border border-[#E0D8CE] rounded-lg p-5">
               <h2 className="font-heading font-bold text-base text-[#2D3436] border-b border-[#F0EAE1] pb-2">
-                Scholar Identity
+                {t("heading")}
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Scholar Full Name *
+                    {t("name")} *
                   </label>
                   <input
                     type="text"
@@ -254,13 +258,13 @@ export function ProfileClient({
 
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Honorific Headline / Title
+                    {t("headline")}
                   </label>
                   <input
                     type="text"
                     value={headline}
                     onChange={(e) => setHeadline(e.target.value)}
-                    placeholder="e.g. Senior Islamic Scholar & Fatwa Council Member"
+                    placeholder="Senior Islamic Scholar & Sharia Consultant"
                     className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                   />
                 </div>
@@ -268,20 +272,20 @@ export function ProfileClient({
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Primary Location / Residence
+                  Location
                 </label>
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="e.g. Addis Ababa, Ethiopia"
+                  placeholder="Addis Ababa, Ethiopia"
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Comprehensive Biography (Markdown supported)
+                  {t("bio")}
                 </label>
                 <textarea
                   rows={8}
@@ -294,7 +298,7 @@ export function ProfileClient({
 
               {/* Social Channels */}
               <h2 className="font-heading font-bold text-base text-[#2D3436] border-b border-[#F0EAE1] pt-4 pb-2">
-                Official Media Channels
+                {t("socials")}
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -355,7 +359,7 @@ export function ProfileClient({
             {/* Right 1 Col: Portrait Preview */}
             <div className="space-y-4 bg-white border border-[#E0D8CE] rounded-lg p-5">
               <h2 className="font-heading font-bold text-base text-[#2D3436] border-b border-[#F0EAE1] pb-2">
-                Scholar Portrait
+                Portrait
               </h2>
 
               <div className="relative aspect-square w-full rounded-md overflow-hidden bg-[#F5F1EB] border border-[#E0D8CE]">
@@ -385,9 +389,6 @@ export function ProfileClient({
                   placeholder="/images/sheikh-portrait.jpg"
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
-                <p className="text-[11px] text-[#636E72] mt-1">
-                  Accepts local path like <code className="bg-[#F5F1EB] px-1 rounded">/images/sheikh-portrait.jpg</code> or external HTTPS image URL.
-                </p>
               </div>
             </div>
           </div>
@@ -399,7 +400,7 @@ export function ProfileClient({
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors cursor-pointer disabled:opacity-60"
             >
               {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              <span>Save Profile Information</span>
+              <span>{t("saveProfile")}</span>
             </button>
           </div>
         </form>
@@ -410,14 +411,14 @@ export function ProfileClient({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs text-[#636E72]">
-              Scholarly credentials, licenses, Islamic university degrees, and sanad chains displayed on public bio.
+              {t("credentials")}
             </p>
             <button
               onClick={handleAddQualification}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-semibold transition-colors cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Add Qualification</span>
+              <span>{tCommon("add")}</span>
             </button>
           </div>
 
@@ -430,7 +431,7 @@ export function ProfileClient({
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 flex-1">
                   <div className="md:col-span-2">
                     <label className="block text-[11px] font-semibold text-[#2D3436] mb-0.5">
-                      Degree / Ijazah Title
+                      {tCommon("title")}
                     </label>
                     <input
                       type="text"
@@ -469,7 +470,7 @@ export function ProfileClient({
                 <button
                   onClick={() => handleRemoveQualification(idx)}
                   className="p-1.5 text-[#636E72] hover:text-red-600 hover:bg-red-50 rounded transition-colors self-end md:self-center"
-                  title="Remove Qualification"
+                  title={tCommon("delete")}
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -484,7 +485,7 @@ export function ProfileClient({
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors cursor-pointer disabled:opacity-60"
             >
               {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              <span>Save Qualifications</span>
+              <span>{tCommon("save")}</span>
             </button>
           </div>
         </div>
@@ -495,14 +496,14 @@ export function ProfileClient({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs text-[#636E72]">
-              Historical milestones along Sheikh&apos;s educational and dawah journey spanning over 35+ years.
+              {t("subheading")}
             </p>
             <button
               onClick={handleAddMilestone}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-semibold transition-colors cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Add Milestone</span>
+              <span>{tCommon("add")}</span>
             </button>
           </div>
 
@@ -529,7 +530,7 @@ export function ProfileClient({
 
                     <div className="sm:col-span-2">
                       <label className="block text-[11px] font-semibold text-[#2D3436] mb-0.5">
-                        Milestone Title
+                        {tCommon("title")}
                       </label>
                       <input
                         type="text"
@@ -543,7 +544,7 @@ export function ProfileClient({
                   <button
                     onClick={() => handleRemoveMilestone(idx)}
                     className="p-1.5 text-[#636E72] hover:text-red-600 hover:bg-red-50 rounded transition-colors self-start"
-                    title="Remove Milestone"
+                    title={tCommon("delete")}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -571,7 +572,7 @@ export function ProfileClient({
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors cursor-pointer disabled:opacity-60"
             >
               {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              <span>Save Journey Milestones</span>
+              <span>{tCommon("save")}</span>
             </button>
           </div>
         </div>

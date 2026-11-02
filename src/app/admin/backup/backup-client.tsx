@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   Download,
   Upload,
@@ -40,6 +41,9 @@ export function BackupClient({
   initialJson: string;
   metrics: SystemMetrics;
 }) {
+  const t = useTranslations("admin.backup");
+  const tCommon = useTranslations("admin.common");
+
   const [jsonContent, setJsonContent] = useState(initialJson);
   const [restoreInput, setRestoreInput] = useState("");
   const [copied, setCopied] = useState(false);
@@ -61,7 +65,7 @@ export function BackupClient({
     URL.revokeObjectURL(url);
     setFeedback({
       type: "success",
-      message: "Database JSON exported and downloaded successfully!",
+      message: t("exportDesc"),
     });
   };
 
@@ -81,7 +85,7 @@ export function BackupClient({
       setRestoreInput(content);
       setFeedback({
         type: "success",
-        message: `File "${file.name}" loaded into restore box. Review and click "Restore Database" to apply.`,
+        message: `${file.name} - ${t("restoreDesc")}`,
       });
     };
     reader.readAsText(file);
@@ -89,13 +93,13 @@ export function BackupClient({
 
   const handleRestore = async () => {
     if (!restoreInput.trim()) {
-      alert("Please upload a JSON file or paste valid database JSON into the box.");
+      alert(t("selectFile"));
       return;
     }
 
     if (
       !confirm(
-        "CAUTION: Restoring will overwrite the current content store with the imported JSON data. Are you sure you wish to proceed?"
+        t("restoreDesc")
       )
     ) {
       return;
@@ -109,19 +113,19 @@ export function BackupClient({
       if (res.success) {
         setFeedback({
           type: "success",
-          message: `Database restored successfully to version ${res.version}! All portal data has been refreshed.`,
+          message: `${tCommon("success")}: v${res.version}`,
         });
         setJsonContent(restoreInput.trim());
       } else {
         setFeedback({
           type: "error",
-          message: res.error || "Failed to restore database from provided JSON.",
+          message: res.error || tCommon("error"),
         });
       }
     } catch (err: any) {
       setFeedback({
         type: "error",
-        message: err.message || "An unexpected error occurred during database restore.",
+        message: err.message || tCommon("error"),
       });
     } finally {
       setIsLoading(false);
@@ -130,7 +134,7 @@ export function BackupClient({
 
   const handleReset = async () => {
     const confirmed = prompt(
-      'DANGER: To reset all data back to original scholarly seed data, type "RESET" below:'
+      'Type "RESET" to confirm restore to seed data:'
     );
     if (confirmed !== "RESET") return;
 
@@ -142,14 +146,14 @@ export function BackupClient({
       if (res.success) {
         setFeedback({
           type: "success",
-          message: "Database has been reset to default scholarly seed data. Reloading page...",
+          message: tCommon("success"),
         });
         setTimeout(() => window.location.reload(), 1500);
       }
     } catch (err: any) {
       setFeedback({
         type: "error",
-        message: err.message || "Failed to reset database.",
+        message: err.message || tCommon("error"),
       });
     } finally {
       setIsLoading(false);
@@ -162,10 +166,10 @@ export function BackupClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Database Backup & Portability
+            {t("heading")}
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Full 1-click JSON backup, restore point recovery, and data portability for Sheikh Muhammed Ferej portal.
+            {t("subheading")}
           </p>
         </div>
 
@@ -174,7 +178,7 @@ export function BackupClient({
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto cursor-pointer"
         >
           <Download className="w-4 h-4" />
-          <span>Export 1-Click JSON Backup</span>
+          <span>{t("exportJson")}</span>
         </button>
       </div>
 
@@ -212,10 +216,10 @@ export function BackupClient({
             </div>
             <div>
               <h2 className="font-heading font-bold text-sm text-[#2D3436]">
-                Portal Data Store Summary
+                {t("storageUsage")}
               </h2>
               <p className="text-[11px] text-[#636E72]">
-                Database schema v{metrics.version} • Last updated: {new Date(metrics.lastUpdated).toLocaleString()}
+                v{metrics.version} • {t("lastBackup")}: {new Date(metrics.lastUpdated).toLocaleString()}
               </p>
             </div>
           </div>
@@ -224,27 +228,27 @@ export function BackupClient({
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
           <div className="bg-[#FBF9F5] p-3 rounded border border-[#F0EAE1] text-center">
             <div className="font-heading text-lg font-bold text-[#1B5E20]">{metrics.lecturesCount}</div>
-            <div className="text-[11px] text-[#636E72]">Lectures</div>
+            <div className="text-[11px] text-[#636E72]">{tCommon("lectures")}</div>
           </div>
           <div className="bg-[#FBF9F5] p-3 rounded border border-[#F0EAE1] text-center">
             <div className="font-heading text-lg font-bold text-[#1B5E20]">{metrics.seriesCount}</div>
-            <div className="text-[11px] text-[#636E72]">Curriculum Series</div>
+            <div className="text-[11px] text-[#636E72]">{tCommon("series")}</div>
           </div>
           <div className="bg-[#FBF9F5] p-3 rounded border border-[#F0EAE1] text-center">
             <div className="font-heading text-lg font-bold text-[#1B5E20]">{metrics.articlesCount}</div>
-            <div className="text-[11px] text-[#636E72]">Articles</div>
+            <div className="text-[11px] text-[#636E72]">{tCommon("articles")}</div>
           </div>
           <div className="bg-[#FBF9F5] p-3 rounded border border-[#F0EAE1] text-center">
             <div className="font-heading text-lg font-bold text-[#1B5E20]">{metrics.fatwasCount}</div>
-            <div className="text-[11px] text-[#636E72]">Public Fatwas</div>
+            <div className="text-[11px] text-[#636E72]">{tCommon("fatwas")}</div>
           </div>
           <div className="bg-[#FBF9F5] p-3 rounded border border-[#F0EAE1] text-center">
             <div className="font-heading text-lg font-bold text-[#1B5E20]">{metrics.booksCount}</div>
-            <div className="text-[11px] text-[#636E72]">Library Books</div>
+            <div className="text-[11px] text-[#636E72]">{tCommon("library")}</div>
           </div>
           <div className="bg-[#FBF9F5] p-3 rounded border border-[#F0EAE1] text-center">
             <div className="font-heading text-lg font-bold text-[#1B5E20]">{metrics.inquiriesTotal}</div>
-            <div className="text-[11px] text-[#636E72]">Public Inquiries</div>
+            <div className="text-[11px] text-[#636E72]">{tCommon("inquiries")}</div>
           </div>
         </div>
       </div>
@@ -257,7 +261,7 @@ export function BackupClient({
             <div className="flex items-center gap-2">
               <FileCode className="w-4 h-4 text-[#1B5E20]" />
               <h3 className="font-heading font-bold text-sm text-[#2D3436]">
-                Current Database JSON
+                {t("exportJson")}
               </h3>
             </div>
             <button
@@ -285,7 +289,7 @@ export function BackupClient({
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[#E0D8CE] hover:border-[#1B5E20] text-xs font-medium text-[#2D3436] transition-colors cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-[#1B5E20]" />
-              <span>Download File</span>
+              <span>{t("downloadBackup")}</span>
             </button>
           </div>
         </div>
@@ -297,11 +301,11 @@ export function BackupClient({
               <div className="flex items-center gap-2">
                 <Upload className="w-4 h-4 text-[#C5A059]" />
                 <h3 className="font-heading font-bold text-sm text-[#2D3436]">
-                  Restore from Backup JSON
+                  {t("restoreBackup")}
                 </h3>
               </div>
               <label className="inline-flex items-center gap-1 text-xs text-[#1B5E20] hover:underline cursor-pointer">
-                <span>Upload JSON file</span>
+                <span>{t("selectFile")}</span>
                 <input
                   type="file"
                   accept=".json,application/json"
@@ -312,7 +316,7 @@ export function BackupClient({
             </div>
 
             <p className="text-xs text-[#636E72]">
-              Paste exported JSON or upload a backup file to restore all lectures, series, books, fatwas, and scholar profile.
+              {t("restoreDesc")}
             </p>
 
             <textarea
@@ -331,7 +335,7 @@ export function BackupClient({
               className="inline-flex items-center gap-2 px-5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors cursor-pointer disabled:opacity-50"
             >
               {isLoading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-              <span>Restore Database</span>
+              <span>{t("restoreButton")}</span>
             </button>
 
             <button
@@ -341,7 +345,7 @@ export function BackupClient({
               title="Reset to default seed data"
             >
               <RefreshCw className="w-3.5 h-3.5" />
-              <span>Factory Reset</span>
+              <span>Reset</span>
             </button>
           </div>
         </div>

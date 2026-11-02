@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { PublicCategory } from "@/lib/api/types";
 
@@ -12,6 +13,7 @@ interface FilterBarProps {
 }
 
 export function FilterBar({ categories, currentCategory }: FilterBarProps) {
+  const t = useTranslations("lectures");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -48,7 +50,7 @@ export function FilterBar({ categories, currentCategory }: FilterBarProps) {
             : "bg-white text-[#0F241C] border-[#072118]/15 hover:border-[#1B6A50] hover:text-[#1B6A50]"
         )}
       >
-        All
+        {t("all")}
       </button>
       {categories.map((category) => (
         <button
