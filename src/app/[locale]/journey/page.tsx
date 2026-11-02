@@ -21,7 +21,7 @@ export default async function JourneyPage({ params }: { params: Promise<{ locale
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
-        <div className="relative max-w-page mx-auto px-4 sm:px-6">
+        <div className="relative max-w-page mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -45,7 +45,7 @@ export default async function JourneyPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* Timeline Section */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="relative border-s-2 border-[#1B6A50]/30 ms-3 sm:ms-8 space-y-8 sm:space-y-12">
           {journeyData.map((entry, idx) => {
             const isCurrent = entry.type === "current";
