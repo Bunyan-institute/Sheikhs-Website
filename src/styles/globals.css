@@ -94,13 +94,13 @@ body {
 
 /* Page container max-width to center content cleanly on wide screens */
 .max-w-page {
-  max-width: 72rem;
+  max-width: 80rem; /* 1280px — slightly wider for pristine navbar breathing room while keeping side gaps */
   margin-left: auto;
   margin-right: auto;
 }
 
 @utility max-w-page {
-  max-width: 72rem;
+  max-width: 80rem;
 }
 
 /* Clickable interactive card affordances */

@@ -65,15 +65,15 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
           </div>
           
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8 shrink-0">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0">
             <HeaderNav items={items} />
 
-            <div className="flex items-center gap-3 border-s border-[#BF9A45]/20 ps-4 ms-1">
+            <div className="flex items-center gap-2.5 xl:gap-3 border-s border-[#BF9A45]/20 ps-3.5 xl:ps-4 ms-1">
               <CommandSearch />
               <LocaleSwitcher />
               <Link
                 href="/ask"
-                className="hidden xl:inline-flex bg-[#BF9A45] text-[#072118] text-sm font-bold rounded-full px-5 py-2 hover:bg-[#E6D3A3] transition-colors shrink-0 shadow-sm cursor-pointer min-h-[38px] items-center"
+                className="hidden lg:inline-flex bg-[#BF9A45] text-[#072118] text-xs xl:text-sm font-bold rounded-full px-4 xl:px-5 py-2 hover:bg-[#E6D3A3] transition-colors shrink-0 shadow-sm cursor-pointer min-h-[36px] xl:min-h-[38px] items-center whitespace-nowrap"
               >
                 {askLabel}
               </Link>

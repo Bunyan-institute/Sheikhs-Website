@@ -11,7 +11,7 @@ export default function HeaderNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
   
   return (
-    <nav className="flex items-center gap-5 lg:gap-6">
+    <nav className="flex items-center gap-3.5 lg:gap-4 xl:gap-6 shrink-0">
       {items.map((item, idx) => {
         const hasChildren = item.children && item.children.length > 0;
         const isChildActive = hasChildren && item.children?.some(c => 
@@ -36,7 +36,7 @@ export default function HeaderNav({ items }: { items: NavItem[] }) {
           <Link
             key={item.key}
             href={item.href}
-            className={`font-sans text-sm font-medium transition-colors ${
+            className={`font-sans text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
               isActive ? 'text-[#E6D3A3] font-semibold border-b-2 border-[#BF9A45] pb-0.5' : 'text-[#EDF4F0]/85 hover:text-[#E6D3A3]'
             }`}
           >
@@ -65,19 +65,19 @@ function DropdownNavItem({ item, isActive, label, alignEnd }: { item: NavItem, i
 
   return (
     <div 
-      className="relative"
+      className="relative shrink-0"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center font-sans text-sm font-medium transition-colors ${
+        className={`flex items-center font-sans text-xs xl:text-sm font-medium transition-colors whitespace-nowrap cursor-pointer ${
           isActive || isOpen ? 'text-[#E6D3A3] font-semibold' : 'text-[#EDF4F0]/85 hover:text-[#E6D3A3]'
         }`}
         aria-expanded={isOpen}
       >
-        {label}
-        <ChevronDown className={`ms-1 w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span>{label}</span>
+        <ChevronDown className={`ms-1 w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
