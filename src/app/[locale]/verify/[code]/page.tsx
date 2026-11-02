@@ -26,7 +26,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
 
   return (
     <div className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
-      <div className="max-w-page mx-auto px-4 sm:px-6">
+      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6 sm:mb-8 print:hidden">
           <Link
             href="/verify"
