@@ -36,7 +36,7 @@ export default async function FatwasPage({
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
-        <div className="relative max-w-page mx-auto px-4 sm:px-6">
+        <div className="relative max-w-page mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -59,12 +59,12 @@ export default async function FatwasPage({
         </div>
       </section>
 
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
+      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
         <section className="space-y-5 sm:space-y-6">
           {fatwas.length > 0 ? (
             fatwas.map((fatwa) => (
               <Link key={fatwa.id} href={`/fatwas/${fatwa.slug}`} className="block group">
-                <article className="border border-[#0F241C]/10 bg-white rounded-2xl p-5 sm:p-7 hover:border-[#1B6A50] transition-all shadow-xs relative overflow-hidden">
+                <article className="interactive-card border border-[#0F241C]/10 bg-white rounded-2xl p-5 sm:p-7 hover:border-[#BF9A45] transition-all shadow-xs relative overflow-hidden cursor-pointer">
                   <div className="flex flex-wrap items-center gap-2.5 mb-3 text-xs">
                     {fatwa.categories?.[0] && (
                       <span className="text-[#1B6A50] font-semibold uppercase tracking-wider text-[11px] bg-[#1B6A50]/10 border border-[#1B6A50]/20 px-3 py-0.5 rounded-full">

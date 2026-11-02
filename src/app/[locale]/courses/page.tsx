@@ -30,7 +30,7 @@ export default async function CoursesPage({
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
-        <div className="relative max-w-page mx-auto px-4 sm:px-6">
+        <div className="relative max-w-page mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -53,13 +53,13 @@ export default async function CoursesPage({
         </div>
       </section>
 
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
+      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
         <section>
           {courses.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {courses.map((course) => (
                 <Link key={course.id} href={`/courses/${course.slug}`} className="group block h-full">
-                  <article className="border border-[#0F241C]/10 bg-white rounded-2xl h-full flex flex-col hover:border-[#1B6A50] transition-all shadow-xs overflow-hidden">
+                  <article className="interactive-card border border-[#0F241C]/10 bg-white rounded-2xl h-full flex flex-col hover:border-[#BF9A45] transition-all shadow-xs overflow-hidden cursor-pointer">
                     <div className="aspect-[16/9] relative bg-[#EDF4F0] border-b border-[#0F241C]/10">
                       {course.cover ? (
                         <img 
