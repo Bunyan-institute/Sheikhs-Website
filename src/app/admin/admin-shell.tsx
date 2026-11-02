@@ -3,18 +3,26 @@
 import { useState } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
+import { localeDirections, type Locale } from "@/i18n/config";
 
 interface AdminShellProps {
   children: React.ReactNode;
   username: string;
   pendingInquiriesCount?: number;
+  locale?: Locale;
 }
 
-export function AdminShell({ children, username, pendingInquiriesCount = 0 }: AdminShellProps) {
+export function AdminShell({
+  children,
+  username,
+  pendingInquiriesCount = 0,
+  locale = "en",
+}: AdminShellProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const dir = localeDirections[locale] ?? "ltr";
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] flex">
+    <div dir={dir} lang={locale} className="min-h-screen bg-[#F7F5F0] flex">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
         <AdminSidebar pendingInquiriesCount={pendingInquiriesCount} />
