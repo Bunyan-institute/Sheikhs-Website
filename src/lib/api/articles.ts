@@ -455,27 +455,25 @@ function localizeArticle(art: PublicArticle, locale?: string): PublicArticle {
 import { getAllArticles, getArticleByIdOrSlug } from "@/lib/db/repository";
 
 export async function getArticles(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicArticle>> {
+  let list: PublicArticle[] = [];
   try {
-    let list = getAllArticles();
-    if (params.category && params.category.length > 0) {
-      list = list.filter((a) => a.categories.some((c) => params.category!.includes(c)));
-    }
-    const localizedData = list.map((a) => localizeArticle(a, params.locale));
-    return {
-      object: "list",
-      data: localizedData,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = getAllArticles();
   } catch {
-    const localizedData = AUTHENTIC_ARTICLES.map((a) => localizeArticle(a, params.locale));
-    return {
-      object: "list",
-      data: localizedData,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = AUTHENTIC_ARTICLES;
   }
+  if (!list || list.length === 0) {
+    list = AUTHENTIC_ARTICLES;
+  }
+  if (params.category && params.category.length > 0) {
+    list = list.filter((a) => a.categories.some((c) => params.category!.includes(c)));
+  }
+  const localizedData = list.map((a) => localizeArticle(a, params.locale));
+  return {
+    object: "list",
+    data: localizedData,
+    has_more: false,
+    next_cursor: null,
+  };
 }
 
 export async function getArticle(reference: string, locale?: string): Promise<PublicArticle> {

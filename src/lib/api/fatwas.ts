@@ -136,25 +136,24 @@ export const AUTHENTIC_FATWAS: PublicFatwa[] = [
 import { getAllFatwas, getFatwaByIdOrSlug } from "@/lib/db/repository";
 
 export async function getFatwas(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicFatwa>> {
+  let list: PublicFatwa[] = [];
   try {
-    let list = getAllFatwas();
-    if (params.category && params.category.length > 0) {
-      list = list.filter((f) => f.categories.some((c) => params.category!.includes(c)));
-    }
-    return {
-      object: "list",
-      data: list,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = getAllFatwas();
   } catch {
-    return {
-      object: "list",
-      data: AUTHENTIC_FATWAS,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = AUTHENTIC_FATWAS;
   }
+  if (!list || list.length === 0) {
+    list = AUTHENTIC_FATWAS;
+  }
+  if (params.category && params.category.length > 0) {
+    list = list.filter((f) => f.categories.some((c) => params.category!.includes(c)));
+  }
+  return {
+    object: "list",
+    data: list,
+    has_more: false,
+    next_cursor: null,
+  };
 }
 
 export async function getFatwa(reference: string, locale?: string): Promise<PublicFatwa> {
