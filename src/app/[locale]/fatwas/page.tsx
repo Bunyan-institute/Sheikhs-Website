@@ -11,13 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: "fatwas" });
   return {
     title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
-    description: t("description"),
+    description: t("subtitle"),
   };
 }
 
 export default async function FatwasPage({ 
   params,
-  searchParams
+  searchParams 
 }: { 
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ category?: string }>;
@@ -25,7 +25,7 @@ export default async function FatwasPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "fatwas" });
-  
+
   const { category } = await searchParams;
 
   const fatwasRes = await getFatwas({ locale, category: category ? [category] : undefined });
@@ -34,7 +34,7 @@ export default async function FatwasPage({
   return (
     <div className="w-full">
       {/* Page Hero Header */}
-      <section className="relative bg-[#0F3446] text-[#EDF2EE] py-16 overflow-hidden">
+      <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
         <div className="relative max-w-page mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
@@ -43,49 +43,49 @@ export default async function FatwasPage({
                 <span className="font-arabic text-sm text-[#E6D3A3] font-bold" dir="rtl">
                   {t("arabicBadge")}
                 </span>
-                <span className="star-sep" />
-                <span className="text-xs uppercase tracking-widest text-[#E6D3A3]/80 font-semibold">
+                <span className="star-sep text-[#BF9A45]" />
+                <span className="text-xs uppercase tracking-widest text-[#E6D3A3]/85 font-semibold">
                   {t("subtitle")}
                 </span>
               </div>
-              <h1 className="font-display text-4xl sm:text-5xl text-[#EDF2EE]">
+              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#EDF4F0]">
                 {t("title")}
               </h1>
             </div>
-            <p className="text-sm text-[#EDF2EE]/75 max-w-xl font-sans leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#EDF4F0]/80 max-w-xl font-sans leading-relaxed">
               {t("description")}
             </p>
           </div>
         </div>
       </section>
 
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-12 lg:py-16">
-        <section className="space-y-6">
+      <div className="max-w-page mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
+        <section className="space-y-5 sm:space-y-6">
           {fatwas.length > 0 ? (
             fatwas.map((fatwa) => (
               <Link key={fatwa.id} href={`/fatwas/${fatwa.slug}`} className="block group">
-                <article className="border border-[#14262E]/10 bg-white rounded-2xl p-6 sm:p-7 hover:border-[#1D6A5A] transition-all shadow-xs relative overflow-hidden">
+                <article className="border border-[#0F241C]/10 bg-white rounded-2xl p-5 sm:p-7 hover:border-[#1B6A50] transition-all shadow-xs relative overflow-hidden">
                   <div className="flex flex-wrap items-center gap-2.5 mb-3 text-xs">
                     {fatwa.categories?.[0] && (
-                      <span className="text-[#1D6A5A] font-semibold uppercase tracking-wider text-[11px] bg-[#1D6A5A]/10 border border-[#1D6A5A]/20 px-3 py-0.5 rounded-full">
+                      <span className="text-[#1B6A50] font-semibold uppercase tracking-wider text-[11px] bg-[#1B6A50]/10 border border-[#1B6A50]/20 px-3 py-0.5 rounded-full">
                         {fatwa.categories[0]}
                       </span>
                     )}
-                    <span className="text-[#14262E]/50">
+                    <span className="text-[#0F241C]/50">
                       {formatDate(fatwa.published_at, locale)}
                     </span>
-                    <span className="text-[#1D6A5A] font-medium ms-auto flex items-center gap-1.5 text-[11px]">
+                    <span className="text-[#1B6A50] font-medium ms-auto flex items-center gap-1.5 text-[11px]">
                       <CheckCircle className="w-3.5 h-3.5 text-[#BF9A45]" /> Verified Ruling
                     </span>
                   </div>
                   
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-[#14262E] mb-3 group-hover:text-[#1D6A5A] transition-colors break-words">
+                  <h3 className="font-display text-lg sm:text-2xl font-bold text-[#0F241C] mb-3 group-hover:text-[#1B6A50] transition-colors break-words">
                     {fatwa.title}
                   </h3>
                   
                   {fatwa.question && (
-                    <div className="bg-[#EDF2EE] border border-[#BF9A45]/30 rounded-xl p-4 mb-3">
-                      <p className="text-[#14262E] text-xs sm:text-sm line-clamp-2 break-words leading-relaxed">
+                    <div className="bg-[#EDF4F0] border border-[#BF9A45]/30 rounded-xl p-4 mb-3">
+                      <p className="text-[#0F241C] text-xs sm:text-sm line-clamp-2 break-words leading-relaxed">
                         <span className="text-[#BF9A45] font-semibold me-2">Inquiry:</span>
                         {fatwa.question}
                       </p>
@@ -93,12 +93,12 @@ export default async function FatwasPage({
                   )}
                   
                   {fatwa.summary && (
-                    <p className="text-[#14262E]/75 text-xs sm:text-sm mb-4 line-clamp-2 leading-relaxed">
+                    <p className="text-[#0F241C]/75 text-xs sm:text-sm mb-4 line-clamp-2 leading-relaxed">
                       {fatwa.summary}
                     </p>
                   )}
                   
-                  <div className="text-[#BF9A45] font-semibold text-xs flex items-center gap-1.5 pt-3 border-t border-[#14262E]/10">
+                  <div className="text-[#BF9A45] font-semibold text-xs flex items-center gap-1.5 pt-3 border-t border-[#0F241C]/10">
                     <span>Read Jurisprudential Ruling &amp; Evidences</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
@@ -106,9 +106,9 @@ export default async function FatwasPage({
               </Link>
             ))
           ) : (
-            <div className="py-20 text-center border border-[#14262E]/10 bg-white rounded-2xl p-8">
-              <HelpCircle className="w-12 h-12 text-[#14262E]/30 mx-auto mb-3" />
-              <p className="text-[#14262E]/60 text-sm">No verified fatwas found in this category.</p>
+            <div className="py-20 text-center border border-[#0F241C]/10 bg-white rounded-2xl p-8">
+              <HelpCircle className="w-12 h-12 text-[#0F241C]/30 mx-auto mb-3" />
+              <p className="text-[#0F241C]/60 text-sm">No verified fatwas found in this category.</p>
             </div>
           )}
         </section>
