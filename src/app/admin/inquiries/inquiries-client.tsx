@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import {
   HelpCircle,
@@ -26,6 +27,7 @@ import {
 import type { InquiryRecord } from "@/lib/db/types";
 
 export function InquiriesClient({ initialInquiries }: { initialInquiries: InquiryRecord[] }) {
+  const router = useRouter();
   const t = useTranslations("admin.inquiries");
   const tCommon = useTranslations("admin.common");
   const tFatwas = useTranslations("admin.fatwas");
@@ -67,6 +69,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
           prev.map((i) => (i.id === id ? { ...i, status: newStatus } : i))
         );
         setFeedback(tCommon("success"));
+        router.refresh();
       }
     } catch (err: any) {
       alert(tCommon("error") + ": " + err.message);
@@ -79,6 +82,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
       await deleteInquiryAction(id);
       setInquiries((prev) => prev.filter((i) => i.id !== id));
       setFeedback(tCommon("success"));
+      router.refresh();
     } catch (err: any) {
       alert(tCommon("error") + ": " + err.message);
     }
@@ -131,6 +135,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
         );
         setIsConvertModalOpen(false);
         setFeedback(`${tCommon("success")}: "${res.fatwa.title}"`);
+        router.refresh();
       }
     } catch (err: any) {
       alert(tCommon("error") + ": " + err.message);

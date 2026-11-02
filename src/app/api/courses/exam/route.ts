@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { submitCourseExam } from "@/lib/db/repository";
+import { revalidatePath } from "next/cache";
+import { submitCourseExamAsync } from "@/lib/db/repository";
 
 export async function POST(req: Request) {
   try {
@@ -11,12 +12,22 @@ export async function POST(req: Request) {
       );
     }
 
-    const result = submitCourseExam({
+    const result = await submitCourseExamAsync({
       course_id: data.course_id,
       student_email: data.student_email,
       student_name: data.student_name,
       answers: data.answers,
     });
+
+    try {
+      revalidatePath("/admin/certificates");
+      revalidatePath("/admin/enrollments");
+      if (result.certificate) {
+        revalidatePath(`/verify/${result.certificate.id}`);
+      }
+    } catch {
+      // Non-blocking
+    }
 
     return NextResponse.json({ success: true, ...result });
   } catch (err: any) {

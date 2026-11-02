@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { createCourseEnrollment, getEnrollmentByEmail } from "@/lib/db/repository";
+import { revalidatePath } from "next/cache";
+import { createCourseEnrollmentAsync, getEnrollmentByEmail } from "@/lib/db/repository";
 
 export async function POST(req: Request) {
   try {
@@ -11,7 +12,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const enrollment = createCourseEnrollment({
+    const enrollment = await createCourseEnrollmentAsync({
       course_id: data.course_id,
       course_slug: data.course_slug || data.course_id,
       course_title: data.course_title || "Course Program",
@@ -20,6 +21,12 @@ export async function POST(req: Request) {
       student_phone: data.student_phone,
       city: data.city,
     });
+
+    try {
+      revalidatePath("/admin/enrollments");
+    } catch {
+      // Non-blocking in non-request contexts
+    }
 
     return NextResponse.json({ success: true, enrollment });
   } catch (err: any) {
