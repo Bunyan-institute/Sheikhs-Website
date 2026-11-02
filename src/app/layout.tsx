@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Manrope, Inter, Amiri, Noto_Sans_Ethiopic } from "next/font/google";
+import { Marcellus, Figtree, Amiri, Noto_Sans_Ethiopic, Noto_Serif_Ethiopic } from "next/font/google";
 import "@/styles/globals.css";
 
-const manrope = Manrope({
+const marcellus = Marcellus({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-display",
   display: "swap",
 });
 
-const inter = Inter({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -27,12 +28,19 @@ const notoEthiopic = Noto_Sans_Ethiopic({
   display: "swap",
 });
 
+const notoSerifEthiopic = Noto_Serif_Ethiopic({
+  weight: ["500", "600"],
+  subsets: ["ethiopic"],
+  variable: "--font-ethiopic-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Sheikh Muhammed Ferej Megeno",
     default: "Sheikh Muhammed Ferej Megeno",
   },
-  description: "Islamic Scholar, Educator & Sharia Consultant — Authentic Lectures, Articles, and Sharia Insights",
+  description: "Official scholar archive of Sheikh Muhammed Ferej Megeno — Islamic scholar, educator and AAOIFI-certified Sharia consultant.",
 };
 
 export default function RootLayout({
@@ -43,9 +51,9 @@ export default function RootLayout({
   return (
     <html
       suppressHydrationWarning
-      className={`${manrope.variable} ${inter.variable} ${amiri.variable} ${notoEthiopic.variable}`}
+      className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable} ${notoSerifEthiopic.variable}`}
     >
-      <body className="min-h-screen bg-surface text-text antialiased">
+      <body className="min-h-screen bg-[#EDF2EE] text-[#14262E] font-sans antialiased selection:bg-[#BF9A45]/30">
         {children}
       </body>
     </html>

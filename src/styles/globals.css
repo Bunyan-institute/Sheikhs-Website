@@ -1,44 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --color-surface: #FAF8F5;
-  --color-surface-2: #F4EFEA;
-  --color-surface-3: #EAE3D9;
+  --color-paper: #EDF2EE;
+  --color-mist: #DDE7E1;
+  --color-ink: #14262E;
+  --color-lapis: #0F3446;
+  --color-abyss: #0A2532;
+  --color-jade: #1D6A5A;
+  --color-gold: #BF9A45;
+  --color-leaf: #E6D3A3;
+
+  /* Legacy aliases mapped gracefully */
+  --color-surface: #EDF2EE;
+  --color-surface-2: #DDE7E1;
+  --color-surface-3: #D0DDD5;
   --color-surface-card: #FFFFFF;
 
-  --color-text: #1C1917;
-  --color-text-secondary: #57534E;
-  --color-text-tertiary: #A8A29E;
-  --color-text-inverse: #FFFFFF;
+  --color-text: #14262E;
+  --color-text-secondary: #3D5560;
+  --color-text-tertiary: #6E8894;
+  --color-text-inverse: #EDF2EE;
 
-  --color-accent: #1A4D2E;
-  --color-accent-hover: #133A22;
-  --color-accent-muted: #EBF2ED;
+  --color-accent: #1D6A5A;
+  --color-accent-hover: #144E42;
+  --color-accent-muted: #DDE7E1;
 
-  --color-brass: #B8860B;
-  --color-brass-muted: #FBF6EB;
+  --color-brass: #BF9A45;
+  --color-brass-muted: #E6D3A3;
 
-  --color-border: #E6E0D8;
-  --color-border-light: #F0ECE4;
+  --color-border: #DDE7E1;
+  --color-border-light: #E8F0EA;
 
-  --font-heading: "Manrope", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-arabic: "Amiri", "Noto Naskh Arabic", serif;
-  --font-ethiopic: "Noto Sans Ethiopic", system-ui, sans-serif;
+  --font-display: "Marcellus", "Noto Serif Ethiopic", serif;
+  --font-sans: "Figtree", "Noto Sans Ethiopic", system-ui, sans-serif;
+  --font-heading: "Marcellus", "Noto Serif Ethiopic", serif;
+  --font-body: "Figtree", "Noto Sans Ethiopic", system-ui, sans-serif;
+  --font-arabic: "Amiri", serif;
+  --font-ethiopic: "Noto Serif Ethiopic", serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 /* Base styles */
 html {
-  scroll-behavior: auto !important;
+  scroll-behavior: smooth;
   overflow-x: clip;
   max-width: 100%;
 }
 
 body {
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  font-family: var(--font-body);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
@@ -46,30 +58,111 @@ body {
 }
 
 /* RTL Arabic */
-[dir="rtl"] body,
-[dir="rtl"] .font-body {
-  font-family: var(--font-arabic);
+[dir="rtl"],
+.ar {
+  font-family: var(--font-arabic) !important;
 }
 
-/* Amharic */
-[lang="am"] body,
-[lang="am"] .font-body {
-  font-family: var(--font-ethiopic);
+/* Ethiopic / Amharic */
+[lang="am"],
+.font-ethiopic {
+  font-family: var(--font-ethiopic) !important;
 }
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+  outline: 2px solid #BF9A45;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
-/* ZERO ANIMATION POLICY for serious, dignified scholarly aesthetic */
-*,
-*::before,
-*::after {
-  animation: none !important;
-  transform: none !important;
-  transition-duration: 0.1s !important;
+/* Eight-point star lattice backgrounds */
+.lattice {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23BF9A45' stroke-opacity='.22' stroke-width='1'%3E%3Crect x='21' y='21' width='30' height='30'/%3E%3Crect x='21' y='21' width='30' height='30' transform='rotate(45 36 36)'/%3E%3Cpath d='M0 0l15 15M72 0L57 15M0 72l15-15M72 72L57 57M36 0v9M36 63v9M0 36h9M63 36h9'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+.lattice-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%231D6A5A' stroke-opacity='.10' stroke-width='1'%3E%3Crect x='21' y='21' width='30' height='30'/%3E%3Crect x='21' y='21' width='30' height='30' transform='rotate(45 36 36)'/%3E%3Cpath d='M0 0l15 15M72 0L57 15M0 72l15-15M72 72L57 57M36 0v9M36 63v9M0 36h9M63 36h9'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+/* Architectural Islamic elements */
+.arch-top {
+  border-radius: 50% 50% 10px 10px / 38% 38% 10px 10px;
+}
+
+.star-sep {
+  width: 10px;
+  height: 10px;
+  background: #BF9A45;
+  clip-path: polygon(50% 0, 61% 35%, 100% 50%, 61% 65%, 50% 100%, 39% 65%, 0 50%, 39% 35%);
+}
+
+.tab[aria-selected="true"] {
+  background: #0F3446;
+  color: #EDF2EE;
+  border-color: #0F3446;
+}
+
+/* Mihrab orchestration moments */
+.mihrab-line {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: draw 2.4s cubic-bezier(0.6, 0.1, 0.2, 1) 0.2s forwards;
+}
+
+.mihrab-inner {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw 2.4s cubic-bezier(0.6, 0.1, 0.2, 1) 0.55s forwards;
+}
+
+.mihrab-fill {
+  opacity: 0;
+  animation: fade 1.4s ease 1.3s forwards;
+}
+
+.mihrab-name {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: rise 1.2s ease 1.6s forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mihrab-line,
+  .mihrab-inner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .mihrab-fill,
+  .mihrab-name {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Scrollbar styling */
@@ -82,47 +175,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-border);
-  border-radius: 2px;
-}
-
-/* Typography utilities */
-.prose-scholarly {
-  font-family: var(--font-body);
-  line-height: 1.8;
-  letter-spacing: -0.01em;
-}
-
-.prose-scholarly h1,
-.prose-scholarly h2,
-.prose-scholarly h3 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.prose-scholarly p {
-  margin-bottom: 1.5em;
-}
-
-/* Classical Islamic Double Border Frame */
-.islamic-frame {
-  position: relative;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 0 0 3px #FAF8F5, 0 0 0 4px var(--color-border-light);
-}
-
-/* Classical Top Accent Rule */
-.islamic-border-accent {
-  position: relative;
-}
-
-.islamic-border-accent::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #1A4D2E, #B8860B, transparent);
+  background-color: var(--color-mist);
+  border-radius: 3px;
 }
