@@ -11,11 +11,11 @@ import { FloatingAppCard } from "@/components/profile/floating-app-card";
 import type { PublicProfile, SectionMap } from "@/lib/api/types";
 
 const DEFAULT_SECTIONS: SectionMap = {
-  lectures: true,
+  lectures: false,
   articles: true,
   fatwas: true,
   courses: true,
-  library: true,
+  library: false,
   events: true,
   questions: true,
 };

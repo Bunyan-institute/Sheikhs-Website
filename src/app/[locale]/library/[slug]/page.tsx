@@ -32,11 +32,11 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
   return (
     <article className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
       <Link 
-        href="/library" 
+        href="/media" 
         className="inline-flex items-center text-xs sm:text-sm font-semibold text-[#555E61] hover:text-[#1A4D2E] mb-8"
       >
         <ArrowLeft className="w-4 h-4 me-2 rtl:rotate-180 text-[#8C6D23]" />
-        Back to Library &amp; Treatises
+        Back to Media &amp; Treatises
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr] gap-8 md:gap-12 lg:gap-16">

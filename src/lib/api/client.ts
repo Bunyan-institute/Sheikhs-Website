@@ -22,12 +22,11 @@ export class BunyanApiError extends Error {
 }
 
 const LISTING_PATHS = [
-  "/lectures",
+  "/media",
   "/series",
   "/articles",
   "/fatwas",
   "/courses",
-  "/library",
   "/events",
   "/categories",
   "/tags",
