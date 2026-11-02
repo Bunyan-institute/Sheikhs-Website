@@ -47,7 +47,7 @@ export default async function LectureDetailPage({ params }: LectureDetailPagePro
     return (
       <div className="min-h-screen bg-[#FAF8F5] py-20 text-center">
         <h1 className="text-2xl font-bold font-heading mb-4 text-[#2D3436]">Lecture Not Found</h1>
-        <Link href="/lectures" className="text-[#1B5E20] hover:underline font-medium">← Back to all lectures</Link>
+        <Link href="/media" className="text-[#1B5E20] hover:underline font-medium">← Back to Media Hub</Link>
       </div>
     );
   }
@@ -68,11 +68,11 @@ export default async function LectureDetailPage({ params }: LectureDetailPagePro
     <div className="min-h-screen bg-[#FAF8F5] py-8 md:py-16">
       <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <Link 
-          href="/lectures" 
+          href="/media" 
           className="inline-flex items-center gap-2 text-sm font-medium text-[#636E72] hover:text-[#1B5E20] transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          All Lectures & Discourses
+          All Media &amp; Discourses Hub
         </Link>
 
         <div className="bg-white border border-[#E0D8CE] rounded-md p-5 sm:p-6 md:p-8 mb-8">
