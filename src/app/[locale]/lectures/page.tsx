@@ -1,6 +1,5 @@
-import { redirect } from "@/i18n/navigation";
+import { redirect } from "next/navigation";
 
-export default async function LecturesPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  redirect({ href: "/media", locale });
+export default function LecturesPage() {
+  redirect("/media");
 }

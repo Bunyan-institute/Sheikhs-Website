@@ -6,17 +6,13 @@ import { Download, Star, ChevronRight, ChevronLeft, WifiOff, Headphones, ShieldC
 
 export function FloatingAppCard() {
   const [isOpen, setIsOpen] = useState(true);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     // On smaller screens, default to collapsed so it doesn't obstruct reading
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setIsOpen(false);
     }
   }, []);
-
-  if (!mounted) return null;
 
   return (
     <aside
