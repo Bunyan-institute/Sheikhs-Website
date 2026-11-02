@@ -3,9 +3,17 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Download, Star, ChevronRight, ChevronLeft, WifiOff, Headphones, ShieldCheck, Smartphone } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function FloatingAppCard() {
   const [isOpen, setIsOpen] = useState(true);
+
+  let t = (key: string) => key;
+  try {
+    t = useTranslations("appShowcase");
+  } catch {
+    // fallback
+  }
 
   useEffect(() => {
     // On smaller screens (<1024px), default to collapsed so it doesn't obstruct reading
@@ -13,6 +21,14 @@ export function FloatingAppCard() {
       setIsOpen(false);
     }
   }, []);
+
+  const badgeText = t("badge") !== "badge" ? t("badge") : "Official Android App";
+  const titleText = t("title") !== "title" ? t("title") : "ሸይኽ ሙሃመድ ፈረጅ";
+  const publisherText = t("publisher") !== "publisher" ? t("publisher") : "Africa Media Network";
+  const feat1 = t("offlineFeature") !== "offlineFeature" ? t("offlineFeature") : "100% Offline Audio";
+  const feat2 = t("backgroundFeature") !== "backgroundFeature" ? t("backgroundFeature") : "Background Playback";
+  const feat3 = t("adFreeFeature") !== "adFreeFeature" ? t("adFreeFeature") : "100% Free & Ad-Free";
+  const ctaBtn = t("downloadButton") !== "downloadButton" ? t("downloadButton") : "Install from Google Play";
 
   return (
     <aside
@@ -27,13 +43,13 @@ export function FloatingAppCard() {
           <div className="relative flex items-center justify-between pb-3 mb-3 border-b border-[#BF9A45]/20">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#1B6A50]/30 text-[#E6D3A3] text-[11px] font-semibold border border-[#1B6A50]/50">
               <Smartphone className="w-3 h-3 text-[#BF9A45]" />
-              <span>Official Android App</span>
+              <span>{badgeText}</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-lg text-[#EDF4F0]/70 hover:text-[#E6D3A3] hover:bg-[#0D3E2F] transition-colors"
+              className="p-1 rounded-lg text-[#EDF4F0]/70 hover:text-[#E6D3A3] hover:bg-[#0D3E2F] transition-colors cursor-pointer"
               aria-label="Collapse app card"
-              title="Collapse / ደብቅ"
+              title="Collapse"
             >
               <ChevronRight className="w-4 h-4 rtl:rotate-180" />
             </button>
@@ -54,10 +70,10 @@ export function FloatingAppCard() {
             </div>
             <div className="min-w-0">
               <h4 className="font-display font-bold text-base text-[#EDF4F0] leading-tight truncate">
-                ሸይኽ ሙሃመድ ፈረጅ
+                {titleText}
               </h4>
               <p className="text-[11px] text-[#E6D3A3] font-medium truncate mt-0.5">
-                Africa Media Network (Africa TV)
+                {publisherText}
               </p>
               <div className="flex items-center gap-1.5 text-[11px] text-[#EDF4F0]/70 mt-1">
                 <span className="flex items-center gap-0.5 text-[#BF9A45] font-bold">
@@ -65,7 +81,7 @@ export function FloatingAppCard() {
                   4.9
                 </span>
                 <span>•</span>
-                <span>Free &amp; Offline</span>
+                <span>10,000+ Downloads</span>
               </div>
             </div>
           </div>
@@ -74,15 +90,15 @@ export function FloatingAppCard() {
           <div className="relative space-y-1.5 text-xs text-[#EDF4F0]/85 bg-[#0D3E2F]/70 border border-[#BF9A45]/20 rounded-xl p-2.5 mb-3.5">
             <div className="flex items-center gap-2">
               <WifiOff className="w-3.5 h-3.5 text-[#BF9A45] shrink-0" />
-              <span className="text-[11px]">ሙሉ ደርሶችን ያለ ኢንተርኔት ያዳምጡ</span>
+              <span className="text-[11px] font-medium">{feat1}</span>
             </div>
             <div className="flex items-center gap-2">
               <Headphones className="w-3.5 h-3.5 text-[#BF9A45] shrink-0" />
-              <span className="text-[11px]">ከበስተጀርባ (Background) ማጫወት</span>
+              <span className="text-[11px] font-medium">{feat2}</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-3.5 h-3.5 text-[#BF9A45] shrink-0" />
-              <span className="text-[11px]">100% ነፃ • ምንም ማስታወቂያ የሌለው</span>
+              <span className="text-[11px] font-medium">{feat3}</span>
             </div>
           </div>
 
@@ -92,34 +108,33 @@ export function FloatingAppCard() {
               href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#BF9A45] text-[#072118] font-bold text-xs hover:bg-[#E6D3A3] transition-colors shadow-sm min-h-[40px]"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] font-bold text-xs transition-colors shadow-sm min-h-[40px] cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-[#072118]" />
-              <span>Install from Google Play</span>
+              <span>{ctaBtn}</span>
             </a>
           </div>
         </div>
       ) : (
-        /* Collapsed Trigger Button - docks smoothly on edge */
         <button
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-1.5 sm:gap-2 bg-[#072118] border border-[#BF9A45]/50 border-e-0 rounded-s-xl py-2 sm:py-2.5 px-1.5 sm:px-2 shadow-2xl hover:bg-[#0D3E2F] text-[#E6D3A3] transition-all"
-          aria-label="Open ሸይኽ ሙሃመድ ፈረጅ App Download Card"
-          title="ሸይኽ ሙሃመድ ፈረጅ App"
+          className="group flex items-center gap-2 bg-[#072118] text-[#EDF4F0] border border-[#BF9A45]/50 border-e-0 rounded-s-2xl shadow-xl px-3 py-3 hover:bg-[#0D3E2F] hover:border-[#BF9A45] transition-all cursor-pointer"
+          aria-label="Expand mobile app quick access"
         >
-          <ChevronLeft className="w-4 h-4 text-[#BF9A45] group-hover:text-[#E6D3A3] rtl:rotate-180" />
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg overflow-hidden bg-white p-0.5 border border-[#BF9A45]/50 shrink-0">
+          <ChevronLeft className="w-4 h-4 text-[#BF9A45] group-hover:-translate-x-0.5 transition-transform rtl:rotate-180" />
+          <div className="w-7 h-7 rounded-lg overflow-hidden bg-white p-0.5 border border-[#BF9A45]/50 shrink-0">
             <Image
               src="/images/sheikh-app-icon.png"
-              alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
+              alt="ሸይኽ ሙሃመድ ፈረጅ"
               width={28}
               height={28}
               className="w-full h-full object-cover rounded-md"
             />
           </div>
-          <span className="[writing-mode:vertical-rl] rotate-180 text-[10px] sm:text-[11px] font-semibold tracking-wider text-[#EDF4F0] group-hover:text-[#E6D3A3]">
-            ሸይኽ ሙሃመድ ፈረጅ App
-          </span>
+          <div className="text-start leading-none hidden sm:block">
+            <span className="block text-[9px] uppercase tracking-wider text-[#BF9A45] font-bold">App</span>
+            <span className="block text-xs font-bold text-[#EDF4F0] mt-0.5">Google Play</span>
+          </div>
         </button>
       )}
     </aside>
