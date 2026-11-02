@@ -92,6 +92,28 @@ body {
   border-radius: 50% 50% 10px 10px / 38% 38% 10px 10px;
 }
 
+/* Page container max-width to center content cleanly on wide screens */
+.max-w-page {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@utility max-w-page {
+  max-width: 72rem;
+}
+
+/* Clickable interactive card affordances */
+.interactive-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.interactive-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(7, 33, 24, 0.14), 0 8px 12px -6px rgba(7, 33, 24, 0.08);
+  border-color: #BF9A45 !important;
+}
+
 .star-sep {
   width: 10px;
   height: 10px;
