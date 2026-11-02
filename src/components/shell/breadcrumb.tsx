@@ -14,7 +14,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
 
   return (
     <nav aria-label="Breadcrumb" className="w-full">
-      <ol className="flex items-center space-x-2 text-sm text-[#636E72] flex-wrap">
+      <ol className="flex items-center space-x-2 text-xs font-sans text-[#14262E]/60 flex-wrap">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           
@@ -23,18 +23,18 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
               {item.href && !isLast ? (
                 <Link 
                   href={item.href}
-                  className="font-body hover:text-[#2D3436] transition-colors"
+                  className="hover:text-[#1D6A5A] transition-colors"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className={`font-body ${isLast ? 'text-[#2D3436] font-medium' : ''}`}>
+                <span className={isLast ? 'text-[#14262E] font-semibold' : ''}>
                   {item.label}
                 </span>
               )}
               
               {!isLast && (
-                <span className="mx-2 text-[#E0D8CE]">/</span>
+                <span className="mx-2 text-[#BF9A45]/50">/</span>
               )}
             </li>
           );
