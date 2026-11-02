@@ -26,21 +26,21 @@ export default function LocaleNotFound() {
         </Link>
 
         <Link
-          href="/lectures"
+          href="/media"
           className="p-5 rounded-md border border-[#E0D8CE] bg-white hover:border-[#1B5E20] hover:shadow-sm transition-all group"
         >
           <Video className="w-6 h-6 text-[#1B5E20] mb-3 group-hover:scale-110 transition-transform" />
-          <div className="font-heading font-bold text-[#2D3436] group-hover:text-[#1B5E20]">Lectures</div>
-          <div className="text-xs text-[#636E72] mt-1">Audio & video discourses</div>
+          <div className="font-heading font-bold text-[#2D3436] group-hover:text-[#1B5E20]">Media Hub</div>
+          <div className="text-xs text-[#636E72] mt-1">Audio &amp; video broadcasts</div>
         </Link>
 
         <Link
-          href="/library"
+          href="/courses"
           className="p-5 rounded-md border border-[#E0D8CE] bg-white hover:border-[#1B5E20] hover:shadow-sm transition-all group"
         >
           <BookOpen className="w-6 h-6 text-[#1B5E20] mb-3 group-hover:scale-110 transition-transform" />
-          <div className="font-heading font-bold text-[#2D3436] group-hover:text-[#1B5E20]">Public Library</div>
-          <div className="text-xs text-[#636E72] mt-1">Classical Kitabs & PDFs</div>
+          <div className="font-heading font-bold text-[#2D3436] group-hover:text-[#1B5E20]">Courses</div>
+          <div className="text-xs text-[#636E72] mt-1">Structured Hadith Curricula</div>
         </Link>
 
         <Link

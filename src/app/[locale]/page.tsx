@@ -1,127 +1,23 @@
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getProfile } from "@/lib/api/profile";
-import { getLectures } from "@/lib/api/lectures";
 import { getArticles } from "@/lib/api/articles";
 import { getEvents } from "@/lib/api/events";
+import { getMedia } from "@/lib/api/media";
 import { ScholarHero } from "@/components/profile/scholar-hero";
-import { LecturePlayer } from "@/components/lectures/lecture-player";
 import { AfricaTvPlaylists } from "@/components/media/africa-tv-playlists";
-import { AppShowcaseSection } from "@/components/profile/app-showcase-section";
-import { formatDuration, formatDate } from "@/lib/utils";
-import type { PublicLecture, PublicArticle, PublicEvent } from "@/lib/api/types";
+import { formatDate } from "@/lib/utils";
+import type { PublicArticle, PublicEvent } from "@/lib/api/types";
 import { 
-  Play, 
-  Download, 
   ArrowRight, 
   Calendar, 
   MapPin, 
-  CheckCircle, 
-  Tv, 
-  Layers, 
   ExternalLink,
-  Smartphone,
-  Headphones
+  Tv,
+  Headphones,
+  Video,
+  FileText
 } from "lucide-react";
-
-const OFFICIAL_PLAYLISTS = [
-  {
-    id: "pl_yt_main",
-    title: "Sheikh Muhammed Ferej — Official Complete Lectures Playlist",
-    amharicTitle: "የሸይኽ ሙሐመድ ፈረጅ የተሟላ የዳዕዋ ፕሌይሊስት (350+ ሰዓታት)",
-    platform: "YouTube Playlist",
-    episodes: "350+ Hours",
-    url: "https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3",
-    cover: "/images/photo_11_2026-09-30_23-42-17.jpg",
-    description: "The primary verified YouTube archive of lectures, Friday Khutbahs, and halaqat delivered by Sheikh Muhammed Ferej across three decades.",
-  },
-  {
-    id: "pl_africatv_riyad",
-    title: "Africa TV — Riyadus Saliheen Series (ሪያዱ ሷሊሂን በአፍሪካ ቲቪ)",
-    amharicTitle: "ሪያዱ ሷሊሂን በአፍሪካ ቲቪ — በሸይኽ ሙሐመድ ፈረጅ",
-    platform: "Africa TV Series",
-    episodes: "Full TV Series",
-    url: "https://www.youtube.com/@AfricaTV1",
-    cover: "/images/photo_12_2026-09-30_23-42-17.jpg",
-    description: "Systematic television commentary on Hadith sciences and purification of character broadcast across the Horn of Africa on Africa TV.",
-  },
-  {
-    id: "pl_africatv_seerah",
-    title: "Africa TV — Nebyu Beleloch Andebet (ነቢዩ በሌሎች አንደበት)",
-    amharicTitle: "ነቢዩ (ሰ.ዐ.ወ) በሌሎች አንደበት — በአፍሪካ ቲቪ የተላለፈ",
-    platform: "Africa TV Series",
-    episodes: "Complete Exegesis",
-    url: "https://www.youtube.com/watch?v=5hlykYaVcn4",
-    cover: "/images/photo_1_2026-09-30_23-42-17.jpg",
-    description: "Televised series exploring global historical testimonies and classical non-Muslim recognitions of Prophet Muhammad (ﷺ).",
-  },
-  {
-    id: "pl_africatv_hajj",
-    title: "Africa TV — Negere Hajj & Umrah Rulings (ነገረ ሐጅ)",
-    amharicTitle: "የሐጅ እና ዑምራ ስነስርዓት በአፍሪካ ቲቪ — በሸይኽ ሙሐመድ ፈረጅ",
-    platform: "Africa TV Series",
-    episodes: "Practical Rulings",
-    url: "https://www.youtube.com/@AfricaTV1",
-    cover: "/images/photo_16_2026-09-30_23-42-17.jpg",
-    description: "Step-by-step jurisprudential guide and rulings on performing Hajj and Umrah in accordance with authentic Sunnah.",
-  },
-];
-
-function LectureCard({ lecture }: { lecture: PublicLecture }) {
-  const coverUrl = lecture.cover?.url;
-  const isVideo = Boolean(lecture.media?.video);
-
-  return (
-    <Link href={`/lectures/${lecture.slug}`} className="block group h-full">
-      <div className="border border-[#E6E0D8] rounded-[4px] overflow-hidden bg-white hover:border-[#1A4D2E] transition-colors h-full flex flex-col">
-        <div className="aspect-video bg-[#FAF8F5] relative flex items-center justify-center overflow-hidden border-b border-[#E6E0D8]">
-          {coverUrl ? (
-            <img 
-              src={coverUrl} 
-              alt={lecture.title} 
-              className="w-full h-full object-cover" 
-            />
-          ) : (
-            <div className="text-[#1A4D2E] opacity-40">
-              <Tv className="w-10 h-10" />
-            </div>
-          )}
-          <div className="absolute top-2.5 end-2.5 bg-[#FAF8F5]/90 border border-[#E6E0D8] text-[#1A4D2E] text-[10px] font-bold px-2 py-0.5 rounded-[2px]">
-            {isVideo ? "Africa TV / Video" : "Audio Lesson"}
-          </div>
-        </div>
-        <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs">
-              {lecture.categories && lecture.categories.length > 0 && (
-                <span className="px-2 py-0.5 text-[11px] rounded-[2px] bg-[#FAF8F5] text-[#1A4D2E] border border-[#E6E0D8] font-semibold uppercase tracking-wider">
-                  {lecture.categories[0]}
-                </span>
-              )}
-              {lecture.duration_seconds && (
-                <span className="text-[#7A8285] font-medium text-xs">
-                  {formatDuration(lecture.duration_seconds)}
-                </span>
-              )}
-            </div>
-            <h3 className="font-heading font-bold text-sm sm:text-base text-[#2D3436] group-hover:text-[#1A4D2E] transition-colors line-clamp-2 break-words">
-              {lecture.title}
-            </h3>
-            {lecture.summary && (
-              <p className="text-xs text-[#555E61] line-clamp-2 leading-relaxed">
-                {lecture.summary}
-              </p>
-            )}
-          </div>
-          <div className="pt-3 border-t border-[#FAF8F5] flex items-center justify-between text-xs text-[#8C6D23] font-semibold">
-            <span>Watch / Study Lesson</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </div>
-        </div>
-      </div>
-    </Link>
-  );
-}
 
 function ArticleCard({ article }: { article: PublicArticle }) {
   return (
@@ -184,26 +80,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
 
   let profile = null;
-  let latestLectures: PublicLecture[] = [];
   let latestArticles: PublicArticle[] = [];
   let upcomingEvents: PublicEvent[] = [];
+  let mediaItems: any[] = [];
 
   try {
     profile = await getProfile(locale);
     const sections = profile.sections;
 
-    if (sections.lectures) {
-      const res = await getLectures({ limit: "24", locale });
-      latestLectures = res?.data || [];
-    }
-    if (sections.articles) {
-      const res = await getArticles({ limit: "3", locale });
-      latestArticles = res?.data || [];
-    }
-    if (sections.events) {
-      const res = await getEvents({ limit: "3", locale });
-      upcomingEvents = res?.data || [];
-    }
+    const [articlesRes, eventsRes, mediaRes] = await Promise.all([
+      sections.articles ? getArticles({ limit: "3", locale }) : Promise.resolve(null),
+      sections.events ? getEvents({ limit: "3", locale }) : Promise.resolve(null),
+      getMedia({ locale }),
+    ]);
+
+    latestArticles = articlesRes?.data || [];
+    upcomingEvents = eventsRes?.data || [];
+    mediaItems = mediaRes || [];
   } catch (error) {
     console.error("Failed to fetch homepage data", error);
   }
@@ -228,7 +121,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         height: 1280,
         duration_seconds: null,
       },
-      sections: { lectures: true, articles: true, fatwas: true, courses: true, library: true, events: true, questions: true },
+      sections: { lectures: false, articles: true, fatwas: true, courses: true, library: false, events: true, questions: true },
       socials: {
         youtube: "https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3",
         tiktok: "https://www.tiktok.com/@ustazmuhammadferej0",
@@ -239,8 +132,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     };
   }
 
-  const featuredLecture = latestLectures[0];
-  const videoLectures = latestLectures.filter(l => Boolean(l.media?.video));
+  const videoItems = mediaItems.filter(m => m.kind === "video").slice(0, 3);
+  const audioItems = mediaItems.filter(m => m.kind === "audio").slice(0, 3);
 
   return (
     <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pb-24">
@@ -251,9 +144,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         photoUrl={profile.photo?.url ?? null}
         locale={locale}
       />
-
-      {/* ── HIGH VISIBILITY OFFICIAL GOOGLE PLAY APP SHOWCASE ── */}
-      <AppShowcaseSection />
 
       {/* ── AFRICA TV & YOUTUBE OFFICIAL PLAYLISTS SHOWCASE ── */}
       <section className="py-12 border-b border-[#E6E0D8]">
@@ -276,119 +166,109 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </p>
           </div>
 
-          <a 
-            href="https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link 
+            href="/media"
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#1A4D2E] hover:text-[#8C6D23] font-bold"
           >
-            <span>Open 350+ Hours Playlist</span>
-            <ExternalLink className="w-4 h-4" />
-          </a>
+            <span>Browse Full Media Hub</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
         <AfricaTvPlaylists />
       </section>
 
-      {/* Featured Broadcast Halaqah Section */}
-      {featuredLecture && (
-        <section className="py-12 border-b border-[#E6E0D8]">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3">
-            <div>
-              <span className="text-xs uppercase font-bold text-[#1A4D2E] tracking-widest block mb-1">
-                Featured Broadcast • المحاضرات والخطب
-              </span>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#2D3436]">
-                Broadcast Exegesis by Sheikh Muhammed Ferej
-              </h2>
-            </div>
-            <Link 
-              href="/lectures" 
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#1A4D2E] hover:text-[#8C6D23] font-semibold"
-            >
-              <span>Browse All Recorded Lectures</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="border border-[#E6E0D8] rounded-[4px] overflow-hidden bg-white shadow-xs flex flex-col lg:flex-row">
-            <div className="lg:w-7/12 aspect-video bg-[#1A1A1A] relative flex items-center justify-center">
-              <LecturePlayer media={featuredLecture.media} title={featuredLecture.title} coverUrl={featuredLecture.cover?.url} />
-            </div>
-            <div className="p-6 sm:p-8 flex flex-col justify-center lg:w-5/12 space-y-4">
-              <div className="flex flex-wrap items-center gap-2">
-                {featuredLecture.categories && featuredLecture.categories.length > 0 && (
-                  <span className="px-3 py-1 text-[11px] rounded-[2px] bg-[#FAF8F5] text-[#1A4D2E] border border-[#E6E0D8] font-bold uppercase tracking-wider">
-                    {featuredLecture.categories[0]}
-                  </span>
-                )}
-                {featuredLecture.duration_seconds && (
-                  <span className="px-3 py-1 text-[11px] rounded-[2px] bg-[#FAF8F5] text-[#555E61] border border-[#E6E0D8] font-medium">
-                    {formatDuration(featuredLecture.duration_seconds)}
-                  </span>
-                )}
-                <span className="px-3 py-1 text-[11px] rounded-[2px] bg-[#1A4D2E]/10 text-[#1A4D2E] font-semibold">
-                  Official Exegesis
-                </span>
-              </div>
-              <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-[#2D3436] break-words">
-                {featuredLecture.title}
-              </h3>
-              {featuredLecture.summary && (
-                <p className="text-[#555E61] line-clamp-3 text-sm leading-relaxed break-words font-body">
-                  {featuredLecture.summary}
-                </p>
-              )}
-              <div className="pt-2 flex flex-wrap gap-3">
-                <Link
-                  href={`/lectures/${featuredLecture.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] bg-[#1A4D2E] text-white font-semibold text-xs sm:text-sm hover:bg-[#143d24]"
-                >
-                  <span>Full Lecture Notes &amp; Summary</span>
-                  <ArrowRight className="w-4 h-4 text-[#B8860B]" />
-                </Link>
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#FAF8F5] border border-[#E6E0D8] text-[#1A4D2E] font-bold text-xs hover:bg-white"
-                >
-                  <Download className="w-3.5 h-3.5 text-[#B8860B]" />
-                  <span>Listen in App (Offline)</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Audio Halaqat & Authentic Series */}
+      {/* ── MEDIA HUB DISCOURSES & BROADCAST ARCHIVES ── */}
       <section className="py-12 border-b border-[#E6E0D8]">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="text-xs uppercase font-bold text-[#1A4D2E] tracking-widest mb-1">
-              Audio Exegesis Archive • سلسلة الدروس الصوتية
+            <div className="flex items-center gap-2 mb-1">
+              <span className="font-arabic text-sm text-[#1A4D2E] font-bold" dir="rtl">
+                المكتبة المرئية والصوتية
+              </span>
+              <span className="text-[#B8860B]">۞</span>
+              <span className="text-xs uppercase tracking-widest text-[#8C6D23] font-semibold">
+                Media Hub &amp; Audio Broadcasts
+              </span>
             </div>
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#2D3436]">
-              Featured Audio Exegesis &amp; Study Series
+              Audio Lessons, Broadcasts &amp; Scholarly Archives
             </h2>
             <p className="text-xs sm:text-sm text-[#555E61] mt-1">
-              Systematic verse-by-verse and hadith-by-hadith classroom audio series taught by Sheikh Muhammed Ferej.
+              Listen to authentic classroom audio expositions, television series, and verified scholarly recordings.
             </p>
           </div>
+
           <Link 
-            href="/series" 
+            href="/media" 
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#1A4D2E] hover:text-[#8C6D23] font-semibold"
           >
-            <span>Explore All Audio Series</span>
+            <span>Explore All Media Categories</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {latestLectures.filter(l => !l.media?.video).slice(0, 4).map((lec) => (
-            <LectureCard key={lec.id} lecture={lec} />
-          ))}
+        {/* Media Category Quick Access Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Link
+            href="/media?kind=videos"
+            className="p-5 rounded-[4px] border border-[#E6E0D8] bg-white hover:border-[#1A4D2E] transition-colors flex items-center gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+              <Video className="w-5 h-5 text-[#B8860B]" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="font-heading font-bold text-sm text-[#2D3436] group-hover:text-[#1A4D2E] truncate">
+                Video Discourses
+              </h4>
+              <p className="text-xs text-[#7A8285]">Africa TV &amp; YouTube</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/media?kind=audio"
+            className="p-5 rounded-[4px] border border-[#E6E0D8] bg-white hover:border-[#1A4D2E] transition-colors flex items-center gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+              <Headphones className="w-5 h-5 text-[#1A4D2E]" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="font-heading font-bold text-sm text-[#2D3436] group-hover:text-[#1A4D2E] truncate">
+                Audio Exegesis
+              </h4>
+              <p className="text-xs text-[#7A8285]">Riyad us-Saliheen Series</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/media?kind=photos"
+            className="p-5 rounded-[4px] border border-[#E6E0D8] bg-white hover:border-[#1A4D2E] transition-colors flex items-center gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+              <Tv className="w-5 h-5 text-[#8C6D23]" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="font-heading font-bold text-sm text-[#2D3436] group-hover:text-[#1A4D2E] truncate">
+                Photo Archives
+              </h4>
+              <p className="text-xs text-[#7A8285]">Historical Dawah Timeline</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/media?kind=documents"
+            className="p-5 rounded-[4px] border border-[#E6E0D8] bg-white hover:border-[#1A4D2E] transition-colors flex items-center gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-[3px] bg-[#FAF8F5] border border-[#E6E0D8] flex items-center justify-center shrink-0">
+              <FileText className="w-5 h-5 text-[#1A4D2E]" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="font-heading font-bold text-sm text-[#2D3436] group-hover:text-[#1A4D2E] truncate">
+                Study Documents
+              </h4>
+              <p className="text-xs text-[#7A8285]">Syllabi &amp; Curriculum PDFs</p>
+            </div>
+          </Link>
         </div>
       </section>
 

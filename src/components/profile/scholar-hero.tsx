@@ -69,29 +69,14 @@ export function ScholarHero({ name, headline, biography, photoUrl, locale }: Sch
             </p>
           )}
 
-          {/* Classical Primary Action CTAs with Visible Google Play App Download */}
+          {/* Classical Primary Action CTAs */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-[4px] bg-[#1A4D2E] text-[#FAF8F5] font-bold text-sm sm:text-base border border-[#143d24] shadow-xs hover:bg-[#143d24]"
-            >
-              <Image
-                src="/images/sheikh-app-icon.png"
-                alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
-                width={24}
-                height={24}
-                className="rounded-[4px] shadow-2xs shrink-0"
-              />
-              <span>Download &ldquo;ሸይኽ ሙሃመድ ፈረጅ&rdquo; App</span>
-            </a>
             <Link 
-              href="/lectures"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-[4px] bg-[#FAF8F5] border border-[#1A4D2E] text-[#1A4D2E] font-semibold text-sm sm:text-base shadow-xs hover:bg-[#F2ECE1]"
+              href="/media"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-[4px] bg-[#1A4D2E] text-white font-semibold text-sm sm:text-base shadow-xs hover:bg-[#143d24]"
             >
               <BookOpen className="w-4 h-4 text-[#B8860B]" />
-              <span>Africa TV &amp; YouTube Halaqat</span>
+              <span>Africa TV &amp; Media Archive</span>
             </Link>
             <Link 
               href="/ask"
