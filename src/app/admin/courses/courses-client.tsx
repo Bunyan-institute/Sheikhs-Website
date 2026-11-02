@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Edit2, Trash2, ExternalLink, GraduationCap, X, Loader2, CheckCircle, Check, Ban } from "lucide-react";
+import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Check, Ban } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { saveCourseAction, deleteCourseAction } from "../actions";
 import type { PublicCourse } from "@/lib/api/types";
 
 export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse[] }) {
+  const t = useTranslations("admin.courses");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [courses, setCourses] = useState<PublicCourse[]>(initialCourses);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -87,7 +92,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
       }
 
       setIsModalOpen(false);
-      setFeedback("Course program saved successfully!");
+      setFeedback(tCommon("successSave"));
     } catch (err: any) {
       alert("Error: " + err.message);
     } finally {
@@ -96,11 +101,11 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
   };
 
   const handleDelete = async (id: string, cTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${cTitle}"?`)) return;
+    if (!confirm(`${tCommon("confirmDelete")} (${cTitle})`)) return;
     try {
       await deleteCourseAction(id);
       setCourses((prev) => prev.filter((c) => c.id !== id));
-      setFeedback(`Course "${cTitle}" deleted.`);
+      setFeedback(tCommon("successDelete"));
     } catch (err: any) {
       alert("Error: " + err.message);
     }
@@ -111,10 +116,10 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Courses & Study Programs ({courses.length})
+            {t("heading")} ({courses.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage structured curricula, syllabus chapters, and student enrollment status.
+            {t("subheading")}
           </p>
         </div>
 
@@ -123,7 +128,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
-          <span>New Course</span>
+          <span>{t("newCourse")}</span>
         </button>
       </div>
 
@@ -153,13 +158,13 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
                   }`}
                 >
                   {crs.enrolment_open ? <Check className="w-3 h-3" /> : <Ban className="w-3 h-3" />}
-                  <span>{crs.enrolment_open ? "Enrollment Open" : "Closed"}</span>
+                  <span>{crs.enrolment_open ? tCommon("active") : tCommon("completed")}</span>
                 </span>
                 <Link
-                  href={`/courses/${crs.slug}`}
+                  href={`/${locale}/courses/${crs.slug}`}
                   target="_blank"
                   className="text-[#636E72] hover:text-[#1B5E20] p-1"
-                  title="View Public Course"
+                  title={tCommon("viewLive")}
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
@@ -177,19 +182,19 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
             </div>
 
             <div className="pt-4 border-t border-[#FAF8F5] flex items-center justify-between text-xs text-[#636E72]">
-              <span>{crs.lesson_count} Lessons</span>
+              <span>{crs.lesson_count} {t("fieldLessonsCount")}</span>
               <div className="space-x-2">
                 <button
                   onClick={() => openEditModal(crs)}
                   className="px-3 py-1.5 rounded bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 font-semibold text-xs"
                 >
-                  Edit
+                  {tCommon("edit")}
                 </button>
                 <button
                   onClick={() => handleDelete(crs.id, crs.title)}
                   className="px-3 py-1.5 rounded bg-red-50 text-red-600 hover:bg-red-100 font-semibold text-xs"
                 >
-                  Delete
+                  {tCommon("delete")}
                 </button>
               </div>
             </div>
@@ -203,7 +208,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg z-10 border border-[#E0D8CE] overflow-hidden">
             <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5]">
               <h3 className="font-heading font-bold text-sm text-[#2D3436]">
-                {editingCourse ? "Edit Course" : "New Course"}
+                {editingCourse ? t("editCourse") : t("newCourse")}
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-[#636E72]">
                 <X className="w-4 h-4" />
@@ -212,7 +217,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
 
             <form onSubmit={handleSave} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Course Title *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldTitle")} *</label>
                 <input
                   type="text"
                   required
@@ -224,7 +229,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Slug *</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSlug")} *</label>
                   <input
                     type="text"
                     required
@@ -234,7 +239,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Total Lessons</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldLessonsCount")}</label>
                   <input
                     type="number"
                     value={lessonCount}
@@ -246,7 +251,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Summary</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDescription")}</label>
                 <textarea
                   rows={2}
                   value={summary}
@@ -256,7 +261,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Full Curriculum Description</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDescription")}</label>
                 <textarea
                   rows={4}
                   value={description}
@@ -274,7 +279,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
                   className="w-4 h-4 text-[#1B5E20] rounded border-gray-300"
                 />
                 <label htmlFor="enrolment" className="font-semibold text-[#2D3436] cursor-pointer">
-                  Enrollment Open (Students can register)
+                  {tCommon("active")} ({tCommon("enrollments")})
                 </label>
               </div>
 
@@ -284,14 +289,14 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-[#E0D8CE] rounded text-[#636E72]"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
                   className="px-6 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white rounded font-bold"
                 >
-                  {isSaving ? "Saving..." : "Save Course"}
+                  {isSaving ? tCommon("saving") : t("saveCourse")}
                 </button>
               </div>
             </form>

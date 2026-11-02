@@ -6,17 +6,15 @@ import {
   Award,
   Search,
   CheckCircle,
-  AlertTriangle,
   ExternalLink,
   Plus,
   ShieldCheck,
   Ban,
-  User,
   Mail,
-  Calendar,
   X,
   Loader2,
 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { revokeCertificateAction, issueCertificateAction } from "../actions";
 import type { IssuedCertificateRecord } from "@/lib/db/types";
 import type { PublicCourse } from "@/lib/api/types";
@@ -28,6 +26,10 @@ export function CertificatesClient({
   initialCertificates: IssuedCertificateRecord[];
   courses: PublicCourse[];
 }) {
+  const t = useTranslations("admin.certificates");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [certificates, setCertificates] = useState<IssuedCertificateRecord[]>(initialCertificates);
   const [searchTerm, setSearchTerm] = useState("");
   const [isIssueModalOpen, setIsIssueModalOpen] = useState(false);
@@ -121,21 +123,21 @@ export function CertificatesClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Issued Certificates & Credentials ({certificates.length})
+            {t("heading")} ({certificates.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Tamper-proof scholarly certificate registry with cryptographic hash verification and anti-forgery protection.
+            {t("subheading")}
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <Link
-            href="/verify"
+            href={`/${locale}/verify`}
             target="_blank"
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-[4px] border border-[#E0D8CE] bg-white hover:border-[#1B5E20] text-xs font-semibold text-[#2D3436] transition-colors"
           >
             <ShieldCheck className="w-4 h-4 text-[#1B5E20]" />
-            <span>Public Verification Portal</span>
+            <span>{tCommon("viewLive")}</span>
           </Link>
 
           <button
@@ -143,7 +145,7 @@ export function CertificatesClient({
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>Manually Issue Certificate</span>
+            <span>{tCommon("add")}</span>
           </button>
         </div>
       </div>
@@ -162,7 +164,7 @@ export function CertificatesClient({
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Total Certificates
+            {tCommon("all")}
           </span>
           <p className="font-heading text-2xl font-bold text-[#2D3436] mt-1">
             {certificates.length}
@@ -171,7 +173,7 @@ export function CertificatesClient({
 
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Active Verified
+            {t("valid")}
           </span>
           <p className="font-heading text-2xl font-bold text-[#1B5E20] mt-1">
             {activeCount}
@@ -180,7 +182,7 @@ export function CertificatesClient({
 
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Revoked
+            {t("revoked")}
           </span>
           <p className="font-heading text-2xl font-bold text-red-700 mt-1">
             {revokedCount}
@@ -194,7 +196,7 @@ export function CertificatesClient({
           <Search className="w-4 h-4 text-[#636E72] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search by certificate serial code (e.g. MFM-2026-TWH-1001), student name, or course..."
+            placeholder={t("searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full text-xs ps-9 pe-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
@@ -208,12 +210,12 @@ export function CertificatesClient({
           <table className="w-full text-left text-xs">
             <thead className="bg-[#FAF8F5] border-b border-[#E0D8CE] text-[#636E72] uppercase font-bold text-[10px] tracking-wider">
               <tr>
-                <th className="py-3 px-4">Serial & Verification</th>
-                <th className="py-3 px-4">Student</th>
-                <th className="py-3 px-4">Course Program</th>
-                <th className="py-3 px-4">Merit / Honor</th>
-                <th className="py-3 px-4">Issue Date</th>
-                <th className="py-3 px-4 text-right">Actions</th>
+                <th className="py-3 px-4">{t("colCode")}</th>
+                <th className="py-3 px-4">{t("colStudent")}</th>
+                <th className="py-3 px-4">{t("colCourse")}</th>
+                <th className="py-3 px-4">{t("colGrade")}</th>
+                <th className="py-3 px-4">{t("colDate")}</th>
+                <th className="py-3 px-4 text-right">{t("colActions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F0EAE1]">
@@ -222,7 +224,7 @@ export function CertificatesClient({
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-1.5">
                       <Link
-                        href={`/verify/${cert.id}`}
+                        href={`/${locale}/verify/${cert.id}`}
                         target="_blank"
                         className="font-mono font-bold text-sm text-[#1B5E20] hover:underline inline-flex items-center gap-1"
                       >
@@ -237,11 +239,11 @@ export function CertificatesClient({
 
                     {cert.revoked ? (
                       <span className="inline-block mt-1 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-red-100 text-red-800">
-                        Revoked: {cert.revoked_reason}
+                        {t("revoked")}: {cert.revoked_reason}
                       </span>
                     ) : (
                       <span className="inline-block mt-1 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800">
-                        Verified Authentic
+                        {t("valid")}
                       </span>
                     )}
                   </td>
@@ -292,13 +294,13 @@ export function CertificatesClient({
                       <button
                         onClick={() => handleRevoke(cert.id, cert.student_name)}
                         className="p-1.5 text-[#636E72] hover:text-red-700 hover:bg-red-50 rounded transition-colors"
-                        title="Revoke Certificate"
+                        title={t("revokeCertificate")}
                       >
                         <Ban className="w-4 h-4" />
                       </button>
                     ) : (
                       <span className="text-[10px] text-red-600 font-semibold italic">
-                        Revoked
+                        {t("revoked")}
                       </span>
                     )}
                   </td>
@@ -308,7 +310,7 @@ export function CertificatesClient({
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={6} className="py-12 text-center text-[#636E72]">
-                    No certificates found matching your search.
+                    {tCommon("noRecords")}
                   </td>
                 </tr>
               )}
@@ -323,7 +325,7 @@ export function CertificatesClient({
           <div className="bg-white rounded-lg max-w-lg w-full p-6 space-y-4 shadow-xl">
             <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-3">
               <h2 className="font-heading font-bold text-lg text-[#2D3436]">
-                Issue Scholarly Certificate
+                {tCommon("certificates")}
               </h2>
               <button
                 onClick={() => setIsIssueModalOpen(false)}
@@ -336,7 +338,7 @@ export function CertificatesClient({
             <form onSubmit={handleIssueSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Target Course Program *
+                  {t("colCourse")} *
                 </label>
                 <select
                   value={selectedCourseSlug}
@@ -353,28 +355,26 @@ export function CertificatesClient({
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Student Full Legal Name *
+                  {t("colStudent")} *
                 </label>
                 <input
                   type="text"
                   required
                   value={studentName}
                   onChange={(e) => setStudentName(e.target.value)}
-                  placeholder="e.g. Bilal Ahmed al-Habashi"
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Student Email Address *
+                  Email *
                 </label>
                 <input
                   type="email"
                   required
                   value={studentEmail}
                   onChange={(e) => setStudentEmail(e.target.value)}
-                  placeholder="bilal@example.com"
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -382,7 +382,7 @@ export function CertificatesClient({
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Exam Score (%)
+                    Score (%)
                   </label>
                   <input
                     type="number"
@@ -395,7 +395,7 @@ export function CertificatesClient({
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Grade Distinction
+                    {t("colGrade")}
                   </label>
                   <input
                     type="text"
@@ -412,7 +412,7 @@ export function CertificatesClient({
                   onClick={() => setIsIssueModalOpen(false)}
                   className="px-4 py-2 text-xs font-medium text-[#636E72] hover:bg-[#F5F1EB] rounded transition-colors"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
@@ -420,7 +420,7 @@ export function CertificatesClient({
                   className="inline-flex items-center gap-2 px-5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs transition-colors cursor-pointer disabled:opacity-60"
                 >
                   {isSubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>Generate Certificate</span>
+                  <span>{tCommon("save")}</span>
                 </button>
               </div>
             </form>

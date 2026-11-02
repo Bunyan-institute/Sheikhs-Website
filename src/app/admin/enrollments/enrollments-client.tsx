@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 import {
   GraduationCap,
   Search,
@@ -21,6 +22,10 @@ export function EnrollmentsClient({
 }: {
   initialEnrollments: CourseEnrollmentRecord[];
 }) {
+  const t = useTranslations("admin.enrollments");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [enrollments] = useState<CourseEnrollmentRecord[]>(initialEnrollments);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "enrolled" | "in_progress" | "completed">("all");
@@ -47,10 +52,10 @@ export function EnrollmentsClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Course Enrollments & Student Roster ({enrollments.length})
+            {t("heading")} ({enrollments.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Track student registrations, syllabus progression, assessment attempts, and earned credentials.
+            {t("subheading")}
           </p>
         </div>
 
@@ -60,7 +65,7 @@ export function EnrollmentsClient({
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-semibold shadow-xs transition-colors"
           >
             <Award className="w-4 h-4 text-[#C5A059]" />
-            <span>View Issued Certificates ({certifiedCount})</span>
+            <span>{tCommon("certificates")} ({certifiedCount})</span>
           </Link>
         </div>
       </div>
@@ -69,7 +74,7 @@ export function EnrollmentsClient({
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Total Enrolled
+            {tCommon("all")}
           </span>
           <p className="font-heading text-2xl font-bold text-[#2D3436] mt-1">
             {enrollments.length}
@@ -78,7 +83,7 @@ export function EnrollmentsClient({
 
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Studying in Progress
+            {t("inProgress")}
           </span>
           <p className="font-heading text-2xl font-bold text-amber-700 mt-1">
             {inProgressCount}
@@ -87,7 +92,7 @@ export function EnrollmentsClient({
 
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Courses Completed
+            {t("completed")}
           </span>
           <p className="font-heading text-2xl font-bold text-emerald-700 mt-1">
             {completedCount}
@@ -96,7 +101,7 @@ export function EnrollmentsClient({
 
         <div className="bg-white border border-[#E0D8CE] p-4 rounded-lg">
           <span className="text-[11px] text-[#636E72] uppercase font-bold block">
-            Certified Students
+            {t("issued")}
           </span>
           <p className="font-heading text-2xl font-bold text-[#1B5E20] mt-1">
             {certifiedCount}
@@ -109,9 +114,9 @@ export function EnrollmentsClient({
         <div className="flex items-center gap-1.5">
           {(
             [
-              { id: "all", label: "All Students", count: enrollments.length },
-              { id: "in_progress", label: "In Progress", count: inProgressCount },
-              { id: "completed", label: "Completed", count: completedCount },
+              { id: "all", label: tCommon("all"), count: enrollments.length },
+              { id: "in_progress", label: t("inProgress"), count: inProgressCount },
+              { id: "completed", label: t("completed"), count: completedCount },
             ] as const
           ).map((tab) => (
             <button
@@ -132,7 +137,7 @@ export function EnrollmentsClient({
           <Search className="w-4 h-4 text-[#636E72] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search student, email, course..."
+            placeholder={t("searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full sm:w-64 text-xs ps-9 pe-3 py-1.5 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
@@ -146,12 +151,12 @@ export function EnrollmentsClient({
           <table className="w-full text-left text-xs">
             <thead className="bg-[#FAF8F5] border-b border-[#E0D8CE] text-[#636E72] uppercase font-bold text-[10px] tracking-wider">
               <tr>
-                <th className="py-3 px-4">Student</th>
-                <th className="py-3 px-4">Enrolled Course</th>
-                <th className="py-3 px-4">Lessons Progress</th>
-                <th className="py-3 px-4">Exam Performance</th>
-                <th className="py-3 px-4">Credential Status</th>
-                <th className="py-3 px-4 text-right">Enrolled Date</th>
+                <th className="py-3 px-4">{t("colStudent")}</th>
+                <th className="py-3 px-4">{t("colCourse")}</th>
+                <th className="py-3 px-4">{t("colProgress")}</th>
+                <th className="py-3 px-4">{t("colStatus")}</th>
+                <th className="py-3 px-4">{t("colCertificate")}</th>
+                <th className="py-3 px-4 text-right">{t("colDate")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F0EAE1]">
@@ -206,13 +211,10 @@ export function EnrollmentsClient({
                           >
                             Score: {highestScore}%
                           </span>
-                          <span className="text-[10px] text-[#636E72] block">
-                            {enr.exam_attempts.length} {enr.exam_attempts.length > 1 ? "attempts" : "attempt"}
-                          </span>
                         </div>
                       ) : (
                         <span className="text-[#636E72] italic text-[11px]">
-                          Not attempted yet
+                          —
                         </span>
                       )}
                     </td>
@@ -220,7 +222,7 @@ export function EnrollmentsClient({
                     <td className="py-3.5 px-4">
                       {enr.certificate_id ? (
                         <Link
-                          href={`/verify/${enr.certificate_id}`}
+                          href={`/${locale}/verify/${enr.certificate_id}`}
                           target="_blank"
                           className="inline-flex items-center gap-1 text-[11px] font-bold text-[#1B5E20] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded transition-colors"
                         >
@@ -236,7 +238,7 @@ export function EnrollmentsClient({
                               : "bg-[#F5F1EB] text-[#636E72]"
                           }`}
                         >
-                          {enr.status}
+                          {enr.status === "in_progress" ? t("inProgress") : enr.status}
                         </span>
                       )}
                     </td>
@@ -255,7 +257,7 @@ export function EnrollmentsClient({
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={6} className="py-12 text-center text-[#636E72]">
-                    No student enrollments found matching this filter.
+                    {tCommon("noRecords")}
                   </td>
                 </tr>
               )}
