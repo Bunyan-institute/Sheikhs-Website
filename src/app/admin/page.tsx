@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { createTranslator } from "next-intl";
 import {
   getSystemMetrics,
   getAllInquiries,
   getAllLectures,
-  getAllArticles,
 } from "@/lib/db/repository";
 import {
   Video,
@@ -20,11 +21,18 @@ import {
   Calendar,
   Layers,
 } from "lucide-react";
+import { locales, defaultLocale, type Locale } from "@/i18n/config";
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
+  const cookieStore = await cookies();
+  const rawLocale = cookieStore.get("admin_locale")?.value;
+  const locale: Locale = locales.includes(rawLocale as Locale) ? (rawLocale as Locale) : defaultLocale;
+  const messages = (await import(`@/i18n/messages/${locale}.json`)).default;
+  const tDash = createTranslator({ locale, messages, namespace: "admin.dashboard" });
+  const tCommon = createTranslator({ locale, messages, namespace: "admin.common" });
+
   const metrics = getSystemMetrics();
   const inquiries = getAllInquiries().slice(0, 5);
-  const recentLectures = getAllLectures().slice(0, 4);
 
   return (
     <div className="space-y-8">
@@ -32,15 +40,15 @@ export default function AdminDashboardPage() {
       <div className="bg-gradient-to-r from-[#1B5E20] via-[#236b28] to-[#154a19] rounded-xl p-6 sm:p-8 text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-200 text-xs font-semibold backdrop-blur-xs font-arabic" dir="rtl">
-            <span>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+            <span>{tDash("bismillah")}</span>
             <span>۞</span>
-            <span>لوحة التحكم الرئيسية</span>
+            <span>{tCommon("controlPanel")}</span>
           </div>
           <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight">
-            Sheikh Muhammed Ferej Megeno
+            {tDash("title")}
           </h1>
           <p className="text-emerald-100/90 text-sm max-w-xl">
-            Live Scholarly Knowledge Management. All additions and edits are dynamically synchronized with the public multilingual portal.
+            {tDash("subtitle")}
           </p>
         </div>
 
@@ -50,21 +58,21 @@ export default function AdminDashboardPage() {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-white text-[#1B5E20] font-bold text-xs hover:bg-emerald-50 transition-colors shadow-xs"
           >
             <Plus className="w-4 h-4" />
-            <span>Add Lecture</span>
+            <span>{tDash("addLecture")}</span>
           </Link>
           <Link
             href="/admin/articles"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-white/15 text-white font-bold text-xs hover:bg-white/25 transition-colors border border-white/20"
           >
             <Plus className="w-4 h-4" />
-            <span>Write Article</span>
+            <span>{tDash("writeArticle")}</span>
           </Link>
           <Link
             href="/admin/backup"
             className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded bg-black/20 text-emerald-100 font-medium text-xs hover:bg-black/30 transition-colors"
           >
             <Database className="w-3.5 h-3.5" />
-            <span>Backup</span>
+            <span>{tCommon("backup")}</span>
           </Link>
         </div>
       </div>
@@ -77,7 +85,7 @@ export default function AdminDashboardPage() {
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs uppercase font-bold text-[#636E72] tracking-wider">
-              Lectures & Audio
+              {tCommon("lectures")}
             </span>
             <div className="w-8 h-8 rounded-full bg-[#1B5E20]/10 text-[#1B5E20] flex items-center justify-center group-hover:scale-110 transition-transform">
               <Video className="w-4 h-4" />
@@ -87,9 +95,9 @@ export default function AdminDashboardPage() {
             {metrics.lecturesCount}
           </div>
           <div className="mt-2 text-xs text-[#636E72] flex items-center justify-between">
-            <span>{metrics.videoLectures} HD Videos</span>
+            <span>{metrics.videoLectures} HD</span>
             <span>&bull;</span>
-            <span>{metrics.audioLessons} Audio Lessons</span>
+            <span>{metrics.audioLessons} MP3</span>
           </div>
         </Link>
 
@@ -99,7 +107,7 @@ export default function AdminDashboardPage() {
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs uppercase font-bold text-[#636E72] tracking-wider">
-              Hadith Articles
+              {tCommon("articles")}
             </span>
             <div className="w-8 h-8 rounded-full bg-[#B8860B]/10 text-[#B8860B] flex items-center justify-center group-hover:scale-110 transition-transform">
               <FileText className="w-4 h-4" />
@@ -109,7 +117,7 @@ export default function AdminDashboardPage() {
             {metrics.articlesCount}
           </div>
           <div className="mt-2 text-xs text-[#636E72]">
-            Tafsir, Hadith Exegesis & Spiritual Studies
+            {tDash("metrics.articlesSub")}
           </div>
         </Link>
 
@@ -119,7 +127,7 @@ export default function AdminDashboardPage() {
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs uppercase font-bold text-[#636E72] tracking-wider">
-              Fatwas & Rulings
+              {tCommon("fatwas")}
             </span>
             <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
               <HelpCircle className="w-4 h-4" />
@@ -129,7 +137,7 @@ export default function AdminDashboardPage() {
             {metrics.fatwasCount}
           </div>
           <div className="mt-2 text-xs text-[#636E72]">
-            Fiqh Rulings & Banking Standards
+            {tDash("metrics.fatwasSub")}
           </div>
         </Link>
 
@@ -143,7 +151,7 @@ export default function AdminDashboardPage() {
         >
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs uppercase font-bold text-[#636E72] tracking-wider">
-              Public Inquiries
+              {tCommon("inquiries")}
             </span>
             <div className="w-8 h-8 rounded-full bg-[#B8860B]/20 text-[#B8860B] flex items-center justify-center group-hover:scale-110 transition-transform">
               <MessageSquare className="w-4 h-4" />
@@ -153,41 +161,41 @@ export default function AdminDashboardPage() {
             <span>{metrics.inquiriesTotal}</span>
             {metrics.pendingInquiries > 0 && (
               <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-[#B8860B] text-white">
-                {metrics.pendingInquiries} New
+                {metrics.pendingInquiries} {tCommon("pending")}
               </span>
             )}
           </div>
           <div className="mt-2 text-xs text-[#636E72]">
-            Submitted questions from /ask
+            {tDash("metrics.inquiriesSub")}
           </div>
         </Link>
       </div>
 
-      {/* Main Content Split: Recent Inquiries + Recent Content */}
+      {/* Main Content Split: Recent Inquiries + Quick Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Inquiries Inbox */}
         <div className="lg:col-span-7 bg-white border border-[#E0D8CE] rounded-lg p-5 sm:p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-4">
             <div>
               <h2 className="font-heading text-lg font-bold text-[#2D3436]">
-                Latest Community Inquiries
+                {tDash("recentInquiries")}
               </h2>
               <p className="text-xs text-[#636E72]">
-                Questions submitted by visitors requiring scholarly guidance
+                {tDash("metrics.inquiriesSub")}
               </p>
             </div>
             <Link
               href="/admin/inquiries"
               className="text-xs font-bold text-[#1B5E20] hover:underline flex items-center gap-1"
             >
-              <span>View All ({metrics.inquiriesTotal})</span>
+              <span>{tDash("viewAllInquiries")} ({metrics.inquiriesTotal})</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           {inquiries.length === 0 ? (
             <div className="text-center py-10 text-sm text-[#636E72]">
-              No questions submitted yet.
+              {tDash("noRecentInquiries")}
             </div>
           ) : (
             <div className="divide-y divide-[#FAF8F5] space-y-2">
@@ -204,7 +212,7 @@ export default function AdminDashboardPage() {
                           : "bg-emerald-100 text-emerald-800"
                       }`}
                     >
-                      {inq.status}
+                      {inq.status === "pending" ? tCommon("pending") : tCommon("resolved")}
                     </span>
                   </div>
                   <p className="text-xs text-[#636E72] line-clamp-2 leading-relaxed">
@@ -219,7 +227,7 @@ export default function AdminDashboardPage() {
                       href="/admin/inquiries"
                       className="font-bold text-[#1B5E20] hover:underline"
                     >
-                      Answer / Convert &rarr;
+                      {tCommon("actions")} &rarr;
                     </Link>
                   </div>
                 </div>
@@ -233,7 +241,7 @@ export default function AdminDashboardPage() {
           {/* Quick Actions Panel */}
           <div className="bg-white border border-[#E0D8CE] rounded-lg p-5 shadow-2xs space-y-3">
             <h3 className="font-heading text-sm font-bold text-[#2D3436] uppercase tracking-wider border-b border-[#E0D8CE] pb-2">
-              Quick Management Shortcuts
+              {tCommon("quickActions")}
             </h3>
             <div className="grid grid-cols-2 gap-2.5 pt-1 text-xs">
               <Link
@@ -241,42 +249,42 @@ export default function AdminDashboardPage() {
                 className="p-3 rounded-md bg-[#FAF8F5] border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-white transition-all font-semibold text-[#2D3436] flex items-center gap-2"
               >
                 <Video className="w-4 h-4 text-[#1B5E20]" />
-                <span>New Lecture</span>
+                <span>{tDash("addLecture")}</span>
               </Link>
               <Link
                 href="/admin/series"
                 className="p-3 rounded-md bg-[#FAF8F5] border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-white transition-all font-semibold text-[#2D3436] flex items-center gap-2"
               >
                 <Layers className="w-4 h-4 text-[#B8860B]" />
-                <span>Manage Series</span>
+                <span>{tCommon("series")}</span>
               </Link>
               <Link
                 href="/admin/fatwas"
                 className="p-3 rounded-md bg-[#FAF8F5] border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-white transition-all font-semibold text-[#2D3436] flex items-center gap-2"
               >
                 <HelpCircle className="w-4 h-4 text-blue-600" />
-                <span>Publish Fatwa</span>
+                <span>{tDash("newFatwa")}</span>
               </Link>
               <Link
                 href="/admin/library"
                 className="p-3 rounded-md bg-[#FAF8F5] border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-white transition-all font-semibold text-[#2D3436] flex items-center gap-2"
               >
                 <BookOpen className="w-4 h-4 text-[#1B5E20]" />
-                <span>Upload Kitab</span>
+                <span>{tCommon("library")}</span>
               </Link>
               <Link
                 href="/admin/events"
                 className="p-3 rounded-md bg-[#FAF8F5] border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-white transition-all font-semibold text-[#2D3436] flex items-center gap-2"
               >
                 <Calendar className="w-4 h-4 text-purple-600" />
-                <span>Add Event</span>
+                <span>{tDash("addEvent")}</span>
               </Link>
               <Link
                 href="/admin/profile"
                 className="p-3 rounded-md bg-[#FAF8F5] border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-white transition-all font-semibold text-[#2D3436] flex items-center gap-2"
               >
                 <Sparkles className="w-4 h-4 text-[#B8860B]" />
-                <span>Scholar Bio</span>
+                <span>{tCommon("profile")}</span>
               </Link>
             </div>
           </div>
@@ -285,23 +293,18 @@ export default function AdminDashboardPage() {
           <div className="bg-[#FAF8F5] border border-[#E0D8CE] rounded-lg p-5 text-xs space-y-3">
             <div className="flex items-center justify-between">
               <span className="font-bold text-[#2D3436] uppercase tracking-wider text-[11px]">
-                Engine Status
+                {tDash("systemStatusTitle")}
               </span>
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#1B5E20] bg-emerald-100 px-2 py-0.5 rounded-full">
-                <CheckCircle2 className="w-3 h-3" /> Persistent & Active
+                <CheckCircle2 className="w-3 h-3" /> {tCommon("active")}
               </span>
             </div>
             <div className="space-y-1.5 text-[#636E72]">
               <div className="flex justify-between py-1 border-b border-[#E0D8CE]/50">
-                <span>Storage Provider:</span>
-                <strong className="text-[#2D3436]">Unified JSON Repository</strong>
-              </div>
-              <div className="flex justify-between py-1 border-b border-[#E0D8CE]/50">
-                <span>Cache Invalidation:</span>
-                <strong className="text-[#1B5E20]">Automatic on Save</strong>
+                <span>{tDash("systemStatusDesc")}</span>
               </div>
               <div className="flex justify-between py-1">
-                <span>Last Updated:</span>
+                <span>{tCommon("updated")}:</span>
                 <span className="text-[#2D3436]">{new Date(metrics.lastUpdated).toLocaleString()}</span>
               </div>
             </div>
