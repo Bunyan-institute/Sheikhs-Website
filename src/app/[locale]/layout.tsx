@@ -7,6 +7,7 @@ import { getProfile } from "@/lib/api/profile";
 import { buildNavigation, buildMoreItems } from "@/lib/sections";
 import { SiteHeader } from "@/components/shell/site-header";
 import { SiteFooter } from "@/components/shell/site-footer";
+import { FloatingAppCard } from "@/components/profile/floating-app-card";
 import type { PublicProfile, SectionMap } from "@/lib/api/types";
 
 const DEFAULT_SECTIONS: SectionMap = {
@@ -85,6 +86,7 @@ export default async function LocaleLayout({
           locale={locale}
         />
         <main className="flex-1">{children}</main>
+        <FloatingAppCard />
         <SiteFooter profile={profile} locale={locale} />
       </div>
     </NextIntlClientProvider>

@@ -46,23 +46,6 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-5 lg:gap-7 shrink-0">
             <HeaderNav items={items} />
-            
-            <a
-              href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[3px] bg-[#1A4D2E] text-white text-xs font-bold hover:bg-[#143d24] transition-colors shadow-2xs"
-              title="Download Official Android App from Google Play Store"
-            >
-              <Image
-                src="/images/sheikh-app-icon.png"
-                alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
-                width={18}
-                height={18}
-                className="rounded-[3px] shrink-0"
-              />
-              <span>ሸይኽ ሙሃመድ ፈረጅ App</span>
-            </a>
 
             <div className="flex items-center gap-3 sm:gap-4 border-s border-[#E6E0D8] ps-4 ms-1">
               <CommandSearch />
@@ -72,22 +55,6 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
 
           {/* Mobile Nav Toggle */}
           <div className="flex md:hidden items-center gap-1 sm:gap-2 shrink-0">
-            <a
-              href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1 text-[#1A4D2E] flex items-center"
-              aria-label="Google Play App"
-              title="Download ሸይኽ ሙሃመድ ፈረጅ App"
-            >
-              <Image
-                src="/images/sheikh-app-icon.png"
-                alt="ሸይኽ ሙሃመድ ፈረጅ App Icon"
-                width={22}
-                height={22}
-                className="rounded-[3px] shadow-2xs"
-              />
-            </a>
             <Link href="/search" className="p-2 text-[#636E72] hover:text-[#2D3436] transition-colors" aria-label="Search">
               <Search className="w-5 h-5" />
             </Link>
