@@ -14,12 +14,12 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
 
   return (
     <nav aria-label="Breadcrumb" className="w-full">
-      <ol className="flex items-center space-x-2 text-xs font-sans text-[#0F241C]/60 flex-wrap">
+      <ol className="flex items-center gap-2 text-xs font-sans text-[#0F241C]/60 flex-wrap">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           
           return (
-            <li key={index} className="flex items-center">
+            <li key={index} className="flex items-center gap-2">
               {item.href && !isLast ? (
                 <Link 
                   href={item.href}
@@ -34,7 +34,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
               )}
               
               {!isLast && (
-                <span className="mx-2 text-[#BF9A45]/50">/</span>
+                <span className="text-[#BF9A45]/50 rtl:rotate-180">/</span>
               )}
             </li>
           );

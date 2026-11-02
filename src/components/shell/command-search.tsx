@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { Command } from 'cmdk';
 import { 
   Search, 
@@ -17,34 +18,28 @@ import {
   GraduationCap
 } from 'lucide-react';
 
-interface QuickLink {
-  title: string;
-  href: string;
-  category: string;
-  icon: any;
-}
-
-const QUICK_LINKS: QuickLink[] = [
-  { title: "Riyad us-Saliheen Playlist (Africa TV)", href: "/media", category: "Media", icon: Video },
-  { title: "Watch Lectures & Sermons", href: "/media", category: "Media", icon: Video },
-  { title: "350+ Hours Darasa Audio Archive", href: "/media?kind=audio", category: "Media", icon: Video },
-  { title: "All Articles & Written Lessons", href: "/articles", category: "Articles", icon: FileText },
-  { title: "Tarbiyah & Spiritual Reflections", href: "/articles", category: "Articles", icon: FileText },
-  { title: "Fatwas & Legal Rulings Archive", href: "/fatwas", category: "Fatwas", icon: BookOpen },
-  { title: "Ask the Sheikh a Question", href: "/ask", category: "Fatwas", icon: HelpCircle },
-  { title: "Educational Courses & Halaqat", href: "/courses", category: "Courses", icon: GraduationCap },
-  { title: "Upcoming Seminars & Gatherings", href: "/events", category: "Events", icon: Calendar },
-  { title: "Verify Course Certificate", href: "/verify", category: "Certificate", icon: Award },
-  { title: "Scholar Biography & Profile", href: "/about", category: "About", icon: User },
-  { title: "Scholarly Journey & Timeline", href: "/journey", category: "About", icon: Compass },
-  { title: "Academic & Traditional Qualifications", href: "/qualifications", category: "About", icon: Award },
-  { title: "Contact Office & Foundation", href: "/contact", category: "Contact", icon: PhoneCall },
-];
-
 export function CommandSearch() {
+  const t = useTranslations("commandSearch");
+  const tNav = useTranslations("nav");
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
+
+  const quickLinks = [
+    { title: `${tNav("media")} & ${tNav("lectures")}`, href: "/media", category: t("lectures"), icon: Video },
+    { title: tNav("articles"), href: "/articles", category: t("articles"), icon: FileText },
+    { title: tNav("fatwas"), href: "/fatwas", category: t("fatwas"), icon: BookOpen },
+    { title: tNav("ask"), href: "/ask", category: t("fatwas"), icon: HelpCircle },
+    { title: tNav("courses"), href: "/courses", category: t("courses"), icon: GraduationCap },
+    { title: tNav("series"), href: "/series", category: t("lectures"), icon: BookOpen },
+    { title: tNav("library"), href: "/library", category: t("library"), icon: BookOpen },
+    { title: tNav("events"), href: "/events", category: tNav("events"), icon: Calendar },
+    { title: tNav("verify"), href: "/verify", category: tNav("verify"), icon: Award },
+    { title: tNav("about"), href: "/about", category: tNav("about"), icon: User },
+    { title: tNav("journey"), href: "/journey", category: tNav("about"), icon: Compass },
+    { title: tNav("qualifications"), href: "/qualifications", category: tNav("about"), icon: Award },
+    { title: tNav("contact"), href: "/contact", category: tNav("contact"), icon: PhoneCall },
+  ];
 
   // Keyboard shortcut (Cmd+K or Ctrl+K)
   useEffect(() => {
@@ -66,8 +61,8 @@ export function CommandSearch() {
   };
 
   const filteredLinks = query.trim() === "" 
-    ? QUICK_LINKS 
-    : QUICK_LINKS.filter(link => 
+    ? quickLinks 
+    : quickLinks.filter(link => 
         link.title.toLowerCase().includes(query.toLowerCase()) ||
         link.category.toLowerCase().includes(query.toLowerCase())
       );
@@ -81,7 +76,7 @@ export function CommandSearch() {
         aria-label="Search portal"
       >
         <Search className="w-3.5 h-3.5 text-[#BF9A45]" />
-        <span>Search...</span>
+        <span>{t("placeholder").slice(0, 18)}...</span>
         <kbd className="hidden md:inline-block ms-1.5 px-1.5 py-0.5 text-[10px] font-semibold text-[#EDF4F0]/70 bg-[#072118]/80 border border-[#BF9A45]/30 rounded">
           ⌘K
         </kbd>
@@ -106,7 +101,7 @@ export function CommandSearch() {
                 <Command.Input 
                   value={query}
                   onValueChange={setQuery}
-                  placeholder="Search lessons, series and topics..." 
+                  placeholder={t("placeholder")} 
                   className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 text-sm sm:text-base px-3 font-sans text-[#0F241C] placeholder-[#0F241C]/50" 
                   autoFocus
                 />
@@ -126,12 +121,12 @@ export function CommandSearch() {
                     className="flex items-center px-4 py-3 rounded-xl bg-[#EDF4F0] hover:bg-[#DCE8E1] cursor-pointer text-[#1B6A50] font-semibold text-sm mb-1"
                   >
                     <Search className="w-4 h-4 me-3 shrink-0" />
-                    <span>Search all portal archives for &quot;{query.trim()}&quot;</span>
+                    <span>{t("placeholder")} &quot;{query.trim()}&quot;</span>
                   </Command.Item>
                 )}
 
                 {filteredLinks.length > 0 ? (
-                  <Command.Group heading={query ? "Matching Resources" : "Quick Navigation"} className="px-2 py-2 text-xs font-bold text-[#1B6A50] uppercase tracking-wider">
+                  <Command.Group heading={t("quickNav")} className="px-2 py-2 text-xs font-bold text-[#1B6A50] uppercase tracking-wider">
                     {filteredLinks.map((item) => {
                       const Icon = item.icon;
                       return (
@@ -153,14 +148,14 @@ export function CommandSearch() {
                   </Command.Group>
                 ) : (
                   <Command.Empty className="py-12 text-center text-[#0F241C]/60 text-sm">
-                    No matching direct pages found. Press enter to search all content.
+                    {t("noResults")}
                   </Command.Empty>
                 )}
               </Command.List>
 
               <div className="flex items-center justify-between border-t border-[#0F241C]/10 px-5 py-2.5 bg-[#EDF4F0]/50 text-xs text-[#0F241C]/60">
                 <span className="font-arabic text-[#1B6A50]">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
-                <span className="text-[11px]">Use ↑↓ to navigate • ↵ to open</span>
+                <span className="text-[11px]">↑↓ {t("select")} • Esc {t("close")}</span>
               </div>
             </Command>
           </div>
