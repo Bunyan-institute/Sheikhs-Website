@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, GraduationCap, Loader2, CheckCircle } from "lucide-react";
 import type { CourseEnrollmentRecord } from "@/lib/db/types";
 
@@ -19,6 +20,8 @@ export function CourseEnrollmentModal({
   onClose: () => void;
   onSuccess: (enrollment: CourseEnrollmentRecord) => void;
 }) {
+  const t = useTranslations("courseDetail");
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -84,16 +87,16 @@ export function CourseEnrollmentModal({
           </div>
           <div>
             <h2 className="font-heading font-bold text-lg text-[#2D3436]">
-              Enroll in Islamic Course
+              {t("modalTitle")}
             </h2>
             <p className="text-xs text-[#636E72]">
-              Free enrollment with official certificate upon exam completion
+              {t("certificateIncluded")}
             </p>
           </div>
         </div>
 
         <div className="bg-[#FAF8F5] border border-[#E0D8CE] p-3 rounded text-xs text-[#2D3436] font-semibold">
-          Program: {courseTitle}
+          {courseTitle}
         </div>
 
         {error && (
@@ -105,7 +108,7 @@ export function CourseEnrollmentModal({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-bold text-[#2D3436] mb-1">
-              Full Legal Name (as it will appear on your Certificate) *
+              {t("fullName")} *
             </label>
             <input
               type="text"
@@ -119,7 +122,7 @@ export function CourseEnrollmentModal({
 
           <div>
             <label className="block text-xs font-bold text-[#2D3436] mb-1">
-              Email Address *
+              {t("email")} *
             </label>
             <input
               type="email"
@@ -129,15 +132,12 @@ export function CourseEnrollmentModal({
               placeholder="ahmad@example.com"
               className="w-full text-xs px-3 py-2.5 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
             />
-            <p className="text-[10px] text-[#636E72] mt-0.5">
-              Your exam results and certificate verification token will be associated with this email.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                Phone Number / WhatsApp
+                {t("phone")}
               </label>
               <input
                 type="tel"
@@ -149,7 +149,7 @@ export function CourseEnrollmentModal({
             </div>
             <div>
               <label className="block text-xs font-bold text-[#2D3436] mb-1">
-                City / Country
+                Location
               </label>
               <input
                 type="text"
@@ -170,10 +170,10 @@ export function CourseEnrollmentModal({
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Registering Enrollment...</span>
+                  <span>{t("enrolling")}</span>
                 </>
               ) : (
-                <span>Complete Enrollment & Begin Studies</span>
+                <span>{t("confirmEnrollment")}</span>
               )}
             </button>
           </div>

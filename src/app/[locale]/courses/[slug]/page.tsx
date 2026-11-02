@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCourse, AUTHENTIC_COURSES } from "@/lib/api/courses";
 import { notFound } from "next/navigation";
@@ -48,6 +48,8 @@ export default async function CoursePage({
     notFound();
   }
 
+  const t = await getTranslations({ locale, namespace: "courseDetail" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
   const examConfig = getCourseExam(slug);
 
   return (
@@ -58,8 +60,8 @@ export default async function CoursePage({
             href="/courses" 
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1B6A50] hover:text-[#0D3E2F] transition-colors py-1"
           >
-            <ArrowLeft className="w-4 h-4 text-[#BF9A45]" />
-            <span>All Courses &amp; Syllabi</span>
+            <ArrowLeft className="w-4 h-4 text-[#BF9A45] rtl:rotate-180" />
+            <span>{tNav("courses")}</span>
           </Link>
         </div>
 
@@ -85,15 +87,15 @@ export default async function CoursePage({
               <div className="flex items-center gap-3 mb-4">
                 {course.enrolment_open ? (
                   <span className="bg-[#1B6A50]/10 text-[#1B6A50] font-semibold px-3 py-1 rounded-full text-xs border border-[#1B6A50]/20">
-                    Enrollment Open
+                    {t("enroll")}
                   </span>
                 ) : (
                   <span className="bg-[#EDF4F0] text-[#0F241C]/70 font-semibold px-3 py-1 rounded-full border border-[#0F241C]/10 text-xs">
-                    Self-Study Archive
+                    {t("certificateIncluded")}
                   </span>
                 )}
                 <span className="text-[#0F241C]/60 text-xs font-medium">
-                  {course.lesson_count || 0} Lessons
+                  {course.lesson_count || 0} {t("lessons")}
                 </span>
               </div>
               
@@ -113,7 +115,7 @@ export default async function CoursePage({
         {course.description && (
           <section className="mb-8 sm:mb-10 bg-white border border-[#0F241C]/10 rounded-2xl p-5 sm:p-8 shadow-xs">
             <h2 className="font-display text-xl sm:text-2xl font-bold text-[#0F241C] mb-4 border-b border-[#0F241C]/10 pb-3">
-              Course Description &amp; Scholarly Scope
+              {t("overview")}
             </h2>
             <div 
               className="prose prose-base max-w-none text-[#0F241C]/80 leading-relaxed font-sans break-words text-sm sm:text-base"

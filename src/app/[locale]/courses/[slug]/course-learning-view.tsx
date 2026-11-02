@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   GraduationCap,
   CheckCircle2,
@@ -35,6 +36,8 @@ export function CourseLearningView({
   initialEnrollment?: CourseEnrollmentRecord | null;
   initialCertificate?: IssuedCertificateRecord | null;
 }) {
+  const t = useTranslations("courseDetail");
+
   const [enrollment, setEnrollment] = useState<CourseEnrollmentRecord | null>(
     initialEnrollment || null
   );
@@ -147,12 +150,12 @@ export function CourseLearningView({
                 <>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                      Enrolled Student
+                      {t("enrolled")}
                     </span>
                     {certificate && (
                       <span className="text-xs font-bold uppercase tracking-wider text-[#C5A059] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#C5A059]/40 flex items-center gap-1">
                         <Award className="w-3.5 h-3.5" />
-                        <span>Certified</span>
+                        <span>{t("completed")}</span>
                       </span>
                     )}
                   </div>
@@ -164,10 +167,10 @@ export function CourseLearningView({
               ) : (
                 <>
                   <h3 className="font-heading font-bold text-base text-[#2D3436]">
-                    Enroll in this Study Program
+                    {t("enroll")}
                   </h3>
                   <p className="text-xs text-[#636E72]">
-                    Register for free to track your lessons, take the assessment exam, and earn an authentic certificate.
+                    {t("certificateIncluded")}
                   </p>
                 </>
               )}
@@ -178,7 +181,7 @@ export function CourseLearningView({
             {enrollment ? (
               <div className="w-full sm:w-48 text-left md:text-right">
                 <div className="flex items-center justify-between text-xs text-[#636E72] mb-1">
-                  <span>Progress</span>
+                  <span>{t("progress")}</span>
                   <span className="font-bold text-[#1B5E20]">{progressPercentage}%</span>
                 </div>
                 <div className="w-full bg-[#F5F1EB] h-2 rounded-full overflow-hidden">
@@ -188,7 +191,7 @@ export function CourseLearningView({
                   />
                 </div>
                 <span className="text-[10px] text-[#636E72] mt-0.5 block">
-                  {completedLessons.length} of {lessons.length} lessons studied
+                  {completedLessons.length} / {lessons.length} {t("lessons")}
                 </span>
               </div>
             ) : (
@@ -196,7 +199,7 @@ export function CourseLearningView({
                 onClick={() => setIsEnrollModalOpen(true)}
                 className="px-5 py-2.5 bg-[#1B5E20] hover:bg-[#154a19] text-white font-bold text-xs uppercase tracking-wider rounded shadow-xs transition-colors cursor-pointer"
               >
-                Enroll Free & Earn Certificate
+                {t("enroll")}
               </button>
             )}
           </div>
@@ -214,7 +217,7 @@ export function CourseLearningView({
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>Curriculum Lessons ({lessons.length})</span>
+          <span>{t("lessons")} ({lessons.length})</span>
         </button>
 
         <button
@@ -226,7 +229,7 @@ export function CourseLearningView({
           }`}
         >
           <Award className="w-4 h-4 text-[#C5A059]" />
-          <span>Certification Exam & Certificate</span>
+          <span>{t("certificateIncluded")}</span>
         </button>
       </div>
 
@@ -235,15 +238,15 @@ export function CourseLearningView({
         <div className="space-y-4">
           <div className="bg-[#FAF8F5] border border-[#E0D8CE] p-4 rounded text-xs text-[#636E72] flex items-center justify-between">
             <span>
-              Click the checkmark circle to record completed lessons as you listen and study.
+              {t("completeLesson")}
             </span>
             {enrollment && (
               <button
                 onClick={() => setActiveTab("exam")}
                 className="text-[#1B5E20] font-bold hover:underline inline-flex items-center gap-1"
               >
-                <span>Ready for the Exam?</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>{t("continueLearning")}</span>
+                <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
               </button>
             )}
           </div>
@@ -264,7 +267,7 @@ export function CourseLearningView({
                   <button
                     type="button"
                     className="mt-0.5 text-emerald-700 shrink-0"
-                    title={isDone ? "Mark as incomplete" : "Mark as completed"}
+                    title={isDone ? t("completed") : t("completeLesson")}
                   >
                     {isDone ? (
                       <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100" />
@@ -312,10 +315,10 @@ export function CourseLearningView({
                   <CheckCircle2 className="w-8 h-8 text-emerald-600 shrink-0" />
                   <div>
                     <h3 className="font-heading font-bold text-base text-emerald-950">
-                      Mabrouk! You are Officially Certified
+                      {t("enrollSuccess")}
                     </h3>
                     <p className="text-xs text-emerald-800">
-                      You have passed the examination for this course. Your certificate is verified and permanently registered.
+                      {t("certificateIncluded")}
                     </p>
                   </div>
                 </div>
@@ -325,7 +328,7 @@ export function CourseLearningView({
                   target="_blank"
                   className="px-4 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-bold rounded shadow-xs"
                 >
-                  View Public Verification
+                  Verify Certificate
                 </Link>
               </div>
 
@@ -337,15 +340,15 @@ export function CourseLearningView({
               <div className="bg-[#FAF8F5] border border-[#E0D8CE] rounded-lg p-5 space-y-2">
                 <div className="flex items-center gap-2 text-[#1B5E20] font-bold text-sm">
                   <Award className="w-5 h-5 text-[#C5A059]" />
-                  <span>Official Scholarly Certification Assessment</span>
+                  <span>{t("certificateIncluded")}</span>
                 </div>
                 <p className="text-xs text-[#636E72] leading-relaxed">
                   Answer the following {examQuestions.length} questions assessing fundamental comprehension of the curriculum. A score of{" "}
-                  <strong>{initialExam?.passing_percentage || 70}% or higher</strong> is required to earn the official, cryptographically verified Certificate of Scholarly Completion under the seal of Sheikh Muhammed Ferej Megeno.
+                  <strong>{initialExam?.passing_percentage || 70}% or higher</strong> is required to earn the official Certificate under the seal of Sheikh Muhammed Ferej Megeno.
                 </p>
                 {!enrollment && (
                   <p className="text-xs text-amber-800 font-semibold pt-1">
-                    Please enroll in the course before submitting your assessment.
+                    {t("enroll")}
                   </p>
                 )}
               </div>
@@ -362,7 +365,7 @@ export function CourseLearningView({
                 <div className="p-5 bg-amber-50 border border-amber-300 rounded-lg space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="font-heading font-bold text-sm text-amber-900">
-                      Assessment Score: {examResult.score}% ({examResult.correct_count} of {examResult.total_questions} correct)
+                      Score: {examResult.score}% ({examResult.correct_count} of {examResult.total_questions} correct)
                     </h4>
                     <span className="text-xs font-bold text-amber-800">
                       Passing grade: {initialExam?.passing_percentage || 70}%
@@ -379,7 +382,7 @@ export function CourseLearningView({
                     className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-700 hover:bg-amber-800 text-white rounded text-xs font-semibold"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Reset & Retake Assessment</span>
+                    <span>Retake Assessment</span>
                   </button>
                 </div>
               )}
@@ -440,7 +443,7 @@ export function CourseLearningView({
                     {isSubmittingExam ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Grading & Issuing Certificate...</span>
+                        <span>Grading...</span>
                       </>
                     ) : (
                       <>
