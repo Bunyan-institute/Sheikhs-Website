@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getLibraryItem, AUTHENTIC_BOOKS } from '@/lib/api/library';
 import { Link } from '@/i18n/navigation';
 import { notFound } from 'next/navigation';
@@ -29,14 +29,17 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
 
   if (!item) return notFound();
 
+  const t = await getTranslations({ locale: params.locale, namespace: "libraryDetail" });
+  const tNav = await getTranslations({ locale: params.locale, namespace: "nav" });
+
   return (
     <article className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
       <Link 
-        href="/media" 
+        href="/library" 
         className="inline-flex items-center text-xs sm:text-sm font-semibold text-[#555E61] hover:text-[#1A4D2E] mb-8"
       >
         <ArrowLeft className="w-4 h-4 me-2 rtl:rotate-180 text-[#8C6D23]" />
-        Back to Media &amp; Treatises
+        {t("backToLibrary")}
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[360px_1fr] gap-8 md:gap-12 lg:gap-16">
@@ -65,7 +68,7 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
                 rel="noopener noreferrer"
               >
                 <Download className="w-4 h-4 text-[#B8860B]" />
-                Download Document (PDF)
+                {t("downloadPdf")}
               </a>
             )}
             {item.external_url && (
@@ -82,7 +85,7 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
             <div className="bg-[#FAF8F5] border border-[#E6E0D8] p-3.5 rounded-[4px] text-xs space-y-1.5 text-[#555E61]">
               <div className="flex items-center gap-1.5 font-semibold text-[#1A4D2E]">
                 <CheckCircle className="w-3.5 h-3.5" />
-                <span>Scholarly Work of Sheikh Muhammed Ferej</span>
+                <span>{item.author}</span>
               </div>
               <p className="text-[11px] leading-relaxed">
                 Authored, translated, or verified by Sheikh Muhammed Ferej Megeno.
@@ -129,7 +132,7 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
           </div>
 
           <div className="prose prose-base sm:prose-lg font-body text-[#2D3436] max-w-none leading-relaxed">
-            <h3 className="font-heading font-bold text-lg text-[#1A4D2E] mb-2">Description &amp; Academic Scope</h3>
+            <h3 className="font-heading font-bold text-lg text-[#1A4D2E] mb-2">{t("category")} &amp; Scope</h3>
             <p className="text-sm sm:text-base text-[#555E61] whitespace-pre-line">
               {item.description || item.summary}
             </p>
@@ -142,7 +145,7 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
                 <div className="flex items-center gap-2">
                   <FileText className="w-5 h-5 text-[#1A4D2E]" />
                   <h3 className="font-heading font-bold text-lg text-[#2D3436]">
-                    Document Viewer
+                    {t("readOnline")}
                   </h3>
                 </div>
                 <a 
@@ -151,7 +154,7 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-[#1A4D2E] hover:underline"
                 >
-                  Open in New Window &rarr;
+                  {t("downloadPdf")} &rarr;
                 </a>
               </div>
               <div className="w-full h-[650px] sm:h-[800px] border border-[#E6E0D8] rounded-[4px] bg-[#FAF8F5] overflow-hidden">

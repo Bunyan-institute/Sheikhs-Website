@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFatwa, AUTHENTIC_FATWAS } from "@/lib/api/fatwas";
 import { formatDate } from "@/lib/utils";
@@ -63,6 +63,9 @@ export default async function FatwaDetailPage({
     notFound();
   }
 
+  const t = await getTranslations({ locale, namespace: "fatwaDetail" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+
   return (
     <article className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,8 +74,8 @@ export default async function FatwaDetailPage({
             href="/fatwas" 
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1B6A50] hover:text-[#0D3E2F] transition-colors py-1"
           >
-            <ArrowLeft className="w-4 h-4 text-[#BF9A45]" />
-            <span>All Fatwas &amp; Fiqh Rulings</span>
+            <ArrowLeft className="w-4 h-4 text-[#BF9A45] rtl:rotate-180" />
+            <span>{t("backToFatwas")}</span>
           </Link>
         </div>
 
@@ -88,7 +91,7 @@ export default async function FatwaDetailPage({
                 {formatDate(fatwa.published_at, locale)}
               </span>
               <span className="text-[#1B6A50] font-medium ms-auto flex items-center gap-1.5 text-xs">
-                <CheckCircle className="w-3.5 h-3.5 text-[#BF9A45]" /> Verified Ruling
+                <CheckCircle className="w-3.5 h-3.5 text-[#BF9A45]" /> {t("verdict")}
               </span>
             </div>
 
@@ -101,7 +104,7 @@ export default async function FatwaDetailPage({
             {fatwa.question && (
               <section className="bg-[#EDF4F0] border border-[#BF9A45]/30 rounded-2xl p-5 sm:p-7">
                 <h2 className="font-display text-base sm:text-lg font-bold text-[#BF9A45] mb-2 sm:mb-3">
-                  Inquiry / Question:
+                  {t("question")}:
                 </h2>
                 <div 
                   className="prose prose-base max-w-none text-[#0F241C] leading-relaxed break-words"
@@ -113,7 +116,7 @@ export default async function FatwaDetailPage({
             {fatwa.answer && (
               <section className="pt-2">
                 <h2 className="font-display text-xl sm:text-2xl font-bold text-[#1B6A50] mb-4 pb-3 border-b border-[#0F241C]/10">
-                  Ruling &amp; Evidences / الشيخ&apos;s Answer:
+                  {t("scholarAnswer")}:
                 </h2>
                 <div 
                   className="prose prose-lg max-w-none text-[#0F241C]/85 break-words font-sans leading-relaxed"
@@ -124,8 +127,11 @@ export default async function FatwaDetailPage({
           </div>
           
           <div className="mt-10 sm:mt-12 text-center text-xs sm:text-sm text-[#0F241C]/60 border-t border-[#0F241C]/10 pt-6">
-            <p>This ruling is issued based on the specific circumstances presented in the question.</p>
-            <p className="mt-1.5">Have your own question? <Link href="/ask" className="text-[#1B6A50] hover:underline font-semibold">Submit an inquiry to the Sheikh</Link>.</p>
+            <p>{t("askSimilar")}{' '}
+              <Link href="/ask" className="text-[#1B6A50] hover:underline font-semibold">
+                {tNav("ask")}
+              </Link>
+            </p>
           </div>
         </div>
       </div>

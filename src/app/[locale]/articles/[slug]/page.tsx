@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getArticle, AUTHENTIC_ARTICLES } from "@/lib/api/articles";
 import { formatDate } from "@/lib/utils";
@@ -47,6 +47,8 @@ export default async function ArticlePage({
     notFound();
   }
 
+  const t = await getTranslations({ locale, namespace: "articleDetail" });
+
   return (
     <article className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,8 +57,8 @@ export default async function ArticlePage({
             href="/articles" 
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1B6A50] hover:text-[#0D3E2F] transition-colors py-1"
           >
-            <ArrowLeft className="w-4 h-4 text-[#BF9A45]" />
-            <span>All Articles &amp; Hadith Studies</span>
+            <ArrowLeft className="w-4 h-4 text-[#BF9A45] rtl:rotate-180" />
+            <span>{t("backToArticles")}</span>
           </Link>
         </div>
 
@@ -75,7 +77,7 @@ export default async function ArticlePage({
                 <>
                   <span className="text-[#0F241C]/20">&bull;</span>
                   <span className="text-[#0F241C]/50 text-xs">
-                    {article.reading_minutes} min study
+                    {t("readingTime", { min: article.reading_minutes })}
                   </span>
                 </>
               )}
@@ -111,7 +113,7 @@ export default async function ArticlePage({
 
           {/* Verification colophon */}
           <footer className="mt-10 sm:mt-12 pt-6 border-t border-[#0F241C]/10 flex flex-wrap items-center justify-between gap-4 text-xs text-[#0F241C]/60">
-            <p>Author: فضيلة الشيخ محمد فرج مجنو حفظه الله</p>
+            <p>{t("scholar")}</p>
             <p className="font-arabic text-[#1B6A50] text-sm font-semibold" dir="rtl">والحمد لله رب العالمين</p>
           </footer>
         </div>
