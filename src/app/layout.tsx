@@ -53,7 +53,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable} ${notoSerifEthiopic.variable}`}
     >
-      <body className="min-h-screen bg-[#EDF2EE] text-[#14262E] font-sans antialiased selection:bg-[#BF9A45]/30">
+      <body className="min-h-screen bg-[#EDF4F0] text-[#0F241C] font-sans antialiased selection:bg-[#BF9A45]/30">
         {children}
       </body>
     </html>

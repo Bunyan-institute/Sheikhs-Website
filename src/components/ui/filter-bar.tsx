@@ -42,10 +42,10 @@ export function FilterBar({ categories, currentCategory }: FilterBarProps) {
       <button
         onClick={() => router.push(`${pathname}?${createQueryString("category", "")}`)}
         className={cn(
-          "whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors border",
+          "whitespace-nowrap rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all border cursor-pointer min-h-[38px]",
           !currentCategory
-            ? "bg-[#1B5E20] text-white border-[#1B5E20]"
-            : "bg-[#FAF8F5] text-[#2D3436] border-[#E0D8CE] hover:bg-[#E0D8CE]"
+            ? "bg-[#0D3E2F] text-white border-[#0D3E2F] shadow-xs"
+            : "bg-white text-[#0F241C] border-[#072118]/15 hover:border-[#1B6A50] hover:text-[#1B6A50]"
         )}
       >
         All
@@ -55,10 +55,10 @@ export function FilterBar({ categories, currentCategory }: FilterBarProps) {
           key={category.id}
           onClick={() => handleCategoryClick(category.slug)}
           className={cn(
-            "whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors border",
+            "whitespace-nowrap rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all border cursor-pointer min-h-[38px]",
             currentCategory === category.slug
-              ? "bg-[#1B5E20] text-white border-[#1B5E20]"
-              : "bg-[#FAF8F5] text-[#2D3436] border-[#E0D8CE] hover:bg-[#E0D8CE]"
+              ? "bg-[#0D3E2F] text-white border-[#0D3E2F] shadow-xs"
+              : "bg-white text-[#0F241C] border-[#072118]/15 hover:border-[#1B6A50] hover:text-[#1B6A50]"
           )}
         >
           {category.name}
