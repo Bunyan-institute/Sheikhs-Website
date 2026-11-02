@@ -51,7 +51,7 @@ export default function AskPage(props: { params: Promise<{ locale: string }> }) 
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
-        <div className="relative max-w-page mx-auto px-4 sm:px-6">
+        <div className="relative max-w-page mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -74,7 +74,7 @@ export default function AskPage(props: { params: Promise<{ locale: string }> }) 
         </div>
       </section>
 
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
+      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
         {success ? (
           <div className="max-w-2xl mx-auto bg-white border border-[#1B6A50]/30 rounded-2xl p-6 sm:p-12 text-center shadow-xs">
              <CheckCircle className="w-14 h-14 sm:w-16 sm:h-16 text-[#1B6A50] mx-auto mb-4" />

@@ -17,7 +17,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
-        <div className="relative max-w-page mx-auto px-4 sm:px-6">
+        <div className="relative max-w-page mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -40,7 +40,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         </div>
       </section>
 
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
+      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* Office Channels Card */}
           <div className="bg-white border border-[#0F241C]/10 p-5 sm:p-8 rounded-2xl space-y-6 shadow-xs">
