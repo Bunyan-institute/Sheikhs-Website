@@ -19,6 +19,7 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { saveEventAction, deleteEventAction } from "../actions";
 import type { PublicEvent } from "@/lib/api/types";
 import type { EventRegistrationRecord } from "@/lib/db/types";
@@ -43,6 +44,10 @@ export function EventsClient({
   initialEvents: PublicEvent[];
   initialRegistrations?: EventRegistrationRecord[];
 }) {
+  const t = useTranslations("admin.events");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [events, setEvents] = useState<PublicEvent[]>(initialEvents);
   const [registrations] = useState<EventRegistrationRecord[]>(initialRegistrations);
   const [searchTerm, setSearchTerm] = useState("");
@@ -161,7 +166,7 @@ export function EventsClient({
       }
 
       setIsModalOpen(false);
-      setFeedback("Event saved successfully and scheduled!");
+      setFeedback(tCommon("successSave"));
     } catch (err: any) {
       alert("Error: " + err.message);
     } finally {
@@ -170,11 +175,11 @@ export function EventsClient({
   };
 
   const handleDelete = async (id: string, eTitle: string) => {
-    if (!confirm(`Are you sure you want to delete event "${eTitle}"?`)) return;
+    if (!confirm(`${tCommon("confirmDelete")} (${eTitle})`)) return;
     try {
       await deleteEventAction(id);
       setEvents((prev) => prev.filter((item) => item.id !== id));
-      setFeedback(`Event "${eTitle}" deleted.`);
+      setFeedback(tCommon("successDelete"));
     } catch (err: any) {
       alert("Error: " + err.message);
     }
@@ -186,10 +191,10 @@ export function EventsClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Events & Khutbah Schedule ({events.length})
+            {t("heading")} ({events.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage upcoming Friday Khutbahs, Islamic seminars, regional visits, and online live streams.
+            {t("subheading")}
           </p>
         </div>
 
@@ -198,7 +203,7 @@ export function EventsClient({
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto cursor-pointer"
         >
           <Plus className="w-4 h-4" />
-          <span>New Event</span>
+          <span>{t("newEvent")}</span>
         </button>
       </div>
 
@@ -218,7 +223,7 @@ export function EventsClient({
       <div className="bg-white border border-[#E0D8CE] rounded-lg p-3">
         <input
           type="text"
-          placeholder="Search by event title, mosque name, or location..."
+          placeholder={t("searchPlaceholder")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
@@ -248,7 +253,7 @@ export function EventsClient({
                         : "bg-[#F5F1EB] text-[#636E72]"
                     }`}
                   >
-                    {isUpcoming ? "Upcoming" : "Past Event"}
+                    {isUpcoming ? tCommon("active") : tCommon("archived")}
                   </span>
                   <div className="flex items-center gap-1 text-[11px] text-[#636E72]">
                     <Clock className="w-3.5 h-3.5" />
@@ -291,7 +296,7 @@ export function EventsClient({
                         rel="noopener noreferrer"
                         className="truncate hover:underline"
                       >
-                        Online Stream / Zoom
+                        Online Stream / Live
                       </a>
                     </div>
                   )}
@@ -313,32 +318,26 @@ export function EventsClient({
                       {cat}
                     </span>
                   ))}
-                  {evt.registration_required && (
-                    <span className="text-[10px] bg-amber-100 text-amber-900 font-semibold px-2 py-0.5 rounded">
-                      Registration Required
-                    </span>
-                  )}
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-3 border-t border-[#F0EAE1] mt-2">
                 <div className="flex items-center gap-2">
                   <Link
-                    href={`/events/${evt.slug}`}
+                    href={`/${locale}/events/${evt.slug}`}
                     target="_blank"
                     className="text-xs text-[#1B5E20] hover:text-[#154a19] font-medium inline-flex items-center gap-1"
                   >
-                    <span>Public View</span>
+                    <span>{tCommon("viewLive")}</span>
                     <ExternalLink className="w-3 h-3" />
                   </Link>
 
                   <button
                     onClick={() => setSelectedEventForAttendees(evt)}
                     className="inline-flex items-center gap-1 text-[10px] font-bold text-[#1B5E20] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded transition-colors cursor-pointer"
-                    title="View registered attendees"
                   >
                     <Users className="w-3 h-3 text-[#C5A059]" />
-                    <span>{eventAttendees.length} Registered</span>
+                    <span>{eventAttendees.length}</span>
                   </button>
                 </div>
 
@@ -346,14 +345,14 @@ export function EventsClient({
                   <button
                     onClick={() => openEditModal(evt)}
                     className="p-1.5 text-[#636E72] hover:text-[#1B5E20] hover:bg-[#F5F1EB] rounded transition-colors"
-                    title="Edit Event"
+                    title={tCommon("edit")}
                   >
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(evt.id, evt.title)}
                     className="p-1.5 text-[#636E72] hover:text-red-600 hover:bg-red-50 rounded transition-colors"
-                    title="Delete Event"
+                    title={tCommon("delete")}
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -365,7 +364,7 @@ export function EventsClient({
 
         {filteredEvents.length === 0 && (
           <div className="col-span-full py-12 text-center text-[#636E72] bg-white border border-[#E0D8CE] rounded-lg">
-            No events found matching your filter. Click &ldquo;New Event&rdquo; to schedule one.
+            {tCommon("noRecords")}
           </div>
         )}
       </div>
@@ -376,7 +375,7 @@ export function EventsClient({
           <div className="bg-white rounded-lg max-w-2xl w-full p-6 space-y-4 shadow-xl my-8">
             <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-3">
               <h2 className="font-heading font-bold text-lg text-[#2D3436]">
-                {editingEvent ? "Edit Scheduled Event" : "Schedule New Event"}
+                {editingEvent ? tCommon("edit") : t("newEvent")}
               </h2>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -389,14 +388,13 @@ export function EventsClient({
             <form onSubmit={handleSave} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Event Title *
+                  {t("fieldTitle")} *
                 </label>
                 <input
                   type="text"
                   required
                   value={title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  placeholder="e.g. Friday Khutbah: Sincerity in Deeds (Ikhlas)"
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -404,7 +402,7 @@ export function EventsClient({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    URL Slug *
+                    Slug *
                   </label>
                   <input
                     type="text"
@@ -416,13 +414,13 @@ export function EventsClient({
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Categories (comma separated)
+                    {tCommon("category")}
                   </label>
                   <input
                     type="text"
                     value={categories}
                     onChange={(e) => setCategories(e.target.value)}
-                    placeholder="khutbah, jummah, adama"
+                    placeholder="khutbah, jummah"
                     className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                   />
                 </div>
@@ -431,7 +429,7 @@ export function EventsClient({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Start Date & Time *
+                    {t("fieldDate")} *
                   </label>
                   <input
                     type="datetime-local"
@@ -443,7 +441,7 @@ export function EventsClient({
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    End Date & Time (Optional)
+                    End Date & Time
                   </label>
                   <input
                     type="datetime-local"
@@ -457,7 +455,7 @@ export function EventsClient({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Mosque / Venue Name
+                    {t("fieldLocation")}
                   </label>
                   <input
                     type="text"
@@ -469,7 +467,7 @@ export function EventsClient({
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Venue Address / City
+                    Address
                   </label>
                   <input
                     type="text"
@@ -481,68 +479,14 @@ export function EventsClient({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Online Stream Link (Zoom / YouTube Live)
-                  </label>
-                  <input
-                    type="url"
-                    value={onlineUrl}
-                    onChange={(e) => setOnlineUrl(e.target.value)}
-                    placeholder="https://youtube.com/live/..."
-                    className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                    Cover Image URL (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={coverUrl}
-                    onChange={(e) => setCoverUrl(e.target.value)}
-                    placeholder="/images/hero-bg.jpg"
-                    className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="regReq"
-                  checked={registrationRequired}
-                  onChange={(e) => setRegistrationRequired(e.target.checked)}
-                  className="rounded text-[#1B5E20] focus:ring-[#1B5E20]"
-                />
-                <label htmlFor="regReq" className="text-xs font-medium text-[#2D3436] cursor-pointer">
-                  Advance attendee registration required for this event
-                </label>
-              </div>
-
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Brief Summary
+                  {t("fieldDescription")}
                 </label>
                 <textarea
                   rows={2}
                   value={summary}
                   onChange={(e) => setSummary(e.target.value)}
-                  placeholder="Short description for schedule cards..."
-                  className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-[#2D3436] mb-1">
-                  Detailed Description (Optional)
-                </label>
-                <textarea
-                  rows={4}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Full agenda, transport details, parking instructions..."
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -553,7 +497,7 @@ export function EventsClient({
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 text-xs font-medium text-[#636E72] hover:bg-[#F5F1EB] rounded transition-colors"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
@@ -561,13 +505,14 @@ export function EventsClient({
                   className="inline-flex items-center gap-2 px-5 py-2 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs transition-colors cursor-pointer disabled:opacity-60"
                 >
                   {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>{editingEvent ? "Update Event" : "Create Event"}</span>
+                  <span>{t("saveEvent")}</span>
                 </button>
               </div>
             </form>
           </div>
         </div>
       )}
+
       {/* Attendee Roster Modal */}
       {selectedEventForAttendees && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
@@ -575,11 +520,8 @@ export function EventsClient({
             <div className="flex items-center justify-between border-b border-[#E0D8CE] pb-3">
               <div>
                 <h2 className="font-heading font-bold text-lg text-[#2D3436]">
-                  Registered Attendees
-                </h2>
-                <p className="text-xs text-[#636E72]">
                   {selectedEventForAttendees.title}
-                </p>
+                </h2>
               </div>
               <button
                 onClick={() => setSelectedEventForAttendees(null)}
@@ -613,27 +555,7 @@ export function EventsClient({
                             {attendee.phone}
                           </span>
                         )}
-                        {attendee.city && (
-                          <span className="flex items-center gap-1">
-                            <MapPin className="w-3 h-3 text-[#C5A059]" />
-                            {attendee.city}
-                          </span>
-                        )}
                       </div>
-                      {attendee.notes && (
-                        <p className="text-[11px] text-[#636E72] italic bg-[#FAF8F5] p-1.5 rounded">
-                          &ldquo;{attendee.notes}&rdquo;
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="text-right shrink-0">
-                      <span className="inline-block bg-[#FAF8F5] border border-[#E0D8CE] text-xs font-semibold px-2 py-0.5 rounded text-[#1B5E20]">
-                        {attendee.attendees_count} {attendee.attendees_count > 1 ? "Seats" : "Seat"}
-                      </span>
-                      <span className="block text-[10px] text-[#636E72] font-mono mt-1">
-                        {attendee.id}
-                      </span>
                     </div>
                   </div>
                 ))}
@@ -644,7 +566,7 @@ export function EventsClient({
                   r.event_slug === selectedEventForAttendees.slug
               ).length === 0 && (
                 <div className="py-8 text-center text-xs text-[#636E72]">
-                  No attendees have registered for this event yet.
+                  {tCommon("noRecords")}
                 </div>
               )}
             </div>
@@ -654,7 +576,7 @@ export function EventsClient({
                 onClick={() => setSelectedEventForAttendees(null)}
                 className="px-4 py-2 text-xs font-semibold bg-[#FAF8F5] hover:bg-[#F5F1EB] text-[#2D3436] rounded border border-[#E0D8CE]"
               >
-                Close
+                {tCommon("cancel")}
               </button>
             </div>
           </div>

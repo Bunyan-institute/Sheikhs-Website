@@ -16,10 +16,15 @@ import {
   Loader2,
   CheckCircle,
 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { saveLectureAction, deleteLectureAction } from "../actions";
 import type { PublicLecture } from "@/lib/api/types";
 
 export default function AdminLecturesPage() {
+  const t = useTranslations("admin.lectures");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [lectures, setLectures] = useState<PublicLecture[]>([]);
   const [search, setSearch] = useState("");
   const [formatFilter, setFormatFilter] = useState<"all" | "video" | "audio">("all");
@@ -123,7 +128,7 @@ export default function AdminLecturesPage() {
       });
 
       setIsModalOpen(false);
-      setFeedback("Lecture saved and synchronized successfully!");
+      setFeedback(tCommon("successSave"));
       fetchLectures();
     } catch (err: any) {
       alert("Error saving lecture: " + err.message);
@@ -133,11 +138,11 @@ export default function AdminLecturesPage() {
   };
 
   const handleDelete = async (id: string, lecTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${lecTitle}"?`)) return;
+    if (!confirm(`${tCommon("confirmDelete")} (${lecTitle})`)) return;
 
     try {
       await deleteLectureAction(id);
-      setFeedback(`"${lecTitle}" was removed.`);
+      setFeedback(tCommon("successDelete"));
       setLectures((prev) => prev.filter((l) => l.id !== id));
     } catch (err: any) {
       alert("Failed to delete: " + err.message);
@@ -162,10 +167,10 @@ export default function AdminLecturesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Lectures & Discourses ({lectures.length})
+            {t("heading")} ({lectures.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Manage televised broadcasts, YouTube videos, and Riyad us-Saliheen audio lessons.
+            {t("subheading")}
           </p>
         </div>
 
@@ -174,7 +179,7 @@ export default function AdminLecturesPage() {
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
-          <span>Add New Lecture</span>
+          <span>{t("newLecture")}</span>
         </button>
       </div>
 
@@ -196,7 +201,7 @@ export default function AdminLecturesPage() {
           <Search className="w-4 h-4 text-[#636E72] absolute start-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search lectures by title or keyword..."
+            placeholder={t("searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full ps-9 pe-4 py-2 bg-[#FAF8F5] border border-[#E0D8CE] rounded text-xs text-[#2D3436] focus:outline-none focus:border-[#1B5E20]"
@@ -210,7 +215,7 @@ export default function AdminLecturesPage() {
               formatFilter === "all" ? "bg-[#1B5E20] text-white" : "bg-[#FAF8F5] text-[#636E72] hover:text-[#2D3436]"
             }`}
           >
-            All ({lectures.length})
+            {tCommon("all")} ({lectures.length})
           </button>
           <button
             onClick={() => setFormatFilter("video")}
@@ -236,22 +241,22 @@ export default function AdminLecturesPage() {
         {isLoading ? (
           <div className="p-12 text-center text-xs text-[#636E72] flex items-center justify-center gap-2">
             <Loader2 className="w-4 h-4 animate-spin text-[#1B5E20]" />
-            <span>Loading lectures repository...</span>
+            <span>{tCommon("loading")}</span>
           </div>
         ) : filtered.length === 0 ? (
           <div className="p-12 text-center text-xs text-[#636E72]">
-            No lectures found matching your filter.
+            {tCommon("noRecords")}
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-start text-xs">
               <thead className="bg-[#FAF8F5] text-[#2D3436] font-heading font-bold uppercase tracking-wider text-[10px] border-b border-[#E0D8CE]">
                 <tr>
-                  <th className="py-3 px-4 text-start">Title & Description</th>
+                  <th className="py-3 px-4 text-start">{t("colTitle")}</th>
                   <th className="py-3 px-4 text-start">Format</th>
-                  <th className="py-3 px-4 text-start">Series</th>
-                  <th className="py-3 px-4 text-start">Duration</th>
-                  <th className="py-3 px-4 text-end">Actions</th>
+                  <th className="py-3 px-4 text-start">{t("colSeries")}</th>
+                  <th className="py-3 px-4 text-start">{t("colDuration")}</th>
+                  <th className="py-3 px-4 text-end">{t("colActions")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E0D8CE]/60">
@@ -305,23 +310,23 @@ export default function AdminLecturesPage() {
 
                     <td className="py-3.5 px-4 whitespace-nowrap text-end space-x-2">
                       <Link
-                        href={`/lectures/${lec.slug}`}
+                        href={`/${locale}/lectures/${lec.slug}`}
                         target="_blank"
-                        title="View Live Page"
+                        title={tCommon("viewLive")}
                         className="inline-block p-1.5 rounded hover:bg-gray-100 text-[#636E72] hover:text-[#1B5E20] transition-colors"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                       </Link>
                       <button
                         onClick={() => openEditModal(lec)}
-                        title="Edit Lecture"
+                        title={tCommon("edit")}
                         className="p-1.5 rounded hover:bg-emerald-50 text-[#636E72] hover:text-[#1B5E20] transition-colors"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDelete(lec.id, lec.title)}
-                        title="Delete Lecture"
+                        title={tCommon("delete")}
                         className="p-1.5 rounded hover:bg-red-50 text-[#636E72] hover:text-red-600 transition-colors"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -344,11 +349,8 @@ export default function AdminLecturesPage() {
             <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5] rounded-t-xl">
               <div>
                 <h3 className="font-heading font-bold text-base text-[#2D3436]">
-                  {editingLecture ? "Edit Lecture" : "Add New Lecture"}
+                  {editingLecture ? tCommon("edit") : t("newLecture")}
                 </h3>
-                <p className="text-xs text-[#636E72]">
-                  Fill in the details. Public cache updates immediately on save.
-                </p>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -361,31 +363,29 @@ export default function AdminLecturesPage() {
             {/* Modal Form */}
             <form onSubmit={handleSave} className="p-6 overflow-y-auto space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Lecture Title *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldTitle")} *</label>
                 <input
                   type="text"
                   required
                   value={title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  placeholder="e.g. Nebyu (s.a.w) Beleloch Andebet"
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">URL Slug *</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSlug")} *</label>
                   <input
                     type="text"
                     required
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
-                    placeholder="nebyu-beleloch-andebet"
                     className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Duration (Minutes)</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDuration")}</label>
                   <input
                     type="number"
                     value={durationMinutes}
@@ -397,12 +397,11 @@ export default function AdminLecturesPage() {
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Summary / Excerpt</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDescription")}</label>
                 <textarea
                   rows={2}
                   value={summary}
                   onChange={(e) => setSummary(e.target.value)}
-                  placeholder="Brief description of the sermon or lecture..."
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -411,7 +410,7 @@ export default function AdminLecturesPage() {
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1 flex items-center gap-1.5">
                     <Video className="w-3.5 h-3.5 text-red-600" />
-                    <span>YouTube Video URL</span>
+                    <span>{t("fieldYoutubeUrl")}</span>
                   </label>
                   <input
                     type="url"
@@ -424,7 +423,7 @@ export default function AdminLecturesPage() {
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1 flex items-center gap-1.5">
                     <AudioLines className="w-3.5 h-3.5 text-[#1B5E20]" />
-                    <span>Audio MP3 URL</span>
+                    <span>{t("fieldAudioUrl")}</span>
                   </label>
                   <input
                     type="url"
@@ -438,35 +437,33 @@ export default function AdminLecturesPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Series Assignment</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSeries")}</label>
                   <select
                     value={seriesId}
                     onChange={(e) => setSeriesId(e.target.value)}
                     className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
                   >
-                    <option value="">No Series (Standalone Lecture)</option>
+                    <option value="">Standalone</option>
                     <option value="ser-riyadus-saliheen">Riyad us-Saliheen (ሪያዱ ሷሊሂን)</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Categories (comma-separated)</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{tCommon("category")}</label>
                   <input
                     type="text"
                     value={categories}
                     onChange={(e) => setCategories(e.target.value)}
-                    placeholder="Hadith, Akhlaq, Tazkiyah"
                     className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Transcript / Study Notes</label>
+                <label className="block font-bold text-[#2D3436] mb-1">Transcript</label>
                 <textarea
                   rows={4}
                   value={transcript}
                   onChange={(e) => setTranscript(e.target.value)}
-                  placeholder="Paste lecture transcript or key points..."
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
@@ -477,7 +474,7 @@ export default function AdminLecturesPage() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-[#E0D8CE] text-[#636E72] hover:bg-[#FAF8F5] rounded font-semibold text-xs transition-colors"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
@@ -485,7 +482,7 @@ export default function AdminLecturesPage() {
                   className="px-6 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white rounded font-bold text-xs shadow-xs transition-colors disabled:opacity-50 flex items-center gap-1.5"
                 >
                   {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>{editingLecture ? "Save Changes" : "Create Lecture"}</span>
+                  <span>{isSaving ? tCommon("saving") : t("saveLecture")}</span>
                 </button>
               </div>
             </form>

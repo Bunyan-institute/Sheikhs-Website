@@ -3,10 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, Layers, X, Loader2, CheckCircle } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { saveSeriesAction, deleteSeriesAction } from "../actions";
 import type { PublicSeries } from "@/lib/api/types";
 
 export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] }) {
+  const t = useTranslations("admin.series");
+  const tCommon = useTranslations("admin.common");
+  const locale = useLocale();
+
   const [series, setSeries] = useState<PublicSeries[]>(initialSeries);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -75,7 +80,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
       }
 
       setIsModalOpen(false);
-      setFeedback("Series saved successfully!");
+      setFeedback(tCommon("successSave"));
     } catch (err: any) {
       alert("Error: " + err.message);
     } finally {
@@ -84,11 +89,11 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
   };
 
   const handleDelete = async (id: string, sTitle: string) => {
-    if (!confirm(`Are you sure you want to delete "${sTitle}"?`)) return;
+    if (!confirm(`${tCommon("confirmDelete")} (${sTitle})`)) return;
     try {
       await deleteSeriesAction(id);
       setSeries((prev) => prev.filter((s) => s.id !== id));
-      setFeedback(`Series "${sTitle}" removed.`);
+      setFeedback(tCommon("successDelete"));
     } catch (err: any) {
       alert("Error: " + err.message);
     }
@@ -99,10 +104,10 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            Series & Curriculums ({series.length})
+            {t("heading")} ({series.length})
           </h1>
           <p className="text-xs text-[#636E72] mt-0.5">
-            Organize multi-part educational series like Riyad us-Saliheen.
+            {t("subheading")}
           </p>
         </div>
 
@@ -111,7 +116,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
-          <span>New Series</span>
+          <span>{t("newSeries")}</span>
         </button>
       </div>
 
@@ -135,13 +140,13 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
               <div className="flex items-start justify-between gap-2 mb-2">
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#FAF8F5] text-[#B8860B] border border-[#E0D8CE] font-bold text-[11px]">
                   <Layers className="w-3.5 h-3.5" />
-                  <span>{s.lecture_count} Lessons</span>
+                  <span>{s.lecture_count} {t("colLectures")}</span>
                 </span>
                 <Link
-                  href={`/series/${s.slug}`}
+                  href={`/${locale}/series/${s.slug}`}
                   target="_blank"
                   className="text-[#636E72] hover:text-[#1B5E20] p-1"
-                  title="View Public Series"
+                  title={tCommon("viewLive")}
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
@@ -167,13 +172,13 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
                   onClick={() => openEditModal(s)}
                   className="px-3 py-1.5 rounded bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 font-semibold text-xs"
                 >
-                  Edit
+                  {tCommon("edit")}
                 </button>
                 <button
                   onClick={() => handleDelete(s.id, s.title)}
                   className="px-3 py-1.5 rounded bg-red-50 text-red-600 hover:bg-red-100 font-semibold text-xs"
                 >
-                  Delete
+                  {tCommon("delete")}
                 </button>
               </div>
             </div>
@@ -187,7 +192,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg z-10 border border-[#E0D8CE] overflow-hidden">
             <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5]">
               <h3 className="font-heading font-bold text-sm text-[#2D3436]">
-                {editingSeries ? "Edit Series" : "New Series"}
+                {editingSeries ? t("editSeries") : t("newSeries")}
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-[#636E72]">
                 <X className="w-4 h-4" />
@@ -196,7 +201,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
 
             <form onSubmit={handleSave} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Series Title *</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldTitle")} *</label>
                 <input
                   type="text"
                   required
@@ -208,7 +213,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Slug *</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSlug")} *</label>
                   <input
                     type="text"
                     required
@@ -218,7 +223,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">Total Lessons</label>
+                  <label className="block font-bold text-[#2D3436] mb-1">{t("colLectures")}</label>
                   <input
                     type="number"
                     value={lectureCount}
@@ -230,7 +235,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Description</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDescription")}</label>
                 <textarea
                   rows={3}
                   value={description}
@@ -240,7 +245,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
               </div>
 
               <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Cover Image URL</label>
+                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldCoverUrl")}</label>
                 <input
                   type="text"
                   value={coverUrl}
@@ -256,14 +261,14 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border border-[#E0D8CE] rounded text-[#636E72]"
                 >
-                  Cancel
+                  {tCommon("cancel")}
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
                   className="px-6 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white rounded font-bold"
                 >
-                  {isSaving ? "Saving..." : "Save Series"}
+                  {isSaving ? tCommon("saving") : t("saveSeries")}
                 </button>
               </div>
             </form>
