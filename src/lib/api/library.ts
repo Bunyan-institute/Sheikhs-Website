@@ -138,26 +138,24 @@ export const AUTHENTIC_BOOKS: PublicBook[] = [
 ];
 
 export async function getLibrary(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicBook>> {
+  let list: PublicBook[] = [];
   try {
-    let list = getAllBooks();
-    if (params.category && params.category.length > 0) {
-      list = list.filter((b) => b.categories.some((cat) => params.category!.includes(cat)));
-    }
-    if (!list || list.length === 0) list = AUTHENTIC_BOOKS;
-    return {
-      object: "list",
-      data: list,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = getAllBooks();
   } catch {
-    return {
-      object: "list",
-      data: AUTHENTIC_BOOKS,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = AUTHENTIC_BOOKS;
   }
+  if (!list || list.length === 0) {
+    list = AUTHENTIC_BOOKS;
+  }
+  if (params.category && params.category.length > 0) {
+    list = list.filter((b) => b.categories.some((cat) => params.category!.includes(cat)));
+  }
+  return {
+    object: "list",
+    data: list,
+    has_more: false,
+    next_cursor: null,
+  };
 }
 
 export async function getLibraryItem(reference: string, locale?: string): Promise<PublicBook> {

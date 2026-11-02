@@ -17,28 +17,27 @@ export interface LectureListParams {
 export const AUTHENTIC_LECTURES: PublicLecture[] = (contentStore.lectures || []) as PublicLecture[];
 
 export async function getLectures(params: LectureListParams = {}): Promise<ListResponse<PublicLecture>> {
+  let list: PublicLecture[] = [];
   try {
-    let list = getAllLectures();
-    if (params.series) {
-      list = list.filter((l) => l.series?.id === params.series);
-    }
-    if (params.category && params.category.length > 0) {
-      list = list.filter((l) => l.categories.some((c) => params.category!.includes(c)));
-    }
-    return {
-      object: "list",
-      data: list,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = getAllLectures();
   } catch {
-    return {
-      object: "list",
-      data: AUTHENTIC_LECTURES,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = AUTHENTIC_LECTURES;
   }
+  if (!list || list.length === 0) {
+    list = AUTHENTIC_LECTURES;
+  }
+  if (params.series) {
+    list = list.filter((l) => l.series?.id === params.series);
+  }
+  if (params.category && params.category.length > 0) {
+    list = list.filter((l) => l.categories.some((c) => params.category!.includes(c)));
+  }
+  return {
+    object: "list",
+    data: list,
+    has_more: false,
+    next_cursor: null,
+  };
 }
 
 export async function getLecture(reference: string, locale?: string): Promise<PublicLecture> {

@@ -171,25 +171,24 @@ export const AUTHENTIC_COURSES: PublicCourse[] = [
 import { getAllCourses, getCourseByIdOrSlug } from "@/lib/db/repository";
 
 export async function getCourses(params: { limit?: string; cursor?: string; locale?: string; category?: string[]; tag?: string[]; sort?: string } = {}): Promise<ListResponse<PublicCourse>> {
+  let list: PublicCourse[] = [];
   try {
-    let list = getAllCourses();
-    if (params.category && params.category.length > 0) {
-      list = list.filter((c) => c.categories.some((cat) => params.category!.includes(cat)));
-    }
-    return {
-      object: "list",
-      data: list,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = getAllCourses();
   } catch {
-    return {
-      object: "list",
-      data: AUTHENTIC_COURSES,
-      has_more: false,
-      next_cursor: null,
-    };
+    list = AUTHENTIC_COURSES;
   }
+  if (!list || list.length === 0) {
+    list = AUTHENTIC_COURSES;
+  }
+  if (params.category && params.category.length > 0) {
+    list = list.filter((c) => c.categories.some((cat) => params.category!.includes(cat)));
+  }
+  return {
+    object: "list",
+    data: list,
+    has_more: false,
+    next_cursor: null,
+  };
 }
 
 export async function getCourse(reference: string, locale?: string): Promise<PublicCourse> {
