@@ -95,5 +95,6 @@ export function importDatabaseJson(jsonString: string): PortalDatabase {
   if (!parsed || !Array.isArray(parsed.lectures) || !Array.isArray(parsed.articles)) {
     throw new Error("Invalid database schema format.");
   }
-  return saveDatabase(parsed);
+  const saved = saveDatabase(parsed);
+  return saved;
 }

@@ -3,35 +3,34 @@
 import { revalidatePath } from "next/cache";
 import { getSessionUser } from "@/lib/auth/session";
 import {
-  saveLecture,
-  deleteLecture,
-  saveSeries,
-  deleteSeries,
-  saveArticle,
-  deleteArticle,
-  saveFatwa,
-  deleteFatwa,
-  saveCourse,
-  deleteCourse,
-  saveBook,
-  deleteBook,
-  saveEvent,
-  deleteEvent,
-  saveMediaItem,
-  deleteMediaItem,
-  updateInquiryStatus,
-  deleteInquiry,
-  updateProfile,
-  updateJourney,
-  updateQualifications,
-  issueCertificate,
-  revokeCertificate,
-  updateEventRegistrationStatus,
-  deleteEventRegistration,
+  saveLectureAsync,
+  deleteLectureAsync,
+  saveSeriesAsync,
+  deleteSeriesAsync,
+  saveArticleAsync,
+  deleteArticleAsync,
+  saveFatwaAsync,
+  deleteFatwaAsync,
+  saveCourseAsync,
+  deleteCourseAsync,
+  saveBookAsync,
+  deleteBookAsync,
+  saveEventAsync,
+  deleteEventAsync,
+  saveMediaItemAsync,
+  deleteMediaItemAsync,
+  updateInquiryStatusAsync,
+  deleteInquiryAsync,
+  updateProfileAsync,
+  updateJourneyAsync,
+  updateQualificationsAsync,
+  issueCertificateAsync,
+  revokeCertificateAsync,
+  updateEventRegistrationStatusAsync,
+  deleteEventRegistrationAsync,
   importDatabaseJson,
   resetDatabase,
 } from "@/lib/db/repository";
-import type { PublicLecture, PublicArticle, PublicFatwa, PublicCourse, PublicBook, PublicEvent } from "@/lib/api/types";
 import type { JourneyMilestone, QualificationRecord } from "@/lib/db/types";
 
 async function assertAuthenticated() {
@@ -68,7 +67,7 @@ export async function saveLectureAction(data: {
 }) {
   await assertAuthenticated();
 
-  const lecture = saveLecture({
+  const lecture = await saveLectureAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
@@ -91,12 +90,14 @@ export async function saveLectureAction(data: {
     tags: data.tags || [],
   });
 
+  refreshCache();
   return { success: true, lecture };
 }
 
 export async function deleteLectureAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteLecture(id);
+  const deleted = await deleteLectureAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -112,7 +113,7 @@ export async function saveSeriesAction(data: {
 }) {
   await assertAuthenticated();
 
-  const series = saveSeries({
+  const series = await saveSeriesAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
@@ -121,23 +122,25 @@ export async function saveSeriesAction(data: {
     cover: data.coverUrl
       ? {
           object: "media",
-          id: `med_${data.slug}`,
+          id: `med_ser_${Date.now()}`,
           kind: "image",
           url: data.coverUrl,
           mime_type: "image/jpeg",
-          width: 1200,
-          height: 800,
+          width: 800,
+          height: 600,
           duration_seconds: null,
         }
       : null,
   });
 
+  refreshCache();
   return { success: true, series };
 }
 
 export async function deleteSeriesAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteSeries(id);
+  const deleted = await deleteSeriesAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -157,7 +160,7 @@ export async function saveArticleAction(data: {
 }) {
   await assertAuthenticated();
 
-  const article = saveArticle({
+  const article = await saveArticleAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
@@ -181,12 +184,14 @@ export async function saveArticleAction(data: {
       : null,
   });
 
+  refreshCache();
   return { success: true, article };
 }
 
 export async function deleteArticleAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteArticle(id);
+  const deleted = await deleteArticleAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -205,7 +210,7 @@ export async function saveFatwaAction(data: {
 }) {
   await assertAuthenticated();
 
-  const fatwa = saveFatwa({
+  const fatwa = await saveFatwaAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
@@ -217,12 +222,14 @@ export async function saveFatwaAction(data: {
     published_at: data.publishedAt || new Date().toISOString(),
   });
 
+  refreshCache();
   return { success: true, fatwa };
 }
 
 export async function deleteFatwaAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteFatwa(id);
+  const deleted = await deleteFatwaAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -238,42 +245,48 @@ export async function saveCourseAction(data: {
   lessonCount?: number;
   coverUrl?: string;
   categories?: string[];
+  tags?: string[];
+  publishedAt?: string;
 }) {
   await assertAuthenticated();
 
-  const course = saveCourse({
+  const course = await saveCourseAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
     summary: data.summary || null,
     description: data.description || null,
-    enrolment_open: Boolean(data.enrolmentOpen),
-    lesson_count: data.lessonCount || 0,
-    categories: data.categories || ["islamic-studies"],
+    enrolment_open: data.enrolmentOpen ?? true,
+    lesson_count: data.lessonCount ?? 0,
     cover: data.coverUrl
       ? {
           object: "media",
-          id: `med_crs_${Date.now()}`,
+          id: `med_cou_${Date.now()}`,
           kind: "image",
           url: data.coverUrl,
           mime_type: "image/jpeg",
           width: 1200,
-          height: 800,
+          height: 675,
           duration_seconds: null,
         }
       : null,
+    categories: data.categories || ["aqeedah"],
+    tags: data.tags || [],
+    published_at: data.publishedAt || new Date().toISOString(),
   });
 
+  refreshCache();
   return { success: true, course };
 }
 
 export async function deleteCourseAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteCourse(id);
+  const deleted = await deleteCourseAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
-// ── Book / Library Actions ──
+// ── Library (Book) Actions ──
 
 export async function saveBookAction(data: {
   id?: string;
@@ -284,15 +297,17 @@ export async function saveBookAction(data: {
   author?: string;
   publisher?: string;
   year?: number;
+  isbn?: string;
   kind?: "book" | "document" | "recommended_text";
+  coverUrl?: string;
   fileUrl?: string;
   externalUrl?: string;
-  coverUrl?: string;
   categories?: string[];
+  tags?: string[];
 }) {
   await assertAuthenticated();
 
-  const book = saveBook({
+  const book = await saveBookAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
@@ -301,25 +316,24 @@ export async function saveBookAction(data: {
     author: data.author || "Sheikh Muhammed Ferej",
     publisher: data.publisher || null,
     year: data.year || new Date().getFullYear(),
+    isbn: data.isbn || null,
     kind: data.kind || "document",
-    external_url: data.externalUrl || null,
-    categories: data.categories || ["treatise"],
     cover: data.coverUrl
       ? {
           object: "media",
-          id: `med_cov_${Date.now()}`,
+          id: `med_bk_cov_${Date.now()}`,
           kind: "image",
           url: data.coverUrl,
           mime_type: "image/jpeg",
-          width: 1000,
-          height: 1400,
+          width: 800,
+          height: 1200,
           duration_seconds: null,
         }
       : null,
     file: data.fileUrl
       ? {
           object: "media",
-          id: `med_file_${Date.now()}`,
+          id: `med_bk_file_${Date.now()}`,
           kind: "document",
           url: data.fileUrl,
           mime_type: "application/pdf",
@@ -328,14 +342,19 @@ export async function saveBookAction(data: {
           duration_seconds: null,
         }
       : null,
+    external_url: data.externalUrl || null,
+    categories: data.categories || ["treatise"],
+    tags: data.tags || [],
   });
 
+  refreshCache();
   return { success: true, book };
 }
 
 export async function deleteBookAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteBook(id);
+  const deleted = await deleteBookAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -349,16 +368,19 @@ export async function saveEventAction(data: {
   description?: string;
   startsAt: string;
   endsAt?: string;
+  timezone?: string;
   venueName?: string;
   venueAddress?: string;
   onlineUrl?: string;
   registrationRequired?: boolean;
+  capacity?: number;
   coverUrl?: string;
   categories?: string[];
+  tags?: string[];
 }) {
   await assertAuthenticated();
 
-  const event = saveEvent({
+  const event = await saveEventAsync({
     id: data.id,
     title: data.title,
     slug: data.slug,
@@ -366,11 +388,12 @@ export async function saveEventAction(data: {
     description: data.description || null,
     starts_at: data.startsAt,
     ends_at: data.endsAt || null,
+    timezone: data.timezone || "Africa/Addis_Ababa",
     venue_name: data.venueName || null,
     venue_address: data.venueAddress || null,
     online_url: data.onlineUrl || null,
-    registration_required: Boolean(data.registrationRequired),
-    categories: data.categories || ["khutbah"],
+    registration_required: data.registrationRequired ?? false,
+    capacity: data.capacity || null,
     cover: data.coverUrl
       ? {
           object: "media",
@@ -379,18 +402,22 @@ export async function saveEventAction(data: {
           url: data.coverUrl,
           mime_type: "image/jpeg",
           width: 1200,
-          height: 800,
+          height: 675,
           duration_seconds: null,
         }
       : null,
+    categories: data.categories || ["khutbah"],
+    tags: data.tags || [],
   });
 
+  refreshCache();
   return { success: true, event };
 }
 
 export async function deleteEventAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteEvent(id);
+  const deleted = await deleteEventAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -403,7 +430,7 @@ export async function saveMediaAction(data: {
 }) {
   await assertAuthenticated();
 
-  const media = saveMediaItem({
+  const media = await saveMediaItemAsync({
     object: "media",
     id: data.id || `med_${Date.now()}`,
     kind: data.kind || "image",
@@ -414,12 +441,14 @@ export async function saveMediaAction(data: {
     duration_seconds: null,
   });
 
+  refreshCache();
   return { success: true, media };
 }
 
 export async function deleteMediaAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteMediaItem(id);
+  const deleted = await deleteMediaItemAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -431,13 +460,15 @@ export async function updateInquiryStatusAction(
   notes?: string
 ) {
   await assertAuthenticated();
-  const updated = updateInquiryStatus(id, status, notes);
+  const updated = await updateInquiryStatusAsync(id, status, notes);
+  refreshCache();
   return { success: Boolean(updated), inquiry: updated };
 }
 
 export async function deleteInquiryAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteInquiry(id);
+  const deleted = await deleteInquiryAsync(id);
+  refreshCache();
   return { success: deleted };
 }
 
@@ -450,7 +481,7 @@ export async function convertInquiryToFatwaAction(data: {
 }) {
   await assertAuthenticated();
 
-  const fatwa = saveFatwa({
+  const fatwa = await saveFatwaAsync({
     title: data.title,
     slug: data.slug,
     summary: `Scholarly ruling responding to community inquiry #${data.inquiryId}`,
@@ -460,7 +491,8 @@ export async function convertInquiryToFatwaAction(data: {
     published_at: new Date().toISOString(),
   });
 
-  updateInquiryStatus(data.inquiryId, "answered", `Converted to public Fatwa: ${fatwa.slug}`);
+  await updateInquiryStatusAsync(data.inquiryId, "answered", `Converted to public Fatwa: ${fatwa.slug}`);
+  refreshCache();
 
   return { success: true, fatwa };
 }
@@ -482,7 +514,7 @@ export async function updateProfileAction(data: {
 }) {
   await assertAuthenticated();
 
-  const profile = updateProfile({
+  const profile = await updateProfileAsync({
     name: data.name,
     headline: data.headline || null,
     biography: data.biography || null,
@@ -507,18 +539,21 @@ export async function updateProfileAction(data: {
       : undefined,
   });
 
+  refreshCache();
   return { success: true, profile };
 }
 
 export async function updateJourneyAction(milestones: JourneyMilestone[]) {
   await assertAuthenticated();
-  const journey = updateJourney(milestones);
+  const journey = await updateJourneyAsync(milestones);
+  refreshCache();
   return { success: true, journey };
 }
 
 export async function updateQualificationsAction(qualifications: QualificationRecord[]) {
   await assertAuthenticated();
-  const quals = updateQualifications(qualifications);
+  const quals = await updateQualificationsAsync(qualifications);
+  refreshCache();
   return { success: true, qualifications: quals };
 }
 
@@ -528,6 +563,7 @@ export async function restoreDatabaseAction(jsonString: string) {
   await assertAuthenticated();
   try {
     const db = importDatabaseJson(jsonString);
+    refreshCache();
     return { success: true, version: db.version };
   } catch (err: any) {
     return { success: false, error: err.message || "Failed to parse database JSON." };
@@ -545,7 +581,7 @@ export async function resetDatabaseAction() {
 
 export async function revokeCertificateAction(id: string, reason?: string) {
   await assertAuthenticated();
-  const cert = revokeCertificate(id, reason);
+  const cert = await revokeCertificateAsync(id, reason);
   refreshCache();
   return { success: Boolean(cert), certificate: cert };
 }
@@ -560,7 +596,7 @@ export async function issueCertificateAction(data: {
   grade_title?: string;
 }) {
   await assertAuthenticated();
-  const cert = issueCertificate(data);
+  const cert = await issueCertificateAsync(data);
   refreshCache();
   return { success: true, certificate: cert };
 }
@@ -570,14 +606,14 @@ export async function updateEventRegistrationStatusAction(
   status: "confirmed" | "cancelled" | "attended"
 ) {
   await assertAuthenticated();
-  const updated = updateEventRegistrationStatus(id, status);
+  const updated = await updateEventRegistrationStatusAsync(id, status);
   refreshCache();
   return { success: Boolean(updated), registration: updated };
 }
 
 export async function deleteEventRegistrationAction(id: string) {
   await assertAuthenticated();
-  const deleted = deleteEventRegistration(id);
+  const deleted = await deleteEventRegistrationAsync(id);
   refreshCache();
   return { success: deleted };
 }
