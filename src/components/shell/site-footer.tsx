@@ -47,18 +47,16 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
   };
 
   const knowledgeLinks = [
-    { href: "/lectures", labelKey: "nav.lectures" },
+    { href: "/media", labelKey: "nav.media" },
     { href: "/series", labelKey: "nav.series" },
     { href: "/articles", labelKey: "nav.articles" },
     { href: "/fatwas", labelKey: "nav.fatwas" },
     { href: "/courses", labelKey: "nav.courses" },
   ];
 
-  const libraryLinks = [
-    { href: "/library", labelKey: "nav.library" },
+  const resourceLinks = [
     { href: "/events", labelKey: "nav.events" },
     { href: "/verify", labelKey: "nav.verify" },
-    { href: "/media", labelKey: "nav.media" },
     { href: "/ask", labelKey: "nav.ask" },
     { href: "/search", labelKey: "nav.search" },
   ];
@@ -174,13 +172,13 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
             </nav>
           </div>
 
-          {/* Column 4: Library & Engagement */}
+          {/* Column 4: Resources & Engagement */}
           <div className="flex flex-col space-y-3">
             <h3 className="font-heading text-xs font-bold text-[#1A4D2E] uppercase tracking-wider">
-              Library &amp; Treatises
+              Resources &amp; Inquiries
             </h3>
             <nav className="flex flex-col space-y-2">
-              {libraryLinks.map((link) => (
+              {resourceLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -199,7 +197,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
           </p>
           <div className="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 text-xs text-[#7A8285]">
             <Link href="/about" className="hover:text-[#1A4D2E]">Biography</Link>
-            <Link href="/library" className="hover:text-[#1A4D2E]">Scholarly Treatises</Link>
+            <Link href="/media" className="hover:text-[#1A4D2E]">Media &amp; Halaqat</Link>
             <a href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A4D2E] font-bold text-[#1A4D2E]">ሸይኽ ሙሃመድ ፈረጅ App</a>
             <Link href="/contact" className="hover:text-[#1A4D2E]">Direct Inquiry</Link>
           </div>

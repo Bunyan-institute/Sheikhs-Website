@@ -8,11 +8,11 @@ export interface NavItem {
 }
 
 export const DEFAULT_SECTIONS: SectionMap = {
-  lectures: true,
+  lectures: false,
   articles: true,
   fatwas: true,
   courses: true,
-  library: true,
+  library: false,
   events: true,
   questions: true,
 };
@@ -24,9 +24,8 @@ export function buildNavigation(sections?: Partial<SectionMap> | null): NavItem[
     { key: "about", href: "/about", labelKey: "nav.about" },
   ];
 
-  if (s.lectures) {
-    nav.push({ key: "lectures", href: "/lectures", labelKey: "nav.lectures" });
-  }
+  // Media replaces Lectures as primary nav item
+  nav.push({ key: "media", href: "/media", labelKey: "nav.media" });
 
   const knowledge: NavItem[] = [];
   if (s.articles) {
@@ -38,9 +37,7 @@ export function buildNavigation(sections?: Partial<SectionMap> | null): NavItem[
   if (s.courses) {
     knowledge.push({ key: "courses", href: "/courses", labelKey: "nav.courses" });
   }
-  if (s.lectures) {
-    knowledge.push({ key: "series", href: "/series", labelKey: "nav.series" });
-  }
+  knowledge.push({ key: "series", href: "/series", labelKey: "nav.series" });
 
   if (knowledge.length > 0) {
     nav.push({
@@ -49,10 +46,6 @@ export function buildNavigation(sections?: Partial<SectionMap> | null): NavItem[
       labelKey: "nav.knowledge",
       children: knowledge,
     });
-  }
-
-  if (s.library) {
-    nav.push({ key: "library", href: "/library", labelKey: "nav.library" });
   }
 
   if (s.events) {
@@ -79,7 +72,6 @@ export function buildMoreItems(sections?: Partial<SectionMap> | null): NavItem[]
     { key: "journey", href: "/journey", labelKey: "nav.journey" },
     { key: "qualifications", href: "/qualifications", labelKey: "nav.qualifications" },
     { key: "verify", href: "/verify", labelKey: "nav.verify" },
-    { key: "media", href: "/media", labelKey: "nav.media" },
   ];
 
   if (s.questions) {

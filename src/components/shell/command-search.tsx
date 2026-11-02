@@ -18,15 +18,13 @@ const QUICK_LINKS: QuickLink[] = [
   { title: "Scholar Biography & Profile", href: "/about", category: "Scholar", icon: Compass },
   { title: "Educational Journey & Timeline", href: "/journey", category: "Scholar", icon: GraduationCap },
   { title: "Academic Qualifications & Traditional Ijazat", href: "/qualifications", category: "Scholar", icon: Award },
-  { title: "Lectures & Sermons Archive", href: "/lectures", category: "Knowledge", icon: Video },
-  { title: "Africa TV & YouTube Playlists", href: "/lectures", category: "Knowledge", icon: Video },
+  { title: "Media Hub & Africa TV Video Archive", href: "/media", category: "Knowledge", icon: Video },
   { title: "ሸይኽ ሙሃመድ ፈረጅ Official App (Google Play)", href: "https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej", category: "Resources", icon: Layers },
   { title: "Scholarly Articles & Hadith Studies", href: "/articles", category: "Knowledge", icon: FileText },
   { title: "Fatwas & Sharia Rulings", href: "/fatwas", category: "Knowledge", icon: CheckCircle },
   { title: "Structured Academic Courses", href: "/courses", category: "Knowledge", icon: Book },
-  { title: "Public Kitab & Documents (PDFs)", href: "/library", category: "Resources", icon: Book },
   { title: "Conferences & Events Schedule", href: "/events", category: "Resources", icon: Calendar },
-  { title: "Unified Media Gallery (Audio, Photos, TikTok)", href: "/media", category: "Resources", icon: Headphones },
+  { title: "Unified Media Gallery (Audio, Photos, Videos)", href: "/media", category: "Resources", icon: Headphones },
   { title: "Ask the Sheikh (Question Submission)", href: "/ask", category: "Engagement", icon: MessageSquare },
   { title: "Scholarly Office & Contact", href: "/contact", category: "Engagement", icon: Mail },
 ];
@@ -69,7 +67,7 @@ export function CommandSearch() {
         aria-label="Search content"
       >
         <Search className="w-4 h-4 me-2 text-[#1A4D2E]" />
-        <span className="hidden sm:inline-block me-4 font-body text-xs">Search scholar library...</span>
+        <span className="hidden sm:inline-block me-4 font-body text-xs">Search scholarly content...</span>
         <kbd className="hidden sm:inline-block font-sans text-[11px] font-semibold px-1.5 py-0.5 bg-[#FAF8F5] border border-[#E6E0D8] rounded-[2px] text-[#7A8285]">
           ⌘K
         </kbd>
