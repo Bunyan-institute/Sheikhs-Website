@@ -43,56 +43,56 @@ export default async function ArticlePage({
   let article;
   try {
     article = await getArticle(slug, locale);
-  } catch (error) {
+  } catch {
     notFound();
   }
 
   return (
-    <article className="w-full bg-[#EDF2EE] py-10 md:py-16">
+    <article className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <Link 
             href="/articles" 
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#1D6A5A] hover:text-[#0F3446] transition-colors"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1B6A50] hover:text-[#0D3E2F] transition-colors py-1"
           >
             <ArrowLeft className="w-4 h-4 text-[#BF9A45]" />
-            All Articles &amp; Hadith Studies
+            <span>All Articles &amp; Hadith Studies</span>
           </Link>
         </div>
 
-        <div className="bg-white border border-[#14262E]/10 rounded-2xl p-6 sm:p-10 md:p-12 shadow-xs">
-          <header className="mb-10 pb-8 border-b border-[#14262E]/10">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+        <div className="bg-white border border-[#0F241C]/10 rounded-2xl p-6 sm:p-10 md:p-12 shadow-xs">
+          <header className="mb-8 sm:mb-10 pb-6 sm:pb-8 border-b border-[#0F241C]/10">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
               {article.categories?.map((cat) => (
-                <span key={cat} className="text-[#1D6A5A] font-semibold bg-[#1D6A5A]/10 border border-[#1D6A5A]/20 px-3 py-0.5 rounded-full text-xs capitalize">
+                <span key={cat} className="text-[#1B6A50] font-semibold bg-[#1B6A50]/10 border border-[#1B6A50]/20 px-3 py-0.5 rounded-full text-xs capitalize">
                   {cat}
                 </span>
               ))}
-              <span className="text-[#14262E]/50 text-xs font-medium">
+              <span className="text-[#0F241C]/50 text-xs font-medium">
                 {formatDate(article.published_at, locale)}
               </span>
               {article.reading_minutes && (
                 <>
-                  <span className="text-[#14262E]/20">&bull;</span>
-                  <span className="text-[#14262E]/50 text-xs">
+                  <span className="text-[#0F241C]/20">&bull;</span>
+                  <span className="text-[#0F241C]/50 text-xs">
                     {article.reading_minutes} min study
                   </span>
                 </>
               )}
             </div>
             
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[#14262E] leading-tight mb-6 break-words">
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold text-[#0F241C] leading-tight mb-4 sm:mb-6 break-words">
               {article.title}
             </h1>
 
             {article.summary && (
-              <p className="text-lg text-[#14262E]/70 leading-relaxed font-sans font-normal italic">
+              <p className="text-base sm:text-lg text-[#0F241C]/75 leading-relaxed font-sans font-normal italic">
                 &ldquo;{article.summary}&rdquo;
               </p>
             )}
 
             {article.cover && (
-              <div className="w-full aspect-[16/9] relative rounded-xl overflow-hidden bg-[#EDF2EE] border border-[#BF9A45]/30 mt-8">
+              <div className="w-full aspect-[16/9] relative rounded-xl overflow-hidden bg-[#EDF4F0] border border-[#BF9A45]/30 mt-6 sm:mt-8">
                 <img 
                   src={article.cover.url} 
                   alt={article.title} 
@@ -104,15 +104,15 @@ export default async function ArticlePage({
 
           {article.body && (
             <div 
-              className="prose prose-lg max-w-none text-[#14262E]/80 prose-headings:font-display prose-headings:text-[#14262E] prose-a:text-[#1D6A5A] prose-a:underline hover:prose-a:text-[#0F3446] leading-relaxed break-words font-sans"
+              className="prose prose-lg max-w-none text-[#0F241C]/80 prose-headings:font-display prose-headings:text-[#0F241C] prose-a:text-[#1B6A50] prose-a:underline hover:prose-a:text-[#0D3E2F] leading-relaxed break-words font-sans"
               dangerouslySetInnerHTML={{ __html: article.body }}
             />
           )}
 
           {/* Verification colophon */}
-          <footer className="mt-12 pt-6 border-t border-[#14262E]/10 flex flex-wrap items-center justify-between gap-4 text-xs text-[#14262E]/60">
+          <footer className="mt-10 sm:mt-12 pt-6 border-t border-[#0F241C]/10 flex flex-wrap items-center justify-between gap-4 text-xs text-[#0F241C]/60">
             <p>Author: فضيلة الشيخ محمد فرج مجنو حفظه الله</p>
-            <p className="font-arabic text-[#1D6A5A] text-sm" dir="rtl">والحمد لله رب العالمين</p>
+            <p className="font-arabic text-[#1B6A50] text-sm font-semibold" dir="rtl">والحمد لله رب العالمين</p>
           </footer>
         </div>
       </div>
