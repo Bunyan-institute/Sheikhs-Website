@@ -47,9 +47,9 @@ export default async function SeriesDetailPage({ params }: SeriesDetailPageProps
     series = await getSeriesDetail(slug, locale);
   } catch {
     return (
-      <div className="min-h-screen bg-[#FAF8F5] py-20 text-center">
-        <h1 className="text-2xl font-bold font-heading mb-4 text-[#2D3436]">Series Not Found</h1>
-        <Link href="/series" className="text-[#1B5E20] hover:underline font-medium">← Back to all series</Link>
+      <div className="min-h-screen bg-[#EDF2EE] py-20 text-center">
+        <h1 className="text-3xl font-display font-bold mb-4 text-[#14262E]">Series Not Found</h1>
+        <Link href="/series" className="text-[#1D6A5A] hover:underline font-medium">← Back to all series</Link>
       </div>
     );
   }
@@ -59,19 +59,20 @@ export default async function SeriesDetailPage({ params }: SeriesDetailPageProps
   );
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] py-8 md:py-16">
-      <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
+    <div className="w-full bg-[#EDF2EE] py-10 md:py-16">
+      <div className="max-w-page mx-auto px-4 sm:px-6">
         <Link 
           href="/series" 
-          className="inline-flex items-center gap-2 text-sm font-medium text-[#636E72] hover:text-[#1B5E20] transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#1D6A5A] hover:text-[#0F3446] transition-colors mb-8"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4 text-[#BF9A45]" />
           All Series
         </Link>
 
-        <div className="bg-white border border-[#E0D8CE] rounded-md overflow-hidden mb-12">
+        {/* Series Overview Card */}
+        <div className="bg-white border border-[#14262E]/10 rounded-2xl overflow-hidden mb-12 shadow-xs">
           {series.cover?.url && (
-            <div className="w-full h-48 md:h-64 relative bg-[#E0D8CE]">
+            <div className="w-full h-52 md:h-72 relative bg-[#EDF2EE] border-b border-[#14262E]/10">
               <Image
                 src={series.cover.url}
                 alt={series.title}
@@ -80,33 +81,34 @@ export default async function SeriesDetailPage({ params }: SeriesDetailPageProps
               />
             </div>
           )}
-          <div className="p-5 sm:p-6 md:p-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#E0D8CE] text-[#B8860B] rounded-full text-xs font-medium mb-4">
-              <Layers className="w-3.5 h-3.5" />
+          <div className="p-6 sm:p-8 md:p-10">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#1D6A5A]/10 border border-[#1D6A5A]/20 text-[#1D6A5A] rounded-full text-xs font-semibold mb-4">
+              <Layers className="w-3.5 h-3.5 text-[#BF9A45]" />
               Series • {series.lecture_count || lectures.length} Lessons
             </div>
             
-            <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#2D3436] mb-4 break-words">
+            <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#14262E] mb-4 break-words">
               {series.title}
             </h1>
             
             {series.description && (
-              <p className="text-base sm:text-lg text-[#636E72] leading-relaxed font-body break-words">
+              <p className="text-base sm:text-lg text-[#14262E]/70 leading-relaxed font-sans break-words max-w-4xl">
                 {series.description}
               </p>
             )}
           </div>
         </div>
 
+        {/* Lesson List */}
         <div className="space-y-6">
-          <h2 className="font-heading text-2xl font-bold text-[#2D3436]">Course Material</h2>
+          <h2 className="font-display text-2xl sm:text-3xl text-[#14262E]">Series Curriculum &amp; Lessons</h2>
           
           {lectures.length === 0 ? (
-            <div className="p-8 text-center bg-white border border-[#E0D8CE] rounded-md text-[#636E72]">
+            <div className="p-10 text-center bg-white border border-[#14262E]/10 rounded-2xl text-[#14262E]/60 text-sm">
               No lessons have been added to this series yet.
             </div>
           ) : (
-            <div className="bg-white border border-[#E0D8CE] rounded-md divide-y divide-[#E0D8CE]">
+            <div className="bg-white border border-[#14262E]/10 rounded-2xl divide-y divide-[#14262E]/10 overflow-hidden shadow-xs">
               {lectures.map((lecture: PublicLecture, index: number) => {
                 const position = lecture.series?.position || index + 1;
                 const formattedNumber = position.toString().padStart(2, '0');
@@ -114,33 +116,33 @@ export default async function SeriesDetailPage({ params }: SeriesDetailPageProps
                 return (
                   <Link 
                     key={lecture.id} 
-                    href={`/lectures/${lecture.slug}`}
-                    className="flex flex-col sm:flex-row items-start sm:items-center p-4 md:p-6 hover:bg-[#FAF8F5] transition-colors group"
+                    href="/media"
+                    className="flex flex-col sm:flex-row items-start sm:items-center p-5 md:p-6 hover:bg-[#EDF2EE]/40 transition-colors group"
                   >
-                    <div className="flex items-center gap-3 sm:gap-4 w-full">
-                      <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FAF8F5] border border-[#E0D8CE] flex items-center justify-center text-[#2D3436] font-heading font-bold text-xs sm:text-sm group-hover:bg-[#1B5E20] group-hover:text-white group-hover:border-[#1B5E20] transition-colors">
+                    <div className="flex items-center gap-4 w-full">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#EDF2EE] border border-[#BF9A45]/30 flex items-center justify-center text-[#14262E] font-display font-semibold text-sm group-hover:bg-[#1D6A5A] group-hover:text-[#EDF2EE] transition-colors">
                         {formattedNumber}
                       </div>
                       
                       <div className="flex-grow min-w-0">
-                        <h3 className="font-heading text-base sm:text-lg font-semibold text-[#2D3436] group-hover:text-[#1B5E20] transition-colors break-words">
+                        <h3 className="font-display text-base sm:text-lg font-semibold text-[#14262E] group-hover:text-[#1D6A5A] transition-colors break-words">
                           {lecture.title}
                         </h3>
                         {lecture.summary && (
-                          <p className="text-xs sm:text-sm text-[#636E72] line-clamp-1 mt-1 break-words">
+                          <p className="text-xs sm:text-sm text-[#14262E]/60 line-clamp-1 mt-1 break-words">
                             {lecture.summary}
                           </p>
                         )}
                       </div>
 
-                      <div className="flex-shrink-0 flex items-center gap-3 sm:gap-6 text-[#636E72]">
+                      <div className="flex-shrink-0 flex items-center gap-4 text-[#14262E]/60">
                         {lecture.duration_seconds && (
-                          <div className="hidden sm:flex items-center gap-1.5 text-sm">
-                            <Clock className="w-4 h-4" />
+                          <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium">
+                            <Clock className="w-3.5 h-3.5 text-[#BF9A45]" />
                             {formatDuration(lecture.duration_seconds)}
                           </div>
                         )}
-                        <PlayCircle className="w-7 h-7 sm:w-8 sm:h-8 text-[#E0D8CE] group-hover:text-[#1B5E20] transition-colors" />
+                        <PlayCircle className="w-7 h-7 text-[#BF9A45] group-hover:text-[#1D6A5A] transition-colors" />
                       </div>
                     </div>
                   </Link>
