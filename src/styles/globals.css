@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #EDF2EE;
-  --color-mist: #DDE7E1;
-  --color-ink: #14262E;
-  --color-lapis: #0F3446;
-  --color-abyss: #0A2532;
-  --color-jade: #1D6A5A;
+  --color-paper: #EDF4F0;
+  --color-mist: #DCE8E1;
+  --color-ink: #0F241C;
+  --color-lapis: #0D3E2F;
+  --color-abyss: #072118;
+  --color-jade: #1B6A50;
   --color-gold: #BF9A45;
   --color-leaf: #E6D3A3;
 
   /* Legacy aliases mapped gracefully */
-  --color-surface: #EDF2EE;
-  --color-surface-2: #DDE7E1;
-  --color-surface-3: #D0DDD5;
+  --color-surface: #EDF4F0;
+  --color-surface-2: #DCE8E1;
+  --color-surface-3: #CFE0D6;
   --color-surface-card: #FFFFFF;
 
-  --color-text: #14262E;
-  --color-text-secondary: #3D5560;
-  --color-text-tertiary: #6E8894;
-  --color-text-inverse: #EDF2EE;
+  --color-text: #0F241C;
+  --color-text-secondary: #2C483D;
+  --color-text-tertiary: #5A7D6F;
+  --color-text-inverse: #EDF4F0;
 
-  --color-accent: #1D6A5A;
-  --color-accent-hover: #144E42;
-  --color-accent-muted: #DDE7E1;
+  --color-accent: #1B6A50;
+  --color-accent-hover: #124D3A;
+  --color-accent-muted: #DCE8E1;
 
   --color-brass: #BF9A45;
   --color-brass-muted: #E6D3A3;
 
-  --color-border: #DDE7E1;
-  --color-border-light: #E8F0EA;
+  --color-border: #DCE8E1;
+  --color-border-light: #E7F0EB;
 
   --font-display: "Marcellus", "Noto Serif Ethiopic", serif;
   --font-sans: "Figtree", "Noto Sans Ethiopic", system-ui, sans-serif;
