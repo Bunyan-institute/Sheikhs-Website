@@ -68,7 +68,7 @@ export function AfricaTvPlaylists() {
   return (
     <div className="space-y-6">
       {/* Playlist Selector Tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5">
         {PLAYLISTS.map((pl) => {
           const isActive = activePlaylist.id === pl.id;
           return (
@@ -77,23 +77,23 @@ export function AfricaTvPlaylists() {
               onClick={() => setActivePlaylist(pl)}
               className={`text-start p-4 rounded-2xl border transition-all cursor-pointer ${
                 isActive
-                  ? "bg-white border-[#1D6A5A] shadow-xs"
-                  : "bg-white/60 border-[#14262E]/10 hover:border-[#1D6A5A]/50 hover:bg-white"
+                  ? "bg-white border-[#1B6A50] ring-1 ring-[#1B6A50] shadow-sm"
+                  : "bg-white/70 border-[#0F241C]/10 hover:border-[#1B6A50]/50 hover:bg-white"
               }`}
             >
               <div className="flex items-center justify-between text-[11px] mb-2">
-                <span className={`font-semibold flex items-center gap-1.5 ${isActive ? "text-[#1D6A5A]" : "text-[#BF9A45]"}`}>
+                <span className={`font-semibold flex items-center gap-1.5 ${isActive ? "text-[#1B6A50]" : "text-[#BF9A45]"}`}>
                   <Tv className="w-3.5 h-3.5" />
                   <span>{pl.channel}</span>
                 </span>
-                <span className="text-[10px] bg-[#EDF2EE] text-[#14262E] px-2 py-0.5 rounded-full font-semibold border border-[#14262E]/10">
+                <span className="text-[10px] bg-[#EDF4F0] text-[#0F241C] px-2 py-0.5 rounded-full font-semibold border border-[#0F241C]/10">
                   {pl.episodeCount}
                 </span>
               </div>
-              <h4 className="font-display text-sm font-semibold text-[#14262E] line-clamp-1 mb-1">
+              <h4 className="font-display text-sm font-semibold text-[#0F241C] line-clamp-1 mb-1">
                 {pl.amharicTitle}
               </h4>
-              <p className="text-xs text-[#14262E]/70 line-clamp-2 leading-relaxed font-sans">
+              <p className="text-xs text-[#0F241C]/70 line-clamp-2 leading-relaxed font-sans">
                 {pl.description}
               </p>
             </button>
@@ -102,9 +102,9 @@ export function AfricaTvPlaylists() {
       </div>
 
       {/* Main Interactive Playlist View */}
-      <div className="border border-[#14262E]/10 rounded-2xl bg-white overflow-hidden shadow-xs flex flex-col lg:flex-row">
+      <div className="border border-[#0F241C]/10 rounded-2xl bg-white overflow-hidden shadow-xs flex flex-col lg:flex-row">
         {/* Responsive 16:9 YouTube Playlist Embed */}
-        <div className="lg:w-7/12 aspect-video bg-[#0A2532] relative">
+        <div className="lg:w-7/12 aspect-video bg-[#072118] relative">
           <iframe
             src={`https://www.youtube-nocookie.com/embed/videoseries?list=${activePlaylist.playlistId}`}
             title={activePlaylist.title}
@@ -116,50 +116,50 @@ export function AfricaTvPlaylists() {
         </div>
 
         {/* Playlist Metadata & Details */}
-        <div className="p-6 sm:p-8 flex flex-col justify-between lg:w-5/12 space-y-4">
+        <div className="p-5 sm:p-8 flex flex-col justify-between lg:w-5/12 space-y-4">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-0.5 rounded-full bg-[#1D6A5A] text-white text-[11px] font-semibold uppercase tracking-wider">
+              <span className="px-3 py-0.5 rounded-full bg-[#1B6A50] text-[#EDF4F0] text-[11px] font-semibold uppercase tracking-wider">
                 {activePlaylist.channel}
               </span>
-              <span className="px-3 py-0.5 rounded-full bg-[#EDF2EE] text-[#BF9A45] border border-[#BF9A45]/30 text-[11px] font-semibold">
+              <span className="px-3 py-0.5 rounded-full bg-[#EDF4F0] text-[#BF9A45] border border-[#BF9A45]/30 text-[11px] font-semibold">
                 {activePlaylist.episodeCount}
               </span>
-              <span className="px-3 py-0.5 rounded-full bg-[#EDF2EE] text-[#14262E]/70 text-[11px] font-medium border border-[#14262E]/10">
+              <span className="px-3 py-0.5 rounded-full bg-[#EDF4F0] text-[#0F241C]/70 text-[11px] font-medium border border-[#0F241C]/10">
                 Official YouTube Playlist
               </span>
             </div>
 
-            <h3 className="font-display text-xl sm:text-2xl font-bold text-[#14262E] leading-snug">
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-[#0F241C] leading-snug">
               {activePlaylist.amharicTitle}
             </h3>
 
-            <p className="font-arabic text-sm text-[#1D6A5A] font-medium" dir="rtl">
+            <p className="font-arabic text-sm text-[#1B6A50] font-medium" dir="rtl">
               سلسلة الدروس المنهجية والمحاضرات لفضيلة الشيخ محمد فرج مجنو حفظه الله
             </p>
 
-            <p className="text-[#14262E]/75 text-xs sm:text-sm leading-relaxed font-sans">
+            <p className="text-[#0F241C]/75 text-xs sm:text-sm leading-relaxed font-sans">
               {activePlaylist.description}
             </p>
 
-            <div className="space-y-2 pt-2 text-xs text-[#14262E]">
-              <div className="flex items-center gap-2 text-[#1D6A5A]">
+            <div className="space-y-2 pt-2 text-xs text-[#0F241C]">
+              <div className="flex items-center gap-2 text-[#1B6A50]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#BF9A45] shrink-0" />
                 <span>ቀጥታ የተሟላውን የአፍሪካ ቲቪ የትምህርት ዝርዝር በቅደም ተከተል ይከታተሉ</span>
               </div>
-              <div className="flex items-center gap-2 text-[#1D6A5A]">
+              <div className="flex items-center gap-2 text-[#1B6A50]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#BF9A45] shrink-0" />
                 <span>ያለማስታወቂያ በይፋዊው የሞባይል መተግበሪያ ላይም ይገኛል</span>
               </div>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#14262E]/10 flex flex-wrap items-center gap-3">
+          <div className="pt-4 border-t border-[#0F241C]/10 flex flex-wrap items-center gap-3">
             <a
               href={activePlaylist.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0F3446] text-[#EDF2EE] font-semibold text-xs hover:bg-[#1D6A5A] transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0D3E2F] text-[#EDF4F0] font-semibold text-xs hover:bg-[#1B6A50] transition-colors shadow-xs min-h-[40px]"
             >
               <span>Open on YouTube</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -169,7 +169,7 @@ export function AfricaTvPlaylists() {
               href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#EDF2EE] border border-[#BF9A45]/40 text-[#14262E] font-semibold text-xs hover:bg-white transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#EDF4F0] border border-[#BF9A45]/40 text-[#0F241C] font-semibold text-xs hover:bg-white transition-colors min-h-[40px]"
             >
               <Radio className="w-3.5 h-3.5 text-[#BF9A45]" />
               <span>Listen in App (Offline)</span>

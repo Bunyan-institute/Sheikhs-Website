@@ -103,7 +103,7 @@ export function HomeArticleTabs({ initialArticles }: { initialArticles?: Article
   return (
     <div>
       {/* Scrollable pill tabs */}
-      <div className="-mx-4 px-4 overflow-x-auto pb-2">
+      <div className="-mx-4 px-4 overflow-x-auto pb-2 scrollbar-none">
         <div role="tablist" aria-label="Filter articles by topic" className="flex gap-2 w-max">
           {tabKeys.map((key) => {
             const isSelected = selectedTopic === key;
@@ -113,10 +113,10 @@ export function HomeArticleTabs({ initialArticles }: { initialArticles?: Article
                 role="tab"
                 onClick={() => setSelectedTopic(key)}
                 aria-selected={isSelected}
-                className={`whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                className={`whitespace-nowrap rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-colors min-h-[36px] ${
                   isSelected
-                    ? 'bg-[#0F3446] text-[#EDF2EE] border border-[#0F3446] shadow-xs'
-                    : 'border border-[#14262E]/20 text-[#14262E]/80 hover:border-[#1D6A5A] hover:text-[#14262E]'
+                    ? 'bg-[#0D3E2F] text-[#EDF4F0] border border-[#0D3E2F] shadow-xs'
+                    : 'border border-[#0F241C]/20 text-[#0F241C]/80 hover:border-[#1B6A50] hover:text-[#0F241C] bg-white'
                 }`}
               >
                 {key === 'all' ? 'All topics' : TOPICS[key]}
@@ -128,32 +128,32 @@ export function HomeArticleTabs({ initialArticles }: { initialArticles?: Article
 
       {/* 2-column article list */}
       {filtered.length > 0 ? (
-        <ol className="mt-6 grid md:grid-cols-2 gap-x-12">
+        <ol className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-12">
           {filtered.map((item, idx) => (
-            <li key={idx} className="border-t border-[#14262E]/15 py-7">
+            <li key={idx} className="border-t border-[#0F241C]/15 py-6 sm:py-7">
               <Link href={item.slug ? `/articles/${item.slug}` : "/articles"} className="group block">
-                <div className="flex items-center gap-3 text-sm">
-                  <span className="text-[#1D6A5A] font-medium">{TOPICS[item.topic] || item.topic}</span>
-                  <span className="text-[#14262E]/45">{item.min} min read</span>
+                <div className="flex items-center gap-3 text-xs sm:text-sm">
+                  <span className="text-[#1B6A50] font-semibold">{TOPICS[item.topic] || item.topic}</span>
+                  <span className="text-[#0F241C]/45">{item.min} min read</span>
                 </div>
                 <h3
-                  className={`mt-2 text-[1.3rem] leading-snug group-hover:text-[#1D6A5A] transition-colors ${
-                    item.lang === 'am' ? 'font-ethiopic' : 'font-display'
+                  className={`mt-2 text-lg sm:text-[1.3rem] leading-snug group-hover:text-[#1B6A50] transition-colors ${
+                    item.lang === 'am' ? 'font-ethiopic font-semibold' : 'font-display font-medium'
                   }`}
                   lang={item.lang}
                 >
                   {item.title}
                 </h3>
                 {item.sub && (
-                  <p className="mt-1 font-display text-[#14262E]/60 text-sm">{item.sub}</p>
+                  <p className="mt-1 font-display text-[#0F241C]/60 text-xs sm:text-sm">{item.sub}</p>
                 )}
                 <p
-                  className="mt-3 text-[#14262E]/70 text-[15px] leading-relaxed max-w-[60ch]"
+                  className="mt-2.5 sm:mt-3 text-[#0F241C]/75 text-sm sm:text-[15px] leading-relaxed max-w-[60ch]"
                   lang={item.lang}
                 >
                   {item.excerpt}
                 </p>
-                <span className="mt-4 inline-block text-sm font-semibold text-[#0F3446] underline decoration-[#BF9A45]/70 underline-offset-4 group-hover:decoration-[#BF9A45] transition-colors">
+                <span className="mt-3.5 sm:mt-4 inline-block text-xs sm:text-sm font-semibold text-[#0D3E2F] underline decoration-[#BF9A45]/70 underline-offset-4 group-hover:decoration-[#BF9A45] transition-colors">
                   Read the lesson
                 </span>
               </Link>
@@ -161,9 +161,9 @@ export function HomeArticleTabs({ initialArticles }: { initialArticles?: Article
           ))}
         </ol>
       ) : (
-        <p className="mt-8 text-[#14262E]/60 text-sm">
-          No lessons in this topic yet. Choose another topic above.
-        </p>
+        <div className="mt-10 text-center py-12 border border-dashed border-[#0F241C]/20 rounded-2xl">
+          <p className="text-[#0F241C]/60 text-sm">No articles found in this category.</p>
+        </div>
       )}
     </div>
   );
