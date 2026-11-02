@@ -69,45 +69,25 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
   ];
 
   return (
-    <footer className="w-full bg-[#FAF8F5] border-t border-[#E6E0D8] mt-auto">
-      {/* Sacred Knowledge Hadith Colophon Banner */}
-      <div className="border-b border-[#E6E0D8] bg-[#F2ECE1]/60 py-6 px-4">
-        <div className="max-w-[1560px] mx-auto text-center space-y-2">
-          <p className="font-arabic text-[#1A4D2E] text-base sm:text-lg font-bold" dir="rtl">
-            « مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ »
-          </p>
-          <p className="text-xs text-[#7A8285] font-serif italic">
-            &ldquo;Whoever treads a path seeking knowledge, Allah makes easy for him a path to Paradise.&rdquo; — Sahih Muslim
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Column 1: Scholar Name & Info */}
-          <div className="sm:col-span-2 lg:col-span-2 flex flex-col space-y-4">
-            <Link href="/" className="font-heading text-xl font-bold text-[#2D3436] hover:text-[#1A4D2E] transition-colors break-words">
-              {profile.name}
-            </Link>
-            {profile.headline && (
-              <p className="font-body text-sm text-[#555E61] max-w-sm leading-relaxed">
-                {profile.headline}
-              </p>
-            )}
-            <div className="pt-2 text-xs text-[#7A8285] space-y-1 font-medium">
-              <p>• Sharia Consultant, Wegagen Bank (Amanah)</p>
-              <p>• Member, African Scholars Union</p>
-              <p>• President, Al-Fajr Islamic Foundation</p>
-            </div>
-            {/* Google Play App Download CTA */}
-            <div className="pt-2">
+    <footer className="relative bg-[#0A2532] text-[#EDF2EE]/80 overflow-hidden mt-auto">
+      <div className="absolute inset-0 lattice opacity-30 pointer-events-none" aria-hidden="true" />
+      <div className="relative mx-auto max-w-page px-4 sm:px-6 pt-16 pb-10">
+        <div className="grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+          <div>
+            <p className="font-arabic text-3xl text-[#E6D3A3]" dir="rtl" lang="ar">الشيخ محمد فرج مجنو</p>
+            <p className="mt-3 font-display text-xl text-[#EDF2EE]">Sheikh Muhammed Ferej Megeno</p>
+            <p className="mt-2 text-sm leading-relaxed max-w-xs text-[#EDF2EE]/75">
+              Islamic scholar, educator and Sharia consultant. President of the Al-Fajr Islamic Foundation and member of the African Scholars Union.
+            </p>
+            
+            <div className="mt-5">
               <a
                 href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-[3px] bg-[#1A4D2E] text-white text-xs font-bold hover:bg-[#143d24] transition-colors"
+                className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#EDF2EE]/10 border border-[#BF9A45]/30 hover:border-[#BF9A45] text-[#EDF2EE] text-xs font-semibold hover:bg-[#EDF2EE]/15 transition-all"
               >
-                <svg className="w-4 h-4 text-[#B8860B]" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-4 h-4 text-[#BF9A45]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3.609 1.814L13.793 12 3.61 22.186c-.33-.2-.533-.564-.533-.969V2.783c0-.405.203-.769.532-.969zm11.597 11.598l2.38 2.38-12.062 6.845 9.682-9.225zm0-2.824L5.524 1.363l12.062 6.845-2.38 2.38zm1.414 1.412l3.473 1.968c.84.476.84 1.258 0 1.734l-3.473 1.968-2.121-2.121 2.121-2.121z"/>
                 </svg>
                 <span>Get &ldquo;ሸይኽ ሙሃመድ ፈረጅ&rdquo; App</span>
@@ -115,7 +95,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
             </div>
 
             {/* Socials */}
-            <div className="pt-2 flex flex-wrap gap-2.5">
+            <div className="mt-5 flex flex-wrap gap-2.5">
               {profile.socials && Object.entries(profile.socials).map(([key, url]) => {
                 if (!url) return null;
                 const icon = renderSocialIcon(key);
@@ -126,7 +106,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-[3px] bg-white border border-[#E6E0D8] text-[#555E61] hover:text-[#1A4D2E] hover:border-[#1A4D2E]"
+                    className="p-2 rounded-lg bg-[#0F3446] border border-[#BF9A45]/30 text-[#EDF2EE]/80 hover:text-[#E6D3A3] hover:border-[#BF9A45] transition-colors"
                     aria-label={`Official ${key}`}
                   >
                     {icon}
@@ -136,71 +116,49 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
             </div>
           </div>
 
-          {/* Column 2: Profile & Journey */}
-          <div className="flex flex-col space-y-3">
-            <h3 className="font-heading text-xs font-bold text-[#1A4D2E] uppercase tracking-wider">
-              Scholar
-            </h3>
-            <nav className="flex flex-col space-y-2">
+          <nav aria-label="Scholar">
+            <p className="font-display text-[#EDF2EE] text-lg">Scholar</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
               {profileLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-body text-sm text-[#555E61] hover:text-[#1A4D2E] w-fit"
-                >
-                  {t(link.labelKey as any)}
-                </Link>
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors">
+                    {t(link.labelKey as any)}
+                  </Link>
+                </li>
               ))}
-            </nav>
-          </div>
+            </ul>
+          </nav>
 
-          {/* Column 3: Knowledge & Curriculum */}
-          <div className="flex flex-col space-y-3">
-            <h3 className="font-heading text-xs font-bold text-[#1A4D2E] uppercase tracking-wider">
-              {t("nav.knowledge" as any)}
-            </h3>
-            <nav className="flex flex-col space-y-2">
+          <nav aria-label="Knowledge">
+            <p className="font-display text-[#EDF2EE] text-lg">Knowledge</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
               {knowledgeLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-body text-sm text-[#555E61] hover:text-[#1A4D2E] w-fit"
-                >
-                  {t(link.labelKey as any)}
-                </Link>
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors">
+                    {t(link.labelKey as any)}
+                  </Link>
+                </li>
               ))}
-            </nav>
-          </div>
+            </ul>
+          </nav>
 
-          {/* Column 4: Resources & Engagement */}
-          <div className="flex flex-col space-y-3">
-            <h3 className="font-heading text-xs font-bold text-[#1A4D2E] uppercase tracking-wider">
-              Resources &amp; Inquiries
-            </h3>
-            <nav className="flex flex-col space-y-2">
+          <nav aria-label="Resources">
+            <p className="font-display text-[#EDF2EE] text-lg">Resources</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
               {resourceLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-body text-sm text-[#555E61] hover:text-[#1A4D2E] w-fit"
-                >
-                  {t(link.labelKey as any)}
-                </Link>
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors">
+                    {t(link.labelKey as any)}
+                  </Link>
+                </li>
               ))}
-            </nav>
-          </div>
+            </ul>
+          </nav>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-[#E6E0D8] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">
-          <p className="font-body text-xs text-[#7A8285]">
-            © {currentYear} {profile.name}. All educational materials published for beneficial knowledge.
-          </p>
-          <div className="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 text-xs text-[#7A8285]">
-            <Link href="/about" className="hover:text-[#1A4D2E]">Biography</Link>
-            <Link href="/media" className="hover:text-[#1A4D2E]">Media &amp; Halaqat</Link>
-            <a href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A4D2E] font-bold text-[#1A4D2E]">ሸይኽ ሙሃመድ ፈረጅ App</a>
-            <Link href="/contact" className="hover:text-[#1A4D2E]">Direct Inquiry</Link>
-          </div>
+        <div className="mt-14 pt-6 border-t border-[#EDF2EE]/10 flex flex-wrap justify-between items-center gap-4 text-xs text-[#EDF2EE]/60">
+          <p>© {currentYear} Sheikh Muhammed Ferej Megeno. All educational materials are published for beneficial knowledge.</p>
+          <p className="font-arabic text-sm text-[#E6D3A3]/80" dir="rtl" lang="ar">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
         </div>
       </div>
     </footer>
