@@ -69,14 +69,14 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
   ];
 
   return (
-    <footer className="relative bg-[#0A2532] text-[#EDF2EE]/80 overflow-hidden mt-auto">
+    <footer className="relative bg-[#072118] text-[#EDF4F0]/80 overflow-hidden mt-auto border-t border-[#BF9A45]/20">
       <div className="absolute inset-0 lattice opacity-30 pointer-events-none" aria-hidden="true" />
-      <div className="relative mx-auto max-w-page px-4 sm:px-6 pt-16 pb-10">
-        <div className="grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+      <div className="relative mx-auto max-w-page px-4 sm:px-6 pt-14 sm:pt-16 pb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-8 sm:gap-10">
           <div>
-            <p className="font-arabic text-3xl text-[#E6D3A3]" dir="rtl" lang="ar">الشيخ محمد فرج مجنو</p>
-            <p className="mt-3 font-display text-xl text-[#EDF2EE]">Sheikh Muhammed Ferej Megeno</p>
-            <p className="mt-2 text-sm leading-relaxed max-w-xs text-[#EDF2EE]/75">
+            <p className="font-arabic text-2xl sm:text-3xl text-[#E6D3A3]" dir="rtl" lang="ar">الشيخ محمد فرج مجنو</p>
+            <p className="mt-2 font-display text-lg sm:text-xl text-[#EDF4F0]">Sheikh Muhammed Ferej Megeno</p>
+            <p className="mt-2 text-sm leading-relaxed max-w-xs text-[#EDF4F0]/75">
               Islamic scholar, educator and Sharia consultant. President of the Al-Fajr Islamic Foundation and member of the African Scholars Union.
             </p>
             
@@ -85,7 +85,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
                 href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#EDF2EE]/10 border border-[#BF9A45]/30 hover:border-[#BF9A45] text-[#EDF2EE] text-xs font-semibold hover:bg-[#EDF2EE]/15 transition-all"
+                className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#0D3E2F] border border-[#BF9A45]/40 hover:border-[#BF9A45] text-[#EDF4F0] text-xs font-semibold hover:bg-[#1B6A50]/40 transition-all shadow-sm"
               >
                 <svg className="w-4 h-4 text-[#BF9A45]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3.609 1.814L13.793 12 3.61 22.186c-.33-.2-.533-.564-.533-.969V2.783c0-.405.203-.769.532-.969zm11.597 11.598l2.38 2.38-12.062 6.845 9.682-9.225zm0-2.824L5.524 1.363l12.062 6.845-2.38 2.38zm1.414 1.412l3.473 1.968c.84.476.84 1.258 0 1.734l-3.473 1.968-2.121-2.121 2.121-2.121z"/>
@@ -106,7 +106,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-[#0F3446] border border-[#BF9A45]/30 text-[#EDF2EE]/80 hover:text-[#E6D3A3] hover:border-[#BF9A45] transition-colors"
+                    className="p-2 rounded-lg bg-[#0D3E2F] border border-[#BF9A45]/30 text-[#EDF4F0]/80 hover:text-[#E6D3A3] hover:border-[#BF9A45] transition-colors"
                     aria-label={`Official ${key}`}
                   >
                     {icon}
@@ -117,11 +117,11 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
           </div>
 
           <nav aria-label="Scholar">
-            <p className="font-display text-[#EDF2EE] text-lg">Scholar</p>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <p className="font-display text-[#EDF4F0] text-lg font-semibold">Scholar</p>
+            <ul className="mt-3.5 space-y-2 text-sm">
               {profileLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors">
+                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors inline-block py-0.5">
                     {t(link.labelKey as any)}
                   </Link>
                 </li>
@@ -130,11 +130,11 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
           </nav>
 
           <nav aria-label="Knowledge">
-            <p className="font-display text-[#EDF2EE] text-lg">Knowledge</p>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <p className="font-display text-[#EDF4F0] text-lg font-semibold">Knowledge</p>
+            <ul className="mt-3.5 space-y-2 text-sm">
               {knowledgeLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors">
+                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors inline-block py-0.5">
                     {t(link.labelKey as any)}
                   </Link>
                 </li>
@@ -143,11 +143,11 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
           </nav>
 
           <nav aria-label="Resources">
-            <p className="font-display text-[#EDF2EE] text-lg">Resources</p>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <p className="font-display text-[#EDF4F0] text-lg font-semibold">Resources</p>
+            <ul className="mt-3.5 space-y-2 text-sm">
               {resourceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors">
+                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors inline-block py-0.5">
                     {t(link.labelKey as any)}
                   </Link>
                 </li>
@@ -156,9 +156,9 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
           </nav>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-[#EDF2EE]/10 flex flex-wrap justify-between items-center gap-4 text-xs text-[#EDF2EE]/60">
+        <div className="mt-12 sm:mt-14 pt-6 border-t border-[#EDF4F0]/10 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[#EDF4F0]/60 text-center sm:text-start">
           <p>© {currentYear} Sheikh Muhammed Ferej Megeno. All educational materials are published for beneficial knowledge.</p>
-          <p className="font-arabic text-sm text-[#E6D3A3]/80" dir="rtl" lang="ar">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
+          <p className="font-arabic text-sm text-[#E6D3A3]" dir="rtl" lang="ar">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
         </div>
       </div>
     </footer>

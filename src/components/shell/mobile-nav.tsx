@@ -15,7 +15,7 @@ export function MobileMenuButton() {
   return (
     <button 
       onClick={toggle}
-      className="p-2 -me-2 text-[#636E72] hover:text-[#2D3436] transition-colors"
+      className="p-2 -me-2 text-[#EDF4F0]/80 hover:text-[#E6D3A3] transition-colors"
       aria-label="Open menu"
     >
       <Menu className="w-6 h-6" />
@@ -58,9 +58,7 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
   // Custom event listener for the button
   useEffect(() => {
     const handleToggle = () => {
-      // The parent needs to implement toggling to pass 'open' prop properly
-      // If we don't have a parent handling this event, we'd need internal state.
-      // Assuming parent manages the toggle if it provides open and onClose.
+      // Toggle support if dispatched
     };
     window.addEventListener('toggle-mobile-nav', handleToggle as EventListener);
     return () => window.removeEventListener('toggle-mobile-nav', handleToggle as EventListener);
@@ -91,7 +89,7 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
       <div 
         ref={drawerRef}
         tabIndex={-1}
-        className="relative ms-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-[#0A2532] text-[#EDF2EE] border-s border-[#BF9A45]/30 pb-6 shadow-2xl outline-none transition-transform"
+        className="relative ms-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-[#072118] text-[#EDF4F0] border-s border-[#BF9A45]/30 pb-6 shadow-2xl outline-none transition-transform"
       >
         <div className="flex items-center justify-between px-5 py-5 border-b border-[#BF9A45]/20">
           <div className="flex items-center gap-2.5 min-w-0">
@@ -104,13 +102,13 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
               </svg>
               <span className="font-arabic text-[#E6D3A3] text-sm leading-none relative -mt-0.5">م</span>
             </span>
-            <span className="font-display text-base font-semibold text-[#EDF2EE] truncate">
+            <span className="font-display text-base font-semibold text-[#EDF4F0] truncate">
               {profile.name}
             </span>
           </div>
           <button
             type="button"
-            className="rounded-lg p-2 text-[#EDF2EE]/70 hover:text-[#E6D3A3] hover:bg-[#0F3446]"
+            className="rounded-lg p-2 text-[#EDF4F0]/70 hover:text-[#E6D3A3] hover:bg-[#0D3E2F] transition-colors"
             onClick={onClose}
           >
             <span className="sr-only">Close menu</span>
@@ -120,7 +118,7 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
 
         <div className="px-4 py-6">
           <nav className="flex flex-col space-y-5">
-            <div className="space-y-3">
+            <div className="space-y-2">
               {mainItems.map((item) => {
                 const isGroup = item.href === '#';
                 return (
@@ -133,10 +131,10 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
                       <Link
                         href={item.href}
                         onClick={onClose}
-                        className={`font-sans text-base font-medium px-3 py-2 rounded-xl transition-colors hover:bg-[#0F3446] hover:text-[#E6D3A3] ${
+                        className={`font-sans text-base font-medium px-3.5 py-2.5 rounded-xl transition-colors hover:bg-[#0D3E2F] hover:text-[#E6D3A3] ${
                           pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
-                            ? 'text-[#E6D3A3] font-semibold bg-[#0F3446] border-s-2 border-[#BF9A45]' 
-                            : 'text-[#EDF2EE]/85'
+                            ? 'text-[#E6D3A3] font-semibold bg-[#0D3E2F] border-s-2 border-[#BF9A45]' 
+                            : 'text-[#EDF4F0]/85'
                         }`}
                       >
                         {t(item.labelKey as any)}
@@ -151,8 +149,8 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
                               key={child.key}
                               href={child.href}
                               onClick={onClose}
-                              className={`font-sans text-sm py-1.5 px-3 rounded-lg transition-colors hover:bg-[#0F3446] hover:text-[#E6D3A3] ${
-                                isChildActive ? 'text-[#E6D3A3] font-semibold bg-[#0F3446]' : 'text-[#EDF2EE]/70'
+                              className={`font-sans text-sm py-2 px-3 rounded-lg transition-colors hover:bg-[#0D3E2F] hover:text-[#E6D3A3] ${
+                                isChildActive ? 'text-[#E6D3A3] font-semibold bg-[#0D3E2F]' : 'text-[#EDF4F0]/70'
                               }`}
                             >
                               {t(child.labelKey as any)}
@@ -172,11 +170,11 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
           <Link
             href="/ask"
             onClick={onClose}
-            className="inline-flex items-center justify-center bg-[#BF9A45] text-[#0A2532] text-sm font-semibold rounded-full py-2.5 hover:bg-[#E6D3A3] transition-colors shadow-sm"
+            className="inline-flex items-center justify-center bg-[#BF9A45] text-[#072118] text-sm font-bold rounded-full py-3 hover:bg-[#E6D3A3] transition-colors shadow-sm min-h-[44px]"
           >
             Ask the Sheikh
           </Link>
-          <div className="pt-1">
+          <div className="pt-2">
             <LocaleSwitcher />
           </div>
         </div>

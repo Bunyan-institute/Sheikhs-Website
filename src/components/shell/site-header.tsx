@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import HeaderNav from './header-nav';
 import LocaleSwitcher from './locale-switcher';
-import { Search, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import type { PublicProfile } from '@/lib/api/types';
 import type { NavItem } from '@/lib/sections';
 import MobileNav from './mobile-nav';
@@ -26,25 +26,25 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
     <>
       <header
         style={{ top: 'env(safe-area-inset-top, 0px)' }}
-        className="sticky top-0 z-40 w-full bg-[#0A2532]/95 backdrop-blur-md text-[#EDF2EE] border-b border-[#BF9A45]/20 transition-colors"
+        className="sticky top-0 z-40 w-full bg-[#072118]/95 backdrop-blur-md text-[#EDF4F0] border-b border-[#BF9A45]/20 transition-colors"
       >
-        <div className="max-w-page mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-4 sm:gap-6">
+        <div className="max-w-page mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-3 sm:gap-6">
           <div className="flex-1 min-w-0 me-2 sm:me-6">
-            <Link href="/" className="group inline-flex items-center gap-3">
-              <span className="relative grid place-items-center w-9 h-9 shrink-0">
+            <Link href="/" className="group inline-flex items-center gap-2.5 sm:gap-3">
+              <span className="relative grid place-items-center w-8 h-8 sm:w-9 sm:h-9 shrink-0">
                 <svg viewBox="0 0 40 40" className="absolute inset-0 w-full h-full" aria-hidden="true">
-                  <g fill="none" stroke="#BF9A45" strokeWidth="1.4">
+                  <g fill="none" stroke="#BF9A45" strokeWidth="1.5">
                     <rect x="8" y="8" width="24" height="24" />
                     <rect x="8" y="8" width="24" height="24" transform="rotate(45 20 20)" />
                   </g>
                 </svg>
-                <span className="font-arabic text-[#E6D3A3] text-lg leading-none relative -mt-0.5">م</span>
+                <span className="font-arabic text-[#E6D3A3] text-base sm:text-lg leading-none relative -mt-0.5">م</span>
               </span>
               <div className="min-w-0 leading-tight">
-                <span className="block font-display text-[15px] sm:text-base tracking-wide text-[#EDF2EE] group-hover:text-[#E6D3A3] transition-colors truncate max-w-[210px] sm:max-w-none">
+                <span className="block font-display text-sm sm:text-base tracking-wide text-[#EDF4F0] group-hover:text-[#E6D3A3] transition-colors truncate max-w-[190px] xs:max-w-[240px] sm:max-w-none">
                   Sheikh Muhammed Ferej
                 </span>
-                <span className="block text-[11px] text-[#E6D3A3]/70 font-medium">
+                <span className="block text-[10px] sm:text-[11px] text-[#E6D3A3]/80 font-medium truncate">
                   Official scholar archive
                 </span>
               </div>
@@ -60,7 +60,7 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
               <LocaleSwitcher />
               <Link
                 href="/ask"
-                className="hidden xl:inline-flex bg-[#BF9A45] text-[#0A2532] text-sm font-semibold rounded-full px-4 py-1.5 hover:bg-[#E6D3A3] transition-colors shrink-0 shadow-sm"
+                className="hidden xl:inline-flex bg-[#BF9A45] text-[#072118] text-sm font-bold rounded-full px-4 py-2 hover:bg-[#E6D3A3] transition-colors shrink-0 shadow-sm"
               >
                 Ask the Sheikh
               </Link>
@@ -68,15 +68,15 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
           </div>
 
           {/* Tablet & Mobile Actions */}
-          <div className="flex lg:hidden items-center gap-2 shrink-0">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <CommandSearch />
             <LocaleSwitcher />
             <button
               onClick={() => setIsMobileNavOpen(true)}
-              className="p-2 text-[#EDF2EE]/80 hover:text-[#E6D3A3] transition-colors"
+              className="p-2 rounded-lg text-[#EDF4F0]/85 hover:text-[#E6D3A3] hover:bg-[#0D3E2F] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center"
               aria-label="Open menu"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
         </div>
