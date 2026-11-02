@@ -15,15 +15,16 @@ export function MediaCard({ item }: { item: MediaItem }) {
   const isFacebook = item.url?.includes("facebook.com");
 
   return (
-    <div className="group flex flex-col bg-white rounded-2xl border border-[#14262E]/10 overflow-hidden hover:border-[#1D6A5A] transition-all shadow-xs">
+    <div className="group flex flex-col bg-white rounded-2xl border border-[#0F241C]/10 overflow-hidden hover:border-[#1B6A50] transition-all shadow-xs">
       {/* Media Top Container */}
-      <div className="aspect-video bg-[#EDF2EE] relative flex items-center justify-center overflow-hidden border-b border-[#14262E]/10">
+      <div className="aspect-video bg-[#EDF4F0] relative flex items-center justify-center overflow-hidden border-b border-[#0F241C]/10">
         {isYouTube ? (
           <iframe
             src={isYouTube}
             title={item.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            loading="lazy"
             className="w-full h-full border-0"
           />
         ) : item.thumbnail_url ? (
@@ -33,7 +34,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="text-[#1D6A5A]/30">
+          <div className="text-[#1B6A50]/30">
             {item.kind === "video" && <PlayCircle className="w-12 h-12" />}
             {item.kind === "audio" && <Headphones className="w-12 h-12" />}
             {item.kind === "image" && <ImageIcon className="w-12 h-12" />}
@@ -43,7 +44,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
 
         {/* Type Badge */}
         {!isYouTube && (
-          <div className="absolute top-3 right-3 bg-[#0A2532]/90 backdrop-blur-xs border border-[#BF9A45]/30 px-2.5 py-1 rounded-full text-[10px] font-semibold text-[#EDF2EE] flex items-center gap-1.5 uppercase tracking-wider shadow-sm">
+          <div className="absolute top-3 right-3 bg-[#072118]/90 backdrop-blur-xs border border-[#BF9A45]/30 px-2.5 py-1 rounded-full text-[10px] font-semibold text-[#EDF4F0] flex items-center gap-1.5 uppercase tracking-wider shadow-sm">
             {isTikTok ? (
               <span>TikTok</span>
             ) : isFacebook ? (
@@ -63,37 +64,37 @@ export function MediaCard({ item }: { item: MediaItem }) {
 
       {/* Media Details */}
       <div className="p-5 flex flex-col flex-grow">
-        <h3 className="font-display font-semibold text-base text-[#14262E] mb-2 line-clamp-2 group-hover:text-[#1D6A5A] transition-colors break-words">
+        <h3 className="font-display font-semibold text-base text-[#0F241C] mb-2 line-clamp-2 group-hover:text-[#1B6A50] transition-colors break-words">
           {item.title}
         </h3>
-        <p className="text-xs text-[#14262E]/70 line-clamp-2 mb-4 font-sans leading-relaxed">
+        <p className="text-xs text-[#0F241C]/70 line-clamp-2 mb-4 font-sans leading-relaxed">
           {item.description || "Scholarly resource from the official archive of Sheikh Muhammed Ferej."}
         </p>
 
-        <div className="mt-auto pt-3 border-t border-[#14262E]/10 flex items-center justify-between text-xs font-semibold text-[#BF9A45]">
+        <div className="mt-auto pt-3 border-t border-[#0F241C]/10 flex items-center justify-between text-xs font-semibold text-[#BF9A45]">
           {item.url ? (
             <a
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#1D6A5A] inline-flex items-center gap-1.5 transition-colors"
+              className="hover:text-[#1B6A50] inline-flex items-center gap-1.5 transition-colors py-1"
             >
               {item.kind === "document" ? (
                 <>
-                  <Download className="w-3.5 h-3.5 text-[#1D6A5A]" /> Download PDF
+                  <Download className="w-3.5 h-3.5 text-[#1B6A50]" /> <span>Download PDF</span>
                 </>
               ) : item.kind === "audio" ? (
                 <>
-                  <Headphones className="w-3.5 h-3.5 text-[#1D6A5A]" /> Listen Lesson
+                  <Headphones className="w-3.5 h-3.5 text-[#1B6A50]" /> <span>Listen Lesson</span>
                 </>
               ) : (
                 <>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#BF9A45]" /> View Archive
+                  <ExternalLink className="w-3.5 h-3.5 text-[#BF9A45]" /> <span>View Archive</span>
                 </>
               )}
             </a>
           ) : (
-            <span className="text-[11px] text-[#14262E]/50">Archived Document</span>
+            <span className="text-[11px] text-[#0F241C]/50">Archived Document</span>
           )}
         </div>
       </div>
