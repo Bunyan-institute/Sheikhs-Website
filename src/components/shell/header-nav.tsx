@@ -36,8 +36,8 @@ export default function HeaderNav({ items }: { items: NavItem[] }) {
           <Link
             key={item.key}
             href={item.href}
-            className={`font-body text-sm font-medium transition-colors ${
-              isActive ? 'text-[#1A4D2E] font-bold border-b-2 border-[#1A4D2E] pb-0.5' : 'text-[#555E61] hover:text-[#1A4D2E]'
+            className={`font-sans text-sm font-medium transition-colors ${
+              isActive ? 'text-[#E6D3A3] font-semibold border-b-2 border-[#BF9A45] pb-0.5' : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3]'
             }`}
           >
             {t(item.labelKey as any)}
@@ -71,8 +71,8 @@ function DropdownNavItem({ item, isActive, label, alignEnd }: { item: NavItem, i
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center font-body text-sm font-medium transition-colors ${
-          isActive || isOpen ? 'text-[#1A4D2E] font-bold' : 'text-[#555E61] hover:text-[#1A4D2E]'
+        className={`flex items-center font-sans text-sm font-medium transition-colors ${
+          isActive || isOpen ? 'text-[#E6D3A3] font-semibold' : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3]'
         }`}
         aria-expanded={isOpen}
       >
@@ -81,17 +81,17 @@ function DropdownNavItem({ item, isActive, label, alignEnd }: { item: NavItem, i
       </button>
 
       {isOpen && (
-        <div className={`absolute top-full ${alignEnd ? 'end-0' : 'start-0'} mt-2 w-52 rounded-[4px] bg-[#FAF8F5] shadow-md border border-[#E6E0D8] py-1.5 z-50`}>
+        <div className={`absolute top-full ${alignEnd ? 'end-0' : 'start-0'} mt-2 w-52 rounded-xl bg-[#0A2532] shadow-2xl border border-[#BF9A45]/30 py-1.5 z-50`}>
           {item.children?.map((child) => {
             const isChildActive = pathname === child.href;
             return (
               <Link
                 key={child.key}
                 href={child.href}
-                className={`block px-4 py-2 font-body text-sm transition-colors ${
+                className={`block px-4 py-2 font-sans text-sm transition-colors ${
                   isChildActive 
-                    ? 'text-[#1A4D2E] font-bold bg-[#1A4D2E]/10 border-s-2 border-[#1A4D2E]' 
-                    : 'text-[#555E61] hover:text-[#1A4D2E] hover:bg-black/5'
+                    ? 'text-[#E6D3A3] font-semibold bg-[#0F3446] border-s-2 border-[#BF9A45]' 
+                    : 'text-[#EDF2EE]/80 hover:text-[#E6D3A3] hover:bg-[#0F3446]/60'
                 }`}
                 onClick={() => setIsOpen(false)}
               >
