@@ -3,6 +3,9 @@ import { Link } from "@/i18n/navigation";
 import { getProfile } from "@/lib/api/profile";
 import { ScholarHero } from "@/components/profile/scholar-hero";
 import { HomeArticleTabs } from "@/components/home/home-article-tabs";
+import { getArticles } from "@/lib/api/articles";
+import { getEvents } from "@/lib/api/events";
+import type { PublicEvent } from "@/lib/api/types";
 import { 
   Video, 
   Headphones, 
@@ -19,43 +22,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const t = await getTranslations({ locale, namespace: "home" });
 
-  let profile = null;
-  try {
-    profile = await getProfile(locale);
-  } catch (error) {
-    console.error("Failed to fetch homepage data", error);
-  }
+  const [profile, articlesRes, eventsRes] = await Promise.all([
+    getProfile(locale),
+    getArticles({ locale }),
+    getEvents({ locale }),
+  ]);
+  const { socials } = profile;
 
-  if (!profile) {
-    profile = {
-      object: "profile" as const,
-      id: "sheikh-ferej",
-      name: t("heroName"),
-      headline: t("heroBadge"),
-      biography: t("heroBio"),
-      languages: ["ar", "am", "en", "om"],
-      locale,
-      direction: (locale === "ar" ? "rtl" : "ltr") as "rtl" | "ltr",
-      photo: {
-        object: "media" as const,
-        id: "med_portrait",
-        kind: "image" as const,
-        url: "/images/sheikh-portrait.jpg",
-        mime_type: "image/jpeg",
-        width: 1280,
-        height: 1280,
-        duration_seconds: null,
-      },
-      sections: { lectures: false, articles: true, fatwas: true, courses: true, library: false, events: true, questions: true },
-      socials: {
-        youtube: "https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3",
-        tiktok: "https://www.tiktok.com/@ustazmuhammadferej0",
-        facebook: "https://web.facebook.com/p/Ustaz-Muhammad-ferej-100064605885257/?_rdc=1&_rdr#",
-        telegram: "https://t.me/ustazmuhammadferej",
-      },
-      updated_at: new Date().toISOString(),
-    };
-  }
+  const articleItems = articlesRes.data.slice(0, 12).map((a) => ({
+    id: a.id,
+    topic: a.categories[0] ?? "",
+    min: a.reading_minutes ?? 5,
+    lang: a.locale,
+    title: a.title,
+    excerpt: a.summary ?? "",
+    slug: a.slug,
+  }));
+
+  const now = Date.now();
+  const upcoming = eventsRes.data
+    .filter((e) => new Date(e.starts_at).getTime() >= now)
+    .sort((a, b) => new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime())[0];
+  const recent = eventsRes.data.filter((e) => new Date(e.starts_at).getTime() < now).slice(0, 2);
+  const dayOf = (e: PublicEvent) => new Intl.DateTimeFormat("en", { day: "numeric" }).format(new Date(e.starts_at));
+  const monthYearOf = (e: PublicEvent) => new Intl.DateTimeFormat("en", { month: "short", year: "numeric" }).format(new Date(e.starts_at));
 
   return (
     <div className="w-full">
@@ -130,7 +120,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
                 <div className="mt-6 sm:mt-8 flex gap-4 sm:gap-6 items-start">
                   <a
-                    href="https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3"
+                    href={socials.youtube}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Play Riyad us-Saliheen on YouTube"
@@ -170,7 +160,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
                 <div className="mt-8 sm:mt-10 pt-4 flex flex-col sm:flex-row gap-3.5">
                   <a
-                    href="https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3"
+                    href={socials.youtube}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] font-bold rounded-full px-6 py-3.5 transition-all text-sm shadow-md min-h-[46px] cursor-pointer"
@@ -179,7 +169,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <ExternalLink className="w-4 h-4 text-[#072118]" />
                   </a>
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+                    href={socials.play_store}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-full px-6 py-3.5 border border-[#EDF4F0]/40 text-[#EDF4F0] hover:border-[#E6D3A3] hover:text-[#E6D3A3] transition-colors text-sm font-semibold min-h-[46px] cursor-pointer"
@@ -388,7 +378,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
 
           <div className="mt-8 sm:mt-10">
-            <HomeArticleTabs />
+            <HomeArticleTabs articles={articleItems} />
           </div>
         </div>
       </section>
@@ -440,7 +430,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           <div className="mt-10 sm:mt-12 grid lg:grid-cols-[1.2fr_1fr] gap-8">
             {/* Upcoming Event */}
-            <article className="rounded-3xl bg-[#0D3E2F] text-[#EDF4F0] p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between shadow-xl border border-[#BF9A45]/30">
+            {upcoming ? (
+<article className="rounded-3xl bg-[#0D3E2F] text-[#EDF4F0] p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between shadow-xl border border-[#BF9A45]/30">
               <div className="absolute -right-16 -bottom-16 w-72 h-72 lattice opacity-50 rounded-full pointer-events-none" aria-hidden="true" />
               <div>
                 <p className="relative text-[#E6D3A3] text-xs sm:text-sm font-semibold uppercase tracking-wider">
@@ -448,74 +439,64 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </p>
                 <div className="relative mt-5 sm:mt-6 flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
                   <div className="shrink-0 w-20 sm:w-24 arch-top bg-[#BF9A45] text-[#072118] text-center pt-5 sm:pt-6 pb-3 sm:pb-4 shadow-md font-bold">
-                    <p className="font-display text-4xl sm:text-5xl leading-none">15</p>
-                    <p className="mt-1 text-xs sm:text-sm">Nov 2026</p>
+                    <p className="font-display text-4xl sm:text-5xl leading-none">{dayOf(upcoming)}</p>
+                    <p className="mt-1 text-xs sm:text-sm">{monthYearOf(upcoming)}</p>
                   </div>
                   <div>
-                    <h3 className="font-ethiopic text-xl sm:text-2xl leading-snug font-bold" lang="am">
-                      እስላማዊ ባንኪንግና የሸሪዓ አስተዳደር አውደ ጥናት
-                    </h3>
-                    <p className="mt-2 font-display text-base sm:text-lg text-[#E6D3A3] font-semibold">
-                      Islamic banking and Sharia governance workshop
-                    </p>
+                    <h3 className="font-display text-xl sm:text-2xl leading-snug font-bold" lang={upcoming.locale}>{upcoming.title}</h3>
+                    {upcoming.summary && <p className="mt-2 font-display text-base sm:text-lg text-[#E6D3A3] font-semibold">{upcoming.summary}</p>}
                     <p className="mt-4 flex items-center gap-2 text-[#EDF4F0]/85 text-sm sm:text-[15px]">
                       <MapPin className="w-4 h-4 text-[#BF9A45] shrink-0" />
-                      <span>Wegagen Bank Headquarters Hall, Addis Ababa</span>
+                      <span>{[upcoming.venue_name, upcoming.venue_address].filter(Boolean).join(", ") || upcoming.online_url}</span>
                     </p>
                   </div>
                 </div>
               </div>
               <div className="relative mt-8 sm:mt-10 flex flex-wrap gap-3.5">
                 <Link
-                  href="/events"
+                  href={`/events/${upcoming.slug}`}
                   className="inline-flex items-center justify-center bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] font-bold rounded-full px-6 py-3 transition-colors text-sm min-h-[44px] cursor-pointer shadow-sm"
                 >
-                  Register to attend
+                  {t("registerToAttend")}
                 </Link>
                 <Link
-                  href="/events"
+                  href={`/events/${upcoming.slug}`}
                   className="inline-flex items-center justify-center rounded-full px-6 py-3 border border-[#EDF4F0]/40 text-[#EDF4F0] hover:border-[#E6D3A3] hover:text-[#E6D3A3] transition-colors text-sm font-semibold min-h-[44px] cursor-pointer"
                 >
-                  View Details
+                  {t("viewDetails")}
                 </Link>
               </div>
             </article>
+) : (
+<article className="rounded-3xl bg-[#0D3E2F] text-[#EDF4F0] p-6 sm:p-10 shadow-xl border border-[#BF9A45]/30 flex items-center justify-center text-center">
+              <p className="text-[#E6D3A3] text-sm sm:text-base font-semibold">{t("noUpcomingEvents")}</p>
+            </article>
+)}
 
             {/* Recently held */}
+            {recent.length > 0 && (
             <div>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0F241C]/60">Recently held</p>
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0F241C]/60">{t("recentlyHeld")}</p>
               <ul className="mt-3 space-y-3">
-                <li className="interactive-card bg-white border border-[#0F241C]/10 hover:border-[#BF9A45] p-5 rounded-2xl flex gap-4 sm:gap-5 shadow-xs transition-all">
-                  <div className="w-14 sm:w-16 shrink-0 text-center border-r border-[#0F241C]/10 pr-2">
-                    <p className="font-display text-2xl sm:text-3xl text-[#1B6A50] font-bold leading-none">25</p>
-                    <p className="text-xs text-[#0F241C]/60 mt-1 font-semibold">Oct 2026</p>
-                  </div>
-                  <div>
-                    <h3 className="font-ethiopic text-base sm:text-lg leading-snug text-[#0F241C] font-bold" lang="am">
-                      የሪያዱ ሷሊሂን ዓመታዊ ጉባኤ
-                    </h3>
-                    <p className="text-sm sm:text-[15px] text-[#0F241C]/75 font-medium">Annual Riyad us-Saliheen Conference</p>
-                    <p className="mt-1 text-xs text-[#0F241C]/55">Addis Ababa Cultural &amp; Conference Hall</p>
-                  </div>
-                </li>
-                <li className="interactive-card bg-white border border-[#0F241C]/10 hover:border-[#BF9A45] p-5 rounded-2xl flex gap-4 sm:gap-5 shadow-xs transition-all">
-                  <div className="w-14 sm:w-16 shrink-0 text-center border-r border-[#0F241C]/10 pr-2">
-                    <p className="font-display text-2xl sm:text-3xl text-[#1B6A50] font-bold leading-none">9</p>
-                    <p className="text-xs text-[#0F241C]/60 mt-1 font-semibold">Oct 2026</p>
-                  </div>
-                  <div>
-                    <h3 className="font-ethiopic text-base sm:text-lg leading-snug text-[#0F241C] font-bold" lang="am">
-                      የጁምዓ ኹጥባህ — የተውሂድና የተረጋጋ ልብ ፋይዳ
-                    </h3>
-                    <p className="text-sm sm:text-[15px] text-[#0F241C]/75 font-medium">Friday khutbah on tawhid and a tranquil heart</p>
-                    <p className="mt-1 text-xs text-[#0F241C]/55">Al-Fajr Mosque</p>
-                  </div>
-                </li>
+                {recent.map((e) => (
+                  <li key={e.id} className="interactive-card bg-white border border-[#0F241C]/10 hover:border-[#BF9A45] p-5 rounded-2xl flex gap-4 sm:gap-5 shadow-xs">
+                    <div className="w-14 sm:w-16 shrink-0 text-center border-e border-[#0F241C]/10 pe-2">
+                      <p className="font-display text-2xl sm:text-3xl text-[#1B6A50] font-bold leading-none">{dayOf(e)}</p>
+                      <p className="text-xs text-[#0F241C]/60 mt-1 font-semibold">{monthYearOf(e)}</p>
+                    </div>
+                    <div>
+                      <Link href={`/events/${e.slug}`} className="font-display text-base sm:text-lg leading-snug text-[#0F241C] font-bold hover:text-[#1B6A50]" lang={e.locale}>{e.title}</Link>
+                      {e.summary && <p className="text-sm sm:text-[15px] text-[#0F241C]/75 font-medium">{e.summary}</p>}
+                      {e.venue_name && <p className="mt-1 text-xs text-[#0F241C]/55">{e.venue_name}</p>}
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
-          </div>
+          )}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* ============ APP + ASK ============ */}
       <section className="pb-16 sm:pb-20 lg:pb-24">
@@ -539,7 +520,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <div className="relative mt-8 flex flex-wrap gap-3.5">
               <a
-                href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+                href={socials.play_store}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] rounded-full px-6 py-3 transition-colors shadow-sm font-bold text-xs sm:text-sm min-h-[46px] cursor-pointer"
@@ -553,7 +534,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </span>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+                href={socials.play_store}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 border border-[#EDF4F0]/40 rounded-full px-6 py-3 hover:border-[#E6D3A3] hover:text-[#E6D3A3] transition-colors text-xs sm:text-sm font-semibold min-h-[46px] cursor-pointer"
@@ -575,7 +556,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </p>
               <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <a
-                  href="https://t.me/ustazmuhammadferej"
+                  href={socials.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="interactive-card flex flex-col gap-2 rounded-2xl border border-[#0F241C]/10 p-4 hover:border-[#1B6A50] hover:bg-[#EDF4F0]/50 transition-all cursor-pointer"
@@ -587,7 +568,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <span className="text-xs text-[#0F241C]/60 -mt-1 font-medium">Official channel</span>
                 </a>
                 <a
-                  href="https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3"
+                  href={socials.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="interactive-card flex flex-col gap-2 rounded-2xl border border-[#0F241C]/10 p-4 hover:border-[#1B6A50] hover:bg-[#EDF4F0]/50 transition-all cursor-pointer"
@@ -599,7 +580,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <span className="text-xs text-[#0F241C]/60 -mt-1 font-medium">Official playlists</span>
                 </a>
                 <a
-                  href="https://web.facebook.com/p/Ustaz-Muhammad-ferej-100064605885257/?_rdc=1&_rdr#"
+                  href={socials.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="interactive-card flex flex-col gap-2 rounded-2xl border border-[#0F241C]/10 p-4 hover:border-[#1B6A50] hover:bg-[#EDF4F0]/50 transition-all cursor-pointer"

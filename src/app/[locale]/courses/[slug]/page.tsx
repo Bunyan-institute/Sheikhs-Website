@@ -1,22 +1,11 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { getCourse, AUTHENTIC_COURSES } from "@/lib/api/courses";
+import { getCourse } from "@/lib/api/courses";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getCourseExam } from "@/lib/db/repository";
+import { getCourseExam, getProfile as getStoredProfile } from "@/lib/db/repository";
 import { CourseLearningView } from "./course-learning-view";
 import { ArrowLeft } from "lucide-react";
-
-export async function generateStaticParams() {
-  const locales = ["en", "ar", "am", "om"];
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const c of AUTHENTIC_COURSES) {
-      params.push({ locale, slug: c.slug });
-    }
-  }
-  return params;
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;
@@ -50,7 +39,13 @@ export default async function CoursePage({
 
   const t = await getTranslations({ locale, namespace: "courseDetail" });
   const tNav = await getTranslations({ locale, namespace: "nav" });
-  const examConfig = getCourseExam(slug);
+  const playStoreUrl = (await getStoredProfile()).socials.play_store;
+  const storedExam = await getCourseExam(slug);
+  // Never ship the answer key or explanations to the browser; grading happens server-side.
+  const examConfig = storedExam && {
+    ...storedExam,
+    questions: storedExam.questions.map(({ correct_option_index: _answer, explanation: _explanation, ...q }) => ({ ...q, correct_option_index: -1 })),
+  };
 
   return (
     <div className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
@@ -142,14 +137,14 @@ export default async function CoursePage({
               >
                 Browse Audio Series
               </Link>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+              {playStoreUrl && (<a
+                href={playStoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 border border-[#EDF4F0]/30 text-[#EDF4F0] rounded-full text-xs font-semibold hover:border-[#E6D3A3] hover:text-[#E6D3A3] transition-colors inline-flex items-center gap-1.5"
               >
                 <span>Listen in Mobile App &rarr;</span>
-              </a>
+              </a>)}
             </div>
           </div>
         )}

@@ -99,7 +99,11 @@
     "appGetOn": "تحميل من",
     "askCardTitle": "اسأل فضيلة الشيخ",
     "askCardSubtitle": "قنوات مباشرة لمكتب الشيخ للإجابة على الأسئلة الشرعية والفتاوى.",
-    "askDirectLink": "أرسل سؤالك مباشرة عبر الموقع"
+    "askDirectLink": "أرسل سؤالك مباشرة عبر الموقع",
+    "registerToAttend": "سجّل للحضور",
+    "viewDetails": "عرض التفاصيل",
+    "recentlyHeld": "أُقيمت مؤخرًا",
+    "noUpcomingEvents": "لا توجد لقاءات قادمة حاليًا."
   },
   "about": {
     "title": "ترجمة فضيلة الشيخ",
@@ -382,7 +386,8 @@
       "active": "نشط",
       "completed": "مكتمل",
       "pending": "قيد الانتظار",
-      "resolved": "تم الرد"
+      "resolved": "تم الرد",
+      "viewLiveSite": "عرض الموقع المباشر"
     },
     "header": {
       "systemStatus": "النظام متصل • مزامنة حية ومباشرة",
@@ -660,7 +665,9 @@
       "headline": "الصفة العلمية والمهنية",
       "bio": "السيرة الذاتية المفصلة",
       "credentials": "المؤهلات والإجازات المعتمدة",
-      "socials": "المنصات الرسمية المعتمدة"
+      "socials": "المنصات الرسمية المعتمدة",
+      "saveProfile": "حفظ الملف الشخصي",
+      "savedNotice": "تم حفظ التغييرات بنجاح"
     },
     "backup": {
       "heading": "النسخ الاحتياطي وحماية البيانات",
@@ -761,7 +768,8 @@
     "episodesCount": "{count} دروس",
     "category": "القسم",
     "startSeries": "بدء السلسلة من الدرس الأول",
-    "curriculum": "فهرس دروس السلسلة"
+    "curriculum": "فهرس دروس السلسلة",
+    "backToSeries": "العودة إلى السلاسل"
   },
   "certificateVerify": {
     "officialCredential": "شهادة علمية معتمدة",

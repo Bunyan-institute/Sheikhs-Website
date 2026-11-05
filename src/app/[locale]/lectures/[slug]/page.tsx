@@ -1,4 +1,4 @@
-import { getLecture, getLectures, AUTHENTIC_LECTURES } from "@/lib/api/lectures";
+import { getLecture, getLectures } from "@/lib/api/lectures";
 import { setRequestLocale } from "next-intl/server";
 import { LecturePlayer } from "@/components/lectures/lecture-player";
 import { LectureTranscript } from "@/components/lectures/lecture-transcript";
@@ -10,17 +10,6 @@ import { Metadata } from "next";
 
 interface LectureDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const locales = ["en", "ar", "am", "om"];
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const lec of AUTHENTIC_LECTURES) {
-      params.push({ locale, slug: lec.slug });
-    }
-  }
-  return params;
 }
 
 export async function generateMetadata({ params }: LectureDetailPageProps): Promise<Metadata> {

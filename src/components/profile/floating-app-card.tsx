@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Download, Star, ChevronRight, ChevronLeft, WifiOff, Headphones, ShieldCheck, Smartphone } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export function FloatingAppCard() {
+export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
   const [isOpen, setIsOpen] = useState(true);
 
   let t = (key: string) => key;
@@ -29,6 +29,8 @@ export function FloatingAppCard() {
   const feat2 = t("backgroundFeature") !== "backgroundFeature" ? t("backgroundFeature") : "Background Playback";
   const feat3 = t("adFreeFeature") !== "adFreeFeature" ? t("adFreeFeature") : "100% Free & Ad-Free";
   const ctaBtn = t("downloadButton") !== "downloadButton" ? t("downloadButton") : "Install from Google Play";
+
+  if (!playStoreUrl) return null;
 
   return (
     <aside
@@ -105,7 +107,7 @@ export function FloatingAppCard() {
           {/* Action CTA */}
           <div className="relative">
             <a
-              href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+              href={playStoreUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] font-bold text-xs transition-colors shadow-sm min-h-[40px] cursor-pointer"

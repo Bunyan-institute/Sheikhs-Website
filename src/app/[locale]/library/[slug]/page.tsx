@@ -1,20 +1,9 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { getLibraryItem, AUTHENTIC_BOOKS } from '@/lib/api/library';
+import { getLibraryItem } from '@/lib/api/library';
 import { Link } from '@/i18n/navigation';
 import { notFound } from 'next/navigation';
 import { Download, ExternalLink, ArrowLeft, CheckCircle, FileText } from 'lucide-react';
 import type { PublicBook } from '@/lib/api/types';
-
-export async function generateStaticParams() {
-  const locales = ["en", "ar", "am", "om"];
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const b of AUTHENTIC_BOOKS) {
-      params.push({ locale, slug: b.slug });
-    }
-  }
-  return params;
-}
 
 export default async function LibraryItemPage(props: { params: Promise<{ locale: string, slug: string }> }) {
   const params = await props.params;

@@ -99,7 +99,11 @@
     "appGetOn": "አውርድ",
     "askCardTitle": "ሸይኹን ይጠይቁ",
     "askCardSubtitle": "ለፈትዋ ጥያቄዎችና ምክክር በቀጥታ ወደ ሸይኹ ቢሮ የሚላክበት መንገድ።",
-    "askDirectLink": "ጥያቄዎን በቀጥታ በድረ-ገጹ ይላኩ"
+    "askDirectLink": "ጥያቄዎን በቀጥታ በድረ-ገጹ ይላኩ",
+    "registerToAttend": "ለመሳተፍ ይመዝገቡ",
+    "viewDetails": "ዝርዝር ይመልከቱ",
+    "recentlyHeld": "በቅርቡ የተካሄዱ",
+    "noUpcomingEvents": "እስካሁን የተያዘ ቀጣይ ፕሮግራም የለም።"
   },
   "about": {
     "title": "ስለ ሸይኽ ሙሐመድ ፈረጅ",
@@ -382,7 +386,8 @@
       "active": "ንቁ",
       "completed": "የተጠናቀቀ",
       "pending": "በመጠባበቅ ላይ",
-      "resolved": "መልስ የተሰጠው"
+      "resolved": "መልስ የተሰጠው",
+      "viewLiveSite": "ቀጥታ ድረ ገጹን ይመልከቱ"
     },
     "header": {
       "systemStatus": "ስርዓቱ በመስመር ላይ ነው • የቀጥታ ቅንጅት",

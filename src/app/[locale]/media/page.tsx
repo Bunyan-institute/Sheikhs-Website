@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getMedia, type MediaItem } from "@/lib/api/media";
+import { getProfile } from "@/lib/api/profile";
 import { MediaCard } from "@/components/media/media-card";
 import { ArrowRight } from "lucide-react";
 
@@ -34,12 +35,11 @@ export default async function MediaPage({
     console.error("Failed to fetch media", error);
   }
 
-  const media = currentKind === "all" 
-    ? allMedia 
-    : allMedia.filter((m) => {
-        if (currentKind === "photos") return m.kind === "image";
-        return m.kind === currentKind;
-      });
+  const { socials } = await getProfile(locale);
+
+  // URL values are plural (videos, photos, documents); media kinds are singular.
+  const kindOf: Record<string, MediaItem["kind"]> = { audio: "audio", videos: "video", photos: "image", documents: "document" };
+  const media = currentKind === "all" ? allMedia : allMedia.filter((m) => m.kind === kindOf[currentKind]);
 
   const kinds = [
     { label: "All Media Archives", value: "all" },
@@ -81,7 +81,7 @@ export default async function MediaPage({
         {/* Official Archives Strip */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-12">
           <a
-            href="https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3"
+            href={socials.youtube}
             target="_blank"
             rel="noopener noreferrer"
             className="p-5 rounded-2xl border border-[#0F241C]/10 bg-white hover:border-[#1B6A50] transition-all flex items-center gap-4 group shadow-xs"
@@ -98,7 +98,7 @@ export default async function MediaPage({
           </a>
 
           <a
-            href="https://t.me/ustazmuhammadferej"
+            href={socials.telegram}
             target="_blank"
             rel="noopener noreferrer"
             className="p-5 rounded-2xl border border-[#0F241C]/10 bg-white hover:border-[#1B6A50] transition-all flex items-center gap-4 group shadow-xs"
@@ -115,7 +115,7 @@ export default async function MediaPage({
           </a>
 
           <a
-            href="https://web.facebook.com/p/Ustaz-Muhammad-ferej-100064605885257/?_rdc=1&_rdr#"
+            href={socials.facebook}
             target="_blank"
             rel="noopener noreferrer"
             className="p-5 rounded-2xl border border-[#0F241C]/10 bg-white hover:border-[#1B6A50] transition-all flex items-center gap-4 group shadow-xs"

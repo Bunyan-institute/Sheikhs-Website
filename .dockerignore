@@ -1,0 +1,11 @@
+node_modules
+.next
+.next-*
+.git
+data
+e2e
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+Sheikh Muhammed Ferej Megeno.html

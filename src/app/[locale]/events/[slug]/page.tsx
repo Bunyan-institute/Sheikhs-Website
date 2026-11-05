@@ -1,5 +1,5 @@
 import { setRequestLocale } from 'next-intl/server';
-import { getEvent, AUTHENTIC_EVENTS } from '@/lib/api/events';
+import { getEvent } from '@/lib/api/events';
 import { Link } from '@/i18n/navigation';
 import { notFound } from 'next/navigation';
 import { Calendar, Clock, MapPin, Video, Users, ArrowLeft, Info } from 'lucide-react';
@@ -8,17 +8,6 @@ import { EventRegisterButton } from './event-register-button';
 
 interface EventDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const locales = ["en", "ar", "am", "om"];
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const ev of AUTHENTIC_EVENTS) {
-      params.push({ locale, slug: ev.slug });
-    }
-  }
-  return params;
 }
 
 export async function generateMetadata({ params }: EventDetailPageProps): Promise<Metadata> {

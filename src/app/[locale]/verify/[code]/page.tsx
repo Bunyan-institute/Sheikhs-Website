@@ -23,7 +23,7 @@ export default async function CertificateVerifyPage(props: CertificateVerifyPage
 
   const t = await getTranslations({ locale, namespace: "verify" });
   const cleanCode = decodeURIComponent(code).trim().toUpperCase();
-  const certificate = getCertificateByCode(cleanCode);
+  const certificate = await getCertificateByCode(cleanCode);
 
   return (
     <div className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">

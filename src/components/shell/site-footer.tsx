@@ -46,20 +46,21 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
     }
   };
 
+  // Links tied to an admin-controlled section only show while that section is enabled.
   const knowledgeLinks = [
     { href: "/media", labelKey: "nav.media" },
     { href: "/series", labelKey: "nav.series" },
-    { href: "/articles", labelKey: "nav.articles" },
-    { href: "/fatwas", labelKey: "nav.fatwas" },
-    { href: "/courses", labelKey: "nav.courses" },
-  ];
+    { href: "/articles", labelKey: "nav.articles", section: "articles" as const },
+    { href: "/fatwas", labelKey: "nav.fatwas", section: "fatwas" as const },
+    { href: "/courses", labelKey: "nav.courses", section: "courses" as const },
+  ].filter((l) => !l.section || profile.sections[l.section]);
 
   const resourceLinks = [
-    { href: "/events", labelKey: "nav.events" },
+    { href: "/events", labelKey: "nav.events", section: "events" as const },
     { href: "/verify", labelKey: "nav.verify" },
-    { href: "/ask", labelKey: "nav.ask" },
+    { href: "/ask", labelKey: "nav.ask", section: "questions" as const },
     { href: "/search", labelKey: "nav.search" },
-  ];
+  ].filter((l) => !l.section || profile.sections[l.section]);
 
   const profileLinks = [
     { href: "/about", labelKey: "nav.about" },
@@ -80,9 +81,10 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
               Islamic scholar, educator and Sharia consultant. President of the Al-Fajr Islamic Foundation and member of the African Scholars Union.
             </p>
             
+            {profile.socials.play_store && (
             <div className="mt-5">
               <a
-                href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej"
+                href={profile.socials.play_store}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#0D3E2F] border border-[#BF9A45]/40 hover:border-[#BF9A45] text-[#EDF4F0] text-xs font-semibold hover:bg-[#1B6A50]/40 transition-all shadow-sm"
@@ -93,6 +95,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
                 <span>Get &ldquo;ሸይኽ ሙሃመድ ፈረጅ&rdquo; App</span>
               </a>
             </div>
+            )}
 
             {/* Socials */}
             <div className="mt-5 flex flex-wrap gap-2.5">

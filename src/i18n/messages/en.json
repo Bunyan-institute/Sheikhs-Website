@@ -99,7 +99,11 @@
     "appGetOn": "GET IT ON",
     "askCardTitle": "Ask the Sheikh",
     "askCardSubtitle": "Direct channels to the scholar's office for fatwa inquiries and advice.",
-    "askDirectLink": "Submit a question directly online"
+    "askDirectLink": "Submit a question directly online",
+    "registerToAttend": "Register to attend",
+    "viewDetails": "View details",
+    "recentlyHeld": "Recently held",
+    "noUpcomingEvents": "No upcoming gatherings are scheduled yet."
   },
   "about": {
     "title": "About the Scholar",
@@ -382,7 +386,8 @@
       "active": "Active",
       "completed": "Completed",
       "pending": "Pending",
-      "resolved": "Resolved"
+      "resolved": "Resolved",
+      "viewLiveSite": "View live site"
     },
     "header": {
       "systemStatus": "System Online • Live Dynamic Sync",

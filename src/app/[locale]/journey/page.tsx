@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { journeyData } from "@/data/journey";
+import { getJourney } from "@/lib/db/repository";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -15,6 +15,7 @@ export default async function JourneyPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "journey" });
+  const journeyData = await getJourney();
 
   return (
     <div className="w-full">

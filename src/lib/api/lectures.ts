@@ -1,7 +1,6 @@
-import { bunyan } from "./client";
 import type { ListResponse, PublicLecture } from "./types";
-import contentStore from "../../../data/content-store.json";
 import { getAllLectures, getLectureByIdOrSlug } from "@/lib/db/repository";
+import { filterTaxonomy, orThrow, published, publishedOnly, toList } from "./list";
 
 export interface LectureListParams {
   limit?: string;
@@ -14,48 +13,12 @@ export interface LectureListParams {
   published_after?: string;
 }
 
-export const AUTHENTIC_LECTURES: PublicLecture[] = (contentStore.lectures || []) as PublicLecture[];
-
 export async function getLectures(params: LectureListParams = {}): Promise<ListResponse<PublicLecture>> {
-  let list: PublicLecture[] = [];
-  try {
-    list = getAllLectures();
-  } catch {
-    list = AUTHENTIC_LECTURES;
-  }
-  if (!list || list.length === 0) {
-    list = AUTHENTIC_LECTURES;
-  }
-  if (params.series) {
-    list = list.filter((l) => l.series?.id === params.series);
-  }
-  if (params.category && params.category.length > 0) {
-    list = list.filter((l) => l.categories.some((c) => params.category!.includes(c)));
-  }
-  return {
-    object: "list",
-    data: list,
-    has_more: false,
-    next_cursor: null,
-  };
+  let list = published(await getAllLectures());
+  if (params.series) list = list.filter((l) => l.series?.id === params.series);
+  return toList(filterTaxonomy(list, params));
 }
 
-export async function getLecture(reference: string, locale?: string): Promise<PublicLecture> {
-  try {
-    const found = getLectureByIdOrSlug(reference);
-    if (found) {
-      return found;
-    }
-  } catch {
-    // fallback
-  }
-
-  const foundFallback = AUTHENTIC_LECTURES.find(
-    (l) => l.slug === reference || l.id === reference
-  );
-  if (foundFallback) {
-    return foundFallback;
-  }
-
-  throw new Error(`Lecture ${reference} not found`);
+export async function getLecture(reference: string, _locale?: string): Promise<PublicLecture> {
+  return orThrow(publishedOnly(await getLectureByIdOrSlug(reference)), "Lecture", reference);
 }

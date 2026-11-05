@@ -203,14 +203,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   </div>
                   <div className="text-xs text-[#0F241C]/60 mt-1.5 leading-relaxed">AAOIFI auditor diploma and traditional chains.</div>
                 </Link>
-                <a href="https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej" target="_blank" rel="noopener noreferrer" className="block p-5 bg-white border border-[#0F241C]/10 rounded-2xl hover:border-[#1B6A50] transition-all group shadow-xs">
+                {profile.socials.play_store && (<a href={profile.socials.play_store} target="_blank" rel="noopener noreferrer" className="block p-5 bg-white border border-[#0F241C]/10 rounded-2xl hover:border-[#1B6A50] transition-all group shadow-xs">
                   <div className="text-[11px] font-bold text-[#1B6A50] uppercase tracking-wider mb-1">Official Mobile App</div>
                   <div className="font-display font-semibold text-base text-[#0F241C] group-hover:text-[#1B6A50] flex items-center justify-between">
                     <span>ሸይኽ ሙሃመድ ፈረጅ</span>
                     <ArrowRight className="w-4 h-4 text-[#BF9A45]" />
                   </div>
                   <div className="text-xs text-[#0F241C]/60 mt-1.5 leading-relaxed">Free Android App on Google Play Store with offline halaqat.</div>
-                </a>
+                </a>)}
               </div>
             </div>
           </main>

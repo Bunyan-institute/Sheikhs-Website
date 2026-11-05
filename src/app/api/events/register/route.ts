@@ -1,40 +1,54 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { createEventRegistrationAsync } from "@/lib/db/repository";
+import { createEventRegistration, getEventByIdOrSlug } from "@/lib/db/repository";
+import { clean, clientIp, isEmail, rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json();
-    if (!data.event_id || !data.name || !data.email) {
-      return NextResponse.json(
-        { error: "Event ID, attendee name, and email are required." },
-        { status: 400 }
-      );
+    const limit = rateLimit(`event-reg:${clientIp(req)}`, 10, 60 * 60 * 1000);
+    if (!limit.allowed) {
+      return NextResponse.json({ error: "Too many registrations. Please try again later." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
     }
 
-    const registration = await createEventRegistrationAsync({
-      event_id: data.event_id,
-      event_slug: data.event_slug || data.event_id,
-      event_title: data.event_title || "Event Attendance",
-      name: data.name.trim(),
+    const data = await req.json().catch(() => null);
+    if (!data || typeof data !== "object") {
+      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    }
+    if (data.website) return NextResponse.json({ success: true });
+
+    const name = clean(data.name, 120);
+    if (!data.event_id || !name || !isEmail(data.email)) {
+      return NextResponse.json({ error: "Event, attendee name, and a valid email are required." }, { status: 400 });
+    }
+
+    // Event details come from the database, never from the client.
+    const event = await getEventByIdOrSlug(String(data.event_id));
+    if (!event || event.status === "draft") {
+      return NextResponse.json({ error: "Event not found." }, { status: 404 });
+    }
+
+    const attendees = Math.min(20, Math.max(1, parseInt(String(data.attendees_count ?? 1), 10) || 1));
+    const registration = await createEventRegistration({
+      event_id: event.id,
+      event_slug: event.slug,
+      event_title: event.title,
+      name,
       email: data.email.trim().toLowerCase(),
-      phone: data.phone,
-      city: data.city,
-      attendees_count: data.attendees_count ? parseInt(data.attendees_count, 10) : 1,
-      notes: data.notes,
+      phone: clean(data.phone, 40),
+      city: clean(data.city, 80),
+      attendees_count: attendees,
+      notes: clean(data.notes, 1000),
     });
 
     try {
       revalidatePath("/admin/events");
     } catch {
-      // Non-blocking in non-request contexts
+      // Non-blocking outside request contexts
     }
 
-    return NextResponse.json({ success: true, registration });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err.message || "Failed to register for event" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: true, registration: { id: registration.id, status: registration.status } });
+  } catch (err) {
+    console.error("Event registration failed:", err);
+    return NextResponse.json({ error: "Failed to register for event" }, { status: 500 });
   }
 }

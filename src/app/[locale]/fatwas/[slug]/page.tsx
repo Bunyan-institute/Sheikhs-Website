@@ -1,21 +1,10 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { getFatwa, AUTHENTIC_FATWAS } from "@/lib/api/fatwas";
+import { getFatwa } from "@/lib/api/fatwas";
 import { formatDate } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, CheckCircle } from "lucide-react";
-
-export async function generateStaticParams() {
-  const locales = ["en", "ar", "am", "om"];
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const fatwa of AUTHENTIC_FATWAS) {
-      params.push({ locale, slug: fatwa.slug });
-    }
-  }
-  return params;
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;

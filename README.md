@@ -1,97 +1,84 @@
-# Sheikh Muhammed Ferej Megeno — Official Scholarly Portal
-### የኡስታዝ ሼክ ሙሐመድ ፈረጅ መጀኖ ይፋዊ የእውቀትና ዳዕዋ መድረክ
+# Sheikh Muhammed Ferej Megeno — website and admin
 
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?logo=next.js)](https://nextjs.org/)
-[![Turbopack](https://img.shields.io/badge/Turbopack-Ready-blueviolet)](https://turbo.build/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
-[![AAOIFI Certified](https://img.shields.io/badge/AAOIFI-Certified_Sharia_Auditor-1B5E20)](https://aaoifi.com/)
+A multilingual (English, Arabic, Amharic, Afaan Oromoo) site for the scholar's lectures, articles, fatwas, courses,
+library and events. **All content is managed from the admin**, which is also an installable PWA.
 
-A modern, high-performance, editorial digital library and scholar portal for **Sheikh Muhammed Ferej Megeno (الشيخ محمد فرج مجنو)** — renowned Ethiopian Islamic scholar, educator, Sharia consultant at Wegagen Bank, African Scholars Union member, and President of Al-Fajr Islamic Foundation.
+- **Stack:** Next.js 16 (App Router), React 19, next-intl, Tailwind CSS v4, libSQL / SQLite.
+- **Single source of truth:** SQLite. The public site and the admin read and write the same database.
+  `src/lib/db/seed/content-seed.json` is only used to fill a brand-new database (and by "Reset to seed data").
 
----
-
-## 🏛️ Architecture & Philosophy
-
-The portal strictly implements the **Scholarly Digital Library Architecture**:
-- **Application Shell**: A clean, distraction-free navigation shell across desktop and mobile.
-- **Deep Routing (No Giant Scrolling Homepage)**: Every content domain lives in its own dedicated, purpose-built route with natural scrolling and faceted filtering.
-- **Scholarly Editorial Theme**: Warm paper parchment backgrounds (`#FAF8F5`), Deep Forest Green (`#1B5E20`), Warm Gold accents (`#B8860B`), Charcoal Typography (`#2D3436`), and serif headings.
-- **Full Multilingual Foundation**: English, Arabic (العربية with full RTL support), Amharic (አማርኛ), and Afaan Oromoo.
-
----
-
-## 🧭 Routes & Digital Library Modules
-
-| Route | Description | Highlights |
-| :--- | :--- | :--- |
-| `/` | **Scholar Dashboard** | Hero portrait, identity, featured lecture video player, latest media |
-| `/about` | **Biography & Profile** | 35+ years of scholarly journey, Halaqat roots, institutional positions |
-| `/journey` | **Educational Timeline** | Scholarly milestones from Jimma/Silti Halaqat to university degrees |
-| `/qualifications` | **Academic & Traditional Sanad** | BA in Sharia & Law, MA in Islamic Studies, AAOIFI Auditor Diploma |
-| `/lectures` | **Lecture Archives** | 7 HD YouTube lectures + 32 Kitab At-Tawheed lessons + Friday Khutbah |
-| `/lectures/[slug]` | **Lecture Application** | Responsive embedded YouTube/HTML5 player, synchronized transcripts |
-| `/series` | **Course & Lecture Series** | Complete 32-chapter *Kitab At-Tawheed (ኪታቡ አተውሂድ)* curriculum |
-| `/articles` | **Writings & Exegesis** | Tafsir of Surah Al-Fath & Al-Ahqaf, Spiritual Purity, Islamic Parenting |
-| `/fatwas` | **Practical Q&A** | Zakat al-Fitr, AAOIFI digital banking fees, travel Salah, business Zakat |
-| `/courses` | **Structured Academics** | Kitab At-Tawheed, Fiqh of Salah & Wudu, Islamic Banking Standards |
-| `/library` | **Public Kitab & Documents** | **Complete 132-page Kitab At-Tawheed PDF**, Mukhtasar Tafsir, Official CV |
-| `/events` | **Conferences & Khutbahs** | Al-Fajr Friday Khutbah, Annual Tawheed Intensive, AAOIFI Workshop |
-| `/media` | **Unified Media Gallery** | Audio lessons, 17 archival photos, PDF documents, YouTube, TikTok showcase |
-| `/ask` | **Ask the Sheikh** | Dedicated interactive question submission form |
-| `/search` | **Omni-Search** | Instant faceted search across lectures, kitabs, fatwas, and articles |
-| `/contact` | **Scholarly Office** | Institutional inquiries, booking, and Al-Fajr Foundation contacts |
-
----
-
-## 📖 Public Kitab (የመጻሕፍት ማዕከል)
-
-The portal features full downloadable and readable classical treatises:
-1. **Kitab At-Tawheed — The Book of Monotheism (كتاب التوحيد — ኪታቡ አተውሂድ)**:
-   - Full 132-page classical treatise (`/documents/kitabu-tawhid-complete.pdf`).
-   - 2-page English/Amharic study syllabus & curriculum guide (`/documents/kitab-at-tawheed-syllabus.pdf`).
-   - 32 accompanying audio lessons delivered by Sheikh Muhammed Ferej.
-2. **Official Scholarly Curriculum Vitae**:
-   - Authenticated PDF resume (`/documents/My CV.pdf`).
-3. **Summary Interpretation of the Holy Quran (ሙኽተሰር ተፍሲር)**:
-   - Authorized Amharic co-translation.
-4. **AAOIFI Sharia Governance and Ethical Finance Framework**.
-
----
-
-## 📱 Official Channels
-
-- **TikTok**: [@ustazmuhammadferej0](https://www.tiktok.com/@ustazmuhammadferej0) *(297.5K+ Followers · 2.3M+ Likes)*
-- **YouTube**: [Official Lecture Playlist](https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3)
-- **Facebook**: [Ustaz Muhammad ferej](https://web.facebook.com/p/Ustaz-Muhammad-ferej-100064605885257/?_rdc=1&_rdr#) *(330,000+ Followers)*
-- **Telegram**: [@ustazmuhammadferej](https://t.me/ustazmuhammadferej)
-
----
-
-## 🛠️ Technology Stack
-
-- **Framework**: Next.js 16.3.8 with Turbopack
-- **Language**: TypeScript 5.x
-- **Internationalization**: `next-intl` (en, ar, am, om)
-- **Styling**: Tailwind CSS v4
-- **Icons**: Lucide React
-- **Audio/Video**: Native HTML5 player with YouTube iframe fallback and media detection
-- **Content API**: Bunyan Content Client with full offline fallback resilience
-
----
-
-## 🚀 Running Locally
+## Run it locally
 
 ```bash
-# Install dependencies
 npm install
+npm run dev            # http://localhost:3002
+```
 
-# Run TypeScript validation
+The database is created at `data/sheikh_ferej.db` and seeded on first start. In development the admin login is
+`admin` / `sheikh_admin_2026!` (set in `.env.local`, and the built-in fallback if unset). Production never falls back to defaults — see below.
+
+## Configuration
+
+Copy `.env.example` to `.env` (Docker) or `.env.local` (local) and set:
+
+| Variable | Purpose |
+|---|---|
+| `ADMIN_USERNAME` | Admin login name (required in production) |
+| `ADMIN_PASSWORD_HASH` | scrypt hash of the password — generate with `node scripts/hash-password.mjs "your password"` (or set `ADMIN_PASSWORD`) |
+| `ADMIN_SESSION_SECRET` | 16+ random characters used to sign session cookies (required in production) |
+| `CERTIFICATE_SECRET` | Signs certificate verification tokens (required in production) |
+| `DATABASE_URL` | Defaults to `file:./data/sheikh_ferej.db`; a remote libSQL/Turso URL also works (`DATABASE_AUTH_TOKEN`) |
+| `UPLOAD_DIR` | Where uploaded files are stored (default `./data/uploads`) |
+| `MAX_UPLOAD_MB` | Upload size limit (default 500) |
+
+In production the server refuses admin logins until the credentials and secrets are configured.
+
+## What the admin manages
+
+Lectures, series, articles, fatwas, courses (lessons and exams), library, events (and registrations), media gallery,
+inquiries (including converting one into a fatwa), enrollments, certificates, the scholar profile, journey and
+qualifications, social links, the Play Store link and which public sections are shown. Content can be saved as a
+**draft** (hidden from the public site) or published. Audio, video, PDFs and images can be **uploaded** directly;
+files are stored under `UPLOAD_DIR` and served from `/uploads/…` with range support. **Backup** exports and restores
+everything as JSON.
+
+## Admin as an app (PWA)
+
+The admin is installable (Chrome, Edge, Android: "Install app" in the header or browser menu; iOS: Share → Add to
+Home Screen). It ships a manifest (`public/admin.webmanifest`), icons (`public/icons`, regenerate with
+`node scripts/generate-icons.mjs`) and a deliberately conservative service worker (`public/admin-sw.js`) scoped to
+`/admin`: it caches only the offline page, icons and immutable build assets, never admin pages, API responses or
+uploads, and shows an offline page when the network is unavailable. The service worker registers in production builds only.
+
+## Deploy with Docker
+
+SQLite needs a persistent disk and a single running instance.
+
+```bash
+cp .env.example .env     # fill in the admin credentials and secrets
+docker compose up -d --build
+```
+
+The database and uploads live in the `sheikh_data` volume (`/app/data`). `GET /api/health` is the health check.
+Put a TLS-terminating reverse proxy (Caddy, nginx, Traefik) in front — the PWA and secure cookies need HTTPS.
+
+## Tests
+
+End-to-end tests drive a real browser (Playwright's Chromium) against a running server:
+
+```bash
+npm run dev                                   # or a production build: npm run build && npm start
+npm run test:e2e                              # admin workflows (auth, CRUD, uploads, exams, backup, i18n…)
+BASE_URL=http://localhost:3000 ADMIN_USERNAME=… ADMIN_PASSWORD=… npm run test:pwa   # PWA, against a production server
 npm run check-types
+```
 
-# Build production bundle
-npm run build
+## Project layout
 
-# Start local server
-npm run start
+```
+src/app/[locale]/…        public pages        src/app/admin/…     admin UI + server actions
+src/app/api/…             public + admin API  src/app/uploads/…   file serving
+src/lib/db/repository.ts  all reads/writes    src/lib/db/sqlite-schema.ts  versioned migrations
+src/lib/auth/…            sessions and login  src/lib/api/…       public data layer (published content only)
+src/i18n/…                locales and messages
 ```

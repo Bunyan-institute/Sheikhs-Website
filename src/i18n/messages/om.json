@@ -99,7 +99,11 @@
     "appGetOn": "Buufadhaa",
     "askCardTitle": "Sheeka gaafadhaa",
     "askCardSubtitle": "Gaaffii fi fatwaaf kallattiin gara biiroo Sheekaatti erguuf.",
-    "askDirectLink": "Kallattiin toora interneetiin gaaffii ergaa"
+    "askDirectLink": "Kallattiin toora interneetiin gaaffii ergaa",
+    "registerToAttend": "Hirmaachuuf galmaa’i",
+    "viewDetails": "Bal’ina ilaali",
+    "recentlyHeld": "Dhiyeenya kana geggeeffaman",
+    "noUpcomingEvents": "Yeroo ammaa walgahiin itti aanu hin jiru."
   },
   "about": {
     "title": "Waa'ee Sheikh Muhammed Ferej",
@@ -382,7 +386,8 @@
       "active": "Kan Hojjetu",
       "completed": "Kan Xumurame",
       "pending": "Kan Eegamaa Jiru",
-      "resolved": "Kan Deebii Argate"
+      "resolved": "Kan Deebii Argate",
+      "viewLiveSite": "Marsariitii kallattii ilaali"
     },
     "header": {
       "systemStatus": "Sirnichi Hojjataa Jira • Walitti Hidhamiinsa Kallattii",
@@ -509,7 +514,18 @@
       "colLevel": "Sadarkaa",
       "colDuration": "Yeroo",
       "colStudents": "Barattoota",
-      "colActions": "Tarkaanfiiwwan"
+      "colActions": "Tarkaanfiiwwan",
+      "fieldTitle": "Mata duree",
+      "fieldSlug": "Slug / Geessituu URL",
+      "fieldDescription": "Ibsa",
+      "fieldLevel": "Sadarkaa",
+      "fieldDuration": "Yeroo",
+      "fieldLessonsCount": "Lakkoofsa barnoota",
+      "fieldPrerequisites": "Dursa barbaachisu",
+      "levelBeginner": "Jalqabaa",
+      "levelIntermediate": "Giddugaleessa",
+      "levelAdvanced": "Ol’aanaa",
+      "saveCourse": "Koorsii olkaa’i"
     },
     "enrollments": {
       "heading": "Galmee Barattoota Koorsii",

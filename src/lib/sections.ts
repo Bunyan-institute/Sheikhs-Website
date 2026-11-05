@@ -8,11 +8,11 @@ export interface NavItem {
 }
 
 export const DEFAULT_SECTIONS: SectionMap = {
-  lectures: false,
+  lectures: true,
   articles: true,
   fatwas: true,
   courses: true,
-  library: false,
+  library: true,
   events: true,
   questions: true,
 };

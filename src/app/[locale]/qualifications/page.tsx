@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { qualifications } from "@/data/qualifications";
+import { getQualifications } from "@/lib/db/repository";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -15,6 +15,8 @@ const typeConfig: Record<string, { label: string, color: string }> = {
   ijazah: { label: "Traditional Ijazah", color: "bg-[#1B6A50]/10 text-[#1B6A50] border-[#1B6A50]/30" },
   academic: { label: "University Degree", color: "bg-[#BF9A45]/15 text-[#072118] border-[#BF9A45]/40" },
   certificate: { label: "Certified Qualification", color: "bg-[#0D3E2F]/10 text-[#0D3E2F] border-[#0D3E2F]/20" },
+  traditional: { label: "Traditional Ijazah", color: "bg-[#1B6A50]/10 text-[#1B6A50] border-[#1B6A50]/30" },
+  certification: { label: "Certified Qualification", color: "bg-[#0D3E2F]/10 text-[#0D3E2F] border-[#0D3E2F]/20" },
   other: { label: "Accreditation", color: "bg-[#0F241C]/5 text-[#0F241C]/80 border-[#0F241C]/15" }
 };
 
@@ -22,6 +24,7 @@ export default async function QualificationsPage({ params }: { params: Promise<{
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "qualifications" });
+  const qualifications = await getQualifications();
 
   return (
     <div className="w-full">

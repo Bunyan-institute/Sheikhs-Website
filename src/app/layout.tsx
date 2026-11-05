@@ -50,6 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html
+      lang="en"
       suppressHydrationWarning
       className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable} ${notoSerifEthiopic.variable}`}
     >

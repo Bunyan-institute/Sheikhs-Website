@@ -1,4 +1,6 @@
 // ── Media ──
+export type ContentStatus = "draft" | "published";
+
 export interface MediaRef {
   object: "media";
   id: string;
@@ -8,6 +10,10 @@ export interface MediaRef {
   width: number | null;
   height: number | null;
   duration_seconds: number | null;
+  /** Gallery metadata (admin-managed); absent on plain cover/file references. */
+  title?: string | null;
+  description?: string | null;
+  thumbnail_url?: string | null;
 }
 
 // ── List response envelope ──
@@ -49,6 +55,7 @@ export interface PublicProfile {
 // ── Lecture ──
 export interface PublicLecture {
   object: "lecture";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
@@ -76,6 +83,7 @@ export interface PublicLecture {
 // ── Series ──
 export interface PublicSeries {
   object: "series";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
@@ -92,6 +100,7 @@ export interface PublicSeries {
 // ── Article ──
 export interface PublicArticle {
   object: "article";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
@@ -110,6 +119,7 @@ export interface PublicArticle {
 // ── Fatwa ──
 export interface PublicFatwa {
   object: "fatwa";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
@@ -136,6 +146,7 @@ export interface PublicLesson {
 
 export interface PublicCourse {
   object: "course";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
@@ -156,6 +167,7 @@ export interface PublicCourse {
 // ── Library (Book) ──
 export interface PublicBook {
   object: "book";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
@@ -180,6 +192,7 @@ export interface PublicBook {
 // ── Event ──
 export interface PublicEvent {
   object: "event";
+  status?: ContentStatus;
   id: string;
   title: string;
   slug: string;
