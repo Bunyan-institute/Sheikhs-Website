@@ -23,7 +23,7 @@ function publicEnrollment(e: CourseEnrollmentRecord) {
 
 export async function POST(req: Request) {
   try {
-    const limit = rateLimit(`enroll:${clientIp(req)}`, 10, 60 * 60 * 1000);
+    const limit = await rateLimit(`enroll:${clientIp(req)}`, 10, 60 * 60 * 1000);
     if (!limit.allowed) {
       return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
     }
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const limit = rateLimit(`enroll-lookup:${clientIp(req)}`, 30, 10 * 60 * 1000);
+    const limit = await rateLimit(`enroll-lookup:${clientIp(req)}`, 30, 10 * 60 * 1000);
     if (!limit.allowed) {
       return NextResponse.json({ error: "Too many requests." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
     }

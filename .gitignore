@@ -45,3 +45,5 @@ e2e/.last-run.log
 /.next*/
 data/uploads/
 Sheikh Muhammed Ferej Megeno.html
+
+.env.supabase

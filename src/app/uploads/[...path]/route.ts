@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { Readable } from "stream";
-import { isSafeFilename, mimeFromFilename, uploadDir } from "@/lib/uploads";
+import { getUploadData, isSafeFilename, mimeFromFilename, uploadDir } from "@/lib/uploads";
 
 export const runtime = "nodejs";
 
@@ -13,13 +13,16 @@ export async function GET(req: Request, { params }: { params: Promise<{ path: st
   if (!mime) return new Response("Not found", { status: 404 });
 
   const filePath = path.join(uploadDir(), filename);
-  let stat: fs.Stats;
+  let stat: fs.Stats | null = null;
   try {
-    stat = fs.statSync(filePath);
-    if (!stat.isFile()) throw new Error("not a file");
+    const st = fs.statSync(filePath);
+    if (st.isFile()) stat = st;
   } catch {
-    return new Response("Not found", { status: 404 });
+    // not on disk: it may live in the database (serverless hosting)
   }
+  const stored = stat ? null : await getUploadData(filename);
+  if (!stat && !stored) return new Response("Not found", { status: 404 });
+  const size = stat ? stat.size : stored!.data.length;
 
   const headers: Record<string, string> = {
     "Content-Type": mime,
@@ -35,21 +38,24 @@ export async function GET(req: Request, { params }: { params: Promise<{ path: st
     let end = match[2] === "" ? NaN : Number(match[2]);
     if (Number.isNaN(start)) {
       // Suffix range: last N bytes
-      start = Math.max(0, stat.size - end);
-      end = stat.size - 1;
-    } else if (Number.isNaN(end) || end >= stat.size) {
-      end = stat.size - 1;
+      start = Math.max(0, size - end);
+      end = size - 1;
+    } else if (Number.isNaN(end) || end >= size) {
+      end = size - 1;
     }
-    if (start > end || start >= stat.size) {
-      return new Response(null, { status: 416, headers: { "Content-Range": `bytes */${stat.size}` } });
+    if (start > end || start >= size) {
+      return new Response(null, { status: 416, headers: { "Content-Range": `bytes */${size}` } });
     }
-    return new Response(Readable.toWeb(fs.createReadStream(filePath, { start, end })) as ReadableStream, {
+    const body = stored
+      ? new Uint8Array(stored.data.subarray(start, end + 1))
+      : (Readable.toWeb(fs.createReadStream(filePath, { start, end })) as ReadableStream);
+    return new Response(body as BodyInit, {
       status: 206,
-      headers: { ...headers, "Content-Range": `bytes ${start}-${end}/${stat.size}`, "Content-Length": String(end - start + 1) },
+      headers: { ...headers, "Content-Range": `bytes ${start}-${end}/${size}`, "Content-Length": String(end - start + 1) },
     });
   }
 
-  return new Response(Readable.toWeb(fs.createReadStream(filePath)) as ReadableStream, {
-    headers: { ...headers, "Content-Length": String(stat.size) },
+  return new Response((stored ? new Uint8Array(stored.data) : Readable.toWeb(fs.createReadStream(filePath))) as BodyInit, {
+    headers: { ...headers, "Content-Length": String(size) },
   });
 }

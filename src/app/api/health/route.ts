@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { queryOne } from "@/lib/db/sqlite-client";
+import { queryOne } from "@/lib/db/client";
 
 export const dynamic = "force-dynamic";
 

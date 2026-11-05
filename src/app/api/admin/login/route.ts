@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     }
 
     if (verifyAdminCredentials(username, password)) {
-      clearRateLimit(limitKey);
+      await clearRateLimit(limitKey);
       const token = await createSession(username.trim());
       const response = NextResponse.json({ success: true, username: username.trim() });
       response.cookies.set({
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       return response;
     }
 
-    const attempt = rateLimit(limitKey, MAX_FAILED_ATTEMPTS, WINDOW_MS);
+    const attempt = await rateLimit(limitKey, MAX_FAILED_ATTEMPTS, WINDOW_MS);
     if (!attempt.allowed) {
       return NextResponse.json(
         { error: "Too many failed attempts. Try again later." },

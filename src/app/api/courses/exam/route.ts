@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Course ID, student email, and answers are required." }, { status: 400 });
     }
 
-    const limit = rateLimit(`exam:${clientIp(req)}:${data.student_email.toLowerCase()}`, 10, 60 * 60 * 1000);
+    const limit = await rateLimit(`exam:${clientIp(req)}:${data.student_email.toLowerCase()}`, 10, 60 * 60 * 1000);
     if (!limit.allowed) {
       return NextResponse.json({ error: "Too many exam attempts. Please try again later." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
     }

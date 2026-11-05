@@ -4,7 +4,7 @@ import { clientIp, rateLimit } from "@/lib/rate-limit";
 
 export async function GET(req: Request, props: { params: Promise<{ code: string }> }) {
   try {
-    const limit = rateLimit(`verify:${clientIp(req)}`, 60, 10 * 60 * 1000);
+    const limit = await rateLimit(`verify:${clientIp(req)}`, 60, 10 * 60 * 1000);
     if (!limit.allowed) {
       return NextResponse.json({ error: "Too many requests." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
     }

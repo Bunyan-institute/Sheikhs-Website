@@ -6,12 +6,13 @@ import { NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth/session";
 import {
   ALLOWED_UPLOAD_TYPES,
-  MAX_UPLOAD_BYTES,
+  maxUploadBytes,
+  useDatabaseStorage,
   deleteUpload,
   listUploads,
   newStoredFilename,
   recordUpload,
-  uploadDir,
+  ensureUploadDir,
 } from "@/lib/uploads";
 
 export const runtime = "nodejs";
@@ -31,21 +32,36 @@ export async function PUT(req: Request) {
   if (!ALLOWED_UPLOAD_TYPES[mime]) {
     return NextResponse.json({ error: `Unsupported file type: ${mime || "unknown"}` }, { status: 415 });
   }
+  const maxBytes = maxUploadBytes();
+  const tooLarge = () =>
+    NextResponse.json({ error: `File is too large (limit ${Math.round(maxBytes / 1024 / 1024)} MB on this server).` }, { status: 413 });
   const declared = Number(req.headers.get("content-length") || 0);
-  if (declared > MAX_UPLOAD_BYTES) {
-    return NextResponse.json({ error: "File is too large." }, { status: 413 });
-  }
+  if (declared > maxBytes) return tooLarge();
   if (!req.body) {
     return NextResponse.json({ error: "Empty upload." }, { status: 400 });
   }
 
   const filename = newStoredFilename(originalName, mime);
-  const target = path.join(uploadDir(), filename);
+  const num = (v: string | null) => (v && /^\d{1,5}$/.test(v) ? Number(v) : null);
+
+  // Serverless hosting: keep the file in the database instead of on a (read-only) disk.
+  if (useDatabaseStorage()) {
+    const data = Buffer.from(await req.arrayBuffer());
+    if (data.length === 0) return NextResponse.json({ error: "Empty upload." }, { status: 400 });
+    if (data.length > maxBytes) return tooLarge();
+    const record = await recordUpload({
+      filename, originalName, mime, size: data.length, data,
+      width: num(url.searchParams.get("w")), height: num(url.searchParams.get("h")),
+    });
+    return NextResponse.json(record, { status: 201 });
+  }
+
+  const target = path.join(ensureUploadDir(), filename);
   let size = 0;
   const limiter = new Transform({
     transform(chunk, _enc, cb) {
       size += chunk.length;
-      if (size > MAX_UPLOAD_BYTES) return cb(new Error("TOO_LARGE"));
+      if (size > maxBytes) return cb(new Error("TOO_LARGE"));
       cb(null, chunk);
     },
   });
@@ -56,13 +72,12 @@ export async function PUT(req: Request) {
   } catch (err) {
     fs.rmSync(target, { force: true });
     const code = err instanceof Error ? err.message : "";
-    if (code === "TOO_LARGE") return NextResponse.json({ error: "File is too large." }, { status: 413 });
+    if (code === "TOO_LARGE") return tooLarge();
     if (code === "EMPTY") return NextResponse.json({ error: "Empty upload." }, { status: 400 });
     console.error("Upload failed:", err);
     return NextResponse.json({ error: "Upload failed." }, { status: 500 });
   }
 
-  const num = (v: string | null) => (v && /^\d{1,5}$/.test(v) ? Number(v) : null);
   const record = await recordUpload({
     filename,
     originalName,

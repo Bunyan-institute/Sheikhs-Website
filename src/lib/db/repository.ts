@@ -1,7 +1,6 @@
 import crypto from "crypto";
 import { revalidatePath } from "next/cache";
-import type { InStatement, InValue } from "@libsql/client";
-import { execute, queryAll, queryOne, batch } from "./sqlite-client";
+import { execute, queryAll, queryOne, batch, dialect, tableColumns, type Statement, type DbValue } from "./client";
 import { ensureTablesExist, createMissingTables } from "./sqlite-schema";
 import { UserError } from "@/lib/user-error";
 import type {
@@ -57,6 +56,7 @@ function revalidate() {
 // ── Readiness: migrations + first-run seed ──
 
 const SEEDED_KEY = "_seeded";
+const SEEDING_KEY = "_seeding";
 let readyPromise: Promise<void> | null = null;
 
 /**
@@ -74,10 +74,30 @@ export function ready(): Promise<void> {
 }
 
 async function initialize() {
+  const t0 = Date.now();
+  const lap = (m: string) => console.log(`[db-debug] ${m} +${Date.now() - t0}ms`);
   await ensureTablesExist();
+  lap("tables ensured");
   await repairLegacyTables();
+  lap("repair done");
   const marker = await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEEDED_KEY]);
+  lap("marker checked");
   if (marker) return;
+
+  // Several serverless instances can cold-start together: one claims the seeding, the others wait for it.
+  const claimed =
+    (await execute(
+      "INSERT INTO site_settings (key, value_json, updated_at) VALUES (?, ?, ?) ON CONFLICT (key) DO NOTHING;",
+      [SEEDING_KEY, "true", nowIso()]
+    )).rowsAffected > 0;
+  if (!claimed) {
+    for (let i = 0; i < 80; i++) {
+      if (await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEEDED_KEY])) return;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+    // The claiming instance never finished; seeding is idempotent, so carry on.
+  }
+
   const counts = await queryOne<{ n: number }>(
     "SELECT (SELECT count(*) FROM lectures) + (SELECT count(*) FROM scholar_profile) AS n;"
   );
@@ -85,7 +105,7 @@ async function initialize() {
     const seed = (await import("./seed/content-seed.json")).default as unknown as PortalDatabase;
     await writeAll(seed, false);
   }
-  await execute("INSERT OR REPLACE INTO site_settings (key, value_json, updated_at) VALUES (?, ?, ?);", [
+  await execute(upsertSql("site_settings", ["key", "value_json", "updated_at"], "key"), [
     SEEDED_KEY,
     "true",
     nowIso(),
@@ -98,6 +118,7 @@ async function initialize() {
  * refilled from the bundled seed, so every environment converges on the same shape.
  */
 async function repairLegacyTables() {
+  if (dialect !== "sqlite") return; // Postgres databases are always created from the current schema.
   const expected: Record<string, string[]> = {
     scholar_profile: profileCols,
     series: seriesDef.cols,
@@ -108,7 +129,7 @@ async function repairLegacyTables() {
   };
   const rebuilt = new Set<string>();
   for (const [table, cols] of Object.entries(expected)) {
-    const actual = new Set((await queryAll<Row>(`PRAGMA table_info(${table});`)).map((c) => String(c.name)));
+    const actual = new Set(await tableColumns(table));
     if (cols.every((c) => actual.has(c))) continue;
     console.warn(`[db] Table ${table} uses an outdated schema; rebuilding it (old rows kept in legacy_${table}).`);
     await execute(`DROP TABLE IF EXISTS legacy_${table};`);
@@ -130,20 +151,57 @@ async function repairLegacyTables() {
 interface Entity<T extends { id: string }> {
   table: string;
   cols: string[];
-  toArgs: (t: T) => InValue[];
+  toArgs: (t: T) => DbValue[];
   fromRow: (r: Row) => T;
   order: string;
   /** Prefix for generated ids */
   prefix: string;
 }
 
+/** Portable upsert (works on SQLite and Postgres): insert, or update every non-key column on conflict. */
+function upsertSql(table: string, cols: string[], key: string | string[] = "id"): string {
+  const keys = Array.isArray(key) ? key : [key];
+  const updates = cols.filter((c) => !keys.includes(c)).map((c) => `${c} = excluded.${c}`).join(", ");
+  return `INSERT INTO ${table} (${cols.join(", ")}) VALUES (${placeholders(cols.length)}) ON CONFLICT (${keys.join(", ")}) DO UPDATE SET ${updates};`;
+}
+
+interface TableRows {
+  cols: string[];
+  key: string | string[];
+  rows: DbValue[][];
+}
+
+/**
+ * Bulk upsert: one multi-row statement per chunk instead of one statement per row. Round trips dominate
+ * on a remote database, so this keeps seeding and restores fast. Duplicate keys collapse (last wins).
+ */
+function multiUpsert(table: string, t: TableRows): Statement[] {
+  const keys = Array.isArray(t.key) ? t.key : [t.key];
+  const keyIdx = keys.map((k) => t.cols.indexOf(k));
+  const unique = new Map<string, DbValue[]>();
+  for (const row of t.rows) unique.set(keyIdx.map((i) => String(row[i])).join("\u0000"), row);
+  const rows = [...unique.values()];
+  const updates = t.cols.filter((c) => !keys.includes(c)).map((c) => `${c} = excluded.${c}`).join(", ");
+  const perStatement = Math.max(1, Math.floor(8000 / t.cols.length));
+  const out: Statement[] = [];
+  for (let i = 0; i < rows.length; i += perStatement) {
+    const slice = rows.slice(i, i + perStatement);
+    const values = slice.map(() => `(${placeholders(t.cols.length)})`).join(", ");
+    out.push({
+      sql: `INSERT INTO ${table} (${t.cols.join(", ")}) VALUES ${values} ON CONFLICT (${keys.join(", ")}) DO UPDATE SET ${updates};`,
+      args: slice.flat(),
+    });
+  }
+  return out;
+}
+
 function placeholders(n: number) {
   return Array.from({ length: n }, () => "?").join(", ");
 }
 
-function upsertStatement<T extends { id: string }>(def: Entity<T>, item: T): InStatement {
+function upsertStatement<T extends { id: string }>(def: Entity<T>, item: T): Statement {
   return {
-    sql: `INSERT OR REPLACE INTO ${def.table} (${def.cols.join(", ")}) VALUES (${placeholders(def.cols.length)});`,
+    sql: upsertSql(def.table, def.cols),
     args: def.toArgs(item),
   };
 }
@@ -184,7 +242,7 @@ async function remove(table: string, id: string, keyCol = "id"): Promise<boolean
 const lectureDef: Entity<PublicLecture> = {
   table: "lectures",
   prefix: "lec",
-  order: "published_at DESC",
+  order: "published_at DESC NULLS LAST",
   cols: ["id", "title", "slug", "summary", "duration_seconds", "published_at", "updated_at", "cover_json", "media_json", "series_json", "categories_json", "tags_json", "locale", "direction", "status"],
   toArgs: (l) => [
     l.id, l.title, l.slug, l.summary, l.duration_seconds, l.published_at, l.updated_at,
@@ -247,7 +305,7 @@ export const deleteLecture = (id: string) => remove("lectures", id);
 const seriesDef: Entity<PublicSeries> = {
   table: "series",
   prefix: "ser",
-  order: "published_at DESC",
+  order: "published_at DESC NULLS LAST",
   cols: ["id", "title", "slug", "description", "locale", "direction", "cover_json", "lecture_count", "published_at", "updated_at", "lectures_json", "status"],
   toArgs: (s) => [
     s.id, s.title, s.slug, s.description, s.locale, s.direction, JSON.stringify(s.cover),
@@ -281,6 +339,21 @@ async function withLectures(list: PublicSeries[]): Promise<PublicSeries[]> {
   });
 }
 
+/** Updates (or, with a null title, detaches) the denormalised series reference stored on a series' lectures. */
+async function relabelSeriesLectures(seriesId: string, title: string | null) {
+  const rows = await queryAll<Row>("SELECT id, series_json FROM lectures;");
+  const updates: Statement[] = [];
+  for (const r of rows) {
+    const ref = json<PublicLecture["series"]>(r.series_json, null);
+    if (ref?.id !== seriesId) continue;
+    updates.push({
+      sql: "UPDATE lectures SET series_json = ? WHERE id = ?;",
+      args: [JSON.stringify(title === null ? null : { ...ref, title }), String(r.id)],
+    });
+  }
+  if (updates.length) await batch(updates);
+}
+
 export async function getAllSeries() {
   return withLectures(await listAll(seriesDef));
 }
@@ -306,16 +379,13 @@ export async function saveSeries(data: Partial<PublicSeries> & { title: string; 
     status: data.status ?? "published",
   });
   // Keep the denormalised series title on its lectures in step with renames.
-  await execute(
-    "UPDATE lectures SET series_json = json_set(series_json, '$.title', ?) WHERE json_extract(series_json, '$.id') = ?;",
-    [saved.title, saved.id]
-  );
+  await relabelSeriesLectures(saved.id, saved.title);
   return (await getSeriesByIdOrSlug(saved.id)) ?? saved;
 }
 
 export async function deleteSeries(id: string) {
   await ready();
-  await execute("UPDATE lectures SET series_json = 'null' WHERE json_extract(series_json, '$.id') = ?;", [id]);
+  await relabelSeriesLectures(id, null);
   return remove("series", id);
 }
 
@@ -324,7 +394,7 @@ export async function deleteSeries(id: string) {
 const articleDef: Entity<PublicArticle> = {
   table: "articles",
   prefix: "art",
-  order: "published_at DESC",
+  order: "published_at DESC NULLS LAST",
   cols: ["id", "title", "slug", "summary", "body", "reading_minutes", "locale", "direction", "cover_json", "categories_json", "tags_json", "published_at", "updated_at", "status"],
   toArgs: (a) => [
     a.id, a.title, a.slug, a.summary, a.body ?? "", a.reading_minutes ?? 5, a.locale, a.direction,
@@ -380,7 +450,7 @@ export const deleteArticle = (id: string) => remove("articles", id);
 const fatwaDef: Entity<PublicFatwa> = {
   table: "fatwas",
   prefix: "fat",
-  order: "published_at DESC",
+  order: "published_at DESC NULLS LAST",
   cols: ["id", "title", "slug", "summary", "question", "answer", "locale", "direction", "categories_json", "tags_json", "published_at", "updated_at", "status"],
   toArgs: (f) => [
     f.id, f.title, f.slug, f.summary, f.question, f.answer ?? null, f.locale, f.direction,
@@ -434,7 +504,7 @@ export const deleteFatwa = (id: string) => remove("fatwas", id);
 const courseDef: Entity<PublicCourse> = {
   table: "courses",
   prefix: "cou",
-  order: "published_at DESC",
+  order: "published_at DESC NULLS LAST",
   cols: ["id", "title", "slug", "summary", "description", "enrolment_open", "lesson_count", "lessons_json", "locale", "direction", "cover_json", "categories_json", "tags_json", "published_at", "updated_at", "status"],
   toArgs: (c) => [
     c.id, c.title, c.slug, c.summary, c.description, c.enrolment_open ? 1 : 0, c.lesson_count,
@@ -510,7 +580,7 @@ export async function renameCourseSlug(oldSlug: string, newSlug: string): Promis
 const bookDef: Entity<PublicBook> = {
   table: "library_items",
   prefix: "bk",
-  order: "published_at DESC",
+  order: "published_at DESC NULLS LAST",
   cols: ["id", "title", "slug", "summary", "description", "author", "publisher", "year", "isbn", "kind", "locale", "direction", "cover_json", "file_json", "external_url", "categories_json", "tags_json", "published_at", "updated_at", "status"],
   toArgs: (b) => [
     b.id, b.title, b.slug, b.summary, b.description ?? null, b.author, b.publisher, b.year, b.isbn, b.kind,
@@ -666,21 +736,21 @@ function mediaFromRow(r: Row): MediaRef {
   };
 }
 
-const mediaArgs = (m: MediaRef): InValue[] => [
+const mediaArgs = (m: MediaRef): DbValue[] => [
   m.id, m.url, m.kind, m.mime_type, m.width, m.height, m.duration_seconds, nowIso(),
   m.title ?? null, m.description ?? null, m.thumbnail_url ?? null,
 ];
 
 export async function getAllMedia(): Promise<MediaRef[]> {
   await ready();
-  const rows = await queryAll<Row>("SELECT * FROM media_assets ORDER BY created_at DESC, rowid DESC;");
+  const rows = await queryAll<Row>("SELECT * FROM media_assets ORDER BY created_at DESC;");
   return rows.map(mediaFromRow);
 }
 
 export async function saveMediaItem(item: MediaRef): Promise<MediaRef> {
   await ready();
   await execute(
-    `INSERT OR REPLACE INTO media_assets (${mediaCols.join(", ")}) VALUES (${placeholders(mediaCols.length)});`,
+    upsertSql("media_assets", mediaCols),
     mediaArgs(item)
   );
   revalidate();
@@ -705,7 +775,7 @@ const inquiryFromRow = (r: Row): InquiryRecord => ({
 });
 
 const inquiryCols = ["id", "question", "name", "email", "is_anonymous", "locale", "status", "notes", "answer", "created_at"];
-const inquiryArgs = (i: InquiryRecord): InValue[] => [
+const inquiryArgs = (i: InquiryRecord): DbValue[] => [
   i.id, i.question, i.name ?? null, i.email ?? null, i.is_anonymous ? 1 : 0, i.locale, i.status,
   i.notes ?? null, i.answer ?? null, i.created_at,
 ];
@@ -804,14 +874,14 @@ export async function getProfile(): Promise<PublicProfile> {
 }
 
 const profileCols = ["id", "name", "headline", "biography", "languages_json", "location", "photo_json", "sections_json", "socials_json", "locale", "direction", "updated_at"];
-const profileArgs = (p: PublicProfile): InValue[] => [
+const profileArgs = (p: PublicProfile): DbValue[] => [
   p.id || "primary", p.name, p.headline, p.biography, JSON.stringify(p.languages), p.location ?? null,
   JSON.stringify(p.photo), JSON.stringify(p.sections), JSON.stringify(p.socials), p.locale, p.direction, p.updated_at,
 ];
 
 export async function updateProfile(partial: Partial<PublicProfile>): Promise<PublicProfile> {
   const profile: PublicProfile = { ...(await getProfile()), ...partial, updated_at: nowIso() };
-  await execute(`INSERT OR REPLACE INTO scholar_profile (${profileCols.join(", ")}) VALUES (${placeholders(profileCols.length)});`, profileArgs(profile));
+  await execute(upsertSql("scholar_profile", profileCols), profileArgs(profile));
   revalidate();
   return profile;
 }
@@ -828,15 +898,13 @@ export async function getJourney(): Promise<JourneyMilestone[]> {
   }));
 }
 
-const journeyStatements = (list: JourneyMilestone[]): InStatement[] =>
-  list.map((m, i) => ({
-    sql: "INSERT INTO journey_milestones (id, year, title, institution, description, type, position, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
-    args: [newId("jrn"), m.year, m.title, m.institution ?? null, m.description || "", m.type || "contribution", i, nowIso()],
-  }));
+const journeyCols = ["id", "year", "title", "institution", "description", "type", "position", "created_at"];
+const journeyRows = (list: JourneyMilestone[]): DbValue[][] =>
+  list.map((m, i) => [`jrn_${String(i).padStart(3, "0")}`, m.year, m.title, m.institution ?? null, m.description || "", m.type || "contribution", i, nowIso()]);
 
 export async function updateJourney(list: JourneyMilestone[]): Promise<JourneyMilestone[]> {
   await ready();
-  await batch([{ sql: "DELETE FROM journey_milestones;", args: [] }, ...journeyStatements(list)]);
+  await batch([{ sql: "DELETE FROM journey_milestones;", args: [] }, ...multiUpsert("journey_milestones", { cols: journeyCols, key: "id", rows: journeyRows(list) })]);
   revalidate();
   return list;
 }
@@ -854,15 +922,13 @@ export async function getQualifications(): Promise<QualificationRecord[]> {
   }));
 }
 
-const qualificationStatements = (list: QualificationRecord[]): InStatement[] =>
-  list.map((q, i) => ({
-    sql: "INSERT INTO qualifications (id, title, issuer, year, type, description, position, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
-    args: [q.id || newId("qual"), q.title, q.issuer, q.year, q.type || "academic", q.description || "", i, nowIso()],
-  }));
+const qualificationCols = ["id", "title", "issuer", "year", "type", "description", "position", "created_at"];
+const qualificationRows = (list: QualificationRecord[]): DbValue[][] =>
+  list.map((q, i) => [q.id || `qual_${String(i).padStart(3, "0")}`, q.title, q.issuer, q.year, q.type || "academic", q.description || "", i, nowIso()]);
 
 export async function updateQualifications(list: QualificationRecord[]): Promise<QualificationRecord[]> {
   await ready();
-  await batch([{ sql: "DELETE FROM qualifications;", args: [] }, ...qualificationStatements(list)]);
+  await batch([{ sql: "DELETE FROM qualifications;", args: [] }, ...multiUpsert("qualifications", { cols: qualificationCols, key: "id", rows: qualificationRows(list) })]);
   revalidate();
   return list;
 }
@@ -877,7 +943,7 @@ export async function getSetting<T>(key: string, fallback: T): Promise<T> {
 
 export async function setSetting<T>(key: string, value: T): Promise<T> {
   await ready();
-  await execute("INSERT OR REPLACE INTO site_settings (key, value_json, updated_at) VALUES (?, ?, ?);", [
+  await execute(upsertSql("site_settings", ["key", "value_json", "updated_at"], "key"), [
     key,
     JSON.stringify(value),
     nowIso(),
@@ -903,7 +969,7 @@ const registrationFromRow = (r: Row): EventRegistrationRecord => ({
   status: (r.status as EventRegistrationRecord["status"]) ?? "confirmed",
   notes: str(r.notes) ?? undefined,
 });
-const registrationArgs = (r: EventRegistrationRecord): InValue[] => [
+const registrationArgs = (r: EventRegistrationRecord): DbValue[] => [
   r.id, r.event_id, r.event_slug, r.event_title, r.name, r.email, r.phone ?? null, r.city ?? null,
   r.attendees_count, r.notes ?? null, r.status, r.created_at,
 ];
@@ -986,7 +1052,7 @@ const enrollmentFromRow = (r: Row): CourseEnrollmentRecord => ({
   certificate_id: str(r.certificate_id),
   status: (r.status as CourseEnrollmentRecord["status"]) ?? "enrolled",
 });
-const enrollmentArgs = (e: CourseEnrollmentRecord): InValue[] => [
+const enrollmentArgs = (e: CourseEnrollmentRecord): DbValue[] => [
   e.id, e.course_id, e.course_slug, e.course_title, e.student_name, e.student_email, e.student_phone ?? null,
   e.city ?? null, e.status, JSON.stringify(e.completed_lessons), JSON.stringify(e.exam_attempts),
   e.certificate_id ?? null, e.created_at, nowIso(),
@@ -994,7 +1060,7 @@ const enrollmentArgs = (e: CourseEnrollmentRecord): InValue[] => [
 
 async function saveEnrollment(e: CourseEnrollmentRecord) {
   await execute(
-    `INSERT OR REPLACE INTO course_enrollments (${enrollmentCols.join(", ")}) VALUES (${placeholders(enrollmentCols.length)});`,
+    upsertSql("course_enrollments", enrollmentCols),
     enrollmentArgs(e)
   );
 }
@@ -1205,7 +1271,7 @@ const certificateFromRow = (r: Row): IssuedCertificateRecord => ({
   revoked: Number(r.revoked) === 1,
   revoked_reason: str(r.revoked_reason),
 });
-const certificateArgs = (c: IssuedCertificateRecord): InValue[] => [
+const certificateArgs = (c: IssuedCertificateRecord): DbValue[] => [
   c.id, c.verification_token, c.course_id, c.course_slug, c.course_title, c.student_name, c.student_email,
   c.score_percentage, c.grade_title, c.issued_at, c.hijri_date ?? null, c.instructor_name, c.authority_seal,
   c.revoked ? 1 : 0, c.revoked_reason ?? null,
@@ -1279,10 +1345,11 @@ export const deleteCertificate = (id: string) => remove("certificates", id);
 
 export async function getSystemMetrics() {
   await ready();
+  const lectureMedia = (await queryAll<Row>("SELECT media_json FROM lectures;")).map((m) =>
+    json<Partial<PublicLecture["media"]>>(m.media_json, {})
+  );
   const r = await queryOne<Row>(`SELECT
       (SELECT count(*) FROM lectures) AS lectures,
-      (SELECT count(*) FROM lectures WHERE json_extract(media_json, '$.video') IS NOT NULL) AS video,
-      (SELECT count(*) FROM lectures WHERE json_extract(media_json, '$.audio') IS NOT NULL) AS audio,
       (SELECT count(*) FROM series) AS series,
       (SELECT count(*) FROM articles) AS articles,
       (SELECT count(*) FROM fatwas) AS fatwas,
@@ -1298,8 +1365,8 @@ export async function getSystemMetrics() {
       (SELECT max(version) FROM schema_version) AS version;`);
   return {
     lecturesCount: Number(r?.lectures ?? 0),
-    videoLectures: Number(r?.video ?? 0),
-    audioLessons: Number(r?.audio ?? 0),
+    videoLectures: lectureMedia.filter((m) => m.video).length,
+    audioLessons: lectureMedia.filter((m) => m.audio).length,
     seriesCount: Number(r?.series ?? 0),
     articlesCount: Number(r?.articles ?? 0),
     fatwasCount: Number(r?.fatwas ?? 0),
@@ -1328,19 +1395,21 @@ const ALL_TABLES = [
 /** Writes a full portal snapshot into SQLite in one transaction, optionally replacing everything. */
 async function writeAll(data: PortalDatabase, replace: boolean, only?: Set<string>) {
   const want = (table: string) => !only || only.has(table);
-  const statements: InStatement[] = [];
+  const stamp = <T extends { updated_at: string }>(x: T): T => ({ ...x, updated_at: x.updated_at || nowIso() });
+  const statements: Statement[] = [];
   if (replace) ALL_TABLES.forEach((t) => statements.push({ sql: `DELETE FROM ${t};`, args: [] }));
 
-  if (data.profile && want("scholar_profile")) {
-    statements.push({
-      sql: `INSERT OR REPLACE INTO scholar_profile (${profileCols.join(", ")}) VALUES (${placeholders(profileCols.length)});`,
-      args: profileArgs({ ...DEFAULT_PROFILE, ...data.profile, updated_at: data.profile.updated_at || nowIso() }),
-    });
-  }
-  if (!only) statements.push(...journeyStatements(data.journey ?? []), ...qualificationStatements(data.qualifications ?? []));
+  const add = (table: string, cols: string[], rows: DbValue[][], key: string | string[] = "id") => {
+    if (want(table) && rows.length) statements.push(...multiUpsert(table, { cols, key, rows }));
+  };
 
-  const stamp = <T extends { updated_at: string }>(x: T): T => ({ ...x, updated_at: x.updated_at || nowIso() });
-  const defs: [Entity<{ id: string }>, { id: string }[] | undefined][] = [
+  if (data.profile) {
+    add("scholar_profile", profileCols, [profileArgs({ ...DEFAULT_PROFILE, ...data.profile, updated_at: data.profile.updated_at || nowIso() })]);
+  }
+  add("journey_milestones", journeyCols, journeyRows(data.journey ?? []));
+  add("qualifications", qualificationCols, qualificationRows(data.qualifications ?? []));
+
+  const entities: [Entity<{ id: string }>, { id: string }[] | undefined][] = [
     [seriesDef as unknown as Entity<{ id: string }>, data.series],
     [lectureDef as unknown as Entity<{ id: string }>, data.lectures],
     [articleDef as unknown as Entity<{ id: string }>, data.articles],
@@ -1349,39 +1418,23 @@ async function writeAll(data: PortalDatabase, replace: boolean, only?: Set<strin
     [bookDef as unknown as Entity<{ id: string }>, data.books],
     [eventDef as unknown as Entity<{ id: string }>, data.events],
   ];
-  for (const [def, items] of defs) {
-    if (!want(def.table)) continue;
-    for (const item of items ?? []) statements.push(upsertStatement(def, stamp(item as { id: string; updated_at: string })));
+  for (const [def, items] of entities) {
+    add(def.table, def.cols, (items ?? []).map((item) => def.toArgs(stamp(item as { id: string; updated_at: string }))));
   }
 
-  if (!only) for (const m of data.media ?? []) {
-    statements.push({ sql: `INSERT OR REPLACE INTO media_assets (${mediaCols.join(", ")}) VALUES (${placeholders(mediaCols.length)});`, args: mediaArgs(m) });
-  }
-  if (!only) for (const i of data.inquiries ?? []) {
-    statements.push({ sql: `INSERT OR REPLACE INTO inquiries (${inquiryCols.join(", ")}) VALUES (${placeholders(inquiryCols.length)});`, args: inquiryArgs(i) });
-  }
-  if (!only) for (const r of data.event_registrations ?? []) {
-    statements.push({ sql: `INSERT OR REPLACE INTO event_registrations (${registrationCols.join(", ")}) VALUES (${placeholders(registrationCols.length)});`, args: registrationArgs(r) });
-  }
-  if (!only) for (const e of data.course_enrollments ?? []) {
-    statements.push({ sql: `INSERT OR REPLACE INTO course_enrollments (${enrollmentCols.join(", ")}) VALUES (${placeholders(enrollmentCols.length)});`, args: enrollmentArgs(e) });
-  }
-  if (!only) for (const c of data.certificates ?? []) {
-    statements.push({ sql: `INSERT OR REPLACE INTO certificates (${certificateCols.join(", ")}) VALUES (${placeholders(certificateCols.length)});`, args: certificateArgs(c) });
-  }
-  if (!only) for (const [slug, exam] of Object.entries(data.course_exams ?? {})) {
-    statements.push({
-      sql: "INSERT OR REPLACE INTO course_exams (course_slug, course_id, passing_percentage, questions_json, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?);",
-      args: [slug, exam.course_id || slug, exam.passing_percentage || 70, JSON.stringify(exam.questions ?? []), nowIso(), nowIso()],
-    });
-  }
+  add("media_assets", mediaCols, (data.media ?? []).map(mediaArgs));
+  add("inquiries", inquiryCols, (data.inquiries ?? []).map(inquiryArgs));
+  add("event_registrations", registrationCols, (data.event_registrations ?? []).map(registrationArgs));
+  add("course_enrollments", enrollmentCols, (data.course_enrollments ?? []).map(enrollmentArgs));
+  add("certificates", certificateCols, (data.certificates ?? []).map(certificateArgs));
+  add(
+    "course_exams",
+    ["course_slug", "course_id", "passing_percentage", "questions_json", "created_at", "updated_at"],
+    Object.entries(data.course_exams ?? {}).map(([slug, exam]) => [slug, exam.course_id || slug, exam.passing_percentage || 70, JSON.stringify(exam.questions ?? []), nowIso(), nowIso()]),
+    "course_slug"
+  );
 
-  const CHUNK = 200;
-  if (replace) {
-    await batch(statements);
-  } else {
-    for (let i = 0; i < statements.length; i += CHUNK) await batch(statements.slice(i, i + CHUNK));
-  }
+  await batch(statements);
 }
 
 export async function exportDatabase(): Promise<PortalDatabase> {

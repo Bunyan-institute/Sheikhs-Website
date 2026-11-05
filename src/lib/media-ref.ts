@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { queryOne } from "@/lib/db/sqlite-client";
+import { queryOne } from "@/lib/db/client";
 import { ensureTablesExist } from "@/lib/db/sqlite-schema";
 import { mimeFromFilename } from "@/lib/uploads";
 import type { MediaRef } from "@/lib/api/types";

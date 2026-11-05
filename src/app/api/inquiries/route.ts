@@ -4,7 +4,7 @@ import { clean, clientIp, isEmail, rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
   try {
-    const limit = rateLimit(`inquiry:${clientIp(req)}`, 5, 60 * 60 * 1000);
+    const limit = await rateLimit(`inquiry:${clientIp(req)}`, 5, 60 * 60 * 1000);
     if (!limit.allowed) {
       return NextResponse.json({ error: "Too many questions submitted. Please try again later." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
     }

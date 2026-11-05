@@ -1,4 +1,4 @@
-import { execute, queryAll, queryOne, batch } from "./sqlite-client";
+import { execute, queryOne, batch, tableColumns, BINARY_TYPE } from "./client";
 
 const MIGRATION_1: string[] = [
   // 1. Scholar Identity & Profile
@@ -163,7 +163,7 @@ const MIGRATION_1: string[] = [
     course_title TEXT NOT NULL,
     student_name TEXT NOT NULL,
     student_email TEXT NOT NULL,
-    score_percentage REAL NOT NULL,
+    score_percentage DOUBLE PRECISION NOT NULL,
     grade_title TEXT NOT NULL,
     issued_at TEXT NOT NULL,
     hijri_date TEXT,
@@ -244,7 +244,7 @@ const MIGRATION_1: string[] = [
     mime_type TEXT,
     width INTEGER,
     height INTEGER,
-    duration_seconds REAL,
+    duration_seconds DOUBLE PRECISION,
     created_at TEXT NOT NULL
   );`,
 
@@ -286,7 +286,7 @@ const MIGRATION_2: string[] = [
 type Migration = string[] | (() => Promise<void>);
 
 async function addColumnsIfMissing(table: string, columns: Record<string, string>) {
-  const existing = new Set((await queryAll<{ name: string }>(`PRAGMA table_info(${table});`)).map((c) => c.name));
+  const existing = new Set(await tableColumns(table));
   for (const [name, type] of Object.entries(columns)) {
     if (!existing.has(name)) await execute(`ALTER TABLE ${table} ADD COLUMN ${name} ${type};`);
   }
@@ -303,7 +303,7 @@ const MIGRATION_4: string[] = [
     id TEXT PRIMARY KEY,
     username TEXT NOT NULL,
     created_at TEXT NOT NULL,
-    expires_at INTEGER NOT NULL
+    expires_at BIGINT NOT NULL
   );`,
 ];
 
@@ -328,7 +328,17 @@ const MIGRATION_6 = async () => {
   }
 };
 
-const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6];
+// Shared rate-limit counters (work across serverless instances) and optional database-backed uploads.
+const MIGRATION_7 = async () => {
+  await execute(`CREATE TABLE IF NOT EXISTS rate_limits (
+    key TEXT PRIMARY KEY,
+    count INTEGER NOT NULL,
+    reset_at BIGINT NOT NULL
+  );`);
+  await addColumnsIfMissing("uploads", { data: BINARY_TYPE });
+};
+
+const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7];
 
 /** Re-runs the base CREATE ... IF NOT EXISTS statements (used after a legacy table is set aside). */
 export async function createMissingTables(): Promise<void> {
@@ -351,20 +361,27 @@ export function ensureTablesExist(): Promise<void> {
   return migrated;
 }
 
+/** True when an error only means a concurrent instance already applied the same step. */
+const alreadyApplied = (err: unknown) => /already exists|duplicate (column|key)|unique constraint/i.test(String((err as Error)?.message ?? err));
+
 async function runMigrations(): Promise<void> {
   await execute("CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL);");
   const row = await queryOne<{ version: number }>("SELECT max(version) AS version FROM schema_version;");
   const current = Number(row?.version ?? 0);
   for (let v = current; v < MIGRATIONS.length; v++) {
     const migration = MIGRATIONS[v];
-    if (typeof migration === "function") {
-      await migration();
-      await execute("INSERT INTO schema_version (version) VALUES (?);", [v + 1]);
-    } else {
-      await batch([
-        ...migration.map((sql) => ({ sql, args: [] })),
-        { sql: "INSERT INTO schema_version (version) VALUES (?);", args: [v + 1] },
-      ]);
+    try {
+      if (typeof migration === "function") {
+        await migration();
+        await execute("INSERT INTO schema_version (version) VALUES (?);", [v + 1]);
+      } else {
+        await batch([
+          ...migration.map((sql) => ({ sql, args: [] })),
+          { sql: "INSERT INTO schema_version (version) VALUES (?);", args: [v + 1] },
+        ]);
+      }
+    } catch (err) {
+      if (!alreadyApplied(err)) throw err;
     }
   }
 }

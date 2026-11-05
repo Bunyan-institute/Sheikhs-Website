@@ -1,34 +1,63 @@
-/** Small in-memory fixed-window limiter. Suitable for the single-instance deployment this app targets. */
+/**
+ * Fixed-window rate limiter backed by the database, so limits hold across restarts and across
+ * serverless instances. Falls back to in-process counters if the database is unavailable.
+ */
+import { execute } from "@/lib/db/client";
+import { ensureTablesExist } from "@/lib/db/sqlite-schema";
 
 interface Bucket {
   count: number;
   resetAt: number;
 }
 
-const g = globalThis as unknown as { __rateBuckets?: Map<string, Bucket> };
-const buckets = (g.__rateBuckets ??= new Map<string, Bucket>());
+const memory = new Map<string, Bucket>();
 
 export interface RateResult {
   allowed: boolean;
   retryAfterSeconds: number;
 }
 
-export function rateLimit(key: string, limit: number, windowMs: number): RateResult {
+function memoryLimit(key: string, limit: number, windowMs: number): RateResult {
   const now = Date.now();
-  if (buckets.size > 5000) {
-    for (const [k, b] of buckets) if (b.resetAt <= now) buckets.delete(k);
-  }
-  const bucket = buckets.get(key);
+  if (memory.size > 5000) for (const [k, b] of memory) if (b.resetAt <= now) memory.delete(k);
+  const bucket = memory.get(key);
   if (!bucket || bucket.resetAt <= now) {
-    buckets.set(key, { count: 1, resetAt: now + windowMs });
+    memory.set(key, { count: 1, resetAt: now + windowMs });
     return { allowed: true, retryAfterSeconds: 0 };
   }
   bucket.count += 1;
   return { allowed: bucket.count <= limit, retryAfterSeconds: Math.ceil((bucket.resetAt - now) / 1000) };
 }
 
-export function clearRateLimit(key: string) {
-  buckets.delete(key);
+export async function rateLimit(key: string, limit: number, windowMs: number): Promise<RateResult> {
+  const now = Date.now();
+  try {
+    await ensureTablesExist();
+    const res = await execute(
+      `INSERT INTO rate_limits (key, count, reset_at) VALUES (?, 1, ?)
+       ON CONFLICT (key) DO UPDATE SET
+         count = CASE WHEN rate_limits.reset_at <= ? THEN 1 ELSE rate_limits.count + 1 END,
+         reset_at = CASE WHEN rate_limits.reset_at <= ? THEN ? ELSE rate_limits.reset_at END
+       RETURNING count, reset_at;`,
+      [key, now + windowMs, now, now, now + windowMs]
+    );
+    const row = res.rows[0];
+    if (Math.random() < 0.01) await execute("DELETE FROM rate_limits WHERE reset_at < ?;", [now]).catch(() => {});
+    const count = Number(row.count);
+    return { allowed: count <= limit, retryAfterSeconds: Math.max(1, Math.ceil((Number(row.reset_at) - now) / 1000)) };
+  } catch (err) {
+    console.warn("Rate limiter fell back to memory:", err instanceof Error ? err.message : err);
+    return memoryLimit(key, limit, windowMs);
+  }
+}
+
+export async function clearRateLimit(key: string): Promise<void> {
+  memory.delete(key);
+  try {
+    await execute("DELETE FROM rate_limits WHERE key = ?;", [key]);
+  } catch {
+    // best effort
+  }
 }
 
 export function clientIp(req: Request): string {

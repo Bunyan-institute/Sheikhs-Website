@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { cookies } from "next/headers";
-import { execute, queryOne } from "@/lib/db/sqlite-client";
+import { execute, queryOne } from "@/lib/db/client";
 import { ensureTablesExist } from "@/lib/db/sqlite-schema";
 import {
   SESSION_COOKIE_NAME,
