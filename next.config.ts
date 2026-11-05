@@ -16,6 +16,7 @@ const projectRoot = path.resolve(import.meta.dirname);
 const nextConfig: NextConfig = {
   // Self-contained server bundle for Docker (node server.js).
   output: "standalone",
+  agentRules: false, // do not auto-generate AGENTS.md / CLAUDE.md into the repo
   outputFileTracingRoot: projectRoot,
   turbopack: { root: projectRoot },
   // NEXT_DIST_DIR lets a production build live beside a running dev server (used for PWA testing).
@@ -24,6 +25,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/:path*", headers: securityHeaders },
       // The worker and manifest must always be revalidated so updates roll out promptly.
+      { source: "/sw.js", headers: [{ key: "Cache-Control", value: "no-cache, no-store, must-revalidate" }, { key: "Service-Worker-Allowed", value: "/" }, { key: "Content-Type", value: "application/javascript; charset=utf-8" }] },
+      { source: "/manifest.webmanifest", headers: [{ key: "Content-Type", value: "application/manifest+json" }, { key: "Cache-Control", value: "no-cache" }] },
       { source: "/admin-sw.js", headers: [{ key: "Cache-Control", value: "no-cache, no-store, must-revalidate" }, { key: "Service-Worker-Allowed", value: "/admin" }] },
       { source: "/admin.webmanifest", headers: [{ key: "Content-Type", value: "application/manifest+json" }, { key: "Cache-Control", value: "no-cache" }] },
     ];
