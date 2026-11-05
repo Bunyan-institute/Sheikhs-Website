@@ -22,6 +22,7 @@ import {
   Users,
   Award,
 } from "lucide-react";
+import { InstallButton } from "@/components/admin/pwa/install-button";
 
 interface AdminSidebarProps {
   onCloseMobile?: () => void;
@@ -132,6 +133,7 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
 
       {/* Footer Actions */}
       <div className="p-4 border-t border-[#3e4446] space-y-2">
+        <InstallButton variant="sidebar" />
         <Link
           href={`/${locale}`}
           target="_blank"

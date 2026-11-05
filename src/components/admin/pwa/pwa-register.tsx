@@ -3,12 +3,12 @@
 import { useEffect } from "react";
 
 /**
- * Registers the admin service worker (production only, so dev hot-reload is never cached) and
+ * Registers the admin service worker (scope: /admin) and
  * reloads once when a newer worker takes over so the app never runs against stale assets.
  */
 export function PwaRegister() {
   useEffect(() => {
-    if (process.env.NODE_ENV !== "production" || !("serviceWorker" in navigator)) return;
+    if (typeof window === "undefined" || !("serviceWorker" in navigator)) return;
 
     let hadController = Boolean(navigator.serviceWorker.controller);
     let reloaded = false;

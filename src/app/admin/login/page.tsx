@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Lock, User, Eye, EyeOff, ShieldCheck, ArrowLeft, Loader2, Globe } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { locales, localeLabels, type Locale } from "@/i18n/config";
+import { InstallButton } from "@/components/admin/pwa/install-button";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -59,22 +60,25 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#1B5E20] selection:text-white">
-      {/* Language Switcher in top corner */}
-      <div className="absolute top-4 end-4 flex items-center gap-1.5 bg-white border border-[#E0D8CE] rounded-full px-3 py-1 text-xs shadow-2xs">
-        <Globe className="w-3.5 h-3.5 text-[#1B5E20]" />
-        {locales.map((loc) => (
-          <button
-            key={loc}
-            onClick={() => handleLanguageChange(loc)}
-            className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-colors ${
-              currentLocale === loc
-                ? "bg-[#1B5E20] text-white"
-                : "text-gray-600 hover:text-[#1B5E20]"
-            }`}
-          >
-            {localeLabels[loc]}
-          </button>
-        ))}
+      {/* Language Switcher & Install in top corner */}
+      <div className="absolute top-4 end-4 flex items-center gap-2">
+        <InstallButton variant="login" />
+        <div className="flex items-center gap-1.5 bg-white border border-[#E0D8CE] rounded-full px-3 py-1 text-xs shadow-2xs">
+          <Globe className="w-3.5 h-3.5 text-[#1B5E20]" />
+          {locales.map((loc) => (
+            <button
+              key={loc}
+              onClick={() => handleLanguageChange(loc)}
+              className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-colors ${
+                currentLocale === loc
+                  ? "bg-[#1B5E20] text-white"
+                  : "text-gray-600 hover:text-[#1B5E20]"
+              }`}
+            >
+              {localeLabels[loc]}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

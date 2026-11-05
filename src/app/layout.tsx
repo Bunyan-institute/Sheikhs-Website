@@ -71,6 +71,21 @@ export default function RootLayout({
       className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable} ${notoSerifEthiopic.variable}`}
     >
       <body className="min-h-screen bg-[#EDF4F0] text-[#0F241C] font-sans antialiased selection:bg-[#BF9A45]/30">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && !location.pathname.startsWith('/admin')) {
+                navigator.serviceWorker.getRegistrations().then(function(regs) {
+                  for (var i = 0; i < regs.length; i++) {
+                    if (!regs[i].scope.includes('/admin')) {
+                      regs[i].unregister();
+                    }
+                  }
+                });
+              }
+            `,
+          }}
+        />
         {children}
       </body>
     </html>
