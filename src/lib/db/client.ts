@@ -34,6 +34,8 @@ function pg(): postgres.Sql {
     pgInstance = postgres(url, {
       // Required for Supabase's transaction-mode pooler (no prepared statements).
       prepare: false,
+      // The pooler cannot handle pipelined queries (concurrent queries on one connection hang), so one at a time.
+      max_pipeline: 1,
       max: Number(process.env.DATABASE_POOL_MAX || 5),
       idle_timeout: 20,
       connect_timeout: 20,
@@ -118,9 +120,11 @@ export async function queryOne<T = Record<string, unknown>>(sql: string, args: D
 /** Runs the statements in one transaction. */
 export async function batch(statements: Statement[]): Promise<QueryResult[]> {
   if (isPostgres) {
-    // Returning the queries as an array lets postgres.js pipeline them: one network round trip, in order.
-    const results = await pg().begin((tx) => statements.map((s) => tx.unsafe(toPostgres(s.sql), pgArgs(s.args))));
-    return results.map((r) => ({ rows: r as unknown as Record<string, unknown>[], rowsAffected: r.count ?? 0 }));
+    return (await pg().begin(async (tx) => {
+      const out: QueryResult[] = [];
+      for (const s of statements) out.push(await pgRun(tx, s));
+      return out;
+    })) as QueryResult[];
   }
   const client = await sqliteReady();
   const results = await client.batch(

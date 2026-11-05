@@ -74,14 +74,9 @@ export function ready(): Promise<void> {
 }
 
 async function initialize() {
-  const t0 = Date.now();
-  const lap = (m: string) => console.log(`[db-debug] ${m} +${Date.now() - t0}ms`);
   await ensureTablesExist();
-  lap("tables ensured");
   await repairLegacyTables();
-  lap("repair done");
   const marker = await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEEDED_KEY]);
-  lap("marker checked");
   if (marker) return;
 
   // Several serverless instances can cold-start together: one claims the seeding, the others wait for it.
