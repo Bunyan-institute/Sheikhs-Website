@@ -2,13 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Download, Star, ChevronRight, ChevronLeft, WifiOff, Headphones, ShieldCheck, Smartphone, CheckCircle2, ExternalLink } from "lucide-react";
+import { Download, Star, ChevronRight, ChevronLeft, WifiOff, Headphones, ShieldCheck, Smartphone } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { usePwa } from "@/components/pwa/pwa-context";
 
 export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
   const [isOpen, setIsOpen] = useState(true);
-  const { isInstalled, promptInstall, isIos, openIosGuide } = usePwa();
 
   let t = (key: string) => key;
   try {
@@ -24,21 +22,15 @@ export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
     }
   }, []);
 
-  const badgeText = t("badge") !== "badge" ? t("badge") : "Official App";
+  const badgeText = t("badge") !== "badge" ? t("badge") : "Official Android App";
   const titleText = t("title") !== "title" ? t("title") : "ሸይኽ ሙሃመድ ፈረጅ";
-  const publisherText = t("publisher") !== "publisher" ? t("publisher") : "Official Scholar Platform";
+  const publisherText = t("publisher") !== "publisher" ? t("publisher") : "Africa Media Network";
   const feat1 = t("offlineFeature") !== "offlineFeature" ? t("offlineFeature") : "100% Offline Audio";
   const feat2 = t("backgroundFeature") !== "backgroundFeature" ? t("backgroundFeature") : "Background Playback";
   const feat3 = t("adFreeFeature") !== "adFreeFeature" ? t("adFreeFeature") : "100% Free & Ad-Free";
-  const installAppText = isIos ? "Install on iPhone/iPad" : "Install Standalone App";
+  const ctaBtn = t("downloadButton") !== "downloadButton" ? t("downloadButton") : "Install from Google Play";
 
-  const handleInstallClick = async () => {
-    if (isIos) {
-      openIosGuide();
-    } else {
-      await promptInstall();
-    }
-  };
+  if (!playStoreUrl) return null;
 
   return (
     <aside
@@ -113,34 +105,16 @@ export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
           </div>
 
           {/* Action CTA */}
-          <div className="relative space-y-2">
-            {!isInstalled ? (
-              <button
-                type="button"
-                onClick={handleInstallClick}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] font-bold text-xs transition-colors shadow-sm min-h-[40px] cursor-pointer"
-              >
-                <Download className="w-3.5 h-3.5 text-[#072118]" />
-                <span>{installAppText}</span>
-              </button>
-            ) : (
-              <div className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#1B6A50]/40 text-[#A3E6CD] font-bold text-xs border border-[#1B6A50]">
-                <CheckCircle2 className="w-4 h-4 text-[#1D6A5A]" />
-                <span>App Installed</span>
-              </div>
-            )}
-
-            {playStoreUrl && (
-              <a
-                href={playStoreUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-[#E6D3A3] text-[11px] font-medium transition-colors"
-              >
-                <span>Google Play Store</span>
-                <ExternalLink className="w-3 h-3 opacity-70" />
-              </a>
-            )}
+          <div className="relative">
+            <a
+              href={playStoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#BF9A45] hover:bg-[#E6D3A3] text-[#072118] font-bold text-xs transition-colors shadow-sm min-h-[40px] cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5 text-[#072118]" />
+              <span>{ctaBtn}</span>
+            </a>
           </div>
         </div>
       ) : (
@@ -161,9 +135,7 @@ export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
           </div>
           <div className="text-start leading-none hidden sm:block">
             <span className="block text-[9px] uppercase tracking-wider text-[#BF9A45] font-bold">App</span>
-            <span className="block text-xs font-bold text-[#EDF4F0] mt-0.5">
-              {isInstalled ? "Installed" : "Download"}
-            </span>
+            <span className="block text-xs font-bold text-[#EDF4F0] mt-0.5">Google Play</span>
           </div>
         </button>
       )}
@@ -172,3 +144,4 @@ export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
 }
 
 export default FloatingAppCard;
+

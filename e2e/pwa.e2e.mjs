@@ -106,11 +106,10 @@ await step("offline: navigating inside the admin shows the offline page, then re
   await page.getByRole("button", { name: /Write New Article/ }).waitFor();
 });
 
-await step("public site has its own app manifest and is installable", async () => {
+await step("public site stays outside the admin PWA service worker scope", async () => {
   await page.goto(BASE + "/");
-  assert((await page.locator('link[rel="manifest"]').getAttribute("href")) === "/manifest.webmanifest", "manifest link");
-  const controlledByAdmin = await page.evaluate(() => Boolean(navigator.serviceWorker.controller?.scriptURL?.endsWith("/admin-sw.js")));
-  assert(!controlledByAdmin, "public pages must stay outside the admin service worker scope");
+  const controlled = await page.evaluate(() => Boolean(navigator.serviceWorker.controller));
+  assert(!controlled, "public pages must stay outside the admin service worker scope");
 });
 
 await browser.close();

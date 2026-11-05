@@ -5,7 +5,6 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { X, Menu } from 'lucide-react';
 import LocaleSwitcher from './locale-switcher';
-import { PwaInstallButton } from '@/components/pwa/pwa-install-button';
 import type { PublicProfile } from '@/lib/api/types';
 import type { NavItem } from '@/lib/sections';
 
@@ -168,7 +167,6 @@ export default function MobileNav({ open, onClose, mainItems, moreItems, locale,
         </div>
 
         <div className="mt-auto px-5 py-6 border-t border-[#BF9A45]/20 flex flex-col gap-3">
-          <PwaInstallButton className="w-full py-3" />
           <Link
             href="/ask"
             onClick={onClose}
