@@ -5,11 +5,21 @@
  *  - never caches /api, uploads, server actions or admin HTML (private, always fresh)
  *  - when a navigation fails because the device is offline, shows the offline page
  */
-const VERSION = "v1";
+const VERSION = "v2";
 const SHELL_CACHE = `admin-shell-${VERSION}`;
 const STATIC_CACHE = `admin-static-${VERSION}`;
 const OFFLINE_URL = "/admin-offline.html";
-const PRECACHE = [OFFLINE_URL, "/admin.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png", "/icons/maskable-192.png", "/icons/maskable-512.png"];
+const PRECACHE = [
+  OFFLINE_URL,
+  "/admin.webmanifest",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/maskable-192.png",
+  "/icons/maskable-512.png",
+  "/icons/apple-touch-icon.png",
+  "/screenshots/admin-wide.png",
+  "/screenshots/admin-narrow.png"
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(SHELL_CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting()));

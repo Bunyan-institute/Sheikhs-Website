@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#1B5E20] selection:text-white">
-      {/* Language Switcher pill in top corner */}
+      {/* Language Switcher in top corner */}
       <div className="absolute top-4 end-4 flex items-center gap-1.5 bg-white border border-[#E0D8CE] rounded-full px-3 py-1 text-xs shadow-2xs">
         <Globe className="w-3.5 h-3.5 text-[#1B5E20]" />
         {locales.map((loc) => (
