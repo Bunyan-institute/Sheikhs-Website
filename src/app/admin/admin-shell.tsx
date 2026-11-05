@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
+import { AdminBottomNav } from "@/components/admin/admin-bottom-nav";
 import { AdminFeedbackProvider } from "@/components/admin/ui/feedback";
 import { localeDirections, type Locale } from "@/i18n/config";
 
@@ -52,9 +53,13 @@ export function AdminShell({
           username={username}
           onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
         />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-[max(1rem,env(safe-area-inset-bottom))] max-w-[1600px] w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-[max(5rem,calc(4.5rem+env(safe-area-inset-bottom)))] md:pb-[max(1rem,env(safe-area-inset-bottom))] max-w-[1600px] w-full mx-auto">
           {children}
         </main>
+        <AdminBottomNav
+          onOpenMenu={() => setMobileSidebarOpen(true)}
+          pendingInquiriesCount={pendingInquiriesCount}
+        />
       </div>
     </div>
     </AdminFeedbackProvider>

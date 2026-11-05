@@ -387,7 +387,9 @@
       "completed": "Completed",
       "pending": "Pending",
       "resolved": "Resolved",
-      "viewLiveSite": "View live site"
+      "viewLiveSite": "View live site",
+      "menu": "Menu",
+      "more": "More"
     },
     "header": {
       "systemStatus": "System Online • Live Dynamic Sync",

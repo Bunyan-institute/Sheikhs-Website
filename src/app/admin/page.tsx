@@ -77,6 +77,82 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
+      {/* Scholar Quick Actions */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+        <Link
+          href="/admin/lectures"
+          className="bg-white border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-emerald-50/40 p-3.5 sm:p-4 rounded-xl shadow-2xs transition-all flex items-center gap-3 group min-h-[56px]"
+        >
+          <div className="w-10 h-10 rounded-lg bg-emerald-100 text-[#1B5E20] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <Video className="w-5 h-5" />
+          </div>
+          <div className="min-w-0">
+            <span className="block text-xs font-bold text-[#2D3436] truncate group-hover:text-[#1B5E20]">
+              {tDash("addLecture")}
+            </span>
+            <span className="block text-[11px] text-[#636E72] truncate">
+              {metrics.lecturesCount} {tCommon("lectures")}
+            </span>
+          </div>
+        </Link>
+
+        <Link
+          href="/admin/inquiries"
+          className="bg-white border border-[#E0D8CE] hover:border-[#B8860B] hover:bg-amber-50/40 p-3.5 sm:p-4 rounded-xl shadow-2xs transition-all flex items-center gap-3 group min-h-[56px] relative"
+        >
+          <div className="w-10 h-10 rounded-lg bg-amber-100 text-[#B8860B] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <MessageSquare className="w-5 h-5" />
+          </div>
+          <div className="min-w-0">
+            <span className="block text-xs font-bold text-[#2D3436] truncate group-hover:text-[#B8860B]">
+              {tCommon("inquiries")}
+            </span>
+            <span className="block text-[11px] text-[#636E72] truncate">
+              {metrics.pendingInquiries > 0
+                ? `${metrics.pendingInquiries} ${tCommon("pending")}`
+                : tCommon("resolved")}
+            </span>
+          </div>
+          {metrics.pendingInquiries > 0 && (
+            <span className="absolute top-2 end-2 w-2 h-2 rounded-full bg-red-500 animate-ping" />
+          )}
+        </Link>
+
+        <Link
+          href="/admin/fatwas"
+          className="bg-white border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-emerald-50/40 p-3.5 sm:p-4 rounded-xl shadow-2xs transition-all flex items-center gap-3 group min-h-[56px]"
+        >
+          <div className="w-10 h-10 rounded-lg bg-emerald-100 text-[#1B5E20] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <HelpCircle className="w-5 h-5" />
+          </div>
+          <div className="min-w-0">
+            <span className="block text-xs font-bold text-[#2D3436] truncate group-hover:text-[#1B5E20]">
+              {tCommon("fatwas")}
+            </span>
+            <span className="block text-[11px] text-[#636E72] truncate">
+              {metrics.fatwasCount} {tCommon("fatwas")}
+            </span>
+          </div>
+        </Link>
+
+        <Link
+          href="/admin/articles"
+          className="bg-white border border-[#E0D8CE] hover:border-[#1B5E20] hover:bg-emerald-50/40 p-3.5 sm:p-4 rounded-xl shadow-2xs transition-all flex items-center gap-3 group min-h-[56px]"
+        >
+          <div className="w-10 h-10 rounded-lg bg-emerald-100 text-[#1B5E20] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <FileText className="w-5 h-5" />
+          </div>
+          <div className="min-w-0">
+            <span className="block text-xs font-bold text-[#2D3436] truncate group-hover:text-[#1B5E20]">
+              {tDash("writeArticle")}
+            </span>
+            <span className="block text-[11px] text-[#636E72] truncate">
+              {metrics.articlesCount} {tCommon("articles")}
+            </span>
+          </div>
+        </Link>
+      </div>
+
       {/* Metrics Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <Link

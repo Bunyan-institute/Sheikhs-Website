@@ -387,7 +387,9 @@
       "completed": "Kan Xumurame",
       "pending": "Kan Eegamaa Jiru",
       "resolved": "Kan Deebii Argate",
-      "viewLiveSite": "Marsariitii kallattii ilaali"
+      "viewLiveSite": "Marsariitii kallattii ilaali",
+      "menu": "Baafata",
+      "more": "Dabalata"
     },
     "header": {
       "systemStatus": "Sirnichi Hojjataa Jira • Walitti Hidhamiinsa Kallattii",

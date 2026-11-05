@@ -387,7 +387,9 @@
       "completed": "የተጠናቀቀ",
       "pending": "በመጠባበቅ ላይ",
       "resolved": "መልስ የተሰጠው",
-      "viewLiveSite": "ቀጥታ ድረ ገጹን ይመልከቱ"
+      "viewLiveSite": "ቀጥታ ድረ ገጹን ይመልከቱ",
+      "menu": "ማውጫ",
+      "more": "ተጨማሪ"
     },
     "header": {
       "systemStatus": "ስርዓቱ በመስመር ላይ ነው • የቀጥታ ቅንጅት",

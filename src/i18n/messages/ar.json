@@ -387,7 +387,9 @@
       "completed": "مكتمل",
       "pending": "قيد الانتظار",
       "resolved": "تم الرد",
-      "viewLiveSite": "عرض الموقع المباشر"
+      "viewLiveSite": "عرض الموقع المباشر",
+      "menu": "القائمة",
+      "more": "المزيد"
     },
     "header": {
       "systemStatus": "النظام متصل • مزامنة حية ومباشرة",
