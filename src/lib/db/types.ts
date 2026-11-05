@@ -15,7 +15,7 @@ export interface JourneyMilestone {
   title: string;
   institution?: string;
   description: string;
-  type?: "education" | "position" | "contribution" | "current";
+  type?: "education" | "position" | "contribution" | "qualification" | "teaching" | "current";
 }
 
 export interface QualificationRecord {
@@ -23,7 +23,7 @@ export interface QualificationRecord {
   title: string;
   issuer: string;
   year: string;
-  type: "academic" | "traditional" | "certification" | "other";
+  type: "academic" | "traditional" | "certification" | "certificate" | "ijazah" | "other";
   description: string;
 }
 

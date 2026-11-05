@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+e2e/.last-run.log
+/.next*/
+data/uploads/
+Sheikh Muhammed Ferej Megeno.html

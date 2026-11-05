@@ -1,7 +1,9 @@
 import crypto from "crypto";
-import { loadDatabase, saveDatabase, resetDatabase, exportDatabaseJson, importDatabaseJson } from "./store";
-import { execute, queryAll, queryOne } from "./sqlite-client";
-import { seedSqliteIfEmpty } from "./sqlite-seed";
+import { revalidatePath } from "next/cache";
+import type { InStatement, InValue } from "@libsql/client";
+import { execute, queryAll, queryOne, batch } from "./sqlite-client";
+import { ensureTablesExist, createMissingTables } from "./sqlite-schema";
+import { UserError } from "@/lib/user-error";
 import type {
   InquiryRecord,
   JourneyMilestone,
@@ -10,6 +12,7 @@ import type {
   CourseEnrollmentRecord,
   CourseExamConfig,
   IssuedCertificateRecord,
+  PortalDatabase,
 } from "./types";
 import type {
   PublicLecture,
@@ -23,1202 +26,903 @@ import type {
   MediaRef,
 } from "@/lib/api/types";
 
-// Ensure SQLite schema and seed migration runs on startup
-seedSqliteIfEmpty().catch((err) => {
-  console.warn("SQLite auto-seed notice:", err);
-});
+type Row = Record<string, unknown>;
 
-function triggerRevalidations() {
+// ── Helpers ──
+
+const nowIso = () => new Date().toISOString();
+const newId = (prefix: string) => `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+const str = (v: unknown): string | null => (v === null || v === undefined ? null : String(v));
+const num = (v: unknown): number | null => (v === null || v === undefined ? null : Number(v));
+const dir = (v: unknown): "ltr" | "rtl" => (v === "rtl" ? "rtl" : "ltr");
+
+function json<T>(v: unknown, fallback: T): T {
+  if (typeof v !== "string" || v === "") return fallback;
   try {
-    // Safely revalidate if inside server request environment
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { revalidatePath } = require("next/cache");
-    if (typeof revalidatePath === "function") {
-      revalidatePath("/", "layout");
-    }
+    const parsed = JSON.parse(v);
+    return (parsed ?? fallback) as T;
   } catch {
-    // Ignore in non-request contexts
+    return fallback;
   }
+}
+
+function revalidate() {
+  try {
+    revalidatePath("/", "layout");
+  } catch {
+    // Not inside a request/action context (seed, scripts)
+  }
+}
+
+// ── Readiness: migrations + first-run seed ──
+
+const SEEDED_KEY = "_seeded";
+let readyPromise: Promise<void> | null = null;
+
+/**
+ * Resolves once the schema is migrated and a brand-new database has been seeded.
+ * Every repository function awaits this, so SQLite is always the single source of truth.
+ */
+export function ready(): Promise<void> {
+  if (!readyPromise) {
+    readyPromise = initialize().catch((err) => {
+      readyPromise = null;
+      throw err;
+    });
+  }
+  return readyPromise;
+}
+
+async function initialize() {
+  await ensureTablesExist();
+  await repairLegacyTables();
+  const marker = await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEEDED_KEY]);
+  if (marker) return;
+  const counts = await queryOne<{ n: number }>(
+    "SELECT (SELECT count(*) FROM lectures) + (SELECT count(*) FROM scholar_profile) AS n;"
+  );
+  if (Number(counts?.n ?? 0) === 0) {
+    const seed = (await import("./seed/content-seed.json")).default as unknown as PortalDatabase;
+    await writeAll(seed, false);
+  }
+  await execute("INSERT OR REPLACE INTO site_settings (key, value_json, updated_at) VALUES (?, ?, ?);", [
+    SEEDED_KEY,
+    "true",
+    nowIso(),
+  ]);
+}
+
+/**
+ * Databases created by earlier versions of the app can have different columns on the content
+ * tables. Any such table is set aside as legacy_<name>, recreated with the current schema and
+ * refilled from the bundled seed, so every environment converges on the same shape.
+ */
+async function repairLegacyTables() {
+  const expected: Record<string, string[]> = {
+    scholar_profile: profileCols,
+    series: seriesDef.cols,
+    fatwas: fatwaDef.cols,
+    courses: courseDef.cols,
+    library_items: bookDef.cols,
+    events: eventDef.cols,
+  };
+  const rebuilt = new Set<string>();
+  for (const [table, cols] of Object.entries(expected)) {
+    const actual = new Set((await queryAll<Row>(`PRAGMA table_info(${table});`)).map((c) => String(c.name)));
+    if (cols.every((c) => actual.has(c))) continue;
+    console.warn(`[db] Table ${table} uses an outdated schema; rebuilding it (old rows kept in legacy_${table}).`);
+    await execute(`DROP TABLE IF EXISTS legacy_${table};`);
+    await execute(`ALTER TABLE ${table} RENAME TO legacy_${table};`);
+    rebuilt.add(table);
+  }
+  if (rebuilt.size === 0) return;
+  const legacyIndexes = await queryAll<Row>(
+    "SELECT name FROM sqlite_master WHERE type = 'index' AND tbl_name LIKE 'legacy\\_%' ESCAPE '\\' AND name NOT LIKE 'sqlite_%';"
+  );
+  for (const idx of legacyIndexes) await execute(`DROP INDEX IF EXISTS ${String(idx.name)};`);
+  await createMissingTables();
+  const seed = (await import("./seed/content-seed.json")).default as unknown as PortalDatabase;
+  await writeAll(seed, false, rebuilt);
+}
+
+// ── Generic entity table mapping ──
+
+interface Entity<T extends { id: string }> {
+  table: string;
+  cols: string[];
+  toArgs: (t: T) => InValue[];
+  fromRow: (r: Row) => T;
+  order: string;
+  /** Prefix for generated ids */
+  prefix: string;
+}
+
+function placeholders(n: number) {
+  return Array.from({ length: n }, () => "?").join(", ");
+}
+
+function upsertStatement<T extends { id: string }>(def: Entity<T>, item: T): InStatement {
+  return {
+    sql: `INSERT OR REPLACE INTO ${def.table} (${def.cols.join(", ")}) VALUES (${placeholders(def.cols.length)});`,
+    args: def.toArgs(item),
+  };
+}
+
+async function listAll<T extends { id: string }>(def: Entity<T>): Promise<T[]> {
+  await ready();
+  const rows = await queryAll<Row>(`SELECT * FROM ${def.table} ORDER BY ${def.order};`);
+  return rows.map(def.fromRow);
+}
+
+async function findOne<T extends { id: string }>(def: Entity<T>, key: string): Promise<T | null> {
+  await ready();
+  const row = await queryOne<Row>(`SELECT * FROM ${def.table} WHERE id = ? OR slug = ? LIMIT 1;`, [key, key]);
+  return row ? def.fromRow(row) : null;
+}
+
+/** Upserts by id; a slug already used by a different record is rejected, never overwritten. */
+async function upsert<T extends { id: string; slug: string }>(def: Entity<T>, item: T): Promise<T> {
+  await ready();
+  const clash = await queryOne("SELECT id FROM " + def.table + " WHERE slug = ? AND id <> ?;", [item.slug, item.id]);
+  if (clash) {
+    throw new UserError(`The slug "${item.slug}" is already used by another item.`);
+  }
+  await batch([upsertStatement(def, item)]);
+  revalidate();
+  return item;
+}
+
+async function remove(table: string, id: string, keyCol = "id"): Promise<boolean> {
+  await ready();
+  const res = await execute(`DELETE FROM ${table} WHERE ${keyCol} = ?;`, [id]);
+  revalidate();
+  return res.rowsAffected > 0;
 }
 
 // ── Lectures ──
 
-async function persistLectureToSql(l: PublicLecture) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO lectures (id, title, slug, summary, duration_seconds, published_at, updated_at, cover_json, media_json, series_json, categories_json, tags_json, locale, direction)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        l.id,
-        l.title,
-        l.slug,
-        l.summary ?? null,
-        l.duration_seconds ?? null,
-        l.published_at ?? null,
-        l.updated_at || new Date().toISOString(),
-        JSON.stringify(l.cover ?? null),
-        JSON.stringify(l.media || {}),
-        JSON.stringify(l.series ?? null),
-        JSON.stringify(l.categories ?? []),
-        JSON.stringify(l.tags ?? []),
-        l.locale || "am",
-        l.direction || "ltr",
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist lecture to SQLite:", err);
-  }
-}
+const lectureDef: Entity<PublicLecture> = {
+  table: "lectures",
+  prefix: "lec",
+  order: "published_at DESC",
+  cols: ["id", "title", "slug", "summary", "duration_seconds", "published_at", "updated_at", "cover_json", "media_json", "series_json", "categories_json", "tags_json", "locale", "direction", "status"],
+  toArgs: (l) => [
+    l.id, l.title, l.slug, l.summary, l.duration_seconds, l.published_at, l.updated_at,
+    JSON.stringify(l.cover), JSON.stringify(l.media), JSON.stringify(l.series),
+    JSON.stringify(l.categories), JSON.stringify(l.tags), l.locale, l.direction,
+    l.status ?? "published",
+  ],
+  fromRow: (r) => ({
+    object: "lecture",
+    id: String(r.id),
+    title: String(r.title),
+    slug: String(r.slug),
+    summary: str(r.summary),
+    locale: String(r.locale ?? "am"),
+    direction: dir(r.direction),
+    duration_seconds: num(r.duration_seconds),
+    published_at: str(r.published_at),
+    status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+    cover: json(r.cover_json, null),
+    media: { audio: null, video: null, transcript: null, ...json<Partial<PublicLecture["media"]>>(r.media_json, {}) },
+    series: json(r.series_json, null),
+    categories: json(r.categories_json, []),
+    tags: json(r.tags_json, []),
+  }),
+};
 
-async function deleteLectureFromSql(id: string) {
-  try {
-    await execute("DELETE FROM lectures WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete lecture from SQLite:", err);
-  }
-}
+export const getAllLectures = () => listAll(lectureDef);
+export const getLectureByIdOrSlug = (key: string) => findOne(lectureDef, key);
 
-export function getAllLectures(): PublicLecture[] {
-  const db = loadDatabase();
-  return [...db.lectures].sort((a, b) => {
-    const dateA = a.published_at ? new Date(a.published_at).getTime() : 0;
-    const dateB = b.published_at ? new Date(b.published_at).getTime() : 0;
-    return dateB - dateA;
+export function saveLecture(data: Partial<PublicLecture> & { title: string; slug: string }) {
+  return upsert(lectureDef, {
+    object: "lecture",
+    id: data.id || newId("lec"),
+    title: data.title,
+    slug: data.slug,
+    summary: data.summary ?? null,
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    duration_seconds: data.duration_seconds ?? null,
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
+    cover: data.cover ?? null,
+    media: {
+      audio: data.media?.audio ?? null,
+      video: data.media?.video ?? null,
+      transcript: data.media?.transcript ?? null,
+    },
+    series: data.series ?? null,
+    categories: data.categories ?? [],
+    tags: data.tags ?? [],
   });
 }
 
-export function getLectureByIdOrSlug(identifier: string): PublicLecture | null {
-  const db = loadDatabase();
-  return db.lectures.find((l) => l.id === identifier || l.slug === identifier) || null;
-}
-
-export function saveLecture(lectureData: Partial<PublicLecture> & { title: string; slug: string }): PublicLecture {
-  const db = loadDatabase();
-  const id = lectureData.id || `lec_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.lectures.findIndex((l) => l.id === id || l.slug === lectureData.slug);
-
-  const completeLecture: PublicLecture = {
-    object: "lecture",
-    id,
-    title: lectureData.title,
-    slug: lectureData.slug,
-    summary: lectureData.summary ?? null,
-    locale: lectureData.locale ?? "am",
-    direction: lectureData.direction ?? "ltr",
-    duration_seconds: lectureData.duration_seconds ?? null,
-    published_at: lectureData.published_at ?? now,
-    updated_at: now,
-    cover: lectureData.cover ?? null,
-    media: {
-      audio: lectureData.media?.audio ?? null,
-      video: lectureData.media?.video ?? null,
-      transcript: lectureData.media?.transcript ?? null,
-    },
-    series: lectureData.series ?? null,
-    categories: lectureData.categories ?? ["Lectures"],
-    tags: lectureData.tags ?? [],
-  };
-
-  if (existingIndex >= 0) {
-    db.lectures[existingIndex] = completeLecture;
-  } else {
-    db.lectures.unshift(completeLecture);
-  }
-
-  saveDatabase(db);
-  persistLectureToSql(completeLecture);
-  triggerRevalidations();
-  return completeLecture;
-}
-
-export async function saveLectureAsync(lectureData: Partial<PublicLecture> & { title: string; slug: string }): Promise<PublicLecture> {
-  const lecture = saveLecture(lectureData);
-  await persistLectureToSql(lecture);
-  return lecture;
-}
-
-export function deleteLecture(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.lectures.length;
-  db.lectures = db.lectures.filter((l) => l.id !== id);
-  if (db.lectures.length !== initialLength) {
-    saveDatabase(db);
-    deleteLectureFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
-
-export async function deleteLectureAsync(id: string): Promise<boolean> {
-  const deleted = deleteLecture(id);
-  await deleteLectureFromSql(id);
-  return deleted;
-}
+export const deleteLecture = (id: string) => remove("lectures", id);
 
 // ── Series ──
 
-async function persistSeriesToSql(s: PublicSeries) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO series (id, title, slug, description, locale, direction, cover_json, lecture_count, published_at, updated_at, lectures_json)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        s.id,
-        s.title,
-        s.slug,
-        s.description ?? null,
-        s.locale || "am",
-        s.direction || "ltr",
-        JSON.stringify(s.cover ?? null),
-        s.lecture_count || 0,
-        s.published_at ?? null,
-        s.updated_at || new Date().toISOString(),
-        JSON.stringify(s.lectures || []),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist series to SQLite:", err);
-  }
-}
-
-async function deleteSeriesFromSql(id: string) {
-  try {
-    await execute("DELETE FROM series WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete series from SQLite:", err);
-  }
-}
-
-export function getAllSeries(): PublicSeries[] {
-  const db = loadDatabase();
-  return db.series;
-}
-
-export function getSeriesByIdOrSlug(identifier: string): PublicSeries | null {
-  const db = loadDatabase();
-  return db.series.find((s) => s.id === identifier || s.slug === identifier) || null;
-}
-
-export function saveSeries(seriesData: Partial<PublicSeries> & { title: string; slug: string }): PublicSeries {
-  const db = loadDatabase();
-  const id = seriesData.id || `ser_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.series.findIndex((s) => s.id === id || s.slug === seriesData.slug);
-
-  const completeSeries: PublicSeries = {
+const seriesDef: Entity<PublicSeries> = {
+  table: "series",
+  prefix: "ser",
+  order: "published_at DESC",
+  cols: ["id", "title", "slug", "description", "locale", "direction", "cover_json", "lecture_count", "published_at", "updated_at", "lectures_json", "status"],
+  toArgs: (s) => [
+    s.id, s.title, s.slug, s.description, s.locale, s.direction, JSON.stringify(s.cover),
+    s.lecture_count, s.published_at, s.updated_at, "[]",
+    s.status ?? "published",
+  ],
+  fromRow: (r) => ({
     object: "series",
-    id,
-    title: seriesData.title,
-    slug: seriesData.slug,
-    description: seriesData.description ?? null,
-    locale: seriesData.locale ?? "am",
-    direction: seriesData.direction ?? "ltr",
-    cover: seriesData.cover ?? null,
-    lecture_count: seriesData.lecture_count ?? 0,
-    published_at: seriesData.published_at ?? now,
-    updated_at: now,
-    lectures: seriesData.lectures ?? [],
-  };
+    id: String(r.id),
+    title: String(r.title),
+    slug: String(r.slug),
+    description: str(r.description),
+    locale: String(r.locale ?? "am"),
+    direction: dir(r.direction),
+    cover: json(r.cover_json, null),
+    lecture_count: Number(r.lecture_count ?? 0),
+    published_at: str(r.published_at),
+    status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+  }),
+};
 
-  if (existingIndex >= 0) {
-    db.series[existingIndex] = completeSeries;
-  } else {
-    db.series.unshift(completeSeries);
-  }
-
-  saveDatabase(db);
-  persistSeriesToSql(completeSeries);
-  triggerRevalidations();
-  return completeSeries;
+/** Series carry their lectures (ordered by position) so counts can never drift from the data. */
+async function withLectures(list: PublicSeries[]): Promise<PublicSeries[]> {
+  const lectures = await getAllLectures();
+  return list.map((s) => {
+    const own = lectures
+      .filter((l) => l.series?.id === s.id)
+      .sort((a, b) => (a.series?.position ?? 0) - (b.series?.position ?? 0));
+    return { ...s, lecture_count: own.length, lectures: own };
+  });
 }
 
-export async function saveSeriesAsync(seriesData: Partial<PublicSeries> & { title: string; slug: string }): Promise<PublicSeries> {
-  const series = saveSeries(seriesData);
-  await persistSeriesToSql(series);
-  return series;
+export async function getAllSeries() {
+  return withLectures(await listAll(seriesDef));
 }
 
-export function deleteSeries(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.series.length;
-  db.series = db.series.filter((s) => s.id !== id);
-  if (db.series.length !== initialLength) {
-    saveDatabase(db);
-    deleteSeriesFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
+export async function getSeriesByIdOrSlug(key: string) {
+  const s = await findOne(seriesDef, key);
+  return s ? (await withLectures([s]))[0] : null;
 }
 
-export async function deleteSeriesAsync(id: string): Promise<boolean> {
-  const deleted = deleteSeries(id);
-  await deleteSeriesFromSql(id);
-  return deleted;
+export async function saveSeries(data: Partial<PublicSeries> & { title: string; slug: string }) {
+  const saved = await upsert(seriesDef, {
+    object: "series",
+    id: data.id || newId("ser"),
+    title: data.title,
+    slug: data.slug,
+    description: data.description ?? null,
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    cover: data.cover ?? null,
+    lecture_count: 0,
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
+  });
+  // Keep the denormalised series title on its lectures in step with renames.
+  await execute(
+    "UPDATE lectures SET series_json = json_set(series_json, '$.title', ?) WHERE json_extract(series_json, '$.id') = ?;",
+    [saved.title, saved.id]
+  );
+  return (await getSeriesByIdOrSlug(saved.id)) ?? saved;
+}
+
+export async function deleteSeries(id: string) {
+  await ready();
+  await execute("UPDATE lectures SET series_json = 'null' WHERE json_extract(series_json, '$.id') = ?;", [id]);
+  return remove("series", id);
 }
 
 // ── Articles ──
 
-async function persistArticleToSql(a: PublicArticle) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO articles (id, title, slug, summary, body, reading_minutes, locale, direction, cover_json, categories_json, tags_json, published_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        a.id,
-        a.title,
-        a.slug,
-        a.summary ?? null,
-        a.body ?? "",
-        a.reading_minutes ?? 5,
-        a.locale || "am",
-        a.direction || "ltr",
-        JSON.stringify(a.cover ?? null),
-        JSON.stringify(a.categories ?? []),
-        JSON.stringify(a.tags ?? []),
-        a.published_at ?? null,
-        a.updated_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist article to SQLite:", err);
-  }
-}
+const articleDef: Entity<PublicArticle> = {
+  table: "articles",
+  prefix: "art",
+  order: "published_at DESC",
+  cols: ["id", "title", "slug", "summary", "body", "reading_minutes", "locale", "direction", "cover_json", "categories_json", "tags_json", "published_at", "updated_at", "status"],
+  toArgs: (a) => [
+    a.id, a.title, a.slug, a.summary, a.body ?? "", a.reading_minutes ?? 5, a.locale, a.direction,
+    JSON.stringify(a.cover), JSON.stringify(a.categories), JSON.stringify(a.tags), a.published_at, a.updated_at,
+    a.status ?? "published",
+  ],
+  fromRow: (r) => ({
+    object: "article",
+    id: String(r.id),
+    title: String(r.title),
+    slug: String(r.slug),
+    summary: str(r.summary),
+    body: str(r.body),
+    reading_minutes: num(r.reading_minutes),
+    locale: String(r.locale ?? "am"),
+    direction: dir(r.direction),
+    cover: json(r.cover_json, null),
+    categories: json(r.categories_json, []),
+    tags: json(r.tags_json, []),
+    published_at: str(r.published_at),
+    status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+  }),
+};
 
-async function deleteArticleFromSql(id: string) {
-  try {
-    await execute("DELETE FROM articles WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete article from SQLite:", err);
-  }
-}
+export const getAllArticles = () => listAll(articleDef);
+export const getArticleByIdOrSlug = (key: string) => findOne(articleDef, key);
 
-export function getAllArticles(): PublicArticle[] {
-  const db = loadDatabase();
-  return [...db.articles].sort((a, b) => {
-    const dateA = a.published_at ? new Date(a.published_at).getTime() : 0;
-    const dateB = b.published_at ? new Date(b.published_at).getTime() : 0;
-    return dateB - dateA;
+export function saveArticle(data: Partial<PublicArticle> & { title: string; slug: string }) {
+  return upsert(articleDef, {
+    object: "article",
+    id: data.id || newId("art"),
+    title: data.title,
+    slug: data.slug,
+    summary: data.summary ?? null,
+    body: data.body ?? "",
+    reading_minutes: data.reading_minutes ?? 5,
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    cover: data.cover ?? null,
+    categories: data.categories ?? [],
+    tags: data.tags ?? [],
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
   });
 }
 
-export function getArticleByIdOrSlug(identifier: string): PublicArticle | null {
-  const db = loadDatabase();
-  return db.articles.find((a) => a.id === identifier || a.slug === identifier) || null;
-}
-
-export function saveArticle(articleData: Partial<PublicArticle> & { title: string; slug: string }): PublicArticle {
-  const db = loadDatabase();
-  const id = articleData.id || `art_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.articles.findIndex((a) => a.id === id || a.slug === articleData.slug);
-
-  const completeArticle: PublicArticle = {
-    object: "article",
-    id,
-    title: articleData.title,
-    slug: articleData.slug,
-    summary: articleData.summary ?? null,
-    body: articleData.body || "",
-    reading_minutes: articleData.reading_minutes ?? 5,
-    locale: articleData.locale ?? "am",
-    direction: articleData.direction ?? "ltr",
-    published_at: articleData.published_at ?? now,
-    updated_at: now,
-    cover: articleData.cover ?? null,
-    categories: articleData.categories ?? ["articles"],
-    tags: articleData.tags ?? [],
-  };
-
-  if (existingIndex >= 0) {
-    db.articles[existingIndex] = completeArticle;
-  } else {
-    db.articles.unshift(completeArticle);
-  }
-
-  saveDatabase(db);
-  persistArticleToSql(completeArticle);
-  triggerRevalidations();
-  return completeArticle;
-}
-
-export async function saveArticleAsync(articleData: Partial<PublicArticle> & { title: string; slug: string }): Promise<PublicArticle> {
-  const article = saveArticle(articleData);
-  await persistArticleToSql(article);
-  return article;
-}
-
-export function deleteArticle(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.articles.length;
-  db.articles = db.articles.filter((a) => a.id !== id);
-  if (db.articles.length !== initialLength) {
-    saveDatabase(db);
-    deleteArticleFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
-
-export async function deleteArticleAsync(id: string): Promise<boolean> {
-  const deleted = deleteArticle(id);
-  await deleteArticleFromSql(id);
-  return deleted;
-}
+export const deleteArticle = (id: string) => remove("articles", id);
 
 // ── Fatwas ──
 
-async function persistFatwaToSql(f: PublicFatwa) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO fatwas (id, title, slug, summary, question, answer, locale, direction, categories_json, tags_json, published_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        f.id,
-        f.title,
-        f.slug,
-        f.summary ?? null,
-        f.question ?? null,
-        f.answer ?? null,
-        f.locale || "am",
-        f.direction || "ltr",
-        JSON.stringify(f.categories || []),
-        JSON.stringify(f.tags || []),
-        f.published_at ?? null,
-        f.updated_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist fatwa to SQLite:", err);
-  }
-}
+const fatwaDef: Entity<PublicFatwa> = {
+  table: "fatwas",
+  prefix: "fat",
+  order: "published_at DESC",
+  cols: ["id", "title", "slug", "summary", "question", "answer", "locale", "direction", "categories_json", "tags_json", "published_at", "updated_at", "status"],
+  toArgs: (f) => [
+    f.id, f.title, f.slug, f.summary, f.question, f.answer ?? null, f.locale, f.direction,
+    JSON.stringify(f.categories), JSON.stringify(f.tags), f.published_at, f.updated_at,
+    f.status ?? "published",
+  ],
+  fromRow: (r) => ({
+    object: "fatwa",
+    id: String(r.id),
+    title: String(r.title),
+    slug: String(r.slug),
+    summary: str(r.summary),
+    question: str(r.question),
+    answer: str(r.answer),
+    locale: String(r.locale ?? "am"),
+    direction: dir(r.direction),
+    categories: json(r.categories_json, []),
+    tags: json(r.tags_json, []),
+    published_at: str(r.published_at),
+    status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+  }),
+};
 
-async function deleteFatwaFromSql(id: string) {
-  try {
-    await execute("DELETE FROM fatwas WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete fatwa from SQLite:", err);
-  }
-}
+export const getAllFatwas = () => listAll(fatwaDef);
+export const getFatwaByIdOrSlug = (key: string) => findOne(fatwaDef, key);
 
-export function getAllFatwas(): PublicFatwa[] {
-  const db = loadDatabase();
-  return [...db.fatwas].sort((a, b) => {
-    const dateA = a.published_at ? new Date(a.published_at).getTime() : 0;
-    const dateB = b.published_at ? new Date(b.published_at).getTime() : 0;
-    return dateB - dateA;
+export function saveFatwa(data: Partial<PublicFatwa> & { title: string; slug: string }) {
+  return upsert(fatwaDef, {
+    object: "fatwa",
+    id: data.id || newId("fat"),
+    title: data.title,
+    slug: data.slug,
+    summary: data.summary ?? null,
+    question: data.question ?? null,
+    answer: data.answer ?? null,
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    categories: data.categories ?? [],
+    tags: data.tags ?? [],
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
   });
 }
 
-export function getFatwaByIdOrSlug(identifier: string): PublicFatwa | null {
-  const db = loadDatabase();
-  return db.fatwas.find((f) => f.id === identifier || f.slug === identifier) || null;
-}
-
-export function saveFatwa(fatwaData: Partial<PublicFatwa> & { title: string; slug: string }): PublicFatwa {
-  const db = loadDatabase();
-  const id = fatwaData.id || `fat_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.fatwas.findIndex((f) => f.id === id || f.slug === fatwaData.slug);
-
-  const completeFatwa: PublicFatwa = {
-    object: "fatwa",
-    id,
-    title: fatwaData.title,
-    slug: fatwaData.slug,
-    summary: fatwaData.summary ?? null,
-    question: fatwaData.question ?? null,
-    answer: fatwaData.answer ?? null,
-    locale: fatwaData.locale ?? "am",
-    direction: fatwaData.direction ?? "ltr",
-    published_at: fatwaData.published_at ?? now,
-    updated_at: now,
-    categories: fatwaData.categories ?? ["fiqh"],
-    tags: fatwaData.tags ?? [],
-  };
-
-  if (existingIndex >= 0) {
-    db.fatwas[existingIndex] = completeFatwa;
-  } else {
-    db.fatwas.unshift(completeFatwa);
-  }
-
-  saveDatabase(db);
-  persistFatwaToSql(completeFatwa);
-  triggerRevalidations();
-  return completeFatwa;
-}
-
-export async function saveFatwaAsync(fatwaData: Partial<PublicFatwa> & { title: string; slug: string }): Promise<PublicFatwa> {
-  const fatwa = saveFatwa(fatwaData);
-  await persistFatwaToSql(fatwa);
-  return fatwa;
-}
-
-export function deleteFatwa(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.fatwas.length;
-  db.fatwas = db.fatwas.filter((f) => f.id !== id);
-  if (db.fatwas.length !== initialLength) {
-    saveDatabase(db);
-    deleteFatwaFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
-
-export async function deleteFatwaAsync(id: string): Promise<boolean> {
-  const deleted = deleteFatwa(id);
-  await deleteFatwaFromSql(id);
-  return deleted;
-}
+export const deleteFatwa = (id: string) => remove("fatwas", id);
 
 // ── Courses ──
 
-async function persistCourseToSql(c: PublicCourse) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO courses (id, title, slug, summary, description, enrolment_open, lesson_count, lessons_json, locale, direction, cover_json, categories_json, tags_json, published_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        c.id,
-        c.title,
-        c.slug,
-        c.summary ?? null,
-        c.description ?? null,
-        c.enrolment_open ? 1 : 0,
-        c.lesson_count || (c.lessons ? c.lessons.length : 0),
-        JSON.stringify(c.lessons || []),
-        c.locale || "am",
-        c.direction || "ltr",
-        JSON.stringify(c.cover ?? null),
-        JSON.stringify(c.categories || []),
-        JSON.stringify(c.tags || []),
-        c.published_at ?? null,
-        c.updated_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist course to SQLite:", err);
-  }
-}
+const courseDef: Entity<PublicCourse> = {
+  table: "courses",
+  prefix: "cou",
+  order: "published_at DESC",
+  cols: ["id", "title", "slug", "summary", "description", "enrolment_open", "lesson_count", "lessons_json", "locale", "direction", "cover_json", "categories_json", "tags_json", "published_at", "updated_at", "status"],
+  toArgs: (c) => [
+    c.id, c.title, c.slug, c.summary, c.description, c.enrolment_open ? 1 : 0, c.lesson_count,
+    JSON.stringify(c.lessons ?? []), c.locale, c.direction, JSON.stringify(c.cover),
+    JSON.stringify(c.categories), JSON.stringify(c.tags), c.published_at, c.updated_at,
+    c.status ?? "published",
+  ],
+  fromRow: (r) => {
+    const lessons = json<NonNullable<PublicCourse["lessons"]>>(r.lessons_json, []);
+    return {
+      object: "course",
+      id: String(r.id),
+      title: String(r.title),
+      slug: String(r.slug),
+      summary: str(r.summary),
+      description: str(r.description),
+      enrolment_open: Number(r.enrolment_open) === 1,
+      lesson_count: lessons.length || Number(r.lesson_count ?? 0),
+      lessons,
+      locale: String(r.locale ?? "am"),
+      direction: dir(r.direction),
+      cover: json(r.cover_json, null),
+      categories: json(r.categories_json, []),
+      tags: json(r.tags_json, []),
+      published_at: str(r.published_at),
+      status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+    };
+  },
+};
 
-async function deleteCourseFromSql(id: string) {
-  try {
-    await execute("DELETE FROM courses WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete course from SQLite:", err);
-  }
-}
+export const getAllCourses = () => listAll(courseDef);
+export const getCourseByIdOrSlug = (key: string) => findOne(courseDef, key);
 
-export function getAllCourses(): PublicCourse[] {
-  const db = loadDatabase();
-  return db.courses;
-}
-
-export function getCourseByIdOrSlug(identifier: string): PublicCourse | null {
-  const db = loadDatabase();
-  return db.courses.find((c) => c.id === identifier || c.slug === identifier) || null;
-}
-
-export function saveCourse(courseData: Partial<PublicCourse> & { title: string; slug: string }): PublicCourse {
-  const db = loadDatabase();
-  const id = courseData.id || `cou_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.courses.findIndex((c) => c.id === id || c.slug === courseData.slug);
-
-  const completeCourse: PublicCourse = {
+export function saveCourse(data: Partial<PublicCourse> & { title: string; slug: string }) {
+  const lessons = data.lessons ?? [];
+  return upsert(courseDef, {
     object: "course",
-    id,
-    title: courseData.title,
-    slug: courseData.slug,
-    summary: courseData.summary ?? null,
-    description: courseData.description ?? null,
-    enrolment_open: courseData.enrolment_open ?? true,
-    lesson_count: courseData.lesson_count ?? (courseData.lessons?.length || 0),
-    lessons: courseData.lessons ?? [],
-    locale: courseData.locale ?? "am",
-    direction: courseData.direction ?? "ltr",
-    cover: courseData.cover ?? null,
-    categories: courseData.categories ?? ["Islamic Studies"],
-    tags: courseData.tags ?? [],
-    published_at: courseData.published_at ?? now,
-    updated_at: now,
-  };
-
-  if (existingIndex >= 0) {
-    db.courses[existingIndex] = completeCourse;
-  } else {
-    db.courses.unshift(completeCourse);
-  }
-
-  saveDatabase(db);
-  persistCourseToSql(completeCourse);
-  triggerRevalidations();
-  return completeCourse;
+    id: data.id || newId("cou"),
+    title: data.title,
+    slug: data.slug,
+    summary: data.summary ?? null,
+    description: data.description ?? null,
+    enrolment_open: data.enrolment_open ?? true,
+    lesson_count: lessons.length || data.lesson_count || 0,
+    lessons,
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    cover: data.cover ?? null,
+    categories: data.categories ?? [],
+    tags: data.tags ?? [],
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
+  });
 }
 
-export async function saveCourseAsync(courseData: Partial<PublicCourse> & { title: string; slug: string }): Promise<PublicCourse> {
-  const course = saveCourse(courseData);
-  await persistCourseToSql(course);
-  return course;
+export const deleteCourse = (id: string) => remove("courses", id);
+
+/** Keeps exams and enrollments attached to a course when its slug changes. */
+export async function renameCourseSlug(oldSlug: string, newSlug: string): Promise<void> {
+  if (oldSlug === newSlug) return;
+  await ready();
+  await batch([
+    { sql: "UPDATE course_exams SET course_slug = ? WHERE course_slug = ?;", args: [newSlug, oldSlug] },
+    { sql: "UPDATE course_enrollments SET course_slug = ? WHERE course_slug = ?;", args: [newSlug, oldSlug] },
+    { sql: "UPDATE certificates SET course_slug = ? WHERE course_slug = ?;", args: [newSlug, oldSlug] },
+  ]);
 }
 
-export function deleteCourse(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.courses.length;
-  db.courses = db.courses.filter((c) => c.id !== id);
-  if (db.courses.length !== initialLength) {
-    saveDatabase(db);
-    deleteCourseFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
+// ── Library ──
 
-export async function deleteCourseAsync(id: string): Promise<boolean> {
-  const deleted = deleteCourse(id);
-  await deleteCourseFromSql(id);
-  return deleted;
-}
-
-// ── Books & Digital Library ──
-
-async function persistBookToSql(b: PublicBook) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO library_items (id, title, slug, summary, description, author, publisher, year, isbn, kind, locale, direction, cover_json, file_json, external_url, categories_json, tags_json, published_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        b.id,
-        b.title,
-        b.slug,
-        b.summary ?? null,
-        b.description ?? null,
-        b.author ?? "Sheikh Muhammed Ferej Megeno",
-        b.publisher ?? null,
-        b.year ?? null,
-        b.isbn ?? null,
-        b.kind || "document",
-        b.locale || "am",
-        b.direction || "ltr",
-        JSON.stringify(b.cover ?? null),
-        JSON.stringify(b.file ?? null),
-        b.external_url ?? null,
-        JSON.stringify(b.categories ?? []),
-        JSON.stringify(b.tags ?? []),
-        b.published_at ?? null,
-        b.updated_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist book to SQLite:", err);
-  }
-}
-
-async function deleteBookFromSql(id: string) {
-  try {
-    await execute("DELETE FROM library_items WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete book from SQLite:", err);
-  }
-}
-
-export function getAllBooks(): PublicBook[] {
-  const db = loadDatabase();
-  return db.books;
-}
-
-export function getBookByIdOrSlug(identifier: string): PublicBook | null {
-  const db = loadDatabase();
-  return db.books.find((b) => b.id === identifier || b.slug === identifier) || null;
-}
-
-export function saveBook(bookData: Partial<PublicBook> & { title: string; slug: string }): PublicBook {
-  const db = loadDatabase();
-  const id = bookData.id || `bk_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.books.findIndex((b) => b.id === id || b.slug === bookData.slug);
-
-  const completeBook: PublicBook = {
+const bookDef: Entity<PublicBook> = {
+  table: "library_items",
+  prefix: "bk",
+  order: "published_at DESC",
+  cols: ["id", "title", "slug", "summary", "description", "author", "publisher", "year", "isbn", "kind", "locale", "direction", "cover_json", "file_json", "external_url", "categories_json", "tags_json", "published_at", "updated_at", "status"],
+  toArgs: (b) => [
+    b.id, b.title, b.slug, b.summary, b.description ?? null, b.author, b.publisher, b.year, b.isbn, b.kind,
+    b.locale, b.direction, JSON.stringify(b.cover), JSON.stringify(b.file), b.external_url,
+    JSON.stringify(b.categories), JSON.stringify(b.tags), b.published_at, b.updated_at,
+    b.status ?? "published",
+  ],
+  fromRow: (r) => ({
     object: "book",
-    id,
-    title: bookData.title,
-    slug: bookData.slug,
-    summary: bookData.summary ?? null,
-    description: bookData.description ?? null,
-    author: bookData.author ?? "Sheikh Muhammed Ferej Megeno",
-    publisher: bookData.publisher ?? null,
-    year: bookData.year ?? new Date().getFullYear(),
-    isbn: bookData.isbn ?? null,
-    kind: bookData.kind ?? "document",
-    locale: bookData.locale ?? "am",
-    direction: bookData.direction ?? "ltr",
-    cover: bookData.cover ?? null,
-    file: bookData.file ?? null,
-    external_url: bookData.external_url ?? null,
-    categories: bookData.categories ?? ["Publications"],
-    tags: bookData.tags ?? [],
-    published_at: bookData.published_at ?? now,
-    updated_at: now,
-  };
+    id: String(r.id),
+    title: String(r.title),
+    slug: String(r.slug),
+    summary: str(r.summary),
+    description: str(r.description),
+    author: str(r.author),
+    publisher: str(r.publisher),
+    year: num(r.year),
+    isbn: str(r.isbn),
+    kind: (r.kind as PublicBook["kind"]) ?? "document",
+    locale: String(r.locale ?? "am"),
+    direction: dir(r.direction),
+    cover: json(r.cover_json, null),
+    file: json(r.file_json, null),
+    external_url: str(r.external_url),
+    categories: json(r.categories_json, []),
+    tags: json(r.tags_json, []),
+    published_at: str(r.published_at),
+    status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+  }),
+};
 
-  if (existingIndex >= 0) {
-    db.books[existingIndex] = completeBook;
-  } else {
-    db.books.unshift(completeBook);
-  }
+export const getAllBooks = () => listAll(bookDef);
+export const getBookByIdOrSlug = (key: string) => findOne(bookDef, key);
 
-  saveDatabase(db);
-  persistBookToSql(completeBook);
-  triggerRevalidations();
-  return completeBook;
+export function saveBook(data: Partial<PublicBook> & { title: string; slug: string }) {
+  return upsert(bookDef, {
+    object: "book",
+    id: data.id || newId("bk"),
+    title: data.title,
+    slug: data.slug,
+    summary: data.summary ?? null,
+    description: data.description ?? null,
+    author: data.author ?? null,
+    publisher: data.publisher ?? null,
+    year: data.year ?? null,
+    isbn: data.isbn ?? null,
+    kind: data.kind ?? "document",
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    cover: data.cover ?? null,
+    file: data.file ?? null,
+    external_url: data.external_url ?? null,
+    categories: data.categories ?? [],
+    tags: data.tags ?? [],
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
+  });
 }
 
-export async function saveBookAsync(bookData: Partial<PublicBook> & { title: string; slug: string }): Promise<PublicBook> {
-  const book = saveBook(bookData);
-  await persistBookToSql(book);
-  return book;
-}
-
-export function deleteBook(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.books.length;
-  db.books = db.books.filter((b) => b.id !== id);
-  if (db.books.length !== initialLength) {
-    saveDatabase(db);
-    deleteBookFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
-
-export async function deleteBookAsync(id: string): Promise<boolean> {
-  const deleted = deleteBook(id);
-  await deleteBookFromSql(id);
-  return deleted;
-}
+export const deleteBook = (id: string) => remove("library_items", id);
 
 // ── Events ──
 
-async function persistEventToSql(ev: PublicEvent) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO events (id, title, slug, summary, description, starts_at, ends_at, timezone, venue_name, venue_address, online_url, registration_required, capacity, locale, direction, cover_json, categories_json, tags_json, published_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        ev.id,
-        ev.title,
-        ev.slug,
-        ev.summary ?? null,
-        ev.description ?? null,
-        ev.starts_at,
-        ev.ends_at ?? null,
-        ev.timezone || "Africa/Addis_Ababa",
-        ev.venue_name ?? null,
-        ev.venue_address ?? null,
-        ev.online_url ?? null,
-        ev.registration_required ? 1 : 0,
-        ev.capacity ?? null,
-        ev.locale || "am",
-        ev.direction || "ltr",
-        JSON.stringify(ev.cover ?? null),
-        JSON.stringify(ev.categories ?? []),
-        JSON.stringify(ev.tags ?? []),
-        ev.published_at ?? null,
-        ev.updated_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist event to SQLite:", err);
-  }
-}
+const eventDef: Entity<PublicEvent> = {
+  table: "events",
+  prefix: "evt",
+  order: "starts_at DESC",
+  cols: ["id", "title", "slug", "summary", "description", "starts_at", "ends_at", "timezone", "venue_name", "venue_address", "online_url", "registration_required", "capacity", "locale", "direction", "cover_json", "categories_json", "tags_json", "published_at", "updated_at", "status"],
+  toArgs: (e) => [
+    e.id, e.title, e.slug, e.summary, e.description ?? null, e.starts_at, e.ends_at, e.timezone,
+    e.venue_name, e.venue_address, e.online_url, e.registration_required ? 1 : 0, e.capacity,
+    e.locale, e.direction, JSON.stringify(e.cover), JSON.stringify(e.categories), JSON.stringify(e.tags),
+    e.published_at, e.updated_at,
+    e.status ?? "published",
+  ],
+  fromRow: (r) => ({
+    object: "event",
+    id: String(r.id),
+    title: String(r.title),
+    slug: String(r.slug),
+    summary: str(r.summary),
+    description: str(r.description),
+    starts_at: String(r.starts_at),
+    ends_at: str(r.ends_at),
+    timezone: String(r.timezone ?? "Africa/Addis_Ababa"),
+    venue_name: str(r.venue_name),
+    venue_address: str(r.venue_address),
+    online_url: str(r.online_url),
+    registration_required: Number(r.registration_required) === 1,
+    capacity: num(r.capacity),
+    locale: String(r.locale ?? "am"),
+    direction: dir(r.direction),
+    cover: json(r.cover_json, null),
+    categories: json(r.categories_json, []),
+    tags: json(r.tags_json, []),
+    published_at: str(r.published_at),
+    status: r.status === "draft" ? "draft" : "published",
+    updated_at: String(r.updated_at),
+  }),
+};
 
-async function deleteEventFromSql(id: string) {
-  try {
-    await execute("DELETE FROM events WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete event from SQLite:", err);
-  }
-}
+export const getAllEvents = () => listAll(eventDef);
+export const getEventByIdOrSlug = (key: string) => findOne(eventDef, key);
 
-export function getAllEvents(): PublicEvent[] {
-  const db = loadDatabase();
-  return [...db.events].sort((a, b) => {
-    return new Date(b.starts_at).getTime() - new Date(a.starts_at).getTime();
+export function saveEvent(data: Partial<PublicEvent> & { title: string; slug: string; starts_at: string }) {
+  return upsert(eventDef, {
+    object: "event",
+    id: data.id || newId("evt"),
+    title: data.title,
+    slug: data.slug,
+    summary: data.summary ?? null,
+    description: data.description ?? null,
+    starts_at: data.starts_at,
+    ends_at: data.ends_at ?? null,
+    timezone: data.timezone ?? "Africa/Addis_Ababa",
+    venue_name: data.venue_name ?? null,
+    venue_address: data.venue_address ?? null,
+    online_url: data.online_url ?? null,
+    registration_required: Boolean(data.registration_required),
+    capacity: data.capacity ?? null,
+    locale: data.locale ?? "am",
+    direction: data.direction ?? "ltr",
+    cover: data.cover ?? null,
+    categories: data.categories ?? [],
+    tags: data.tags ?? [],
+    published_at: data.published_at ?? nowIso(),
+    updated_at: nowIso(),
+    status: data.status ?? "published",
   });
 }
 
-export function getEventByIdOrSlug(identifier: string): PublicEvent | null {
-  const db = loadDatabase();
-  return db.events.find((e) => e.id === identifier || e.slug === identifier) || null;
-}
-
-export function saveEvent(eventData: Partial<PublicEvent> & { title: string; slug: string; starts_at: string }): PublicEvent {
-  const db = loadDatabase();
-  const id = eventData.id || `evt_${Date.now()}`;
-  const now = new Date().toISOString();
-
-  const existingIndex = db.events.findIndex((e) => e.id === id || e.slug === eventData.slug);
-
-  const completeEvent: PublicEvent = {
-    object: "event",
-    id,
-    title: eventData.title,
-    slug: eventData.slug,
-    summary: eventData.summary ?? null,
-    description: eventData.description ?? null,
-    starts_at: eventData.starts_at,
-    ends_at: eventData.ends_at ?? null,
-    timezone: eventData.timezone ?? "Africa/Addis_Ababa",
-    venue_name: eventData.venue_name ?? null,
-    venue_address: eventData.venue_address ?? null,
-    online_url: eventData.online_url ?? null,
-    registration_required: Boolean(eventData.registration_required),
-    capacity: eventData.capacity ?? null,
-    locale: eventData.locale ?? "am",
-    direction: eventData.direction ?? "ltr",
-    cover: eventData.cover ?? null,
-    categories: eventData.categories ?? ["khutbah"],
-    tags: eventData.tags ?? [],
-    published_at: eventData.published_at ?? now,
-    updated_at: now,
-  };
-
-  if (existingIndex >= 0) {
-    db.events[existingIndex] = completeEvent;
-  } else {
-    db.events.unshift(completeEvent);
-  }
-
-  saveDatabase(db);
-  persistEventToSql(completeEvent);
-  triggerRevalidations();
-  return completeEvent;
-}
-
-export async function saveEventAsync(eventData: Partial<PublicEvent> & { title: string; slug: string; starts_at: string }): Promise<PublicEvent> {
-  const event = saveEvent(eventData);
-  await persistEventToSql(event);
-  return event;
-}
-
-export function deleteEvent(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.events.length;
-  db.events = db.events.filter((e) => e.id !== id);
-  if (db.events.length !== initialLength) {
-    saveDatabase(db);
-    deleteEventFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
-
-export async function deleteEventAsync(id: string): Promise<boolean> {
-  const deleted = deleteEvent(id);
-  await deleteEventFromSql(id);
-  return deleted;
-}
+export const deleteEvent = (id: string) => remove("events", id);
 
 // ── Media ──
 
-async function persistMediaToSql(m: MediaRef) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO media_assets (id, url, kind, mime_type, width, height, duration_seconds, created_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        m.id,
-        m.url,
-        m.kind || "image",
-        m.mime_type || "image/jpeg",
-        m.width ?? null,
-        m.height ?? null,
-        m.duration_seconds ?? null,
-        new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist media to SQLite:", err);
-  }
+const mediaCols = ["id", "url", "kind", "mime_type", "width", "height", "duration_seconds", "created_at", "title", "description", "thumbnail_url"];
+
+function mediaFromRow(r: Row): MediaRef {
+  return {
+    object: "media",
+    id: String(r.id),
+    kind: (r.kind as MediaRef["kind"]) ?? "image",
+    url: String(r.url),
+    mime_type: String(r.mime_type ?? ""),
+    width: num(r.width),
+    height: num(r.height),
+    duration_seconds: num(r.duration_seconds),
+    title: str(r.title),
+    description: str(r.description),
+    thumbnail_url: str(r.thumbnail_url),
+  };
 }
 
-async function deleteMediaFromSql(id: string) {
-  try {
-    await execute("DELETE FROM media_assets WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete media from SQLite:", err);
-  }
+const mediaArgs = (m: MediaRef): InValue[] => [
+  m.id, m.url, m.kind, m.mime_type, m.width, m.height, m.duration_seconds, nowIso(),
+  m.title ?? null, m.description ?? null, m.thumbnail_url ?? null,
+];
+
+export async function getAllMedia(): Promise<MediaRef[]> {
+  await ready();
+  const rows = await queryAll<Row>("SELECT * FROM media_assets ORDER BY created_at DESC, rowid DESC;");
+  return rows.map(mediaFromRow);
 }
 
-export function getAllMedia(): MediaRef[] {
-  const db = loadDatabase();
-  return db.media;
-}
-
-export function saveMediaItem(mediaItem: MediaRef): MediaRef {
-  const db = loadDatabase();
-  const existingIndex = db.media.findIndex((m) => m.id === mediaItem.id);
-  if (existingIndex >= 0) {
-    db.media[existingIndex] = mediaItem;
-  } else {
-    db.media.unshift(mediaItem);
-  }
-  saveDatabase(db);
-  persistMediaToSql(mediaItem);
-  triggerRevalidations();
-  return mediaItem;
-}
-
-export async function saveMediaItemAsync(mediaItem: MediaRef): Promise<MediaRef> {
-  const item = saveMediaItem(mediaItem);
-  await persistMediaToSql(item);
+export async function saveMediaItem(item: MediaRef): Promise<MediaRef> {
+  await ready();
+  await execute(
+    `INSERT OR REPLACE INTO media_assets (${mediaCols.join(", ")}) VALUES (${placeholders(mediaCols.length)});`,
+    mediaArgs(item)
+  );
+  revalidate();
   return item;
 }
 
-export function deleteMediaItem(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.media.length;
-  db.media = db.media.filter((m) => m.id !== id);
-  if (db.media.length !== initialLength) {
-    saveDatabase(db);
-    deleteMediaFromSql(id);
-    triggerRevalidations();
-    return true;
-  }
-  return false;
-}
-
-export async function deleteMediaItemAsync(id: string): Promise<boolean> {
-  const deleted = deleteMediaItem(id);
-  await deleteMediaFromSql(id);
-  return deleted;
-}
+export const deleteMediaItem = (id: string) => remove("media_assets", id);
 
 // ── Inquiries ──
 
-async function persistInquiryToSql(inq: InquiryRecord) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO inquiries (id, question, name, email, is_anonymous, locale, status, notes, answer, created_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        inq.id,
-        inq.question,
-        inq.name ?? null,
-        inq.email ?? null,
-        inq.is_anonymous ? 1 : 0,
-        inq.locale || "am",
-        inq.status || "pending",
-        inq.notes ?? null,
-        inq.answer ?? null,
-        inq.created_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist inquiry to SQLite:", err);
-  }
+const inquiryFromRow = (r: Row): InquiryRecord => ({
+  id: String(r.id),
+  question: String(r.question),
+  name: str(r.name) ?? undefined,
+  email: str(r.email) ?? undefined,
+  is_anonymous: Number(r.is_anonymous) === 1,
+  locale: String(r.locale ?? "am"),
+  created_at: String(r.created_at),
+  status: (r.status as InquiryRecord["status"]) ?? "pending",
+  notes: str(r.notes) ?? undefined,
+  answer: str(r.answer) ?? undefined,
+});
+
+const inquiryCols = ["id", "question", "name", "email", "is_anonymous", "locale", "status", "notes", "answer", "created_at"];
+const inquiryArgs = (i: InquiryRecord): InValue[] => [
+  i.id, i.question, i.name ?? null, i.email ?? null, i.is_anonymous ? 1 : 0, i.locale, i.status,
+  i.notes ?? null, i.answer ?? null, i.created_at,
+];
+
+export async function getAllInquiries(): Promise<InquiryRecord[]> {
+  await ready();
+  return (await queryAll<Row>("SELECT * FROM inquiries ORDER BY created_at DESC;")).map(inquiryFromRow);
 }
 
-async function deleteInquiryFromSql(id: string) {
-  try {
-    await execute("DELETE FROM inquiries WHERE id = ?;", [id]);
-  } catch (err) {
-    console.error("Failed to delete inquiry from SQLite:", err);
-  }
-}
-
-export function getAllInquiries(): InquiryRecord[] {
-  const db = loadDatabase();
-  return [...db.inquiries].sort((a, b) => {
-    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-  });
-}
-
-export function createInquiry(payload: {
-  question: string;
-  name?: string;
-  email?: string;
-  is_anonymous?: boolean;
-  locale?: string;
-}): InquiryRecord {
-  const db = loadDatabase();
-  const inquiry: InquiryRecord = {
-    id: `inq_${Date.now()}`,
-    question: payload.question,
-    name: payload.name,
-    email: payload.email,
-    is_anonymous: Boolean(payload.is_anonymous),
-    locale: payload.locale ?? "am",
-    created_at: new Date().toISOString(),
-    status: "pending",
-  };
-  db.inquiries.unshift(inquiry);
-  saveDatabase(db);
-  persistInquiryToSql(inquiry);
-  return inquiry;
-}
-
-export async function createInquiryAsync(payload: {
+export async function createInquiry(payload: {
   question: string;
   name?: string;
   email?: string;
   is_anonymous?: boolean;
   locale?: string;
 }): Promise<InquiryRecord> {
-  const inquiry = createInquiry(payload);
-  await persistInquiryToSql(inquiry);
+  await ready();
+  const inquiry: InquiryRecord = {
+    id: newId("inq"),
+    question: payload.question,
+    name: payload.name,
+    email: payload.email,
+    is_anonymous: Boolean(payload.is_anonymous),
+    locale: payload.locale ?? "am",
+    created_at: nowIso(),
+    status: "pending",
+  };
+  await execute(
+    `INSERT INTO inquiries (${inquiryCols.join(", ")}) VALUES (${placeholders(inquiryCols.length)});`,
+    inquiryArgs(inquiry)
+  );
   return inquiry;
 }
 
-export function updateInquiryStatus(id: string, status: InquiryRecord["status"], notes?: string): InquiryRecord | null {
-  const db = loadDatabase();
-  const inq = db.inquiries.find((i) => i.id === id);
-  if (!inq) return null;
-  inq.status = status;
-  if (notes !== undefined) inq.notes = notes;
-  saveDatabase(db);
-  persistInquiryToSql(inq);
-  return inq;
+export async function updateInquiryStatus(
+  id: string,
+  status: InquiryRecord["status"],
+  notes?: string
+): Promise<InquiryRecord | null> {
+  await ready();
+  const res = await execute("UPDATE inquiries SET status = ?, notes = COALESCE(?, notes) WHERE id = ?;", [
+    status,
+    notes ?? null,
+    id,
+  ]);
+  if (res.rowsAffected === 0) return null;
+  const row = await queryOne<Row>("SELECT * FROM inquiries WHERE id = ?;", [id]);
+  return row ? inquiryFromRow(row) : null;
 }
 
-export async function updateInquiryStatusAsync(id: string, status: InquiryRecord["status"], notes?: string): Promise<InquiryRecord | null> {
-  const inq = updateInquiryStatus(id, status, notes);
-  if (inq) {
-    await persistInquiryToSql(inq);
-  }
-  return inq;
-}
-
-export function deleteInquiry(id: string): boolean {
-  const db = loadDatabase();
-  const initialLength = db.inquiries.length;
-  db.inquiries = db.inquiries.filter((i) => i.id !== id);
-  if (db.inquiries.length !== initialLength) {
-    saveDatabase(db);
-    deleteInquiryFromSql(id);
-    return true;
-  }
-  return false;
-}
-
-export async function deleteInquiryAsync(id: string): Promise<boolean> {
-  const deleted = deleteInquiry(id);
-  await deleteInquiryFromSql(id);
-  return deleted;
-}
+export const deleteInquiry = (id: string) => remove("inquiries", id);
 
 // ── Profile, Journey & Qualifications ──
 
-export function getProfile(): PublicProfile {
-  const db = loadDatabase();
-  return db.profile;
-}
+const DEFAULT_PROFILE: PublicProfile = {
+  object: "profile",
+  id: "primary",
+  name: "Sheikh Muhammed Ferej Megeno",
+  headline: null,
+  biography: null,
+  languages: ["am", "ar", "en", "om"],
+  locale: "en",
+  direction: "ltr",
+  photo: null,
+  location: null,
+  sections: { lectures: true, articles: true, fatwas: true, courses: true, library: true, events: true, questions: true },
+  socials: {
+    telegram: "https://t.me/ustazmuhammadferej",
+    youtube: "https://www.youtube.com/playlist?list=PLzRqlK40SdT6R8jYsWIxMf44Hdl8q3pt3",
+    facebook: "https://web.facebook.com/p/Ustaz-Muhammad-ferej-100064605885257/?_rdc=1&_rdr#",
+    tiktok: "https://www.tiktok.com/@ustazmuhammadferej0",
+    play_store: "https://play.google.com/store/apps/details?id=com.sheikhmuhammedferej",
+  },
+  updated_at: "1970-01-01T00:00:00.000Z",
+};
 
-export function updateProfile(partialProfile: Partial<PublicProfile>): PublicProfile {
-  const db = loadDatabase();
-  db.profile = {
-    ...db.profile,
-    ...partialProfile,
-    updated_at: new Date().toISOString(),
+export async function getProfile(): Promise<PublicProfile> {
+  await ready();
+  const r = await queryOne<Row>("SELECT * FROM scholar_profile LIMIT 1;");
+  if (!r) return DEFAULT_PROFILE;
+  return {
+    object: "profile",
+    id: String(r.id),
+    name: String(r.name),
+    headline: str(r.headline),
+    biography: str(r.biography),
+    languages: json(r.languages_json, DEFAULT_PROFILE.languages),
+    locale: String(r.locale ?? "en"),
+    direction: dir(r.direction),
+    photo: json(r.photo_json, null),
+    location: str(r.location),
+    sections: { ...DEFAULT_PROFILE.sections, ...json<Partial<PublicProfile["sections"]>>(r.sections_json, {}) },
+    socials: { ...DEFAULT_PROFILE.socials, ...json<Record<string, string>>(r.socials_json, {}) },
+    updated_at: String(r.updated_at),
   };
-  saveDatabase(db);
-  execute(
-    `INSERT OR REPLACE INTO scholar_profile (id, name, headline, biography, languages_json, location, photo_json, sections_json, socials_json, locale, direction, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-    [
-      db.profile.id || "primary",
-      db.profile.name || "Sheikh Muhammed Ferej Megeno",
-      db.profile.headline ?? null,
-      db.profile.biography ?? null,
-      JSON.stringify(db.profile.languages || ["am", "ar", "en", "om"]),
-      db.profile.location ?? "Addis Ababa, Ethiopia",
-      JSON.stringify(db.profile.photo ?? null),
-      JSON.stringify(db.profile.sections || {}),
-      JSON.stringify(db.profile.socials || {}),
-      db.profile.locale || "am",
-      db.profile.direction || "ltr",
-      db.profile.updated_at,
-    ]
-  ).catch(console.error);
-  triggerRevalidations();
-  return db.profile;
 }
 
-export async function updateProfileAsync(partialProfile: Partial<PublicProfile>): Promise<PublicProfile> {
-  const profile = updateProfile(partialProfile);
-  await execute(
-    `INSERT OR REPLACE INTO scholar_profile (id, name, headline, biography, languages_json, location, photo_json, sections_json, socials_json, locale, direction, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-    [
-      profile.id || "primary",
-      profile.name || "Sheikh Muhammed Ferej Megeno",
-      profile.headline ?? null,
-      profile.biography ?? null,
-      JSON.stringify(profile.languages || ["am", "ar", "en", "om"]),
-      profile.location ?? "Addis Ababa, Ethiopia",
-      JSON.stringify(profile.photo ?? null),
-      JSON.stringify(profile.sections || {}),
-      JSON.stringify(profile.socials || {}),
-      profile.locale || "am",
-      profile.direction || "ltr",
-      profile.updated_at,
-    ]
-  );
+const profileCols = ["id", "name", "headline", "biography", "languages_json", "location", "photo_json", "sections_json", "socials_json", "locale", "direction", "updated_at"];
+const profileArgs = (p: PublicProfile): InValue[] => [
+  p.id || "primary", p.name, p.headline, p.biography, JSON.stringify(p.languages), p.location ?? null,
+  JSON.stringify(p.photo), JSON.stringify(p.sections), JSON.stringify(p.socials), p.locale, p.direction, p.updated_at,
+];
+
+export async function updateProfile(partial: Partial<PublicProfile>): Promise<PublicProfile> {
+  const profile: PublicProfile = { ...(await getProfile()), ...partial, updated_at: nowIso() };
+  await execute(`INSERT OR REPLACE INTO scholar_profile (${profileCols.join(", ")}) VALUES (${placeholders(profileCols.length)});`, profileArgs(profile));
+  revalidate();
   return profile;
 }
 
-export function getJourney(): JourneyMilestone[] {
-  const db = loadDatabase();
-  return db.journey;
+export async function getJourney(): Promise<JourneyMilestone[]> {
+  await ready();
+  const rows = await queryAll<Row>("SELECT * FROM journey_milestones ORDER BY position ASC;");
+  return rows.map((r) => ({
+    year: String(r.year),
+    title: String(r.title),
+    institution: str(r.institution) ?? undefined,
+    description: String(r.description ?? ""),
+    type: (r.type as JourneyMilestone["type"]) ?? "contribution",
+  }));
 }
 
-export function updateJourney(milestones: JourneyMilestone[]): JourneyMilestone[] {
-  const db = loadDatabase();
-  db.journey = milestones;
-  saveDatabase(db);
-  triggerRevalidations();
-  return db.journey;
+const journeyStatements = (list: JourneyMilestone[]): InStatement[] =>
+  list.map((m, i) => ({
+    sql: "INSERT INTO journey_milestones (id, year, title, institution, description, type, position, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+    args: [newId("jrn"), m.year, m.title, m.institution ?? null, m.description || "", m.type || "contribution", i, nowIso()],
+  }));
+
+export async function updateJourney(list: JourneyMilestone[]): Promise<JourneyMilestone[]> {
+  await ready();
+  await batch([{ sql: "DELETE FROM journey_milestones;", args: [] }, ...journeyStatements(list)]);
+  revalidate();
+  return list;
 }
 
-export async function updateJourneyAsync(milestones: JourneyMilestone[]): Promise<JourneyMilestone[]> {
-  const updated = updateJourney(milestones);
-  try {
-    await execute("DELETE FROM journey_milestones;");
-    for (let i = 0; i < milestones.length; i++) {
-      const m = milestones[i];
-      await execute(
-        `INSERT INTO journey_milestones (id, year, title, institution, description, type, position, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?);`,
-        [`jrn_${i}_${Date.now()}`, m.year, m.title, m.institution ?? null, m.description || "", m.type || "contribution", i, new Date().toISOString()]
-      );
-    }
-  } catch (err) {
-    console.error("Failed to sync journey to SQLite:", err);
-  }
-  return updated;
+export async function getQualifications(): Promise<QualificationRecord[]> {
+  await ready();
+  const rows = await queryAll<Row>("SELECT * FROM qualifications ORDER BY position ASC;");
+  return rows.map((r) => ({
+    id: String(r.id),
+    title: String(r.title),
+    issuer: String(r.issuer),
+    year: String(r.year),
+    type: (r.type as QualificationRecord["type"]) ?? "academic",
+    description: String(r.description ?? ""),
+  }));
 }
 
-export function getQualifications(): QualificationRecord[] {
-  const db = loadDatabase();
-  return db.qualifications;
+const qualificationStatements = (list: QualificationRecord[]): InStatement[] =>
+  list.map((q, i) => ({
+    sql: "INSERT INTO qualifications (id, title, issuer, year, type, description, position, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+    args: [q.id || newId("qual"), q.title, q.issuer, q.year, q.type || "academic", q.description || "", i, nowIso()],
+  }));
+
+export async function updateQualifications(list: QualificationRecord[]): Promise<QualificationRecord[]> {
+  await ready();
+  await batch([{ sql: "DELETE FROM qualifications;", args: [] }, ...qualificationStatements(list)]);
+  revalidate();
+  return list;
 }
 
-export function updateQualifications(quals: QualificationRecord[]): QualificationRecord[] {
-  const db = loadDatabase();
-  db.qualifications = quals;
-  saveDatabase(db);
-  triggerRevalidations();
-  return db.qualifications;
+// ── Site settings (admin-managed key/value) ──
+
+export async function getSetting<T>(key: string, fallback: T): Promise<T> {
+  await ready();
+  const row = await queryOne<Row>("SELECT value_json FROM site_settings WHERE key = ?;", [key]);
+  return row ? json(row.value_json, fallback) : fallback;
 }
 
-export async function updateQualificationsAsync(quals: QualificationRecord[]): Promise<QualificationRecord[]> {
-  const updated = updateQualifications(quals);
-  try {
-    await execute("DELETE FROM qualifications;");
-    for (let i = 0; i < quals.length; i++) {
-      const q = quals[i];
-      await execute(
-        `INSERT INTO qualifications (id, title, issuer, year, type, description, position, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?);`,
-        [q.id || `qual_${i}`, q.title, q.issuer, q.year, q.type || "academic", q.description || "", i, new Date().toISOString()]
-      );
-    }
-  } catch (err) {
-    console.error("Failed to sync qualifications to SQLite:", err);
-  }
-  return updated;
+export async function setSetting<T>(key: string, value: T): Promise<T> {
+  await ready();
+  await execute("INSERT OR REPLACE INTO site_settings (key, value_json, updated_at) VALUES (?, ?, ?);", [
+    key,
+    JSON.stringify(value),
+    nowIso(),
+  ]);
+  revalidate();
+  return value;
 }
 
-// ── Event Registrations ──
+// ── Event registrations ──
 
-async function persistEventRegistrationToSql(reg: EventRegistrationRecord) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO event_registrations (id, event_id, event_slug, event_title, name, email, phone, city, attendees_count, notes, status, created_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        reg.id,
-        reg.event_id,
-        reg.event_slug,
-        reg.event_title,
-        reg.name,
-        reg.email,
-        reg.phone ?? null,
-        reg.city ?? null,
-        reg.attendees_count || 1,
-        reg.notes ?? null,
-        reg.status || "confirmed",
-        reg.created_at || new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist event registration to SQLite:", err);
-  }
+const registrationCols = ["id", "event_id", "event_slug", "event_title", "name", "email", "phone", "city", "attendees_count", "notes", "status", "created_at"];
+const registrationFromRow = (r: Row): EventRegistrationRecord => ({
+  id: String(r.id),
+  event_id: String(r.event_id),
+  event_slug: String(r.event_slug),
+  event_title: String(r.event_title),
+  name: String(r.name),
+  email: String(r.email),
+  phone: str(r.phone) ?? undefined,
+  city: str(r.city) ?? undefined,
+  attendees_count: Number(r.attendees_count ?? 1),
+  created_at: String(r.created_at),
+  status: (r.status as EventRegistrationRecord["status"]) ?? "confirmed",
+  notes: str(r.notes) ?? undefined,
+});
+const registrationArgs = (r: EventRegistrationRecord): InValue[] => [
+  r.id, r.event_id, r.event_slug, r.event_title, r.name, r.email, r.phone ?? null, r.city ?? null,
+  r.attendees_count, r.notes ?? null, r.status, r.created_at,
+];
+
+export async function getAllEventRegistrations(): Promise<EventRegistrationRecord[]> {
+  await ready();
+  return (await queryAll<Row>("SELECT * FROM event_registrations ORDER BY created_at DESC;")).map(registrationFromRow);
 }
 
-export function getAllEventRegistrations(): EventRegistrationRecord[] {
-  const db = loadDatabase();
-  return [...db.event_registrations].sort((a, b) => {
-    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-  });
-}
-
-export function getRegistrationsByEventId(eventIdOrSlug: string): EventRegistrationRecord[] {
-  const db = loadDatabase();
-  return db.event_registrations.filter(
-    (r) => r.event_id === eventIdOrSlug || r.event_slug === eventIdOrSlug
+export async function getRegistrationsByEventId(eventIdOrSlug: string): Promise<EventRegistrationRecord[]> {
+  await ready();
+  const rows = await queryAll<Row>(
+    "SELECT * FROM event_registrations WHERE event_id = ? OR event_slug = ? ORDER BY created_at DESC;",
+    [eventIdOrSlug, eventIdOrSlug]
   );
+  return rows.map(registrationFromRow);
 }
 
-export function createEventRegistration(payload: {
-  event_id: string;
-  event_slug: string;
-  event_title: string;
-  name: string;
-  email: string;
-  phone?: string;
-  city?: string;
-  attendees_count?: number;
-  notes?: string;
-}): EventRegistrationRecord {
-  const db = loadDatabase();
-  const id = `evtr_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
-  const reg: EventRegistrationRecord = {
-    id,
-    event_id: payload.event_id,
-    event_slug: payload.event_slug,
-    event_title: payload.event_title,
-    name: payload.name.trim(),
-    email: payload.email.trim().toLowerCase(),
-    phone: payload.phone?.trim(),
-    city: payload.city?.trim(),
-    attendees_count: Math.max(1, payload.attendees_count || 1),
-    notes: payload.notes?.trim(),
-    created_at: new Date().toISOString(),
-    status: "confirmed",
-  };
-  db.event_registrations.unshift(reg);
-  saveDatabase(db);
-  persistEventRegistrationToSql(reg);
-  return reg;
-}
-
-export async function createEventRegistrationAsync(payload: {
+export async function createEventRegistration(payload: {
   event_id: string;
   event_slug: string;
   event_title: string;
@@ -1229,143 +933,87 @@ export async function createEventRegistrationAsync(payload: {
   attendees_count?: number;
   notes?: string;
 }): Promise<EventRegistrationRecord> {
-  const reg = createEventRegistration(payload);
-  await persistEventRegistrationToSql(reg);
+  await ready();
+  const reg: EventRegistrationRecord = {
+    id: newId("evtr"),
+    event_id: payload.event_id,
+    event_slug: payload.event_slug,
+    event_title: payload.event_title,
+    name: payload.name.trim(),
+    email: payload.email.trim().toLowerCase(),
+    phone: payload.phone?.trim(),
+    city: payload.city?.trim(),
+    attendees_count: Math.max(1, payload.attendees_count || 1),
+    notes: payload.notes?.trim(),
+    created_at: nowIso(),
+    status: "confirmed",
+  };
+  await execute(
+    `INSERT INTO event_registrations (${registrationCols.join(", ")}) VALUES (${placeholders(registrationCols.length)});`,
+    registrationArgs(reg)
+  );
   return reg;
 }
 
-export function updateEventRegistrationStatus(
-  id: string,
-  status: EventRegistrationRecord["status"]
-): EventRegistrationRecord | null {
-  const db = loadDatabase();
-  const reg = db.event_registrations.find((r) => r.id === id);
-  if (!reg) return null;
-  reg.status = status;
-  saveDatabase(db);
-  persistEventRegistrationToSql(reg);
-  return reg;
-}
-
-export async function updateEventRegistrationStatusAsync(
+export async function updateEventRegistrationStatus(
   id: string,
   status: EventRegistrationRecord["status"]
 ): Promise<EventRegistrationRecord | null> {
-  const reg = updateEventRegistrationStatus(id, status);
-  if (reg) {
-    await persistEventRegistrationToSql(reg);
-  }
-  return reg;
+  await ready();
+  const res = await execute("UPDATE event_registrations SET status = ? WHERE id = ?;", [status, id]);
+  if (res.rowsAffected === 0) return null;
+  const row = await queryOne<Row>("SELECT * FROM event_registrations WHERE id = ?;", [id]);
+  return row ? registrationFromRow(row) : null;
 }
 
-export function deleteEventRegistration(id: string): boolean {
-  const db = loadDatabase();
-  const initLen = db.event_registrations.length;
-  db.event_registrations = db.event_registrations.filter((r) => r.id !== id);
-  if (db.event_registrations.length !== initLen) {
-    saveDatabase(db);
-    execute("DELETE FROM event_registrations WHERE id = ?;", [id]).catch(console.error);
-    return true;
-  }
-  return false;
-}
+export const deleteEventRegistration = (id: string) => remove("event_registrations", id);
 
-export async function deleteEventRegistrationAsync(id: string): Promise<boolean> {
-  const deleted = deleteEventRegistration(id);
-  await execute("DELETE FROM event_registrations WHERE id = ?;", [id]);
-  return deleted;
-}
+// ── Course enrollments & progress ──
 
-// ── Course Enrollments & Progress ──
+const enrollmentCols = ["id", "course_id", "course_slug", "course_title", "student_name", "student_email", "student_phone", "city", "status", "completed_lessons_json", "exam_attempts_json", "certificate_id", "created_at", "updated_at"];
+const enrollmentFromRow = (r: Row): CourseEnrollmentRecord => ({
+  id: String(r.id),
+  course_id: String(r.course_id),
+  course_slug: String(r.course_slug),
+  course_title: String(r.course_title),
+  student_name: String(r.student_name),
+  student_email: String(r.student_email),
+  student_phone: str(r.student_phone) ?? undefined,
+  city: str(r.city) ?? undefined,
+  created_at: String(r.created_at),
+  completed_lessons: json(r.completed_lessons_json, []),
+  exam_attempts: json(r.exam_attempts_json, []),
+  certificate_id: str(r.certificate_id),
+  status: (r.status as CourseEnrollmentRecord["status"]) ?? "enrolled",
+});
+const enrollmentArgs = (e: CourseEnrollmentRecord): InValue[] => [
+  e.id, e.course_id, e.course_slug, e.course_title, e.student_name, e.student_email, e.student_phone ?? null,
+  e.city ?? null, e.status, JSON.stringify(e.completed_lessons), JSON.stringify(e.exam_attempts),
+  e.certificate_id ?? null, e.created_at, nowIso(),
+];
 
-async function persistCourseEnrollmentToSql(enr: CourseEnrollmentRecord) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO course_enrollments (id, course_id, course_slug, course_title, student_name, student_email, student_phone, city, status, completed_lessons_json, exam_attempts_json, certificate_id, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        enr.id,
-        enr.course_id,
-        enr.course_slug,
-        enr.course_title,
-        enr.student_name,
-        enr.student_email,
-        enr.student_phone ?? null,
-        enr.city ?? null,
-        enr.status || "enrolled",
-        JSON.stringify(enr.completed_lessons || []),
-        JSON.stringify(enr.exam_attempts || []),
-        enr.certificate_id ?? null,
-        enr.created_at || new Date().toISOString(),
-        new Date().toISOString(),
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist course enrollment to SQLite:", err);
-  }
-}
-
-export function getAllCourseEnrollments(): CourseEnrollmentRecord[] {
-  const db = loadDatabase();
-  return [...db.course_enrollments].sort((a, b) => {
-    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-  });
-}
-
-export function getEnrollmentByEmail(
-  courseIdOrSlug: string,
-  email: string
-): CourseEnrollmentRecord | null {
-  const db = loadDatabase();
-  const cleanEmail = email.trim().toLowerCase();
-  return (
-    db.course_enrollments.find(
-      (e) =>
-        (e.course_id === courseIdOrSlug || e.course_slug === courseIdOrSlug) &&
-        e.student_email.toLowerCase() === cleanEmail
-    ) || null
+async function saveEnrollment(e: CourseEnrollmentRecord) {
+  await execute(
+    `INSERT OR REPLACE INTO course_enrollments (${enrollmentCols.join(", ")}) VALUES (${placeholders(enrollmentCols.length)});`,
+    enrollmentArgs(e)
   );
 }
 
-export function createCourseEnrollment(payload: {
-  course_id: string;
-  course_slug: string;
-  course_title: string;
-  student_name: string;
-  student_email: string;
-  student_phone?: string;
-  city?: string;
-}): CourseEnrollmentRecord {
-  const db = loadDatabase();
-  const existing = getEnrollmentByEmail(payload.course_slug, payload.student_email);
-  if (existing) {
-    return existing;
-  }
-
-  const id = `enr_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
-  const enrollment: CourseEnrollmentRecord = {
-    id,
-    course_id: payload.course_id,
-    course_slug: payload.course_slug,
-    course_title: payload.course_title,
-    student_name: payload.student_name.trim(),
-    student_email: payload.student_email.trim().toLowerCase(),
-    student_phone: payload.student_phone?.trim(),
-    city: payload.city?.trim(),
-    created_at: new Date().toISOString(),
-    completed_lessons: [],
-    exam_attempts: [],
-    status: "enrolled",
-    certificate_id: null,
-  };
-
-  db.course_enrollments.unshift(enrollment);
-  saveDatabase(db);
-  persistCourseEnrollmentToSql(enrollment);
-  return enrollment;
+export async function getAllCourseEnrollments(): Promise<CourseEnrollmentRecord[]> {
+  await ready();
+  return (await queryAll<Row>("SELECT * FROM course_enrollments ORDER BY created_at DESC;")).map(enrollmentFromRow);
 }
 
-export async function createCourseEnrollmentAsync(payload: {
+export async function getEnrollmentByEmail(courseIdOrSlug: string, email: string): Promise<CourseEnrollmentRecord | null> {
+  await ready();
+  const row = await queryOne<Row>(
+    "SELECT * FROM course_enrollments WHERE (course_id = ? OR course_slug = ?) AND lower(student_email) = ? LIMIT 1;",
+    [courseIdOrSlug, courseIdOrSlug, email.trim().toLowerCase()]
+  );
+  return row ? enrollmentFromRow(row) : null;
+}
+
+export async function createCourseEnrollment(payload: {
   course_id: string;
   course_slug: string;
   course_title: string;
@@ -1374,203 +1022,155 @@ export async function createCourseEnrollmentAsync(payload: {
   student_phone?: string;
   city?: string;
 }): Promise<CourseEnrollmentRecord> {
-  const enrollment = createCourseEnrollment(payload);
-  await persistCourseEnrollmentToSql(enrollment);
+  const existing = await getEnrollmentByEmail(payload.course_slug, payload.student_email);
+  if (existing) return existing;
+  const enrollment: CourseEnrollmentRecord = {
+    id: newId("enr"),
+    course_id: payload.course_id,
+    course_slug: payload.course_slug,
+    course_title: payload.course_title,
+    student_name: payload.student_name.trim(),
+    student_email: payload.student_email.trim().toLowerCase(),
+    student_phone: payload.student_phone?.trim(),
+    city: payload.city?.trim(),
+    created_at: nowIso(),
+    completed_lessons: [],
+    exam_attempts: [],
+    status: "enrolled",
+    certificate_id: null,
+  };
+  await saveEnrollment(enrollment);
   return enrollment;
 }
 
-export function toggleLessonProgress(
-  enrollmentId: string,
-  lessonId: string
-): CourseEnrollmentRecord | null {
-  const db = loadDatabase();
-  const enr = db.course_enrollments.find((e) => e.id === enrollmentId);
-  if (!enr) return null;
-
-  if (enr.completed_lessons.includes(lessonId)) {
-    enr.completed_lessons = enr.completed_lessons.filter((l) => l !== lessonId);
-  } else {
-    enr.completed_lessons.push(lessonId);
-  }
-
-  if (enr.completed_lessons.length > 0 && enr.status === "enrolled") {
-    enr.status = "in_progress";
-  }
-
-  saveDatabase(db);
-  persistCourseEnrollmentToSql(enr);
+export async function toggleLessonProgress(enrollmentId: string, lessonId: string): Promise<CourseEnrollmentRecord | null> {
+  await ready();
+  const row = await queryOne<Row>("SELECT * FROM course_enrollments WHERE id = ?;", [enrollmentId]);
+  if (!row) return null;
+  const enr = enrollmentFromRow(row);
+  enr.completed_lessons = enr.completed_lessons.includes(lessonId)
+    ? enr.completed_lessons.filter((l) => l !== lessonId)
+    : [...enr.completed_lessons, lessonId];
+  if (enr.completed_lessons.length > 0 && enr.status === "enrolled") enr.status = "in_progress";
+  await saveEnrollment(enr);
   return enr;
 }
 
-export async function toggleLessonProgressAsync(
-  enrollmentId: string,
-  lessonId: string
-): Promise<CourseEnrollmentRecord | null> {
-  const enr = toggleLessonProgress(enrollmentId, lessonId);
-  if (enr) {
-    await persistCourseEnrollmentToSql(enr);
-  }
-  return enr;
+export async function updateEnrollmentStatus(id: string, status: CourseEnrollmentRecord["status"]) {
+  await ready();
+  const res = await execute("UPDATE course_enrollments SET status = ?, updated_at = ? WHERE id = ?;", [status, nowIso(), id]);
+  return res.rowsAffected > 0;
 }
 
-// ── Course Exams & Grading ──
+export const deleteCourseEnrollment = (id: string) => remove("course_enrollments", id);
 
-export function getCourseExam(courseIdOrSlug: string): CourseExamConfig | null {
-  const db = loadDatabase();
-  return (
-    db.course_exams[courseIdOrSlug] ||
-    db.course_exams["comprehensive-riyadus-saliheen"] ||
-    null
-  );
+// ── Course exams & grading ──
+
+export async function getCourseExam(courseIdOrSlug: string): Promise<CourseExamConfig | null> {
+  await ready();
+  const row = await queryOne<Row>("SELECT * FROM course_exams WHERE course_slug = ? OR course_id = ? LIMIT 1;", [
+    courseIdOrSlug,
+    courseIdOrSlug,
+  ]);
+  if (!row) return null;
+  return {
+    course_id: String(row.course_id),
+    passing_percentage: Number(row.passing_percentage ?? 70),
+    questions: json(row.questions_json, []),
+  };
 }
 
-export function saveCourseExam(
-  courseIdOrSlug: string,
-  examConfig: CourseExamConfig
-): CourseExamConfig {
-  const db = loadDatabase();
-  db.course_exams[courseIdOrSlug] = examConfig;
-  saveDatabase(db);
-  execute(
-    `INSERT OR REPLACE INTO course_exams (course_slug, course_id, passing_percentage, questions_json, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?);`,
-    [
-      courseIdOrSlug,
-      examConfig.course_id || courseIdOrSlug,
-      examConfig.passing_percentage || 70,
-      JSON.stringify(examConfig.questions || []),
-      new Date().toISOString(),
-      new Date().toISOString(),
-    ]
-  ).catch(console.error);
-  return examConfig;
-}
-
-export async function saveCourseExamAsync(
-  courseIdOrSlug: string,
-  examConfig: CourseExamConfig
-): Promise<CourseExamConfig> {
-  const exam = saveCourseExam(courseIdOrSlug, examConfig);
+export async function saveCourseExam(courseSlug: string, exam: CourseExamConfig): Promise<CourseExamConfig> {
+  await ready();
   await execute(
-    `INSERT OR REPLACE INTO course_exams (course_slug, course_id, passing_percentage, questions_json, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?);`,
-    [
-      courseIdOrSlug,
-      examConfig.course_id || courseIdOrSlug,
-      examConfig.passing_percentage || 70,
-      JSON.stringify(examConfig.questions || []),
-      new Date().toISOString(),
-      new Date().toISOString(),
-    ]
+    `INSERT INTO course_exams (course_slug, course_id, passing_percentage, questions_json, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?)
+     ON CONFLICT(course_slug) DO UPDATE SET course_id = excluded.course_id,
+       passing_percentage = excluded.passing_percentage, questions_json = excluded.questions_json,
+       updated_at = excluded.updated_at;`,
+    [courseSlug, exam.course_id || courseSlug, exam.passing_percentage || 70, JSON.stringify(exam.questions ?? []), nowIso(), nowIso()]
   );
   return exam;
 }
 
+export const deleteCourseExam = (courseSlug: string) => remove("course_exams", courseSlug, "course_slug");
+
 function computeHijriDate(): string {
   try {
     return (
-      new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      }).format(new Date()) + " AH"
+      new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", { day: "numeric", month: "long", year: "numeric" }).format(new Date()) +
+      " AH"
     );
   } catch {
     return "1448 AH";
   }
 }
 
-function generateCertificateVerificationToken(
-  studentName: string,
-  courseId: string,
-  issueDate: string
-): string {
-  const secret = process.env.CERTIFICATE_SECRET || "sheikh_muhammed_ferej_scholarly_seal_2026";
+function generateCertificateVerificationToken(studentName: string, courseId: string, issueDate: string): string {
+  const secret = process.env.CERTIFICATE_SECRET || (process.env.NODE_ENV === "production" ? "" : "development-only-certificate-secret");
+  if (!secret) throw new Error("CERTIFICATE_SECRET must be set in production.");
   const data = `${studentName.trim().toLowerCase()}|${courseId.trim().toLowerCase()}|${issueDate}`;
   return crypto.createHmac("sha256", secret).update(data).digest("hex");
 }
 
 function generateCertificateCode(courseSlug: string): string {
-  const year = new Date().getFullYear();
-  let acronym = "GEN";
   const lower = courseSlug.toLowerCase();
-  if (lower.includes("riyad") || lower.includes("saliheen")) acronym = "RDS";
-  else if (lower.includes("tafsir")) acronym = "TFS";
-  else if (lower.includes("hadith")) acronym = "HDT";
-  else if (lower.includes("fiqh")) acronym = "FQH";
-  else if (lower.includes("aqeedah")) acronym = "AQD";
-  else if (lower.includes("quran")) acronym = "QRN";
-
-  const rand = Math.floor(1000 + Math.random() * 9000);
-  return `MFM-${year}-${acronym}-${rand}`;
+  const acronyms: [string, string][] = [["riyad", "RDS"], ["saliheen", "RDS"], ["tafsir", "TFS"], ["hadith", "HDT"], ["fiqh", "FQH"], ["aqeedah", "AQD"], ["quran", "QRN"]];
+  const acronym = acronyms.find(([k]) => lower.includes(k))?.[1] ?? "GEN";
+  return `MFM-${new Date().getFullYear()}-${acronym}-${crypto.randomInt(1000, 10000)}`;
 }
 
-export function submitCourseExam(payload: {
+export async function submitCourseExam(payload: {
   course_id: string;
   student_email: string;
   student_name?: string;
   answers: Record<string, number>;
-}): {
+}): Promise<{
   score: number;
   passed: boolean;
   correct_count: number;
   total_questions: number;
   certificate?: IssuedCertificateRecord;
   enrollment?: CourseEnrollmentRecord;
-} {
-  const db = loadDatabase();
-  const exam = getCourseExam(payload.course_id);
-  if (!exam || !exam.questions || exam.questions.length === 0) {
+}> {
+  const course = await getCourseByIdOrSlug(payload.course_id);
+  const exam = (await getCourseExam(course?.slug ?? payload.course_id)) ?? (course ? await getCourseExam(course.id) : null);
+  if (!exam || exam.questions.length === 0) {
     throw new Error("Exam configuration not found for this course.");
   }
 
-  let correctCount = 0;
-  for (const q of exam.questions) {
-    const selected = payload.answers[q.id];
-    if (selected !== undefined && selected === q.correct_option_index) {
-      correctCount++;
-    }
-  }
-
+  const correctCount = exam.questions.filter((q) => payload.answers[q.id] === q.correct_option_index).length;
   const score = Math.round((correctCount / exam.questions.length) * 100);
   const passed = score >= (exam.passing_percentage || 70);
 
-  // Find or create enrollment
-  let enrollment = getEnrollmentByEmail(payload.course_id, payload.student_email);
+  let enrollment = await getEnrollmentByEmail(payload.course_id, payload.student_email);
   if (!enrollment && payload.student_name) {
-    const course = db.courses.find((c) => c.id === payload.course_id || c.slug === payload.course_id);
-    enrollment = createCourseEnrollment({
-      course_id: payload.course_id,
-      course_slug: course?.slug || payload.course_id,
-      course_title: course?.title || "Comprehensive Islamic Studies",
+    enrollment = await createCourseEnrollment({
+      course_id: course?.id ?? payload.course_id,
+      course_slug: course?.slug ?? payload.course_id,
+      course_title: course?.title ?? payload.course_id,
       student_name: payload.student_name,
       student_email: payload.student_email,
     });
   }
 
   let certificate: IssuedCertificateRecord | undefined;
-
   if (passed) {
-    const course = db.courses.find((c) => c.id === payload.course_id || c.slug === payload.course_id);
-    const studentName = enrollment ? enrollment.student_name : (payload.student_name || "Enrolled Student");
-
-    let gradeTitle = "Jayyid Jiddan (Very Good / جيد جداً)";
-    if (score === 100) {
-      gradeTitle = "Mumtaz with Highest Distinction (ممتاز مع مرتبة الشرف الأولى)";
-    } else if (score >= 90) {
-      gradeTitle = "Mumtaz with Distinction (ممتاز)";
-    }
-
-    certificate = issueCertificate({
-      course_id: payload.course_id,
-      course_slug: course?.slug || payload.course_id,
-      course_title: course?.title || "Comprehensive Islamic Studies",
-      student_name: studentName,
+    const gradeTitle =
+      score === 100
+        ? "Mumtaz with Highest Distinction (ممتاز مع مرتبة الشرف الأولى)"
+        : score >= 90
+          ? "Mumtaz with Distinction (ممتاز)"
+          : "Jayyid Jiddan (Very Good / جيد جداً)";
+    certificate = await issueCertificate({
+      course_id: course?.id ?? payload.course_id,
+      course_slug: course?.slug ?? payload.course_id,
+      course_title: course?.title ?? payload.course_id,
+      student_name: enrollment?.student_name ?? payload.student_name ?? "Enrolled Student",
       student_email: payload.student_email,
       score_percentage: score,
       grade_title: gradeTitle,
     });
-
     if (enrollment) {
       enrollment.certificate_id = certificate.id;
       enrollment.status = "completed";
@@ -1578,78 +1178,51 @@ export function submitCourseExam(payload: {
   }
 
   if (enrollment) {
-    enrollment.exam_attempts.push({
-      attempt_date: new Date().toISOString(),
-      score,
-      passed,
-    });
-    saveDatabase(db);
-    persistCourseEnrollmentToSql(enrollment);
+    enrollment.exam_attempts.push({ attempt_date: nowIso(), score, passed });
+    await saveEnrollment(enrollment);
   }
 
-  return {
-    score,
-    passed,
-    correct_count: correctCount,
-    total_questions: exam.questions.length,
-    certificate,
-    enrollment: enrollment || undefined,
-  };
+  return { score, passed, correct_count: correctCount, total_questions: exam.questions.length, certificate, enrollment: enrollment ?? undefined };
 }
 
-export async function submitCourseExamAsync(payload: {
-  course_id: string;
-  student_email: string;
-  student_name?: string;
-  answers: Record<string, number>;
-}) {
-  return submitCourseExam(payload);
+// ── Certificates & verification ──
+
+const certificateCols = ["id", "verification_token", "course_id", "course_slug", "course_title", "student_name", "student_email", "score_percentage", "grade_title", "issued_at", "hijri_date", "instructor_name", "authority_seal", "revoked", "revoked_reason"];
+const certificateFromRow = (r: Row): IssuedCertificateRecord => ({
+  id: String(r.id),
+  verification_token: String(r.verification_token),
+  course_id: String(r.course_id),
+  course_slug: String(r.course_slug),
+  course_title: String(r.course_title),
+  student_name: String(r.student_name),
+  student_email: String(r.student_email),
+  issued_at: String(r.issued_at),
+  hijri_date: str(r.hijri_date) ?? undefined,
+  score_percentage: Number(r.score_percentage),
+  grade_title: String(r.grade_title),
+  instructor_name: String(r.instructor_name ?? ""),
+  authority_seal: String(r.authority_seal ?? ""),
+  revoked: Number(r.revoked) === 1,
+  revoked_reason: str(r.revoked_reason),
+});
+const certificateArgs = (c: IssuedCertificateRecord): InValue[] => [
+  c.id, c.verification_token, c.course_id, c.course_slug, c.course_title, c.student_name, c.student_email,
+  c.score_percentage, c.grade_title, c.issued_at, c.hijri_date ?? null, c.instructor_name, c.authority_seal,
+  c.revoked ? 1 : 0, c.revoked_reason ?? null,
+];
+
+export async function getAllCertificates(): Promise<IssuedCertificateRecord[]> {
+  await ready();
+  return (await queryAll<Row>("SELECT * FROM certificates ORDER BY issued_at DESC;")).map(certificateFromRow);
 }
 
-// ── Certificates & Public Verification ──
-
-async function persistCertificateToSql(cert: IssuedCertificateRecord) {
-  try {
-    await execute(
-      `INSERT OR REPLACE INTO certificates (id, verification_token, course_id, course_slug, course_title, student_name, student_email, score_percentage, grade_title, issued_at, hijri_date, instructor_name, authority_seal, revoked, revoked_reason)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-      [
-        cert.id,
-        cert.verification_token,
-        cert.course_id,
-        cert.course_slug,
-        cert.course_title,
-        cert.student_name,
-        cert.student_email,
-        cert.score_percentage,
-        cert.grade_title,
-        cert.issued_at,
-        cert.hijri_date ?? null,
-        cert.instructor_name || "Sheikh Muhammed Ferej Megeno",
-        cert.authority_seal || "AAOIFI Sharia Board & Al-Fajr Islamic Foundation",
-        cert.revoked ? 1 : 0,
-        cert.revoked_reason ?? null,
-      ]
-    );
-  } catch (err) {
-    console.error("Failed to persist certificate to SQLite:", err);
-  }
+export async function getCertificateByCode(code: string): Promise<IssuedCertificateRecord | null> {
+  await ready();
+  const row = await queryOne<Row>("SELECT * FROM certificates WHERE upper(id) = ? LIMIT 1;", [code.trim().toUpperCase()]);
+  return row ? certificateFromRow(row) : null;
 }
 
-export function getAllCertificates(): IssuedCertificateRecord[] {
-  const db = loadDatabase();
-  return [...db.certificates].sort((a, b) => {
-    return new Date(b.issued_at).getTime() - new Date(a.issued_at).getTime();
-  });
-}
-
-export function getCertificateByCode(code: string): IssuedCertificateRecord | null {
-  const db = loadDatabase();
-  const cleanCode = code.trim().toUpperCase();
-  return db.certificates.find((c) => c.id.toUpperCase() === cleanCode) || null;
-}
-
-export function issueCertificate(payload: {
+export async function issueCertificate(payload: {
   course_id: string;
   course_slug: string;
   course_title: string;
@@ -1657,32 +1230,24 @@ export function issueCertificate(payload: {
   student_email: string;
   score_percentage: number;
   grade_title?: string;
-}): IssuedCertificateRecord {
-  const db = loadDatabase();
-
-  // Check if a certificate already exists for this student & course
-  const existing = db.certificates.find(
-    (c) =>
-      c.course_slug === payload.course_slug &&
-      c.student_email.toLowerCase() === payload.student_email.toLowerCase() &&
-      !c.revoked
+}): Promise<IssuedCertificateRecord> {
+  await ready();
+  const email = payload.student_email.trim().toLowerCase();
+  const existing = await queryOne<Row>(
+    "SELECT * FROM certificates WHERE course_slug = ? AND lower(student_email) = ? AND revoked = 0 LIMIT 1;",
+    [payload.course_slug, email]
   );
-  if (existing) {
-    return existing;
-  }
+  if (existing) return certificateFromRow(existing);
 
-  const issuedAt = new Date().toISOString();
-  const id = generateCertificateCode(payload.course_slug);
-  const token = generateCertificateVerificationToken(payload.student_name, payload.course_id, issuedAt);
-
+  const issuedAt = nowIso();
   const cert: IssuedCertificateRecord = {
-    id,
-    verification_token: token,
+    id: generateCertificateCode(payload.course_slug),
+    verification_token: generateCertificateVerificationToken(payload.student_name, payload.course_id, issuedAt),
     course_id: payload.course_id,
     course_slug: payload.course_slug,
     course_title: payload.course_title,
     student_name: payload.student_name.trim(),
-    student_email: payload.student_email.trim().toLowerCase(),
+    student_email: email,
     issued_at: issuedAt,
     hijri_date: computeHijriDate(),
     score_percentage: payload.score_percentage,
@@ -1692,74 +1257,173 @@ export function issueCertificate(payload: {
     revoked: false,
     revoked_reason: null,
   };
-
-  db.certificates.unshift(cert);
-  saveDatabase(db);
-  persistCertificateToSql(cert);
+  await execute(
+    `INSERT INTO certificates (${certificateCols.join(", ")}) VALUES (${placeholders(certificateCols.length)});`,
+    certificateArgs(cert)
+  );
   return cert;
 }
 
-export async function issueCertificateAsync(payload: {
-  course_id: string;
-  course_slug: string;
-  course_title: string;
-  student_name: string;
-  student_email: string;
-  score_percentage: number;
-  grade_title?: string;
-}): Promise<IssuedCertificateRecord> {
-  const cert = issueCertificate(payload);
-  await persistCertificateToSql(cert);
-  return cert;
+export async function revokeCertificate(id: string, reason?: string): Promise<IssuedCertificateRecord | null> {
+  await ready();
+  const res = await execute("UPDATE certificates SET revoked = 1, revoked_reason = ? WHERE upper(id) = ?;", [
+    reason?.trim() || "Revoked by Scholarly Accreditation Board.",
+    id.trim().toUpperCase(),
+  ]);
+  return res.rowsAffected > 0 ? getCertificateByCode(id) : null;
 }
 
-export function revokeCertificate(id: string, reason?: string): IssuedCertificateRecord | null {
-  const db = loadDatabase();
-  const cert = db.certificates.find((c) => c.id.toUpperCase() === id.trim().toUpperCase());
-  if (!cert) return null;
-
-  cert.revoked = true;
-  cert.revoked_reason = reason?.trim() || "Revoked by Scholarly Accreditation Board.";
-  saveDatabase(db);
-  persistCertificateToSql(cert);
-  return cert;
-}
-
-export async function revokeCertificateAsync(id: string, reason?: string): Promise<IssuedCertificateRecord | null> {
-  const cert = revokeCertificate(id, reason);
-  if (cert) {
-    await persistCertificateToSql(cert);
-  }
-  return cert;
-}
+export const deleteCertificate = (id: string) => remove("certificates", id);
 
 // ── Metrics ──
 
-export function getSystemMetrics() {
-  const db = loadDatabase();
-  const pendingInquiries = db.inquiries.filter((i) => i.status === "pending").length;
-  const videoLectures = db.lectures.filter((l) => Boolean(l.media?.video)).length;
-  const audioLessons = db.lectures.filter((l) => Boolean(l.media?.audio && !l.media?.video)).length;
-
+export async function getSystemMetrics() {
+  await ready();
+  const r = await queryOne<Row>(`SELECT
+      (SELECT count(*) FROM lectures) AS lectures,
+      (SELECT count(*) FROM lectures WHERE json_extract(media_json, '$.video') IS NOT NULL) AS video,
+      (SELECT count(*) FROM lectures WHERE json_extract(media_json, '$.audio') IS NOT NULL) AS audio,
+      (SELECT count(*) FROM series) AS series,
+      (SELECT count(*) FROM articles) AS articles,
+      (SELECT count(*) FROM fatwas) AS fatwas,
+      (SELECT count(*) FROM courses) AS courses,
+      (SELECT count(*) FROM library_items) AS books,
+      (SELECT count(*) FROM events) AS events,
+      (SELECT count(*) FROM media_assets) AS media,
+      (SELECT count(*) FROM inquiries) AS inquiries,
+      (SELECT count(*) FROM inquiries WHERE status = 'pending') AS pending,
+      (SELECT count(*) FROM course_enrollments) AS enrollments,
+      (SELECT count(*) FROM certificates) AS certificates,
+      (SELECT count(*) FROM event_registrations) AS registrations,
+      (SELECT max(version) FROM schema_version) AS version;`);
   return {
-    lecturesCount: db.lectures.length,
-    videoLectures,
-    audioLessons,
-    seriesCount: db.series.length,
-    articlesCount: db.articles.length,
-    fatwasCount: db.fatwas.length,
-    coursesCount: db.courses.length,
-    booksCount: db.books.length,
-    eventsCount: db.events.length,
-    mediaCount: db.media.length,
-    inquiriesTotal: db.inquiries.length,
-    pendingInquiries,
-    enrollmentsCount: db.course_enrollments.length,
-    certificatesCount: db.certificates.length,
-    eventRegistrationsCount: db.event_registrations.length,
-    lastUpdated: db.updated_at,
-    version: db.version,
+    lecturesCount: Number(r?.lectures ?? 0),
+    videoLectures: Number(r?.video ?? 0),
+    audioLessons: Number(r?.audio ?? 0),
+    seriesCount: Number(r?.series ?? 0),
+    articlesCount: Number(r?.articles ?? 0),
+    fatwasCount: Number(r?.fatwas ?? 0),
+    coursesCount: Number(r?.courses ?? 0),
+    booksCount: Number(r?.books ?? 0),
+    eventsCount: Number(r?.events ?? 0),
+    mediaCount: Number(r?.media ?? 0),
+    inquiriesTotal: Number(r?.inquiries ?? 0),
+    pendingInquiries: Number(r?.pending ?? 0),
+    enrollmentsCount: Number(r?.enrollments ?? 0),
+    certificatesCount: Number(r?.certificates ?? 0),
+    eventRegistrationsCount: Number(r?.registrations ?? 0),
+    lastUpdated: nowIso(),
+    version: Number(r?.version ?? 0),
   };
 }
 
-export { exportDatabaseJson, importDatabaseJson, resetDatabase };
+// ── Backup: export / import / reset (operate on SQLite) ──
+
+const ALL_TABLES = [
+  "scholar_profile", "journey_milestones", "qualifications", "series", "lectures", "articles", "fatwas",
+  "courses", "course_exams", "course_enrollments", "certificates", "library_items", "events",
+  "event_registrations", "media_assets", "inquiries",
+];
+
+/** Writes a full portal snapshot into SQLite in one transaction, optionally replacing everything. */
+async function writeAll(data: PortalDatabase, replace: boolean, only?: Set<string>) {
+  const want = (table: string) => !only || only.has(table);
+  const statements: InStatement[] = [];
+  if (replace) ALL_TABLES.forEach((t) => statements.push({ sql: `DELETE FROM ${t};`, args: [] }));
+
+  if (data.profile && want("scholar_profile")) {
+    statements.push({
+      sql: `INSERT OR REPLACE INTO scholar_profile (${profileCols.join(", ")}) VALUES (${placeholders(profileCols.length)});`,
+      args: profileArgs({ ...DEFAULT_PROFILE, ...data.profile, updated_at: data.profile.updated_at || nowIso() }),
+    });
+  }
+  if (!only) statements.push(...journeyStatements(data.journey ?? []), ...qualificationStatements(data.qualifications ?? []));
+
+  const stamp = <T extends { updated_at: string }>(x: T): T => ({ ...x, updated_at: x.updated_at || nowIso() });
+  const defs: [Entity<{ id: string }>, { id: string }[] | undefined][] = [
+    [seriesDef as unknown as Entity<{ id: string }>, data.series],
+    [lectureDef as unknown as Entity<{ id: string }>, data.lectures],
+    [articleDef as unknown as Entity<{ id: string }>, data.articles],
+    [fatwaDef as unknown as Entity<{ id: string }>, data.fatwas],
+    [courseDef as unknown as Entity<{ id: string }>, data.courses],
+    [bookDef as unknown as Entity<{ id: string }>, data.books],
+    [eventDef as unknown as Entity<{ id: string }>, data.events],
+  ];
+  for (const [def, items] of defs) {
+    if (!want(def.table)) continue;
+    for (const item of items ?? []) statements.push(upsertStatement(def, stamp(item as { id: string; updated_at: string })));
+  }
+
+  if (!only) for (const m of data.media ?? []) {
+    statements.push({ sql: `INSERT OR REPLACE INTO media_assets (${mediaCols.join(", ")}) VALUES (${placeholders(mediaCols.length)});`, args: mediaArgs(m) });
+  }
+  if (!only) for (const i of data.inquiries ?? []) {
+    statements.push({ sql: `INSERT OR REPLACE INTO inquiries (${inquiryCols.join(", ")}) VALUES (${placeholders(inquiryCols.length)});`, args: inquiryArgs(i) });
+  }
+  if (!only) for (const r of data.event_registrations ?? []) {
+    statements.push({ sql: `INSERT OR REPLACE INTO event_registrations (${registrationCols.join(", ")}) VALUES (${placeholders(registrationCols.length)});`, args: registrationArgs(r) });
+  }
+  if (!only) for (const e of data.course_enrollments ?? []) {
+    statements.push({ sql: `INSERT OR REPLACE INTO course_enrollments (${enrollmentCols.join(", ")}) VALUES (${placeholders(enrollmentCols.length)});`, args: enrollmentArgs(e) });
+  }
+  if (!only) for (const c of data.certificates ?? []) {
+    statements.push({ sql: `INSERT OR REPLACE INTO certificates (${certificateCols.join(", ")}) VALUES (${placeholders(certificateCols.length)});`, args: certificateArgs(c) });
+  }
+  if (!only) for (const [slug, exam] of Object.entries(data.course_exams ?? {})) {
+    statements.push({
+      sql: "INSERT OR REPLACE INTO course_exams (course_slug, course_id, passing_percentage, questions_json, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?);",
+      args: [slug, exam.course_id || slug, exam.passing_percentage || 70, JSON.stringify(exam.questions ?? []), nowIso(), nowIso()],
+    });
+  }
+
+  const CHUNK = 200;
+  if (replace) {
+    await batch(statements);
+  } else {
+    for (let i = 0; i < statements.length; i += CHUNK) await batch(statements.slice(i, i + CHUNK));
+  }
+}
+
+export async function exportDatabase(): Promise<PortalDatabase> {
+  await ready();
+  const [profile, journey, qualifications, lectures, series, articles, fatwas, courses, books, events, media, inquiries, regs, enrollments, certificates] =
+    await Promise.all([
+      getProfile(), getJourney(), getQualifications(), getAllLectures(), listAll(seriesDef), getAllArticles(),
+      getAllFatwas(), getAllCourses(), getAllBooks(), getAllEvents(), getAllMedia(), getAllInquiries(),
+      getAllEventRegistrations(), getAllCourseEnrollments(), getAllCertificates(),
+    ]);
+  const exams = await queryAll<Row>("SELECT * FROM course_exams;");
+  return {
+    version: 2,
+    updated_at: nowIso(),
+    profile, journey, qualifications, lectures, series, articles, fatwas, courses, books, events, media, inquiries,
+    event_registrations: regs,
+    course_enrollments: enrollments,
+    course_exams: Object.fromEntries(
+      exams.map((e) => [String(e.course_slug), { course_id: String(e.course_id), passing_percentage: Number(e.passing_percentage), questions: json(e.questions_json, []) }])
+    ),
+    certificates,
+  };
+}
+
+export async function exportDatabaseJson(): Promise<string> {
+  return JSON.stringify(await exportDatabase(), null, 2);
+}
+
+export async function importDatabaseJson(jsonString: string): Promise<void> {
+  const parsed = JSON.parse(jsonString) as PortalDatabase;
+  if (!parsed || !Array.isArray(parsed.lectures) || !Array.isArray(parsed.articles)) {
+    throw new Error("Invalid database schema format.");
+  }
+  await ready();
+  await writeAll(parsed, true);
+  revalidate();
+}
+
+/** Restores the bundled seed content, replacing everything. */
+export async function resetDatabase(): Promise<void> {
+  await ready();
+  const seed = (await import("./seed/content-seed.json")).default as unknown as PortalDatabase;
+  await writeAll(seed, true);
+  revalidate();
+}

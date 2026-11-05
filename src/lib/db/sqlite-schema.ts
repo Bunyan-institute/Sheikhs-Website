@@ -1,6 +1,6 @@
-import { execute } from "./sqlite-client";
+import { execute, queryAll, queryOne, batch } from "./sqlite-client";
 
-export const SCHEMA_STATEMENTS: string[] = [
+const MIGRATION_1: string[] = [
   // 1. Scholar Identity & Profile
   `CREATE TABLE IF NOT EXISTS scholar_profile (
     id TEXT PRIMARY KEY DEFAULT 'primary',
@@ -274,22 +274,97 @@ export const SCHEMA_STATEMENTS: string[] = [
   `CREATE INDEX IF NOT EXISTS idx_certificates_student ON certificates(student_email);`,
 ];
 
-let tablesEnsured = false;
+const MIGRATION_2: string[] = [
+  // Admin-managed site-wide settings (socials, links, featured content, hadith band, ...)
+  `CREATE TABLE IF NOT EXISTS site_settings (
+    key TEXT PRIMARY KEY,
+    value_json TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  );`,
+];
+
+type Migration = string[] | (() => Promise<void>);
+
+async function addColumnsIfMissing(table: string, columns: Record<string, string>) {
+  const existing = new Set((await queryAll<{ name: string }>(`PRAGMA table_info(${table});`)).map((c) => c.name));
+  for (const [name, type] of Object.entries(columns)) {
+    if (!existing.has(name)) await execute(`ALTER TABLE ${table} ADD COLUMN ${name} ${type};`);
+  }
+}
+
+// Gallery / external-media entries need a title, blurb and thumbnail to be managed from admin.
+// Older databases may already have some of these columns, so each is added only when missing.
+const MIGRATION_3 = () =>
+  addColumnsIfMissing("media_assets", { title: "TEXT", description: "TEXT", thumbnail_url: "TEXT" });
+
+// Server-side admin sessions so logout / revocation is real (the cookie alone is not enough).
+const MIGRATION_4: string[] = [
+  `CREATE TABLE IF NOT EXISTS admin_sessions (
+    id TEXT PRIMARY KEY,
+    username TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    expires_at INTEGER NOT NULL
+  );`,
+];
+
+// Files uploaded from the admin (stored on disk under UPLOAD_DIR, tracked here).
+const MIGRATION_5: string[] = [
+  `CREATE TABLE IF NOT EXISTS uploads (
+    id TEXT PRIMARY KEY,
+    filename TEXT UNIQUE NOT NULL,
+    original_name TEXT NOT NULL,
+    mime_type TEXT NOT NULL,
+    size INTEGER NOT NULL,
+    width INTEGER,
+    height INTEGER,
+    created_at TEXT NOT NULL
+  );`,
+];
+
+// Draft/published workflow for admin-managed content.
+const MIGRATION_6 = async () => {
+  for (const table of ["lectures", "series", "articles", "fatwas", "courses", "library_items", "events"]) {
+    await addColumnsIfMissing(table, { status: "TEXT NOT NULL DEFAULT 'published'" });
+  }
+};
+
+const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6];
+
+/** Re-runs the base CREATE ... IF NOT EXISTS statements (used after a legacy table is set aside). */
+export async function createMissingTables(): Promise<void> {
+  await batch(MIGRATION_1.map((sql) => ({ sql, args: [] })));
+}
+
+let migrated: Promise<void> | null = null;
 
 /**
- * Ensures all relational tables and indexes exist in SQLite.
- * Safe to call idempotently multiple times.
+ * Applies pending schema migrations once per process. The applied version is tracked
+ * in schema_version so new columns/tables can be shipped as additional migrations.
  */
-export async function ensureTablesExist(): Promise<void> {
-  if (tablesEnsured) {
-    return;
+export function ensureTablesExist(): Promise<void> {
+  if (!migrated) {
+    migrated = runMigrations().catch((err) => {
+      migrated = null;
+      throw err;
+    });
   }
-  for (const stmt of SCHEMA_STATEMENTS) {
-    try {
-      await execute(stmt);
-    } catch (err) {
-      console.warn("Schema initialization statement error:", err);
+  return migrated;
+}
+
+async function runMigrations(): Promise<void> {
+  await execute("CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL);");
+  const row = await queryOne<{ version: number }>("SELECT max(version) AS version FROM schema_version;");
+  const current = Number(row?.version ?? 0);
+  for (let v = current; v < MIGRATIONS.length; v++) {
+    const migration = MIGRATIONS[v];
+    if (typeof migration === "function") {
+      await migration();
+      await execute("INSERT INTO schema_version (version) VALUES (?);", [v + 1]);
+    } else {
+      await batch([
+        ...migration.map((sql) => ({ sql, args: [] })),
+        { sql: "INSERT INTO schema_version (version) VALUES (?);", args: [v + 1] },
+      ]);
     }
   }
-  tablesEnsured = true;
 }
