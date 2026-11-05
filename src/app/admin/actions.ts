@@ -3,40 +3,65 @@
 import { revalidatePath } from "next/cache";
 import { getSessionUser } from "@/lib/auth/session";
 import {
-  saveLectureAsync,
-  deleteLectureAsync,
-  saveSeriesAsync,
-  deleteSeriesAsync,
-  saveArticleAsync,
-  deleteArticleAsync,
-  saveFatwaAsync,
-  deleteFatwaAsync,
-  saveCourseAsync,
-  deleteCourseAsync,
-  saveBookAsync,
-  deleteBookAsync,
-  saveEventAsync,
-  deleteEventAsync,
-  saveMediaItemAsync,
-  deleteMediaItemAsync,
-  updateInquiryStatusAsync,
-  deleteInquiryAsync,
-  updateProfileAsync,
-  updateJourneyAsync,
-  updateQualificationsAsync,
-  issueCertificateAsync,
-  revokeCertificateAsync,
-  updateEventRegistrationStatusAsync,
-  deleteEventRegistrationAsync,
+  saveLecture,
+  deleteLecture,
+  saveSeries,
+  getSeriesByIdOrSlug,
+  deleteSeries,
+  saveArticle,
+  deleteArticle,
+  saveFatwa,
+  deleteFatwa,
+  saveCourse,
+  getCourseByIdOrSlug,
+  renameCourseSlug,
+  getCourseExam,
+  saveCourseExam,
+  deleteCourseExam,
+  updateEnrollmentStatus,
+  deleteCourseEnrollment,
+  deleteCertificate,
+  deleteCourse,
+  saveBook,
+  deleteBook,
+  saveEvent,
+  deleteEvent,
+  saveMediaItem,
+  deleteMediaItem,
+  updateInquiryStatus,
+  deleteInquiry,
+  getProfile,
+  updateProfile,
+  updateJourney,
+  updateQualifications,
+  issueCertificate,
+  revokeCertificate,
+  updateEventRegistrationStatus,
+  deleteEventRegistration,
   importDatabaseJson,
   resetDatabase,
 } from "@/lib/db/repository";
+import { mediaRefFromUrl } from "@/lib/media-ref";
+import { UserError } from "@/lib/user-error";
+import type { SectionMap } from "@/lib/api/types";
 import type { JourneyMilestone, QualificationRecord } from "@/lib/db/types";
 
 async function assertAuthenticated() {
   const session = await getSessionUser();
   if (!session) {
     throw new Error("Unauthorized access. Admin session required.");
+  }
+}
+
+type Failure = { success: false; error: string };
+
+/** Runs an action body, returning expected (user-facing) errors as a result instead of throwing. */
+async function guarded<T>(fn: () => Promise<T>): Promise<T | Failure> {
+  try {
+    return await fn();
+  } catch (err) {
+    if (err instanceof UserError) return { success: false, error: err.message };
+    throw err;
   }
 }
 
@@ -50,7 +75,18 @@ function refreshCache() {
 
 // ── Lecture Actions ──
 
+/** Resolves the series a lecture belongs to from the database (title and next position), not from the client. */
+async function resolveLectureSeries(lectureId: string | undefined, seriesId: string | undefined) {
+  if (!seriesId) return null;
+  const series = await getSeriesByIdOrSlug(seriesId);
+  if (!series) throw new UserError("Selected series no longer exists.");
+  const current = lectureId ? series.lectures?.find((l) => l.id === lectureId) : undefined;
+  const position = current?.series?.position ?? (series.lectures?.length ?? 0) + 1;
+  return { id: series.id, title: series.title, position };
+}
+
 export async function saveLectureAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
@@ -60,43 +96,38 @@ export async function saveLectureAction(data: {
   durationSeconds?: number;
   transcript?: string;
   seriesId?: string;
-  seriesTitle?: string;
   categories?: string[];
   tags?: string[];
   publishedAt?: string;
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const lecture = await saveLecture({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || null,
+      duration_seconds: data.durationSeconds || null,
+      published_at: data.publishedAt || new Date().toISOString(),
+      media: {
+        video: data.videoUrl || null,
+        audio: data.audioUrl || null,
+        transcript: data.transcript || null,
+      },
+      series: await resolveLectureSeries(data.id, data.seriesId),
+      categories: data.categories ?? [],
+      tags: data.tags || [],
+    });
 
-  const lecture = await saveLectureAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    summary: data.summary || null,
-    duration_seconds: data.durationSeconds || null,
-    published_at: data.publishedAt || new Date().toISOString(),
-    media: {
-      video: data.videoUrl || null,
-      audio: data.audioUrl || null,
-      transcript: data.transcript || null,
-    },
-    series: data.seriesId
-      ? {
-          id: data.seriesId,
-          title: data.seriesTitle || "Riyad us-Saliheen",
-          position: 1,
-        }
-      : null,
-    categories: data.categories && data.categories.length > 0 ? data.categories : ["Lectures"],
-    tags: data.tags || [],
+    refreshCache();
+    return { success: true as const, lecture };
   });
-
-  refreshCache();
-  return { success: true, lecture };
 }
 
 export async function deleteLectureAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteLectureAsync(id);
+  const deleted = await deleteLecture(id);
   refreshCache();
   return { success: deleted };
 }
@@ -104,6 +135,7 @@ export async function deleteLectureAction(id: string) {
 // ── Series Actions ──
 
 export async function saveSeriesAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
@@ -112,34 +144,25 @@ export async function saveSeriesAction(data: {
   coverUrl?: string;
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const series = await saveSeries({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      description: data.description || null,
+      lecture_count: data.lectureCount || 0,
+      cover: await mediaRefFromUrl(data.coverUrl, "image"),
+    });
 
-  const series = await saveSeriesAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    description: data.description || null,
-    lecture_count: data.lectureCount || 0,
-    cover: data.coverUrl
-      ? {
-          object: "media",
-          id: `med_ser_${Date.now()}`,
-          kind: "image",
-          url: data.coverUrl,
-          mime_type: "image/jpeg",
-          width: 800,
-          height: 600,
-          duration_seconds: null,
-        }
-      : null,
+    refreshCache();
+    return { success: true as const, series };
   });
-
-  refreshCache();
-  return { success: true, series };
 }
 
 export async function deleteSeriesAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteSeriesAsync(id);
+  const deleted = await deleteSeries(id);
   refreshCache();
   return { success: deleted };
 }
@@ -147,6 +170,7 @@ export async function deleteSeriesAction(id: string) {
 // ── Article Actions ──
 
 export async function saveArticleAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
@@ -159,38 +183,29 @@ export async function saveArticleAction(data: {
   publishedAt?: string;
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const article = await saveArticle({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || null,
+      body: data.body,
+      reading_minutes: data.readingMinutes || 5,
+      categories: data.categories ?? [],
+      tags: data.tags || [],
+      published_at: data.publishedAt || new Date().toISOString(),
+      cover: await mediaRefFromUrl(data.coverUrl, "image"),
+    });
 
-  const article = await saveArticleAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    summary: data.summary || null,
-    body: data.body,
-    reading_minutes: data.readingMinutes || 5,
-    categories: data.categories || ["hadith"],
-    tags: data.tags || [],
-    published_at: data.publishedAt || new Date().toISOString(),
-    cover: data.coverUrl
-      ? {
-          object: "media",
-          id: `med_art_${Date.now()}`,
-          kind: "image",
-          url: data.coverUrl,
-          mime_type: "image/jpeg",
-          width: 1200,
-          height: 800,
-          duration_seconds: null,
-        }
-      : null,
+    refreshCache();
+    return { success: true as const, article };
   });
-
-  refreshCache();
-  return { success: true, article };
 }
 
 export async function deleteArticleAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteArticleAsync(id);
+  const deleted = await deleteArticle(id);
   refreshCache();
   return { success: deleted };
 }
@@ -198,6 +213,7 @@ export async function deleteArticleAction(id: string) {
 // ── Fatwa Actions ──
 
 export async function saveFatwaAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
@@ -209,26 +225,28 @@ export async function saveFatwaAction(data: {
   publishedAt?: string;
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const fatwa = await saveFatwa({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || null,
+      question: data.question,
+      answer: data.answer,
+      categories: data.categories ?? [],
+      tags: data.tags || [],
+      published_at: data.publishedAt || new Date().toISOString(),
+    });
 
-  const fatwa = await saveFatwaAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    summary: data.summary || null,
-    question: data.question,
-    answer: data.answer,
-    categories: data.categories || ["fiqh"],
-    tags: data.tags || [],
-    published_at: data.publishedAt || new Date().toISOString(),
+    refreshCache();
+    return { success: true as const, fatwa };
   });
-
-  refreshCache();
-  return { success: true, fatwa };
 }
 
 export async function deleteFatwaAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteFatwaAsync(id);
+  const deleted = await deleteFatwa(id);
   refreshCache();
   return { success: deleted };
 }
@@ -236,52 +254,60 @@ export async function deleteFatwaAction(id: string) {
 // ── Course Actions ──
 
 export async function saveCourseAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
   summary?: string;
   description?: string;
   enrolmentOpen?: boolean;
-  lessonCount?: number;
+  lessons?: { id?: string; title: string; summary?: string; durationMinutes?: number }[];
   coverUrl?: string;
   categories?: string[];
   tags?: string[];
   publishedAt?: string;
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const existing = data.id ? await getCourseByIdOrSlug(data.id) : null;
+    // Lessons omitted by the caller are left untouched rather than wiped.
+    const lessons = data.lessons
+      ? data.lessons
+          .filter((l) => l.title.trim())
+          .map((l, i) => ({
+            object: "lesson" as const,
+            id: l.id || `lsn_${Date.now().toString(36)}_${i + 1}`,
+            title: l.title.trim(),
+            summary: l.summary?.trim() || null,
+            duration_seconds: l.durationMinutes ? Math.round(l.durationMinutes * 60) : null,
+            position: i + 1,
+          }))
+      : existing?.lessons ?? [];
 
-  const course = await saveCourseAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    summary: data.summary || null,
-    description: data.description || null,
-    enrolment_open: data.enrolmentOpen ?? true,
-    lesson_count: data.lessonCount ?? 0,
-    cover: data.coverUrl
-      ? {
-          object: "media",
-          id: `med_cou_${Date.now()}`,
-          kind: "image",
-          url: data.coverUrl,
-          mime_type: "image/jpeg",
-          width: 1200,
-          height: 675,
-          duration_seconds: null,
-        }
-      : null,
-    categories: data.categories || ["aqeedah"],
-    tags: data.tags || [],
-    published_at: data.publishedAt || new Date().toISOString(),
+    const course = await saveCourse({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || null,
+      description: data.description || null,
+      enrolment_open: data.enrolmentOpen ?? true,
+      lessons,
+      cover: await mediaRefFromUrl(data.coverUrl, "image"),
+      categories: data.categories ?? [],
+      tags: data.tags || [],
+      published_at: data.publishedAt || existing?.published_at || new Date().toISOString(),
+    });
+    if (existing) await renameCourseSlug(existing.slug, course.slug);
+
+    refreshCache();
+    return { success: true as const, course };
   });
-
-  refreshCache();
-  return { success: true, course };
 }
 
 export async function deleteCourseAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteCourseAsync(id);
+  const deleted = await deleteCourse(id);
   refreshCache();
   return { success: deleted };
 }
@@ -289,6 +315,7 @@ export async function deleteCourseAction(id: string) {
 // ── Library (Book) Actions ──
 
 export async function saveBookAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
@@ -306,54 +333,34 @@ export async function saveBookAction(data: {
   tags?: string[];
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const book = await saveBook({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || null,
+      description: data.description || null,
+      author: data.author || null,
+      publisher: data.publisher || null,
+      year: data.year || null,
+      isbn: data.isbn || null,
+      kind: data.kind || "document",
+      cover: await mediaRefFromUrl(data.coverUrl, "image"),
+      file: await mediaRefFromUrl(data.fileUrl, "document"),
+      external_url: data.externalUrl || null,
+      categories: data.categories || ["treatise"],
+      tags: data.tags || [],
+    });
 
-  const book = await saveBookAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    summary: data.summary || null,
-    description: data.description || null,
-    author: data.author || "Sheikh Muhammed Ferej",
-    publisher: data.publisher || null,
-    year: data.year || new Date().getFullYear(),
-    isbn: data.isbn || null,
-    kind: data.kind || "document",
-    cover: data.coverUrl
-      ? {
-          object: "media",
-          id: `med_bk_cov_${Date.now()}`,
-          kind: "image",
-          url: data.coverUrl,
-          mime_type: "image/jpeg",
-          width: 800,
-          height: 1200,
-          duration_seconds: null,
-        }
-      : null,
-    file: data.fileUrl
-      ? {
-          object: "media",
-          id: `med_bk_file_${Date.now()}`,
-          kind: "document",
-          url: data.fileUrl,
-          mime_type: "application/pdf",
-          width: null,
-          height: null,
-          duration_seconds: null,
-        }
-      : null,
-    external_url: data.externalUrl || null,
-    categories: data.categories || ["treatise"],
-    tags: data.tags || [],
+    refreshCache();
+    return { success: true as const, book };
   });
-
-  refreshCache();
-  return { success: true, book };
 }
 
 export async function deleteBookAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteBookAsync(id);
+  const deleted = await deleteBook(id);
   refreshCache();
   return { success: deleted };
 }
@@ -361,6 +368,7 @@ export async function deleteBookAction(id: string) {
 // ── Event Actions ──
 
 export async function saveEventAction(data: {
+  status?: "draft" | "published";
   id?: string;
   title: string;
   slug: string;
@@ -379,44 +387,35 @@ export async function saveEventAction(data: {
   tags?: string[];
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const event = await saveEvent({
+      status: data.status,
+      id: data.id,
+      title: data.title,
+      slug: data.slug,
+      summary: data.summary || null,
+      description: data.description || null,
+      starts_at: data.startsAt,
+      ends_at: data.endsAt || null,
+      timezone: data.timezone || "Africa/Addis_Ababa",
+      venue_name: data.venueName || null,
+      venue_address: data.venueAddress || null,
+      online_url: data.onlineUrl || null,
+      registration_required: data.registrationRequired ?? false,
+      capacity: data.capacity || null,
+      cover: await mediaRefFromUrl(data.coverUrl, "image"),
+      categories: data.categories || ["khutbah"],
+      tags: data.tags || [],
+    });
 
-  const event = await saveEventAsync({
-    id: data.id,
-    title: data.title,
-    slug: data.slug,
-    summary: data.summary || null,
-    description: data.description || null,
-    starts_at: data.startsAt,
-    ends_at: data.endsAt || null,
-    timezone: data.timezone || "Africa/Addis_Ababa",
-    venue_name: data.venueName || null,
-    venue_address: data.venueAddress || null,
-    online_url: data.onlineUrl || null,
-    registration_required: data.registrationRequired ?? false,
-    capacity: data.capacity || null,
-    cover: data.coverUrl
-      ? {
-          object: "media",
-          id: `med_evt_${Date.now()}`,
-          kind: "image",
-          url: data.coverUrl,
-          mime_type: "image/jpeg",
-          width: 1200,
-          height: 675,
-          duration_seconds: null,
-        }
-      : null,
-    categories: data.categories || ["khutbah"],
-    tags: data.tags || [],
+    refreshCache();
+    return { success: true as const, event };
   });
-
-  refreshCache();
-  return { success: true, event };
 }
 
 export async function deleteEventAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteEventAsync(id);
+  const deleted = await deleteEvent(id);
   refreshCache();
   return { success: deleted };
 }
@@ -427,27 +426,29 @@ export async function saveMediaAction(data: {
   id?: string;
   url: string;
   kind?: "image" | "audio" | "video" | "document";
+  title?: string;
+  description?: string;
+  thumbnailUrl?: string;
 }) {
   await assertAuthenticated();
+  return guarded(async () => {
+    const ref = await mediaRefFromUrl(data.url, data.kind || "image", {
+      id: data.id,
+      title: data.title?.trim() || null,
+      description: data.description?.trim() || null,
+      thumbnail_url: data.thumbnailUrl?.trim() || null,
+    });
+    if (!ref) throw new UserError("A media URL is required.");
+    const media = await saveMediaItem(ref);
 
-  const media = await saveMediaItemAsync({
-    object: "media",
-    id: data.id || `med_${Date.now()}`,
-    kind: data.kind || "image",
-    url: data.url,
-    mime_type: data.kind === "video" ? "video/mp4" : "image/jpeg",
-    width: 1200,
-    height: 800,
-    duration_seconds: null,
+    refreshCache();
+    return { success: true as const, media };
   });
-
-  refreshCache();
-  return { success: true, media };
 }
 
 export async function deleteMediaAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteMediaItemAsync(id);
+  const deleted = await deleteMediaItem(id);
   refreshCache();
   return { success: deleted };
 }
@@ -460,14 +461,14 @@ export async function updateInquiryStatusAction(
   notes?: string
 ) {
   await assertAuthenticated();
-  const updated = await updateInquiryStatusAsync(id, status, notes);
+  const updated = await updateInquiryStatus(id, status, notes);
   refreshCache();
   return { success: Boolean(updated), inquiry: updated };
 }
 
 export async function deleteInquiryAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteInquiryAsync(id);
+  const deleted = await deleteInquiry(id);
   refreshCache();
   return { success: deleted };
 }
@@ -481,17 +482,17 @@ export async function convertInquiryToFatwaAction(data: {
 }) {
   await assertAuthenticated();
 
-  const fatwa = await saveFatwaAsync({
+  const fatwa = await saveFatwa({
     title: data.title,
     slug: data.slug,
-    summary: `Scholarly ruling responding to community inquiry #${data.inquiryId}`,
+    summary: data.title,
     question: data.title,
     answer: data.answer,
-    categories: [data.category || "fiqh"],
+    categories: data.category ? [data.category] : [],
     published_at: new Date().toISOString(),
   });
 
-  await updateInquiryStatusAsync(data.inquiryId, "answered", `Converted to public Fatwa: ${fatwa.slug}`);
+  await updateInquiryStatus(data.inquiryId, "answered", `Converted to public Fatwa: ${fatwa.slug}`);
   refreshCache();
 
   return { success: true, fatwa };
@@ -505,38 +506,23 @@ export async function updateProfileAction(data: {
   biography?: string;
   location?: string;
   photoUrl?: string;
-  socials?: {
-    tiktok?: string;
-    youtube?: string;
-    facebook?: string;
-    telegram?: string;
-  };
+  socials?: Record<string, string | undefined>;
+  sections?: Partial<SectionMap>;
 }) {
   await assertAuthenticated();
 
-  const profile = await updateProfileAsync({
+  const current = await getProfile();
+  const socials = { ...current.socials };
+  for (const [key, value] of Object.entries(data.socials ?? {})) socials[key] = value?.trim() ?? "";
+
+  const profile = await updateProfile({
     name: data.name,
     headline: data.headline || null,
     biography: data.biography || null,
     location: data.location || null,
-    socials: {
-      tiktok: data.socials?.tiktok || "",
-      youtube: data.socials?.youtube || "",
-      facebook: data.socials?.facebook || "",
-      telegram: data.socials?.telegram || "",
-    },
-    photo: data.photoUrl
-      ? {
-          object: "media",
-          id: "med_portrait_custom",
-          kind: "image",
-          url: data.photoUrl,
-          mime_type: "image/jpeg",
-          width: 1280,
-          height: 1280,
-          duration_seconds: null,
-        }
-      : undefined,
+    socials,
+    sections: { ...current.sections, ...data.sections },
+    ...(data.photoUrl !== undefined && { photo: await mediaRefFromUrl(data.photoUrl, "image", { id: "med_portrait_custom" }) }),
   });
 
   refreshCache();
@@ -545,14 +531,14 @@ export async function updateProfileAction(data: {
 
 export async function updateJourneyAction(milestones: JourneyMilestone[]) {
   await assertAuthenticated();
-  const journey = await updateJourneyAsync(milestones);
+  const journey = await updateJourney(milestones);
   refreshCache();
   return { success: true, journey };
 }
 
 export async function updateQualificationsAction(qualifications: QualificationRecord[]) {
   await assertAuthenticated();
-  const quals = await updateQualificationsAsync(qualifications);
+  const quals = await updateQualifications(qualifications);
   refreshCache();
   return { success: true, qualifications: quals };
 }
@@ -562,9 +548,9 @@ export async function updateQualificationsAction(qualifications: QualificationRe
 export async function restoreDatabaseAction(jsonString: string) {
   await assertAuthenticated();
   try {
-    const db = importDatabaseJson(jsonString);
+    await importDatabaseJson(jsonString);
     refreshCache();
-    return { success: true, version: db.version };
+    return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message || "Failed to parse database JSON." };
   }
@@ -572,16 +558,16 @@ export async function restoreDatabaseAction(jsonString: string) {
 
 export async function resetDatabaseAction() {
   await assertAuthenticated();
-  const db = resetDatabase();
+  await resetDatabase();
   refreshCache();
-  return { success: true, version: db.version };
+  return { success: true };
 }
 
 // ── Certificate & Registration Admin Actions ──
 
 export async function revokeCertificateAction(id: string, reason?: string) {
   await assertAuthenticated();
-  const cert = await revokeCertificateAsync(id, reason);
+  const cert = await revokeCertificate(id, reason);
   refreshCache();
   return { success: Boolean(cert), certificate: cert };
 }
@@ -596,7 +582,7 @@ export async function issueCertificateAction(data: {
   grade_title?: string;
 }) {
   await assertAuthenticated();
-  const cert = await issueCertificateAsync(data);
+  const cert = await issueCertificate(data);
   refreshCache();
   return { success: true, certificate: cert };
 }
@@ -606,14 +592,97 @@ export async function updateEventRegistrationStatusAction(
   status: "confirmed" | "cancelled" | "attended"
 ) {
   await assertAuthenticated();
-  const updated = await updateEventRegistrationStatusAsync(id, status);
+  const updated = await updateEventRegistrationStatus(id, status);
   refreshCache();
   return { success: Boolean(updated), registration: updated };
 }
 
 export async function deleteEventRegistrationAction(id: string) {
   await assertAuthenticated();
-  const deleted = await deleteEventRegistrationAsync(id);
+  const deleted = await deleteEventRegistration(id);
+  refreshCache();
+  return { success: deleted };
+}
+
+// ── Course exam, enrollment & certificate management ──
+
+export interface ExamInput {
+  passingPercentage: number;
+  questions: { id?: string; question: string; options: string[]; correctOptionIndex: number; explanation?: string }[];
+}
+
+export async function getCourseExamAction(courseSlug: string): Promise<ExamInput | null> {
+  await assertAuthenticated();
+  const exam = await getCourseExam(courseSlug);
+  if (!exam) return null;
+  return {
+    passingPercentage: exam.passing_percentage,
+    questions: exam.questions.map((q) => ({
+      id: q.id,
+      question: q.question,
+      options: q.options,
+      correctOptionIndex: q.correct_option_index,
+      explanation: q.explanation,
+    })),
+  };
+}
+
+export async function saveCourseExamAction(courseSlug: string, input: ExamInput) {
+  await assertAuthenticated();
+  return guarded(async () => {    const course = await getCourseByIdOrSlug(courseSlug);
+    if (!course) throw new UserError("Course not found.");
+
+    const passing = Math.round(input.passingPercentage);
+    if (!(passing >= 1 && passing <= 100)) throw new UserError("Passing percentage must be between 1 and 100.");
+    if (input.questions.length === 0) throw new UserError("Add at least one question.");
+
+    const questions = input.questions.map((q, i) => {
+      const options = q.options.map((o) => o.trim()).filter(Boolean);
+      if (!q.question.trim()) throw new UserError(`Question ${i + 1} has no text.`);
+      if (options.length < 2) throw new UserError(`Question ${i + 1} needs at least two options.`);
+      // The correct index refers to the trimmed list, so remap it if blank options were dropped.
+      const correctText = q.options[q.correctOptionIndex]?.trim();
+      const correct = options.indexOf(correctText ?? "");
+      if (correct < 0) throw new UserError(`Question ${i + 1} needs a correct answer selected.`);
+      return {
+        id: q.id || `q${i + 1}`,
+        question: q.question.trim(),
+        options,
+        correct_option_index: correct,
+        ...(q.explanation?.trim() && { explanation: q.explanation.trim() }),
+      };
+    });
+
+    await saveCourseExam(course.slug, { course_id: course.id, passing_percentage: passing, questions });
+    refreshCache();
+    return { success: true as const };
+  });
+}
+
+export async function deleteCourseExamAction(courseSlug: string) {
+  await assertAuthenticated();
+  const deleted = await deleteCourseExam(courseSlug);
+  refreshCache();
+  return { success: deleted };
+}
+
+export async function updateEnrollmentStatusAction(id: string, status: "enrolled" | "in_progress" | "completed") {
+  await assertAuthenticated();
+  const ok = await updateEnrollmentStatus(id, status);
+  refreshCache();
+  return { success: ok };
+}
+
+export async function deleteEnrollmentAction(id: string) {
+  await assertAuthenticated();
+  const deleted = await deleteCourseEnrollment(id);
+  refreshCache();
+  return { success: deleted };
+}
+
+export async function deleteCertificateAction(id: string) {
+  await assertAuthenticated();
+  const deleted = await deleteCertificate(id);
   refreshCache();
   return { success: deleted };
 }

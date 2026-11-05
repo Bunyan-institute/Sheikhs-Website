@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations } from "next-intl";
 import {
   Download,
@@ -41,6 +42,7 @@ export function BackupClient({
   initialJson: string;
   metrics: SystemMetrics;
 }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.backup");
   const tCommon = useTranslations("admin.common");
 
@@ -93,15 +95,11 @@ export function BackupClient({
 
   const handleRestore = async () => {
     if (!restoreInput.trim()) {
-      alert(t("selectFile"));
+      toast.error(t("selectFile"));
       return;
     }
 
-    if (
-      !confirm(
-        t("restoreDesc")
-      )
-    ) {
+    if (!(await confirm({ title: t("restoreBackup"), message: t("restoreDesc"), confirmLabel: t("restoreButton"), danger: true }))) {
       return;
     }
 
@@ -113,7 +111,7 @@ export function BackupClient({
       if (res.success) {
         setFeedback({
           type: "success",
-          message: `${tCommon("success")}: v${res.version}`,
+          message: tCommon("success"),
         });
         setJsonContent(restoreInput.trim());
       } else {
@@ -133,9 +131,12 @@ export function BackupClient({
   };
 
   const handleReset = async () => {
-    const confirmed = prompt(
-      'Type "RESET" to confirm restore to seed data:'
-    );
+    const confirmed = await prompt({
+      title: "Reset to seed data",
+      message: 'This replaces ALL content with the bundled seed data. Type "RESET" to confirm.',
+      placeholder: "RESET",
+      confirmLabel: "Reset",
+    });
     if (confirmed !== "RESET") return;
 
     setIsLoading(true);

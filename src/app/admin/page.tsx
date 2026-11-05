@@ -31,8 +31,8 @@ export default async function AdminDashboardPage() {
   const tDash = createTranslator({ locale, messages, namespace: "admin.dashboard" });
   const tCommon = createTranslator({ locale, messages, namespace: "admin.common" });
 
-  const metrics = getSystemMetrics();
-  const inquiries = getAllInquiries().slice(0, 5);
+  const metrics = await getSystemMetrics();
+  const inquiries = (await getAllInquiries()).slice(0, 5);
 
   return (
     <div className="space-y-8">

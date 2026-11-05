@@ -10,7 +10,9 @@ import { locales, localeLabels, type Locale } from "@/i18n/config";
 export default function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const from = searchParams.get("from") || "/admin";
+  const requestedFrom = searchParams.get("from") || "/admin";
+  // Only follow same-site admin paths (avoids open redirects).
+  const from = requestedFrom.startsWith("/admin") && !requestedFrom.startsWith("//") ? requestedFrom : "/admin";
 
   const tLogin = useTranslations("admin.login");
   const tCommon = useTranslations("admin.common");

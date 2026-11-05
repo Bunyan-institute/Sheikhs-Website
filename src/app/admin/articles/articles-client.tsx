@@ -3,11 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Search, Clock } from "lucide-react";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
 import { saveArticleAction, deleteArticleAction } from "../actions";
 import type { PublicArticle } from "@/lib/api/types";
 
 export function ArticlesClient({ initialArticles }: { initialArticles: PublicArticle[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.articles");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -16,6 +19,7 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingArticle, setEditingArticle] = useState<PublicArticle | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -30,6 +34,7 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
   const [coverUrl, setCoverUrl] = useState("");
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingArticle(null);
     setTitle("");
     setSlug("");
@@ -43,6 +48,7 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
   };
 
   const openEditModal = (a: PublicArticle) => {
+    setPublished(a.status !== "draft");
     setEditingArticle(a);
     setTitle(a.title);
     setSlug(a.slug);
@@ -75,6 +81,7 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
 
     try {
       const res = await saveArticleAction({
+        status: published ? "published" : "draft",
         id: editingArticle?.id,
         title,
         slug,
@@ -85,6 +92,10 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
         tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
         coverUrl: coverUrl || undefined,
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       if (editingArticle) {
         setArticles((prev) => prev.map((a) => (a.id === editingArticle.id ? res.article : a)));
@@ -95,20 +106,20 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
       setIsModalOpen(false);
       setFeedback(t("savedSuccess"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, aTitle: string) => {
-    if (!confirm(`${t("deleteConfirm")} (${aTitle})`)) return;
+    if (!(await confirm(`${t("deleteConfirm")} (${aTitle})`))) return;
     try {
       await deleteArticleAction(id);
       setArticles((prev) => prev.filter((a) => a.id !== id));
       setFeedback(t("deletedSuccess"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -306,13 +317,7 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
                 </div>
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1">{t("fieldCoverUrl")}</label>
-                  <input
-                    type="text"
-                    value={coverUrl}
-                    onChange={(e) => setCoverUrl(e.target.value)}
-                    placeholder="/images/photo_2_...jpg"
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                  />
+                  <UploadField value={coverUrl} onChange={setCoverUrl} accept="image/*" placeholder="/images/photo_2_...jpg" />
                 </div>
               </div>
 
@@ -328,6 +333,15 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded font-mono text-xs bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
 
               <div className="pt-4 border-t border-[#E0D8CE] flex justify-end gap-3">
                 <button

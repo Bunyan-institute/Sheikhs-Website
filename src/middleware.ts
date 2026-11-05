@@ -1,35 +1,32 @@
 import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { SESSION_COOKIE_NAME, verifySessionSignature } from "./lib/auth/token";
 
 const intlMiddleware = createMiddleware(routing);
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Intercept Admin routes
   if (pathname.startsWith("/admin")) {
-    if (pathname === "/admin/login") {
-      // If user already has a session, redirect to /admin
-      const sessionCookie = request.cookies.get("sheikh_admin_session")?.value;
-      if (sessionCookie) {
-        return NextResponse.redirect(new URL("/admin", request.url));
-      }
-      return NextResponse.next();
-    }
+    // Signature + expiry are checked here; revocation (and the logged-in redirect away from /admin/login)
+    // is handled server-side in the admin layout, which can read the session table.
+    const session = await verifySessionSignature(request.cookies.get(SESSION_COOKIE_NAME)?.value);
+    const isLogin = pathname === "/admin/login";
 
-    // Require session cookie for /admin and /admin/*
-    const sessionCookie = request.cookies.get("sheikh_admin_session")?.value;
-    if (!sessionCookie) {
+    if (!isLogin && !session) {
       const loginUrl = new URL("/admin/login", request.url);
       loginUrl.searchParams.set("from", pathname);
-      return NextResponse.redirect(loginUrl);
+      const res = NextResponse.redirect(loginUrl);
+      if (request.cookies.has(SESSION_COOKIE_NAME)) res.cookies.delete(SESSION_COOKIE_NAME);
+      return res;
     }
 
-    return NextResponse.next();
+    const headers = new Headers(request.headers);
+    headers.set("x-pathname", pathname);
+    return NextResponse.next({ request: { headers } });
   }
 
-  // Fallback to public multilingual routing
   return intlMiddleware(request);
 }
 

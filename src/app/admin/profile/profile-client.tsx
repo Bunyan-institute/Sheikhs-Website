@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations } from "next-intl";
 import {
   User,
@@ -22,7 +24,7 @@ import {
   updateJourneyAction,
   updateQualificationsAction,
 } from "../actions";
-import type { PublicProfile } from "@/lib/api/types";
+import type { PublicProfile, SectionMap } from "@/lib/api/types";
 import type { JourneyMilestone, QualificationRecord } from "@/lib/db/types";
 
 export function ProfileClient({
@@ -34,6 +36,7 @@ export function ProfileClient({
   initialJourney: JourneyMilestone[];
   initialQualifications: QualificationRecord[];
 }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.profile");
   const tCommon = useTranslations("admin.common");
 
@@ -51,6 +54,8 @@ export function ProfileClient({
   const [youtube, setYoutube] = useState(initialProfile.socials?.youtube || "");
   const [facebook, setFacebook] = useState(initialProfile.socials?.facebook || "");
   const [telegram, setTelegram] = useState(initialProfile.socials?.telegram || "");
+  const [playStore, setPlayStore] = useState(initialProfile.socials?.play_store || "");
+  const [sections, setSections] = useState<SectionMap>(initialProfile.sections);
 
   // Qualifications State
   const [qualifications, setQualifications] = useState<QualificationRecord[]>(initialQualifications);
@@ -75,11 +80,13 @@ export function ProfileClient({
           youtube,
           facebook,
           telegram,
+          play_store: playStore,
         },
+        sections,
       });
       setFeedback(t("savedNotice"));
     } catch (err: any) {
-      alert(tCommon("error") + ": " + err.message);
+      toast.error(tCommon("error") + ": " + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -92,7 +99,7 @@ export function ProfileClient({
       await updateQualificationsAction(qualifications);
       setFeedback(t("savedNotice"));
     } catch (err: any) {
-      alert(tCommon("error") + ": " + err.message);
+      toast.error(tCommon("error") + ": " + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -129,7 +136,7 @@ export function ProfileClient({
       await updateJourneyAction(journey);
       setFeedback(t("savedNotice"));
     } catch (err: any) {
-      alert(tCommon("error") + ": " + err.message);
+      toast.error(tCommon("error") + ": " + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -330,6 +337,36 @@ export function ProfileClient({
 
                 <div>
                   <label className="block text-xs font-semibold text-[#2D3436] mb-1">
+                    Google Play app URL
+                  </label>
+                  <input
+                    type="url"
+                    value={playStore}
+                    onChange={(e) => setPlayStore(e.target.value)}
+                    placeholder="https://play.google.com/store/apps/details?id=..."
+                    className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
+                  />
+                </div>
+
+                <fieldset className="sm:col-span-2 border border-[#E0D8CE] rounded p-3">
+                  <legend className="px-1 text-xs font-semibold text-[#2D3436]">Public sections (shown in navigation)</legend>
+                  <div className="flex flex-wrap gap-x-5 gap-y-2">
+                    {(Object.keys(sections) as (keyof SectionMap)[]).map((key) => (
+                      <label key={key} className="inline-flex items-center gap-2 text-xs text-[#2D3436] capitalize">
+                        <input
+                          type="checkbox"
+                          checked={sections[key]}
+                          onChange={(e) => setSections({ ...sections, [key]: e.target.checked })}
+                          className="accent-[#1B5E20]"
+                        />
+                        {key}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+
+                <div>
+                  <label className="block text-xs font-semibold text-[#2D3436] mb-1">
                     TikTok Profile URL
                   </label>
                   <input
@@ -382,13 +419,7 @@ export function ProfileClient({
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
                   Portrait Image URL
                 </label>
-                <input
-                  type="text"
-                  value={photoUrl}
-                  onChange={(e) => setPhotoUrl(e.target.value)}
-                  placeholder="/images/sheikh-portrait.jpg"
-                  className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                />
+                <UploadField value={photoUrl} onChange={setPhotoUrl} accept="image/*" placeholder="/images/sheikh-portrait.jpg" />
               </div>
             </div>
           </div>

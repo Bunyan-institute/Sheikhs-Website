@@ -15,12 +15,16 @@ import {
   X,
   Loader2,
   CheckCircle,
+  Pencil,
 } from "lucide-react";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations } from "next-intl";
 import { saveMediaAction, deleteMediaAction } from "../actions";
 import type { MediaRef } from "@/lib/api/types";
 
 export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.media");
   const tCommon = useTranslations("admin.common");
 
@@ -35,6 +39,9 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
   const [mediaUrl, setMediaUrl] = useState("");
   const [mediaKind, setMediaKind] = useState<"image" | "audio" | "video" | "document">("image");
   const [mediaId, setMediaId] = useState("");
+  const [mediaTitle, setMediaTitle] = useState("");
+  const [mediaDescription, setMediaDescription] = useState("");
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
 
   const filteredItems = mediaList.filter((m) => {
     if (activeFilter === "all") return true;
@@ -50,7 +57,20 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
   const openNewModal = () => {
     setMediaUrl("");
     setMediaKind("image");
-    setMediaId(`med_${Date.now()}`);
+    setMediaId("");
+    setMediaTitle("");
+    setMediaDescription("");
+    setThumbnailUrl("");
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (m: MediaRef) => {
+    setMediaUrl(m.url);
+    setMediaKind(m.kind);
+    setMediaId(m.id);
+    setMediaTitle(m.title ?? "");
+    setMediaDescription(m.description ?? "");
+    setThumbnailUrl(m.thumbnail_url ?? "");
     setIsModalOpen(true);
   };
 
@@ -66,26 +86,33 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
         id: mediaId.trim() || undefined,
         url: mediaUrl.trim(),
         kind: mediaKind,
+        title: mediaTitle,
+        description: mediaDescription,
+        thumbnailUrl,
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       setMediaList((prev) => [res.media, ...prev.filter((m) => m.id !== res.media.id)]);
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm(tCommon("confirmDelete"))) return;
+    if (!(await confirm(tCommon("confirmDelete")))) return;
     try {
       await deleteMediaAction(id);
       setMediaList((prev) => prev.filter((m) => m.id !== id));
       setFeedback(tCommon("successDelete"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -181,8 +208,8 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
             {/* Details */}
             <div className="p-3 flex-1 flex flex-col justify-between">
               <div>
-                <p className="text-[11px] font-mono text-[#2D3436] truncate mb-1" title={item.id}>
-                  {item.id}
+                <p className="text-[11px] text-[#2D3436] truncate mb-1 font-semibold" title={item.title ?? item.id}>
+                  {item.title ?? item.id}
                 </p>
                 <p className="text-[10px] text-[#636E72] font-mono truncate" title={item.url}>
                   {item.url}
@@ -210,6 +237,9 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
                 </button>
 
                 <div className="flex items-center gap-1">
+                  <button onClick={() => openEditModal(item)} className="p-1 text-[#636E72] hover:text-[#1B5E20]" title={tCommon("edit")} aria-label={`${tCommon("edit")} ${item.title ?? item.id}`}>
+                    <Pencil className="w-3.5 h-3.5" />
+                  </button>
                   <a
                     href={item.url}
                     target="_blank"
@@ -279,27 +309,24 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
                   {t("fieldUrl")} *
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={mediaUrl}
-                  onChange={(e) => setMediaUrl(e.target.value)}
-                  placeholder="https://... or /images/..."
-                  className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                />
+                <UploadField value={mediaUrl} onChange={setMediaUrl} onUploaded={(f) => setMediaKind(f.mime_type.startsWith("image/") ? "image" : f.mime_type.startsWith("audio/") ? "audio" : f.mime_type.startsWith("video/") ? "video" : "document")} accept="image/*,audio/*,video/mp4,video/webm,application/pdf" placeholder="https://... or /images/..." />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#2D3436] mb-1">
                   {t("fieldTitle")}
                 </label>
-                <input
-                  type="text"
-                  value={mediaId}
-                  onChange={(e) => setMediaId(e.target.value)}
-                  placeholder="med_example"
-                  className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
-                />
+                <input type="text" value={mediaTitle} onChange={(e) => setMediaTitle(e.target.value)} placeholder="Shown in the public media gallery (leave empty to keep it private as a cover/file asset)" className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#2D3436] mb-1">Description</label>
+                <textarea rows={2} value={mediaDescription} onChange={(e) => setMediaDescription(e.target.value)} className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#2D3436] mb-1">Thumbnail (for video/audio/document)</label>
+                <UploadField value={thumbnailUrl} onChange={setThumbnailUrl} accept="image/*" placeholder="/uploads/thumb.jpg or https://..." />
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E0D8CE]">

@@ -10,12 +10,14 @@ import {
   Plus,
   ShieldCheck,
   Ban,
+  Trash2,
   Mail,
   X,
   Loader2,
 } from "lucide-react";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
-import { revokeCertificateAction, issueCertificateAction } from "../actions";
+import { revokeCertificateAction, issueCertificateAction, deleteCertificateAction } from "../actions";
 import type { IssuedCertificateRecord } from "@/lib/db/types";
 import type { PublicCourse } from "@/lib/api/types";
 
@@ -26,6 +28,7 @@ export function CertificatesClient({
   initialCertificates: IssuedCertificateRecord[];
   courses: PublicCourse[];
 }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.certificates");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -54,11 +57,24 @@ export function CertificatesClient({
     );
   });
 
+  const handleDelete = async (id: string, sName: string) => {
+    if (!(await confirm({ message: `Permanently delete certificate ${id} (${sName})? Its public verification link will stop working. Revoke it instead if you want the link to show it as invalid.` }))) return;
+    try {
+      await deleteCertificateAction(id);
+      setCertificates((prev) => prev.filter((c) => c.id !== id));
+      setFeedback(`Certificate ${id} deleted.`);
+    } catch (err: any) {
+      toast.error("Error: " + err.message);
+    }
+  };
+
   const handleRevoke = async (id: string, sName: string) => {
-    const reason = prompt(
-      `Enter revocation reason for certificate ${id} (Student: ${sName}):`,
-      "Revoked by administrative review"
-    );
+    const reason = await prompt({
+      title: "Revoke certificate",
+      message: `Enter revocation reason for certificate ${id} (Student: ${sName}):`,
+      defaultValue: "Revoked by administrative review",
+      confirmLabel: "Revoke",
+    });
     if (!reason) return;
 
     try {
@@ -70,14 +86,14 @@ export function CertificatesClient({
         setFeedback(`Certificate ${id} has been officially revoked.`);
       }
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
   const handleIssueSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!studentName.trim() || !studentEmail.trim()) {
-      alert("Student name and email are required.");
+      toast.error("Student name and email are required.");
       return;
     }
 
@@ -108,7 +124,7 @@ export function CertificatesClient({
         setStudentEmail("");
       }
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -303,6 +319,14 @@ export function CertificatesClient({
                         {t("revoked")}
                       </span>
                     )}
+                    <button
+                      onClick={() => handleDelete(cert.id, cert.student_name)}
+                      className="ms-1 p-1.5 text-[#636E72] hover:text-red-700 hover:bg-red-50 rounded transition-colors"
+                      title="Delete record"
+                      aria-label={`Delete certificate ${cert.id}`}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </td>
                 </tr>
               ))}

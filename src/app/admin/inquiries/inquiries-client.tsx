@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations } from "next-intl";
 import {
   HelpCircle,
@@ -27,6 +28,7 @@ import {
 import type { InquiryRecord } from "@/lib/db/types";
 
 export function InquiriesClient({ initialInquiries }: { initialInquiries: InquiryRecord[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const router = useRouter();
   const t = useTranslations("admin.inquiries");
   const tCommon = useTranslations("admin.common");
@@ -72,19 +74,19 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
         router.refresh();
       }
     } catch (err: any) {
-      alert(tCommon("error") + ": " + err.message);
+      toast.error(tCommon("error") + ": " + err.message);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm(tCommon("deleteConfirm"))) return;
+    if (!(await confirm(tCommon("deleteConfirm")))) return;
     try {
       await deleteInquiryAction(id);
       setInquiries((prev) => prev.filter((i) => i.id !== id));
       setFeedback(tCommon("success"));
       router.refresh();
     } catch (err: any) {
-      alert(tCommon("error") + ": " + err.message);
+      toast.error(tCommon("error") + ": " + err.message);
     }
   };
 
@@ -138,7 +140,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
         router.refresh();
       }
     } catch (err: any) {
-      alert(tCommon("error") + ": " + err.message);
+      toast.error(tCommon("error") + ": " + err.message);
     } finally {
       setIsConverting(false);
     }

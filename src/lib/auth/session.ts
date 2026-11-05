@@ -1,79 +1,96 @@
+import crypto from "crypto";
 import { cookies } from "next/headers";
+import { execute, queryOne } from "@/lib/db/sqlite-client";
+import { ensureTablesExist } from "@/lib/db/sqlite-schema";
+import {
+  SESSION_COOKIE_NAME,
+  SESSION_MAX_AGE_SECONDS,
+  signSession,
+  verifySessionSignature,
+} from "./token";
 
-const SESSION_COOKIE_NAME = "sheikh_admin_session";
-const DEFAULT_SECRET = "sheikh_ferej_portal_hmac_secret_key_2026_safe";
+export { SESSION_COOKIE_NAME, SESSION_MAX_AGE_SECONDS };
 
-function getSecretKey(): string {
-  return process.env.ADMIN_SESSION_SECRET || DEFAULT_SECRET;
+const sha256 = (v: string) => crypto.createHash("sha256").update(v).digest();
+
+/**
+ * Admin credentials come from the environment:
+ *   ADMIN_USERNAME, and either ADMIN_PASSWORD_HASH ("salt:hash", see scripts/hash-password.mjs) or ADMIN_PASSWORD.
+ * Production refuses to authenticate without them; development falls back to admin / sheikh_admin_2026! with a warning.
+ */
+function getConfiguredCredentials(): { username: string; passwordHash?: string; password?: string } | null {
+  const username = process.env.ADMIN_USERNAME;
+  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
+  const password = process.env.ADMIN_PASSWORD;
+  if (username && (passwordHash || password)) return { username, passwordHash, password };
+  if (process.env.NODE_ENV === "production") return null;
+  const g = globalThis as unknown as { __warnedDevCreds?: boolean };
+  if (!g.__warnedDevCreds) {
+    g.__warnedDevCreds = true;
+    console.warn("[auth] ADMIN_USERNAME/ADMIN_PASSWORD not set: using the development login (admin / sheikh_admin_2026!).");
+  }
+  return { username: "admin", password: "sheikh_admin_2026!" };
 }
 
-export function getAdminCredentials() {
-  return {
-    username: process.env.ADMIN_USERNAME || "admin",
-    password: process.env.ADMIN_PASSWORD || "sheikh_admin_2026!",
-  };
+export function isAdminConfigured(): boolean {
+  return getConfiguredCredentials() !== null;
+}
+
+export function hashPassword(password: string, salt = crypto.randomBytes(16).toString("hex")): string {
+  return `${salt}:${crypto.scryptSync(password, salt, 64).toString("hex")}`;
+}
+
+function passwordMatches(input: string, creds: NonNullable<ReturnType<typeof getConfiguredCredentials>>): boolean {
+  if (creds.passwordHash) {
+    const [salt, hash] = creds.passwordHash.split(":");
+    if (!salt || !hash) return false;
+    const expected = Buffer.from(hash, "hex");
+    const actual = crypto.scryptSync(input, salt, expected.length);
+    return actual.length === expected.length && crypto.timingSafeEqual(actual, expected);
+  }
+  return crypto.timingSafeEqual(sha256(input), sha256(creds.password ?? ""));
 }
 
 export function verifyAdminCredentials(user: string, pass: string): boolean {
-  const creds = getAdminCredentials();
-  return user.trim() === creds.username.trim() && pass === creds.password;
+  const creds = getConfiguredCredentials();
+  if (!creds) return false;
+  const userOk = crypto.timingSafeEqual(sha256(user.trim()), sha256(creds.username.trim()));
+  const passOk = passwordMatches(pass, creds);
+  return userOk && passOk;
 }
 
-async function hmacSign(data: string, secret: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"]
-  );
-  const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(data));
-  return Buffer.from(signature).toString("base64url");
-}
-
-async function hmacVerify(data: string, signature: string, secret: string): Promise<boolean> {
-  const expectedSig = await hmacSign(data, secret);
-  return expectedSig === signature;
-}
-
-export async function createSessionToken(username: string): Promise<string> {
-  const payload = {
+/** Creates a server-side session record and returns the signed cookie value. */
+export async function createSession(username: string): Promise<string> {
+  await ensureTablesExist();
+  const sid = crypto.randomUUID();
+  const exp = Date.now() + SESSION_MAX_AGE_SECONDS * 1000;
+  await execute("DELETE FROM admin_sessions WHERE expires_at < ?;", [Date.now()]);
+  await execute("INSERT INTO admin_sessions (id, username, created_at, expires_at) VALUES (?, ?, ?, ?);", [
+    sid,
     username,
-    exp: Date.now() + 1000 * 60 * 60 * 24 * 7, // 7 days
-  };
-  const payloadStr = JSON.stringify(payload);
-  const base64Payload = Buffer.from(payloadStr).toString("base64url");
-  const signature = await hmacSign(base64Payload, getSecretKey());
-  return `${base64Payload}.${signature}`;
+    new Date().toISOString(),
+    exp,
+  ]);
+  return signSession({ sid, username, exp });
 }
 
-export async function verifySessionToken(token: string): Promise<{ username: string } | null> {
-  try {
-    const parts = token.split(".");
-    if (parts.length !== 2) return null;
-    const [base64Payload, signature] = parts;
-    const isValid = await hmacVerify(base64Payload, signature, getSecretKey());
-    if (!isValid) return null;
+export async function destroySession(token: string | undefined): Promise<void> {
+  const payload = await verifySessionSignature(token);
+  if (!payload) return;
+  await ensureTablesExist();
+  await execute("DELETE FROM admin_sessions WHERE id = ?;", [payload.sid]);
+}
 
-    const payloadStr = Buffer.from(base64Payload, "base64url").toString("utf-8");
-    const payload = JSON.parse(payloadStr);
-
-    if (!payload.exp || Date.now() > payload.exp) {
-      return null;
-    }
-
-    return { username: payload.username };
-  } catch {
-    return null;
-  }
+/** Valid signature, unexpired, and not revoked (the session row must still exist). */
+export async function verifySessionToken(token: string | undefined): Promise<{ username: string } | null> {
+  const payload = await verifySessionSignature(token);
+  if (!payload) return null;
+  await ensureTablesExist();
+  const row = await queryOne("SELECT id FROM admin_sessions WHERE id = ? AND expires_at > ?;", [payload.sid, Date.now()]);
+  return row ? { username: payload.username } : null;
 }
 
 export async function getSessionUser(): Promise<{ username: string } | null> {
   const cookieStore = await cookies();
-  const cookie = cookieStore.get(SESSION_COOKIE_NAME);
-  if (!cookie || !cookie.value) return null;
-  return verifySessionToken(cookie.value);
+  return verifySessionToken(cookieStore.get(SESSION_COOKIE_NAME)?.value);
 }
-
-export { SESSION_COOKIE_NAME };

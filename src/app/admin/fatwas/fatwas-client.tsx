@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Search } from "lucide-react";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
 import { saveFatwaAction, deleteFatwaAction } from "../actions";
 import type { PublicFatwa } from "@/lib/api/types";
 
 export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.fatwas");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -16,6 +18,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingFatwa, setEditingFatwa] = useState<PublicFatwa | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -28,6 +31,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
   const [tags, setTags] = useState("");
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingFatwa(null);
     setTitle("");
     setSlug("");
@@ -39,6 +43,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
   };
 
   const openEditModal = (f: PublicFatwa) => {
+    setPublished(f.status !== "draft");
     setEditingFatwa(f);
     setTitle(f.title);
     setSlug(f.slug);
@@ -69,6 +74,7 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
 
     try {
       const res = await saveFatwaAction({
+        status: published ? "published" : "draft",
         id: editingFatwa?.id,
         title,
         slug,
@@ -77,6 +83,10 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
         categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
         tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       if (editingFatwa) {
         setFatwas((prev) => prev.map((f) => (f.id === editingFatwa.id ? res.fatwa : f)));
@@ -87,20 +97,20 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, fTitle: string) => {
-    if (!confirm(`${tCommon("confirmDelete")} (${fTitle})`)) return;
+    if (!(await confirm(`${tCommon("confirmDelete")} (${fTitle})`))) return;
     try {
       await deleteFatwaAction(id);
       setFatwas((prev) => prev.filter((f) => f.id !== id));
       setFeedback(tCommon("successDelete"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -294,6 +304,15 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
 
               <div className="pt-4 border-t border-[#E0D8CE] flex justify-end gap-3">
                 <button

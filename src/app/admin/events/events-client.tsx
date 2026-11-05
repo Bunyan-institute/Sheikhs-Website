@@ -19,6 +19,7 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
 import { saveEventAction, deleteEventAction } from "../actions";
 import type { PublicEvent } from "@/lib/api/types";
@@ -44,6 +45,7 @@ export function EventsClient({
   initialEvents: PublicEvent[];
   initialRegistrations?: EventRegistrationRecord[];
 }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.events");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -54,6 +56,7 @@ export function EventsClient({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEventForAttendees, setSelectedEventForAttendees] = useState<PublicEvent | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingEvent, setEditingEvent] = useState<PublicEvent | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -81,6 +84,7 @@ export function EventsClient({
   });
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingEvent(null);
     setTitle("");
     setSlug("");
@@ -103,6 +107,7 @@ export function EventsClient({
   };
 
   const openEditModal = (evt: PublicEvent) => {
+    setPublished(evt.status !== "draft");
     setEditingEvent(evt);
     setTitle(evt.title);
     setSlug(evt.slug);
@@ -135,7 +140,7 @@ export function EventsClient({
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !startsAt) {
-      alert("Title and start time are required.");
+      toast.error("Title and start time are required.");
       return;
     }
 
@@ -144,6 +149,7 @@ export function EventsClient({
 
     try {
       const res = await saveEventAction({
+        status: published ? "published" : "draft",
         id: editingEvent?.id,
         title,
         slug,
@@ -158,6 +164,10 @@ export function EventsClient({
         categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
         coverUrl: coverUrl || undefined,
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       if (editingEvent) {
         setEvents((prev) => prev.map((item) => (item.id === editingEvent.id ? res.event : item)));
@@ -168,20 +178,20 @@ export function EventsClient({
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, eTitle: string) => {
-    if (!confirm(`${tCommon("confirmDelete")} (${eTitle})`)) return;
+    if (!(await confirm(`${tCommon("confirmDelete")} (${eTitle})`))) return;
     try {
       await deleteEventAction(id);
       setEvents((prev) => prev.filter((item) => item.id !== id));
       setFeedback(tCommon("successDelete"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -490,6 +500,15 @@ export function EventsClient({
                   className="w-full text-xs px-3 py-2 border border-[#E0D8CE] rounded focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
 
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E0D8CE]">
                 <button

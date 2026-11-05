@@ -16,11 +16,14 @@ import {
   Loader2,
   CheckCircle,
 } from "lucide-react";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
 import { saveLectureAction, deleteLectureAction } from "../actions";
 import type { PublicLecture } from "@/lib/api/types";
 
 export default function AdminLecturesPage() {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.lectures");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -31,6 +34,7 @@ export default function AdminLecturesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingLecture, setEditingLecture] = useState<PublicLecture | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -42,6 +46,7 @@ export default function AdminLecturesPage() {
   const [audioUrl, setAudioUrl] = useState("");
   const [durationMinutes, setDurationMinutes] = useState(45);
   const [seriesId, setSeriesId] = useState("");
+  const [seriesOptions, setSeriesOptions] = useState<{ id: string; title: string }[]>([]);
   const [categories, setCategories] = useState("Lectures");
   const [tags, setTags] = useState("");
   const [transcript, setTranscript] = useState("");
@@ -52,6 +57,7 @@ export default function AdminLecturesPage() {
       if (res.ok) {
         const data = await res.json();
         setLectures(data.lectures || []);
+        setSeriesOptions(data.series || []);
       }
     } catch {
       // fallback
@@ -65,6 +71,7 @@ export default function AdminLecturesPage() {
   }, []);
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingLecture(null);
     setTitle("");
     setSlug("");
@@ -80,6 +87,7 @@ export default function AdminLecturesPage() {
   };
 
   const openEditModal = (lec: PublicLecture) => {
+    setPublished(lec.status !== "draft");
     setEditingLecture(lec);
     setTitle(lec.title);
     setSlug(lec.slug);
@@ -112,7 +120,8 @@ export default function AdminLecturesPage() {
     setFeedback(null);
 
     try {
-      await saveLectureAction({
+      const res = await saveLectureAction({
+        status: published ? "published" : "draft",
         id: editingLecture?.id,
         title,
         slug,
@@ -121,31 +130,34 @@ export default function AdminLecturesPage() {
         audioUrl: audioUrl || undefined,
         durationSeconds: durationMinutes * 60,
         seriesId: seriesId || undefined,
-        seriesTitle: seriesId ? "Explanation of Riyad us-Saliheen" : undefined,
         categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
         tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
         transcript: transcript || undefined,
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
       fetchLectures();
     } catch (err: any) {
-      alert("Error saving lecture: " + err.message);
+      toast.error("Error saving lecture: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, lecTitle: string) => {
-    if (!confirm(`${tCommon("confirmDelete")} (${lecTitle})`)) return;
+    if (!(await confirm(`${tCommon("confirmDelete")} (${lecTitle})`))) return;
 
     try {
       await deleteLectureAction(id);
       setFeedback(tCommon("successDelete"));
       setLectures((prev) => prev.filter((l) => l.id !== id));
     } catch (err: any) {
-      alert("Failed to delete: " + err.message);
+      toast.error("Failed to delete: " + err.message);
     }
   };
 
@@ -412,26 +424,14 @@ export default function AdminLecturesPage() {
                     <Video className="w-3.5 h-3.5 text-red-600" />
                     <span>{t("fieldYoutubeUrl")}</span>
                   </label>
-                  <input
-                    type="url"
-                    value={videoUrl}
-                    onChange={(e) => setVideoUrl(e.target.value)}
-                    placeholder="https://www.youtube.com/watch?v=..."
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
-                  />
+                  <UploadField value={videoUrl} onChange={setVideoUrl} accept="video/mp4,video/webm" placeholder="https://www.youtube.com/watch?v=..." />
                 </div>
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1 flex items-center gap-1.5">
                     <AudioLines className="w-3.5 h-3.5 text-[#1B5E20]" />
                     <span>{t("fieldAudioUrl")}</span>
                   </label>
-                  <input
-                    type="url"
-                    value={audioUrl}
-                    onChange={(e) => setAudioUrl(e.target.value)}
-                    placeholder="https://.../lessons/lesson-01.mp3"
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
-                  />
+                  <UploadField value={audioUrl} onChange={setAudioUrl} accept="audio/*" placeholder="https://.../lessons/lesson-01.mp3" />
                 </div>
               </div>
 
@@ -444,7 +444,9 @@ export default function AdminLecturesPage() {
                     className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
                   >
                     <option value="">Standalone</option>
-                    <option value="ser-riyadus-saliheen">Riyad us-Saliheen (ሪያዱ ሷሊሂን)</option>
+                    {seriesOptions.map((s) => (
+                      <option key={s.id} value={s.id}>{s.title}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -467,6 +469,15 @@ export default function AdminLecturesPage() {
                   className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
                 />
               </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
 
               <div className="pt-4 border-t border-[#E0D8CE] flex items-center justify-end gap-3">
                 <button

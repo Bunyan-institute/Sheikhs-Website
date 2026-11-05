@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Menu, ExternalLink, RefreshCw, Globe, ChevronDown } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import { InstallButton } from "@/components/admin/pwa/install-button";
 import { locales, localeLabels, type Locale } from "@/i18n/config";
 
 interface AdminHeaderProps {
@@ -34,7 +35,7 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
   };
 
   return (
-    <header className="h-16 bg-white border-b border-[#E0D8CE] px-4 sm:px-8 flex items-center justify-between gap-4 sticky top-0 z-30 shadow-2xs">
+    <header className="h-16 pt-[env(safe-area-inset-top)] box-content bg-white border-b border-[#E0D8CE] px-4 sm:px-8 flex items-center justify-between gap-4 sticky top-0 z-30 shadow-2xs">
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenMobileSidebar}
@@ -52,6 +53,7 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        <InstallButton />
         {/* Language Switcher */}
         <div className="relative">
           <button

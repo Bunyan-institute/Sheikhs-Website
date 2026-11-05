@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
+import { deleteEnrollmentAction, updateEnrollmentStatusAction } from "../actions";
 import {
   GraduationCap,
   Search,
@@ -14,6 +16,7 @@ import {
   User,
   Mail,
   MapPin,
+  Trash2,
 } from "lucide-react";
 import type { CourseEnrollmentRecord } from "@/lib/db/types";
 
@@ -22,13 +25,35 @@ export function EnrollmentsClient({
 }: {
   initialEnrollments: CourseEnrollmentRecord[];
 }) {
+  const { toast, confirm } = useAdminFeedback();
   const t = useTranslations("admin.enrollments");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
 
-  const [enrollments] = useState<CourseEnrollmentRecord[]>(initialEnrollments);
+  const [enrollments, setEnrollments] = useState<CourseEnrollmentRecord[]>(initialEnrollments);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "enrolled" | "in_progress" | "completed">("all");
+
+  const changeStatus = async (id: string, status: CourseEnrollmentRecord["status"]) => {
+    try {
+      await updateEnrollmentStatusAction(id, status);
+      setEnrollments((prev) => prev.map((e) => (e.id === id ? { ...e, status } : e)));
+      toast.success("Status updated");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to update status");
+    }
+  };
+
+  const removeEnrollment = async (enr: CourseEnrollmentRecord) => {
+    if (!(await confirm({ message: `Delete the enrollment of ${enr.student_name} in "${enr.course_title}"? Their progress will be lost.` }))) return;
+    try {
+      await deleteEnrollmentAction(enr.id);
+      setEnrollments((prev) => prev.filter((e) => e.id !== enr.id));
+      toast.success("Enrollment deleted");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to delete");
+    }
+  };
 
   const filtered = enrollments.filter((e) => {
     if (statusFilter !== "all" && e.status !== statusFilter) return false;
@@ -157,6 +182,7 @@ export function EnrollmentsClient({
                 <th className="py-3 px-4">{t("colStatus")}</th>
                 <th className="py-3 px-4">{t("colCertificate")}</th>
                 <th className="py-3 px-4 text-right">{t("colDate")}</th>
+                <th className="py-3 px-4 text-right">{tCommon("actions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F0EAE1]">
@@ -250,13 +276,29 @@ export function EnrollmentsClient({
                         year: "numeric",
                       })}
                     </td>
+
+                    <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                      <select
+                        aria-label={`Status for ${enr.student_name}`}
+                        value={enr.status}
+                        onChange={(e) => changeStatus(enr.id, e.target.value as CourseEnrollmentRecord["status"])}
+                        className="text-[11px] border border-[#E0D8CE] rounded px-1.5 py-1 bg-white"
+                      >
+                        <option value="enrolled">enrolled</option>
+                        <option value="in_progress">in progress</option>
+                        <option value="completed">completed</option>
+                      </select>
+                      <button type="button" aria-label={`Delete enrollment of ${enr.student_name}`} onClick={() => removeEnrollment(enr)} className="ms-2 p-1 text-red-500 hover:text-red-700 align-middle">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
 
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-[#636E72]">
+                  <td colSpan={7} className="py-12 text-center text-[#636E72]">
                     {tCommon("noRecords")}
                   </td>
                 </tr>

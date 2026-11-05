@@ -3,11 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, Layers, X, Loader2, CheckCircle } from "lucide-react";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
 import { saveSeriesAction, deleteSeriesAction } from "../actions";
 import type { PublicSeries } from "@/lib/api/types";
 
 export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.series");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -15,6 +18,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
   const [series, setSeries] = useState<PublicSeries[]>(initialSeries);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingSeries, setEditingSeries] = useState<PublicSeries | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -26,6 +30,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
   const [coverUrl, setCoverUrl] = useState("");
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingSeries(null);
     setTitle("");
     setSlug("");
@@ -36,6 +41,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
   };
 
   const openEditModal = (s: PublicSeries) => {
+    setPublished(s.status !== "draft");
     setEditingSeries(s);
     setTitle(s.title);
     setSlug(s.slug);
@@ -65,6 +71,7 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
 
     try {
       const res = await saveSeriesAction({
+        status: published ? "published" : "draft",
         id: editingSeries?.id,
         title,
         slug,
@@ -72,6 +79,10 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
         lectureCount,
         coverUrl: coverUrl || undefined,
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       if (editingSeries) {
         setSeries((prev) => prev.map((s) => (s.id === editingSeries.id ? res.series : s)));
@@ -82,20 +93,20 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, sTitle: string) => {
-    if (!confirm(`${tCommon("confirmDelete")} (${sTitle})`)) return;
+    if (!(await confirm(`${tCommon("confirmDelete")} (${sTitle})`))) return;
     try {
       await deleteSeriesAction(id);
       setSeries((prev) => prev.filter((s) => s.id !== id));
       setFeedback(tCommon("successDelete"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -246,14 +257,17 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
 
               <div>
                 <label className="block font-bold text-[#2D3436] mb-1">{t("fieldCoverUrl")}</label>
-                <input
-                  type="text"
-                  value={coverUrl}
-                  onChange={(e) => setCoverUrl(e.target.value)}
-                  placeholder="/images/photo_11_...jpg"
-                  className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                />
+                <UploadField value={coverUrl} onChange={setCoverUrl} accept="image/*" placeholder="/images/photo_11_...jpg" />
               </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
 
               <div className="pt-4 border-t border-[#E0D8CE] flex justify-end gap-3">
                 <button

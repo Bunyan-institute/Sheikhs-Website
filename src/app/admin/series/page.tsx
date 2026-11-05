@@ -1,7 +1,7 @@
 import { getAllSeries } from "@/lib/db/repository";
 import { SeriesClient } from "./series-client";
 
-export default function AdminSeriesPage() {
-  const seriesList = getAllSeries();
+export default async function AdminSeriesPage() {
+  const seriesList = await getAllSeries();
   return <SeriesClient initialSeries={seriesList} />;
 }

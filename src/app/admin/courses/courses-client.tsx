@@ -3,11 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Check, Ban } from "lucide-react";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
+import { LessonsEditor, type LessonDraft } from "./lessons-editor";
+import { ExamEditorModal } from "./exam-editor-modal";
 import { saveCourseAction, deleteCourseAction } from "../actions";
 import type { PublicCourse } from "@/lib/api/types";
 
 export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.courses");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -15,6 +20,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
   const [courses, setCourses] = useState<PublicCourse[]>(initialCourses);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingCourse, setEditingCourse] = useState<PublicCourse | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -24,31 +30,34 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
   const [summary, setSummary] = useState("");
   const [description, setDescription] = useState("");
   const [enrolmentOpen, setEnrolmentOpen] = useState(true);
-  const [lessonCount, setLessonCount] = useState(12);
+  const [lessons, setLessons] = useState<LessonDraft[]>([]);
+  const [examCourse, setExamCourse] = useState<PublicCourse | null>(null);
   const [categories, setCategories] = useState("aqeedah");
   const [coverUrl, setCoverUrl] = useState("");
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingCourse(null);
     setTitle("");
     setSlug("");
     setSummary("");
     setDescription("");
     setEnrolmentOpen(true);
-    setLessonCount(12);
+    setLessons([]);
     setCategories("aqeedah");
     setCoverUrl("");
     setIsModalOpen(true);
   };
 
   const openEditModal = (c: PublicCourse) => {
+    setPublished(c.status !== "draft");
     setEditingCourse(c);
     setTitle(c.title);
     setSlug(c.slug);
     setSummary(c.summary || "");
     setDescription(c.description || "");
     setEnrolmentOpen(c.enrolment_open);
-    setLessonCount(c.lesson_count || 0);
+    setLessons((c.lessons ?? []).map((l) => ({ id: l.id, title: l.title, summary: l.summary ?? "", durationMinutes: l.duration_seconds ? Math.round(l.duration_seconds / 60) : 0 })));
     setCategories(c.categories?.join(", ") || "aqeedah");
     setCoverUrl(c.cover?.url || "");
     setIsModalOpen(true);
@@ -74,16 +83,21 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
 
     try {
       const res = await saveCourseAction({
+        status: published ? "published" : "draft",
         id: editingCourse?.id,
         title,
         slug,
         summary,
         description,
         enrolmentOpen,
-        lessonCount,
+        lessons,
         categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
         coverUrl: coverUrl || undefined,
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       if (editingCourse) {
         setCourses((prev) => prev.map((c) => (c.id === editingCourse.id ? res.course : c)));
@@ -94,20 +108,20 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, cTitle: string) => {
-    if (!confirm(`${tCommon("confirmDelete")} (${cTitle})`)) return;
+    if (!(await confirm(`${tCommon("confirmDelete")} (${cTitle})`))) return;
     try {
       await deleteCourseAction(id);
       setCourses((prev) => prev.filter((c) => c.id !== id));
       setFeedback(tCommon("successDelete"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -185,6 +199,12 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
               <span>{crs.lesson_count} {t("fieldLessonsCount")}</span>
               <div className="space-x-2">
                 <button
+                  onClick={() => setExamCourse(crs)}
+                  className="px-3 py-1.5 rounded bg-amber-50 text-amber-800 hover:bg-amber-100 font-semibold text-xs"
+                >
+                  Exam
+                </button>
+                <button
                   onClick={() => openEditModal(crs)}
                   className="px-3 py-1.5 rounded bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 font-semibold text-xs"
                 >
@@ -205,7 +225,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black/50" onClick={() => setIsModalOpen(false)} />
-          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg z-10 border border-[#E0D8CE] overflow-hidden">
+          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[92vh] overflow-y-auto z-10 border border-[#E0D8CE]">
             <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5]">
               <h3 className="font-heading font-bold text-sm text-[#2D3436]">
                 {editingCourse ? t("editCourse") : t("newCourse")}
@@ -240,13 +260,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
                 </div>
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1">{t("fieldLessonsCount")}</label>
-                  <input
-                    type="number"
-                    value={lessonCount}
-                    onChange={(e) => setLessonCount(Number(e.target.value))}
-                    min={1}
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                  />
+                  <p className="px-3 py-2 text-[#636E72]">{lessons.length}</p>
                 </div>
               </div>
 
@@ -283,6 +297,22 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
                 </label>
               </div>
 
+              <LessonsEditor lessons={lessons} onChange={setLessons} />
+
+              <div>
+                <label className="block font-bold text-[#2D3436] mb-1">Cover image</label>
+                <UploadField value={coverUrl} onChange={setCoverUrl} accept="image/*" placeholder="/uploads/cover.jpg or https://..." />
+              </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
+
               <div className="pt-4 border-t border-[#E0D8CE] flex justify-end gap-3">
                 <button
                   type="button"
@@ -303,6 +333,7 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
           </div>
         </div>
       )}
+      {examCourse && <ExamEditorModal courseSlug={examCourse.slug} courseTitle={examCourse.title} onClose={() => setExamCourse(null)} />}
     </div>
   );
 }

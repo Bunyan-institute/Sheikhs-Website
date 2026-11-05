@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth/session";
-import { getAllLectures } from "@/lib/db/repository";
+import { getAllLectures, getAllSeries } from "@/lib/db/repository";
 
 export async function GET() {
   const session = await getSessionUser();
@@ -8,6 +8,6 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const lectures = getAllLectures();
-  return NextResponse.json({ lectures });
+  const [lectures, series] = await Promise.all([getAllLectures(), getAllSeries()]);
+  return NextResponse.json({ lectures, series: series.map((s) => ({ id: s.id, title: s.title })) });
 }

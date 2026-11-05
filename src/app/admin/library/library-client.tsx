@@ -3,11 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, FileText, X, Loader2, CheckCircle, Download } from "lucide-react";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { useTranslations, useLocale } from "next-intl";
 import { saveBookAction, deleteBookAction } from "../actions";
 import type { PublicBook } from "@/lib/api/types";
 
 export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) {
+  const { toast, confirm, prompt } = useAdminFeedback();
   const t = useTranslations("admin.library");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
@@ -15,6 +18,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
   const [books, setBooks] = useState<PublicBook[]>(initialBooks);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [published, setPublished] = useState(true);
   const [editingBook, setEditingBook] = useState<PublicBook | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -32,6 +36,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
   const [categories, setCategories] = useState("treatise, aqeedah");
 
   const openNewModal = () => {
+    setPublished(true);
     setEditingBook(null);
     setTitle("");
     setSlug("");
@@ -48,6 +53,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
   };
 
   const openEditModal = (b: PublicBook) => {
+    setPublished(b.status !== "draft");
     setEditingBook(b);
     setTitle(b.title);
     setSlug(b.slug);
@@ -83,6 +89,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
 
     try {
       const res = await saveBookAction({
+        status: published ? "published" : "draft",
         id: editingBook?.id,
         title,
         slug,
@@ -96,6 +103,10 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
         coverUrl: coverUrl || undefined,
         categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
       });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
 
       if (editingBook) {
         setBooks((prev) => prev.map((b) => (b.id === editingBook.id ? res.book : b)));
@@ -106,20 +117,20 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
       setIsModalOpen(false);
       setFeedback(tCommon("successSave"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, bTitle: string) => {
-    if (!confirm(`${tCommon("confirmDelete")} (${bTitle})`)) return;
+    if (!(await confirm(`${tCommon("confirmDelete")} (${bTitle})`))) return;
     try {
       await deleteBookAction(id);
       setBooks((prev) => prev.filter((b) => b.id !== id));
       setFeedback(tCommon("successDelete"));
     } catch (err: any) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -304,13 +315,7 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1">{t("fieldPdfUrl")}</label>
-                  <input
-                    type="text"
-                    value={fileUrl}
-                    onChange={(e) => setFileUrl(e.target.value)}
-                    placeholder="/documents/kitabu-tawhid-complete.pdf"
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded bg-white focus:outline-none focus:border-[#1B5E20]"
-                  />
+                  <UploadField value={fileUrl} onChange={setFileUrl} accept="application/pdf" placeholder="/documents/kitabu-tawhid-complete.pdf" />
                 </div>
                 <div>
                   <label className="block font-bold text-[#2D3436] mb-1">External Link</label>
@@ -323,6 +328,20 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
                   />
                 </div>
               </div>
+
+              <div>
+                <label className="block font-bold text-[#2D3436] mb-1">Cover image</label>
+                <UploadField value={coverUrl} onChange={setCoverUrl} accept="image/*" placeholder="/uploads/cover.jpg or https://..." />
+              </div>
+
+              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
+
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
+
+                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
+
+              </label>
+
 
               <div className="pt-4 border-t border-[#E0D8CE] flex justify-end gap-3">
                 <button

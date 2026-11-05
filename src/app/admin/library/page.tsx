@@ -1,7 +1,7 @@
 import { getAllBooks } from "@/lib/db/repository";
 import { LibraryClient } from "./library-client";
 
-export default function AdminLibraryPage() {
-  const books = getAllBooks();
+export default async function AdminLibraryPage() {
+  const books = await getAllBooks();
   return <LibraryClient initialBooks={books} />;
 }
