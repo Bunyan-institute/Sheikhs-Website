@@ -47,3 +47,4 @@ data/uploads/
 Sheikh Muhammed Ferej Megeno.html
 
 .env.supabase
+.env.vercel

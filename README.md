@@ -3,8 +3,8 @@
 A multilingual (English, Arabic, Amharic, Afaan Oromoo) site for the scholar's lectures, articles, fatwas, courses,
 library and events. **All content is managed from the admin**, which is also an installable PWA.
 
-- **Stack:** Next.js 16 (App Router), React 19, next-intl, Tailwind CSS v4, libSQL / SQLite.
-- **Single source of truth:** SQLite. The public site and the admin read and write the same database.
+- **Stack:** Next.js 16 (App Router), React 19, next-intl, Tailwind CSS v4, SQLite (libSQL) **or PostgreSQL / Supabase**.
+- **Single source of truth:** the database (SQLite by default; Postgres when `DATABASE_URL` is a `postgres://` URL). The public site and the admin read and write the same database.
   `src/lib/db/seed/content-seed.json` is only used to fill a brand-new database (and by "Reset to seed data").
 
 ## Run it locally
@@ -27,9 +27,10 @@ Copy `.env.example` to `.env` (Docker) or `.env.local` (local) and set:
 | `ADMIN_PASSWORD_HASH` | scrypt hash of the password — generate with `node scripts/hash-password.mjs "your password"` (or set `ADMIN_PASSWORD`) |
 | `ADMIN_SESSION_SECRET` | 16+ random characters used to sign session cookies (required in production) |
 | `CERTIFICATE_SECRET` | Signs certificate verification tokens (required in production) |
-| `DATABASE_URL` | Defaults to `file:./data/sheikh_ferej.db`; a remote libSQL/Turso URL also works (`DATABASE_AUTH_TOKEN`) |
+| `DATABASE_URL` | Defaults to `file:./data/sheikh_ferej.db`. A `postgres://` URL (Supabase pooler) switches to Postgres; remote libSQL/Turso also works (`DATABASE_AUTH_TOKEN`) |
 | `UPLOAD_DIR` | Where uploaded files are stored (default `./data/uploads`) |
-| `MAX_UPLOAD_MB` | Upload size limit (default 500) |
+| `UPLOAD_STORAGE` | `database` or `filesystem`. Defaults to `database` on Vercel + Postgres (no writable disk), `filesystem` elsewhere |
+| `MAX_UPLOAD_MB` | Upload size limit (default 500; 4 when files are stored in the database) |
 
 In production the server refuses admin logins until the credentials and secrets are configured.
 
@@ -49,6 +50,17 @@ Home Screen). It ships a manifest (`public/admin.webmanifest`), icons (`public/i
 `node scripts/generate-icons.mjs`) and a deliberately conservative service worker (`public/admin-sw.js`) scoped to
 `/admin`: it caches only the offline page, icons and immutable build assets, never admin pages, API responses or
 uploads, and shows an offline page when the network is unavailable. The service worker registers in production builds only.
+
+## Deploy on Vercel with Supabase
+
+Vercel has no persistent disk, so use Postgres. In the Supabase dashboard open **Connect** and copy the
+**transaction pooler** connection string (port 6543). In Vercel → Settings → Environment Variables set
+`DATABASE_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` and `CERTIFICATE_SECRET`, then redeploy.
+The schema is created and the site seeded automatically on the first request.
+
+- Uploads are kept in the database on Vercel and are limited to about 4 MB (the platform's request-size limit).
+  Large audio should be hosted elsewhere (YouTube, Telegram, a CDN) and linked by URL.
+- The pooler does not support prepared statements or pipelined queries; the app is already configured for that.
 
 ## Deploy with Docker
 
