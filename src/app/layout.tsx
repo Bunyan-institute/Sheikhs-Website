@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Marcellus, Figtree, Amiri, Noto_Sans_Ethiopic, Noto_Serif_Ethiopic } from "next/font/google";
 import "@/styles/globals.css";
+import { PwaProvider } from "@/components/pwa/pwa-context";
 
 const marcellus = Marcellus({
   weight: "400",
@@ -35,12 +36,40 @@ const notoSerifEthiopic = Noto_Serif_Ethiopic({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0D3E2F",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Sheikh Muhammed Ferej Megeno",
     default: "Sheikh Muhammed Ferej Megeno",
   },
   description: "Official scholar archive of Sheikh Muhammed Ferej Megeno — Islamic scholar, educator and AAOIFI-certified Sharia consultant.",
+  manifest: "/manifest.webmanifest",
+  applicationName: "Sheikh Ferej",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Sheikh Ferej",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "msapplication-TileColor": "#0D3E2F",
+  },
 };
 
 export default function RootLayout({
@@ -55,8 +84,9 @@ export default function RootLayout({
       className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable} ${notoSerifEthiopic.variable}`}
     >
       <body className="min-h-screen bg-[#EDF4F0] text-[#0F241C] font-sans antialiased selection:bg-[#BF9A45]/30">
-        {children}
+        <PwaProvider>{children}</PwaProvider>
       </body>
     </html>
   );
 }
+

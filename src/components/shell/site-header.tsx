@@ -10,6 +10,7 @@ import type { NavItem } from '@/lib/sections';
 import MobileNav from './mobile-nav';
 import { CommandSearch } from './command-search';
 import { useTranslations } from 'next-intl';
+import { PwaInstallButton } from '@/components/pwa/pwa-install-button';
 
 export interface SiteHeaderProps {
   profile: PublicProfile;
@@ -71,6 +72,7 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
             <div className="flex items-center gap-2.5 xl:gap-3 border-s border-[#BF9A45]/20 ps-3.5 xl:ps-4 ms-1">
               <CommandSearch />
               <LocaleSwitcher />
+              <PwaInstallButton variant="badge" />
               <Link
                 href="/ask"
                 className="hidden lg:inline-flex bg-[#BF9A45] text-[#072118] text-xs xl:text-sm font-bold rounded-full px-4 xl:px-5 py-2 hover:bg-[#E6D3A3] transition-colors shrink-0 shadow-sm cursor-pointer min-h-[36px] xl:min-h-[38px] items-center whitespace-nowrap"
@@ -82,6 +84,7 @@ export function SiteHeader({ profile, navigation, mainItems, moreItems = [], loc
 
           {/* Tablet & Mobile Actions */}
           <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+            <PwaInstallButton variant="minimal" />
             <CommandSearch />
             <LocaleSwitcher />
             <button
