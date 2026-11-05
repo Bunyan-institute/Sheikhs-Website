@@ -30,12 +30,30 @@ const F = (scope, text) =>
 const fakeIp = `10.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
 const post = (url, data) => page.request.post(BASE + url, { data, headers: { "x-forwarded-for": fakeIp } });
 const html = async (url) => (await page.request.get(BASE + url)).text();
+// Retries an assertion until it holds (saves and revalidation take longer against a remote database).
+const eventually = async (fn, ms = 40000 * Math.max(1, SLOW / 2)) => {
+  const end = Date.now() + ms;
+  let last;
+  while (Date.now() < end) {
+    try {
+      return await fn();
+    } catch (e) {
+      last = e;
+      await new Promise((r) => setTimeout(r, 800));
+    }
+  }
+  throw last;
+};
 const status = async (page, url) => (await page.request.get(BASE + url)).status();
 
 const browser = await chromium.launch({ executablePath: exe, args: ["--no-sandbox"] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
 const page = await ctx.newPage();
-page.setDefaultTimeout(45000);
+// Remote databases are slower than a local file: E2E_SLOW multiplies the fixed pauses after saves.
+const SLOW = Number(process.env.E2E_SLOW || 1);
+const realWait = page.waitForTimeout.bind(page);
+page.waitForTimeout = (ms) => realWait(ms * SLOW);
+page.setDefaultTimeout(45000 * Math.max(1, SLOW / 2));
 page.setDefaultNavigationTimeout(60000);
 page.on("dialog", (d) => d.dismiss()); // native dialogs must never appear
 
@@ -104,10 +122,11 @@ await step("publishing makes it public", async () => {
   await form.getByRole("checkbox").check();
   await form.getByRole("button", { name: "Save Article" }).click();
   await page.waitForTimeout(1200);
-  const detail = await (await page.request.get(`${BASE}/articles/${slug}`)).text();
-  assert(detail.includes("Body from e2e"), "published body should be served");
-  const html = await (await page.request.get(BASE + "/articles")).text();
-  assert(html.includes(slug), "published article should be listed");
+  await eventually(async () => {
+    const detail = await (await page.request.get(`${BASE}/articles/${slug}`)).text();
+    assert(detail.includes("Body from e2e"), "published body should be served");
+  });
+  await eventually(async () => assert((await (await page.request.get(BASE + "/articles")).text()).includes(slug), "published article should be listed"));
 });
 await step("duplicate slug is rejected (not overwritten)", async () => {
   await page.goto(BASE + "/admin/articles");
@@ -228,13 +247,13 @@ await step("hiding a section removes it from public navigation, restoring brings
   };
   try {
     await setFatwas(true);
-    assert(await navHas(), "fatwas link should be visible when the section is on");
+    await eventually(async () => assert(await navHas(), "fatwas link should be visible when the section is on"));
     await setFatwas(false);
-    assert(!(await navHas()), "fatwas link (header and footer) should be hidden when the section is off");
+    await eventually(async () => assert(!(await navHas()), "fatwas link (header and footer) should be hidden when the section is off"));
   } finally {
     await setFatwas(true);
   }
-  assert(await navHas(), "fatwas link should be back");
+  await eventually(async () => assert(await navHas(), "fatwas link should be back"));
 });
 
 const confirmDelete = async () => {
@@ -350,15 +369,16 @@ await step("create a series and a lecture with uploaded audio inside it", async 
   await F(form, "Lecture Title *").fill(lecTitle);
   await F(form, "URL Slug *").fill(lecSlug);
   const mp3 = fs.readdirSync("public/audio").find((f) => f.endsWith(".mp3"));
-  await form.locator('input[type="file"]').nth(1).setInputFiles(path.resolve("public/audio", mp3));
+  // A 100 KB slice is enough to exercise upload, storage and range serving without measuring bandwidth.
+  const slice = fs.readFileSync(path.resolve("public/audio", mp3)).subarray(0, 100_000);
+  await form.locator('input[type="file"]').nth(1).setInputFiles({ name: "e2e-lesson.mp3", mimeType: "audio/mpeg", buffer: slice });
   await page.getByText("File uploaded").waitFor();
   await form.locator("select").first().selectOption({ label: serTitle });
   await form.getByRole("button", { name: "Save Lecture" }).click();
   await page.waitForTimeout(1500);
 
-  assert((await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture page");
-  const series = await html(`/series/${serSlug}`);
-  assert(series.includes(lecTitle), "series page lists the lecture");
+  await eventually(async () => assert((await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture page"));
+  await eventually(async () => assert((await html(`/series/${serSlug}`)).includes(lecTitle), "series page lists the lecture"));
   const audioUrl = (await html(`/lectures/${lecSlug}`)).match(/\/uploads\/[A-Za-z0-9._-]+\.mp3/)?.[0];
   assert(audioUrl, "lecture page references the uploaded audio");
   const partial = await page.request.get(BASE + audioUrl, { headers: { Range: "bytes=0-99" } });
@@ -372,7 +392,7 @@ await step("renaming the series updates the lecture's series title; deleting the
   await F(form, "URL Slug *").fill(serSlug);
   await form.getByRole("button", { name: "Save Series" }).click();
   await page.waitForTimeout(1200);
-  assert((await html(`/lectures/${lecSlug}`)).includes(serTitle + " Renamed"), "lecture shows the new series title");
+  await eventually(async () => assert((await html(`/lectures/${lecSlug}`)).includes(serTitle + " Renamed"), "lecture shows the new series title"));
 });
 await step("clean up lecture and series", async () => {
   await page.goto(BASE + "/admin/lectures");
@@ -381,8 +401,8 @@ await step("clean up lecture and series", async () => {
   await page.goto(BASE + "/admin/series");
   await cardFor(serTitle, /delete/i).getByRole("button", { name: /delete/i }).first().click();
   await confirmDelete();
-  assert(!(await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture gone");
-  assert(!(await html("/series")).includes(serSlug), "series gone");
+  await eventually(async () => assert(!(await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture gone"));
+  await eventually(async () => assert(!(await html("/series")).includes(serSlug), "series gone"));
 });
 
 console.log("\nFatwas & inquiries");
