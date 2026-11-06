@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { createCourseEnrollment, getCourseByIdOrSlug, getEnrollmentByEmail } from "@/lib/db/repository";
 import { clean, clientIp, isEmail, rateLimit } from "@/lib/rate-limit";
+import { notifyAdmins } from "@/lib/push";
 import type { CourseEnrollmentRecord } from "@/lib/db/types";
 
 /** Only what the learner's own UI needs: no phone, city or other personal fields. */
@@ -47,6 +48,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Enrolment for this course is closed." }, { status: 403 });
     }
 
+    // Only a brand-new sign-up is news: signing up again returns the existing record.
+    const alreadyEnrolled = Boolean(await getEnrollmentByEmail(course.slug, data.student_email));
     const enrollment = await createCourseEnrollment({
       course_id: course.id,
       course_slug: course.slug,
@@ -61,6 +64,10 @@ export async function POST(req: Request) {
       revalidatePath("/admin/enrollments");
     } catch {
       // Non-blocking outside request contexts
+    }
+
+    if (!alreadyEnrolled) {
+      after(() => notifyAdmins({ kind: "enrollment", detail: course.title, url: "/admin/enrollments", tag: `enrollment-${course.id}` }));
     }
 
     return NextResponse.json({ success: true, enrollment: publicEnrollment(enrollment) });

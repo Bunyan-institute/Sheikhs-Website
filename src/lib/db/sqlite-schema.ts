@@ -338,7 +338,22 @@ const MIGRATION_7 = async () => {
   await addColumnsIfMissing("uploads", { data: BINARY_TYPE });
 };
 
-const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7];
+// Devices that receive push notifications (one row per browser/phone subscription).
+const MIGRATION_8: string[] = [
+  `CREATE TABLE IF NOT EXISTS push_subscriptions (
+    id TEXT PRIMARY KEY,
+    endpoint TEXT UNIQUE NOT NULL,
+    p256dh TEXT NOT NULL,
+    auth TEXT NOT NULL,
+    username TEXT NOT NULL,
+    locale TEXT,
+    user_agent TEXT,
+    created_at TEXT NOT NULL,
+    last_used_at TEXT
+  );`,
+];
+
+const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7, MIGRATION_8];
 
 /** Re-runs the base CREATE ... IF NOT EXISTS statements (used after a legacy table is set aside). */
 export async function createMissingTables(): Promise<void> {

@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { createEventRegistration, getEventByIdOrSlug } from "@/lib/db/repository";
+import { notifyAdmins } from "@/lib/push";
 import { clean, clientIp, isEmail, rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
@@ -45,6 +46,8 @@ export async function POST(req: Request) {
     } catch {
       // Non-blocking outside request contexts
     }
+
+    after(() => notifyAdmins({ kind: "registration", detail: event.title, url: "/admin/events", tag: `registration-${event.id}` }));
 
     return NextResponse.json({ success: true, registration: { id: registration.id, status: registration.status } });
   } catch (err) {

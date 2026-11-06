@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { createInquiry } from "@/lib/db/repository";
+import { countPendingInquiries } from "@/lib/db/push-repository";
+import { notifyAdmins } from "@/lib/push";
 import { clean, clientIp, isEmail, rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
@@ -32,6 +34,11 @@ export async function POST(req: Request) {
       email,
       is_anonymous: Boolean(data.is_anonymous || !name),
       locale: clean(data.locale, 8) || "am",
+    });
+
+    // Tell the Sheikh's phone (after the response, so a slow push service never delays the visitor).
+    after(async () => {
+      await notifyAdmins({ kind: "inquiry", url: "/admin/inquiries", tag: "inquiry", badge: await countPendingInquiries().catch(() => undefined) });
     });
 
     return NextResponse.json({ object: "question", id: record.id, received: true });

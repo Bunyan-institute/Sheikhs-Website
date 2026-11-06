@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getEnrollmentByEmail, submitCourseExam } from "@/lib/db/repository";
 import { clientIp, isEmail, rateLimit } from "@/lib/rate-limit";
+import { notifyAdmins } from "@/lib/push";
 
 export async function POST(req: Request) {
   try {
@@ -38,6 +39,12 @@ export async function POST(req: Request) {
       revalidatePath("/admin/enrollments");
     } catch {
       // Non-blocking
+    }
+
+    // News only the first time a student passes (a student who already holds a certificate is just retaking).
+    const cert = result.certificate;
+    if (result.passed && cert && !enrollment.certificate_id) {
+      after(() => notifyAdmins({ kind: "certificate", detail: cert.course_title, url: "/admin/certificates", tag: `certificate-${cert.id}` }));
     }
 
     const { enrollment: updated, ...rest } = result;
