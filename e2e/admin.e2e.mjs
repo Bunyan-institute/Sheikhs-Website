@@ -181,7 +181,7 @@ console.log("\nArticle editor");
     const form = page.locator("form").last();
     await form.getByRole("tab", { name: "Preview" }).click();
     await form.locator('iframe[src*="youtube-nocookie.com/embed/dQw4w9WgXcQ"]').waitFor();
-    const previewText = await form.locator(".prose").innerText();
+    const previewText = await form.locator(".article-body").innerText();
     assert(previewText.includes("<script>alert(1)</script>"), "typed HTML must be shown as text");
     await form.getByRole("tab", { name: "Write" }).click();
   });

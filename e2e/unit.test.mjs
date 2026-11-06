@@ -219,3 +219,41 @@ test("estimateReadingMinutes: at least one minute, scales with length", () => {
   assert.equal(estimateReadingMinutes(""), 1);
   assert.equal(estimateReadingMinutes("word ".repeat(540)), 3);
 });
+
+// ── push: real encryption and VAPID signing, without any network ──
+import * as webpush from "web-push";
+import crypto from "node:crypto";
+import { pushMessage } from "../src/lib/push-messages.ts";
+
+test("web-push builds a valid encrypted, VAPID-signed request for a subscription", () => {
+  const vapid = webpush.generateVAPIDKeys();
+  const browser = crypto.createECDH("prime256v1");
+  browser.generateKeys();
+  const subscription = {
+    endpoint: "https://fcm.googleapis.com/fcm/send/example-device-token",
+    keys: { p256dh: browser.getPublicKey().toString("base64url"), auth: crypto.randomBytes(16).toString("base64url") },
+  };
+  const details = webpush.generateRequestDetails(subscription, JSON.stringify({ title: "ሰላም", body: "x", url: "/admin/inquiries", tag: "inquiry" }), {
+    vapidDetails: { subject: "https://muhammedferej.pro.et", publicKey: vapid.publicKey, privateKey: vapid.privateKey },
+    TTL: 3600,
+    urgency: "high",
+  });
+  assert.equal(details.method, "POST");
+  assert.equal(details.endpoint, subscription.endpoint);
+  assert.equal(details.headers["Content-Encoding"], "aes128gcm");
+  assert.match(details.headers.Authorization, /^vapid t=[\w-]+\.[\w-]+\.[\w-]+, k=/);
+  assert.equal(String(details.headers.TTL), "3600");
+  assert.ok(Buffer.isBuffer(details.body) && details.body.length > 40, "encrypted body present");
+  assert.ok(!details.body.toString("utf8").includes("inquiry"), "payload must be encrypted");
+});
+
+test("push messages exist in every language and never put personal details on the lock screen", () => {
+  for (const locale of ["en", "ar", "am", "om"]) {
+    for (const kind of ["inquiry", "registration", "enrollment", "certificate", "test"]) {
+      assert.ok(pushMessage(kind, locale).title.length > 2, `${kind}/${locale}`);
+    }
+  }
+  assert.equal(pushMessage("registration", "en", "Annual Conference").body, "Annual Conference");
+  assert.equal(pushMessage("inquiry", "xx").title, pushMessage("inquiry", "am").title, "unknown locale falls back to Amharic");
+  assert.ok(pushMessage("inquiry", "en", "x".repeat(500)).body.length <= 120);
+});

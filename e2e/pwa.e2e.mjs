@@ -24,6 +24,7 @@ const assert = (c, m) => {
 
 const browser = await chromium.launch({ executablePath: exe, args: ["--no-sandbox"] });
 const ctx = await browser.newContext({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true });
+await ctx.addCookies([{ name: "admin_locale", value: "en", url: BASE }]);
 const page = await ctx.newPage();
 page.setDefaultTimeout(30000);
 const cdp = await ctx.newCDPSession(page);
@@ -49,7 +50,7 @@ await step("browser parses the manifest and reports no installability errors", a
   assert(url.endsWith("/admin.webmanifest"), "manifest url");
   assert(!errors.length, `manifest errors: ${errors.map((e) => e.message).join("; ")}`);
   const m = JSON.parse(data);
-  assert(m.display === "standalone" && m.start_url === "/admin" && m.scope === "/admin", "manifest fields");
+  assert(m.display === "standalone" && m.start_url === "/admin?source=pwa" && m.scope === "/admin", "manifest fields");
   assert(m.icons.some((i) => i.purpose === "maskable" && i.sizes === "512x512"), "maskable icon");
   const { installabilityErrors } = await cdp.send("Page.getInstallabilityErrors");
   // Test browsers run in a private context, which can never install; every other reason is a real problem.
@@ -111,6 +112,73 @@ await step("public site stays outside the admin PWA service worker scope", async
   const controlled = await page.evaluate(() => Boolean(navigator.serviceWorker.controller));
   assert(!controlled, "public pages must stay outside the admin service worker scope");
 });
+
+await step("manifest: launches into the admin, reuses the open window, offers create shortcuts", async () => {
+  const m = await (await page.request.get(BASE + "/admin.webmanifest")).json();
+  assert(m.launch_handler?.client_mode?.includes("navigate-existing"), "launch_handler");
+  const urls = m.shortcuts.map((x) => x.url);
+  for (const u of ["/admin/lectures?new=1", "/admin/articles?new=1", "/admin/inquiries", "/admin/media?new=1"]) assert(urls.includes(u), `shortcut ${u}`);
+  assert(m.shortcuts.every((x) => x.url.startsWith("/admin")), "every shortcut stays inside the admin");
+  assert(m.theme_color === "#0D3E2F" && m.lang === "am", "brand colour and Amharic app language");
+  assert((await page.request.get(BASE + "/icons/badge-72.png")).status() === 200, "notification badge icon");
+});
+
+await step("the service worker handles push, notification taps and key changes", async () => {
+  const sw = await (await page.request.get(BASE + "/admin-sw.js")).text();
+  for (const needle of ['addEventListener("push"', 'addEventListener("notificationclick"', 'addEventListener("pushsubscriptionchange"', "showNotification", "safeAdminUrl"]) {
+    assert(sw.includes(needle), `service worker should contain ${needle}`);
+  }
+  assert(!/cache\.put\([^)]*\/api/.test(sw), "API responses are never cached");
+});
+
+await step("a launch from the app pointed at a public page is sent to the admin (server side)", async () => {
+  const r = await page.request.get(BASE + "/en?source=pwa", { maxRedirects: 0 });
+  assert(r.status() === 307 && r.headers().location.endsWith("/admin"), `got ${r.status()} ${r.headers().location}`);
+});
+
+console.log("\nInstalled (standalone) behaviour");
+const sctx = await browser.newContext({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true });
+await sctx.addCookies([{ name: "admin_locale", value: "en", url: BASE }]);
+await sctx.addInitScript(() => {
+  // Pretend the page runs as an installed app.
+  const real = window.matchMedia.bind(window);
+  window.matchMedia = (q) =>
+    q.includes("display-mode: standalone")
+      ? { matches: true, media: q, onchange: null, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, dispatchEvent: () => false }
+      : real(q);
+});
+const sp = await sctx.newPage();
+sp.setDefaultTimeout(30000);
+await step("the installed app never shows public pages: they redirect to the admin", async () => {
+  for (const path of ["/en", "/en/about", "/am/articles", "/"]) {
+    await sp.goto(BASE + path);
+    await sp.waitForURL(/\/admin/);
+  }
+});
+await step("inside the installed app there is no link to the public site", async () => {
+  await sp.goto(BASE + "/admin/login");
+  await sp.locator('input[type="text"]').first().fill(USER);
+  await sp.locator('input[type="password"]').fill(PASS);
+  await sp.locator('button[type="submit"]').click();
+  await sp.waitForURL(BASE + "/admin");
+  await sp.getByRole("button", { name: "More" }).click();
+  await sp.getByRole("menuitem", { name: "Notifications" }).waitFor();
+  assert((await sp.getByRole("menuitem", { name: "Live Site" }).count()) === 0, "no Live Site item in the installed app");
+  await sp.keyboard.press("Escape");
+  for (const path of ["/admin/lectures", "/admin/articles", "/admin/media"]) {
+    await sp.goto(BASE + path);
+    await sp.locator("main").first().waitFor();
+    // The server renders these links; the browser hides them as soon as it knows it runs as an installed app.
+    let external = [];
+    for (let i = 0; i < 25; i++) {
+      external = await sp.locator('a[target="_blank"]').evaluateAll((els) => els.map((e) => e.getAttribute("href")).filter((h) => h && h.startsWith("/") && !h.startsWith("/admin") && !/^\/(uploads|images|audio|documents)\//.test(h)));
+      if (external.length === 0) break;
+      await sp.waitForTimeout(200);
+    }
+    assert(external.length === 0, `${path} links to the public site: ${external.join(", ")}`);
+  }
+});
+await sctx.close();
 
 await browser.close();
 const failed = results.filter((r) => !r).length;
