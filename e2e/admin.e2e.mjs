@@ -48,6 +48,8 @@ const status = async (page, url) => (await page.request.get(BASE + url)).status(
 
 const browser = await chromium.launch({ executablePath: exe, args: ["--no-sandbox"] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+// The admin opens in Amharic by default; the suite drives English labels.
+await ctx.addCookies([{ name: "admin_locale", value: "en", url: BASE }]);
 const page = await ctx.newPage();
 // Remote databases are slower than a local file: E2E_SLOW multiplies the fixed pauses after saves.
 const SLOW = Number(process.env.E2E_SLOW || 1);
