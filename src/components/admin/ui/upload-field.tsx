@@ -2,7 +2,9 @@
 
 import { useRef, useState } from "react";
 import { Loader2, Upload } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useAdminFeedback } from "./feedback";
+import { buttonSecondary, inputClass } from "./form-field";
 
 export interface UploadedFile {
   url: string;
@@ -42,6 +44,7 @@ function imageSize(file: File): Promise<{ w: number; h: number } | null> {
 
 /** A URL input with an Upload button that stores the file on the server and fills in its URL. */
 export function UploadField({ value, onChange, onUploaded, accept, placeholder, inputClassName }: UploadFieldProps) {
+  const t = useTranslations("admin.common");
   const { toast } = useAdminFeedback();
   const fileRef = useRef<HTMLInputElement>(null);
   const [progress, setProgress] = useState<number | null>(null);
@@ -76,9 +79,9 @@ export function UploadField({ value, onChange, onUploaded, accept, placeholder, 
       });
       onChange(result.url);
       onUploaded?.(result);
-      toast.success("File uploaded");
+      toast.success(t("fileUploaded"));
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Upload failed");
+      toast.error(err instanceof Error ? err.message : t("uploadFailed"));
     } finally {
       setProgress(null);
       if (fileRef.current) fileRef.current.value = "";
@@ -92,17 +95,17 @@ export function UploadField({ value, onChange, onUploaded, accept, placeholder, 
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={inputClassName ?? "w-full min-w-0 px-3 py-2 border border-[#E0D8CE] rounded bg-white focus:outline-none focus:border-[#1B5E20]"}
+        className={inputClassName ?? inputClass}
       />
       <input ref={fileRef} type="file" accept={accept} className="hidden" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
       <button
         type="button"
         onClick={() => fileRef.current?.click()}
         disabled={progress !== null}
-        className="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded border border-[#1B5E20] text-[#1B5E20] text-xs font-semibold hover:bg-[#E8F5E9] disabled:opacity-60"
+        className={`${buttonSecondary} shrink-0 !px-3 text-adm-primary`}
       >
         {progress !== null ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
-        <span>{progress !== null ? `${progress}%` : "Upload"}</span>
+        <span>{progress !== null ? `${progress}%` : t("upload")}</span>
       </button>
     </div>
   );

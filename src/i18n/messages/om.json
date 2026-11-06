@@ -389,7 +389,20 @@
       "resolved": "Kan Deebii Argate",
       "viewLiveSite": "Marsariitii kallattii ilaali",
       "menu": "Baafata",
-      "more": "Dabalata"
+      "more": "Dabalata",
+      "close": "Cufi",
+      "ok": "Tole",
+      "showMore": "Dabalata agarsiisi",
+      "noResults": "Bu'aan hin argamne",
+      "addTag": "Barreessii Enter cuqaasi",
+      "removeTag": "Haqi",
+      "regenerate": "Mata dureerraa irra deebi'ii uumi",
+      "slugHint": "Teessoo marsariitii, mata dureerraa uumame",
+      "upload": "Olkaa'i",
+      "fileUploaded": "Faayilli olkaa'ameera",
+      "uploadFailed": "Olkaa'uun hin milkoofne",
+      "paste": "Maxxansi",
+      "confirm": "Mirkaneessi"
     },
     "header": {
       "systemStatus": "Sirnichi Hojjataa Jira • Walitti Hidhamiinsa Kallattii",

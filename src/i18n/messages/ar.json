@@ -389,7 +389,20 @@
       "resolved": "تم الرد",
       "viewLiveSite": "عرض الموقع المباشر",
       "menu": "القائمة",
-      "more": "المزيد"
+      "more": "المزيد",
+      "close": "إغلاق",
+      "ok": "حسنًا",
+      "showMore": "عرض المزيد",
+      "noResults": "لا توجد نتائج مطابقة",
+      "addTag": "اكتب ثم اضغط Enter",
+      "removeTag": "إزالة",
+      "regenerate": "إعادة الإنشاء من العنوان",
+      "slugHint": "عنوان الصفحة، يُنشأ من العنوان",
+      "upload": "رفع",
+      "fileUploaded": "تم رفع الملف",
+      "uploadFailed": "فشل الرفع",
+      "paste": "لصق",
+      "confirm": "تأكيد"
     },
     "header": {
       "systemStatus": "النظام متصل • مزامنة حية ومباشرة",

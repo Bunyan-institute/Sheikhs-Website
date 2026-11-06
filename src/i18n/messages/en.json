@@ -389,7 +389,20 @@
       "resolved": "Resolved",
       "viewLiveSite": "View live site",
       "menu": "Menu",
-      "more": "More"
+      "more": "More",
+      "close": "Close",
+      "ok": "OK",
+      "showMore": "Show more",
+      "noResults": "No matching results",
+      "addTag": "Type and press Enter",
+      "removeTag": "Remove",
+      "regenerate": "Regenerate from title",
+      "slugHint": "Web address, made from the title",
+      "upload": "Upload",
+      "fileUploaded": "File uploaded",
+      "uploadFailed": "Upload failed",
+      "paste": "Paste",
+      "confirm": "Confirm"
     },
     "header": {
       "systemStatus": "System Online • Live Dynamic Sync",

@@ -389,7 +389,20 @@
       "resolved": "መልስ የተሰጠው",
       "viewLiveSite": "ቀጥታ ድረ ገጹን ይመልከቱ",
       "menu": "ማውጫ",
-      "more": "ተጨማሪ"
+      "more": "ተጨማሪ",
+      "close": "ዝጋ",
+      "ok": "እሺ",
+      "showMore": "ተጨማሪ አሳይ",
+      "noResults": "ምንም ውጤት አልተገኘም",
+      "addTag": "ጽፈው Enter ይጫኑ",
+      "removeTag": "አስወግድ",
+      "regenerate": "ከርዕሱ እንደገና ፍጠር",
+      "slugHint": "የገጹ አድራሻ፣ ከርዕሱ የሚፈጠር",
+      "upload": "ስቀል",
+      "fileUploaded": "ፋይሉ ተሰቅሏል",
+      "uploadFailed": "መስቀል አልተሳካም",
+      "paste": "ለጥፍ",
+      "confirm": "አረጋግጥ"
     },
     "header": {
       "systemStatus": "ስርዓቱ በመስመር ላይ ነው • የቀጥታ ቅንጅት",
