@@ -21,7 +21,9 @@ export function PwaRegister() {
     };
     navigator.serviceWorker.addEventListener("controllerchange", onControllerChange);
 
-    navigator.serviceWorker.register("/admin-sw.js", { scope: "/admin" }).catch((err) => {
+    // ?dev=1 keeps hot reload working: the worker still handles push but never caches assets there.
+    const script = process.env.NODE_ENV === "production" ? "/admin-sw.js" : "/admin-sw.js?dev=1";
+    navigator.serviceWorker.register(script, { scope: "/admin" }).catch((err) => {
       console.warn("Admin service worker registration failed:", err);
     });
 

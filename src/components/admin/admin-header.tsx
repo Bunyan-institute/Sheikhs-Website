@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Menu, ExternalLink, RefreshCw, Globe, MoreVertical, LogOut } from "lucide-react";
+import { Menu, ExternalLink, RefreshCw, Globe, MoreVertical, LogOut, Bell } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { InstallButton } from "@/components/admin/pwa/install-button";
+import { NotificationSettings } from "@/components/admin/pwa/notification-settings";
 import { useStandalone } from "@/components/admin/pwa/use-standalone";
 import { Dropdown, menuItemClass } from "@/components/admin/ui/dropdown";
 import { useLogout } from "@/components/admin/use-logout";
@@ -21,10 +22,12 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
   const tCommon = useTranslations("admin.common");
   const tHeader = useTranslations("admin.header");
   const tSidebar = useTranslations("admin.sidebar");
+  const tNotifications = useTranslations("admin.notifications");
   const currentLocale = useLocale() as Locale;
   const standalone = useStandalone();
   const logout = useLogout();
   const [refreshing, setRefreshing] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -38,6 +41,7 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
   };
 
   return (
+    <>
     <header className="sticky top-0 z-30 box-content flex h-14 items-center justify-between gap-2 border-b border-adm-border bg-white/95 px-3 pt-[env(safe-area-inset-top)] backdrop-blur sm:px-6">
       <div className="flex min-w-0 items-center gap-1.5">
         <button
@@ -91,6 +95,10 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
                 <RefreshCw className={`size-4 text-adm-primary ${refreshing ? "animate-spin" : ""}`} />
                 {tHeader("refresh")}
               </button>
+              <button type="button" role="menuitem" className={menuItemClass} onClick={() => { setNotificationsOpen(true); close(); }}>
+                <Bell className="size-4 text-adm-primary" />
+                {tNotifications("title")}
+              </button>
               <InstallButton variant="menu" />
               {/* The installed app is admin-only: it never links out to the public site. */}
               {!standalone && (
@@ -117,5 +125,7 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
         </div>
       </div>
     </header>
+    <NotificationSettings open={notificationsOpen} onClose={() => setNotificationsOpen(false)} />
+    </>
   );
 }

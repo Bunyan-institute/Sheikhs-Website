@@ -808,6 +808,27 @@
       "emptyPreview": "Ammaaf wanti ilaalamu hin jiru.",
       "draftFound": "Barruu haaraaf tuqii hin kaa'amne qabda. Itti fufnaa?",
       "draftSaved": "Tuqiin meeshaa kana irratti kaa'ameera"
+    },
+    "notifications": {
+      "title": "Beeksisa",
+      "intro": "Yeroo namni gaaffii gaafatu, taatee irratti galmaa'u ykn koorsii seenu meeshaa kana irratti ergaa argadhu.",
+      "enable": "Beeksisa bani",
+      "disable": "Meeshaa kana irratti cufi",
+      "sendTest": "Qorannoo ergi",
+      "testSent": "Qorannoon ergameera. Yeroo gabaabaa keessatti mul'ata.",
+      "statusOn": "Beeksisni meeshaa kanaaf banameera.",
+      "statusOff": "Beeksisni meeshaa kanaaf cufameera.",
+      "unsupported": "Biraawzariin kun beeksisa agarsiisuu hin danda'u. Chrome, Edge ykn Safari yaali (iPhone irratti duraan appii kaa'i).",
+      "iosInstallFirst": "iPhone fi iPad irratti duraan appii kaa'i: Share cuqaasi, achiis Add to Home Screen filadhu. Achiis bakka jalqabaa irraa bani, as beeksisa bani.",
+      "denied": "Beeksisni cufameera. Qindaa'ina biraawzaraa ykn bilbilaa keessatti appii kanaaf eeyyami, achiis deebi'i.",
+      "notConfigured": "Beeksisni sarvarii irratti ammaaf hin qophoofne.",
+      "devices": "Meeshaalee beeksisa argatan",
+      "thisDevice": "Meeshaa kana",
+      "remove": "Haqi",
+      "noDevices": "Amma meeshaan hin jiru.",
+      "enabledToast": "Beeksisni banameera",
+      "disabledToast": "Beeksisni cufameera",
+      "failed": "Beeksisa banuun hin danda'amne. Mee irra deebi'ii yaali."
     }
   },
   "articleDetail": {

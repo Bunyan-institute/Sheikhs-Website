@@ -21,4 +21,9 @@ for (const size of [192, 512]) {
     .png({ compressionLevel: 9, palette: true, quality: 90 })
     .toFile(out(`maskable-${size}.png`));
 }
+// Notification badge: Android draws only the alpha channel, so it is a plain white mihrab arch on transparency.
+const arch = Buffer.from(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72"><path fill="#fff" d="M14 62V30C14 12 58 12 58 30V62Z"/><path fill="#000" d="M26 62V34C26 24 46 24 46 34V62Z"/></svg>'
+);
+await sharp(arch).png().toFile(out("badge-72.png"));
 console.log("icons written to public/icons");

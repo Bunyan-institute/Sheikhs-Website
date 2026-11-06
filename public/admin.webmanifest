@@ -1,9 +1,9 @@
 {
   "id": "/admin",
-  "name": "Sheikh Muhammed Ferej — Control Center",
-  "short_name": "Sheikh Admin",
-  "description": "Scholarly Control Center & Dynamic Data Engine for Sheikh Muhammed Ferej Megeno.",
-  "start_url": "/admin",
+  "name": "Sheikh Muhammed Ferej — አስተዳደር",
+  "short_name": "ሸይኽ አስተዳደር",
+  "description": "Manage lessons, articles, questions and sign-ups for Sheikh Muhammed Ferej Megeno.",
+  "start_url": "/admin?source=pwa",
   "scope": "/admin",
   "display": "standalone",
   "display_override": [
@@ -12,11 +12,15 @@
     "minimal-ui"
   ],
   "orientation": "any",
-  "lang": "en",
+  "lang": "am",
   "dir": "ltr",
-  "background_color": "#F7F5F0",
-  "theme_color": "#1B5E20",
-  "categories": ["productivity", "education", "business"],
+  "background_color": "#EEF4F0",
+  "theme_color": "#0D3E2F",
+  "categories": [
+    "productivity",
+    "education",
+    "business"
+  ],
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -61,24 +65,54 @@
   ],
   "shortcuts": [
     {
-      "name": "Inquiries",
+      "name": "አዲስ ትምህርት · New lesson",
+      "short_name": "New lesson",
+      "url": "/admin/lectures?new=1",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "ጽሑፍ ጻፍ · New article",
+      "short_name": "New article",
+      "url": "/admin/articles?new=1",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "ጥያቄዎች · Questions",
+      "short_name": "Questions",
       "url": "/admin/inquiries",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
-      "name": "Lectures",
-      "url": "/admin/lectures",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Fatwas",
-      "url": "/admin/fatwas",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Articles",
-      "url": "/admin/articles",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "name": "ሚዲያ · Add media",
+      "short_name": "Media",
+      "url": "/admin/media?new=1",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "navigate-existing",
+      "auto"
+    ]
+  }
 }

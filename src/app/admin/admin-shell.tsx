@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { AdminBottomNav } from "@/components/admin/admin-bottom-nav";
@@ -24,6 +24,13 @@ export function AdminShell({
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
   const dir = localeDirections[locale] ?? "ltr";
+
+  // Show the number of unanswered questions on the installed app's icon where the platform supports it.
+  useEffect(() => {
+    const nav = navigator as Navigator & { setAppBadge?: (n?: number) => Promise<void>; clearAppBadge?: () => Promise<void> };
+    if (pendingInquiriesCount > 0) nav.setAppBadge?.(pendingInquiriesCount).catch(() => {});
+    else nav.clearAppBadge?.().catch(() => {});
+  }, [pendingInquiriesCount]);
 
   return (
     <AdminFeedbackProvider>

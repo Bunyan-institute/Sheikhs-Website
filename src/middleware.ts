@@ -27,6 +27,11 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.next({ request: { headers } });
   }
 
+  // Launched from the installed app but pointed at a public page: send it to the admin instead.
+  if (request.nextUrl.searchParams.get("source") === "pwa") {
+    return NextResponse.redirect(new URL("/admin", request.url));
+  }
+
   return intlMiddleware(request);
 }
 

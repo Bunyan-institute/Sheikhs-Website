@@ -18,7 +18,7 @@ export const metadata = {
   },
   manifest: "/admin.webmanifest",
   applicationName: "Sheikh Admin",
-  appleWebApp: { capable: true, title: "Sheikh Admin", statusBarStyle: "default" as const },
+  appleWebApp: { capable: true, title: "ሸይኽ አስተዳደር", statusBarStyle: "default" as const },
   icons: {
     icon: [
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },

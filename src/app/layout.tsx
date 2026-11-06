@@ -67,6 +67,11 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              // The installed app is admin-only: if it ever lands on a public page, go back to the admin.
+              try {
+                var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+                if (standalone && !location.pathname.startsWith('/admin')) location.replace('/admin');
+              } catch (e) {}
               if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && !location.pathname.startsWith('/admin')) {
                 navigator.serviceWorker.getRegistrations().then(function(regs) {
                   for (var i = 0; i < regs.length; i++) {
