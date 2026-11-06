@@ -2,34 +2,26 @@
 
 import { PlayCircle, Headphones, Image as ImageIcon, FileText, Download, ExternalLink } from "lucide-react";
 import type { MediaItem } from "@/lib/api/media";
-
-function getYouTubeEmbedUrl(url: string): string | null {
-  if (!url) return null;
-  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}?rel=0&modestbranding=1` : null;
-}
+import { parseMediaUrl } from "@/lib/media-source";
+import { MediaEmbed } from "@/components/media/media-embed";
 
 export function MediaCard({ item }: { item: MediaItem }) {
-  const isYouTube = item.kind === "video" && item.url ? getYouTubeEmbedUrl(item.url) : null;
-  const isTikTok = item.url?.includes("tiktok.com");
-  const isFacebook = item.url?.includes("facebook.com");
+  const parsed = parseMediaUrl(item.url);
+  // Landscape embeds (YouTube, Facebook video, Telegram) play right in the card; portrait ones link out.
+  const inlineEmbed = item.kind === "video" && Boolean(parsed.embedUrl) && parsed.aspect === "16/9";
+  const inlineAudio = item.kind === "audio" && (parsed.provider === "direct" || parsed.provider === "upload");
+  const thumbnail = item.thumbnail_url ?? parsed.thumbnailUrl ?? null;
+  const providerLabel = parsed.provider === "youtube" ? "YouTube" : parsed.provider === "tiktok" ? "TikTok" : parsed.provider === "facebook" ? "Facebook" : parsed.provider === "telegram" ? "Telegram" : null;
 
   return (
     <div className="group flex flex-col bg-white rounded-2xl border border-[#0F241C]/10 overflow-hidden hover:border-[#1B6A50] transition-all shadow-xs">
       {/* Media Top Container */}
       <div className="aspect-video bg-[#EDF4F0] relative flex items-center justify-center overflow-hidden border-b border-[#0F241C]/10">
-        {isYouTube ? (
-          <iframe
-            src={isYouTube}
-            title={item.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            loading="lazy"
-            className="w-full h-full border-0"
-          />
-        ) : item.thumbnail_url ? (
+        {inlineEmbed ? (
+          <MediaEmbed url={item.url!} title={item.title} className="!rounded-none !shadow-none size-full" />
+        ) : thumbnail ? (
           <img
-            src={item.thumbnail_url}
+            src={thumbnail}
             alt={item.title}
             className="w-full h-full object-cover"
           />
@@ -43,12 +35,10 @@ export function MediaCard({ item }: { item: MediaItem }) {
         )}
 
         {/* Type Badge */}
-        {!isYouTube && (
+        {!inlineEmbed && (
           <div className="absolute top-3 right-3 bg-[#072118]/90 backdrop-blur-xs border border-[#BF9A45]/30 px-2.5 py-1 rounded-full text-[10px] font-semibold text-[#EDF4F0] flex items-center gap-1.5 uppercase tracking-wider shadow-sm">
-            {isTikTok ? (
-              <span>TikTok</span>
-            ) : isFacebook ? (
-              <span>Facebook</span>
+            {providerLabel ? (
+              <span>{providerLabel}</span>
             ) : (
               <>
                 {item.kind === "video" && <PlayCircle className="w-3 h-3 text-[#BF9A45]" />}
@@ -72,7 +62,11 @@ export function MediaCard({ item }: { item: MediaItem }) {
         </p>
 
         <div className="mt-auto pt-3 border-t border-[#0F241C]/10 flex items-center justify-between text-xs font-semibold text-[#BF9A45]">
-          {item.url ? (
+          {inlineAudio && item.url ? (
+            <audio controls preload="metadata" className="h-9 w-full">
+              <source src={parsed.url} type={parsed.mime} />
+            </audio>
+          ) : item.url ? (
             <a
               href={item.url}
               target="_blank"
