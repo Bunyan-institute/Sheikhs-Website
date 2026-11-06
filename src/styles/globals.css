@@ -31,6 +31,20 @@
   --color-border: #DCE8E1;
   --color-border-light: #E7F0EB;
 
+  /* Admin tokens: friendly, high-contrast, brand-matched (used by src/components/admin/ui) */
+  --color-adm-bg: #EEF4F0;
+  --color-adm-surface: #FFFFFF;
+  --color-adm-soft: #E4EEE8;
+  --color-adm-border: #D3E2D9;
+  --color-adm-text: #0F241C;
+  --color-adm-muted: #4F6E61;
+  --color-adm-primary: #1B6A50;
+  --color-adm-primary-hover: #124D3A;
+  --color-adm-accent: #BF9A45;
+  --color-adm-danger: #B3261E;
+  --color-adm-danger-soft: #FCEAE8;
+  --color-adm-warn-soft: #FFF4D6;
+
   --font-display: "Marcellus", "Noto Sans Ethiopic", serif;
   --font-sans: "Figtree", "Noto Sans Ethiopic", system-ui, sans-serif;
   --font-heading: "Marcellus", "Noto Sans Ethiopic", serif;

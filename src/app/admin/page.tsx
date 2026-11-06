@@ -21,12 +21,10 @@ import {
   Calendar,
   Layers,
 } from "lucide-react";
-import { locales, defaultLocale, type Locale } from "@/i18n/config";
+import { getAdminLocale } from "@/lib/admin-locale";
 
 export default async function AdminDashboardPage() {
-  const cookieStore = await cookies();
-  const rawLocale = cookieStore.get("admin_locale")?.value;
-  const locale: Locale = locales.includes(rawLocale as Locale) ? (rawLocale as Locale) : defaultLocale;
+  const locale = await getAdminLocale();
   const messages = (await import(`@/i18n/messages/${locale}.json`)).default;
   const tDash = createTranslator({ locale, messages, namespace: "admin.dashboard" });
   const tCommon = createTranslator({ locale, messages, namespace: "admin.common" });

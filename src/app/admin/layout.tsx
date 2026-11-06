@@ -6,7 +6,8 @@ import { AdminShell } from "./admin-shell";
 import { PwaRegister } from "@/components/admin/pwa/pwa-register";
 import type { Viewport } from "next";
 import { getSystemMetrics } from "@/lib/db/repository";
-import { locales, defaultLocale, localeDirections, type Locale } from "@/i18n/config";
+import { localeDirections } from "@/i18n/config";
+import { getAdminLocale } from "@/lib/admin-locale";
 
 export const metadata = {
   title: "Admin Dashboard | Sheikh Muhammed Ferej Megeno",
@@ -39,9 +40,7 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const session = await getSessionUser();
-  const cookieStore = await cookies();
-  const rawLocale = cookieStore.get("admin_locale")?.value;
-  const locale: Locale = locales.includes(rawLocale as Locale) ? (rawLocale as Locale) : defaultLocale;
+  const locale = await getAdminLocale();
   const messages = (await import(`@/i18n/messages/${locale}.json`)).default;
   const dir = localeDirections[locale] ?? "ltr";
 
