@@ -31,12 +31,12 @@
   --color-border: #DCE8E1;
   --color-border-light: #E7F0EB;
 
-  --font-display: "Marcellus", "Noto Serif Ethiopic", serif;
+  --font-display: "Marcellus", "Noto Sans Ethiopic", serif;
   --font-sans: "Figtree", "Noto Sans Ethiopic", system-ui, sans-serif;
-  --font-heading: "Marcellus", "Noto Serif Ethiopic", serif;
+  --font-heading: "Marcellus", "Noto Sans Ethiopic", serif;
   --font-body: "Figtree", "Noto Sans Ethiopic", system-ui, sans-serif;
   --font-arabic: "Amiri", serif;
-  --font-ethiopic: "Noto Serif Ethiopic", serif;
+  --font-ethiopic: "Noto Sans Ethiopic", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 

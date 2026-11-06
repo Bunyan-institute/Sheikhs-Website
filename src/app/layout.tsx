@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Marcellus, Figtree, Amiri, Noto_Sans_Ethiopic, Noto_Serif_Ethiopic } from "next/font/google";
+import { Marcellus, Figtree, Amiri, Noto_Sans_Ethiopic } from "next/font/google";
 import "@/styles/globals.css";
 
 const marcellus = Marcellus({
@@ -25,13 +25,6 @@ const amiri = Amiri({
 const notoEthiopic = Noto_Sans_Ethiopic({
   subsets: ["ethiopic"],
   variable: "--font-ethiopic",
-  display: "swap",
-});
-
-const notoSerifEthiopic = Noto_Serif_Ethiopic({
-  weight: ["500", "600"],
-  subsets: ["ethiopic"],
-  variable: "--font-ethiopic-serif",
   display: "swap",
 });
 
@@ -68,7 +61,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable} ${notoSerifEthiopic.variable}`}
+      className={`${marcellus.variable} ${figtree.variable} ${amiri.variable} ${notoEthiopic.variable}`}
     >
       <body className="min-h-screen bg-[#EDF4F0] text-[#0F241C] font-sans antialiased selection:bg-[#BF9A45]/30">
         <script

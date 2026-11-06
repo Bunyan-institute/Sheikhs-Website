@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ path: st
   const mime = isSafeFilename(filename) ? mimeFromFilename(filename) : null;
   if (!mime) return new Response("Not found", { status: 404 });
 
-  const filePath = path.join(uploadDir(), filename);
+  const filePath = path.join(/*turbopackIgnore: true*/ uploadDir(), filename);
   let stat: fs.Stats | null = null;
   try {
     const st = fs.statSync(filePath);

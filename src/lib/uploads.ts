@@ -146,7 +146,7 @@ export async function deleteUpload(id: string): Promise<boolean> {
   if (!row) return false;
   await execute("DELETE FROM uploads WHERE id = ?;", [id]);
   try {
-    fs.unlinkSync(path.join(uploadDir(), String(row.filename)));
+    fs.unlinkSync(path.join(/*turbopackIgnore: true*/ uploadDir(), String(row.filename)));
   } catch {
     // File already gone
   }
