@@ -28,6 +28,7 @@ Copy `.env.example` to `.env` (Docker) or `.env.local` (local) and set:
 | `ADMIN_SESSION_SECRET` | 16+ random characters used to sign session cookies (required in production) |
 | `CERTIFICATE_SECRET` | Signs certificate verification tokens (required in production) |
 | `DATABASE_URL` | Defaults to `file:./data/sheikh_ferej.db`. A `postgres://` URL (Supabase pooler) switches to Postgres; remote libSQL/Turso also works (`DATABASE_AUTH_TOKEN`) |
+| `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | Push notifications. Generate once with `npm run vapid` and keep them: changing them cancels every subscribed device. Without them the app works but sends no notifications |
 | `UPLOAD_DIR` | Where uploaded files are stored (default `./data/uploads`) |
 | `UPLOAD_STORAGE` | `database` or `filesystem`. Defaults to `database` on Vercel + Postgres (no writable disk), `filesystem` elsewhere |
 | `MAX_UPLOAD_MB` | Upload size limit (default 500; 4 when files are stored in the database) |
@@ -43,13 +44,51 @@ qualifications, social links, the Play Store link and which public sections are 
 files are stored under `UPLOAD_DIR` and served from `/uploads/…` with range support. **Backup** exports and restores
 everything as JSON.
 
-## Admin as an app (PWA)
+## Admin as an app (PWA) with notifications
 
-The admin is installable (Chrome, Edge, Android: "Install app" in the header or browser menu; iOS: Share → Add to
-Home Screen). It ships a manifest (`public/admin.webmanifest`), icons (`public/icons`, regenerate with
-`node scripts/generate-icons.mjs`) and a deliberately conservative service worker (`public/admin-sw.js`) scoped to
-`/admin`: it caches only the offline page, icons and immutable build assets, never admin pages, API responses or
-uploads, and shows an offline page when the network is unavailable. The service worker registers in production builds only.
+The admin installs like a native app and **only ever opens the admin**: the installed app redirects any public
+page to `/admin` and hides links to the public site. The public website itself is unchanged for visitors.
+
+- **Install:** Android/desktop Chrome and Edge show *Install app* (header "⋯" menu, or the browser's install button).
+  On iPhone/iPad use Share → *Add to Home Screen* (required before notifications can work on iOS 16.4+).
+- **Notifications:** open "⋯" → *Notifications* → *Turn on notifications*. The Sheikh's devices then get a message for
+  a new question, an event registration, a new course enrollment and a student passing an exam. Messages carry no
+  personal details; the unanswered-questions count also appears on the app icon where supported.
+- **Shortcuts:** long-press the app icon for *New lesson*, *New article*, *Questions* and *Add media*.
+- **Offline:** an offline page is shown when there is no connection; admin pages and data are never cached.
+- Files: `public/admin.webmanifest`, `public/admin-sw.js` (scope `/admin`), `public/admin-offline.html`, `public/icons/`
+  (regenerate with `npm run icons`), `src/components/admin/pwa/`.
+
+### Setting up notifications on a server
+
+```bash
+npm run vapid          # prints VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY / VAPID_SUBJECT: run once, store them safely
+```
+
+Add the three variables to `.env` / Vercel and redeploy. Push needs HTTPS (localhost is exempt).
+Subscriptions are stored in the database (`push_subscriptions`), so they survive restarts and redeploys.
+
+### Testing on real devices (checklist)
+
+1. **Android Chrome:** open the site's `/admin`, install, open from the icon, *Turn on notifications*, press *Send a test*,
+   then trigger each event from the public site (ask a question, register for an event, enroll, pass an exam) and tap the
+   notification: it must open the right admin page. Check the icon badge shows the unanswered count.
+2. **iPhone (iOS 16.4+):** Safari → Share → Add to Home Screen → open it from the home screen → *Turn on notifications*
+   (the button is explained but disabled in a normal Safari tab) → send a test.
+3. **Desktop Chrome/Edge:** install from the address bar and check the shortcuts menu and the offline page (turn off Wi-Fi).
+4. In the installed app, try opening a public address: it must land on the admin.
+
+## Tests
+
+```bash
+npm run test:unit        # pure logic: links, slugs, rich text, XSS, push encryption (no server)
+npm run test:i18n        # all four language files have the same keys
+npm run test:e2e         # the full admin workflow in a real browser (needs the app running)
+npm run test:pwa         # manifest, service worker, installed-app lock
+npm run test:push        # notifications; start the app with PUSH_TEST_SINK=http://127.0.0.1:4599/sink
+```
+
+Set `BASE_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` for a different server, and `E2E_SLOW=4` for a remote database.
 
 ## Deploy on Vercel with Supabase
 
@@ -73,17 +112,6 @@ docker compose up -d --build
 
 The database and uploads live in the `sheikh_data` volume (`/app/data`). `GET /api/health` is the health check.
 Put a TLS-terminating reverse proxy (Caddy, nginx, Traefik) in front — the PWA and secure cookies need HTTPS.
-
-## Tests
-
-End-to-end tests drive a real browser (Playwright's Chromium) against a running server:
-
-```bash
-npm run dev                                   # or a production build: npm run build && npm start
-npm run test:e2e                              # admin workflows (auth, CRUD, uploads, exams, backup, i18n…)
-BASE_URL=http://localhost:3000 ADMIN_USERNAME=… ADMIN_PASSWORD=… npm run test:pwa   # PWA, against a production server
-npm run check-types
-```
 
 ## Project layout
 
