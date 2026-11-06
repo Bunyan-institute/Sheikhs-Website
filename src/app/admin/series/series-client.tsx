@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, Layers, X, Loader2, CheckCircle } from "lucide-react";
@@ -39,6 +40,8 @@ export function SeriesClient({ initialSeries }: { initialSeries: PublicSeries[] 
     setCoverUrl("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (s: PublicSeries) => {
     setPublished(s.status !== "draft");

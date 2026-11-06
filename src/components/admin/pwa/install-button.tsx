@@ -28,7 +28,7 @@ if (typeof window !== "undefined") {
 
 interface InstallButtonProps {
   className?: string;
-  variant?: "header" | "sidebar" | "login" | "pill";
+  variant?: "header" | "sidebar" | "login" | "pill" | "menu";
 }
 
 export function InstallButton({ className = "", variant = "header" }: InstallButtonProps) {
@@ -96,18 +96,38 @@ export function InstallButton({ className = "", variant = "header" }: InstallBut
   }, [deferred, isIos]);
 
   if (isStandalone) {
+    if (variant === "menu") {
+      return (
+        <div className="flex min-h-11 items-center gap-3 px-4 py-2.5 text-sm text-adm-primary">
+          <CheckCircle2 className="size-4" />
+          {t("installed")}
+        </div>
+      );
+    }
     if (variant === "header") {
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200">
           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-          <span className="hidden sm:inline">Installed</span>
+          <span className="hidden sm:inline">{t("installed")}</span>
         </span>
       );
     }
     return null;
   }
 
-  const label = "Download App";
+  const label = t("installApp");
+
+  if (variant === "menu") {
+    return (
+      <>
+        <button type="button" role="menuitem" onClick={handleInstall} className="flex min-h-11 w-full items-center gap-3 px-4 py-2.5 text-start text-sm text-adm-text hover:bg-adm-soft">
+          <Download className="size-4 text-adm-primary" />
+          {label}
+        </button>
+        {renderModals()}
+      </>
+    );
+  }
 
   if (variant === "sidebar") {
     return (

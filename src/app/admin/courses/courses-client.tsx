@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Check, Ban } from "lucide-react";
@@ -48,6 +49,8 @@ export function CoursesClient({ initialCourses }: { initialCourses: PublicCourse
     setCoverUrl("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (c: PublicCourse) => {
     setPublished(c.status !== "draft");

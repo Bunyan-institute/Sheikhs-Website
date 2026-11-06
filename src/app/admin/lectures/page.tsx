@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -85,6 +86,8 @@ export default function AdminLecturesPage() {
     setTranscript("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (lec: PublicLecture) => {
     setPublished(lec.status !== "draft");

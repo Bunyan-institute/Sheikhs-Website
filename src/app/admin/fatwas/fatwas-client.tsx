@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Search } from "lucide-react";
@@ -41,6 +42,8 @@ export function FatwasClient({ initialFatwas }: { initialFatwas: PublicFatwa[] }
     setTags("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (f: PublicFatwa) => {
     setPublished(f.status !== "draft");

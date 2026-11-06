@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -105,6 +106,8 @@ export function EventsClient({
     setCoverUrl("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (evt: PublicEvent) => {
     setPublished(evt.status !== "draft");

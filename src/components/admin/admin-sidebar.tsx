@@ -23,6 +23,8 @@ import {
   Award,
 } from "lucide-react";
 import { InstallButton } from "@/components/admin/pwa/install-button";
+import { useStandalone } from "@/components/admin/pwa/use-standalone";
+import { useLogout } from "@/components/admin/use-logout";
 
 interface AdminSidebarProps {
   onCloseMobile?: () => void;
@@ -34,6 +36,8 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
   const locale = useLocale();
   const tCommon = useTranslations("admin.common");
   const tSidebar = useTranslations("admin.sidebar");
+  const standalone = useStandalone();
+  const handleLogout = useLogout();
 
   const navItems = [
     { label: tCommon("dashboard"), href: "/admin", icon: LayoutDashboard },
@@ -57,19 +61,10 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
     { label: tCommon("backup"), href: "/admin/backup", icon: Database },
   ];
 
-  const handleLogout = async () => {
-    try {
-      await fetch("/api/admin/logout", { method: "POST" });
-      window.location.href = "/admin/login";
-    } catch {
-      window.location.href = "/admin/login";
-    }
-  };
-
   return (
-    <aside className="w-64 bg-[#2D3436] text-white flex flex-col h-full shrink-0 border-e border-[#3e4446]">
+    <aside className="w-64 bg-lapis text-white flex flex-col h-full shrink-0 border-e border-white/10">
       {/* Brand Header */}
-      <div className="h-16 flex items-center justify-between px-5 border-b border-[#3e4446]">
+      <div className="h-16 flex items-center justify-between px-5 border-b border-white/10">
         <Link href="/admin" className="flex items-center gap-3 group">
           <span className="w-8 h-8 rounded bg-[#1B5E20] text-white flex items-center justify-center font-bold text-base shadow border border-[#2e7d32]">
             م
@@ -87,7 +82,7 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
           <button
             onClick={onCloseMobile}
             className="md:hidden text-gray-400 hover:text-white p-1 rounded"
-            aria-label="Close menu"
+            aria-label={tCommon("closeMenu")}
           >
             <X className="w-5 h-5" />
           </button>
@@ -111,9 +106,9 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
               key={item.href}
               href={item.href}
               onClick={onCloseMobile}
-              className={`flex items-center justify-between px-3 py-2.5 rounded text-xs font-medium transition-all ${
+              className={`flex min-h-11 items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? "bg-[#1B5E20] text-white shadow-xs font-semibold"
+                  ? "bg-jade text-white shadow-xs font-semibold"
                   : "text-gray-300 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -132,22 +127,24 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
       </div>
 
       {/* Footer Actions */}
-      <div className="p-4 border-t border-[#3e4446] space-y-2">
+      <div className="p-4 border-t border-white/10 space-y-2">
         <InstallButton variant="sidebar" />
-        <Link
-          href={`/${locale}`}
-          target="_blank"
-          className="flex items-center justify-between px-3 py-2 rounded text-xs text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
-        >
-          <span className="flex items-center gap-2">
-            <ExternalLink className="w-3.5 h-3.5 text-[#B8860B]" />
-            <span>{tSidebar("publicPortal")}</span>
-          </span>
-          <span className="text-[10px] text-gray-400">{tSidebar("live")}</span>
-        </Link>
+        {!standalone && (
+          <Link
+            href={`/${locale}`}
+            target="_blank"
+            className="flex items-center justify-between px-3 py-2 rounded text-xs text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+          >
+            <span className="flex items-center gap-2">
+              <ExternalLink className="w-3.5 h-3.5 text-[#B8860B]" />
+              <span>{tSidebar("publicPortal")}</span>
+            </span>
+            <span className="text-[10px] text-gray-400">{tSidebar("live")}</span>
+          </Link>
+        )}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded text-xs text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors text-start"
+          className="w-full flex min-h-11 items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-300 hover:bg-red-500/10 hover:text-red-300 transition-colors text-start"
         >
           <LogOut className="w-3.5 h-3.5" />
           <span>{tSidebar("signOut")}</span>

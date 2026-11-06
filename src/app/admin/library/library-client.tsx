@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, FileText, X, Loader2, CheckCircle, Download } from "lucide-react";
@@ -51,6 +52,8 @@ export function LibraryClient({ initialBooks }: { initialBooks: PublicBook[] }) 
     setCategories("treatise, aqeedah");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (b: PublicBook) => {
     setPublished(b.status !== "draft");

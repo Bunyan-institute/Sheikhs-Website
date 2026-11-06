@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, Edit2, Trash2, ExternalLink, X, Loader2, CheckCircle, Search, Clock } from "lucide-react";
@@ -46,6 +47,8 @@ export function ArticlesClient({ initialArticles }: { initialArticles: PublicArt
     setCoverUrl("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (a: PublicArticle) => {
     setPublished(a.status !== "draft");

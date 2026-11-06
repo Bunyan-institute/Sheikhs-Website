@@ -107,7 +107,7 @@ export function AdminFeedbackProvider({ children }: { children: React.ReactNode 
     <FeedbackContext.Provider value={value}>
       {children}
 
-      <div className="fixed end-4 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-[100] flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-2 md:bottom-4" aria-live="polite">
+      <div className="fixed end-4 bottom-[calc(6rem+env(safe-area-inset-bottom))] z-[100] flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-2 md:bottom-4" aria-live="polite">
         {toasts.map((toastItem) => {
           const Icon = icons[toastItem.kind];
           return (

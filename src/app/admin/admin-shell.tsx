@@ -5,6 +5,7 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { AdminBottomNav } from "@/components/admin/admin-bottom-nav";
 import { AdminFeedbackProvider } from "@/components/admin/ui/feedback";
+import { CreateSheet } from "@/components/admin/create-sheet";
 import { localeDirections, type Locale } from "@/i18n/config";
 
 interface AdminShellProps {
@@ -21,11 +22,12 @@ export function AdminShell({
   locale = "en",
 }: AdminShellProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
   const dir = localeDirections[locale] ?? "ltr";
 
   return (
     <AdminFeedbackProvider>
-    <div dir={dir} lang={locale} className="min-h-screen bg-[#F7F5F0] flex">
+    <div dir={dir} lang={locale} className="flex min-h-screen bg-adm-bg">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
         <AdminSidebar pendingInquiriesCount={pendingInquiriesCount} />
@@ -53,14 +55,16 @@ export function AdminShell({
           username={username}
           onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
         />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-[max(5rem,calc(4.5rem+env(safe-area-inset-bottom)))] md:pb-[max(1rem,env(safe-area-inset-bottom))] max-w-[1600px] w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-[max(6rem,calc(5.5rem+env(safe-area-inset-bottom)))] md:pb-[max(1rem,env(safe-area-inset-bottom))] max-w-[1600px] w-full mx-auto">
           {children}
         </main>
         <AdminBottomNav
           onOpenMenu={() => setMobileSidebarOpen(true)}
+          onOpenCreate={() => setCreateOpen(true)}
           pendingInquiriesCount={pendingInquiriesCount}
         />
       </div>
+      <CreateSheet open={createOpen} onClose={() => setCreateOpen(false)} />
     </div>
     </AdminFeedbackProvider>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
 import { useState } from "react";
 import Image from "next/image";
 import {
@@ -63,6 +64,8 @@ export function MediaClient({ initialMedia }: { initialMedia: MediaRef[] }) {
     setThumbnailUrl("");
     setIsModalOpen(true);
   };
+
+  useOpenNewFromQuery(openNewModal);
 
   const openEditModal = (m: MediaRef) => {
     setMediaUrl(m.url);
