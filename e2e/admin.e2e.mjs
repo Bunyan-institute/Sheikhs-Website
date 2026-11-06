@@ -462,6 +462,46 @@ await step("no raw message keys on admin pages in en/ar/am/om", async () => {
   await ctx.addCookies([{ name: "admin_locale", value: "en", url: BASE }]);
 });
 
+console.log("\nMobile shell (390px, default language)");
+{
+  const mctx = await browser.newContext({ viewport: { width: 390, height: 800 }, isMobile: true, hasTouch: true });
+  const m = await mctx.newPage();
+  m.setDefaultTimeout(45000 * Math.max(1, SLOW / 2));
+  await step("a fresh admin session opens in Amharic", async () => {
+    await m.goto(BASE + "/admin/login");
+    await m.locator('input[type="text"]').first().fill(USER);
+    await m.locator('input[type="password"]').fill(PASS);
+    await m.locator('button[type="submit"]').click();
+    await m.waitForURL(BASE + "/admin");
+    const heading = await m.locator("main h1").first().innerText();
+    assert(/[\u1200-\u137F]/.test(heading), `expected Ethiopic text, got "${heading}"`);
+  });
+  await step("no sideways scrolling on the main admin pages", async () => {
+    for (const p of ["/admin", "/admin/lectures", "/admin/articles", "/admin/media", "/admin/inquiries"]) {
+      await m.goto(BASE + p);
+      await m.locator("main").first().waitFor();
+      const overflow = await m.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      assert(overflow <= 1, `${p} overflows by ${overflow}px`);
+    }
+  });
+  await step('the dock "+" opens the create sheet, Escape closes it, a choice opens that form', async () => {
+    await m.goto(BASE + "/admin");
+    const plus = m.locator("nav button").filter({ has: m.locator("svg") }).nth(0);
+    await m.locator('nav[aria-label] div.flex.justify-center button').click();
+    const sheet = m.getByRole("dialog");
+    await sheet.waitFor();
+    assert((await sheet.locator('a[href*="?new=1"]').count()) === 6, "six create choices");
+    await m.keyboard.press("Escape");
+    await sheet.waitFor({ state: "detached" });
+    await m.locator('nav[aria-label] div.flex.justify-center button').click();
+    await m.getByRole("dialog").locator('a[href="/admin/articles?new=1"]').click();
+    await m.waitForURL(/\/admin\/articles$/);
+    await m.locator("form").last().waitFor();
+    void plus;
+  });
+  await mctx.close();
+}
+
 console.log("\nLogout");
 await step("logout revokes the session", async () => {
   const cookies = await ctx.cookies();
