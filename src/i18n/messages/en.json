@@ -618,7 +618,30 @@
       "fieldAudioUrl": "Direct Audio MP3 URL",
       "fieldDuration": "Duration (e.g. 45 min)",
       "fieldDescription": "Discourse Summary",
-      "saveLecture": "Save Lecture"
+      "saveLecture": "Save Lecture",
+      "stepSource": "1. Add the video or audio",
+      "stepDetails": "2. Describe it",
+      "stepPublish": "3. Publish",
+      "sourceHelp": "Paste a link (YouTube, Facebook, TikTok, Telegram or a file) or upload a file from your phone.",
+      "sourceRequired": "Add a video or audio link or file first.",
+      "coverLabel": "Cover picture (optional)",
+      "moreOptions": "More options",
+      "lengthLabel": "Length (minutes:seconds)",
+      "lengthHint": "Filled in automatically for files. Leave empty if you do not know.",
+      "extraAudio": "Audio version (optional)",
+      "transcriptLabel": "Written text of the lesson (optional)",
+      "topicsLabel": "Topics",
+      "keywordsLabel": "Keywords",
+      "standalone": "Not part of a series",
+      "publishNow": "Publish now",
+      "publishHint": "Turn off to keep it as a draft that visitors cannot see.",
+      "filterVideo": "Video",
+      "filterAudio": "Audio",
+      "emptyTitle": "No lessons yet",
+      "emptyHint": "Add the first video or audio lesson.",
+      "editTitle": "Edit lesson",
+      "addTitle": "Add a lesson",
+      "shortDescription": "Short description (optional)"
     },
     "series": {
       "heading": "Educational Series & Curricula",
@@ -725,6 +748,19 @@
       "restoreButton": "Restore Database",
       "storageUsage": "Local Storage Engine",
       "lastBackup": "Last Full Export"
+    },
+    "source": {
+      "placeholder": "Paste a link here",
+      "invalid": "This is not a valid link.",
+      "plainLink": "A web page link. Visitors will open it in a new tab.",
+      "detected": "Detected: {name}",
+      "videoFile": "Video file",
+      "audioFile": "Audio file",
+      "imageFile": "Picture",
+      "documentFile": "Document",
+      "useTitle": "Use title: {title}",
+      "useCover": "Use as cover picture",
+      "lengthDetected": "Length detected: {time}"
     }
   },
   "articleDetail": {

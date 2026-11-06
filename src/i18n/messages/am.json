@@ -618,7 +618,30 @@
       "fieldAudioUrl": "የድምጽ ፋይል (MP3) ማስፈንጠሪያ",
       "fieldDuration": "ርዝመት (ለምሳሌ፡ 45 ደቂቃ)",
       "fieldDescription": "የትምህርቱ ማጠቃለያ",
-      "saveLecture": "ትምህርቱን አስቀምጥ"
+      "saveLecture": "ትምህርቱን አስቀምጥ",
+      "stepSource": "1. ቪዲዮውን ወይም ድምፁን ያክሉ",
+      "stepDetails": "2. ይግለጹት",
+      "stepPublish": "3. ያትሙ",
+      "sourceHelp": "ሊንክ ይለጥፉ (ዩቲዩብ፣ ፌስቡክ፣ ቲክቶክ፣ ቴሌግራም ወይም ፋይል) ወይም ከስልክዎ ፋይል ይስቀሉ።",
+      "sourceRequired": "መጀመሪያ የቪዲዮ ወይም የድምፅ ሊንክ ወይም ፋይል ያክሉ።",
+      "coverLabel": "የሽፋን ምስል (አማራጭ)",
+      "moreOptions": "ተጨማሪ አማራጮች",
+      "lengthLabel": "ርዝመት (ደቂቃ:ሰከንድ)",
+      "lengthHint": "ለፋይሎች በራስ ሰር ይሞላል። ካላወቁ ባዶ ይተዉ።",
+      "extraAudio": "የድምፅ ስሪት (አማራጭ)",
+      "transcriptLabel": "የትምህርቱ ጽሑፍ (አማራጭ)",
+      "topicsLabel": "ርዕሰ ጉዳዮች",
+      "keywordsLabel": "ቁልፍ ቃላት",
+      "standalone": "የተከታታይ አካል አይደለም",
+      "publishNow": "አሁን አትም",
+      "publishHint": "ጎብኚዎች እንዳያዩት እንደ ረቂቅ ለማቆየት ያጥፉት።",
+      "filterVideo": "ቪዲዮ",
+      "filterAudio": "ድምፅ",
+      "emptyTitle": "እስካሁን ትምህርት የለም",
+      "emptyHint": "የመጀመሪያውን የቪዲዮ ወይም የድምፅ ትምህርት ያክሉ።",
+      "editTitle": "ትምህርቱን አርም",
+      "addTitle": "ትምህርት ያክሉ",
+      "shortDescription": "አጭር መግለጫ (አማራጭ)"
     },
     "series": {
       "heading": "ተከታታይ ደርሶችና ሥርዓተ-ትምህርቶች",
@@ -725,6 +748,19 @@
       "restoreButton": "መረጃውን መልስ",
       "storageUsage": "የአካባቢ መረጃ ማከማቻ",
       "lastBackup": "የመጨረሻው የመረጃ ቅጂ"
+    },
+    "source": {
+      "placeholder": "ሊንኩን እዚህ ይለጥፉ",
+      "invalid": "ይህ ትክክለኛ ሊንክ አይደለም።",
+      "plainLink": "የድረ ገጽ ሊንክ ነው። ጎብኚዎች በአዲስ ትር ይከፍቱታል።",
+      "detected": "ተለይቷል፦ {name}",
+      "videoFile": "የቪዲዮ ፋይል",
+      "audioFile": "የድምፅ ፋይል",
+      "imageFile": "ምስል",
+      "documentFile": "ሰነድ",
+      "useTitle": "ርዕሱን ተጠቀም፦ {title}",
+      "useCover": "እንደ ሽፋን ምስል ተጠቀም",
+      "lengthDetected": "ርዝመት ተገኝቷል፦ {time}"
     }
   },
   "articleDetail": {

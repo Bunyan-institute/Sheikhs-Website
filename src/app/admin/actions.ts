@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { getSessionUser } from "@/lib/auth/session";
 import {
   saveLecture,
+  getLectureByIdOrSlug,
   deleteLecture,
   saveSeries,
   getSeriesByIdOrSlug,
@@ -42,6 +43,7 @@ import {
   resetDatabase,
 } from "@/lib/db/repository";
 import { mediaRefFromUrl } from "@/lib/media-ref";
+import { oembedEndpoint, parseMediaUrl } from "@/lib/media-source";
 import { UserError } from "@/lib/user-error";
 import type { SectionMap } from "@/lib/api/types";
 import type { JourneyMilestone, QualificationRecord } from "@/lib/db/types";
@@ -95,6 +97,8 @@ export async function saveLectureAction(data: {
   audioUrl?: string;
   durationSeconds?: number;
   transcript?: string;
+  /** undefined keeps the current cover; an empty string removes it. */
+  coverUrl?: string;
   seriesId?: string;
   categories?: string[];
   tags?: string[];
@@ -102,6 +106,7 @@ export async function saveLectureAction(data: {
 }) {
   await assertAuthenticated();
   return guarded(async () => {
+    const existingLecture = data.id ? await getLectureByIdOrSlug(data.id) : null;
     const lecture = await saveLecture({
       status: data.status,
       id: data.id,
@@ -116,7 +121,8 @@ export async function saveLectureAction(data: {
         transcript: data.transcript || null,
       },
       series: await resolveLectureSeries(data.id, data.seriesId),
-      categories: data.categories ?? [],
+      cover: data.coverUrl !== undefined ? await mediaRefFromUrl(data.coverUrl, "image") : existingLecture?.cover ?? null,
+    categories: data.categories ?? [],
       tags: data.tags || [],
     });
 
@@ -685,4 +691,32 @@ export async function deleteCertificateAction(id: string) {
   const deleted = await deleteCertificate(id);
   refreshCache();
   return { success: deleted };
+}
+
+// ── Link helper: title and picture for a pasted video link ──
+
+export async function fetchMediaMetadata(url: string): Promise<{ success: true; title?: string; author?: string; thumbnailUrl?: string }> {
+  await assertAuthenticated();
+  const parsed = parseMediaUrl(url);
+  const soft = { success: true as const, thumbnailUrl: parsed.thumbnailUrl };
+  // Only youtube.com / tiktok.com oEmbed endpoints are ever contacted; the pasted URL is just a query value.
+  const endpoint = oembedEndpoint(parsed);
+  if (!endpoint) return soft;
+  try {
+    const res = await fetch(endpoint, { signal: AbortSignal.timeout(4000), redirect: "error", cache: "no-store", headers: { accept: "application/json" } });
+    if (!res.ok) return soft;
+    const text = await res.text();
+    if (text.length > 200_000) return soft;
+    const json = JSON.parse(text) as { title?: unknown; author_name?: unknown; thumbnail_url?: unknown };
+    const clamp = (v: unknown, n: number) => (typeof v === "string" && v.trim() ? v.trim().slice(0, n) : undefined);
+    const thumb = clamp(json.thumbnail_url, 500);
+    return {
+      success: true,
+      title: clamp(json.title, 200),
+      author: clamp(json.author_name, 120),
+      thumbnailUrl: thumb && /^https:\/\//.test(thumb) ? thumb : parsed.thumbnailUrl,
+    };
+  } catch {
+    return soft;
+  }
 }

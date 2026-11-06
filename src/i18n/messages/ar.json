@@ -618,7 +618,30 @@
       "fieldAudioUrl": "رابط ملف الصوت المباشر (MP3)",
       "fieldDuration": "المدة (مثال: 45 دقيقة)",
       "fieldDescription": "ملخص الدرس",
-      "saveLecture": "حفظ الدرس"
+      "saveLecture": "حفظ الدرس",
+      "stepSource": "١. أضف الفيديو أو الصوت",
+      "stepDetails": "٢. صِفه",
+      "stepPublish": "٣. انشر",
+      "sourceHelp": "الصق رابطًا (يوتيوب، فيسبوك، تيك توك، تيليجرام أو ملف) أو ارفع ملفًا من هاتفك.",
+      "sourceRequired": "أضف رابط فيديو أو صوت أو ملفًا أولًا.",
+      "coverLabel": "صورة الغلاف (اختياري)",
+      "moreOptions": "خيارات إضافية",
+      "lengthLabel": "المدة (دقائق:ثوانٍ)",
+      "lengthHint": "تُعبّأ تلقائيًا للملفات. اتركها فارغة إن لم تعرفها.",
+      "extraAudio": "نسخة صوتية (اختياري)",
+      "transcriptLabel": "النص المكتوب للدرس (اختياري)",
+      "topicsLabel": "المواضيع",
+      "keywordsLabel": "كلمات مفتاحية",
+      "standalone": "ليس ضمن سلسلة",
+      "publishNow": "انشر الآن",
+      "publishHint": "أوقفه للاحتفاظ بها كمسودة لا يراها الزوار.",
+      "filterVideo": "فيديو",
+      "filterAudio": "صوت",
+      "emptyTitle": "لا توجد دروس بعد",
+      "emptyHint": "أضف أول درس مرئي أو صوتي.",
+      "editTitle": "تعديل الدرس",
+      "addTitle": "إضافة درس",
+      "shortDescription": "وصف قصير (اختياري)"
     },
     "series": {
       "heading": "السلاسل العلمية والمنهجية",
@@ -725,6 +748,19 @@
       "restoreButton": "استعادة البيانات",
       "storageUsage": "محرك التخزين المحلي",
       "lastBackup": "آخر عملية تصدير"
+    },
+    "source": {
+      "placeholder": "الصق الرابط هنا",
+      "invalid": "هذا ليس رابطًا صالحًا.",
+      "plainLink": "رابط صفحة ويب. سيفتحه الزوار في علامة تبويب جديدة.",
+      "detected": "تم التعرف: {name}",
+      "videoFile": "ملف فيديو",
+      "audioFile": "ملف صوتي",
+      "imageFile": "صورة",
+      "documentFile": "مستند",
+      "useTitle": "استخدم العنوان: {title}",
+      "useCover": "استخدمها كصورة غلاف",
+      "lengthDetected": "تم تحديد المدة: {time}"
     }
   },
   "articleDetail": {

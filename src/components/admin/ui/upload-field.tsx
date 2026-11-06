@@ -23,6 +23,9 @@ interface UploadFieldProps {
   accept: string;
   placeholder?: string;
   inputClassName?: string;
+  /** Extra control shown between the input and the Upload button (e.g. Paste). */
+  extraButton?: React.ReactNode;
+  id?: string;
 }
 
 function imageSize(file: File): Promise<{ w: number; h: number } | null> {
@@ -43,7 +46,7 @@ function imageSize(file: File): Promise<{ w: number; h: number } | null> {
 }
 
 /** A URL input with an Upload button that stores the file on the server and fills in its URL. */
-export function UploadField({ value, onChange, onUploaded, accept, placeholder, inputClassName }: UploadFieldProps) {
+export function UploadField({ value, onChange, onUploaded, accept, placeholder, inputClassName, extraButton, id }: UploadFieldProps) {
   const t = useTranslations("admin.common");
   const { toast } = useAdminFeedback();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -91,12 +94,15 @@ export function UploadField({ value, onChange, onUploaded, accept, placeholder, 
   return (
     <div className="flex gap-2">
       <input
+        id={id}
         type="text"
+        dir="ltr"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={inputClassName ?? inputClass}
       />
+      {extraButton}
       <input ref={fileRef} type="file" accept={accept} className="hidden" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
       <button
         type="button"

@@ -618,7 +618,30 @@
       "fieldAudioUrl": "Liankii Sagalee (MP3)",
       "fieldDuration": "Dheerina (fkn: Daqiiqaa 45)",
       "fieldDescription": "Cuunfaa Darsichaa",
-      "saveLecture": "Darsii Olkaayi"
+      "saveLecture": "Darsii Olkaayi",
+      "stepSource": "1. Viidiyoo ykn sagalee dabali",
+      "stepDetails": "2. Ibsi",
+      "stepPublish": "3. Maxxansi",
+      "sourceHelp": "Linkii maxxansi (YouTube, Facebook, TikTok, Telegram ykn faayilii) ykn bilbila kee irraa olkaa'i.",
+      "sourceRequired": "Duraan linkii viidiyoo ykn sagalee ykn faayilii dabali.",
+      "coverLabel": "Suuraa golgaa (filannoo)",
+      "moreOptions": "Filannoo dabalataa",
+      "lengthLabel": "Yeroo (daqiiqaa:sekoondii)",
+      "lengthHint": "Faayilii irraaf ofumaan guutama. Yoo hin beekne duwwaa dhiisi.",
+      "extraAudio": "Gosa sagalee (filannoo)",
+      "transcriptLabel": "Barreeffama barnoota (filannoo)",
+      "topicsLabel": "Mata duree",
+      "keywordsLabel": "Jecha furtuu",
+      "standalone": "Kutaa walitti aansuu miti",
+      "publishNow": "Amma maxxansi",
+      "publishHint": "Akka ragaa hin mul'anne tuqii kaa'uuf cufi.",
+      "filterVideo": "Viidiyoo",
+      "filterAudio": "Sagalee",
+      "emptyTitle": "Amma barnoonni hin jiru",
+      "emptyHint": "Barnoota viidiyoo ykn sagalee jalqabaa dabali.",
+      "editTitle": "Barnoota gulaali",
+      "addTitle": "Barnoota dabali",
+      "shortDescription": "Ibsa gabaabaa (filannoo)"
     },
     "series": {
       "heading": "Sagantaalee Barnootaa Walitti Fufaa",
@@ -725,6 +748,19 @@
       "restoreButton": "Deetaa Deebisi",
       "storageUsage": "Kuusaa Deetaa Naannoo",
       "lastBackup": "Kuusaa Eeggannoo Dhumaa"
+    },
+    "source": {
+      "placeholder": "Linkii as maxxansi",
+      "invalid": "Kun linkii sirrii miti.",
+      "plainLink": "Linkii marsariitii. Daawwattoonni tab haaraa keessatti ni bananii.",
+      "detected": "Adda baafameera: {name}",
+      "videoFile": "Faayilii viidiyoo",
+      "audioFile": "Faayilii sagalee",
+      "imageFile": "Suuraa",
+      "documentFile": "Waraqaa",
+      "useTitle": "Mata duree fayyadami: {title}",
+      "useCover": "Suuraa golgaa godhi",
+      "lengthDetected": "Yeroon argameera: {time}"
     }
   },
   "articleDetail": {

@@ -1,58 +1,61 @@
 "use client";
 
-import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  Video,
-  AudioLines,
-  Plus,
-  Search,
-  Edit2,
-  Trash2,
-  ExternalLink,
-  Clock,
-  Layers,
-  X,
-  Loader2,
-  CheckCircle,
-} from "lucide-react";
-import { UploadField } from "@/components/admin/ui/upload-field";
+import { AudioLines, ExternalLink, Pencil, Plus, Trash2, Video } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useAdminFeedback } from "@/components/admin/ui/feedback";
-import { useTranslations, useLocale } from "next-intl";
+import { useOpenNewFromQuery } from "@/components/admin/ui/use-open-new";
+import { useStandalone } from "@/components/admin/pwa/use-standalone";
+import { Modal } from "@/components/admin/ui/modal";
+import { DataList } from "@/components/admin/ui/data-list";
+import { StatusBadge } from "@/components/admin/ui/status-badge";
+import { FormField, buttonDanger, buttonPrimary, buttonSecondary, inputClass, selectClass, textareaClass } from "@/components/admin/ui/form-field";
+import { SlugField } from "@/components/admin/ui/slug-field";
+import { TagInput } from "@/components/admin/ui/tag-input";
+import { SourceField, formatDuration, parseDuration, useProviderLabel } from "@/components/admin/ui/source-field";
+import { UploadField } from "@/components/admin/ui/upload-field";
+import { parseMediaUrl } from "@/lib/media-source";
 import { saveLectureAction, deleteLectureAction } from "../actions";
 import type { PublicLecture } from "@/lib/api/types";
 
+type Format = "all" | "video" | "audio";
+
+const primarySource = (l: PublicLecture) => l.media?.video || l.media?.audio || "";
+
 export default function AdminLecturesPage() {
-  const { toast, confirm, prompt } = useAdminFeedback();
+  const { toast, confirm } = useAdminFeedback();
   const t = useTranslations("admin.lectures");
   const tCommon = useTranslations("admin.common");
   const locale = useLocale();
+  const standalone = useStandalone();
+  const providerLabel = useProviderLabel();
 
   const [lectures, setLectures] = useState<PublicLecture[]>([]);
-  const [search, setSearch] = useState("");
-  const [formatFilter, setFormatFilter] = useState<"all" | "video" | "audio">("all");
+  const [seriesOptions, setSeriesOptions] = useState<{ id: string; title: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [published, setPublished] = useState(true);
-  const [editingLecture, setEditingLecture] = useState<PublicLecture | null>(null);
-  const [feedback, setFeedback] = useState<string | null>(null);
+  const [format, setFormat] = useState<Format>("all");
 
-  // Form State
+  const [modalOpen, setModalOpen] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [editing, setEditing] = useState<PublicLecture | null>(null);
+
+  // Form state
+  const [sourceUrl, setSourceUrl] = useState("");
+  const [extraAudio, setExtraAudio] = useState("");
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [summary, setSummary] = useState("");
-  const [videoUrl, setVideoUrl] = useState("");
-  const [audioUrl, setAudioUrl] = useState("");
-  const [durationMinutes, setDurationMinutes] = useState(45);
   const [seriesId, setSeriesId] = useState("");
-  const [seriesOptions, setSeriesOptions] = useState<{ id: string; title: string }[]>([]);
-  const [categories, setCategories] = useState("Lectures");
-  const [tags, setTags] = useState("");
+  const [topics, setTopics] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
+  const [coverUrl, setCoverUrl] = useState("");
+  const [durationText, setDurationText] = useState("");
   const [transcript, setTranscript] = useState("");
+  const [published, setPublished] = useState(true);
+  const durationTouched = useRef(false);
 
-  const fetchLectures = async () => {
+  const fetchLectures = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/lectures");
       if (res.ok) {
@@ -60,449 +63,340 @@ export default function AdminLecturesPage() {
         setLectures(data.lectures || []);
         setSeriesOptions(data.series || []);
       }
-    } catch {
-      // fallback
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchLectures();
-  }, []);
+  }, [fetchLectures]);
 
-  const openNewModal = () => {
-    setPublished(true);
-    setEditingLecture(null);
+  const topicSuggestions = useMemo(() => [...new Set(lectures.flatMap((l) => l.categories ?? []))].sort(), [lectures]);
+
+  const openNew = () => {
+    setEditing(null);
+    setSourceUrl("");
+    setExtraAudio("");
     setTitle("");
     setSlug("");
     setSummary("");
-    setVideoUrl("");
-    setAudioUrl("");
-    setDurationMinutes(45);
     setSeriesId("");
-    setCategories("Lectures");
-    setTags("");
+    setTopics([]);
+    setKeywords([]);
+    setCoverUrl("");
+    setDurationText("");
     setTranscript("");
-    setIsModalOpen(true);
+    setPublished(true);
+    durationTouched.current = false;
+    setModalOpen(true);
   };
 
-  useOpenNewFromQuery(openNewModal);
+  useOpenNewFromQuery(openNew);
 
-  const openEditModal = (lec: PublicLecture) => {
-    setPublished(lec.status !== "draft");
-    setEditingLecture(lec);
+  const openEdit = (lec: PublicLecture) => {
+    setEditing(lec);
+    setSourceUrl(primarySource(lec));
+    setExtraAudio(lec.media?.video && lec.media?.audio ? lec.media.audio : "");
     setTitle(lec.title);
     setSlug(lec.slug);
     setSummary(lec.summary || "");
-    setVideoUrl(lec.media?.video || "");
-    setAudioUrl(lec.media?.audio || "");
-    setDurationMinutes(lec.duration_seconds ? Math.round(lec.duration_seconds / 60) : 45);
     setSeriesId(lec.series?.id || "");
-    setCategories(lec.categories?.join(", ") || "Lectures");
-    setTags(lec.tags?.join(", ") || "");
+    setTopics(lec.categories ?? []);
+    setKeywords(lec.tags ?? []);
+    setCoverUrl(lec.cover?.url || "");
+    setDurationText(lec.duration_seconds ? formatDuration(lec.duration_seconds) : "");
     setTranscript(lec.media?.transcript || "");
-    setIsModalOpen(true);
-  };
-
-  const handleTitleChange = (val: string) => {
-    setTitle(val);
-    if (!editingLecture) {
-      const autoSlug = val
-        .toLowerCase()
-        .replace(/[^\w\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .slice(0, 50);
-      setSlug(autoSlug || `lec-${Date.now()}`);
-    }
+    setPublished(lec.status !== "draft");
+    durationTouched.current = true; // keep the stored length unless the user changes it
+    setModalOpen(true);
   };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSaving(true);
-    setFeedback(null);
-
+    const parsed = parseMediaUrl(sourceUrl);
+    if (!parsed.valid) {
+      toast.error(t("sourceRequired"));
+      return;
+    }
+    setSaving(true);
     try {
+      const isAudio = parsed.kind === "audio";
       const res = await saveLectureAction({
         status: published ? "published" : "draft",
-        id: editingLecture?.id,
-        title,
+        id: editing?.id,
+        title: title.trim(),
         slug,
         summary,
-        videoUrl: videoUrl || undefined,
-        audioUrl: audioUrl || undefined,
-        durationSeconds: durationMinutes * 60,
+        videoUrl: isAudio ? undefined : parsed.url,
+        audioUrl: isAudio ? parsed.url : extraAudio.trim() || undefined,
+        durationSeconds: parseDuration(durationText) ?? undefined,
         seriesId: seriesId || undefined,
-        categories: categories.split(",").map((c) => c.trim()).filter(Boolean),
-        tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+        categories: topics,
+        tags: keywords,
         transcript: transcript || undefined,
+        coverUrl: coverUrl.trim(),
       });
       if (!res.success) {
         toast.error(res.error);
         return;
       }
-
-      setIsModalOpen(false);
-      setFeedback(tCommon("successSave"));
+      setModalOpen(false);
+      toast.success(tCommon("successSave"));
       fetchLectures();
-    } catch (err: any) {
-      toast.error("Error saving lecture: " + err.message);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : tCommon("errorSave"));
     } finally {
-      setIsSaving(false);
+      setSaving(false);
     }
   };
 
-  const handleDelete = async (id: string, lecTitle: string) => {
-    if (!(await confirm(`${tCommon("confirmDelete")} (${lecTitle})`))) return;
-
+  const handleDelete = async (lec: PublicLecture) => {
+    if (!(await confirm({ message: `${tCommon("confirmDelete")} (${lec.title})` }))) return;
     try {
-      await deleteLectureAction(id);
-      setFeedback(tCommon("successDelete"));
-      setLectures((prev) => prev.filter((l) => l.id !== id));
-    } catch (err: any) {
-      toast.error("Failed to delete: " + err.message);
+      await deleteLectureAction(lec.id);
+      setLectures((prev) => prev.filter((l) => l.id !== lec.id));
+      toast.success(tCommon("successDelete"));
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : tCommon("errorSave"));
     }
   };
 
-  const filtered = lectures.filter((l) => {
-    const matchesSearch =
-      l.title.toLowerCase().includes(search.toLowerCase()) ||
-      l.slug.toLowerCase().includes(search.toLowerCase()) ||
-      (l.summary && l.summary.toLowerCase().includes(search.toLowerCase()));
-
-    if (!matchesSearch) return false;
-    if (formatFilter === "video") return Boolean(l.media?.video);
-    if (formatFilter === "audio") return Boolean(l.media?.audio && !l.media?.video);
+  const visible = lectures.filter((l) => {
+    if (format === "video") return Boolean(l.media?.video);
+    if (format === "audio") return Boolean(l.media?.audio && !l.media?.video);
     return true;
   });
 
-  return (
-    <div className="space-y-6">
-      {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-heading text-2xl font-bold text-[#2D3436]">
-            {t("heading")} ({lectures.length})
-          </h1>
-          <p className="text-xs text-[#636E72] mt-0.5">
-            {t("subheading")}
-          </p>
-        </div>
+  const sourceChip = (l: PublicLecture) => {
+    const main = parseMediaUrl(primarySource(l));
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-adm-soft px-2.5 py-1 text-xs font-semibold text-adm-primary">
+        {l.media?.video ? <Video className="size-3.5" /> : <AudioLines className="size-3.5" />}
+        {providerLabel(main) || "—"}
+        {l.media?.video && l.media?.audio && <AudioLines className="size-3.5 opacity-70" />}
+      </span>
+    );
+  };
 
-        <button
-          onClick={openNewModal}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#1B5E20] hover:bg-[#154a19] text-white font-semibold text-xs shadow-xs transition-colors self-start sm:self-auto"
-        >
-          <Plus className="w-4 h-4" />
-          <span>{t("newLecture")}</span>
+  const actions = (l: PublicLecture) => (
+    <div className="flex items-center justify-end gap-1.5">
+      {!standalone && (
+        <Link href={`/${locale}/lectures/${l.slug}`} target="_blank" aria-label={tCommon("viewLive")} title={tCommon("viewLive")} className="grid size-11 place-items-center rounded-lg text-adm-muted hover:bg-adm-soft">
+          <ExternalLink className="size-4" />
+        </Link>
+      )}
+      <button type="button" onClick={() => openEdit(l)} aria-label={`${tCommon("edit")} ${l.title}`} className={`${buttonSecondary} !px-3`}>
+        <Pencil className="size-4" />
+        <span>{tCommon("edit")}</span>
+      </button>
+      <button type="button" onClick={() => handleDelete(l)} aria-label={`${tCommon("delete")} ${l.title}`} className={`${buttonSecondary} !px-3 text-adm-danger`}>
+        <Trash2 className="size-4" />
+        <span>{tCommon("delete")}</span>
+      </button>
+    </div>
+  );
+
+  const pills: { key: Format; label: string; count: number }[] = [
+    { key: "all", label: tCommon("all"), count: lectures.length },
+    { key: "video", label: t("filterVideo"), count: lectures.filter((l) => l.media?.video).length },
+    { key: "audio", label: t("filterAudio"), count: lectures.filter((l) => l.media?.audio && !l.media?.video).length },
+  ];
+
+  return (
+    <div className="space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-adm-text">
+            {t("heading")} <span className="text-adm-muted">({lectures.length})</span>
+          </h1>
+          <p className="mt-0.5 text-sm text-adm-muted">{t("subheading")}</p>
+        </div>
+        <button type="button" onClick={openNew} className={buttonPrimary}>
+          <Plus className="size-5" />
+          {t("newLecture")}
         </button>
       </div>
 
-      {feedback && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-md flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600" />
-            <span>{feedback}</span>
-          </div>
-          <button onClick={() => setFeedback(null)} className="text-emerald-700 hover:text-black">
-            ✕
-          </button>
-        </div>
-      )}
-
-      {/* Filter and Search Bar */}
-      <div className="bg-white border border-[#E0D8CE] p-3 rounded-lg flex flex-col md:flex-row items-center justify-between gap-3 shadow-2xs">
-        <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-[#636E72] absolute start-3 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder={t("searchPlaceholder")}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full ps-9 pe-4 py-2 bg-[#FAF8F5] border border-[#E0D8CE] rounded text-xs text-[#2D3436] focus:outline-none focus:border-[#1B5E20]"
-          />
-        </div>
-
-        <div className="flex items-center gap-1.5 self-start md:self-auto overflow-x-auto w-full md:w-auto">
-          <button
-            onClick={() => setFormatFilter("all")}
-            className={`px-3 py-1.5 rounded text-xs font-semibold transition-colors ${
-              formatFilter === "all" ? "bg-[#1B5E20] text-white" : "bg-[#FAF8F5] text-[#636E72] hover:text-[#2D3436]"
-            }`}
-          >
-            {tCommon("all")} ({lectures.length})
-          </button>
-          <button
-            onClick={() => setFormatFilter("video")}
-            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1 transition-colors ${
-              formatFilter === "video" ? "bg-red-600 text-white" : "bg-[#FAF8F5] text-[#636E72] hover:text-[#2D3436]"
-            }`}
-          >
-            <Video className="w-3.5 h-3.5" /> Videos ({lectures.filter((l) => Boolean(l.media?.video)).length})
-          </button>
-          <button
-            onClick={() => setFormatFilter("audio")}
-            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1 transition-colors ${
-              formatFilter === "audio" ? "bg-[#1B5E20] text-white" : "bg-[#FAF8F5] text-[#636E72] hover:text-[#2D3436]"
-            }`}
-          >
-            <AudioLines className="w-3.5 h-3.5" /> Audio ({lectures.filter((l) => Boolean(l.media?.audio && !l.media?.video)).length})
-          </button>
-        </div>
-      </div>
-
-      {/* Lectures Table */}
-      <div className="bg-white border border-[#E0D8CE] rounded-lg overflow-hidden shadow-2xs">
-        {isLoading ? (
-          <div className="p-12 text-center text-xs text-[#636E72] flex items-center justify-center gap-2">
-            <Loader2 className="w-4 h-4 animate-spin text-[#1B5E20]" />
-            <span>{tCommon("loading")}</span>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="p-12 text-center text-xs text-[#636E72]">
-            {tCommon("noRecords")}
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-start text-xs">
-              <thead className="bg-[#FAF8F5] text-[#2D3436] font-heading font-bold uppercase tracking-wider text-[10px] border-b border-[#E0D8CE]">
-                <tr>
-                  <th className="py-3 px-4 text-start">{t("colTitle")}</th>
-                  <th className="py-3 px-4 text-start">Format</th>
-                  <th className="py-3 px-4 text-start">{t("colSeries")}</th>
-                  <th className="py-3 px-4 text-start">{t("colDuration")}</th>
-                  <th className="py-3 px-4 text-end">{t("colActions")}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#E0D8CE]/60">
-                {filtered.map((lec) => (
-                  <tr key={lec.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
-                    <td className="py-3.5 px-4 max-w-md">
-                      <div className="font-bold text-[#2D3436] line-clamp-1">{lec.title}</div>
-                      <div className="text-[11px] text-[#636E72] line-clamp-1 mt-0.5 font-mono">
-                        /{lec.slug}
-                      </div>
-                      {lec.summary && (
-                        <div className="text-[11px] text-[#636E72] line-clamp-1 mt-1">
-                          {lec.summary}
-                        </div>
-                      )}
-                    </td>
-
-                    <td className="py-3.5 px-4 whitespace-nowrap">
-                      {lec.media?.video ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-red-50 text-red-700 border border-red-200">
-                          <Video className="w-3 h-3" /> YouTube Video
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                          <AudioLines className="w-3 h-3" /> Audio MP3
-                        </span>
-                      )}
-                    </td>
-
-                    <td className="py-3.5 px-4 whitespace-nowrap text-xs text-[#636E72]">
-                      {lec.series ? (
-                        <span className="inline-flex items-center gap-1 text-[#B8860B] font-medium">
-                          <Layers className="w-3 h-3" />
-                          <span>Lesson {lec.series.position || "•"}</span>
-                        </span>
-                      ) : (
-                        <span className="text-[#636E72]/60">—</span>
-                      )}
-                    </td>
-
-                    <td className="py-3.5 px-4 whitespace-nowrap text-xs text-[#636E72]">
-                      {lec.duration_seconds ? (
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          <span>{Math.round(lec.duration_seconds / 60)} min</span>
-                        </span>
-                      ) : (
-                        "—"
-                      )}
-                    </td>
-
-                    <td className="py-3.5 px-4 whitespace-nowrap text-end space-x-2">
-                      <Link
-                        href={`/${locale}/lectures/${lec.slug}`}
-                        target="_blank"
-                        title={tCommon("viewLive")}
-                        className="inline-block p-1.5 rounded hover:bg-gray-100 text-[#636E72] hover:text-[#1B5E20] transition-colors"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </Link>
-                      <button
-                        onClick={() => openEditModal(lec)}
-                        title={tCommon("edit")}
-                        className="p-1.5 rounded hover:bg-emerald-50 text-[#636E72] hover:text-[#1B5E20] transition-colors"
-                      >
-                        <Edit2 className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(lec.id, lec.title)}
-                        title={tCommon("delete")}
-                        className="p-1.5 rounded hover:bg-red-50 text-[#636E72] hover:text-red-600 transition-colors"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
-      {/* Add / Edit Modal Drawer */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setIsModalOpen(false)} />
-          <div className="relative bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col z-10 border border-[#E0D8CE]">
-            {/* Modal Header */}
-            <div className="p-5 border-b border-[#E0D8CE] flex items-center justify-between bg-[#FAF8F5] rounded-t-xl">
-              <div>
-                <h3 className="font-heading font-bold text-base text-[#2D3436]">
-                  {editingLecture ? tCommon("edit") : t("newLecture")}
-                </h3>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded text-[#636E72] hover:text-black hover:bg-white/80"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Modal Form */}
-            <form onSubmit={handleSave} className="p-6 overflow-y-auto space-y-4 text-xs">
-              <div>
-                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldTitle")} *</label>
-                <input
-                  type="text"
-                  required
-                  value={title}
-                  onChange={(e) => handleTitleChange(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSlug")} *</label>
-                  <input
-                    type="text"
-                    required
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                  />
-                </div>
-                <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDuration")}</label>
-                  <input
-                    type="number"
-                    value={durationMinutes}
-                    onChange={(e) => setDurationMinutes(Number(e.target.value))}
-                    min={1}
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-bold text-[#2D3436] mb-1">{t("fieldDescription")}</label>
-                <textarea
-                  rows={2}
-                  value={summary}
-                  onChange={(e) => setSummary(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3 bg-[#FAF8F5] rounded-md border border-[#E0D8CE]">
-                <div>
-                  <label className="block font-bold text-[#2D3436] mb-1 flex items-center gap-1.5">
-                    <Video className="w-3.5 h-3.5 text-red-600" />
-                    <span>{t("fieldYoutubeUrl")}</span>
-                  </label>
-                  <UploadField value={videoUrl} onChange={setVideoUrl} accept="video/mp4,video/webm" placeholder="https://www.youtube.com/watch?v=..." />
-                </div>
-                <div>
-                  <label className="block font-bold text-[#2D3436] mb-1 flex items-center gap-1.5">
-                    <AudioLines className="w-3.5 h-3.5 text-[#1B5E20]" />
-                    <span>{t("fieldAudioUrl")}</span>
-                  </label>
-                  <UploadField value={audioUrl} onChange={setAudioUrl} accept="audio/*" placeholder="https://.../lessons/lesson-01.mp3" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">{t("fieldSeries")}</label>
-                  <select
-                    value={seriesId}
-                    onChange={(e) => setSeriesId(e.target.value)}
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
-                  >
-                    <option value="">Standalone</option>
-                    {seriesOptions.map((s) => (
-                      <option key={s.id} value={s.id}>{s.title}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block font-bold text-[#2D3436] mb-1">{tCommon("category")}</label>
-                  <input
-                    type="text"
-                    value={categories}
-                    onChange={(e) => setCategories(e.target.value)}
-                    className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs bg-white focus:outline-none focus:border-[#1B5E20]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-bold text-[#2D3436] mb-1">Transcript</label>
-                <textarea
-                  rows={4}
-                  value={transcript}
-                  onChange={(e) => setTranscript(e.target.value)}
-                  className="w-full px-3 py-2 border border-[#E0D8CE] rounded text-xs font-mono bg-[#FAF8F5]/30 focus:outline-none focus:border-[#1B5E20]"
-                />
-              </div>
-
-              <label className="flex items-center gap-2 font-semibold text-[#2D3436] cursor-pointer">
-
-                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#1B5E20]" />
-
-                Published <span className="font-normal text-[#636E72]">(untick to keep as a draft, hidden from the public site)</span>
-
-              </label>
-
-
-              <div className="pt-4 border-t border-[#E0D8CE] flex items-center justify-end gap-3">
+      {isLoading ? (
+        <p className="py-16 text-center text-adm-muted">{tCommon("loading")}</p>
+      ) : (
+        <DataList
+          items={visible}
+          getKey={(l) => l.id}
+          searchText={(l) => `${l.title} ${l.slug} ${l.summary ?? ""}`}
+          emptyTitle={t("emptyTitle")}
+          emptyHint={t("emptyHint")}
+          emptyAction={
+            <button type="button" onClick={openNew} className={buttonPrimary}>
+              <Plus className="size-5" />
+              {t("newLecture")}
+            </button>
+          }
+          toolbar={
+            <div className="flex gap-2 overflow-x-auto pb-1" role="tablist">
+              {pills.map((p) => (
                 <button
+                  key={p.key}
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-[#E0D8CE] text-[#636E72] hover:bg-[#FAF8F5] rounded font-semibold text-xs transition-colors"
+                  role="tab"
+                  aria-selected={format === p.key}
+                  onClick={() => setFormat(p.key)}
+                  className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold ${format === p.key ? "bg-adm-primary text-white" : "border border-adm-border bg-white text-adm-text"}`}
                 >
-                  {tCommon("cancel")}
+                  {p.label} ({p.count})
                 </button>
-                <button
-                  type="submit"
-                  disabled={isSaving}
-                  className="px-6 py-2 bg-[#1B5E20] hover:bg-[#154a19] text-white rounded font-bold text-xs shadow-xs transition-colors disabled:opacity-50 flex items-center gap-1.5"
-                >
-                  {isSaving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  <span>{isSaving ? tCommon("saving") : t("saveLecture")}</span>
-                </button>
+              ))}
+            </div>
+          }
+          header={
+            <tr>
+              <th className="px-4 py-3">{t("colTitle")}</th>
+              <th className="px-4 py-3">{tCommon("status")}</th>
+              <th className="px-4 py-3">{t("colDuration")}</th>
+              <th className="px-4 py-3 text-end">{t("colActions")}</th>
+            </tr>
+          }
+          renderRow={(l) => (
+            <tr key={l.id} className="align-middle">
+              <td className="max-w-md px-4 py-3">
+                <p className="truncate font-semibold text-adm-text">{l.title}</p>
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+                  {sourceChip(l)}
+                  {l.series && <span className="truncate text-xs text-adm-muted">{l.series.title}</span>}
+                </div>
+              </td>
+              <td className="px-4 py-3">
+                <StatusBadge status={l.status} />
+              </td>
+              <td className="px-4 py-3 text-adm-muted">{l.duration_seconds ? formatDuration(l.duration_seconds) : "—"}</td>
+              <td className="px-4 py-3">{actions(l)}</td>
+            </tr>
+          )}
+          renderCard={(l) => (
+            <div className="space-y-3">
+              <div className="flex items-start justify-between gap-3">
+                <p className="font-semibold text-adm-text">{l.title}</p>
+                <StatusBadge status={l.status} />
               </div>
-            </form>
-          </div>
-        </div>
+              <div className="flex flex-wrap items-center gap-2 text-sm text-adm-muted">
+                {sourceChip(l)}
+                {l.duration_seconds ? <span>{formatDuration(l.duration_seconds)}</span> : null}
+                {l.series && <span className="truncate">{l.series.title}</span>}
+              </div>
+              {actions(l)}
+            </div>
+          )}
+        />
       )}
+
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={editing ? t("editTitle") : t("addTitle")}
+        size="lg"
+        footer={
+          <>
+            <button type="button" className={buttonSecondary} onClick={() => setModalOpen(false)}>
+              {tCommon("cancel")}
+            </button>
+            <button type="submit" form="lecture-form" className={buttonPrimary} disabled={saving}>
+              {saving ? tCommon("saving") : t("saveLecture")}
+            </button>
+          </>
+        }
+      >
+        <form id="lecture-form" onSubmit={handleSave} className="space-y-7">
+          <section className="space-y-3">
+            <h3 className="text-base font-bold text-adm-primary">{t("stepSource")}</h3>
+            <p className="text-sm text-adm-muted">{t("sourceHelp")}</p>
+            <SourceField
+              value={sourceUrl}
+              onChange={setSourceUrl}
+              onTitle={setTitle}
+              onThumbnail={setCoverUrl}
+              onDuration={(sec) => {
+                if (!durationTouched.current) setDurationText(formatDuration(sec));
+              }}
+            />
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-base font-bold text-adm-primary">{t("stepDetails")}</h3>
+            <FormField label={t("fieldTitle")} required>
+              {(id) => <input id={id} className={inputClass} value={title} onChange={(e) => setTitle(e.target.value)} required />}
+            </FormField>
+            <FormField label={t("shortDescription")}>
+              {(id) => <textarea id={id} rows={3} className={textareaClass} value={summary} onChange={(e) => setSummary(e.target.value)} />}
+            </FormField>
+            <FormField label={t("fieldSeries")}>
+              {(id) => (
+                <select id={id} className={selectClass} value={seriesId} onChange={(e) => setSeriesId(e.target.value)}>
+                  <option value="">{t("standalone")}</option>
+                  {seriesOptions.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.title}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </FormField>
+            <FormField label={t("topicsLabel")}>{(id) => <TagInput id={id} value={topics} onChange={setTopics} suggestions={topicSuggestions} />}</FormField>
+            <FormField label={t("coverLabel")}>
+              {(id) => (
+                <div className="space-y-2">
+                  <UploadField id={id} value={coverUrl} onChange={setCoverUrl} accept="image/*" placeholder="https://…" />
+                  {coverUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={coverUrl} alt="" className="h-28 w-auto rounded-lg border border-adm-border object-cover" />
+                  )}
+                </div>
+              )}
+            </FormField>
+          </section>
+
+          <section className="space-y-3">
+            <h3 className="text-base font-bold text-adm-primary">{t("stepPublish")}</h3>
+            <label className="flex min-h-11 cursor-pointer items-start gap-3">
+              <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="mt-1 size-5 accent-[#1B6A50]" />
+              <span>
+                <span className="block font-semibold text-adm-text">{t("publishNow")}</span>
+                <span className="block text-sm text-adm-muted">{t("publishHint")}</span>
+              </span>
+            </label>
+          </section>
+
+          <details className="rounded-xl border border-adm-border">
+            <summary className="flex min-h-11 cursor-pointer items-center px-4 font-semibold text-adm-text">{t("moreOptions")}</summary>
+            <div className="space-y-4 border-t border-adm-border p-4">
+              <SlugField title={title} value={slug} onChange={setSlug} label={t("fieldSlug")} autoFollowTitle={!editing} fallbackPrefix="lesson" />
+              <FormField label={t("lengthLabel")} hint={t("lengthHint")}>
+                {(id) => (
+                  <input
+                    id={id}
+                    dir="ltr"
+                    inputMode="numeric"
+                    placeholder="38:12"
+                    className={inputClass}
+                    value={durationText}
+                    onChange={(e) => {
+                      durationTouched.current = true;
+                      setDurationText(e.target.value);
+                    }}
+                  />
+                )}
+              </FormField>
+              <FormField label={t("extraAudio")}>
+                {(id) => <SourceField id={id} value={extraAudio} onChange={setExtraAudio} accept="audio/*" />}
+              </FormField>
+              <FormField label={t("keywordsLabel")}>{(id) => <TagInput id={id} value={keywords} onChange={setKeywords} />}</FormField>
+              <FormField label={t("transcriptLabel")}>
+                {(id) => <textarea id={id} rows={5} className={textareaClass} value={transcript} onChange={(e) => setTranscript(e.target.value)} />}
+              </FormField>
+            </div>
+          </details>
+        </form>
+      </Modal>
     </div>
   );
 }

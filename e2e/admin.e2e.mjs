@@ -263,7 +263,7 @@ const confirmDelete = async () => {
   await page.waitForTimeout(900);
 };
 const cardFor = (text, buttonName) =>
-  page.locator("tr, article, div").filter({ hasText: text }).filter({ has: page.getByRole("button", { name: buttonName }) }).last();
+  page.locator("tr, article, div").filter({ hasText: text }).filter({ has: page.getByRole("button", { name: buttonName }) }).filter({ visible: true }).last();
 
 console.log("\nMedia gallery");
 const mediaTitle = `E2E Video ${run}`;
@@ -366,17 +366,16 @@ await step("create a series and a lecture with uploaded audio inside it", async 
   await page.waitForTimeout(1000);
 
   await page.goto(BASE + "/admin/lectures");
-  await page.getByRole("button", { name: "Add New Lecture" }).click();
+  await page.getByRole("button", { name: "Add New Lecture" }).first().click();
   form = page.locator("form").last();
-  await F(form, "Lecture Title *").fill(lecTitle);
-  await F(form, "URL Slug *").fill(lecSlug);
+  await form.getByLabel("Lecture Title").fill(lecTitle);
   const mp3 = fs.readdirSync("public/audio").find((f) => f.endsWith(".mp3"));
   // A 100 KB slice is enough to exercise upload, storage and range serving without measuring bandwidth.
   const slice = fs.readFileSync(path.resolve("public/audio", mp3)).subarray(0, 100_000);
-  await form.locator('input[type="file"]').nth(1).setInputFiles({ name: "e2e-lesson.mp3", mimeType: "audio/mpeg", buffer: slice });
+  await form.locator('input[type="file"]').first().setInputFiles({ name: "e2e-lesson.mp3", mimeType: "audio/mpeg", buffer: slice });
   await page.getByText("File uploaded").waitFor();
   await form.locator("select").first().selectOption({ label: serTitle });
-  await form.getByRole("button", { name: "Save Lecture" }).click();
+  await page.getByRole("button", { name: "Save Lecture" }).click();
   await page.waitForTimeout(1500);
 
   await eventually(async () => assert((await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture page"));
@@ -405,6 +404,56 @@ await step("clean up lecture and series", async () => {
   await confirmDelete();
   await eventually(async () => assert(!(await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture gone"));
   await eventually(async () => assert(!(await html("/series")).includes(serSlug), "series gone"));
+});
+
+console.log("\nVideo from a link");
+await step("an unusable link is explained, not silently accepted", async () => {
+  await page.goto(BASE + "/admin/lectures");
+  await page.getByRole("button", { name: "Add New Lecture" }).first().click();
+  const form = page.locator("form").last();
+  await form.getByPlaceholder("Paste a link here").first().fill("this is not a link");
+  await form.getByText("This is not a valid link.").waitFor();
+  await form.getByLabel("Lecture Title").fill("E2E invalid link");
+  await page.getByRole("button", { name: "Save Lecture" }).click();
+  await page.getByText("Add a video or audio link or file first.").waitFor();
+  await page.keyboard.press("Escape");
+});
+const linkCases = [
+  ["youtube", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "youtube-nocookie.com/embed/dQw4w9WgXcQ"],
+  ["facebook", "https://www.facebook.com/UstazMuhammad/videos/123456789/", "facebook.com/plugins/video.php"],
+  ["tiktok", "https://www.tiktok.com/@ustazmuhammadferej0/video/7234567890123456789", "tiktok.com/embed/v2/7234567890123456789"],
+  ["telegram", "https://t.me/ustazmuhammadferej/1234", "t.me/ustazmuhammadferej/1234?embed=1"],
+  ["direct", "https://example.com/e2e/lesson.mp4", 'type="video/mp4"'],
+];
+for (const [name, link, expected] of linkCases) {
+  await step(`a ${name} link is detected, previewed and plays on the public lecture page`, async () => {
+    const lecTitle2 = `E2E ${name} ${run}`;
+    const slug2 = `e2e-${name}-${run}`;
+    await page.goto(BASE + "/admin/lectures");
+    await page.getByRole("button", { name: "Add New Lecture" }).first().click();
+    const form = page.locator("form").last();
+    await form.getByPlaceholder("Paste a link here").first().fill(link);
+    await form.locator("[data-source-chip]").first().waitFor();
+    await form.getByLabel("Lecture Title").fill(lecTitle2);
+    await page.getByRole("button", { name: "Save Lecture" }).click();
+    await eventually(async () => {
+      const html2 = await html(`/lectures/${slug2}`);
+      assert(html2.includes(expected), `public page should contain ${expected}`);
+    });
+    await page.goto(BASE + "/admin/lectures");
+    await cardFor(lecTitle2, /delete/i).getByRole("button", { name: /delete/i }).first().click();
+    await confirmDelete();
+  });
+}
+await step("the Amharic title of a lecture gets a readable, non-empty slug", async () => {
+  await page.goto(BASE + "/admin/lectures");
+  await page.getByRole("button", { name: "Add New Lecture" }).first().click();
+  const form = page.locator("form").last();
+  await form.getByLabel("Lecture Title").fill("ሰላም ትምህርት");
+  await form.locator("summary").click();
+  const slugValue = await form.getByLabel("URL Slug").inputValue();
+  assert(/^[a-z0-9-]{4,}$/.test(slugValue), `unexpected slug "${slugValue}"`);
+  await page.keyboard.press("Escape");
 });
 
 console.log("\nFatwas & inquiries");
@@ -436,7 +485,7 @@ await step("a question submitted on the public site reaches the admin inbox", as
 
 console.log("\nBackup");
 await step("export then restore round-trips without losing content", async () => {
-  const count = async () => (await (await page.request.get(BASE + "/")).text(), (await page.goto(BASE + "/admin/lectures"), await page.getByRole("button", { name: /^All \(/ }).innerText()));
+  const count = async () => (await (await page.request.get(BASE + "/")).text(), (await page.goto(BASE + "/admin/lectures"), await page.getByRole("tab", { name: /^All \(/ }).innerText()));
   const before = await count();
   await page.goto(BASE + "/admin/backup");
   const json = await page.locator("textarea").first().inputValue();
