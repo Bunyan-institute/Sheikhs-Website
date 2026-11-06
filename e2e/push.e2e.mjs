@@ -13,6 +13,8 @@ const PASS = process.env.ADMIN_PASSWORD || "sheikh_admin_2026!";
 const SINK_PORT = Number(process.env.SINK_PORT || 4599);
 const exe = process.env.CHROMIUM_PATH || `${process.env.HOME}/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome`;
 const run = Date.now().toString(36);
+// Remote databases are slower: E2E_SLOW multiplies timeouts and the "nothing more arrives" waits.
+const SLOW = Number(process.env.E2E_SLOW || 1);
 const ip = `10.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
 
 // ── the fake push service ──
@@ -47,7 +49,7 @@ const step = async (name, fn) => {
 const assert = (c, m) => {
   if (!c) throw new Error(m);
 };
-const eventually = async (fn, ms = 20000) => {
+const eventually = async (fn, ms = 20000 * SLOW) => {
   const end = Date.now() + ms;
   let last;
   while (Date.now() < end) {
@@ -95,7 +97,7 @@ await ctx.addInitScript(({ keys, endpointBase }) => {
   };
 }, { keys: fakeKeys, endpointBase: `http://127.0.0.1:${SINK_PORT}/push` });
 const page = await ctx.newPage();
-page.setDefaultTimeout(45000);
+page.setDefaultTimeout(45000 * Math.max(1, SLOW / 2));
 
 console.log("\nPush notifications");
 await step("the server is running with push enabled and a signed-in admin can open the settings", async () => {
@@ -192,7 +194,7 @@ await step("enrolling notifies once; enrolling again does not", async () => {
   const count = () => received.filter((x) => x.payload?.title === "New course enrollment").length;
   const before = count();
   await post(page, "/api/courses/enroll", { course_id: courseSlug, student_name: "Push Student", student_email: studentEmail });
-  await new Promise((r) => setTimeout(r, 2500));
+  await new Promise((r) => setTimeout(r, 2500 * SLOW));
   assert(count() === before, "a repeat sign-up is not news");
 });
 
@@ -207,7 +209,7 @@ await step("passing the exam notifies once; retaking does not", async () => {
   const count = () => received.filter((x) => x.payload?.title === "A student passed the exam").length;
   const before = count();
   await exam({ q1: 1 });
-  await new Promise((r) => setTimeout(r, 2500));
+  await new Promise((r) => setTimeout(r, 2500 * SLOW));
   assert(count() === before, "a retake is not news");
 });
 
@@ -224,7 +226,10 @@ await step("the real service worker shows a pushed notification and only opens a
   const deliver = (payload) => cdp.send("ServiceWorker.deliverPushMessage", { origin: BASE, registrationId, data: JSON.stringify(payload) });
   const list = () => page.evaluate(async () => (await (await navigator.serviceWorker.getRegistration("/admin")).getNotifications()).map((n) => ({ title: n.title, tag: n.tag, url: n.data?.url })));
   await deliver({ title: "ሰላም", body: "ፈተና", url: "/admin/inquiries?x=1", tag: "t-good" });
-  await eventually(async () => assert((await list()).some((n) => n.tag === "t-good"), "first notification shown"));
+  await eventually(async () => {
+    const now = await list();
+    assert(now.some((n) => n.tag === "t-good"), `first notification shown (saw ${JSON.stringify(now)}, permission ${await page.evaluate(() => Notification.permission)}, registration ${registrationId})`);
+  });
   await deliver({ title: "Evil", body: "x", url: "https://evil.example/phish", tag: "t-evil" });
   const shown = await eventually(async () => {
     const l = await list();
