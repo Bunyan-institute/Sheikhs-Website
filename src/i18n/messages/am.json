@@ -420,7 +420,12 @@
       "appName": "የሸይኽ አስተዳደር",
       "dockHome": "ዋና",
       "dockQuestions": "ጥያቄዎች",
-      "dockLessons": "ትምህርቶች"
+      "dockLessons": "ትምህርቶች",
+      "publishNow": "አሁን አትም",
+      "publishHint": "ጎብኚዎች እንዳያዩት እንደ ረቂቅ ለማቆየት ያጥፉት።",
+      "moreOptions": "ተጨማሪ አማራጮች",
+      "topics": "ርዕሰ ጉዳዮች",
+      "keywords": "ቁልፍ ቃላት"
     },
     "header": {
       "systemStatus": "ስርዓቱ በመስመር ላይ ነው • የቀጥታ ቅንጅት",
@@ -524,7 +529,16 @@
       "cancel": "ሰርዝ",
       "deleteConfirm": "ይህን ጽሑፍ በቋሚነት ለማጥፋት እርግጠኛ ነዎት?",
       "savedSuccess": "ጽሑፉ በተሳካ ሁኔታ ታትሟል።",
-      "deletedSuccess": "ጽሑፉ በተሳካ ሁኔታ ተሰርዟል።"
+      "deletedSuccess": "ጽሑፉ በተሳካ ሁኔታ ተሰርዟል።",
+      "bodyLabel": "ጽሑፍዎ",
+      "summaryLabel": "አጭር ማጠቃለያ (በዝርዝሮች ውስጥ ይታያል)",
+      "coverLabel": "የሽፋን ምስል (አማራጭ)",
+      "readingAuto": "የሚነበበው በግምት {minutes} ደቂቃ፣ በራስ ሰር ይሰላል",
+      "readingOverride": "የንባብ ጊዜ በደቂቃ (ባዶ = በራስ ሰር)",
+      "emptyTitle": "እስካሁን ጽሑፍ የለም",
+      "emptyHint": "የመጀመሪያውን ጽሑፍ ይጻፉ።",
+      "addTitle": "ጽሑፍ ይጻፉ",
+      "editTitle": "ጽሑፉን አርም"
     },
     "fatwas": {
       "heading": "ፈትዋዎችና ሸሪዓዊ ብይኖች",
@@ -706,7 +720,17 @@
       "fieldTitle": "የፋይሉ ስም",
       "fieldType": "የፋይሉ ዓይነት",
       "fieldUrl": "የፋይሉ ማስፈንጠሪያ",
-      "saveMedia": "ሚዲያ አስቀምጥ"
+      "saveMedia": "ሚዲያ አስቀምጥ",
+      "tabDocuments": "ሰነዶች",
+      "fieldDescription": "አጭር መግለጫ (አማራጭ)",
+      "fieldThumbnail": "ለዝርዝሩ ምስል (አማራጭ)",
+      "copyLink": "ሊንኩን ቅዳ",
+      "copied": "ሊንኩ ተቀድቷል",
+      "emptyTitle": "እስካሁን ምንም የለም",
+      "emptyHint": "ፎቶ፣ ቪዲዮ፣ ድምፅ ወይም ሰነድ ያክሉ።",
+      "editTitle": "ንጥሉን አርም",
+      "kindLabel": "ምንድን ነው?",
+      "sourceNeeded": "መጀመሪያ ሊንክ ያክሉ ወይም ፋይል ይስቀሉ።"
     },
     "inquiries": {
       "heading": "የሕዝብ ጥያቄዎችና መልዕክቶች",
@@ -761,6 +785,29 @@
       "useTitle": "ርዕሱን ተጠቀም፦ {title}",
       "useCover": "እንደ ሽፋን ምስል ተጠቀም",
       "lengthDetected": "ርዝመት ተገኝቷል፦ {time}"
+    },
+    "editor": {
+      "write": "ጻፍ",
+      "preview": "ቅድመ እይታ",
+      "bold": "ደማቅ",
+      "italic": "ሰያፍ",
+      "heading": "ርዕስ",
+      "list": "ዝርዝር",
+      "quote": "ጥቅስ",
+      "link": "ሊንክ",
+      "media": "ቪዲዮ ወይም ድምፅ",
+      "placeholder": "ጽሑፍዎን እዚህ ይጻፉ…",
+      "help": "አዲስ አንቀጽ ለመጀመር ባዶ መስመር ይተው። ለደማቅ ጽሑፍ፣ ለርዕሶችና ለዝርዝሮች ከላይ ያሉትን ቁልፎች ይጠቀሙ።",
+      "linkPrompt": "የድረ ገጽ አድራሻውን (ሊንክ) ይለጥፉ",
+      "linkText": "የሊንክ ጽሑፍ",
+      "insert": "አስገባ",
+      "mediaTitle": "ቪዲዮ ወይም ድምፅ ያክሉ",
+      "legacyNotice": "ይህ ጽሑፍ ቀላሉ አርታዒ ከመምጣቱ በፊት የተጻፈ ስለሆነ በHTML ይታያል። እዚህ ማረምዎን መቀጠል ይችላሉ።",
+      "startOver": "በቀላል ጽሑፍ እንደገና ጀምር",
+      "startOverConfirm": "ይህ አሁን ያለውን ጽሑፍ ይተካል። ይቀጥሉ?",
+      "emptyPreview": "ገና የሚታይ ነገር የለም።",
+      "draftFound": "ለአዲስ ጽሑፍ ያልተቀመጠ ረቂቅ አለዎት። በእሱ ይቀጥሉ?",
+      "draftSaved": "ረቂቁ በዚህ መሣሪያ ላይ ተቀምጧል"
     }
   },
   "articleDetail": {

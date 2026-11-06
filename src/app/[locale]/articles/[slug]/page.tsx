@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getArticle } from "@/lib/api/articles";
 import { formatDate } from "@/lib/utils";
+import { renderArticleBody } from "@/lib/rich-text-server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
@@ -95,8 +96,8 @@ export default async function ArticlePage({
 
           {article.body && (
             <div 
-              className="prose prose-lg max-w-none text-[#0F241C]/80 prose-headings:font-display prose-headings:text-[#0F241C] prose-a:text-[#1B6A50] prose-a:underline hover:prose-a:text-[#0D3E2F] leading-relaxed break-words font-sans"
-              dangerouslySetInnerHTML={{ __html: article.body }}
+              className="article-body max-w-none text-lg text-[#0F241C]/85 font-sans"
+              dangerouslySetInnerHTML={{ __html: renderArticleBody(article.body) }}
             />
           )}
 

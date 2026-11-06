@@ -420,7 +420,12 @@
       "appName": "Bulchiinsa Shaykhaa",
       "dockHome": "Jalqaba",
       "dockQuestions": "Gaaffilee",
-      "dockLessons": "Barnoota"
+      "dockLessons": "Barnoota",
+      "publishNow": "Amma maxxansi",
+      "publishHint": "Akka ragaa hin mul'anne tuqii kaa'uuf cufi.",
+      "moreOptions": "Filannoo dabalataa",
+      "topics": "Mata duree",
+      "keywords": "Jecha furtuu"
     },
     "header": {
       "systemStatus": "Sirnichi Hojjataa Jira • Walitti Hidhamiinsa Kallattii",
@@ -524,7 +529,16 @@
       "cancel": "Dhiisi",
       "deleteConfirm": "Barruu kana guutummaatti haquu akka barbaaddu mirkaneeffatteettaa?",
       "savedSuccess": "Barruun milkaa'inaan maxxanfameera.",
-      "deletedSuccess": "Barruun milkaa'inaan haqameera."
+      "deletedSuccess": "Barruun milkaa'inaan haqameera.",
+      "bodyLabel": "Barruu kee",
+      "summaryLabel": "Cuunfaa gabaabaa (tarreeffama keessatti mul'ata)",
+      "coverLabel": "Suuraa golgaa (filannoo)",
+      "readingAuto": "Dubbisuuf daqiiqaa {minutes} ta'a, ofumaan herregama",
+      "readingOverride": "Yeroo dubbisaa daqiiqaan (duwwaa = ofumaan)",
+      "emptyTitle": "Amma barruun hin jiru",
+      "emptyHint": "Barruu jalqabaa barreessi.",
+      "addTitle": "Barruu barreessi",
+      "editTitle": "Barruu gulaali"
     },
     "fatwas": {
       "heading": "Fatwaawwan fi Murteewwan Sharii'aa",
@@ -706,7 +720,17 @@
       "fieldTitle": "Maqaa Faayilii",
       "fieldType": "Gosa Miidiyaa",
       "fieldUrl": "Liankii Faayilii",
-      "saveMedia": "Miidiyaa Olkaayi"
+      "saveMedia": "Miidiyaa Olkaayi",
+      "tabDocuments": "Waraqaawwan",
+      "fieldDescription": "Ibsa gabaabaa (filannoo)",
+      "fieldThumbnail": "Suuraa tarreeffamaaf (filannoo)",
+      "copyLink": "Linkii kopii godhi",
+      "copied": "Linkiin kopii ta'eera",
+      "emptyTitle": "Amma tokkollee hin jiru",
+      "emptyHint": "Suuraa, viidiyoo, sagalee ykn waraqaa dabali.",
+      "editTitle": "Wanta gulaali",
+      "kindLabel": "Maal dha?",
+      "sourceNeeded": "Duraan linkii dabali ykn faayilii olkaa'i."
     },
     "inquiries": {
       "heading": "Gaaffilee fi Dhaamsawwan Ummataa",
@@ -761,6 +785,29 @@
       "useTitle": "Mata duree fayyadami: {title}",
       "useCover": "Suuraa golgaa godhi",
       "lengthDetected": "Yeroon argameera: {time}"
+    },
+    "editor": {
+      "write": "Barreessi",
+      "preview": "Duraan ilaali",
+      "bold": "Furdaa",
+      "italic": "Muddaa",
+      "heading": "Mata duree",
+      "list": "Tarree",
+      "quote": "Ibsa fudhatame",
+      "link": "Linkii",
+      "media": "Viidiyoo ykn sagalee",
+      "placeholder": "Barruu kee as barreessi…",
+      "help": "Keewwata haaraa jalqabuuf sarara duwwaa dhiisi. Barreeffama furdaa, mata dureewwanii fi tarreewwanii cuqaasuu olii fayyadami.",
+      "linkPrompt": "Teessoo marsariitii (linkii) maxxansi",
+      "linkText": "barruu linkii",
+      "insert": "Galchi",
+      "mediaTitle": "Viidiyoo ykn sagalee dabali",
+      "legacyNotice": "Barruun kun gulaalaa salphaa dura barreeffameera, kanaaf HTML'n mul'ata. As gulaaluu ni dandeessa.",
+      "startOver": "Barreeffama salphaadhaan irra deebi'ii jalqabi",
+      "startOverConfirm": "Kun barreeffama ammaa bakka bu'a. Itti fufnaa?",
+      "emptyPreview": "Ammaaf wanti ilaalamu hin jiru.",
+      "draftFound": "Barruu haaraaf tuqii hin kaa'amne qabda. Itti fufnaa?",
+      "draftSaved": "Tuqiin meeshaa kana irratti kaa'ameera"
     }
   },
   "articleDetail": {

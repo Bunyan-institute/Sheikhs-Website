@@ -10,6 +10,7 @@ import {
   getSeriesByIdOrSlug,
   deleteSeries,
   saveArticle,
+  getArticleByIdOrSlug,
   deleteArticle,
   saveFatwa,
   deleteFatwa,
@@ -44,6 +45,8 @@ import {
 } from "@/lib/db/repository";
 import { mediaRefFromUrl } from "@/lib/media-ref";
 import { oembedEndpoint, parseMediaUrl } from "@/lib/media-source";
+import { estimateReadingMinutes } from "@/lib/rich-text";
+import { prepareArticleBody, renderArticleBody } from "@/lib/rich-text-server";
 import { UserError } from "@/lib/user-error";
 import type { SectionMap } from "@/lib/api/types";
 import type { JourneyMilestone, QualificationRecord } from "@/lib/db/types";
@@ -181,7 +184,10 @@ export async function saveArticleAction(data: {
   title: string;
   slug: string;
   summary?: string;
-  body: string;
+  /** What the Sheikh typed (text) or older raw HTML (html). */
+  bodySource: string;
+  bodyFormat: "text" | "html";
+  /** Leave undefined to calculate it from the text. */
   readingMinutes?: number;
   categories?: string[];
   tags?: string[];
@@ -190,23 +196,32 @@ export async function saveArticleAction(data: {
 }) {
   await assertAuthenticated();
   return guarded(async () => {
+    const existing = data.id ? await getArticleByIdOrSlug(data.id) : null;
     const article = await saveArticle({
       status: data.status,
       id: data.id,
       title: data.title,
       slug: data.slug,
       summary: data.summary || null,
-      body: data.body,
-      reading_minutes: data.readingMinutes || 5,
+      // Always sanitised on the server, whatever the browser sent.
+      body: prepareArticleBody({ source: data.bodySource, format: data.bodyFormat }),
+      reading_minutes: data.readingMinutes || estimateReadingMinutes(data.bodySource),
       categories: data.categories ?? [],
       tags: data.tags || [],
-      published_at: data.publishedAt || new Date().toISOString(),
+      // Editing must not change the date the article was first published.
+      published_at: data.publishedAt || existing?.published_at || new Date().toISOString(),
       cover: await mediaRefFromUrl(data.coverUrl, "image"),
     });
 
     refreshCache();
     return { success: true as const, article };
   });
+}
+
+/** Sanitised preview of older HTML articles (text articles preview in the browser). */
+export async function renderArticlePreview(html: string): Promise<string> {
+  await assertAuthenticated();
+  return renderArticleBody(html);
 }
 
 export async function deleteArticleAction(id: string) {

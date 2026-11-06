@@ -420,7 +420,12 @@
       "appName": "Sheikh Admin",
       "dockHome": "Home",
       "dockQuestions": "Questions",
-      "dockLessons": "Lessons"
+      "dockLessons": "Lessons",
+      "publishNow": "Publish now",
+      "publishHint": "Turn off to keep it as a draft that visitors cannot see.",
+      "moreOptions": "More options",
+      "topics": "Topics",
+      "keywords": "Keywords"
     },
     "header": {
       "systemStatus": "System Online • Live Dynamic Sync",
@@ -524,7 +529,16 @@
       "cancel": "Cancel",
       "deleteConfirm": "Are you sure you want to permanently delete this article?",
       "savedSuccess": "Article published successfully.",
-      "deletedSuccess": "Article deleted successfully."
+      "deletedSuccess": "Article deleted successfully.",
+      "bodyLabel": "Your article",
+      "summaryLabel": "Short summary (shown in lists)",
+      "coverLabel": "Cover picture (optional)",
+      "readingAuto": "About {minutes} min read, calculated automatically",
+      "readingOverride": "Reading time in minutes (empty = automatic)",
+      "emptyTitle": "No articles yet",
+      "emptyHint": "Write the first article.",
+      "addTitle": "Write an article",
+      "editTitle": "Edit article"
     },
     "fatwas": {
       "heading": "Fatwas & Scholarly Rulings",
@@ -706,7 +720,17 @@
       "fieldTitle": "Asset Name",
       "fieldType": "Asset Kind",
       "fieldUrl": "File URL",
-      "saveMedia": "Save Media"
+      "saveMedia": "Save Media",
+      "tabDocuments": "Documents",
+      "fieldDescription": "Short description (optional)",
+      "fieldThumbnail": "Picture for the list (optional)",
+      "copyLink": "Copy link",
+      "copied": "Link copied",
+      "emptyTitle": "Nothing here yet",
+      "emptyHint": "Add a photo, video, audio or document.",
+      "editTitle": "Edit item",
+      "kindLabel": "What is it?",
+      "sourceNeeded": "Add a link or upload a file first."
     },
     "inquiries": {
       "heading": "Public Inquiries & Messages",
@@ -761,6 +785,29 @@
       "useTitle": "Use title: {title}",
       "useCover": "Use as cover picture",
       "lengthDetected": "Length detected: {time}"
+    },
+    "editor": {
+      "write": "Write",
+      "preview": "Preview",
+      "bold": "Bold",
+      "italic": "Italic",
+      "heading": "Heading",
+      "list": "List",
+      "quote": "Quote",
+      "link": "Link",
+      "media": "Video or audio",
+      "placeholder": "Write your article here…",
+      "help": "Leave a blank line to start a new paragraph. Use the buttons above for bold text, headings and lists.",
+      "linkPrompt": "Paste the web address (link)",
+      "linkText": "link text",
+      "insert": "Insert",
+      "mediaTitle": "Add a video or audio",
+      "legacyNotice": "This article was written before the simple editor, so it is shown as HTML. You can keep editing it here.",
+      "startOver": "Start again with simple text",
+      "startOverConfirm": "This replaces the current text. Continue?",
+      "emptyPreview": "Nothing to preview yet.",
+      "draftFound": "You have an unsaved draft for a new article. Continue with it?",
+      "draftSaved": "Draft saved on this device"
     }
   },
   "articleDetail": {

@@ -44,6 +44,12 @@ const eventually = async (fn, ms = 40000 * Math.max(1, SLOW / 2)) => {
   }
   throw last;
 };
+const confirmDelete = async () => {
+  await page.getByRole("dialog").getByRole("button", { name: "Delete" }).click();
+  await page.waitForTimeout(900);
+};
+const cardFor = (text, buttonName) =>
+  page.locator("tr, article, div").filter({ hasText: text }).filter({ has: page.getByRole("button", { name: buttonName }) }).filter({ visible: true }).last();
 const status = async (page, url) => (await page.request.get(BASE + url)).status();
 
 const browser = await chromium.launch({ executablePath: exe, args: ["--no-sandbox"] });
@@ -87,23 +93,18 @@ const slug = `e2e-article-${run}`;
 const title = `E2E Article ${run}`;
 await step("create article as draft with uploaded cover", async () => {
   await page.goto(BASE + "/admin/articles");
-  await page.getByRole("button", { name: "Write New Article" }).click();
+  await page.getByRole("button", { name: "Write New Article" }).first().click();
   const form = page.locator("form").last();
-  await F(form, "Article Title *").fill(title);
-  await F(form, "URL Slug *").fill(slug);
-  await F(form, "Executive Summary").fill("Created by the e2e test.");
-  await F(form, "Categories (comma separated)").fill("e2e-topic");
-  await F(form, "Full Article Text / Markdown *").fill("<p>Body from e2e.</p>");
-  // upload a cover through the Upload button's hidden file input
-  const img = path.resolve("public/images/sheikh-portrait.jpg");
-  await form.locator('input[type="file"]').setInputFiles(img);
+  await form.getByLabel("Article Title").fill(title);
+  await form.getByLabel("Your article").fill("Body from e2e.\n\n**Bold** and a list:\n- one\n- two");
+  await form.getByLabel("Short summary (shown in lists)").fill("Created by the e2e test.");
+  await form.locator('input[type="file"]').first().setInputFiles(path.resolve("public/images/sheikh-portrait.jpg"));
   await page.getByText("File uploaded").waitFor();
-  const coverValue = await form.locator('input[type="text"]').nth(3).inputValue().catch(() => "");
   const uploaded = (await form.locator("input").evaluateAll((els) => els.map((e) => e.value))).find((v) => v.startsWith("/uploads/"));
-  assert(uploaded, `cover URL not filled (saw "${coverValue}")`);
+  assert(uploaded, "cover URL not filled");
   globalThis.__coverUrl = uploaded;
-  await form.getByRole("checkbox").uncheck();
-  await form.getByRole("button", { name: "Save Article" }).click();
+  await form.getByRole("checkbox", { name: /Publish now/ }).uncheck();
+  await page.getByRole("button", { name: "Save Article" }).click();
   await page.getByText(title).first().waitFor();
 });
 await step("uploaded cover is served as an image", async () => {
@@ -118,11 +119,11 @@ await step("draft is hidden from the public site", async () => {
 });
 await step("publishing makes it public", async () => {
   await page.goto(BASE + "/admin/articles");
-  const card = page.locator("tr, article, div").filter({ hasText: title }).filter({ has: page.getByRole("button", { name: /edit/i }) }).last();
+  const card = page.locator("tr, article, div").filter({ hasText: title }).filter({ has: page.getByRole("button", { name: /edit/i }) }).filter({ visible: true }).last();
   await card.getByRole("button", { name: /edit/i }).first().click();
   const form = page.locator("form").last();
-  await form.getByRole("checkbox").check();
-  await form.getByRole("button", { name: "Save Article" }).click();
+  await form.getByRole("checkbox", { name: /Publish now/ }).check();
+  await page.getByRole("button", { name: "Save Article" }).click();
   await page.waitForTimeout(1200);
   await eventually(async () => {
     const detail = await (await page.request.get(`${BASE}/articles/${slug}`)).text();
@@ -132,24 +133,85 @@ await step("publishing makes it public", async () => {
 });
 await step("duplicate slug is rejected (not overwritten)", async () => {
   await page.goto(BASE + "/admin/articles");
-  await page.getByRole("button", { name: "Write New Article" }).click();
+  await page.getByRole("button", { name: "Write New Article" }).first().click();
   const form = page.locator("form").last();
-  await F(form, "Article Title *").fill("Duplicate " + run);
-  await F(form, "URL Slug *").fill(slug);
-  await F(form, "Full Article Text / Markdown *").fill("x");
-  await form.getByRole("button", { name: "Save Article" }).click();
+  await form.getByLabel("Article Title").fill("Duplicate " + run);
+  await form.getByLabel("Your article").fill("x");
+  await form.locator("summary").click();
+  await form.getByLabel("URL Slug").fill(slug);
+  await page.getByRole("button", { name: "Save Article" }).click();
   await page.getByText(/already used/i).waitFor();
   await page.keyboard.press("Escape");
 });
 await step("delete uses the in-app confirm dialog and removes it", async () => {
   await page.goto(BASE + "/admin/articles");
-  const card = page.locator("tr, article, div").filter({ hasText: title }).filter({ has: page.getByRole("button", { name: /delete/i }) }).last();
+  const card = page.locator("tr, article, div").filter({ hasText: title }).filter({ has: page.getByRole("button", { name: /delete/i }) }).filter({ visible: true }).last();
   await card.getByRole("button", { name: /delete/i }).first().click();
   await page.getByRole("dialog").getByRole("button", { name: "Delete" }).click();
   await page.waitForTimeout(1000);
   const detail = await (await page.request.get(`${BASE}/articles/${slug}`)).text();
   assert(!detail.includes("Body from e2e"), "deleted article must not be served");
 });
+
+console.log("\nArticle editor");
+{
+  const edTitle = `E2E Editor ${run}`;
+  const edSlug = `e2e-editor-${run}`;
+  const typed = "ሰላም\n\nbold me\n\nhttps://www.youtube.com/watch?v=dQw4w9WgXcQ\n\n<script>alert(1)</script>";
+  await step("toolbar buttons format the selection and videos can be inserted from a link", async () => {
+    await page.goto(BASE + "/admin/articles");
+    await page.getByRole("button", { name: "Write New Article" }).first().click();
+    const form = page.locator("form").last();
+    await form.getByLabel("Article Title").fill(edTitle);
+    const area = form.getByLabel("Your article");
+    await area.fill("bold me");
+    await area.press("Control+A");
+    await form.getByRole("button", { name: "Bold" }).click();
+    assert((await area.inputValue()) === "**bold me**", `got ${await area.inputValue()}`);
+    await area.fill("ሰላም\n\nbold me");
+    await area.press("Control+End");
+    await form.getByRole("button", { name: "Video or audio" }).click();
+    const dlg = page.getByRole("dialog").last();
+    await dlg.getByPlaceholder("Paste a link here").first().fill("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    await dlg.getByRole("button", { name: "Insert" }).click();
+    assert((await area.inputValue()).includes("https://www.youtube.com/watch?v=dQw4w9WgXcQ"), "link inserted");
+    await area.fill(typed);
+  });
+  await step("the preview shows formatting, a video player, and never runs typed HTML", async () => {
+    const form = page.locator("form").last();
+    await form.getByRole("tab", { name: "Preview" }).click();
+    await form.locator('iframe[src*="youtube-nocookie.com/embed/dQw4w9WgXcQ"]').waitFor();
+    const previewText = await form.locator(".prose").innerText();
+    assert(previewText.includes("<script>alert(1)</script>"), "typed HTML must be shown as text");
+    await form.getByRole("tab", { name: "Write" }).click();
+  });
+  await step("saving publishes safe HTML to readers, and editing restores exactly what was typed", async () => {
+    await page.getByRole("button", { name: "Save Article" }).click();
+    await eventually(async () => {
+      const detail = await html(`/articles/${edSlug}`);
+      assert(detail.includes("youtube-nocookie.com/embed/dQw4w9WgXcQ"), "video embed on the public page");
+      assert(detail.includes("ሰላም"), "Amharic text on the public page");
+      assert(!detail.includes("<script>alert(1)"), "typed script must not execute");
+    });
+    await page.goto(BASE + "/admin/articles");
+    const card = page.locator("tr, article, div").filter({ hasText: edTitle }).filter({ has: page.getByRole("button", { name: /edit/i }) }).filter({ visible: true }).last();
+    await card.getByRole("button", { name: /edit/i }).first().click();
+    assert((await page.locator("form").last().getByLabel("Your article").inputValue()) === typed, "editor restores the typed text");
+    await page.keyboard.press("Escape");
+  });
+  await step("an older HTML article opens in HTML mode and keeps its markup", async () => {
+    await page.goto(BASE + "/admin/articles");
+    const first = page.locator("tr").filter({ has: page.getByRole("button", { name: /edit/i }) }).filter({ hasNotText: edTitle }).first();
+    await first.getByRole("button", { name: /edit/i }).click();
+    await page.getByText("This article was written before the simple editor").waitFor();
+    await page.keyboard.press("Escape");
+  });
+  await step("delete the editor test article", async () => {
+    await page.goto(BASE + "/admin/articles");
+    await cardFor(edTitle, /delete/i).getByRole("button", { name: /delete/i }).first().click();
+    await confirmDelete();
+  });
+}
 
 console.log("\nCourses: lessons, exam, enrolment, certificate");
 const courseSlug = `e2e-course-${run}`;
@@ -258,12 +320,7 @@ await step("hiding a section removes it from public navigation, restoring brings
   await eventually(async () => assert(await navHas(), "fatwas link should be back"));
 });
 
-const confirmDelete = async () => {
-  await page.getByRole("dialog").getByRole("button", { name: "Delete" }).click();
-  await page.waitForTimeout(900);
-};
-const cardFor = (text, buttonName) =>
-  page.locator("tr, article, div").filter({ hasText: text }).filter({ has: page.getByRole("button", { name: buttonName }) }).filter({ visible: true }).last();
+
 
 console.log("\nMedia gallery");
 const mediaTitle = `E2E Video ${run}`;
@@ -271,10 +328,9 @@ await step("add a gallery item with a title; it appears on /media and filters by
   await page.goto(BASE + "/admin/media");
   await page.getByRole("button", { name: "Upload Asset" }).click();
   const form = page.locator("form").last();
-  await form.getByRole("button", { name: "video", exact: true }).click();
-  await form.getByPlaceholder("https://... or /images/...").fill("https://example.com/e2e-video.mp4");
-  await F(form, "Asset Name").fill(mediaTitle);
-  await form.getByRole("button", { name: "Save Media" }).click();
+  await form.getByPlaceholder("Paste a link here").first().fill("https://example.com/e2e-video.mp4");
+  await form.getByLabel("Asset Name").fill(mediaTitle);
+  await page.getByRole("button", { name: "Save Media" }).click();
   await page.waitForTimeout(1200);
   assert((await html("/media")).includes(mediaTitle), "listed on /media");
   assert((await html("/media?kind=videos")).includes(mediaTitle), "listed under the video filter");
@@ -284,7 +340,7 @@ await step("edit then delete the gallery item", async () => {
   await page.goto(BASE + "/admin/media");
   await page.getByRole("button", { name: new RegExp(`Edit ${mediaTitle}`) }).click();
   const form = page.locator("form").last();
-  assert((await F(form, "Asset Name").inputValue()) === mediaTitle, "edit form prefilled");
+  assert((await form.getByLabel("Asset Name").inputValue()) === mediaTitle, "edit form prefilled");
   await page.keyboard.press("Escape");
   await page.reload();
   await page.getByRole("button", { name: new RegExp(`Edit ${mediaTitle}`) }).waitFor();
