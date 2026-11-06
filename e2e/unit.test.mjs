@@ -138,3 +138,84 @@ test("oembedEndpoint only ever points at youtube.com and tiktok.com", () => {
   assert.equal(oembedEndpoint(parseMediaUrl("https://example.com/a.mp4")), null);
   assert.equal(oembedEndpoint(parseMediaUrl("https://www.facebook.com/x/videos/1")), null);
 });
+
+// ── rich text ──
+import { markdownLiteToHtml, withSourceMarker, readSourceMarker, expandMediaPlaceholders, estimateReadingMinutes } from "../src/lib/rich-text.ts";
+import { sanitizeArticleHtml, prepareArticleBody, renderArticleBody } from "../src/lib/rich-text-server.ts";
+
+test("markdownLiteToHtml: headings, emphasis, lists, quotes and paragraphs", () => {
+  const html = markdownLiteToHtml("## Title\n\nHello **bold** and _italic_.\nSecond line\n\n- one\n- two\n\n1. first\n2. second\n\n> wise words");
+  assert.ok(html.includes("<h2>Title</h2>"));
+  assert.ok(html.includes("<p>Hello <strong>bold</strong> and <em>italic</em>.<br>Second line</p>"));
+  assert.ok(html.includes("<ul><li>one</li><li>two</li></ul>"));
+  assert.ok(html.includes("<ol><li>first</li><li>second</li></ol>"));
+  assert.ok(html.includes("<blockquote><p>wise words</p></blockquote>"));
+});
+
+test("markdownLiteToHtml: raw HTML typed by the user is shown as text, never executed", () => {
+  const html = markdownLiteToHtml('<script>alert(1)</script> <img src=x onerror=alert(1)> & "quotes"');
+  assert.ok(!html.includes("<script"));
+  assert.ok(!html.includes("<img"));
+  assert.ok(html.includes("&lt;script&gt;"));
+});
+
+test("markdownLiteToHtml: links, auto-links and unsafe schemes", () => {
+  const html = markdownLiteToHtml("[Read](https://example.com/a?x=1&y=2) and https://example.org/page. [bad](javascript:alert(1))");
+  assert.ok(html.includes('<a href="https://example.com/a?x=1&amp;y=2" target="_blank" rel="noopener noreferrer nofollow">Read</a>'));
+  assert.ok(html.includes('<a href="https://example.org/page"'));
+  assert.ok(!html.includes('href="javascript:'));
+});
+
+test("markdownLiteToHtml: a lone video link becomes a media placeholder, a normal link stays a link", () => {
+  const html = markdownLiteToHtml("Watch:\n\nhttps://www.youtube.com/watch?v=5hlykYaVcn4\n\nSee https://example.com/page");
+  assert.ok(html.includes('<div data-media="https://www.youtube.com/watch?v=5hlykYaVcn4"></div>'));
+  assert.ok(!html.includes('data-media="https://example.com'));
+  const expanded = expandMediaPlaceholders(html);
+  assert.ok(expanded.includes("youtube-nocookie.com/embed/5hlykYaVcn4"));
+});
+
+test("source marker round-trips Amharic and Arabic text exactly", () => {
+  const source = "## ሰላም\n\nبسم الله الرحمن الرحيم **ok**\n- ነጥብ";
+  const stored = withSourceMarker(source, markdownLiteToHtml(source));
+  assert.equal(readSourceMarker(stored), source);
+  assert.equal(readSourceMarker("<p>old html article</p>"), null);
+});
+
+test("sanitizeArticleHtml: removes scripts, handlers, styles, iframes and unsafe links", () => {
+  const dirty =
+    '<p onclick="x()" style="color:red">Hi<script>alert(1)</script></p><iframe src="https://evil.example"></iframe>' +
+    '<a href="javascript:alert(1)">bad</a><a href="https://ok.example">ok</a><img src="x" onerror="alert(1)">' +
+    '<svg onload=alert(1)></svg><object data="x"></object>';
+  const clean = sanitizeArticleHtml(dirty);
+  for (const bad of ["<script", "onclick", "onerror", "onload", "style=", "<iframe", "javascript:", "<svg", "<object"]) {
+    assert.ok(!clean.includes(bad), `${bad} should be removed: ${clean}`);
+  }
+  assert.ok(clean.includes('href="https://ok.example"'));
+  assert.ok(clean.includes("noopener"));
+});
+
+test("sanitizeArticleHtml keeps the markup older articles use (divs, classes, dir)", () => {
+  const legacy = '<div class="space-y-6"><p class="text-right" dir="rtl">نص</p><h3 class="font-bold">Title</h3><ul class="x"><li>a</li></ul></div>';
+  assert.equal(sanitizeArticleHtml(legacy), legacy);
+});
+
+test("renderArticleBody: sanitises, expands only our own media placeholders, and cannot be tricked into foreign iframes", () => {
+  const stored = '<!--md:abc--><p>x</p><div data-media="https://www.youtube.com/watch?v=5hlykYaVcn4"></div><div data-media="javascript:alert(1)"></div><iframe src="https://evil.example"></iframe>';
+  const html = renderArticleBody(stored);
+  assert.ok(html.includes("youtube-nocookie.com/embed/5hlykYaVcn4"));
+  assert.ok(!html.includes("evil.example"));
+  assert.ok(!html.includes("javascript:"));
+  assert.ok(!html.includes("<!--md"));
+});
+
+test("prepareArticleBody: text mode stores sanitised HTML plus the editable source; html mode only sanitises", () => {
+  const saved = prepareArticleBody({ source: "## Hi\n\n**x** <b onclick=1>y</b>", format: "text" });
+  assert.equal(readSourceMarker(saved), "## Hi\n\n**x** <b onclick=1>y</b>");
+  assert.ok(!saved.includes("onclick=1>y</b>"), "typed HTML must be escaped");
+  assert.equal(prepareArticleBody({ source: '<p onclick="a()">hi</p>', format: "html" }), "<p>hi</p>");
+});
+
+test("estimateReadingMinutes: at least one minute, scales with length", () => {
+  assert.equal(estimateReadingMinutes(""), 1);
+  assert.equal(estimateReadingMinutes("word ".repeat(540)), 3);
+});

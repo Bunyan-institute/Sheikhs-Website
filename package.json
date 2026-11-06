@@ -25,6 +25,7 @@
     "postgres": "^4.0.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "sanitize-html": "^2.18.1",
     "tailwind-merge": "^3.0.0"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@types/node": "^26.6.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/sanitize-html": "^2.16.2",
     "playwright-core": "^1.64.1",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
