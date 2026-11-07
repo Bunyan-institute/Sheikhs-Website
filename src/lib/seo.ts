@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { PublicFatwa, PublicArticle, PublicCourse, PublicLecture, PublicBook, PublicEvent } from "./api/types";
+import type { PublicFatwa, PublicArticle, PublicCourse, PublicLecture, PublicBook, PublicEvent, PublicSeries } from "./api/types";
 import { locales, type Locale } from "../i18n/config.ts";
 
 export const PRIMARY_DOMAIN = "https://www.sheikhmuhammedferej.info";
@@ -484,6 +484,223 @@ export function buildWebsiteSchema(locale: string = "en") {
         urlTemplate: `${siteUrl}/${locale}/search?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+/**
+ * Generates Schema.org CreativeWorkSeries for audio/video lesson series.
+ */
+export function buildSeriesSchema(series: PublicSeries, locale: string) {
+  const siteUrl = getSiteUrl();
+  const seriesUrl = `${siteUrl}/${locale}/series/${series.slug}`;
+  const scholar = getScholarEntity();
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWorkSeries",
+    "@id": `${seriesUrl}#series`,
+    name: series.title,
+    description: series.description || series.title,
+    url: seriesUrl,
+    inLanguage: locale,
+    author: {
+      "@type": "Person",
+      "@id": `${siteUrl}/#scholar`,
+      name: scholar.name,
+    },
+    image: series.cover?.url ? `${siteUrl}${series.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`,
+    numberOfItems: series.lecture_count || series.lectures?.length || 0,
+    ...(series.lectures && series.lectures.length > 0
+      ? {
+          hasPart: series.lectures.map((lec, index) => ({
+            "@type": lec.media?.video ? "VideoObject" : "AudioObject",
+            position: lec.series?.position || index + 1,
+            name: lec.title,
+            description: lec.summary || lec.title,
+            url: `${siteUrl}/${locale}/lectures/${lec.slug}`,
+          })),
+        }
+      : {}),
+  };
+}
+
+/**
+ * Generates Schema.org CollectionPage with ItemList.
+ */
+export function buildCollectionSchema(params: {
+  name: string;
+  description?: string;
+  url: string;
+  inLanguage: string;
+  items: Array<{ name: string; url: string; description?: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${params.url}#collection`,
+    name: params.name,
+    description: params.description,
+    url: params.url,
+    inLanguage: params.inLanguage,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: params.items.map((item, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: item.name,
+        url: item.url,
+        description: item.description,
+      })),
+    },
+  };
+}
+
+/**
+ * Generates Schema.org ContactPage linking to Bunyan Institute and the Sheikh.
+ */
+export function buildContactSchema(locale: string = "en") {
+  const siteUrl = getSiteUrl();
+  const contactUrl = `${siteUrl}/${locale}/contact`;
+  const scholar = getScholarEntity();
+  const org = getOrganizationEntity();
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${contactUrl}#contactpage`,
+    url: contactUrl,
+    name: "Contact Sheikh Muhammed Ferej Megeno | Bunyan Institute",
+    inLanguage: locale,
+    mainEntity: {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: org.name,
+      url: siteUrl,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "Scholarly Inquiry & Fatwa Submissions",
+          availableLanguage: ["Amharic", "Arabic", "Afaan Oromo", "English"],
+          url: `${siteUrl}/${locale}/ask`,
+        },
+      ],
+    },
+    about: {
+      "@type": "Person",
+      "@id": `${siteUrl}/#scholar`,
+      name: scholar.name,
+    },
+  };
+}
+
+/**
+ * Generates comprehensive localized metadata for the homepage across 4 languages.
+ */
+export function getHomepageMetadata(locale: string): Metadata {
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/${locale}`;
+  const imageUrl = `${siteUrl}/images/sheikh-portrait.jpg`;
+
+  const copyByLocale: Record<string, { title: string; description: string; ogLocale: string; keywords: string[] }> = {
+    am: {
+      title: "ሸይኽ ሙሐመድ ፈረጅ መገኖ | ይፋዊ የኢስላማዊ ዕውቀትና ፈትዋ መድረክ",
+      description:
+        "የሸይኽ ሙሐመድ ፈረጅ መገኖ ይፋዊ ድረ-ገጽ፡ በኢስላማዊ ፊቅህ፣ የተፍሲርና ሐዲስ ትምህርቶች፣ የሸሪዓ ብይኖች (ፈትዋዎች)፣ ኮርሶች እና ዲጂታል መጽሐፍት የተደራጀ የዕውቀት ማዕከል።",
+      ogLocale: "am_ET",
+      keywords: [
+        "ሸይኽ ሙሐመድ ፈረጅ",
+        "ፈትዋ",
+        "የሸሪዓ ብይን",
+        "ኢስላማዊ ትምህርት",
+        "ፊቅህ",
+        "ተፍሲር",
+        "ሐዲስ",
+        "ቡንያን ተቋም",
+        "ኢትዮጵያ ኢስላም",
+        "ኡስታዝ ሙሐመድ ፈረጅ",
+      ],
+    },
+    ar: {
+      title: "الشيخ محمد فرج مجنو | المنصة العلمية والفتاوى الشرعية الرسمية",
+      description:
+        "الموقع الرسمي لفضيلة الشيخ محمد فرج مجنو حفظه الله، المستشار الشرعي المعتمد من هيئة أيوفي (AAOIFI). خزانة علمية تضم الفتاوى الشرعية المؤصلة، دروس التفسير، وشروح كتب الحديث والفقه.",
+      ogLocale: "ar_SA",
+      keywords: [
+        "الشيخ محمد فرج مجنو",
+        "محمد فرج",
+        "فتاوى شرعية",
+        "فقه إسلامي",
+        "تفسير القرآن",
+        "معهد بنيان",
+        "علماء إثيوبيا",
+        "معايير أيوفي",
+        "دروس إسلامية",
+      ],
+    },
+    om: {
+      title: "Sheekh Muhammad Faraj Maganoo | Maddeen Barnoota Islaamaa fi Fatwaa",
+      description:
+        "Wabii seera qabeessaa Sheekh Muhammad Faraj Maganoo: Fatwaawwan Fiqhii, barumsa Qur'aanaa fi Hadiisaa, koorsiiwwan fi kitaabbilee amantii Islaamaa.",
+      ogLocale: "om_ET",
+      keywords: [
+        "Sheekh Muhammad Faraj",
+        "Fatwaa",
+        "Barnoota Islaamaa",
+        "Fiqhii",
+        "Tafsiira",
+        "Qur'aana",
+        "Oromoo",
+        "Bunyaan",
+      ],
+    },
+    en: {
+      title: "Sheikh Muhammed Ferej Megeno | Official Islamic Scholar Platform",
+      description:
+        "Official website of Sheikh Muhammed Ferej Megeno: certified AAOIFI Sharia consultant, traditional Islamic scholar, and educator. Explore authenticated fatwas, Quranic exegesis (Tafsir), structured fiqh courses, and audio-video archives.",
+      ogLocale: "en_US",
+      keywords: [
+        "Sheikh Muhammed Ferej Megeno",
+        "Sheikh Muhammed Ferej",
+        "Ustaz Muhammad Ferej",
+        "Islamic Fatwa Archive",
+        "AAOIFI Sharia Advisor Ethiopia",
+        "Islamic Studies Addis Ababa",
+        "Tafsir lectures",
+        "Fiqh rulings",
+        "Bunyan Institute",
+      ],
+    },
+  };
+
+  const copy = copyByLocale[locale] || copyByLocale.en;
+
+  return {
+    title: copy.title,
+    description: copy.description,
+    keywords: copy.keywords,
+    alternates: buildHreflangAlternates("", locale),
+    openGraph: {
+      type: "website",
+      locale: copy.ogLocale,
+      url: pageUrl,
+      title: copy.title,
+      description: copy.description,
+      siteName: "Sheikh Muhammed Ferej Megeno Official",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: "Sheikh Muhammed Ferej Megeno",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: copy.title,
+      description: copy.description,
+      images: [imageUrl],
     },
   };
 }

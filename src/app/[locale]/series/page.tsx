@@ -4,15 +4,57 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Layers, LibraryBig, ArrowRight } from "lucide-react";
 import type { PublicSeries } from "@/lib/api/types";
+import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema, buildCollectionSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import type { Metadata } from "next";
 
 interface SeriesPageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: SeriesPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "series" });
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/${locale}/series`;
+  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const description = t("description");
+  const imageUrl = `${siteUrl}/images/sheikh-portrait.jpg`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      "Islamic Audio Series",
+      "Sheikh Muhammed Ferej Series",
+      "Tafsir Series Ethiopia",
+      "Halaqat Series",
+      "ስብስቦች",
+      "سلاسل علمية",
+    ],
+    alternates: buildHreflangAlternates("/series", locale),
+    openGraph: {
+      type: "website",
+      url: pageUrl,
+      title,
+      description,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
 }
 
 export default async function SeriesPage({ params }: SeriesPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "series" });
+  const siteUrl = getSiteUrl();
 
   let series: PublicSeries[] = [];
   try {
@@ -22,8 +64,26 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
     console.error("Failed to load series:", err);
   }
 
+  const breadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("title"), url: `${siteUrl}/${locale}/series` },
+  ]);
+
+  const collectionSchema = buildCollectionSchema({
+    name: `${t("title")} - Sheikh Muhammed Ferej`,
+    description: t("description"),
+    url: `${siteUrl}/${locale}/series`,
+    inLanguage: locale,
+    items: series.map((s) => ({
+      name: s.title,
+      url: `${siteUrl}/${locale}/series/${s.slug}`,
+      description: s.description || undefined,
+    })),
+  });
+
   return (
     <div className="w-full">
+      <JsonLd data={[collectionSchema, breadcrumbs]} />
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />

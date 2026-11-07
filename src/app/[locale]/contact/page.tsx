@@ -2,18 +2,65 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getProfile } from '@/lib/api/profile';
 import { Link } from '@/i18n/navigation';
 import { MapPin, MessageSquare, ArrowRight, Building } from 'lucide-react';
+import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema, buildContactSchema } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/json-ld';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "contact" });
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/${locale}/contact`;
+  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const description = t("description");
+  const imageUrl = `${siteUrl}/images/sheikh-portrait.jpg`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      "Contact Sheikh Muhammed Ferej",
+      "Bunyan Institute Addis Ababa",
+      "Wegagen Bank Sharia Board",
+      "Islamic Scholar Consultation",
+      "Al-Fajr Foundation Ethiopia",
+    ],
+    alternates: buildHreflangAlternates("/contact", locale),
+    openGraph: {
+      type: "website",
+      url: pageUrl,
+      title,
+      description,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
 
 export default async function ContactPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   setRequestLocale(params.locale);
   const t = await getTranslations({ locale: params.locale, namespace: "contact" });
   const profile = await getProfile(params.locale).catch(() => null);
+  const siteUrl = getSiteUrl();
   const socialsList = profile?.socials 
     ? Object.entries(profile.socials).map(([platform, url]) => ({ platform, url }))
     : [];
 
+  const breadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${params.locale}` },
+    { name: t("title"), url: `${siteUrl}/${params.locale}/contact` },
+  ]);
+
   return (
     <div className="w-full">
+      <JsonLd data={[buildContactSchema(params.locale), breadcrumbs]} />
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />

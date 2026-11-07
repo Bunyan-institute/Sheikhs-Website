@@ -5,7 +5,9 @@ import Image from "next/image";
 import { ArrowLeft, Clock, Layers, PlayCircle } from "lucide-react";
 import { formatDuration } from "@/lib/utils";
 import type { PublicSeries, PublicLecture } from "@/lib/api/types";
-import { Metadata } from "next";
+import { getSiteUrl, buildSeriesSchema, buildBreadcrumbSchema, buildHreflangAlternates } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import type { Metadata } from "next";
 
 interface SeriesDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -15,9 +17,29 @@ export async function generateMetadata({ params }: SeriesDetailPageProps): Promi
   const { locale, slug } = await params;
   try {
     const series = await getSeriesDetail(slug, locale);
+    const siteUrl = getSiteUrl();
+    const pageUrl = `${siteUrl}/${locale}/series/${slug}`;
+    const description = series.description || `Audio and video lesson series: ${series.title} by Sheikh Muhammed Ferej Megeno.`;
+    const imageUrl = series.cover?.url ? `${siteUrl}${series.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
+
     return {
       title: `${series.title} | Sheikh Muhammed Ferej Megeno`,
-      description: series.description || "Course and lecture series.",
+      description,
+      keywords: ["Islamic Series", "Sheikh Muhammed Ferej", series.title, "Tafsir", "Fiqh"],
+      alternates: buildHreflangAlternates(`/series/${slug}`, locale),
+      openGraph: {
+        type: "video.other",
+        url: pageUrl,
+        title: `${series.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        images: [{ url: imageUrl, width: 1200, height: 630, alt: series.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${series.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        images: [imageUrl],
+      },
     };
   } catch {
     return {
@@ -46,12 +68,20 @@ export default async function SeriesDetailPage({ params }: SeriesDetailPageProps
     );
   }
 
+  const siteUrl = getSiteUrl();
+  const breadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: "Series", url: `${siteUrl}/${locale}/series` },
+    { name: series.title, url: `${siteUrl}/${locale}/series/${series.slug}` },
+  ]);
+
   const lectures = (series.lectures || []).sort((a: PublicLecture, b: PublicLecture) => 
     (a.series?.position || 0) - (b.series?.position || 0)
   );
 
   return (
     <div className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
+      <JsonLd data={[buildSeriesSchema(series, locale), breadcrumbs]} />
       <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8">
         <Link 
           href="/series" 

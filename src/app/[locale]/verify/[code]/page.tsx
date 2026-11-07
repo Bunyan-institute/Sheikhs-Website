@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCertificateByCode } from "@/lib/db/repository";
 import { CertificateView } from "@/components/certificate/certificate-view";
+import type { Metadata } from "next";
 import { 
   ArrowLeft, 
   ShieldAlert, 
@@ -15,6 +16,19 @@ import {
 
 interface CertificateVerifyPageProps {
   params: Promise<{ locale: string; code: string }>;
+}
+
+export async function generateMetadata(props: CertificateVerifyPageProps): Promise<Metadata> {
+  const { locale, code } = await props.params;
+  const cleanCode = decodeURIComponent(code).trim().toUpperCase();
+  return {
+    title: `Certificate Verification: ${cleanCode} | Sheikh Muhammed Ferej Megeno`,
+    description: `Official authentic certificate verification for student accreditation #${cleanCode}.`,
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
 }
 
 export default async function CertificateVerifyPage(props: CertificateVerifyPageProps) {

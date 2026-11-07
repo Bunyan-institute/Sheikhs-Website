@@ -3,6 +3,23 @@ import { searchContent } from '@/lib/api/search';
 import { Link } from '@/i18n/navigation';
 import { Search as SearchIcon, ArrowRight } from 'lucide-react';
 import type { SearchResult } from '@/lib/api/types';
+import { buildHreflangAlternates } from '@/lib/seo';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "search" });
+  return {
+    title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
+    description: t("placeholder"),
+    alternates: buildHreflangAlternates("/search", locale),
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
 
 export default async function SearchPage(props: {
   params: Promise<{ locale: string }>;

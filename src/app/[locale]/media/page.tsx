@@ -4,14 +4,45 @@ import { getMedia, type MediaItem } from "@/lib/api/media";
 import { getProfile } from "@/lib/api/profile";
 import { MediaCard } from "@/components/media/media-card";
 import { ArrowRight } from "lucide-react";
+import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema, buildCollectionSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import type { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "media" });
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/${locale}/media`;
+  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const description = t("subtitle");
+  const imageUrl = `${siteUrl}/images/sheikh-portrait.jpg`;
+
   return {
-    title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
-    description: t("subtitle"),
+    title,
+    description,
+    keywords: [
+      "Islamic Audio Archives",
+      "Sheikh Muhammed Ferej Lectures",
+      "Ethiopian Islamic Halaqat",
+      "Tafsir Audio",
+      "የድምፅና ምስል ማዕከል",
+      "تسجيلات ومرئيات",
+    ],
+    alternates: buildHreflangAlternates("/media", locale),
+    openGraph: {
+      type: "website",
+      url: pageUrl,
+      title,
+      description,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -26,6 +57,7 @@ export default async function MediaPage({
   const { kind } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "media" });
+  const siteUrl = getSiteUrl();
 
   const currentKind = kind || "all";
   let allMedia: MediaItem[] = [];
@@ -41,6 +73,23 @@ export default async function MediaPage({
   const kindOf: Record<string, MediaItem["kind"]> = { audio: "audio", videos: "video", photos: "image", documents: "document" };
   const media = currentKind === "all" ? allMedia : allMedia.filter((m) => m.kind === kindOf[currentKind]);
 
+  const breadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("title"), url: `${siteUrl}/${locale}/media` },
+  ]);
+
+  const collectionSchema = buildCollectionSchema({
+    name: `${t("title")} - Sheikh Muhammed Ferej`,
+    description: t("subtitle"),
+    url: `${siteUrl}/${locale}/media`,
+    inLanguage: locale,
+    items: media.slice(0, 30).map((m) => ({
+      name: m.title,
+      url: m.url ? (m.url.startsWith("http") ? m.url : `${siteUrl}${m.url}`) : `${siteUrl}/${locale}/media#${m.id}`,
+      description: m.description || undefined,
+    })),
+  });
+
   const kinds = [
     { label: "All Media Archives", value: "all" },
     { label: "Audio Halaqat (Audio)", value: "audio" },
@@ -51,6 +100,7 @@ export default async function MediaPage({
 
   return (
     <div className="w-full">
+      <JsonLd data={[collectionSchema, breadcrumbs]} />
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />

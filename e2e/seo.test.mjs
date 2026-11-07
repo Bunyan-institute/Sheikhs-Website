@@ -14,6 +14,10 @@ import {
   buildBreadcrumbSchema,
   buildWebsiteSchema,
   buildHreflangAlternates,
+  buildSeriesSchema,
+  buildCollectionSchema,
+  buildContactSchema,
+  getHomepageMetadata,
 } from "../src/lib/seo.ts";
 
 test("SEO: canonical domain is correctly configured", () => {
@@ -177,4 +181,73 @@ test("SEO: Breadcrumbs and Website schemas match Schema.org specifications", () 
   assert.equal(website["@type"], "WebSite");
   assert.equal(website.potentialAction["@type"], "SearchAction");
 });
+
+test("SEO: Series, Collection, Contact and Homepage schemas produce valid structured data", () => {
+  const seriesSchema = buildSeriesSchema({
+    object: "series",
+    id: "ser_1",
+    title: "Explanation of Kitab at-Tawheed",
+    slug: "kitab-at-tawheed",
+    description: "Detailed scholarly explanation.",
+    locale: "am",
+    direction: "ltr",
+    cover: null,
+    lecture_count: 24,
+    published_at: "2026-01-01T00:00:00Z",
+    updated_at: "2026-01-02T00:00:00Z",
+    lectures: [
+      {
+        object: "lecture",
+        id: "lec_1",
+        title: "Introduction to Tawheed",
+        slug: "tawheed-intro",
+        summary: "First lesson of the series.",
+        locale: "am",
+        direction: "ltr",
+        duration_seconds: 3600,
+        published_at: "2026-01-01T00:00:00Z",
+        updated_at: "2026-01-02T00:00:00Z",
+        cover: null,
+        media: { audio: "/audio/tawheed-1.mp3", video: null, transcript: null },
+        series: { id: "ser_1", position: 1 },
+        categories: ["Aqeedah"],
+        tags: ["tawheed"],
+      },
+    ],
+  }, "am");
+
+  assert.equal(seriesSchema["@type"], "CreativeWorkSeries");
+  assert.equal(seriesSchema.name, "Explanation of Kitab at-Tawheed");
+  assert.equal(seriesSchema.numberOfItems, 24);
+  assert.equal(seriesSchema.hasPart?.[0]?.name, "Introduction to Tawheed");
+
+  const collectionSchema = buildCollectionSchema({
+    name: "Islamic Fatwas",
+    description: "Authenticated rulings archive.",
+    url: "https://www.sheikhmuhammedferej.info/am/fatwas",
+    inLanguage: "am",
+    items: [
+      { name: "Fatwa 1", url: "https://www.sheikhmuhammedferej.info/am/fatwas/f1" },
+      { name: "Fatwa 2", url: "https://www.sheikhmuhammedferej.info/am/fatwas/f2" },
+    ],
+  });
+  assert.equal(collectionSchema["@type"], "CollectionPage");
+  assert.equal(collectionSchema.mainEntity["@type"], "ItemList");
+  assert.equal(collectionSchema.mainEntity.itemListElement.length, 2);
+
+  const contactSchema = buildContactSchema("ar");
+  assert.equal(contactSchema["@type"], "ContactPage");
+  assert.equal(contactSchema.about["@type"], "Person");
+  assert.equal(contactSchema.about.name, "Sheikh Muhammed Ferej Megeno");
+
+  const amMetadata = getHomepageMetadata("am");
+  assert.ok(amMetadata.title?.toString().includes("ሸይኽ ሙሐመድ ፈረጅ"));
+  assert.ok(amMetadata.description?.includes("የሸሪዓ ብይኖች"));
+  assert.equal(amMetadata.openGraph?.locale, "am_ET");
+
+  const arMetadata = getHomepageMetadata("ar");
+  assert.ok(arMetadata.title?.toString().includes("الشيخ محمد فرج"));
+  assert.equal(arMetadata.openGraph?.locale, "ar_SA");
+});
+
 

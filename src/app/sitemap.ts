@@ -21,17 +21,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/fatwas", changeFrequency: "daily" as const, priority: 0.95 },
     { path: "/articles", changeFrequency: "daily" as const, priority: 0.9 },
     { path: "/courses", changeFrequency: "weekly" as const, priority: 0.85 },
-    { path: "/lectures", changeFrequency: "weekly" as const, priority: 0.85 },
-    { path: "/library", changeFrequency: "weekly" as const, priority: 0.8 },
+    { path: "/media", changeFrequency: "weekly" as const, priority: 0.85 },
     { path: "/series", changeFrequency: "weekly" as const, priority: 0.8 },
     { path: "/events", changeFrequency: "weekly" as const, priority: 0.75 },
-    { path: "/media", changeFrequency: "weekly" as const, priority: 0.7 },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/qualifications", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/journey", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/ask", changeFrequency: "monthly" as const, priority: 0.65 },
     { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
-    { path: "/verify", changeFrequency: "monthly" as const, priority: 0.5 },
   ];
 
   const buildAlternates = (subpath: string) => {

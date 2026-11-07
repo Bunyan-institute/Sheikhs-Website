@@ -6,6 +6,9 @@ import { HomeArticleTabs } from "@/components/home/home-article-tabs";
 import { getArticles } from "@/lib/api/articles";
 import { getEvents } from "@/lib/api/events";
 import type { PublicEvent } from "@/lib/api/types";
+import { getHomepageMetadata, getScholarEntity, getOrganizationEntity, buildWebsiteSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import type { Metadata } from "next";
 import { 
   Video, 
   Headphones, 
@@ -15,6 +18,11 @@ import {
   ArrowRight,
   ExternalLink
 } from "lucide-react";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return getHomepageMetadata(locale);
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -49,6 +57,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div className="w-full">
+      <JsonLd data={[getScholarEntity(), getOrganizationEntity(), buildWebsiteSchema(locale)]} />
       {/* ============ HERO (MIHRAB SHRINE WITH SCHOLAR PORTRAIT) ============ */}
       <ScholarHero
         name={profile.name}
