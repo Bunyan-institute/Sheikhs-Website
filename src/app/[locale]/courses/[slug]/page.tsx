@@ -5,15 +5,36 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCourseExam, getProfile as getStoredProfile } from "@/lib/db/repository";
 import { CourseLearningView } from "./course-learning-view";
+import { getSiteUrl, buildCourseSchema, buildBreadcrumbSchema, buildHreflangAlternates } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ArrowLeft } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string, locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;
   try {
     const course = await getCourse(slug, locale);
+    const siteUrl = getSiteUrl();
+    const pageUrl = `${siteUrl}/${locale}/courses/${slug}`;
+    const description = course.summary || "Islamic educational course with curriculum by Sheikh Muhammed Ferej Megeno.";
+
     return {
       title: `${course.title} | Sheikh Muhammed Ferej Megeno`,
-      description: course.summary || "View course outline and details.",
+      description,
+      keywords: [...(course.categories || []), "Islamic Course", "Sheikh Muhammed Ferej", "Bunyan Institute"],
+      alternates: buildHreflangAlternates(`/courses/${slug}`, locale),
+      openGraph: {
+        type: "article",
+        title: `${course.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        url: pageUrl,
+        images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: course.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${course.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        images: [`${siteUrl}/images/sheikh-portrait.jpg`],
+      },
     };
   } catch {
     return {
@@ -46,9 +67,17 @@ export default async function CoursePage({
     ...storedExam,
     questions: storedExam.questions.map(({ correct_option_index: _answer, explanation: _explanation, ...q }) => ({ ...q, correct_option_index: -1 })),
   };
+  const siteUrl = getSiteUrl();
+
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: tNav("courses") || "Courses", url: `${siteUrl}/${locale}/courses` },
+    { name: course.title, url: `${siteUrl}/${locale}/courses/${course.slug}` },
+  ];
 
   return (
     <div className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
+      <JsonLd data={[buildCourseSchema(course, locale), buildBreadcrumbSchema(breadcrumbs)]} />
       <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6 sm:mb-8">
           <Link 

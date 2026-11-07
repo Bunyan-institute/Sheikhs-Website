@@ -3,6 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { getArticle } from "@/lib/api/articles";
 import { formatDate } from "@/lib/utils";
 import { renderArticleBody } from "@/lib/rich-text-server";
+import { getSiteUrl, buildArticleSchema, buildBreadcrumbSchema, buildHreflangAlternates } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
@@ -11,9 +13,34 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug, locale } = await params;
   try {
     const article = await getArticle(slug, locale);
+    const siteUrl = getSiteUrl();
+    const pageUrl = `${siteUrl}/${locale}/articles/${slug}`;
+    const description = article.summary || "Read scholarly article by Sheikh Muhammed Ferej Megeno.";
+    const imageUrl = article.cover?.url ? `${siteUrl}${article.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
+
     return {
       title: `${article.title} | Sheikh Muhammed Ferej Megeno`,
-      description: article.summary || "Read scholarly article.",
+      description,
+      keywords: [...(article.categories || []), ...(article.tags || []), "Sheikh Muhammed Ferej", "Islamic Article"],
+      alternates: buildHreflangAlternates(`/articles/${slug}`, locale),
+      openGraph: {
+        type: "article",
+        title: `${article.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        url: pageUrl,
+        publishedTime: article.published_at || undefined,
+        modifiedTime: article.updated_at || undefined,
+        authors: ["Sheikh Muhammed Ferej Megeno"],
+        section: article.categories?.[0] || "Islamic Studies",
+        tags: [...(article.categories || []), ...(article.tags || [])],
+        images: [{ url: imageUrl, width: 1200, height: 630, alt: article.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${article.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        images: [imageUrl],
+      },
     };
   } catch {
     return {
@@ -38,9 +65,17 @@ export default async function ArticlePage({
   }
 
   const t = await getTranslations({ locale, namespace: "articleDetail" });
+  const siteUrl = getSiteUrl();
+
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: "Articles", url: `${siteUrl}/${locale}/articles` },
+    { name: article.title, url: `${siteUrl}/${locale}/articles/${article.slug}` },
+  ];
 
   return (
     <article className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
+      <JsonLd data={[buildArticleSchema(article, locale), buildBreadcrumbSchema(breadcrumbs)]} />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6 sm:mb-8">
           <Link 

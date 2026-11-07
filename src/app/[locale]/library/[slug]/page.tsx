@@ -4,6 +4,42 @@ import { Link } from '@/i18n/navigation';
 import { notFound } from 'next/navigation';
 import { Download, ExternalLink, ArrowLeft, CheckCircle, FileText } from 'lucide-react';
 import type { PublicBook } from '@/lib/api/types';
+import { getSiteUrl, buildLibrarySchema, buildBreadcrumbSchema, buildHreflangAlternates } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/json-ld';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await props.params;
+  try {
+    const item = await getLibraryItem(slug, locale);
+    const siteUrl = getSiteUrl();
+    const pageUrl = `${siteUrl}/${locale}/library/${slug}`;
+    const description = item.description || `Read and download Islamic book: ${item.title} by Sheikh Muhammed Ferej Megeno.`;
+    const imageUrl = item.cover?.url ? `${siteUrl}${item.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
+
+    return {
+      title: `${item.title} | Sheikh Muhammed Ferej Megeno Library`,
+      description,
+      keywords: ["Islamic Library", "መጽሐፍት", "كتب إسلامية", item.title, "Sheikh Muhammed Ferej"],
+      alternates: buildHreflangAlternates(`/library/${slug}`, locale),
+      openGraph: {
+        type: "book",
+        title: `${item.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        url: pageUrl,
+        images: [{ url: imageUrl, width: 1200, height: 630, alt: item.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${item.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        images: [imageUrl],
+      },
+    };
+  } catch {
+    return { title: "Book Not Found | Sheikh Muhammed Ferej" };
+  }
+}
 
 export default async function LibraryItemPage(props: { params: Promise<{ locale: string, slug: string }> }) {
   const params = await props.params;
@@ -20,9 +56,17 @@ export default async function LibraryItemPage(props: { params: Promise<{ locale:
 
   const t = await getTranslations({ locale: params.locale, namespace: "libraryDetail" });
   const tNav = await getTranslations({ locale: params.locale, namespace: "nav" });
+  const siteUrl = getSiteUrl();
+
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${params.locale}` },
+    { name: tNav("library") || "Library", url: `${siteUrl}/${params.locale}/library` },
+    { name: item.title, url: `${siteUrl}/${params.locale}/library/${item.slug}` },
+  ];
 
   return (
     <article className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-16">
+      <JsonLd data={[buildLibrarySchema(item, params.locale), buildBreadcrumbSchema(breadcrumbs)]} />
       <Link 
         href="/library" 
         className="inline-flex items-center text-xs sm:text-sm font-semibold text-[#555E61] hover:text-[#1A4D2E] mb-8"

@@ -3,6 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { getArticles } from "@/lib/api/articles";
 import { getCategories } from "@/lib/api/taxonomy";
 import { formatDate } from "@/lib/utils";
+import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 import { ArrowRight, BookOpen } from "lucide-react";
 
@@ -10,9 +12,28 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "articles" });
+  const siteUrl = getSiteUrl();
+  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const description = `${t("subtitle")} — Scholarly writings, treatises, and academic reflections by Sheikh Muhammed Ferej Megeno.`;
+
   return {
-    title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
-    description: t("subtitle"),
+    title,
+    description,
+    keywords: ["Articles", "ፅሁፎች", "مقالات", "Islamic Articles", "Sheikh Muhammed Ferej", "Bunyan Institute"],
+    alternates: buildHreflangAlternates("/articles", locale),
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: `${siteUrl}/${locale}/articles`,
+      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/images/sheikh-portrait.jpg`],
+    },
   };
 }
 
@@ -39,9 +60,34 @@ export default async function ArticlesPage({
 
   const featuredArticle = category ? null : articles[0];
   const latestArticles = category ? articles : articles.slice(1);
+  const siteUrl = getSiteUrl();
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
+    description: t("subtitle"),
+    url: `${siteUrl}/${locale}/articles`,
+    inLanguage: locale,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: articles.map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: a.title,
+        url: `${siteUrl}/${locale}/articles/${a.slug}`,
+      })),
+    },
+  };
+
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("title"), url: `${siteUrl}/${locale}/articles` },
+  ];
 
   return (
     <div className="w-full">
+      <JsonLd data={[collectionSchema, buildBreadcrumbSchema(breadcrumbs)]} />
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />

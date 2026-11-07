@@ -6,7 +6,9 @@ import { Link } from "@/i18n/navigation";
 import { ArrowLeft, Calendar, Clock, Folder, Layers } from "lucide-react";
 import { formatDate, formatDuration } from "@/lib/utils";
 import type { PublicLecture } from "@/lib/api/types";
-import { Metadata } from "next";
+import { getSiteUrl, buildLectureSchema, buildBreadcrumbSchema, buildHreflangAlternates } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import type { Metadata } from "next";
 
 interface LectureDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -16,12 +18,32 @@ export async function generateMetadata({ params }: LectureDetailPageProps): Prom
   const { locale, slug } = await params;
   try {
     const lecture = await getLecture(slug, locale);
+    const siteUrl = getSiteUrl();
+    const pageUrl = `${siteUrl}/${locale}/lectures/${slug}`;
+    const description = lecture.summary || `Listen to Islamic lecture: ${lecture.title} by Sheikh Muhammed Ferej Megeno.`;
+    const imageUrl = lecture.cover?.url ? `${siteUrl}${lecture.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
+
     return {
-      title: `${lecture.title} - Sheikh Muhammed Ferej Megeno`,
-      description: lecture.summary || `Listen to ${lecture.title}`,
+      title: `${lecture.title} | Sheikh Muhammed Ferej Megeno`,
+      description,
+      keywords: [...(lecture.categories || []), "Islamic Lecture", "ዳዕዋ", "محاضرة إسلامية", "Sheikh Muhammed Ferej"],
+      alternates: buildHreflangAlternates(`/lectures/${slug}`, locale),
+      openGraph: {
+        type: "video.other",
+        title: `${lecture.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        url: pageUrl,
+        images: [{ url: imageUrl, width: 1200, height: 630, alt: lecture.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${lecture.title} | Sheikh Muhammed Ferej Megeno`,
+        description,
+        images: [imageUrl],
+      },
     };
-  } catch (error) {
-    return { title: "Lecture Not Found" };
+  } catch {
+    return { title: "Lecture Not Found | Sheikh Muhammed Ferej" };
   }
 }
 
@@ -53,8 +75,16 @@ export default async function LectureDetailPage({ params }: LectureDetailPagePro
     console.error("Failed to load related lectures", err);
   }
 
+  const siteUrl = getSiteUrl();
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: "Lectures", url: `${siteUrl}/${locale}/lectures` },
+    { name: lecture.title, url: `${siteUrl}/${locale}/lectures/${lecture.slug}` },
+  ];
+
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-8 md:py-16">
+      <JsonLd data={[buildLectureSchema(lecture, locale), buildBreadcrumbSchema(breadcrumbs)]} />
       <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <Link 
           href="/media" 

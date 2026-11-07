@@ -3,6 +3,8 @@ import { getEvent } from '@/lib/api/events';
 import { Link } from '@/i18n/navigation';
 import { notFound } from 'next/navigation';
 import { Calendar, Clock, MapPin, Video, Users, ArrowLeft, Info } from 'lucide-react';
+import { getSiteUrl, buildEventSchema, buildBreadcrumbSchema, buildHreflangAlternates } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/json-ld';
 import type { Metadata } from 'next';
 import { EventRegisterButton } from './event-register-button';
 
@@ -13,9 +15,32 @@ interface EventDetailPageProps {
 export async function generateMetadata({ params }: EventDetailPageProps): Promise<Metadata> {
   const { slug, locale } = await params;
   const event = await getEvent(slug, locale).catch(() => null);
+  const siteUrl = getSiteUrl();
+
+  if (!event) {
+    return { title: 'Event Details | Sheikh Muhammed Ferej' };
+  }
+
+  const pageUrl = `${siteUrl}/${locale}/events/${slug}`;
+  const description = event.summary || `Join Islamic gathering: ${event.title} with Sheikh Muhammed Ferej Megeno.`;
+
   return {
-    title: event ? `${event.title} | Sheikh Muhammed Ferej Megeno` : 'Event Details | Sheikh Muhammed Ferej',
-    description: event?.summary || 'Gatherings, lectures and events.',
+    title: `${event.title} | Sheikh Muhammed Ferej Megeno`,
+    description,
+    alternates: buildHreflangAlternates(`/events/${slug}`, locale),
+    openGraph: {
+      type: "article",
+      title: `${event.title} | Sheikh Muhammed Ferej Megeno`,
+      description,
+      url: pageUrl,
+      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 630, alt: event.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${event.title} | Sheikh Muhammed Ferej Megeno`,
+      description,
+      images: [`${siteUrl}/images/sheikh-portrait.jpg`],
+    },
   };
 }
 
@@ -30,9 +55,17 @@ export default async function EventDetailPage(props: EventDetailPageProps) {
   const formattedDate = startDate.toLocaleDateString(params.locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const timeStr = startDate.toLocaleTimeString(params.locale, { hour: 'numeric', minute: '2-digit', timeZoneName: 'long' });
   const isOnline = !!event.online_url;
+  const siteUrl = getSiteUrl();
+
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${params.locale}` },
+    { name: "Events", url: `${siteUrl}/${params.locale}/events` },
+    { name: event.title, url: `${siteUrl}/${params.locale}/events/${event.slug}` },
+  ];
 
   return (
     <article className="w-full bg-[#EDF4F0] py-8 sm:py-12 md:py-16">
+      <JsonLd data={[buildEventSchema(event, params.locale), buildBreadcrumbSchema(breadcrumbs)]} />
       <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/events" className="inline-flex items-center text-xs sm:text-sm font-semibold text-[#1B6A50] hover:text-[#0D3E2F] transition-colors mb-6 sm:mb-8 py-1">
           <ArrowLeft className="w-4 h-4 me-2 text-[#BF9A45] rtl:rotate-180" />

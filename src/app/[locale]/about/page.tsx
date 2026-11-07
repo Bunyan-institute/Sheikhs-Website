@@ -12,14 +12,35 @@ import {
   ShieldCheck 
 } from "lucide-react";
 import { getProfile } from "@/lib/api/profile";
+import { getSiteUrl, getScholarEntity, buildHreflangAlternates } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "about" });
+  const siteUrl = getSiteUrl();
+  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const description = `${t("subtitle")} — Comprehensive biography, academic credentials, traditional sanad, and institutional roles of Sheikh Muhammed Ferej Megeno.`;
+
   return {
-    title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
-    description: t("subtitle"),
+    title,
+    description,
+    keywords: ["About Sheikh Muhammed Ferej", "የሸይኽ ሙሐመድ ፈረጅ የህይወት ታሪክ", "سيرة الشيخ محمد فرج", "Ethiopian Islamic Scholars", "AAOIFI Certified Sharia Advisor"],
+    alternates: buildHreflangAlternates("/about", locale),
+    openGraph: {
+      type: "profile",
+      title,
+      description,
+      url: `${siteUrl}/${locale}/about`,
+      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: "Sheikh Muhammed Ferej Megeno" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/images/sheikh-portrait.jpg`],
+    },
   };
 }
 
@@ -40,9 +61,19 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   }
 
   const photoUrl = profile.photo?.url;
+  const siteUrl = getSiteUrl();
+
+  const profilePageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
+    url: `${siteUrl}/${locale}/about`,
+    mainEntity: getScholarEntity(),
+  };
 
   return (
     <div className="w-full">
+      <JsonLd data={profilePageSchema} />
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />

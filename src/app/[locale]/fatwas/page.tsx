@@ -2,6 +2,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFatwas } from "@/lib/api/fatwas";
 import { formatDate } from "@/lib/utils";
+import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 import { ArrowRight, CheckCircle, HelpCircle } from "lucide-react";
 
@@ -9,9 +11,50 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "fatwas" });
+  const siteUrl = getSiteUrl();
+  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const description = `${t("subtitle")} — Authoritative Islamic jurisprudence rulings, fiqh questions, and fatwas by Sheikh Muhammed Ferej Megeno.`;
+
   return {
-    title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
-    description: t("subtitle"),
+    title,
+    description,
+    keywords: [
+      "Fatwa",
+      "ፈትዋ",
+      "فتوى",
+      "murtii islaamaa",
+      "Islamic Rulings",
+      "Fiqh",
+      "ፊቅህ",
+      "فقه",
+      "Sheikh Muhammed Ferej",
+      "ሸይኽ ሙሐመድ ፈረጅ",
+      "الشيخ محمد فرج",
+      "Halal Haram",
+      "Islamic Banking Rulings",
+      "Ethiopia Islamic Scholars",
+    ],
+    alternates: buildHreflangAlternates("/fatwas", locale),
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: `${siteUrl}/${locale}/fatwas`,
+      images: [
+        {
+          url: `${siteUrl}/images/sheikh-portrait.jpg`,
+          width: 1200,
+          height: 1200,
+          alt: "Sheikh Muhammed Ferej Megeno Fatwa Archive",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/images/sheikh-portrait.jpg`],
+    },
   };
 }
 
@@ -30,9 +73,34 @@ export default async function FatwasPage({
 
   const fatwasRes = await getFatwas({ locale, category: category ? [category] : undefined });
   const fatwas = fatwasRes?.data || [];
+  const siteUrl = getSiteUrl();
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
+    description: t("subtitle"),
+    url: `${siteUrl}/${locale}/fatwas`,
+    inLanguage: locale,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: fatwas.map((f, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: f.title,
+        url: `${siteUrl}/${locale}/fatwas/${f.slug}`,
+      })),
+    },
+  };
+
+  const breadcrumbs = [
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("title"), url: `${siteUrl}/${locale}/fatwas` },
+  ];
 
   return (
     <div className="w-full">
+      <JsonLd data={[collectionSchema, buildBreadcrumbSchema(breadcrumbs)]} />
       {/* Page Hero Header */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] py-14 sm:py-16 overflow-hidden border-b border-[#BF9A45]/20">
         <div className="absolute inset-0 lattice opacity-40 pointer-events-none" aria-hidden="true" />
