@@ -1,4 +1,8 @@
-import * as webpush from "web-push";
+import {
+  setVapidDetails,
+  sendNotification,
+  WebPushError,
+} from "web-push";
 import {
   deletePushSubscriptionByEndpoint,
   listPushSubscriptions,
@@ -48,16 +52,16 @@ const defaultSender: Sender = async (sub, payload) => {
   }
   const cfg = vapidConfig();
   if (!cfg) throw new Error("VAPID keys are not configured");
-  webpush.setVapidDetails(cfg.subject, cfg.publicKey, cfg.privateKey);
+  setVapidDetails(cfg.subject, cfg.publicKey, cfg.privateKey);
   try {
-    const res = await webpush.sendNotification({ endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } }, payload, {
+    const res = await sendNotification({ endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } }, payload, {
       TTL: 60 * 60 * 24,
       urgency: "high",
       timeout: 8000,
     });
     return { status: res.statusCode };
   } catch (err) {
-    if (err instanceof webpush.WebPushError) return { status: err.statusCode };
+    if (err instanceof WebPushError) return { status: err.statusCode };
     throw err;
   }
 };

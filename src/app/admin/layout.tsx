@@ -8,6 +8,7 @@ import type { Viewport } from "next";
 import { getSystemMetrics } from "@/lib/db/repository";
 import { localeDirections } from "@/i18n/config";
 import { getAdminLocale } from "@/lib/admin-locale";
+import { getAdminMessages } from "@/lib/admin-messages";
 
 export const metadata = {
   title: "Admin Dashboard | Sheikh Muhammed Ferej Megeno",
@@ -41,7 +42,7 @@ export default async function AdminLayout({
 }) {
   const session = await getSessionUser();
   const locale = await getAdminLocale();
-  const messages = (await import(`@/i18n/messages/${locale}.json`)).default;
+  const messages = getAdminMessages(locale);
   const dir = localeDirections[locale] ?? "ltr";
 
   // Anything other than the login page needs a live (non-revoked) session.

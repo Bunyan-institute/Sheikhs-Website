@@ -3,10 +3,11 @@ import { createTranslator } from "next-intl";
 import { Video, FileText, Image as ImageIcon, CheckCircle2, MessageSquare, ArrowRight, Users, Calendar, GraduationCap } from "lucide-react";
 import { getSystemMetrics, getAllInquiries, getAllEventRegistrations, getAllCourseEnrollments } from "@/lib/db/repository";
 import { getAdminLocale } from "@/lib/admin-locale";
+import { getAdminMessages } from "@/lib/admin-messages";
 
 export default async function AdminDashboardPage() {
   const locale = await getAdminLocale();
-  const messages = (await import(`@/i18n/messages/${locale}.json`)).default;
+  const messages = getAdminMessages(locale);
   const tDash = createTranslator({ locale, messages, namespace: "admin.dashboard" });
   const tCommon = createTranslator({ locale, messages, namespace: "admin.common" });
 
