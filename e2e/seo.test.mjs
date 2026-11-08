@@ -20,6 +20,8 @@ import {
   getHomepageMetadata,
   getLocalizedUrl,
   buildSitemapAlternates,
+  buildSitelinksNavigationSchema,
+  PRIMARY_SITELINKS,
 } from "../src/lib/seo.ts";
 
 test("SEO: canonical domain is correctly configured", () => {
@@ -269,6 +271,38 @@ test("SEO: getLocalizedUrl generates correct non-redirect URLs", () => {
   assert.equal(alternates["x-default"], "https://www.sheikhmuhammedferej.info/fatwas/test-slug");
   assert.equal(alternates.am, "https://www.sheikhmuhammedferej.info/am/fatwas/test-slug");
 });
+
+test("SEO: Google Sitelinks navigation schema generates 5 authoritative pillars", () => {
+  assert.equal(PRIMARY_SITELINKS.length, 5, "Must have exactly 5 sitelinks");
+
+  const enSitelinks = buildSitelinksNavigationSchema("en");
+  assert.equal(enSitelinks["@type"], "ItemList");
+  assert.equal(enSitelinks.itemListElement.length, 5);
+
+  const expectedPaths = ["/fatwas", "/articles", "/series", "/courses", "/ask"];
+
+  enSitelinks.itemListElement.forEach((el, idx) => {
+    assert.equal(el["@type"], "SiteNavigationElement");
+    assert.equal(el.position, idx + 1);
+    assert.ok(el.name.length > 2, "Has name");
+    assert.ok(el.description.length > 10, "Has description");
+    assert.ok(el.url.endsWith(expectedPaths[idx]), `URL should end with ${expectedPaths[idx]}`);
+    assert.equal(el.url.includes("/en/"), false, "English sitelink URLs must not contain /en/");
+  });
+
+  const amSitelinks = buildSitelinksNavigationSchema("am");
+  assert.equal(amSitelinks.itemListElement.length, 5);
+  amSitelinks.itemListElement.forEach((el, idx) => {
+    assert.ok(el.url.includes(`/am${expectedPaths[idx]}`), `Amharic URL must contain /am${expectedPaths[idx]}`);
+  });
+
+  // Verify WebSite schema includes hasPart for sitelinks
+  const website = buildWebsiteSchema("en");
+  assert.ok(Array.isArray(website.hasPart), "WebSite must contain hasPart");
+  assert.equal(website.hasPart.length, 5);
+  assert.equal(website.hasPart[0]["@type"], "WebPage");
+});
+
 
 
 

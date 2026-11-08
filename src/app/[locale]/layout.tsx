@@ -8,6 +8,8 @@ import { buildNavigation, buildMoreItems } from "@/lib/sections";
 import { SiteHeader } from "@/components/shell/site-header";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { FloatingAppCard } from "@/components/profile/floating-app-card";
+import { buildSitelinksNavigationSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 
 // Content is admin-managed in SQLite, so public pages render per request.
 export const dynamic = "force-dynamic";
@@ -37,6 +39,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <div dir={dir} lang={locale} className="min-h-screen flex flex-col">
+        <JsonLd data={[buildSitelinksNavigationSchema(locale)]} />
         <SiteHeader
           profile={profile}
           navigation={nav}

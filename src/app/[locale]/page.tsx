@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getProfile } from "@/lib/api/profile";
 import { ScholarHero } from "@/components/profile/scholar-hero";
+import { HomeSitelinksPortal } from "@/components/home/home-sitelinks-portal";
 import { HomeArticleTabs } from "@/components/home/home-article-tabs";
 import { getArticles } from "@/lib/api/articles";
 import { getEvents } from "@/lib/api/events";
@@ -66,6 +67,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         photoUrl={profile.photo?.url ?? null}
         locale={locale}
       />
+
+      {/* ============ OFFICIAL GOOGLE SITELINKS PORTAL ============ */}
+      <HomeSitelinksPortal locale={locale} />
 
       {/* ============ SANAD STRIP ============ */}
       <section className="bg-[#072118] text-[#EDF4F0] border-y border-[#BF9A45]/20" aria-label="At a glance">

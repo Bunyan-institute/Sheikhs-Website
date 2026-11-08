@@ -132,12 +132,12 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
             </ul>
           </nav>
 
-          <nav aria-label="Knowledge">
+          <nav aria-label="Knowledge & Sitelinks">
             <p className="font-display text-[#EDF4F0] text-lg font-semibold">Knowledge</p>
             <ul className="mt-3.5 space-y-2 text-sm">
               {knowledgeLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-[#E6D3A3] transition-colors inline-block py-0.5">
+                  <Link href={link.href} title={t(link.labelKey as any)} className="hover:text-[#E6D3A3] transition-colors inline-block py-0.5">
                     {t(link.labelKey as any)}
                   </Link>
                 </li>

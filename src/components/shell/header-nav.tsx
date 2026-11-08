@@ -11,7 +11,7 @@ export default function HeaderNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
   
   return (
-    <nav className="flex items-center gap-3.5 lg:gap-4 xl:gap-6 shrink-0">
+    <nav aria-label="Main Navigation" className="flex items-center gap-3.5 lg:gap-4 xl:gap-6 shrink-0">
       {items.map((item, idx) => {
         const hasChildren = item.children && item.children.length > 0;
         const isChildActive = hasChildren && item.children?.some(c => 

@@ -152,7 +152,7 @@ export function getOrganizationEntity() {
  */
 export function buildHreflangAlternates(pathname: string, currentLocale?: string): Metadata["alternates"] {
   const siteUrl = getSiteUrl();
-  const cleanPath = pathname.replace(/^\/(en|ar|am|om)/, "").replace(/^\/+/, "");
+  const cleanPath = pathname.replace(/^\/(en|ar|am|om)(?=\/|$)/, "").replace(/^\/+/, "");
   const suffix = cleanPath ? `/${cleanPath}` : "";
 
   const languages: Record<string, string> = {
@@ -180,7 +180,7 @@ export function buildHreflangAlternates(pathname: string, currentLocale?: string
  */
 export function getLocalizedUrl(pathname: string, locale: string): string {
   const siteUrl = getSiteUrl();
-  const clean = pathname.replace(/^\/(en|ar|am|om)/, "").replace(/^\/+/, "");
+  const clean = pathname.replace(/^\/(en|ar|am|om)(?=\/|$)/, "").replace(/^\/+/, "");
   const suffix = clean ? `/${clean}` : "";
 
   if (locale === "en") {
@@ -193,7 +193,7 @@ export function getLocalizedUrl(pathname: string, locale: string): string {
  * Returns alternate hreflang dictionary for sitemap XML generation.
  */
 export function buildSitemapAlternates(pathname: string) {
-  const clean = pathname.replace(/^\/(en|ar|am|om)/, "").replace(/^\/+/, "");
+  const clean = pathname.replace(/^\/(en|ar|am|om)(?=\/|$)/, "").replace(/^\/+/, "");
   const suffix = clean ? `/${clean}` : "";
   const siteUrl = getSiteUrl();
 
@@ -488,8 +488,120 @@ export function buildEventSchema(event: PublicEvent, locale: string) {
   };
 }
 
+export interface SitelinkDefinition {
+  subpath: string;
+  name: Record<string, string>;
+  description: Record<string, string>;
+}
+
+export const PRIMARY_SITELINKS: SitelinkDefinition[] = [
+  {
+    subpath: "/fatwas",
+    name: {
+      en: "Fatwas & Sharia Rulings",
+      am: "ፈትዋዎች (የሸሪዓ ብይኖች)",
+      ar: "الفتاوى الشرعية",
+      om: "Fatwaawwan fi Murtii",
+    },
+    description: {
+      en: "Authenticated answers to Islamic jurisprudence and Sharia questions according to Quran and Sunnah.",
+      am: "በቁርኣንና ሐዲስ መረጃዎች ላይ የተመሠረቱ ይፋዊ የኢስላማዊ ፊቅህ ፈትዋዎች እና ብይኖች።",
+      ar: "فتاوى شرعية معتمدة ومؤصلة بالأدلة من الكتاب والسنة في مختلف أبواب الفقه الإسلامي.",
+      om: "Fatwaawwan fi deebiiwwan shari'aa ragaalee Qur'aana fi Hadiisa irratti hundaa'an.",
+    },
+  },
+  {
+    subpath: "/articles",
+    name: {
+      en: "Scholarly Articles & Treatises",
+      am: "ጽሑፎችና ምርምሮች",
+      ar: "المقالات والبحوث",
+      om: "Barreeffamoota fi Qorannoowwan",
+    },
+    description: {
+      en: "Academic Islamic papers, Friday reminders, and research articles by Sheikh Muhammed Ferej.",
+      am: "የሸይኽ ሙሐመድ ፈረጅ ጥናታዊ ጽሑፎች፣ የጁሙዓ ማስታወሻዎች እና ተከታታይ የዕውቀት ትምህርቶች።",
+      ar: "مقالات علمية وبحوث منهجية وتوجيهات دعوية من كتابات فضيلة الشيخ محمد فرج مجنو.",
+      om: "Barreeffamoota barnootaa fi qorannoowwan Islaamaa Sheekh Muhammad Farajtiin qophaa'an.",
+    },
+  },
+  {
+    subpath: "/series",
+    name: {
+      en: "Audio & Video Lesson Series",
+      am: "የትምህርት ስብስቦች",
+      ar: "السلاسل العلمية والمنهجية",
+      om: "Walitti-qabiinsa Barnootaa",
+    },
+    description: {
+      en: "Complete multi-part lecture series covering Tafsir, Hadith compilations, and classical Fiqh books.",
+      am: "የተፍሲር፣ የሐዲስ ኪታቦችና የፊቅህ ትምህርቶች የተሟሉ ተከታታይ የድምፅና ቪዲዮ ስብስቦች።",
+      ar: "سلاسل صوتية ومرئية مكتملة في تفسير كتاب الله وشروح كتب أمهات الحديث والفقه.",
+      om: "Darsiiwwan sagalee fi viidiyoo walitti-fufaa Tafsiira, Hadiisaa fi Fiqhii.",
+    },
+  },
+  {
+    subpath: "/courses",
+    name: {
+      en: "Islamic Courses & Syllabi",
+      am: "የሸሪዓ ኮርሶች",
+      ar: "الدورات التأصيلية",
+      om: "Koorsiiwwan Barnootaa",
+    },
+    description: {
+      en: "Structured Islamic knowledge curriculum, AAOIFI Sharia standards, and online learning modules.",
+      am: "የተዋቀሩ የሸሪዓ ሥርዓተ-ትምህርቶች፣ የአይኦፊ ደረጃዎች እና ተከታታይ የዲጂታል ኮርሶች።",
+      ar: "مناهج تعليمية مؤصلة تشمل المعايير الشرعية ودورات الفقه والحديث المصممة لطلاب العلم.",
+      om: "Koorsoota barnoota amantii Islaamaa tartiibaan qophaa'anii fi leenjiilee shari'aa.",
+    },
+  },
+  {
+    subpath: "/ask",
+    name: {
+      en: "Ask the Sheikh",
+      am: "ፈትዋ ይጠይቁ",
+      ar: "استفتاء الشيخ",
+      om: "Sheikh Gaafadhaa",
+    },
+    description: {
+      en: "Directly submit your personal Islamic jurisprudence inquiries, Sharia doubts, or financial advice questions.",
+      am: "የግል የሃይማኖት ጥያቄዎን፣ የሸሪዓ ማብራሪያ ወይም የፋይናንስ ምክር በቀጥታ ለሸይኹ ቢሮ ያቅርቡ።",
+      ar: "إرسال الأسئلة والاستفتاءات الشرعية والاستشارات الفقهية مباشرة إلى فضيلة الشيخ.",
+      om: "Gaaffilee amantii, fatwaa fi gorsa dhimmoota jireenyaa kallattiin dhiyeessaa.",
+    },
+  },
+];
+
 /**
- * Generates WebSite Schema with SearchAction.
+ * Generates Schema.org ItemList with SiteNavigationElement for Google Sitelinks.
+ */
+export function buildSitelinksNavigationSchema(locale: string = "en") {
+  const siteUrl = getSiteUrl();
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${siteUrl}/#sitelinks`,
+    name: "Primary Sitelinks Navigation",
+    description: "Primary navigational pillars of Sheikh Muhammed Ferej Megeno's official platform",
+    itemListElement: PRIMARY_SITELINKS.map((item, index) => {
+      const name = item.name[locale] || item.name.en;
+      const description = item.description[locale] || item.description.en;
+      const url = getLocalizedUrl(item.subpath, locale);
+
+      return {
+        "@type": "SiteNavigationElement",
+        position: index + 1,
+        name,
+        description,
+        url,
+      };
+    }),
+  };
+}
+
+/**
+ * Generates WebSite Schema with SearchAction and Sitelinks hasPart.
  */
 export function buildWebsiteSchema(locale: string = "en") {
   const siteUrl = getSiteUrl();
@@ -511,6 +623,13 @@ export function buildWebsiteSchema(locale: string = "en") {
       "@type": "Person",
       "@id": `${siteUrl}/#scholar`,
     },
+    hasPart: PRIMARY_SITELINKS.map((item) => ({
+      "@type": "WebPage",
+      "@id": `${getLocalizedUrl(item.subpath, locale)}#webpage`,
+      name: item.name[locale] || item.name.en,
+      description: item.description[locale] || item.description.en,
+      url: getLocalizedUrl(item.subpath, locale),
+    })),
     potentialAction: {
       "@type": "SearchAction",
       target: {
