@@ -8,14 +8,13 @@ import {
   getAllSeries,
   getAllEvents,
 } from "@/lib/db/repository";
-import { getSiteUrl } from "@/lib/seo";
+import { getLocalizedUrl, buildSitemapAlternates } from "@/lib/seo";
 import { locales } from "@/i18n/config";
 
-export const dynamic = "force-dynamic";
+// Cache generated sitemap for 1 hour at edge CDN for instant crawl responses
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = getSiteUrl();
-
   const coreRoutes = [
     { path: "", changeFrequency: "daily" as const, priority: 1.0 },
     { path: "/fatwas", changeFrequency: "daily" as const, priority: 0.95 },
@@ -31,28 +30,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
   ];
 
-  const buildAlternates = (subpath: string) => {
-    const clean = subpath.replace(/^\/+/, "");
-    const suffix = clean ? `/${clean}` : "";
-    return {
-      languages: {
-        en: `${siteUrl}/en${suffix}`,
-        ar: `${siteUrl}/ar${suffix}`,
-        am: `${siteUrl}/am${suffix}`,
-        om: `${siteUrl}/om${suffix}`,
-        "x-default": `${siteUrl}${suffix ? `/${clean}` : ""}`,
-      },
-    };
-  };
+  const buildAlternates = (subpath: string) => ({
+    languages: buildSitemapAlternates(subpath),
+  });
 
   const entries: MetadataRoute.Sitemap = [];
 
-  // 1. Add core routes for all locales
+  // 1. Add core routes for all locales (strictly using getLocalizedUrl so 'en' has no /en prefix)
   for (const route of coreRoutes) {
     for (const locale of locales) {
-      const url = `${siteUrl}/${locale}${route.path}`;
       entries.push({
-        url,
+        url: getLocalizedUrl(route.path, locale),
         lastModified: new Date(),
         changeFrequency: route.changeFrequency,
         priority: locale === "am" ? route.priority : Number((route.priority * 0.95).toFixed(2)),
@@ -61,7 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Helper for published dynamic content
   const isPublished = (item: { status?: string }) => item.status === "published" || item.status === undefined;
   const parseDate = (d?: string | null) => (d ? new Date(d) : new Date());
 
@@ -76,13 +63,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getAllEvents(),
     ]);
 
-    // 2. Fatwas (high SEO priority)
+    // 2. Fatwas (deep Q&A ruling index)
     for (const fatwa of fatwas.filter(isPublished)) {
       if (!fatwa.slug) continue;
       const subpath = `/fatwas/${fatwa.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
+          url: getLocalizedUrl(subpath, locale),
           lastModified: parseDate(fatwa.updated_at || fatwa.published_at),
           changeFrequency: "weekly",
           priority: 0.9,
@@ -97,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const subpath = `/articles/${article.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
+          url: getLocalizedUrl(subpath, locale),
           lastModified: parseDate(article.updated_at || article.published_at),
           changeFrequency: "weekly",
           priority: 0.85,
@@ -112,7 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const subpath = `/courses/${course.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
+          url: getLocalizedUrl(subpath, locale),
           lastModified: parseDate(course.updated_at || course.published_at),
           changeFrequency: "weekly",
           priority: 0.8,
@@ -127,7 +114,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const subpath = `/lectures/${lecture.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
+          url: getLocalizedUrl(subpath, locale),
           lastModified: parseDate(lecture.updated_at || lecture.published_at),
           changeFrequency: "weekly",
           priority: 0.8,
@@ -136,13 +123,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
-    // 6. Library Books
+    // 6. Books
     for (const book of books.filter(isPublished)) {
       if (!book.slug) continue;
       const subpath = `/library/${book.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
+          url: getLocalizedUrl(subpath, locale),
           lastModified: parseDate(book.updated_at || book.published_at),
           changeFrequency: "monthly",
           priority: 0.75,
@@ -152,28 +139,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     // 7. Series
-    for (const series of seriesList) {
-      if (!series.slug) continue;
-      const subpath = `/series/${series.slug}`;
+    for (const s of seriesList.filter(isPublished)) {
+      if (!s.slug) continue;
+      const subpath = `/series/${s.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
-          lastModified: parseDate(series.updated_at),
+          url: getLocalizedUrl(subpath, locale),
+          lastModified: parseDate(s.updated_at || s.published_at),
           changeFrequency: "weekly",
-          priority: 0.75,
+          priority: 0.8,
           alternates: buildAlternates(subpath),
         });
       }
     }
 
     // 8. Events
-    for (const event of events.filter(isPublished)) {
-      if (!event.slug) continue;
-      const subpath = `/events/${event.slug}`;
+    for (const ev of events.filter(isPublished)) {
+      if (!ev.slug) continue;
+      const subpath = `/events/${ev.slug}`;
       for (const locale of locales) {
         entries.push({
-          url: `${siteUrl}/${locale}${subpath}`,
-          lastModified: parseDate(event.updated_at),
+          url: getLocalizedUrl(subpath, locale),
+          lastModified: parseDate(ev.updated_at || ev.published_at),
           changeFrequency: "weekly",
           priority: 0.7,
           alternates: buildAlternates(subpath),
@@ -181,7 +168,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
   } catch (err) {
-    console.error("[sitemap] Failed to fetch dynamic content for sitemap:", err);
+    console.error("Failed to fetch published entities for sitemap:", err);
   }
 
   return entries;

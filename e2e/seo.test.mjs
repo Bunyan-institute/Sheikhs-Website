@@ -18,6 +18,8 @@ import {
   buildCollectionSchema,
   buildContactSchema,
   getHomepageMetadata,
+  getLocalizedUrl,
+  buildSitemapAlternates,
 } from "../src/lib/seo.ts";
 
 test("SEO: canonical domain is correctly configured", () => {
@@ -157,10 +159,11 @@ test("SEO: Article, Course, Lecture and Event schemas produce valid Schema.org e
   assert.equal(eventSchema.location.name, "Grand Mosque Hall");
 });
 
-test("SEO: Bidirectional hreflang alternates include all 4 languages", () => {
+test("SEO: Bidirectional hreflang alternates include all 4 languages with prefixless default", () => {
   const alternates = buildHreflangAlternates("/fatwas/test-slug", "am");
   assert.ok(alternates.canonical?.includes("/am/fatwas/test-slug"));
-  assert.ok(alternates.languages?.en?.includes("/en/fatwas/test-slug"));
+  assert.equal(alternates.languages?.en?.includes("/en/fatwas"), false);
+  assert.ok(alternates.languages?.en?.includes("/fatwas/test-slug"));
   assert.ok(alternates.languages?.ar?.includes("/ar/fatwas/test-slug"));
   assert.ok(alternates.languages?.am?.includes("/am/fatwas/test-slug"));
   assert.ok(alternates.languages?.om?.includes("/om/fatwas/test-slug"));
@@ -249,5 +252,23 @@ test("SEO: Series, Collection, Contact and Homepage schemas produce valid struct
   assert.ok(arMetadata.title?.toString().includes("الشيخ محمد فرج"));
   assert.equal(arMetadata.openGraph?.locale, "ar_SA");
 });
+
+test("SEO: getLocalizedUrl generates correct non-redirect URLs", () => {
+  // English is prefix-less
+  assert.equal(getLocalizedUrl("", "en"), "https://www.sheikhmuhammedferej.info");
+  assert.equal(getLocalizedUrl("/fatwas", "en"), "https://www.sheikhmuhammedferej.info/fatwas");
+  assert.equal(getLocalizedUrl("/fatwas/test-slug", "en"), "https://www.sheikhmuhammedferej.info/fatwas/test-slug");
+
+  // Non-English are prefixed
+  assert.equal(getLocalizedUrl("", "am"), "https://www.sheikhmuhammedferej.info/am");
+  assert.equal(getLocalizedUrl("/fatwas", "am"), "https://www.sheikhmuhammedferej.info/am/fatwas");
+  assert.equal(getLocalizedUrl("/fatwas/test-slug", "am"), "https://www.sheikhmuhammedferej.info/am/fatwas/test-slug");
+
+  const alternates = buildSitemapAlternates("/fatwas/test-slug");
+  assert.equal(alternates.en, "https://www.sheikhmuhammedferej.info/fatwas/test-slug");
+  assert.equal(alternates["x-default"], "https://www.sheikhmuhammedferej.info/fatwas/test-slug");
+  assert.equal(alternates.am, "https://www.sheikhmuhammedferej.info/am/fatwas/test-slug");
+});
+
 
 

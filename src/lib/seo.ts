@@ -148,6 +148,7 @@ export function getOrganizationEntity() {
 
 /**
  * Generates canonical link and bidirectional hreflang alternate links for en, ar, am, om, and x-default.
+ * Note: 'en' is the prefix-less defaultLocale in routing.ts, so English URLs have no /en prefix.
  */
 export function buildHreflangAlternates(pathname: string, currentLocale?: string): Metadata["alternates"] {
   const siteUrl = getSiteUrl();
@@ -155,20 +156,53 @@ export function buildHreflangAlternates(pathname: string, currentLocale?: string
   const suffix = cleanPath ? `/${cleanPath}` : "";
 
   const languages: Record<string, string> = {
-    en: `${siteUrl}/en${suffix}`,
+    en: `${siteUrl}${suffix}`,
     ar: `${siteUrl}/ar${suffix}`,
     am: `${siteUrl}/am${suffix}`,
     om: `${siteUrl}/om${suffix}`,
-    "x-default": `${siteUrl}${suffix ? `/${cleanPath}` : ""}`,
+    "x-default": `${siteUrl}${suffix}`,
   };
 
-  const canonical = currentLocale
-    ? `${siteUrl}/${currentLocale}${suffix}`
-    : `${siteUrl}${suffix ? `/${cleanPath}` : ""}`;
+  const canonical =
+    currentLocale === "en" || !currentLocale
+      ? `${siteUrl}${suffix}`
+      : `${siteUrl}/${currentLocale}${suffix}`;
 
   return {
     canonical,
     languages,
+  };
+}
+
+/**
+ * Resolves the absolute URL for any subpath in a target locale without causing 307 redirects.
+ * English is prefix-less ('/'), while other locales are prefixed ('/am', '/ar', '/om').
+ */
+export function getLocalizedUrl(pathname: string, locale: string): string {
+  const siteUrl = getSiteUrl();
+  const clean = pathname.replace(/^\/(en|ar|am|om)/, "").replace(/^\/+/, "");
+  const suffix = clean ? `/${clean}` : "";
+
+  if (locale === "en") {
+    return `${siteUrl}${suffix}`;
+  }
+  return `${siteUrl}/${locale}${suffix}`;
+}
+
+/**
+ * Returns alternate hreflang dictionary for sitemap XML generation.
+ */
+export function buildSitemapAlternates(pathname: string) {
+  const clean = pathname.replace(/^\/(en|ar|am|om)/, "").replace(/^\/+/, "");
+  const suffix = clean ? `/${clean}` : "";
+  const siteUrl = getSiteUrl();
+
+  return {
+    en: `${siteUrl}${suffix}`,
+    ar: `${siteUrl}/ar${suffix}`,
+    am: `${siteUrl}/am${suffix}`,
+    om: `${siteUrl}/om${suffix}`,
+    "x-default": `${siteUrl}${suffix}`,
   };
 }
 
@@ -209,7 +243,7 @@ export function buildFatwaKeywords(fatwa: PublicFatwa, _locale: string): string[
  */
 export function buildFatwaSchema(fatwa: PublicFatwa, locale: string) {
   const siteUrl = getSiteUrl();
-  const fatwaUrl = `${siteUrl}/${locale}/fatwas/${fatwa.slug}`;
+  const fatwaUrl = getLocalizedUrl(`/fatwas/${fatwa.slug}`, locale);
   const scholar = getScholarEntity();
 
   const stripHtml = (text: string) => text.replace(/<[^>]*>?/gm, "").trim();
@@ -277,7 +311,7 @@ export function buildBreadcrumbSchema(items: Array<{ name: string; url: string }
  */
 export function buildArticleSchema(article: PublicArticle, locale: string) {
   const siteUrl = getSiteUrl();
-  const articleUrl = `${siteUrl}/${locale}/articles/${article.slug}`;
+  const articleUrl = getLocalizedUrl(`/articles/${article.slug}`, locale);
   const scholar = getScholarEntity();
 
   const stripHtml = (text: string) => text.replace(/<[^>]*>?/gm, "").trim();
@@ -319,7 +353,7 @@ export function buildArticleSchema(article: PublicArticle, locale: string) {
  */
 export function buildCourseSchema(course: PublicCourse, locale: string) {
   const siteUrl = getSiteUrl();
-  const courseUrl = `${siteUrl}/${locale}/courses/${course.slug}`;
+  const courseUrl = getLocalizedUrl(`/courses/${course.slug}`, locale);
   const scholar = getScholarEntity();
 
   return {
@@ -356,7 +390,7 @@ export function buildCourseSchema(course: PublicCourse, locale: string) {
  */
 export function buildLectureSchema(lecture: PublicLecture, locale: string) {
   const siteUrl = getSiteUrl();
-  const lectureUrl = `${siteUrl}/${locale}/lectures/${lecture.slug}`;
+  const lectureUrl = getLocalizedUrl(`/lectures/${lecture.slug}`, locale);
   const scholar = getScholarEntity();
   const isVideo = Boolean(lecture.media?.video);
 
@@ -384,7 +418,7 @@ export function buildLectureSchema(lecture: PublicLecture, locale: string) {
  */
 export function buildLibrarySchema(item: PublicBook, locale: string) {
   const siteUrl = getSiteUrl();
-  const itemUrl = `${siteUrl}/${locale}/library/${item.slug}`;
+  const itemUrl = getLocalizedUrl(`/library/${item.slug}`, locale);
   const scholar = getScholarEntity();
 
   return {
@@ -413,7 +447,7 @@ export function buildLibrarySchema(item: PublicBook, locale: string) {
  */
 export function buildEventSchema(event: PublicEvent, locale: string) {
   const siteUrl = getSiteUrl();
-  const eventUrl = `${siteUrl}/${locale}/events/${event.slug}`;
+  const eventUrl = getLocalizedUrl(`/events/${event.slug}`, locale);
   const scholar = getScholarEntity();
 
   return {
@@ -481,7 +515,7 @@ export function buildWebsiteSchema(locale: string = "en") {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/${locale}/search?q={search_term_string}`,
+        urlTemplate: `${getLocalizedUrl("/search", locale)}?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -493,7 +527,7 @@ export function buildWebsiteSchema(locale: string = "en") {
  */
 export function buildSeriesSchema(series: PublicSeries, locale: string) {
   const siteUrl = getSiteUrl();
-  const seriesUrl = `${siteUrl}/${locale}/series/${series.slug}`;
+  const seriesUrl = getLocalizedUrl(`/series/${series.slug}`, locale);
   const scholar = getScholarEntity();
 
   return {
@@ -518,7 +552,7 @@ export function buildSeriesSchema(series: PublicSeries, locale: string) {
             position: lec.series?.position || index + 1,
             name: lec.title,
             description: lec.summary || lec.title,
-            url: `${siteUrl}/${locale}/lectures/${lec.slug}`,
+            url: getLocalizedUrl(`/lectures/${lec.slug}`, locale),
           })),
         }
       : {}),
@@ -561,7 +595,7 @@ export function buildCollectionSchema(params: {
  */
 export function buildContactSchema(locale: string = "en") {
   const siteUrl = getSiteUrl();
-  const contactUrl = `${siteUrl}/${locale}/contact`;
+  const contactUrl = getLocalizedUrl("/contact", locale);
   const scholar = getScholarEntity();
   const org = getOrganizationEntity();
 
@@ -582,7 +616,7 @@ export function buildContactSchema(locale: string = "en") {
           "@type": "ContactPoint",
           contactType: "Scholarly Inquiry & Fatwa Submissions",
           availableLanguage: ["Amharic", "Arabic", "Afaan Oromo", "English"],
-          url: `${siteUrl}/${locale}/ask`,
+          url: getLocalizedUrl("/ask", locale),
         },
       ],
     },
@@ -599,7 +633,7 @@ export function buildContactSchema(locale: string = "en") {
  */
 export function getHomepageMetadata(locale: string): Metadata {
   const siteUrl = getSiteUrl();
-  const pageUrl = `${siteUrl}/${locale}`;
+  const pageUrl = getLocalizedUrl("", locale);
   const imageUrl = `${siteUrl}/images/sheikh-portrait.jpg`;
 
   const copyByLocale: Record<string, { title: string; description: string; ogLocale: string; keywords: string[] }> = {
