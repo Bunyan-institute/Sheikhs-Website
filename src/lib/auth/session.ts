@@ -12,24 +12,25 @@ import {
 export { SESSION_COOKIE_NAME, SESSION_MAX_AGE_SECONDS };
 
 const sha256 = (v: string) => crypto.createHash("sha256").update(v).digest();
+export const DEFAULT_ADMIN_USERNAME = "admin";
+export const DEFAULT_ADMIN_PASSWORD = "sheikh_admin_2026!";
 
 /**
  * Admin credentials come from the environment:
  *   ADMIN_USERNAME, and either ADMIN_PASSWORD_HASH ("salt:hash", see scripts/hash-password.mjs) or ADMIN_PASSWORD.
- * Production refuses to authenticate without them; development falls back to admin / sheikh_admin_2026! with a warning.
+ * When credentials are not configured, the demo credentials shown on the login page are used.
  */
 function getConfiguredCredentials(): { username: string; passwordHash?: string; password?: string } | null {
   const username = process.env.ADMIN_USERNAME;
   const passwordHash = process.env.ADMIN_PASSWORD_HASH;
   const password = process.env.ADMIN_PASSWORD;
   if (username && (passwordHash || password)) return { username, passwordHash, password };
-  if (process.env.NODE_ENV === "production") return null;
   const g = globalThis as unknown as { __warnedDevCreds?: boolean };
   if (!g.__warnedDevCreds) {
     g.__warnedDevCreds = true;
-    console.warn("[auth] ADMIN_USERNAME/ADMIN_PASSWORD not set: using the development login (admin / sheikh_admin_2026!).");
+    console.warn(`[auth] Admin credentials are not configured: using the mock login (${DEFAULT_ADMIN_USERNAME} / ${DEFAULT_ADMIN_PASSWORD}).`);
   }
-  return { username: "admin", password: "sheikh_admin_2026!" };
+  return { username: DEFAULT_ADMIN_USERNAME, password: DEFAULT_ADMIN_PASSWORD };
 }
 
 export function isAdminConfigured(): boolean {
