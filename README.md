@@ -32,7 +32,8 @@ Copy `.env.example` to `.env` (Docker) or `.env.local` (local) and set:
 | `UPLOAD_STORAGE` | `database` or `filesystem`. Defaults to `database` on Vercel + Postgres (no writable disk), `filesystem` elsewhere |
 | `MAX_UPLOAD_MB` | Upload size limit (default 500; 4 when files are stored in the database) |
 
-In production the server refuses admin logins until the credentials and secrets are configured.
+If admin credentials are not configured, the login uses the mock credentials shown on the login page:
+`admin` / `sheikh_admin_2026!`. Configure `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` before a public deployment.
 
 ## What the admin manages
 
