@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const description = fatwa.summary || cleanQuestion || "Islamic jurisprudential ruling by Sheikh Muhammed Ferej Megeno.";
 
     return {
-      title: `${fatwa.title} | Sheikh Muhammed Ferej Megeno`,
+      title: fatwa.title,
       description,
       keywords: buildFatwaKeywords(fatwa, locale),
       alternates: buildHreflangAlternates(`/fatwas/${slug}`, locale),
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   } catch {
     return {
-      title: "Fatwa Not Found | Sheikh Muhammed Ferej",
+      title: "Fatwa Not Found",
     };
   }
 }

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: SeriesDetailPageProps): Promi
     const imageUrl = series.cover?.url ? `${siteUrl}${series.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
 
     return {
-      title: `${series.title} | Sheikh Muhammed Ferej Megeno`,
+      title: series.title,
       description,
       keywords: ["Islamic Series", "Sheikh Muhammed Ferej", series.title, "Tafsir", "Fiqh"],
       alternates: buildHreflangAlternates(`/series/${slug}`, locale),
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: SeriesDetailPageProps): Promi
     };
   } catch {
     return {
-      title: "Series Not Found | Sheikh Muhammed Ferej",
+      title: "Series Not Found",
     };
   }
 }

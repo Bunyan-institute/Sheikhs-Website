@@ -12,7 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "fatwas" });
   const siteUrl = getSiteUrl();
-  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const title = t("title");
+  const fullTitle = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
   const description = `${t("subtitle")} — Authoritative Islamic jurisprudence rulings, fiqh questions, and fatwas by Sheikh Muhammed Ferej Megeno.`;
 
   return {
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: buildHreflangAlternates("/fatwas", locale),
     openGraph: {
       type: "website",
-      title,
+      title: fullTitle,
       description,
       url: `${siteUrl}/${locale}/fatwas`,
       images: [
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: fullTitle,
       description,
       images: [`${siteUrl}/images/sheikh-portrait.jpg`],
     },

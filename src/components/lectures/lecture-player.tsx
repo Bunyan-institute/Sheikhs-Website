@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { AlertCircle, AudioLines, Music } from "lucide-react";
+import { AlertCircle, AudioLines, Download, Music } from "lucide-react";
 import Image from "next/image";
 import { MediaEmbed } from "@/components/media/media-embed";
 
@@ -42,6 +42,18 @@ export function LecturePlayer({ media, title, coverUrl }: LecturePlayerProps) {
             </p>
           </div>
           <MediaEmbed url={media.audio!} title={title} />
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+            <a
+              href={media.audio!}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#1B5E20] hover:bg-[#154a19] text-white text-xs font-semibold rounded-md shadow-xs transition-colors"
+            >
+              <Download className="w-3.5 h-3.5 shrink-0" />
+              <span>ድምፁን ያውርዱ (Download Audio)</span>
+            </a>
+          </div>
         </div>
       </div>
   ) : null;

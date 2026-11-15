@@ -2049,6 +2049,3634 @@
         "ikhlas",
         "addis-ababa"
       ]
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_01",
+      "title": "አርበዒን ነወውያ — ሀዲስ 01 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-01",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 01 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1019,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_01_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/1.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-01.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 01 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 1
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_02",
+      "title": "አርበዒን ነወውያ — ሀዲስ 02 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-02",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 02 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1443,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_02_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/2.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-02.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 02 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 2
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_03",
+      "title": "አርበዒን ነወውያ — ሀዲስ 03 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-03",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 03 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 902,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_03_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/3.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-03.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 03 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 3
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_04",
+      "title": "አርበዒን ነወውያ — ሀዲስ 04 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-04",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 04 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 847,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_04_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/4.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-04.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 04 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 4
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_05",
+      "title": "አርበዒን ነወውያ — ሀዲስ 05 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-05",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 05 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 605,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_05_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/5.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-05.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 05 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 5
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_06",
+      "title": "አርበዒን ነወውያ — ሀዲስ 06 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-06",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 06 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 855,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_06_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/6.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-06.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 06 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 6
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_07",
+      "title": "አርበዒን ነወውያ — ሀዲስ 07 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-07",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 07 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 739,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_07_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/7.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-07.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 07 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 7
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_08",
+      "title": "አርበዒን ነወውያ — ሀዲስ 08 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-08",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 08 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 936,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_08_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/8.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-08.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 08 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 8
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_09",
+      "title": "አርበዒን ነወውያ — ሀዲስ 09 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-09",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 09 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 672,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_09_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/9.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-09.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 09 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 9
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_10",
+      "title": "አርበዒን ነወውያ — ሀዲስ 10 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-10",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 10 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 517,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_10_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/10.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-10.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 10 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 10
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_11",
+      "title": "አርበዒን ነወውያ — ሀዲስ 11 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-11",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 11 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 581,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_11_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/11.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-11.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 11 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 11
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_12",
+      "title": "አርበዒን ነወውያ — ሀዲስ 12 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-12",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 12 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 514,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_12_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/12.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-12.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 12 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 12
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_13",
+      "title": "አርበዒን ነወውያ — ሀዲስ 13 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-13",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 13 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 561,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_13_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/13.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-13.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 13 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 13
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_14",
+      "title": "አርበዒን ነወውያ — ሀዲስ 14 እና 15 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-14",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 14 እና 15 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 897,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_14_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/14.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-14.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 14 እና 15 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 14
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_16",
+      "title": "አርበዒን ነወውያ — ሀዲስ 16 እና 17 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-16",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 16 እና 17 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 816,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_16_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/16.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-16.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 16 እና 17 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 15
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_18",
+      "title": "አርበዒን ነወውያ — ሀዲስ 18 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-18",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 18 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1281,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_18_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/18.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-18.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 18 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 16
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_19",
+      "title": "አርበዒን ነወውያ — ሀዲስ 19 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-19",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 19 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 497,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_19_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/19.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-19.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 19 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 17
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_20",
+      "title": "አርበዒን ነወውያ — ሀዲስ 20 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-20",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 20 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 601,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_20_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/20.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-20.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 20 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 18
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_21",
+      "title": "አርበዒን ነወውያ — ሀዲስ 21 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-21",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 21 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 538,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_21_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/21.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-21.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 21 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 19
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_22",
+      "title": "አርበዒን ነወውያ — ሀዲስ 22 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-22",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 22 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 853,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_22_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/22.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-22.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 22 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 20
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_23",
+      "title": "አርበዒን ነወውያ — ሀዲስ 23 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-23",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 23 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 841,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_23_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/23.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-23.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 23 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 21
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_24",
+      "title": "አርበዒን ነወውያ — ሀዲስ 24 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-24",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 24 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 981,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_24_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/24.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-24.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 24 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 22
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_25",
+      "title": "አርበዒን ነወውያ — ሀዲስ 25 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-25",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 25 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 977,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_25_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/25.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-25.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 25 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 23
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_26",
+      "title": "አርበዒን ነወውያ — ሀዲስ 26 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-26",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 26 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 948,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_26_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/26.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-26.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 26 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 24
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_27",
+      "title": "አርበዒን ነወውያ — ሀዲስ 27 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-27",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 27 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 672,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_27_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/27.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-27.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 27 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 25
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_28_1",
+      "title": "አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 1) (الأربعون النووية)",
+      "slug": "al-arbain-hadith-28-1",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 1) (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 921,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_28_1_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/28.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-28-1.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 1) (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 26
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_28_2",
+      "title": "አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 2) (الأربعون النووية)",
+      "slug": "al-arbain-hadith-28-2",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 2) (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1022,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_28_2_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/28.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-28-2.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 2) (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 27
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_29",
+      "title": "አርበዒን ነወውያ — ሀዲስ 29 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-29",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 29 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1134,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_29_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/29.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-29.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 29 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 28
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_30",
+      "title": "አርበዒን ነወውያ — ሀዲስ 30 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-30",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 30 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 430,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_30_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/30.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-30.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 30 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 29
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_31",
+      "title": "አርበዒን ነወውያ — ሀዲስ 31 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-31",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 31 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 991,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_31_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/31.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-31.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 31 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 30
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_32",
+      "title": "አርበዒን ነወውያ — ሀዲስ 32 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-32",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 32 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 661,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_32_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/32.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-32.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 32 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 31
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_33",
+      "title": "አርበዒን ነወውያ — ሀዲስ 33 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-33",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 33 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 714,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_33_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/33.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-33.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 33 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 32
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_34",
+      "title": "አርበዒን ነወውያ — ሀዲስ 34 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-34",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 34 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 802,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_34_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/34.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-34.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 34 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 33
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_35",
+      "title": "አርበዒን ነወውያ — ሀዲስ 35 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-35",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 35 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 974,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_35_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/35.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-35.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 35 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 34
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_36",
+      "title": "አርበዒን ነወውያ — ሀዲስ 36 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-36",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 36 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 855,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_36_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/36.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-36.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 36 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 35
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_37",
+      "title": "አርበዒን ነወውያ — ሀዲስ 37 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-37",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 37 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 587,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_37_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/37.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-37.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 37 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 36
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_38",
+      "title": "አርበዒን ነወውያ — ሀዲስ 38 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-38",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 38 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1343,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_38_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/38.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-38.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 38 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 37
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_39",
+      "title": "አርበዒን ነወውያ — ሀዲስ 39 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-39",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 39 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1164,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_39_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/39.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-39.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 39 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 38
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_40",
+      "title": "አርበዒን ነወውያ — ሀዲስ 40 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-40",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 40 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 536,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_40_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/40.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-40.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 40 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 39
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_41",
+      "title": "አርበዒን ነወውያ — ሀዲስ 41 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-41",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 41 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 661,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_41_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/41.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-41.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 41 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 40
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_al_arbain_hadith_42",
+      "title": "አርበዒን ነወውያ — ሀዲስ 42 (الأربعون النووية)",
+      "slug": "al-arbain-hadith-42",
+      "summary": "አርበዒን ነወውያ — ሀዲስ 42 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 558,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_al_arbain_hadith_42_cov",
+        "kind": "image",
+        "url": "/images/hadith-slides/42.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-42.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አርበዒን ነወውያ — ሀዲስ 42 (الأربعون النووية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_arbain_nawawi",
+        "position": 41
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_02",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 02 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-02",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 02 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3602,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_02_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-02.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 02 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 1
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_03",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 03 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-03",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 03 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3147,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_03_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-03.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 03 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 2
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_04",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 04 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-04",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 04 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3276,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_04_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-04.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 04 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 3
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_05",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 05 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-05",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 05 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3409,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_05_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-05.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 05 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 4
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_06",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 06 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-06",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 06 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3631,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_06_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-06.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 06 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 5
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_07",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 07 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-07",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 07 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3330,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_07_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-07.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 07 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 6
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_8_1",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 08 (ክፍል 1) (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-8-1",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 08 (ክፍል 1) (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2196,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_8_1_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-8-1.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 08 (ክፍል 1) (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 7
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_09",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 09 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-09",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 09 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3414,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_09_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-09.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 09 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 8
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_10",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 10 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-10",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 10 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2819,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_10_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-10.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 10 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 9
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_11",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 11 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-11",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 11 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2440,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_11_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-11.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 11 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 10
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_12",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 12 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-12",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 12 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2753,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_12_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-12.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 12 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 11
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_13",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 13 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-13",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 13 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2707,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_13_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-13.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 13 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 12
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_14",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 14 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-14",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 14 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2586,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_14_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-14.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 14 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 13
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_15",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 15 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-15",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 15 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2274,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_15_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-15.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 15 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 14
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_16",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 16 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-16",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 16 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2614,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_16_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-16.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 16 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 15
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_17",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 17 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-17",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 17 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2767,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_17_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-17.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 17 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 16
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_18",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 18 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-18",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 18 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2593,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_18_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-18.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 18 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 17
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_19",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 19 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-19",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 19 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3061,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_19_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-19.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 19 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 18
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_20",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 20 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-20",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 20 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2724,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_20_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-20.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 20 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 19
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_21",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 21 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-21",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 21 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2945,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_21_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-21.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 21 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 20
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_22",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 22 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-22",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 22 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3202,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_22_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-22.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 22 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 21
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_23",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 23 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-23",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 23 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2577,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_23_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-23.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 23 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 22
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_24",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 24 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-24",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 24 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2415,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_24_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-24.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 24 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 23
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_25",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 25 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-25",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 25 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2169,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_25_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-25.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 25 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 24
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_26",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 26 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-26",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 26 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2982,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_26_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-26.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 26 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 25
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_27",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 27 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-27",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 27 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2695,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_27_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-27.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 27 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 26
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_aqeedah_al_wasitiyyah_lesson_28",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 28 (شرح العقيدة الواسطية)",
+      "slug": "aqeedah-al-wasitiyyah-lesson-28",
+      "summary": "አቂደቱል ዋሲጢያ ደርስ 28 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2990,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_aqeedah_al_wasitiyyah_lesson_28_cov",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-28.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. አቂደቱል ዋሲጢያ ደርስ 28 (شرح العقيدة الواسطية) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_aqeedah_wasitiyyah",
+        "position": 27
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_01",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 01: መግቢያ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-01",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 01: መግቢያ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 611,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_01_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-01.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 01: መግቢያ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 1
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_02",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 02: ኢባዳ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-02",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 02: ኢባዳ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1982,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_02_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-02.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 02: ኢባዳ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 2
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_03",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 03: በፍርሃትና በመከጀል ማምለክ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-03",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 03: በፍርሃትና በመከጀል ማምለክ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2503,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_03_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-03.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 03: በፍርሃትና በመከጀል ማምለክ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 3
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_04",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 04: የተውሂድ ክፍሊች (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-04",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 04: የተውሂድ ክፍሊች (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1204,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_04_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-04.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 04: የተውሂድ ክፍሊች (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 4
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_05",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 05: አስማእ ወሲፋት (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-05",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 05: አስማእ ወሲፋት (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3103,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_05_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-05.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 05: አስማእ ወሲፋት (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 5
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_06",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 06: የኢባዳ መስፈርቶች (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-06",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 06: የኢባዳ መስፈርቶች (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3512,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_06_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-06.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 06: የኢባዳ መስፈርቶች (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 6
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_07",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 07: ትልቁ ሽርክ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-07",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 07: ትልቁ ሽርክ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3224,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_07_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-07.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 07: ትልቁ ሽርክ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 7
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_08",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 08: የተውሂድ ማስረጃዎች (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-08",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 08: የተውሂድ ማስረጃዎች (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3313,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_08_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-08.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 08: የተውሂድ ማስረጃዎች (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 8
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_09",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 09: እርድን ለአላህ ብቻ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-09",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 09: እርድን ለአላህ ብቻ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2279,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_09_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-09.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 09: እርድን ለአላህ ብቻ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 9
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_10",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 10 (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-10",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 10 (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2755,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_10_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-10.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 10 (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 10
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_11",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 11: ተወሱል (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-11",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 11: ተወሱል (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 1720,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_11_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-11.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 11: ተወሱል (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 11
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_12",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 12: ተወሱል (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-12",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 12: ተወሱል (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 3177,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_12_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-12.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 12: ተወሱል (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 12
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_13",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 13: ሸፋኣ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-13",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 13: ሸፋኣ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2602,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_13_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-13.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 13: ሸፋኣ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 13
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_14",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 14: በቁርዓና ሀዲስ መስራት (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-14",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 14: በቁርዓና ሀዲስ መስራት (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2654,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_14_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-14.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 14: በቁርዓና ሀዲስ መስራት (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 14
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_15",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 15: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-15",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 15: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2900,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_15_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-15.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 15: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 15
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_16",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 16: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-16",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 16: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2451,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_16_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-16.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 16: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 16
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_khudh_aqeedatak_lesson_17",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 17: የመጨረሻ ክፍል (خذ عقيدتك)",
+      "slug": "khudh-aqeedatak-lesson-17",
+      "summary": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 17: የመጨረሻ ክፍል (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ የተሟላ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "duration_seconds": 2480,
+      "published_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "cover": {
+        "object": "media",
+        "id": "med_lec_khudh_aqeedatak_lesson_17_cov",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "media": {
+        "audio": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-17.mp3",
+        "video": null,
+        "transcript": "ቢስሚላሂር ራሕማኒር ራሒም. አልሐምዱ ሊላሂ ረቢል ዓለሚን. ወሶላቱ ወሰላሙ ዓላ ረሱሊላህ. ኪታቡ ኹዝ ዓቂደተክ — ክፍል 17: የመጨረሻ ክፍል (خذ عقيدتك) — በኡስታዝ ሙሐመድ ፈረጅ የተሰጠ ትምህርት።"
+      },
+      "series": {
+        "id": "ser_khudh_aqeedatak",
+        "position": 17
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "status": "published"
     }
   ],
   "series": [
@@ -3419,6 +7047,107 @@
           ]
         }
       ]
+    },
+    {
+      "object": "series",
+      "id": "ser_arbain_nawawi",
+      "title": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ)",
+      "slug": "al-arbain-an-nawawiyyah",
+      "description": "Comprehensive exposition of the forty foundational hadiths of Islam compiled by Imam An-Nawawi, taught with practical and theological applications by Sheikh Muhammed Ferej Megeno.",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_ser_arbain_nawawi_cover",
+        "kind": "image",
+        "url": "/images/hadith-slides/0.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "categories": [
+        "hadith",
+        "sunnah",
+        "tarbiyah"
+      ],
+      "tags": [
+        "arbaeen",
+        "nawawi",
+        "hadith",
+        "sunnah"
+      ],
+      "lecture_count": 0,
+      "status": "published",
+      "published_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    },
+    {
+      "object": "series",
+      "id": "ser_aqeedah_wasitiyyah",
+      "title": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ)",
+      "slug": "aqeedah-al-wasitiyyah",
+      "description": "A thorough explanation of the classical Islamic creed by Shaykh al-Islam Ibn Taymiyyah, delivered with authentic proofs by Sheikh Muhammed Ferej Megeno.",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_ser_aqeedah_wasitiyyah_cover",
+        "kind": "image",
+        "url": "/images/sheikh-portrait.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "categories": [
+        "aqeedah",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "wasitiyyah",
+        "ibn-taymiyyah",
+        "tawheed"
+      ],
+      "lecture_count": 0,
+      "status": "published",
+      "published_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    },
+    {
+      "object": "series",
+      "id": "ser_khudh_aqeedatak",
+      "title": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ)",
+      "slug": "khudh-aqeedatak",
+      "description": "Foundational Islamic creed taken directly from the Holy Quran and authentic Prophetic Sunnah, taught by Sheikh Muhammed Ferej Megeno.",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "object": "media",
+        "id": "med_ser_khudh_aqeedatak_cover",
+        "kind": "image",
+        "url": "/images/sheikh-hero.jpg",
+        "mime_type": "image/jpeg",
+        "width": 1280,
+        "height": 720,
+        "duration_seconds": null
+      },
+      "categories": [
+        "aqeedah",
+        "manhaj",
+        "tawheed"
+      ],
+      "tags": [
+        "aqeedah",
+        "tawheed",
+        "sunnah",
+        "manhaj"
+      ],
+      "lecture_count": 0,
+      "status": "published",
+      "published_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
     }
   ],
   "articles": [
@@ -4635,6 +8364,1111 @@
       "title": "የረመዳን ዝግጅትና የዒባዳ ማነቃቂያ ፕሮግራም (Facebook Live)",
       "description": "የቀጥታ ስርጭት ውይይት እና ለተመልካቾች የቀረበ ጥያቄና መልስ በፌስቡክ።",
       "thumbnail_url": "/images/photo_12_2026-09-30_23-42-17.jpg"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_01",
+      "title": "አርበዒን ነወውያ — ሀዲስ 01 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 1",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-01.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/1.jpg",
+      "duration_seconds": 1019,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_02",
+      "title": "አርበዒን ነወውያ — ሀዲስ 02 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 2",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-02.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/2.jpg",
+      "duration_seconds": 1443,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_03",
+      "title": "አርበዒን ነወውያ — ሀዲስ 03 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 3",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-03.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/3.jpg",
+      "duration_seconds": 902,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_04",
+      "title": "አርበዒን ነወውያ — ሀዲስ 04 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 4",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-04.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/4.jpg",
+      "duration_seconds": 847,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_05",
+      "title": "አርበዒን ነወውያ — ሀዲስ 05 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 5",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-05.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/5.jpg",
+      "duration_seconds": 605,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_06",
+      "title": "አርበዒን ነወውያ — ሀዲስ 06 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 6",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-06.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/6.jpg",
+      "duration_seconds": 855,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_07",
+      "title": "አርበዒን ነወውያ — ሀዲስ 07 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 7",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-07.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/7.jpg",
+      "duration_seconds": 739,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_08",
+      "title": "አርበዒን ነወውያ — ሀዲስ 08 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 8",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-08.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/8.jpg",
+      "duration_seconds": 936,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_09",
+      "title": "አርበዒን ነወውያ — ሀዲስ 09 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 9",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-09.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/9.jpg",
+      "duration_seconds": 672,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_10",
+      "title": "አርበዒን ነወውያ — ሀዲስ 10 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 10",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-10.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/10.jpg",
+      "duration_seconds": 517,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_11",
+      "title": "አርበዒን ነወውያ — ሀዲስ 11 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 11",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-11.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/11.jpg",
+      "duration_seconds": 581,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_12",
+      "title": "አርበዒን ነወውያ — ሀዲስ 12 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 12",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-12.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/12.jpg",
+      "duration_seconds": 514,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_13",
+      "title": "አርበዒን ነወውያ — ሀዲስ 13 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 13",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-13.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/13.jpg",
+      "duration_seconds": 561,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_14",
+      "title": "አርበዒን ነወውያ — ሀዲስ 14 እና 15 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 14",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-14.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/14.jpg",
+      "duration_seconds": 897,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_16",
+      "title": "አርበዒን ነወውያ — ሀዲስ 16 እና 17 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 15",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-16.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/16.jpg",
+      "duration_seconds": 816,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_18",
+      "title": "አርበዒን ነወውያ — ሀዲስ 18 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 16",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-18.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/18.jpg",
+      "duration_seconds": 1281,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_19",
+      "title": "አርበዒን ነወውያ — ሀዲስ 19 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 17",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-19.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/19.jpg",
+      "duration_seconds": 497,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_20",
+      "title": "አርበዒን ነወውያ — ሀዲስ 20 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 18",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-20.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/20.jpg",
+      "duration_seconds": 601,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_21",
+      "title": "አርበዒን ነወውያ — ሀዲስ 21 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 19",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-21.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/21.jpg",
+      "duration_seconds": 538,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_22",
+      "title": "አርበዒን ነወውያ — ሀዲስ 22 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 20",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-22.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/22.jpg",
+      "duration_seconds": 853,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_23",
+      "title": "አርበዒን ነወውያ — ሀዲስ 23 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 21",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-23.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/23.jpg",
+      "duration_seconds": 841,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_24",
+      "title": "አርበዒን ነወውያ — ሀዲስ 24 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 22",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-24.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/24.jpg",
+      "duration_seconds": 981,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_25",
+      "title": "አርበዒን ነወውያ — ሀዲስ 25 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 23",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-25.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/25.jpg",
+      "duration_seconds": 977,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_26",
+      "title": "አርበዒን ነወውያ — ሀዲስ 26 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 24",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-26.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/26.jpg",
+      "duration_seconds": 948,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_27",
+      "title": "አርበዒን ነወውያ — ሀዲስ 27 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 25",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-27.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/27.jpg",
+      "duration_seconds": 672,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_28_1",
+      "title": "አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 1) (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 26",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-28-1.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/28.jpg",
+      "duration_seconds": 921,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_28_2",
+      "title": "አርበዒን ነወውያ — ሀዲስ 28 (ክፍል 2) (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 27",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-28-2.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/28.jpg",
+      "duration_seconds": 1022,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_29",
+      "title": "አርበዒን ነወውያ — ሀዲስ 29 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 28",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-29.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/29.jpg",
+      "duration_seconds": 1134,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_30",
+      "title": "አርበዒን ነወውያ — ሀዲስ 30 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 29",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-30.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/30.jpg",
+      "duration_seconds": 430,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_31",
+      "title": "አርበዒን ነወውያ — ሀዲስ 31 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 30",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-31.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/31.jpg",
+      "duration_seconds": 991,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_32",
+      "title": "አርበዒን ነወውያ — ሀዲስ 32 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 31",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-32.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/32.jpg",
+      "duration_seconds": 661,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_33",
+      "title": "አርበዒን ነወውያ — ሀዲስ 33 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 32",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-33.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/33.jpg",
+      "duration_seconds": 714,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_34",
+      "title": "አርበዒን ነወውያ — ሀዲስ 34 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 33",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-34.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/34.jpg",
+      "duration_seconds": 802,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_35",
+      "title": "አርበዒን ነወውያ — ሀዲስ 35 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 34",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-35.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/35.jpg",
+      "duration_seconds": 974,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_36",
+      "title": "አርበዒን ነወውያ — ሀዲስ 36 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 35",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-36.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/36.jpg",
+      "duration_seconds": 855,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_37",
+      "title": "አርበዒን ነወውያ — ሀዲስ 37 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 36",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-37.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/37.jpg",
+      "duration_seconds": 587,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_38",
+      "title": "አርበዒን ነወውያ — ሀዲስ 38 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 37",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-38.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/38.jpg",
+      "duration_seconds": 1343,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_39",
+      "title": "አርበዒን ነወውያ — ሀዲስ 39 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 38",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-39.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/39.jpg",
+      "duration_seconds": 1164,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_40",
+      "title": "አርበዒን ነወውያ — ሀዲስ 40 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 39",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-40.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/40.jpg",
+      "duration_seconds": 536,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_41",
+      "title": "አርበዒን ነወውያ — ሀዲስ 41 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 40",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-41.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/41.jpg",
+      "duration_seconds": 661,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_al_arbain_hadith_42",
+      "title": "አርበዒን ነወውያ — ሀዲስ 42 (الأربعون النووية)",
+      "description": "الأربعون النووية (Al-Arba'in An-Nawawiyyah / አርበዒን ነወውያ) — ቁጥር 41",
+      "kind": "audio",
+      "url": "/audio/al-arbain-an-nawawiyyah/al-arbain-hadith-42.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/hadith-slides/42.jpg",
+      "duration_seconds": 558,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_02",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 02 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 1",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-02.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3602,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_03",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 03 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 2",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-03.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3147,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_04",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 04 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 3",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-04.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3276,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_05",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 05 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 4",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-05.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3409,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_06",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 06 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 5",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-06.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3631,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_07",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 07 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 6",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-07.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3330,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_8_1",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 08 (ክፍል 1) (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 7",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-8-1.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2196,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_09",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 09 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 8",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-09.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3414,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_10",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 10 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 9",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-10.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2819,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_11",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 11 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 10",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-11.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2440,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_12",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 12 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 11",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-12.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2753,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_13",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 13 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 12",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-13.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2707,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_14",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 14 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 13",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-14.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2586,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_15",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 15 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 14",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-15.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2274,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_16",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 16 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 15",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-16.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2614,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_17",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 17 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 16",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-17.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2767,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_18",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 18 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 17",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-18.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2593,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_19",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 19 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 18",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-19.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3061,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_20",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 20 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 19",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-20.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2724,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_21",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 21 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 20",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-21.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2945,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_22",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 22 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 21",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-22.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 3202,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_23",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 23 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 22",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-23.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2577,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_24",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 24 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 23",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-24.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2415,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_25",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 25 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 24",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-25.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2169,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_26",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 26 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 25",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-26.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2982,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_27",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 27 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 26",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-27.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2695,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_aqeedah_al_wasitiyyah_lesson_28",
+      "title": "አቂደቱል ዋሲጢያ ደርስ 28 (شرح العقيدة الواسطية)",
+      "description": "العقيدة الواسطية (Al-Aqeedah Al-Wasitiyyah / አቂደቱል ዋሲጢያ) — ቁጥር 27",
+      "kind": "audio",
+      "url": "/audio/aqeedah-al-wasitiyyah/aqeedah-al-wasitiyyah-lesson-28.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-portrait.jpg",
+      "duration_seconds": 2990,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_01",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 01: መግቢያ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 1",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-01.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 611,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_02",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 02: ኢባዳ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 2",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-02.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 1982,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_03",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 03: በፍርሃትና በመከጀል ማምለክ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 3",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-03.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2503,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_04",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 04: የተውሂድ ክፍሊች (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 4",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-04.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 1204,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_05",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 05: አስማእ ወሲፋት (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 5",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-05.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 3103,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_06",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 06: የኢባዳ መስፈርቶች (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 6",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-06.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 3512,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_07",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 07: ትልቁ ሽርክ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 7",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-07.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 3224,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_08",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 08: የተውሂድ ማስረጃዎች (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 8",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-08.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 3313,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_09",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 09: እርድን ለአላህ ብቻ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 9",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-09.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2279,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_10",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 10 (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 10",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-10.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2755,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_11",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 11: ተወሱል (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 11",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-11.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 1720,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_12",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 12: ተወሱል (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 12",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-12.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 3177,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_13",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 13: ሸፋኣ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 13",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-13.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2602,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_14",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 14: በቁርዓና ሀዲስ መስራት (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 14",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-14.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2654,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_15",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 15: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 15",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-15.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2900,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_16",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 16: በኺላፍ ጊዜ ወደ መፍትሄ የት እንሂድ (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 16",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-16.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2451,
+      "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_lec_khudh_aqeedatak_lesson_17",
+      "title": "ኪታቡ ኹዝ ዓቂደተክ — ክፍል 17: የመጨረሻ ክፍል (خذ عقيدتك)",
+      "description": "خذ عقيدتك من الكتاب والسنة (Khudh Aqeedatak / ኪታቡ ኹዝ ዓቂደተክ) — ቁጥር 17",
+      "kind": "audio",
+      "url": "/audio/khudh-aqeedatak/khudh-aqeedatak-lesson-17.mp3",
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "thumbnail_url": "/images/sheikh-hero.jpg",
+      "duration_seconds": 2480,
+      "published_at": "2024-01-10T12:00:00Z"
     }
   ],
   "inquiries": [

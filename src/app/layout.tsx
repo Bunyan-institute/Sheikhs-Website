@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   alternates: buildHreflangAlternates("/"),
   openGraph: {
     type: "website",
-    siteName: "Sheikh Muhammed Ferej Megeno | Official Archive",
+    siteName: "Sheikh Muhammed Ferej Megeno",
     title: "Sheikh Muhammed Ferej Megeno",
     description: "Official scholar archive of Sheikh Muhammed Ferej Megeno — Islamic scholar, educator and AAOIFI-certified Sharia consultant.",
     url: siteUrl,
@@ -75,13 +75,19 @@ export const metadata: Metadata = {
       ? { "msvalidate.01": [process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION] }
       : undefined,
   },
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
+    shortcut: ["/favicon.ico"],
     apple: [
-      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };

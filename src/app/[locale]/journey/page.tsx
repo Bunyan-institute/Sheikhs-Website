@@ -8,7 +8,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "journey" });
   const siteUrl = getSiteUrl();
-  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const title = t("title");
+  const fullTitle = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
   const description = `${t("subtitle")} — Over 35 years of Islamic scholarship, teaching Halaqat, and dawah across Ethiopia.`;
 
   return {
@@ -18,14 +19,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: buildHreflangAlternates("/journey", locale),
     openGraph: {
       type: "profile",
-      title,
+      title: fullTitle,
       description,
       url: `${siteUrl}/${locale}/journey`,
-      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: title }],
+      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: fullTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: fullTitle,
       description,
       images: [`${siteUrl}/images/sheikh-portrait.jpg`],
     },

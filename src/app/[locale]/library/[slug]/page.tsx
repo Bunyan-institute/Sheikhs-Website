@@ -18,7 +18,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     const imageUrl = item.cover?.url ? `${siteUrl}${item.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
 
     return {
-      title: `${item.title} | Sheikh Muhammed Ferej Megeno Library`,
+      title: item.title,
       description,
       keywords: ["Islamic Library", "መጽሐፍት", "كتب إسلامية", item.title, "Sheikh Muhammed Ferej"],
       alternates: buildHreflangAlternates(`/library/${slug}`, locale),
@@ -37,7 +37,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
       },
     };
   } catch {
-    return { title: "Book Not Found | Sheikh Muhammed Ferej" };
+    return { title: "Book Not Found" };
   }
 }
 

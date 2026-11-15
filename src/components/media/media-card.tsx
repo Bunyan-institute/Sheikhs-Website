@@ -63,9 +63,23 @@ export function MediaCard({ item }: { item: MediaItem }) {
 
         <div className="mt-auto pt-3 border-t border-[#0F241C]/10 flex items-center justify-between text-xs font-semibold text-[#BF9A45]">
           {inlineAudio && item.url ? (
-            <audio controls preload="metadata" className="h-9 w-full">
-              <source src={parsed.url} type={parsed.mime} />
-            </audio>
+            <div className="flex flex-col w-full gap-2">
+              <audio controls preload="metadata" className="h-9 w-full">
+                <source src={parsed.url} type={parsed.mime} />
+              </audio>
+              <div className="flex items-center justify-between text-[11px] text-[#1B6A50]">
+                <a
+                  href={item.url}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-semibold hover:underline"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download Audio (ድምፁን ያውርዱ)</span>
+                </a>
+              </div>
+            </div>
           ) : item.url ? (
             <a
               href={item.url}

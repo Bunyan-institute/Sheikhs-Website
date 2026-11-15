@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const description = course.summary || "Islamic educational course with curriculum by Sheikh Muhammed Ferej Megeno.";
 
     return {
-      title: `${course.title} | Sheikh Muhammed Ferej Megeno`,
+      title: course.title,
       description,
       keywords: [...(course.categories || []), "Islamic Course", "Sheikh Muhammed Ferej", "Bunyan Institute"],
       alternates: buildHreflangAlternates(`/courses/${slug}`, locale),
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   } catch {
     return {
-      title: "Course Not Found | Sheikh Muhammed Ferej",
+      title: "Course Not Found",
     };
   }
 }

@@ -246,12 +246,14 @@ test("SEO: Series, Collection, Contact and Homepage schemas produce valid struct
   assert.equal(contactSchema.about.name, "Sheikh Muhammed Ferej Megeno");
 
   const amMetadata = getHomepageMetadata("am");
-  assert.ok(amMetadata.title?.toString().includes("ሸይኽ ሙሐመድ ፈረጅ"));
+  const amTitle = typeof amMetadata.title === "object" ? amMetadata.title.absolute : amMetadata.title;
+  assert.ok(amTitle?.includes("ሸይኽ ሙሐመድ ፈረጅ"));
   assert.ok(amMetadata.description?.includes("የሸሪዓ ብይኖች"));
   assert.equal(amMetadata.openGraph?.locale, "am_ET");
 
   const arMetadata = getHomepageMetadata("ar");
-  assert.ok(arMetadata.title?.toString().includes("الشيخ محمد فرج"));
+  const arTitle = typeof arMetadata.title === "object" ? arMetadata.title.absolute : arMetadata.title;
+  assert.ok(arTitle?.includes("الشيخ محمد فرج"));
   assert.equal(arMetadata.openGraph?.locale, "ar_SA");
 });
 

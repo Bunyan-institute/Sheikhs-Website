@@ -610,11 +610,15 @@ export function buildWebsiteSchema(locale: string = "en") {
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     url: siteUrl,
-    name: "Sheikh Muhammed Ferej Megeno | Official Platform",
+    name: "Sheikh Muhammed Ferej Megeno",
     alternateName: [
       "ሸይኽ ሙሐመድ ፈረጅ መገኖ",
+      "ሸይኽ ሙሐመድ ፈረጅ",
       "الشيخ محمد فرج مجنو",
-      "Sheikh Muhammed Ferej Official Archive",
+      "الشيخ محمد فرج",
+      "Sheikh Muhammed Ferej",
+      "Sheekh Muhammad Faraj",
+      "Sheikh Muhammed Ferej Official Platform",
     ],
     description:
       "Official Islamic knowledge platform, fatwa archive, courses, and educational lectures of Sheikh Muhammed Ferej Megeno.",
@@ -829,7 +833,9 @@ export function getHomepageMetadata(locale: string): Metadata {
   const copy = copyByLocale[locale] || copyByLocale.en;
 
   return {
-    title: copy.title,
+    title: {
+      absolute: copy.title,
+    },
     description: copy.description,
     keywords: copy.keywords,
     alternates: buildHreflangAlternates("", locale),
@@ -839,7 +845,7 @@ export function getHomepageMetadata(locale: string): Metadata {
       url: pageUrl,
       title: copy.title,
       description: copy.description,
-      siteName: "Sheikh Muhammed Ferej Megeno Official",
+      siteName: "Sheikh Muhammed Ferej Megeno",
       images: [
         {
           url: imageUrl,

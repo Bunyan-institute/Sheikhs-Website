@@ -12,7 +12,8 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const t = await getTranslations({ locale, namespace: "contact" });
   const siteUrl = getSiteUrl();
   const pageUrl = `${siteUrl}/${locale}/contact`;
-  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const title = t("title");
+  const fullTitle = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
   const description = t("description");
   const imageUrl = `${siteUrl}/images/sheikh-portrait.jpg`;
 
@@ -30,13 +31,13 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     openGraph: {
       type: "website",
       url: pageUrl,
-      title,
+      title: fullTitle,
       description,
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: fullTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: fullTitle,
       description,
       images: [imageUrl],
     },

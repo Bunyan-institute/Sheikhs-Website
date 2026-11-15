@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: LectureDetailPageProps): Prom
     const imageUrl = lecture.cover?.url ? `${siteUrl}${lecture.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
 
     return {
-      title: `${lecture.title} | Sheikh Muhammed Ferej Megeno`,
+      title: lecture.title,
       description,
       keywords: [...(lecture.categories || []), "Islamic Lecture", "ዳዕዋ", "محاضرة إسلامية", "Sheikh Muhammed Ferej"],
       alternates: buildHreflangAlternates(`/lectures/${slug}`, locale),
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: LectureDetailPageProps): Prom
       },
     };
   } catch {
-    return { title: "Lecture Not Found | Sheikh Muhammed Ferej" };
+    return { title: "Lecture Not Found" };
   }
 }
 

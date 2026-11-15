@@ -10,7 +10,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const t = await getTranslations({ locale, namespace: "verify" });
   const siteUrl = getSiteUrl();
   const pageUrl = `${siteUrl}/${locale}/verify`;
-  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const title = t("title");
   const description = t("description");
 
   return {

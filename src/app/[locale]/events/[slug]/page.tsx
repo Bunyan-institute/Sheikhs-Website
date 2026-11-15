@@ -18,14 +18,14 @@ export async function generateMetadata({ params }: EventDetailPageProps): Promis
   const siteUrl = getSiteUrl();
 
   if (!event) {
-    return { title: 'Event Details | Sheikh Muhammed Ferej' };
+    return { title: 'Event Details' };
   }
 
   const pageUrl = `${siteUrl}/${locale}/events/${slug}`;
   const description = event.summary || `Join Islamic gathering: ${event.title} with Sheikh Muhammed Ferej Megeno.`;
 
   return {
-    title: `${event.title} | Sheikh Muhammed Ferej Megeno`,
+    title: event.title,
     description,
     alternates: buildHreflangAlternates(`/events/${slug}`, locale),
     openGraph: {

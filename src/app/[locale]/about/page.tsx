@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "about" });
   const siteUrl = getSiteUrl();
-  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const title = t("title");
+  const fullTitle = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
   const description = `${t("subtitle")} — Comprehensive biography, academic credentials, traditional sanad, and institutional roles of Sheikh Muhammed Ferej Megeno.`;
 
   return {
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: buildHreflangAlternates("/about", locale),
     openGraph: {
       type: "profile",
-      title,
+      title: fullTitle,
       description,
       url: `${siteUrl}/${locale}/about`,
       images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: "Sheikh Muhammed Ferej Megeno" }],

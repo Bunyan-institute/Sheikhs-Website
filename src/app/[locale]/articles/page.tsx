@@ -13,7 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "articles" });
   const siteUrl = getSiteUrl();
-  const title = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
+  const title = t("title");
+  const fullTitle = `${t("title")} | Sheikh Muhammed Ferej Megeno`;
   const description = `${t("subtitle")} — Scholarly writings, treatises, and academic reflections by Sheikh Muhammed Ferej Megeno.`;
 
   return {
@@ -23,14 +24,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: buildHreflangAlternates("/articles", locale),
     openGraph: {
       type: "website",
-      title,
+      title: fullTitle,
       description,
       url: `${siteUrl}/${locale}/articles`,
-      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: title }],
+      images: [{ url: `${siteUrl}/images/sheikh-portrait.jpg`, width: 1200, height: 1200, alt: fullTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: fullTitle,
       description,
       images: [`${siteUrl}/images/sheikh-portrait.jpg`],
     },

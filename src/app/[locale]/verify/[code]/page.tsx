@@ -22,7 +22,7 @@ export async function generateMetadata(props: CertificateVerifyPageProps): Promi
   const { locale, code } = await props.params;
   const cleanCode = decodeURIComponent(code).trim().toUpperCase();
   return {
-    title: `Certificate Verification: ${cleanCode} | Sheikh Muhammed Ferej Megeno`,
+    title: `Certificate Verification: ${cleanCode}`,
     description: `Official authentic certificate verification for student accreditation #${cleanCode}.`,
     robots: {
       index: false,

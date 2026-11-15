@@ -11,7 +11,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "search" });
   return {
-    title: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
+    title: t("title"),
     description: t("placeholder"),
     alternates: buildHreflangAlternates("/search", locale),
     robots: {

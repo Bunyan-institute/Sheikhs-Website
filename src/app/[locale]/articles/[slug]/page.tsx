@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const imageUrl = article.cover?.url ? `${siteUrl}${article.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
 
     return {
-      title: `${article.title} | Sheikh Muhammed Ferej Megeno`,
+      title: article.title,
       description,
       keywords: [...(article.categories || []), ...(article.tags || []), "Sheikh Muhammed Ferej", "Islamic Article"],
       alternates: buildHreflangAlternates(`/articles/${slug}`, locale),
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   } catch {
     return {
-      title: "Article Not Found | Sheikh Muhammed Ferej",
+      title: "Article Not Found",
     };
   }
 }
