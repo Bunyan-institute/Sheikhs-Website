@@ -64,9 +64,13 @@ let sqliteInstance: Client | null = null;
 let pragmaDone = false;
 
 export function getDatabasePath(): string {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return path.join("/tmp", "sheikh_ferej.db");
+  }
   const dataDir = path.join(process.cwd(), "data");
   try {
     fs.mkdirSync(dataDir, { recursive: true });
+    fs.accessSync(dataDir, fs.constants.W_OK);
   } catch {
     return path.join("/tmp", "sheikh_ferej.db");
   }
@@ -75,9 +79,11 @@ export function getDatabasePath(): string {
 
 function sqlite(): Client {
   if (!sqliteInstance) {
+    const url = process.env.DATABASE_URL || process.env.TURSO_DATABASE_URL || `file:${getDatabasePath()}`;
+    const authToken = process.env.DATABASE_AUTH_TOKEN || process.env.TURSO_AUTH_TOKEN;
     sqliteInstance = createClient({
-      url: process.env.DATABASE_URL || `file:${getDatabasePath()}`,
-      authToken: process.env.DATABASE_AUTH_TOKEN,
+      url,
+      authToken,
     });
   }
   return sqliteInstance;
@@ -87,7 +93,7 @@ async function sqliteReady(): Promise<Client> {
   const client = sqlite();
   if (!pragmaDone) {
     pragmaDone = true;
-    const url = process.env.DATABASE_URL;
+    const url = process.env.DATABASE_URL || process.env.TURSO_DATABASE_URL;
     if (!url || url.startsWith("file:")) {
       try {
         await client.execute("PRAGMA journal_mode = WAL;");

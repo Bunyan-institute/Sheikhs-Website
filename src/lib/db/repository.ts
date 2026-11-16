@@ -57,6 +57,7 @@ function revalidate() {
 
 const SEEDED_KEY = "_seeded";
 const SEEDING_KEY = "_seeding";
+const SEED_VERSION_KEY = "_seed_version_20261116_batch1";
 let readyPromise: Promise<void> | null = null;
 
 /**
@@ -76,35 +77,25 @@ export function ready(): Promise<void> {
 async function initialize() {
   await ensureTablesExist();
   await repairLegacyTables();
-  const marker = await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEEDED_KEY]);
-  if (marker) return;
 
-  // Several serverless instances can cold-start together: one claims the seeding, the others wait for it.
-  const claimed =
-    (await execute(
-      "INSERT INTO site_settings (key, value_json, updated_at) VALUES (?, ?, ?) ON CONFLICT (key) DO NOTHING;",
-      [SEEDING_KEY, "true", nowIso()]
-    )).rowsAffected > 0;
-  if (!claimed) {
-    for (let i = 0; i < 80; i++) {
-      if (await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEEDED_KEY])) return;
-      await new Promise((r) => setTimeout(r, 500));
-    }
-    // The claiming instance never finished; seeding is idempotent, so carry on.
-  }
+  const versionMarker = await queryOne("SELECT key FROM site_settings WHERE key = ?;", [SEED_VERSION_KEY]);
+  const seriesCount = await queryOne<{ n: number }>("SELECT count(*) AS n FROM series;");
+  const lectureCount = await queryOne<{ n: number }>("SELECT count(*) AS n FROM lectures;");
 
-  const counts = await queryOne<{ n: number }>(
-    "SELECT (SELECT count(*) FROM lectures) + (SELECT count(*) FROM scholar_profile) AS n;"
-  );
-  if (Number(counts?.n ?? 0) === 0) {
+  if (!versionMarker || Number(seriesCount?.n ?? 0) === 0 || Number(lectureCount?.n ?? 0) < 100) {
     const seed = (await import("./seed/content-seed.json")).default as unknown as PortalDatabase;
     await writeAll(seed, false);
+    await execute(upsertSql("site_settings", ["key", "value_json", "updated_at"], "key"), [
+      SEED_VERSION_KEY,
+      "true",
+      nowIso(),
+    ]);
+    await execute(upsertSql("site_settings", ["key", "value_json", "updated_at"], "key"), [
+      SEEDED_KEY,
+      "true",
+      nowIso(),
+    ]);
   }
-  await execute(upsertSql("site_settings", ["key", "value_json", "updated_at"], "key"), [
-    SEEDED_KEY,
-    "true",
-    nowIso(),
-  ]);
 }
 
 /**
