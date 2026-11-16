@@ -110,7 +110,8 @@ async function sqliteReady(): Promise<Client> {
 
 export async function execute(sql: string, args: DbValue[] = []): Promise<QueryResult> {
   if (isPostgres) return pgRun(pg(), { sql, args });
-  const res = await (await sqliteReady()).execute({ sql, args: args as InValue[] });
+  const sanitized = (args ?? []).map((a) => (a === undefined ? null : a)) as InValue[];
+  const res = await (await sqliteReady()).execute({ sql, args: sanitized });
   return { rows: res.rows as unknown as Record<string, unknown>[], rowsAffected: res.rowsAffected };
 }
 
@@ -134,7 +135,10 @@ export async function batch(statements: Statement[]): Promise<QueryResult[]> {
   }
   const client = await sqliteReady();
   const results = await client.batch(
-    statements.map((s) => ({ sql: s.sql, args: (s.args ?? []) as InValue[] })),
+    statements.map((s) => ({
+      sql: s.sql,
+      args: (s.args ?? []).map((a) => (a === undefined ? null : a)) as InValue[],
+    })),
     "write"
   );
   return results.map((r) => ({ rows: r.rows as unknown as Record<string, unknown>[], rowsAffected: r.rowsAffected }));

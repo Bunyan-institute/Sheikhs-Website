@@ -5677,6 +5677,2946 @@
         "manhaj"
       ],
       "status": "published"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_01",
+      "title": "ረውደቱል አንዋር — መግቢያ 1 (Intro 1) (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-01",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — መግቢያ 1 (Intro 1)።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — መግቢያ 1 (Intro 1)። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3401,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-01.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 1
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_01",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-01.mp3",
+          "title": "ረውደቱል አንዋር — መግቢያ 1 (Intro 1) (روضة الأنوار)",
+          "duration_seconds": 3401,
+          "file_size": 13602758,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — መግቢያ 1 (Intro 1) (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_02",
+      "title": "ረውደቱል አንዋር — መግቢያ 2 (Intro 2) (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-02",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — መግቢያ 2 (Intro 2)።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — መግቢያ 2 (Intro 2)። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3421,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-02.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 2
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_02",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-02.mp3",
+          "title": "ረውደቱል አንዋር — መግቢያ 2 (Intro 2) (روضة الأنوار)",
+          "duration_seconds": 3421,
+          "file_size": 6843469,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — መግቢያ 2 (Intro 2) (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_03",
+      "title": "ረውደቱል አንዋር — ክፍል 02 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-03",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 02።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 02። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3832,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-03.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 3
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_03",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-03.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 02 (روضة الأنوار)",
+          "duration_seconds": 3832,
+          "file_size": 15327091,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 02 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_04",
+      "title": "ረውደቱል አንዋር — ክፍል 03 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-04",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 03።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 03። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3631,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-04.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 4
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_04",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-04.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 03 (روضة الأنوار)",
+          "duration_seconds": 3631,
+          "file_size": 14525905,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 03 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_05",
+      "title": "ረውደቱል አንዋር — ክፍል 04 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-05",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 04።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 04። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3429,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-05.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 5
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_05",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-05.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 04 (روضة الأنوار)",
+          "duration_seconds": 3429,
+          "file_size": 6859227,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 04 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_06",
+      "title": "ረውደቱል አንዋር — ክፍል 05 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-06",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 05።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 05። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3269,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-06.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 6
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_06",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-06.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 05 (روضة الأنوار)",
+          "duration_seconds": 3269,
+          "file_size": 6538846,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 05 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_07",
+      "title": "ረውደቱል አንዋር — ክፍል 06 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-07",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 06።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 06። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3248,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-07.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 7
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_07",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-07.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 06 (روضة الأنوار)",
+          "duration_seconds": 3248,
+          "file_size": 6496752,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 06 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_08",
+      "title": "ረውደቱል አንዋር — ክፍል 07 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-08",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 07።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 07። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3851,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-08.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 8
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_08",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-08.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 07 (روضة الأنوار)",
+          "duration_seconds": 3851,
+          "file_size": 7703138,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 07 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_09",
+      "title": "ረውደቱል አንዋር — ክፍል 08 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-09",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 08።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 08። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3385,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-09.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 9
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_09",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-09.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 08 (روضة الأنوار)",
+          "duration_seconds": 3385,
+          "file_size": 6769679,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 08 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_10",
+      "title": "ረውደቱል አንዋር — ክፍል 09 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-10",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 09።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 09። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3538,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-10.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 10
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_10",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-10.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 09 (روضة الأنوار)",
+          "duration_seconds": 3538,
+          "file_size": 7077351,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 09 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_11",
+      "title": "ረውደቱል አንዋር — ክፍል 10 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-11",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 10።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 10። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3647,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-11.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 11
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_11",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-11.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 10 (روضة الأنوار)",
+          "duration_seconds": 3647,
+          "file_size": 7293794,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 10 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_12",
+      "title": "ረውደቱል አንዋር — ክፍል 11 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-12",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 11።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 11። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3587,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-12.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 12
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_12",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-12.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 11 (روضة الأنوار)",
+          "duration_seconds": 3587,
+          "file_size": 14349437,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 11 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_13",
+      "title": "ረውደቱል አንዋር — ክፍል 12 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-13",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 12።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 12። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3487,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-13.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 13
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_13",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-13.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 12 (روضة الأنوار)",
+          "duration_seconds": 3487,
+          "file_size": 13948390,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 12 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_14",
+      "title": "ረውደቱል አንዋር — ክፍል 13 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-14",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 13።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 13። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 1244,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-14.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 14
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_14",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-14.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 13 (روضة الأنوار)",
+          "duration_seconds": 1244,
+          "file_size": 4978150,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 13 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_15",
+      "title": "ረውደቱል አንዋር — ክፍል 14 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-15",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 14።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 14። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2535,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-15.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 15
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_15",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-15.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 14 (روضة الأنوار)",
+          "duration_seconds": 2535,
+          "file_size": 10140262,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 14 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_16",
+      "title": "ረውደቱል አንዋር — ክፍል 15 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-16",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 15።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 15። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3072,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-16.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 16
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_16",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-16.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 15 (روضة الأنوار)",
+          "duration_seconds": 3072,
+          "file_size": 12288673,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 15 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_17",
+      "title": "ረውደቱል አንዋር — ክፍል 16 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-17",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 16።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 16። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2899,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-17.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 17
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_17",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-17.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 16 (روضة الأنوار)",
+          "duration_seconds": 2899,
+          "file_size": 11596983,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 16 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_18",
+      "title": "ረውደቱል አንዋር — ክፍል 17 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-18",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 17።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 17። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3186,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-18.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 18
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_18",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-18.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 17 (روضة الأنوار)",
+          "duration_seconds": 3186,
+          "file_size": 12746477,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 17 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_19",
+      "title": "ረውደቱል አንዋር — ክፍል 18 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-19",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 18።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 18። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2520,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-19.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 19
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_19",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-19.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 18 (روضة الأنوار)",
+          "duration_seconds": 2520,
+          "file_size": 10079387,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 18 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_20",
+      "title": "ረውደቱል አንዋር — ክፍል 19 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-20",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 19።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 19። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2719,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-20.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 20
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_20",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-20.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 19 (روضة الأنوار)",
+          "duration_seconds": 2719,
+          "file_size": 10877227,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 19 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_21",
+      "title": "ረውደቱል አንዋር — ክፍል 20 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-21",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 20።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 20። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2465,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-21.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 21
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_21",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-21.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 20 (روضة الأنوار)",
+          "duration_seconds": 2465,
+          "file_size": 9860750,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 20 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_22",
+      "title": "ረውደቱል አንዋር — ክፍል 21 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-22",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 21።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 21። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3162,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-22.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 22
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_22",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-22.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 21 (روضة الأنوار)",
+          "duration_seconds": 3162,
+          "file_size": 12650513,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 21 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_23",
+      "title": "ረውደቱል አንዋር — ክፍል 22 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-23",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 22።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 22። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2795,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-23.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 23
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_23",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-23.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 22 (روضة الأنوار)",
+          "duration_seconds": 2795,
+          "file_size": 11181603,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 22 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_24",
+      "title": "ረውደቱል አንዋር — ክፍል 23 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-24",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 23።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 23። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2820,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-24.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 24
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_24",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-24.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 23 (روضة الأنوار)",
+          "duration_seconds": 2820,
+          "file_size": 11279970,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 23 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_25",
+      "title": "ረውደቱል አንዋር — ክፍል 24 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-25",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 24።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 24። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2446,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-25.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 25
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_25",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-25.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 24 (روضة الأنوار)",
+          "duration_seconds": 2446,
+          "file_size": 9783323,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 24 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_26",
+      "title": "ረውደቱል አንዋር — ክፍል 25 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-26",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 25።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 25። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2479,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-26.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 26
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_26",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-26.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 25 (روضة الأنوار)",
+          "duration_seconds": 2479,
+          "file_size": 9916238,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 25 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_27",
+      "title": "ረውደቱል አንዋር — ክፍል 26 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-27",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 26።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 26። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2632,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-27.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 27
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_27",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-27.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 26 (روضة الأنوار)",
+          "duration_seconds": 2632,
+          "file_size": 10527081,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 26 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_28",
+      "title": "ረውደቱል አንዋር — ክፍል 27 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-28",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 27።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 27። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2653,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-28.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 28
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_28",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-28.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 27 (روضة الأنوار)",
+          "duration_seconds": 2653,
+          "file_size": 10612584,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 27 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_29",
+      "title": "ረውደቱል አንዋር — ክፍል 28 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-29",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 28።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 28። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2678,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-29.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 29
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_29",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-29.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 28 (روضة الأنوار)",
+          "duration_seconds": 2678,
+          "file_size": 10710776,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 28 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_30",
+      "title": "ረውደቱል አንዋር — ክፍል 29 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-30",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 29።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 29። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2920,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-30.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 30
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_30",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-30.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 29 (روضة الأنوار)",
+          "duration_seconds": 2920,
+          "file_size": 11680231,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 29 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.066Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_31",
+      "title": "ረውደቱል አንዋር — ክፍል 30 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-31",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 30።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 30። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2738,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-31.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 31
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_31",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-31.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 30 (روضة الأنوار)",
+          "duration_seconds": 2738,
+          "file_size": 10950755,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 30 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_32",
+      "title": "ረውደቱል አንዋር — ክፍል 31 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-32",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 31።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 31። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2921,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-32.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 32
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_32",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-32.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 31 (روضة الأنوار)",
+          "duration_seconds": 2921,
+          "file_size": 11682857,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 31 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_33",
+      "title": "ረውደቱል አንዋር — ክፍል 32 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-33",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 32።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 32። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3074,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-33.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 33
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_33",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-33.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 32 (روضة الأنوار)",
+          "duration_seconds": 3074,
+          "file_size": 12296788,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 32 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_34",
+      "title": "ረውደቱል አንዋር — ክፍል 33 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-34",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 33።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 33። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2993,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-34.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 34
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_34",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-34.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 33 (روضة الأنوار)",
+          "duration_seconds": 2993,
+          "file_size": 11974050,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 33 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_35",
+      "title": "ረውደቱል አንዋር — ክፍል 34 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-35",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 34።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 34። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3054,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-35.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 35
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_35",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-35.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 34 (روضة الأنوار)",
+          "duration_seconds": 3054,
+          "file_size": 12217830,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 34 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_36",
+      "title": "ረውደቱል አንዋር — ክፍል 35 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-36",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 35።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 35። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3286,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-36.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 36
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_36",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-36.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 35 (روضة الأنوار)",
+          "duration_seconds": 3286,
+          "file_size": 13144267,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 35 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_37",
+      "title": "ረውደቱል አንዋር — ክፍል 36 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-37",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 36።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 36። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2914,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-37.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 37
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_37",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-37.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 36 (روضة الأنوار)",
+          "duration_seconds": 2914,
+          "file_size": 11656337,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 36 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_38",
+      "title": "ረውደቱል አንዋር — ክፍል 37 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-38",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 37።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 37። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2999,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-38.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 38
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_38",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-38.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 37 (روضة الأنوار)",
+          "duration_seconds": 2999,
+          "file_size": 11996533,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 37 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_39",
+      "title": "ረውደቱል አንዋር — ክፍል 38 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-39",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 38።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 38። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2917,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-39.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 39
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_39",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-39.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 38 (روضة الأنوار)",
+          "duration_seconds": 2917,
+          "file_size": 23335887,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 38 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_40",
+      "title": "ረውደቱል አንዋር — ክፍል 39 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-40",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 39።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 39። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2469,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-40.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 40
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_40",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-40.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 39 (روضة الأنوار)",
+          "duration_seconds": 2469,
+          "file_size": 19750815,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 39 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_41",
+      "title": "ረውደቱል አንዋር — ክፍል 40 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-41",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 40።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 40። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3182,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-41.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 41
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_41",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-41.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 40 (روضة الأنوار)",
+          "duration_seconds": 3182,
+          "file_size": 12730565,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 40 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_42",
+      "title": "ረውደቱል አንዋር — ክፍል 41 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-42",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 41።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 41። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3109,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-42.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 42
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_42",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-42.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 41 (روضة الأنوار)",
+          "duration_seconds": 3109,
+          "file_size": 12435258,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 41 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_43",
+      "title": "ረውደቱል አንዋር — ክፍል 42 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-43",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 42።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 42። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3086,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-43.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 43
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_43",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-43.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 42 (روضة الأنوار)",
+          "duration_seconds": 3086,
+          "file_size": 12343338,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 42 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_44",
+      "title": "ረውደቱል አንዋር — ክፍል 43 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-44",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 43።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 43። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2773,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-44.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 44
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_44",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-44.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 43 (روضة الأنوار)",
+          "duration_seconds": 2773,
+          "file_size": 11091529,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 43 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_45",
+      "title": "ረውደቱል አንዋር — ክፍል 44 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-45",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 44።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 44። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3137,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-45.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 45
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_45",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-45.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 44 (روضة الأنوار)",
+          "duration_seconds": 3137,
+          "file_size": 12548903,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 44 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_46",
+      "title": "ረውደቱል አንዋር — ክፍል 45 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-46",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 45።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 45። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2803,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-46.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 46
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_46",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-46.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 45 (روضة الأنوار)",
+          "duration_seconds": 2803,
+          "file_size": 11212120,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 45 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_47",
+      "title": "ረውደቱል አንዋር — ክፍል 46 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-47",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 46።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 46። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 3140,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-47.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 47
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_47",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-47.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 46 (روضة الأنوار)",
+          "duration_seconds": 3140,
+          "file_size": 12562396,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 46 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_48",
+      "title": "ረውደቱል አንዋር — ክፍል 48 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-48",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 48።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 48። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2632,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-48.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 48
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_48",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-48.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 48 (روضة الأنوار)",
+          "duration_seconds": 2632,
+          "file_size": 10529126,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 48 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_49",
+      "title": "ረውደቱል አንዋር — ክፍል 49 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-49",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 49።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 49። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 1444,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-49.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 49
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_49",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-49.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 49 (روضة الأنوار)",
+          "duration_seconds": 1444,
+          "file_size": 5774931,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 49 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_50",
+      "title": "ረውደቱል አንዋር — ክፍል 50 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-50",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 50።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 50። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2578,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-50.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 50
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_50",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-50.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 50 (روضة الأنوار)",
+          "duration_seconds": 2578,
+          "file_size": 19720013,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 50 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_51",
+      "title": "ረውደቱል አንዋር — ክፍል 51 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-51",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 51።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 51። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2680,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-51.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 51
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_51",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-51.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 51 (روضة الأنوار)",
+          "duration_seconds": 2680,
+          "file_size": 19752386,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 51 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_52",
+      "title": "ረውደቱል አንዋር — ክፍል 52 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-52",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 52።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 52። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2971,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-52.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 52
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_52",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-52.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 52 (روضة الأنوار)",
+          "duration_seconds": 2971,
+          "file_size": 11882930,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 52 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.067Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_53",
+      "title": "ረውደቱል አንዋር — ክፍል 53 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-53",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 53።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 53። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2762,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-53.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 53
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_53",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-53.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 53 (روضة الأنوار)",
+          "duration_seconds": 2762,
+          "file_size": 11047662,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 53 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_54",
+      "title": "ረውደቱል አንዋር — ክፍል 54 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-54",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 54።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 54። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2895,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-54.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 54
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_54",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-54.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 54 (روضة الأنوار)",
+          "duration_seconds": 2895,
+          "file_size": 11580382,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 54 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_55",
+      "title": "ረውደቱል አንዋር — ክፍል 55 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-55",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 55።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 55። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2423,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-55.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 55
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_55",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-55.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 55 (روضة الأنوار)",
+          "duration_seconds": 2423,
+          "file_size": 9691500,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 55 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_56",
+      "title": "ረውደቱል አንዋር — ክፍል 56 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-56",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 56።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 56። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2503,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-56.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 56
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_56",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-56.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 56 (روضة الأنوار)",
+          "duration_seconds": 2503,
+          "file_size": 10011736,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 56 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_57",
+      "title": "ረውደቱል አንዋር — ክፍል 57 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-57",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 57።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 57። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2653,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-57.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 57
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_57",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-57.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 57 (روضة الأنوار)",
+          "duration_seconds": 2653,
+          "file_size": 10613934,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 57 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_58",
+      "title": "ረውደቱል አንዋር — ክፍል 58 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-58",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 58።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 58። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2283,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-58.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 58
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_58",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-58.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 58 (روضة الأنوار)",
+          "duration_seconds": 2283,
+          "file_size": 9132996,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 58 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_59",
+      "title": "ረውደቱል አንዋር — ክፍል 59 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-59",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 59።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 59። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2720,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-59.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 59
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_59",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-59.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 59 (روضة الأنوار)",
+          "duration_seconds": 2720,
+          "file_size": 10880360,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 59 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
+    },
+    {
+      "object": "lecture",
+      "id": "lec_rawdatul_anwar_60",
+      "title": "ረውደቱል አንዋር — ክፍል 61 (روضة الأنوار)",
+      "slug": "rawdatul-anwar-lesson-60",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 61።",
+      "summary": "ረውደቱል አንዋር በሸይኽ ሙሐመድ ፈረጅ መገኖ — ክፍል 61። ተከታታይ የነብዩ (ሰ.ዐ.ወ) የሲራህ ትምህርት።",
+      "locale": "am",
+      "direction": "ltr",
+      "status": "published",
+      "type": "audio",
+      "duration_seconds": 2117,
+      "audio_url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-60.mp3",
+      "video_url": null,
+      "series": {
+        "id": "ser_rawdatul_anwar",
+        "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+        "position": 60
+      },
+      "media": [
+        {
+          "id": "med_rawdatul_anwar_60",
+          "kind": "audio",
+          "type": "audio",
+          "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-60.mp3",
+          "title": "ረውደቱል አንዋር — ክፍል 61 (روضة الأنوار)",
+          "duration_seconds": 2117,
+          "file_size": 8470468,
+          "mime_type": "audio/mpeg",
+          "width": null,
+          "height": null,
+          "description": "ረውደቱል አንዋር — ክፍል 61 (روضة الأنوار)",
+          "thumbnail_url": "/images/sheikh-portrait.jpg"
+        }
+      ],
+      "tags": [
+        "seerah",
+        "rawdatul-anwar",
+        "prophet-muhammed",
+        "sirah"
+      ],
+      "categories": [
+        "seerah",
+        "history",
+        "prophetic"
+      ],
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.069Z"
     }
   ],
   "series": [
@@ -7148,6 +10088,22 @@
       "status": "published",
       "published_at": "2024-01-01T00:00:00Z",
       "updated_at": "2024-01-01T00:00:00Z"
+    },
+    {
+      "object": "series",
+      "id": "ser_rawdatul_anwar",
+      "title": "روضة الأنوار في سيرة النبي المختار (ረውደቱል አንዋር)",
+      "slug": "rawdatul-anwar",
+      "description": "የአላህ መልዕክተኛ (ሰ.ዐ.ወ) የተከበረች ታሪክ፣ የህይወት ጉዞና የነብይነት ፈለግ ከታማኝና ከተጣራ የሲራህ ምንጮች የተዘጋጀ ተከታታይ የደርስ ስብስብ በሸይኽ ሙሐመድ ፈረጅ መገኖ።",
+      "locale": "am",
+      "direction": "ltr",
+      "cover": {
+        "url": "/images/sheikh-portrait.jpg"
+      },
+      "lecture_count": 60,
+      "published_at": "2026-11-16T12:00:00Z",
+      "updated_at": "2026-11-16T14:52:01.065Z",
+      "status": "published"
     }
   ],
   "articles": [
@@ -9469,6 +12425,846 @@
       "thumbnail_url": "/images/sheikh-hero.jpg",
       "duration_seconds": 2480,
       "published_at": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "med_rawdatul_anwar_01",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-01.mp3",
+      "title": "ረውደቱል አንዋር — መግቢያ 1 (Intro 1) (روضة الأنوار)",
+      "duration_seconds": 3401,
+      "file_size": 13602758,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — መግቢያ 1 (Intro 1) (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_02",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-02.mp3",
+      "title": "ረውደቱል አንዋር — መግቢያ 2 (Intro 2) (روضة الأنوار)",
+      "duration_seconds": 3421,
+      "file_size": 6843469,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — መግቢያ 2 (Intro 2) (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_03",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-03.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 02 (روضة الأنوار)",
+      "duration_seconds": 3832,
+      "file_size": 15327091,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 02 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_04",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-04.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 03 (روضة الأنوار)",
+      "duration_seconds": 3631,
+      "file_size": 14525905,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 03 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_05",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-05.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 04 (روضة الأنوار)",
+      "duration_seconds": 3429,
+      "file_size": 6859227,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 04 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_06",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-06.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 05 (روضة الأنوار)",
+      "duration_seconds": 3269,
+      "file_size": 6538846,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 05 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_07",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-07.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 06 (روضة الأنوار)",
+      "duration_seconds": 3248,
+      "file_size": 6496752,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 06 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_08",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-08.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 07 (روضة الأنوار)",
+      "duration_seconds": 3851,
+      "file_size": 7703138,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 07 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_09",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-09.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 08 (روضة الأنوار)",
+      "duration_seconds": 3385,
+      "file_size": 6769679,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 08 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_10",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-10.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 09 (روضة الأنوار)",
+      "duration_seconds": 3538,
+      "file_size": 7077351,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 09 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_11",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-11.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 10 (روضة الأنوار)",
+      "duration_seconds": 3647,
+      "file_size": 7293794,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 10 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_12",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-12.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 11 (روضة الأنوار)",
+      "duration_seconds": 3587,
+      "file_size": 14349437,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 11 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_13",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-13.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 12 (روضة الأنوار)",
+      "duration_seconds": 3487,
+      "file_size": 13948390,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 12 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_14",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-14.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 13 (روضة الأنوار)",
+      "duration_seconds": 1244,
+      "file_size": 4978150,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 13 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_15",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-15.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 14 (روضة الأنوار)",
+      "duration_seconds": 2535,
+      "file_size": 10140262,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 14 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_16",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-16.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 15 (روضة الأنوار)",
+      "duration_seconds": 3072,
+      "file_size": 12288673,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 15 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_17",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-17.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 16 (روضة الأنوار)",
+      "duration_seconds": 2899,
+      "file_size": 11596983,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 16 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_18",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-18.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 17 (روضة الأنوار)",
+      "duration_seconds": 3186,
+      "file_size": 12746477,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 17 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_19",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-19.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 18 (روضة الأنوار)",
+      "duration_seconds": 2520,
+      "file_size": 10079387,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 18 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_20",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-20.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 19 (روضة الأنوار)",
+      "duration_seconds": 2719,
+      "file_size": 10877227,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 19 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_21",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-21.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 20 (روضة الأنوار)",
+      "duration_seconds": 2465,
+      "file_size": 9860750,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 20 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_22",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-22.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 21 (روضة الأنوار)",
+      "duration_seconds": 3162,
+      "file_size": 12650513,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 21 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_23",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-23.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 22 (روضة الأنوار)",
+      "duration_seconds": 2795,
+      "file_size": 11181603,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 22 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_24",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-24.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 23 (روضة الأنوار)",
+      "duration_seconds": 2820,
+      "file_size": 11279970,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 23 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_25",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-25.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 24 (روضة الأنوار)",
+      "duration_seconds": 2446,
+      "file_size": 9783323,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 24 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_26",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-26.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 25 (روضة الأنوار)",
+      "duration_seconds": 2479,
+      "file_size": 9916238,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 25 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_27",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-27.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 26 (روضة الأنوار)",
+      "duration_seconds": 2632,
+      "file_size": 10527081,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 26 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_28",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-28.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 27 (روضة الأنوار)",
+      "duration_seconds": 2653,
+      "file_size": 10612584,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 27 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_29",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-29.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 28 (روضة الأنوار)",
+      "duration_seconds": 2678,
+      "file_size": 10710776,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 28 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_30",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-30.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 29 (روضة الأنوار)",
+      "duration_seconds": 2920,
+      "file_size": 11680231,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 29 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_31",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-31.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 30 (روضة الأنوار)",
+      "duration_seconds": 2738,
+      "file_size": 10950755,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 30 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_32",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-32.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 31 (روضة الأنوار)",
+      "duration_seconds": 2921,
+      "file_size": 11682857,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 31 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_33",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-33.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 32 (روضة الأنوار)",
+      "duration_seconds": 3074,
+      "file_size": 12296788,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 32 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_34",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-34.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 33 (روضة الأنوار)",
+      "duration_seconds": 2993,
+      "file_size": 11974050,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 33 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_35",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-35.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 34 (روضة الأنوار)",
+      "duration_seconds": 3054,
+      "file_size": 12217830,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 34 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_36",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-36.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 35 (روضة الأنوار)",
+      "duration_seconds": 3286,
+      "file_size": 13144267,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 35 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_37",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-37.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 36 (روضة الأنوار)",
+      "duration_seconds": 2914,
+      "file_size": 11656337,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 36 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_38",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-38.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 37 (روضة الأنوار)",
+      "duration_seconds": 2999,
+      "file_size": 11996533,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 37 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_39",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-39.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 38 (روضة الأنوار)",
+      "duration_seconds": 2917,
+      "file_size": 23335887,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 38 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_40",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-40.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 39 (روضة الأنوار)",
+      "duration_seconds": 2469,
+      "file_size": 19750815,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 39 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_41",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-41.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 40 (روضة الأنوار)",
+      "duration_seconds": 3182,
+      "file_size": 12730565,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 40 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_42",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-42.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 41 (روضة الأنوار)",
+      "duration_seconds": 3109,
+      "file_size": 12435258,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 41 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_43",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-43.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 42 (روضة الأنوار)",
+      "duration_seconds": 3086,
+      "file_size": 12343338,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 42 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_44",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-44.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 43 (روضة الأنوار)",
+      "duration_seconds": 2773,
+      "file_size": 11091529,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 43 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_45",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-45.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 44 (روضة الأنوار)",
+      "duration_seconds": 3137,
+      "file_size": 12548903,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 44 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_46",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-46.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 45 (روضة الأنوار)",
+      "duration_seconds": 2803,
+      "file_size": 11212120,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 45 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_47",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-47.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 46 (روضة الأنوار)",
+      "duration_seconds": 3140,
+      "file_size": 12562396,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 46 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_48",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-48.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 48 (روضة الأنوار)",
+      "duration_seconds": 2632,
+      "file_size": 10529126,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 48 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_49",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-49.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 49 (روضة الأنوار)",
+      "duration_seconds": 1444,
+      "file_size": 5774931,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 49 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_50",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-50.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 50 (روضة الأنوار)",
+      "duration_seconds": 2578,
+      "file_size": 19720013,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 50 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_51",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-51.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 51 (روضة الأنوار)",
+      "duration_seconds": 2680,
+      "file_size": 19752386,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 51 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_52",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-52.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 52 (روضة الأنوار)",
+      "duration_seconds": 2971,
+      "file_size": 11882930,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 52 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_53",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-53.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 53 (روضة الأنوار)",
+      "duration_seconds": 2762,
+      "file_size": 11047662,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 53 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_54",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-54.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 54 (روضة الأنوار)",
+      "duration_seconds": 2895,
+      "file_size": 11580382,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 54 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_55",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-55.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 55 (روضة الأنوار)",
+      "duration_seconds": 2423,
+      "file_size": 9691500,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 55 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_56",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-56.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 56 (روضة الأنوار)",
+      "duration_seconds": 2503,
+      "file_size": 10011736,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 56 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_57",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-57.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 57 (روضة الأنوار)",
+      "duration_seconds": 2653,
+      "file_size": 10613934,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 57 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_58",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-58.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 58 (روضة الأنوار)",
+      "duration_seconds": 2283,
+      "file_size": 9132996,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 58 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_59",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-59.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 59 (روضة الأنوار)",
+      "duration_seconds": 2720,
+      "file_size": 10880360,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 59 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
+    },
+    {
+      "id": "med_rawdatul_anwar_60",
+      "type": "audio",
+      "url": "/audio/rawdatul-anwar/rawdatul-anwar-lesson-60.mp3",
+      "title": "ረውደቱል አንዋር — ክፍል 61 (روضة الأنوار)",
+      "duration_seconds": 2117,
+      "file_size": 8470468,
+      "mime_type": "audio/mpeg",
+      "width": null,
+      "height": null,
+      "kind": "audio",
+      "description": "ረውደቱል አንዋር — ክፍል 61 (روضة الأنوار)",
+      "thumbnail_url": "/images/sheikh-portrait.jpg"
     }
   ],
   "inquiries": [

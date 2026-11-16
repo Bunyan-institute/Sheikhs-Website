@@ -57,7 +57,7 @@ function revalidate() {
 
 const SEEDED_KEY = "_seeded";
 const SEEDING_KEY = "_seeding";
-const SEED_VERSION_KEY = "_seed_version_20261116_batch1";
+const SEED_VERSION_KEY = "_seed_version_20261116_batch2_rawda";
 let readyPromise: Promise<void> | null = null;
 
 /**
@@ -723,8 +723,17 @@ function mediaFromRow(r: Row): MediaRef {
 }
 
 const mediaArgs = (m: MediaRef): DbValue[] => [
-  m.id, m.url, m.kind, m.mime_type, m.width, m.height, m.duration_seconds, nowIso(),
-  m.title ?? null, m.description ?? null, m.thumbnail_url ?? null,
+  m.id,
+  m.url,
+  m.kind ?? (m as unknown as { type?: string }).type ?? "audio",
+  m.mime_type ?? "audio/mpeg",
+  m.width ?? null,
+  m.height ?? null,
+  m.duration_seconds ?? null,
+  nowIso(),
+  m.title ?? null,
+  m.description ?? null,
+  m.thumbnail_url ?? null,
 ];
 
 export async function getAllMedia(): Promise<MediaRef[]> {
