@@ -80,15 +80,14 @@ def optimize_file(src, dest, title, album, track_num):
             temp_dest
         ]
     else:
-        # Transcode to 64kbps mono MP3
+        # Transcode to 48kbps mono MP3 (crystal clear voice clarity, compact file size)
         cmd = [
             "ffmpeg", "-y",
             "-i", src,
             "-c:a", "libmp3lame",
-            "-b:a", "64k",
+            "-b:a", "48k",
             "-ac", "1",
             "-ar", "44100",
-            "-q:a", "2",
             "-id3v2_version", "3",
             "-metadata", f"title={title}",
             "-metadata", f"artist={ARTIST_NAME}",
@@ -218,5 +217,9 @@ def process_volume(vol_cfg):
     return processed
 
 if __name__ == "__main__":
+    import sys
+    target = sys.argv[1] if len(sys.argv) > 1 else None
     for vol in VOLUMES:
+        if target and target not in vol["slug"]:
+            continue
         process_volume(vol)
