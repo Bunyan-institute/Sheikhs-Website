@@ -57,7 +57,7 @@ function revalidate() {
 
 const SEEDED_KEY = "_seeded";
 const SEEDING_KEY = "_seeding";
-const SEED_VERSION_KEY = "_seed_version_20261116_batch2_rawda";
+const SEED_VERSION_KEY = "_seed_version_20261117_batch3_miat_hadith";
 let readyPromise: Promise<void> | null = null;
 
 /**
