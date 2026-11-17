@@ -1,0 +1,9 @@
+*.mp3 -delta
+*.m4a -delta
+*.wma -delta
+*.aac -delta
+*.wav -delta
+*.jpg -delta
+*.png -delta
+*.webp -delta
+*.zip -delta
