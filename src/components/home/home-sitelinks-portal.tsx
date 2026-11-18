@@ -2,14 +2,14 @@ import { Link } from "@/i18n/navigation";
 import { 
   Scale, 
   BookOpen, 
-  Layers, 
+  Video, 
   GraduationCap, 
   HelpCircle, 
   ArrowRight 
 } from "lucide-react";
 import { PRIMARY_SITELINKS } from "@/lib/seo";
 
-const ICONS = [Scale, BookOpen, Layers, GraduationCap, HelpCircle];
+const ICONS = [Scale, BookOpen, Video, GraduationCap, HelpCircle];
 
 export function HomeSitelinksPortal({ locale }: { locale: string }) {
   const isRtl = locale === "ar";
@@ -17,7 +17,7 @@ export function HomeSitelinksPortal({ locale }: { locale: string }) {
   const badges: Record<string, { en: string; am: string; ar: string; om: string }> = {
     "/fatwas": { en: "VERIFIED RULINGS", am: "የተረጋገጡ ብይኖች", ar: "فتاوى مؤصلة", om: "MURTII SHARI'AA" },
     "/articles": { en: "RESEARCH & ESSAYS", am: "ምርምርና ጽሑፎች", ar: "بحوث ومقالات", om: "QORANNOO" },
-    "/series": { en: "AUDIO LESSONS", am: "ተከታታይ ደርሶች", ar: "سلاسل علمية", om: "DARSIIWWAAN" },
+    "/media": { en: "MEDIA & AUDIO HUB", am: "የድምፅና ምስል ማዕከል", ar: "المكتبة الصوتية والمرئية", om: "SAGALEE FI VIIDIYOO" },
     "/courses": { en: "ACADEMY SYLLABI", am: "ሥርዓተ-ትምህርት", ar: "مناهج تأصيلية", om: "LEENJIIWWAN" },
     "/ask": { en: "DIRECT INQUIRIES", am: "ቀጥታ ጥያቄዎች", ar: "استفتاء مباشر", om: "GAAFFII KALLATTII" },
   };

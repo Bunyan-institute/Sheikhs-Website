@@ -263,7 +263,11 @@ export default function AdminLecturesPage() {
                 <p className="truncate font-semibold text-adm-text">{l.title}</p>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
                   {sourceChip(l)}
-                  {l.series && <span className="truncate text-xs text-adm-muted">{l.series.title}</span>}
+                  {l.series && (
+                    <span className="truncate text-xs text-adm-muted font-medium">
+                      📁 {l.series.title} {l.series.position ? `(Ders ${l.series.position})` : ""}
+                    </span>
+                  )}
                 </div>
               </td>
               <td className="px-4 py-3">
@@ -282,7 +286,11 @@ export default function AdminLecturesPage() {
               <div className="flex flex-wrap items-center gap-2 text-sm text-adm-muted">
                 {sourceChip(l)}
                 {l.duration_seconds ? <span>{formatDuration(l.duration_seconds)}</span> : null}
-                {l.series && <span className="truncate">{l.series.title}</span>}
+                {l.series && (
+                  <span className="truncate font-medium">
+                    📁 {l.series.title} {l.series.position ? `(Ders ${l.series.position})` : ""}
+                  </span>
+                )}
               </div>
               {actions(l)}
             </div>

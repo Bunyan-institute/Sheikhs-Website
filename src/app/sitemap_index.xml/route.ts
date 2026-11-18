@@ -13,7 +13,7 @@ export async function GET() {
     "articles",
     "courses",
     "lectures",
-    "series",
+    "playlists",
     "library",
     "events",
   ];

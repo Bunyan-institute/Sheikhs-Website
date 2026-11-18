@@ -413,12 +413,12 @@ const serSlug = `e2e-series-${run}`;
 const lecTitle = `E2E Lecture ${run}`;
 const lecSlug = `e2e-lecture-${run}`;
 await step("create a series and a lecture with uploaded audio inside it", async () => {
-  await page.goto(BASE + "/admin/series");
-  await page.getByRole("button", { name: "Add New Series" }).click();
+  await page.goto(BASE + "/admin/playlists");
+  await page.getByRole("button", { name: /Add New Folder|Add New Series/i }).click();
   let form = page.locator("form").last();
-  await F(form, "Series Title *").fill(serTitle);
+  await F(form, /Folder Title|Series Title/).fill(serTitle);
   await F(form, "URL Slug *").fill(serSlug);
-  await form.getByRole("button", { name: "Save Series" }).click();
+  await form.getByRole("button", { name: /Save Folder|Save Series/i }).click();
   await page.waitForTimeout(1000);
 
   await page.goto(BASE + "/admin/lectures");
@@ -435,19 +435,19 @@ await step("create a series and a lecture with uploaded audio inside it", async 
   await page.waitForTimeout(1500);
 
   await eventually(async () => assert((await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture page"));
-  await eventually(async () => assert((await html(`/series/${serSlug}`)).includes(lecTitle), "series page lists the lecture"));
+  await eventually(async () => assert((await html(`/playlists/${serSlug}`)).includes(lecTitle), "playlist page lists the lecture"));
   const audioUrl = (await html(`/lectures/${lecSlug}`)).match(/\/uploads\/[A-Za-z0-9._-]+\.mp3/)?.[0];
   assert(audioUrl, "lecture page references the uploaded audio");
   const partial = await page.request.get(BASE + audioUrl, { headers: { Range: "bytes=0-99" } });
   assert(partial.status() === 206 && (await partial.body()).length === 100, "audio supports range requests");
 });
 await step("renaming the series updates the lecture's series title; deleting the series detaches lectures", async () => {
-  await page.goto(BASE + "/admin/series");
+  await page.goto(BASE + "/admin/playlists");
   await cardFor(serTitle, /edit/i).getByRole("button", { name: /edit/i }).first().click();
   const form = page.locator("form").last();
-  await F(form, "Series Title *").fill(serTitle + " Renamed");
+  await F(form, /Folder Title|Series Title/).fill(serTitle + " Renamed");
   await F(form, "URL Slug *").fill(serSlug);
-  await form.getByRole("button", { name: "Save Series" }).click();
+  await form.getByRole("button", { name: /Save Folder|Save Series/i }).click();
   await page.waitForTimeout(1200);
   await eventually(async () => assert((await html(`/lectures/${lecSlug}`)).includes(serTitle + " Renamed"), "lecture shows the new series title"));
 });
@@ -455,11 +455,11 @@ await step("clean up lecture and series", async () => {
   await page.goto(BASE + "/admin/lectures");
   await cardFor(lecTitle, /delete|trash/i).getByRole("button", { name: /delete|trash/i }).first().click();
   await confirmDelete();
-  await page.goto(BASE + "/admin/series");
+  await page.goto(BASE + "/admin/playlists");
   await cardFor(serTitle, /delete/i).getByRole("button", { name: /delete/i }).first().click();
   await confirmDelete();
   await eventually(async () => assert(!(await html(`/lectures/${lecSlug}`)).includes(lecTitle), "lecture gone"));
-  await eventually(async () => assert(!(await html("/series")).includes(serSlug), "series gone"));
+  await eventually(async () => assert(!(await html("/playlists")).includes(serSlug), "playlist gone"));
 });
 
 console.log("\nVideo from a link");

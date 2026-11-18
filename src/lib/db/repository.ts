@@ -375,6 +375,41 @@ export async function deleteSeries(id: string) {
   return remove("series", id);
 }
 
+/**
+ * Reorders all lectures in a playlist/series to match orderedLectureIds (1..N).
+ * Updates each lecture's series_json reference atomically.
+ */
+export async function reorderSeriesLectures(seriesId: string, orderedLectureIds: string[]): Promise<PublicSeries> {
+  await ready();
+  const series = await findOne(seriesDef, seriesId);
+  if (!series) throw new Error("Playlist/Folder not found: " + seriesId);
+
+  const updates: Statement[] = [];
+  orderedLectureIds.forEach((id, index) => {
+    updates.push({
+      sql: "UPDATE lectures SET series_json = ? WHERE id = ?;",
+      args: [
+        JSON.stringify({ id: series.id, title: series.title, position: index + 1 }),
+        id,
+      ],
+    });
+  });
+
+  if (updates.length > 0) {
+    await batch(updates);
+  }
+  revalidate();
+  const updated = await getSeriesByIdOrSlug(seriesId);
+  return updated ?? series;
+}
+
+/** Detaches a single lecture from any playlist/folder it belongs to. */
+export async function removeLectureFromSeries(lectureId: string): Promise<void> {
+  await ready();
+  await execute("UPDATE lectures SET series_json = NULL WHERE id = ?;", [lectureId]);
+  revalidate();
+}
+
 // ── Articles ──
 
 const articleDef: Entity<PublicArticle> = {

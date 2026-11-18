@@ -17,7 +17,8 @@
     "qualifications": "Qualifications",
     "search": "Search",
     "more": "More",
-    "menu": "Menu"
+    "menu": "Menu",
+    "playlists": "Playlists & Folders"
   },
   "home": {
     "exploreLectures": "Explore Lectures",
@@ -425,7 +426,9 @@
       "publishHint": "Turn off to keep it as a draft that visitors cannot see.",
       "moreOptions": "More options",
       "topics": "Topics",
-      "keywords": "Keywords"
+      "keywords": "Keywords",
+      "playlists": "Playlists & Folders",
+      "qualifications": "Qualifications"
     },
     "header": {
       "systemStatus": "System Online • Live Dynamic Sync",
@@ -829,6 +832,30 @@
       "enabledToast": "Notifications turned on",
       "disabledToast": "Notifications turned off",
       "failed": "Could not turn on notifications. Please try again."
+    },
+    "playlists": {
+      "heading": "Playlists & Lesson Folders",
+      "subheading": "Organize audio and video derses into sequential numbered playlists and lesson folders.",
+      "newPlaylist": "Add New Folder",
+      "editPlaylist": "Edit Folder",
+      "manageLessons": "Manage Derses",
+      "lessonsInFolder": "Derses in this Folder",
+      "searchPlaceholder": "Search folders...",
+      "colTitle": "Folder Title",
+      "colCategory": "Domain",
+      "colLectures": "Derses",
+      "colActions": "Actions",
+      "fieldTitle": "Folder Title",
+      "fieldSlug": "URL Slug",
+      "fieldDescription": "Description & Overview",
+      "fieldCategory": "Category",
+      "fieldCoverUrl": "Cover Image",
+      "savePlaylist": "Save Folder",
+      "reorderSuccess": "Lesson order successfully updated.",
+      "moveUp": "Move Up",
+      "moveDown": "Move Down",
+      "removeFromFolder": "Remove from Folder",
+      "trackNumber": "Ders"
     }
   },
   "articleDetail": {

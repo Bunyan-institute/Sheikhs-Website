@@ -15,7 +15,8 @@ import {
   User, 
   Compass, 
   PhoneCall,
-  GraduationCap
+  GraduationCap,
+  FolderKanban
 } from 'lucide-react';
 
 export function CommandSearch() {
@@ -31,12 +32,11 @@ export function CommandSearch() {
     { title: tNav("fatwas"), href: "/fatwas", category: t("fatwas"), icon: BookOpen },
     { title: tNav("ask"), href: "/ask", category: t("fatwas"), icon: HelpCircle },
     { title: tNav("courses"), href: "/courses", category: t("courses"), icon: GraduationCap },
-    { title: tNav("series"), href: "/series", category: t("lectures"), icon: BookOpen },
+    { title: tNav("playlists"), href: "/playlists", category: t("lectures"), icon: FolderKanban },
     { title: tNav("library"), href: "/library", category: t("library"), icon: BookOpen },
     { title: tNav("events"), href: "/events", category: tNav("events"), icon: Calendar },
     { title: tNav("verify"), href: "/verify", category: tNav("verify"), icon: Award },
     { title: tNav("about"), href: "/about", category: tNav("about"), icon: User },
-    { title: tNav("journey"), href: "/journey", category: tNav("about"), icon: Compass },
     { title: tNav("qualifications"), href: "/qualifications", category: tNav("about"), icon: Award },
     { title: tNav("contact"), href: "/contact", category: tNav("contact"), icon: PhoneCall },
   ];

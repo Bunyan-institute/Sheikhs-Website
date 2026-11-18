@@ -219,21 +219,21 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 {t("academicCredentials")}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <Link href="/journey" className="block p-5 bg-white border border-[#0F241C]/10 rounded-2xl hover:border-[#1B6A50] transition-all group shadow-xs">
-                  <div className="text-[11px] font-bold text-[#1B6A50] uppercase tracking-wider mb-1">Timeline</div>
-                  <div className="font-display font-semibold text-base text-[#0F241C] group-hover:text-[#1B6A50] flex items-center justify-between">
-                    <span>{t("viewJourney")}</span>
-                    <ArrowRight className="w-4 h-4 text-[#BF9A45]" />
-                  </div>
-                  <div className="text-xs text-[#0F241C]/60 mt-1.5 leading-relaxed">From Silti &amp; Jimma Halaqat to postgraduate honors.</div>
-                </Link>
                 <Link href="/qualifications" className="block p-5 bg-white border border-[#0F241C]/10 rounded-2xl hover:border-[#1B6A50] transition-all group shadow-xs">
-                  <div className="text-[11px] font-bold text-[#1B6A50] uppercase tracking-wider mb-1">Credentials</div>
+                  <div className="text-[11px] font-bold text-[#1B6A50] uppercase tracking-wider mb-1">Qualifications</div>
                   <div className="font-display font-semibold text-base text-[#0F241C] group-hover:text-[#1B6A50] flex items-center justify-between">
                     <span>{t("viewQualifications")}</span>
                     <ArrowRight className="w-4 h-4 text-[#BF9A45]" />
                   </div>
-                  <div className="text-xs text-[#0F241C]/60 mt-1.5 leading-relaxed">AAOIFI auditor diploma and traditional chains.</div>
+                  <div className="text-xs text-[#0F241C]/60 mt-1.5 leading-relaxed">Master&apos;s in Islamic Studies, AAOIFI audit diploma and traditional chains.</div>
+                </Link>
+                <Link href="/playlists" className="block p-5 bg-white border border-[#0F241C]/10 rounded-2xl hover:border-[#1B6A50] transition-all group shadow-xs">
+                  <div className="text-[11px] font-bold text-[#1B6A50] uppercase tracking-wider mb-1">Study Curricula</div>
+                  <div className="font-display font-semibold text-base text-[#0F241C] group-hover:text-[#1B6A50] flex items-center justify-between">
+                    <span>Lesson Folders &amp; Playlists</span>
+                    <ArrowRight className="w-4 h-4 text-[#BF9A45]" />
+                  </div>
+                  <div className="text-xs text-[#0F241C]/60 mt-1.5 leading-relaxed">Complete sequential teachings across 13 foundational Islamic books.</div>
                 </Link>
                 {profile.socials.play_store && (<a href={profile.socials.play_store} target="_blank" rel="noopener noreferrer" className="block p-5 bg-white border border-[#0F241C]/10 rounded-2xl hover:border-[#1B6A50] transition-all group shadow-xs">
                   <div className="text-[11px] font-bold text-[#1B6A50] uppercase tracking-wider mb-1">Official Mobile App</div>

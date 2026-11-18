@@ -17,7 +17,8 @@
     "qualifications": "የትምህርት ደረጃ",
     "search": "ፈልግ",
     "more": "ተጨማሪ",
-    "menu": "ማውጫ"
+    "menu": "ማውጫ",
+    "playlists": "የደርስ አቃፊዎች"
   },
   "home": {
     "exploreLectures": "ትምህርቶችን አስስ",
@@ -425,7 +426,9 @@
       "publishHint": "ጎብኚዎች እንዳያዩት እንደ ረቂቅ ለማቆየት ያጥፉት።",
       "moreOptions": "ተጨማሪ አማራጮች",
       "topics": "ርዕሰ ጉዳዮች",
-      "keywords": "ቁልፍ ቃላት"
+      "keywords": "ቁልፍ ቃላት",
+      "playlists": "አቃፊዎችና የደርስ ዝርዝር",
+      "qualifications": "ማስረጃዎችና ሰነዶች"
     },
     "header": {
       "systemStatus": "ስርዓቱ በመስመር ላይ ነው • የቀጥታ ቅንጅት",
@@ -829,6 +832,30 @@
       "enabledToast": "ማሳወቂያዎች በርተዋል",
       "disabledToast": "ማሳወቂያዎች ጠፍተዋል",
       "failed": "ማሳወቂያዎችን ማብራት አልተቻለም። እባክዎ እንደገና ይሞክሩ።"
+    },
+    "playlists": {
+      "heading": "አቃፊዎችና የደርስ ዝርዝሮች",
+      "subheading": "የድምፅና የምስል ደርሶችን በቅደም ተከተል በተቆጠሩ አቃፊዎችና የደርስ ዝርዝሮች ያደራጁ።",
+      "newPlaylist": "አዲስ አቃፊ ጨምር",
+      "editPlaylist": "አቃፊን አርትዕ",
+      "manageLessons": "ደርሶችን አስተዳድር",
+      "lessonsInFolder": "በዚህ አቃፊ ውስጥ ያሉ ደርሶች",
+      "searchPlaceholder": "አቃፊዎችን ፈልግ...",
+      "colTitle": "የአቃፊው ርዕስ",
+      "colCategory": "ዘርፍ",
+      "colLectures": "ደርሶች",
+      "colActions": "ተግባራት",
+      "fieldTitle": "የአቃፊ ርዕስ",
+      "fieldSlug": "የዩአርኤል ቁልፍ",
+      "fieldDescription": "ማብራሪያና አጭር መግለጫ",
+      "fieldCategory": "ዘርፍ",
+      "fieldCoverUrl": "የሽፋን ምስል",
+      "savePlaylist": "አቃፊውን አስቀምጥ",
+      "reorderSuccess": "የደርስ ቅደም ተከተል በተሳካ ሁኔታ ተስተካክሏል።",
+      "moveUp": "ወደ ላይ ውሰድ",
+      "moveDown": "ወደ ታች ውሰድ",
+      "removeFromFolder": "ከአቃፊ አስወጣ",
+      "trackNumber": "ደርስ"
     }
   },
   "articleDetail": {

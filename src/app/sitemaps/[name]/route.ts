@@ -40,11 +40,10 @@ export async function GET(
         { path: "/articles", changefreq: "daily" as const, priority: 0.9 },
         { path: "/courses", changefreq: "weekly" as const, priority: 0.85 },
         { path: "/media", changefreq: "weekly" as const, priority: 0.85 },
-        { path: "/series", changefreq: "weekly" as const, priority: 0.8 },
+        { path: "/playlists", changefreq: "weekly" as const, priority: 0.8 },
         { path: "/events", changefreq: "weekly" as const, priority: 0.75 },
         { path: "/about", changefreq: "monthly" as const, priority: 0.7 },
         { path: "/qualifications", changefreq: "monthly" as const, priority: 0.7 },
-        { path: "/journey", changefreq: "monthly" as const, priority: 0.7 },
         { path: "/ask", changefreq: "monthly" as const, priority: 0.65 },
         { path: "/contact", changefreq: "monthly" as const, priority: 0.6 },
       ];
@@ -110,12 +109,13 @@ export async function GET(
       }
       break;
     }
+    case "playlists":
     case "series": {
       const data = await getAllSeries().catch(() => []);
       for (const s of data.filter(isPublished)) {
         if (!s.slug) continue;
         items.push({
-          subpath: `/series/${s.slug}`,
+          subpath: `/playlists/${s.slug}`,
           lastmod: toIso(s.updated_at || s.published_at),
           changefreq: "weekly",
           priority: 0.8,

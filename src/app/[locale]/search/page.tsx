@@ -54,7 +54,8 @@ export default async function SearchPage(props: {
       case 'article': return `/articles/${result.slug}`;
       case 'fatwa': return `/fatwas/${result.slug}`;
       case 'course': return `/courses/${result.slug}`;
-      case 'series': return `/series/${result.slug}`;
+      case 'series':
+      case 'playlist': return `/playlists/${result.slug}`;
       case 'event': return `/events/${result.slug}`;
       default: return `/media`;
     }

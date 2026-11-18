@@ -161,10 +161,10 @@ export default async function CoursePage({
             </div>
             <div className="relative flex flex-wrap gap-3 shrink-0">
               <Link
-                href="/series"
+                href="/playlists"
                 className="inline-flex items-center px-4 py-2 text-xs font-bold rounded-full text-[#072118] bg-[#BF9A45] hover:bg-[#E6D3A3] transition-colors"
               >
-                Browse Audio Series
+                Browse Lesson Folders
               </Link>
               {playStoreUrl && (<a
                 href={playStoreUrl}

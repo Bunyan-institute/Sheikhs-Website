@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { getMedia, type MediaItem } from "@/lib/api/media";
 import { getProfile } from "@/lib/api/profile";
 import { MediaCard } from "@/components/media/media-card";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FolderKanban } from "lucide-react";
 import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema, buildCollectionSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
@@ -184,7 +184,20 @@ export default async function MediaPage({
         </div>
 
         {/* Kind Filters */}
-        <div className="flex flex-wrap gap-2 mb-8 sm:mb-10 pb-4 border-b border-[#0F241C]/10">
+        <div className="flex flex-wrap items-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-[#0F241C]/10">
+          <Link
+            href="/playlists"
+            className="px-4 py-2 rounded-full font-bold text-xs transition-colors min-h-[36px] flex items-center gap-2 bg-[#BF9A45]/20 text-[#072118] border border-[#BF9A45]/40 hover:bg-[#BF9A45]/30 shadow-xs"
+          >
+            <FolderKanban className="w-3.5 h-3.5 text-[#B8860B]" />
+            <span>
+              {locale === "am"
+                ? "የደርስ አቃፊዎች (Playlists)"
+                : locale === "ar"
+                ? "مجلدات وقوائم الدروس"
+                : "Lesson Folders & Playlists"}
+            </span>
+          </Link>
           {kinds.map((tab) => (
             <Link
               key={tab.value}

@@ -49,13 +49,13 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
   // Links tied to an admin-controlled section only show while that section is enabled.
   const knowledgeLinks = [
     { href: "/media", labelKey: "nav.media" },
-    { href: "/series", labelKey: "nav.series" },
     { href: "/articles", labelKey: "nav.articles", section: "articles" as const },
     { href: "/fatwas", labelKey: "nav.fatwas", section: "fatwas" as const },
     { href: "/courses", labelKey: "nav.courses", section: "courses" as const },
   ].filter((l) => !l.section || profile.sections[l.section]);
 
   const resourceLinks = [
+    { href: "/playlists", labelKey: "nav.playlists" },
     { href: "/events", labelKey: "nav.events", section: "events" as const },
     { href: "/verify", labelKey: "nav.verify" },
     { href: "/ask", labelKey: "nav.ask", section: "questions" as const },
@@ -64,7 +64,6 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
 
   const profileLinks = [
     { href: "/about", labelKey: "nav.about" },
-    { href: "/journey", labelKey: "nav.journey" },
     { href: "/qualifications", labelKey: "nav.qualifications" },
     { href: "/contact", labelKey: "nav.contact" },
   ];

@@ -9,6 +9,8 @@ import {
   saveSeries,
   getSeriesByIdOrSlug,
   deleteSeries,
+  reorderSeriesLectures,
+  removeLectureFromSeries,
   saveArticle,
   getArticleByIdOrSlug,
   deleteArticle,
@@ -174,6 +176,35 @@ export async function deleteSeriesAction(id: string) {
   const deleted = await deleteSeries(id);
   refreshCache();
   return { success: deleted };
+}
+
+// ── Playlist & Folder Actions (alias & extended reordering) ──
+
+export const savePlaylistAction = saveSeriesAction;
+export const deletePlaylistAction = deleteSeriesAction;
+
+/**
+ * Reorders derses/lectures in a folder/playlist to exact sequential numbers 1..N.
+ */
+export async function reorderPlaylistLecturesAction(playlistId: string, orderedLectureIds: string[]) {
+  await assertAuthenticated();
+  return guarded(async () => {
+    const series = await reorderSeriesLectures(playlistId, orderedLectureIds);
+    refreshCache();
+    return { success: true as const, series };
+  });
+}
+
+/**
+ * Detaches a ders/lecture from its parent folder/playlist.
+ */
+export async function removeLectureFromPlaylistAction(lectureId: string) {
+  await assertAuthenticated();
+  return guarded(async () => {
+    await removeLectureFromSeries(lectureId);
+    refreshCache();
+    return { success: true as const };
+  });
 }
 
 // ── Article Actions ──

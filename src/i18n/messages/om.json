@@ -17,7 +17,8 @@
     "qualifications": "Sadarkaa Barnootaa",
     "search": "Barbaadi",
     "more": "Dabalata",
-    "menu": "Baafata"
+    "menu": "Baafata",
+    "playlists": "Kutaalee fi Tarree Darsii"
   },
   "home": {
     "exploreLectures": "Darsiiwwan Sakatta'aa",
@@ -425,7 +426,9 @@
       "publishHint": "Akka ragaa hin mul'anne tuqii kaa'uuf cufi.",
       "moreOptions": "Filannoo dabalataa",
       "topics": "Mata duree",
-      "keywords": "Jecha furtuu"
+      "keywords": "Jecha furtuu",
+      "playlists": "Kutaalee fi Tarree Darsii",
+      "qualifications": "Ragaalee Barnootaa"
     },
     "header": {
       "systemStatus": "Sirnichi Hojjataa Jira • Walitti Hidhamiinsa Kallattii",
@@ -829,6 +832,30 @@
       "enabledToast": "Beeksisni banameera",
       "disabledToast": "Beeksisni cufameera",
       "failed": "Beeksisa banuun hin danda'amne. Mee irra deebi'ii yaali."
+    },
+    "playlists": {
+      "heading": "Kutaalee fi Tarree Darsii",
+      "subheading": "Darsiiwwan sagalee fi viidiyoo tartiiba lakkoofsaan qindeessuu.",
+      "newPlaylist": "Kuusaa Haaraa Dabali",
+      "editPlaylist": "Kuusaa Gulaali",
+      "manageLessons": "Darsiiwwan Bulchi",
+      "lessonsInFolder": "Darsiiwwan Kuusaa Kana Keessaa",
+      "searchPlaceholder": "Kuusaalee barbaadi...",
+      "colTitle": "Mata-duree Kuusaa",
+      "colCategory": "Damee",
+      "colLectures": "Darsiiwwan",
+      "colActions": "Tarkaanfiiwwan",
+      "fieldTitle": "Mata-duree Kuusaa",
+      "fieldSlug": "Kallattii URL",
+      "fieldDescription": "Ibsa fi Qabiyyee",
+      "fieldCategory": "Ramaddii",
+      "fieldCoverUrl": "Fakkii Qolaa",
+      "savePlaylist": "Kuusaa Olkaawi",
+      "reorderSuccess": "Tartiibni darsii milkaa'inaan haaromeera.",
+      "moveUp": "Ol Siqsi",
+      "moveDown": "Gadi Siqsi",
+      "removeFromFolder": "Kuusaa Keessaa Baasi",
+      "trackNumber": "Darsii"
     }
   },
   "articleDetail": {

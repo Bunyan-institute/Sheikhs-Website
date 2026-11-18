@@ -37,7 +37,6 @@ export function buildNavigation(sections?: Partial<SectionMap> | null): NavItem[
   if (s.courses) {
     knowledge.push({ key: "courses", href: "/courses", labelKey: "nav.courses" });
   }
-  knowledge.push({ key: "series", href: "/series", labelKey: "nav.series" });
 
   if (knowledge.length > 0) {
     nav.push({
@@ -69,7 +68,6 @@ export function buildMoreItems(sections?: Partial<SectionMap> | null): NavItem[]
   const s = { ...DEFAULT_SECTIONS, ...(sections || {}) };
 
   const items: NavItem[] = [
-    { key: "journey", href: "/journey", labelKey: "nav.journey" },
     { key: "qualifications", href: "/qualifications", labelKey: "nav.qualifications" },
     { key: "verify", href: "/verify", labelKey: "nav.verify" },
   ];

@@ -281,7 +281,7 @@ test("SEO: Google Sitelinks navigation schema generates 5 authoritative pillars"
   assert.equal(enSitelinks["@type"], "ItemList");
   assert.equal(enSitelinks.itemListElement.length, 5);
 
-  const expectedPaths = ["/fatwas", "/articles", "/series", "/courses", "/ask"];
+  const expectedPaths = ["/fatwas", "/articles", "/media", "/courses", "/ask"];
 
   enSitelinks.itemListElement.forEach((el, idx) => {
     assert.equal(el["@type"], "SiteNavigationElement");

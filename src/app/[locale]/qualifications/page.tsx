@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getQualifications } from "@/lib/db/repository";
 import { getSiteUrl, getScholarEntity, buildHreflangAlternates } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
+import { QualificationsView } from "@/components/qualifications/qualifications-view";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -15,7 +16,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    keywords: ["Islamic Qualifications", "Sanad", "Ijazah", "AAOIFI Sharia Advisor", "Islamic University of Minnesota", "Sheikh Muhammed Ferej"],
+    keywords: [
+      "Islamic Qualifications",
+      "Sanad",
+      "Ijazah",
+      "AAOIFI Sharia Advisor",
+      "Islamic University of Minnesota",
+      "Sheikh Muhammed Ferej",
+      "ማስረጃዎች",
+      "إجازات شرعية",
+    ],
     alternates: buildHreflangAlternates("/qualifications", locale),
     openGraph: {
       type: "profile",
@@ -33,15 +43,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const typeConfig: Record<string, { label: string, color: string }> = {
-  ijazah: { label: "Traditional Ijazah", color: "bg-[#1B6A50]/10 text-[#1B6A50] border-[#1B6A50]/30" },
-  academic: { label: "University Degree", color: "bg-[#BF9A45]/15 text-[#072118] border-[#BF9A45]/40" },
-  certificate: { label: "Certified Qualification", color: "bg-[#0D3E2F]/10 text-[#0D3E2F] border-[#0D3E2F]/20" },
-  traditional: { label: "Traditional Ijazah", color: "bg-[#1B6A50]/10 text-[#1B6A50] border-[#1B6A50]/30" },
-  certification: { label: "Certified Qualification", color: "bg-[#0D3E2F]/10 text-[#0D3E2F] border-[#0D3E2F]/20" },
-  other: { label: "Accreditation", color: "bg-[#0F241C]/5 text-[#0F241C]/80 border-[#0F241C]/15" }
-};
-
 export default async function QualificationsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -55,6 +56,22 @@ export default async function QualificationsPage({ params }: { params: Promise<{
     name: `${t("title")} | Sheikh Muhammed Ferej Megeno`,
     url: `${siteUrl}/${locale}/qualifications`,
     mainEntity: getScholarEntity(),
+  };
+
+  const translations = {
+    all: locale === "am" ? "ሁሉም ማስረጃዎች" : locale === "ar" ? "كافة المؤهلات" : locale === "om" ? "Hunda" : "All Credentials",
+    academic: locale === "am" ? "የዩኒቨርሲቲ ዲግሪዎች" : locale === "ar" ? "الشهادات الجامعية" : locale === "om" ? "Digirii Yuunivarsitii" : "University Degrees",
+    ijazah: locale === "am" ? "ባህላዊ ኢጃዛና ሰነድ" : locale === "ar" ? "الإجازات والأسانيد" : locale === "om" ? "Ijaazaa fi Sanada" : "Traditional Sanad & Ijazah",
+    certificate: locale === "am" ? "የሙያና የሸሪዓ ማረጋገጫዎች" : locale === "ar" ? "الشهادات المهنية والمعيارية" : locale === "om" ? "Sartafikeetota" : "Professional Certifications",
+    verifiedBadge: locale === "am" ? "የተረጋገጡ የትምህርት ማስረጃዎች" : locale === "ar" ? "مؤهلات وأسانيد معتمدة" : locale === "om" ? "Ragaalee Mirkanaa'an" : "Verified Scholarly Credentials",
+    verifiedSub: locale === "am"
+      ? "በሸሪዓና በህግ፣ በኢስላማዊ ጥናትና በባህላዊ የዕውቀት ሰንሰለት (ሰነድ) የተገኙ ይፋዊ የትምህርት ማስረጃዎች።"
+      : locale === "ar"
+      ? "توثيق شامل للدرجات العلمية في الشريعة والقانون، والأسانيد المتصلة، والمعايير الشرعية المعتمدة."
+      : locale === "om"
+      ? "Ragaalee barnootaa fi ijaazaawwan seera shari'aa fi barnoota Islaamaa irratti argaman."
+      : "Formal academic degrees in Sharia and Law, postgraduate honors, AAOIFI audit certifications, and unbroken transmission sanads.",
+    noItems: locale === "am" ? "በዚህ ምድብ ምንም ማስረጃ አልተገኘም።" : locale === "ar" ? "لا توجد مؤهلات في هذا القسم." : locale === "om" ? "Ragaan hin jiru." : "No credentials found in this category.",
   };
 
   return (
@@ -86,43 +103,12 @@ export default async function QualificationsPage({ params }: { params: Promise<{
         </div>
       </section>
 
-      {/* Qualifications Cards Grid */}
-      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {qualifications.map((qual) => {
-            const config = typeConfig[qual.type] || typeConfig.other;
-
-            return (
-              <div
-                key={qual.id}
-                className="bg-white border border-[#0F241C]/10 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-[#1B6A50] transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex justify-between items-start gap-3 mb-4">
-                    <span className={`px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider rounded-full border ${config.color}`}>
-                      {config.label}
-                    </span>
-                    <span className="text-[#0F241C]/60 text-xs font-semibold bg-[#EDF4F0] px-2.5 py-0.5 rounded-full border border-[#0F241C]/10">
-                      {qual.year}
-                    </span>
-                  </div>
-                  
-                  <h3 className="font-display text-lg sm:text-xl font-semibold text-[#0F241C] mb-2 break-words">
-                    {qual.title}
-                  </h3>
-                  
-                  <p className="text-[#BF9A45] font-semibold text-xs mb-4 pb-3 border-b border-[#0F241C]/10 break-words">
-                    {qual.issuer}
-                  </p>
-                  
-                  <p className="text-[#0F241C]/75 leading-relaxed text-xs sm:text-sm break-words">
-                    {qual.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+      {/* Main Content Area */}
+      <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+        <QualificationsView
+          qualifications={qualifications}
+          translations={translations}
+        />
       </div>
     </div>
   );

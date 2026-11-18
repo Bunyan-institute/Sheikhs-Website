@@ -1,7 +1,5 @@
-import { getAllSeries } from "@/lib/db/repository";
-import { SeriesClient } from "./series-client";
+import { redirect } from "next/navigation";
 
-export default async function AdminSeriesPage() {
-  const seriesList = await getAllSeries();
-  return <SeriesClient initialSeries={seriesList} />;
+export default function AdminSeriesRedirect() {
+  redirect("/admin/playlists");
 }

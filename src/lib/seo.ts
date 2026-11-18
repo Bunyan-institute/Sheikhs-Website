@@ -526,18 +526,18 @@ export const PRIMARY_SITELINKS: SitelinkDefinition[] = [
     },
   },
   {
-    subpath: "/series",
+    subpath: "/media",
     name: {
-      en: "Audio & Video Lesson Series",
-      am: "የትምህርት ስብስቦች",
-      ar: "السلاسل العلمية والمنهجية",
-      om: "Walitti-qabiinsa Barnootaa",
+      en: "Audio & Media Archives",
+      am: "የድምፅና ምስል ማዕከል",
+      ar: "المكتبة الصوتية والمرئية",
+      om: "Kuusaa Sagalee fi Viidiyoo",
     },
     description: {
-      en: "Complete multi-part lecture series covering Tafsir, Hadith compilations, and classical Fiqh books.",
-      am: "የተፍሲር፣ የሐዲስ ኪታቦችና የፊቅህ ትምህርቶች የተሟሉ ተከታታይ የድምፅና ቪዲዮ ስብስቦች።",
-      ar: "سلاسل صوتية ومرئية مكتملة في تفسير كتاب الله وشروح كتب أمهات الحديث والفقه.",
-      om: "Darsiiwwan sagalee fi viidiyoo walitti-fufaa Tafsiira, Hadiisaa fi Fiqhii.",
+      en: "Complete multi-part audio archives, verified halaqat, and video discourses by Sheikh Muhammed Ferej.",
+      am: "በኡስታዝ ሙሐመድ ፈረጅ የተሰጡ የተሟሉ የድምፅ ደርሶች፣ ሀለቃዎች እና ይፋዊ የቪዲዮ ትምህርቶች።",
+      ar: "تسجيلات صوتية ومرئية ودروس منهجية كاملة لفضيلة الشيخ محمد فرج مجنو.",
+      om: "Darsiiwwan sagalee fi viidiyoo guutuu Sheekh Muhammad Farajtiin qophaa'an.",
     },
   },
   {

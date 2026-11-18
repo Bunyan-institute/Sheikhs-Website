@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { LecturePlayer } from "@/components/lectures/lecture-player";
 import { LectureTranscript } from "@/components/lectures/lecture-transcript";
 import { Link } from "@/i18n/navigation";
-import { ArrowLeft, Calendar, Clock, Folder, Layers } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Folder, FolderKanban, Layers } from "lucide-react";
 import { formatDate, formatDuration } from "@/lib/utils";
 import type { PublicLecture } from "@/lib/api/types";
 import { getSiteUrl, buildLectureSchema, buildBreadcrumbSchema, buildHreflangAlternates } from "@/lib/seo";
@@ -123,13 +123,13 @@ export default async function LectureDetailPage({ params }: LectureDetailPagePro
 
             {lecture.series && (
               <Link 
-                href={`/series/${lecture.series.id}`}
+                href={`/playlists/${lecture.series.id}`}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-[#FAF8F5] border border-[#E0D8CE] rounded-md hover:border-[#1B5E20] transition-colors group text-sm"
               >
-                <Layers className="w-4 h-4 text-[#B8860B]" />
-                <span className="text-[#636E72]">Part of series:</span>
+                <FolderKanban className="w-4 h-4 text-[#B8860B]" />
+                <span className="text-[#636E72]">Folder / Playlist:</span>
                 <span className="font-semibold text-[#2D3436] group-hover:text-[#1B5E20]">
-                  {lecture.series.title} {lecture.series.position ? `(Lesson ${lecture.series.position})` : ''}
+                  {lecture.series.title} {lecture.series.position ? `(Ders ${lecture.series.position})` : ""}
                 </span>
               </Link>
             )}

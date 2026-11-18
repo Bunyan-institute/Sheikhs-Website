@@ -17,7 +17,8 @@
     "qualifications": "المؤهلات والإجازات",
     "search": "بحث",
     "more": "المزيد",
-    "menu": "القائمة"
+    "menu": "القائمة",
+    "playlists": "قوائم التشغيل والدروس"
   },
   "home": {
     "exploreLectures": "تصفح المحاضرات والدروس",
@@ -425,7 +426,9 @@
       "publishHint": "أوقفه للاحتفاظ بها كمسودة لا يراها الزوار.",
       "moreOptions": "خيارات إضافية",
       "topics": "المواضيع",
-      "keywords": "كلمات مفتاحية"
+      "keywords": "كلمات مفتاحية",
+      "playlists": "قوائم التشغيل والمجلدات",
+      "qualifications": "المؤهلات والإجازات"
     },
     "header": {
       "systemStatus": "النظام متصل • مزامنة حية ومباشرة",
@@ -829,6 +832,30 @@
       "enabledToast": "تم تفعيل الإشعارات",
       "disabledToast": "تم إيقاف الإشعارات",
       "failed": "تعذّر تفعيل الإشعارات. حاول مرة أخرى."
+    },
+    "playlists": {
+      "heading": "قوائم التشغيل والمجلدات",
+      "subheading": "تنظيم الدروس الصوتية والمرئية في مجلدات وقوائم تشغيل مرتبة ومرقمة تسلسلياً.",
+      "newPlaylist": "إضافة مجلد جديد",
+      "editPlaylist": "تعديل المجلد",
+      "manageLessons": "إدارة الدروس",
+      "lessonsInFolder": "الدروس المندرجة في هذا المجلد",
+      "searchPlaceholder": "البحث في المجلدات...",
+      "colTitle": "عنوان المجلد",
+      "colCategory": "المجال",
+      "colLectures": "الدروس",
+      "colActions": "إجراءات",
+      "fieldTitle": "عنوان المجلد",
+      "fieldSlug": "الاسم اللطيف (Slug)",
+      "fieldDescription": "الوصف والنبذة التعريفية",
+      "fieldCategory": "التصنيف",
+      "fieldCoverUrl": "صورة الغلاف",
+      "savePlaylist": "حفظ المجلد",
+      "reorderSuccess": "تم تحديث ترتيب الدروس بنجاح.",
+      "moveUp": "تحريك لأعلى",
+      "moveDown": "تحريك لأسفل",
+      "removeFromFolder": "إزالة من المجلد",
+      "trackNumber": "الدرس"
     }
   },
   "articleDetail": {
