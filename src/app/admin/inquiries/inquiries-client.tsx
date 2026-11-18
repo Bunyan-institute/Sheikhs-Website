@@ -119,6 +119,7 @@ export function InquiriesClient({ initialInquiries }: { initialInquiries: Inquir
         inquiryId: selectedInquiry.id,
         title: fatwaTitle,
         slug: fatwaSlug,
+        question: selectedInquiry.question,
         answer: fatwaAnswer,
         category: fatwaCategory,
       });

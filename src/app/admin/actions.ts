@@ -498,6 +498,7 @@ export async function convertInquiryToFatwaAction(data: {
   inquiryId: string;
   title: string;
   slug: string;
+  question?: string;
   answer: string;
   category?: string;
 }) {
@@ -507,7 +508,7 @@ export async function convertInquiryToFatwaAction(data: {
     title: data.title,
     slug: data.slug,
     summary: data.title,
-    question: data.title,
+    question: data.question || data.title,
     answer: data.answer,
     categories: data.category ? [data.category] : [],
     published_at: new Date().toISOString(),

@@ -13,7 +13,7 @@ export function useDatabaseStorage(): boolean {
   const mode = process.env.UPLOAD_STORAGE;
   if (mode === "database") return true;
   if (mode === "filesystem") return false;
-  return dialect === "postgres" && Boolean(process.env.VERCEL);
+  return Boolean(process.env.VERCEL) || Boolean(process.env.TURSO_DATABASE_URL);
 }
 
 export const maxUploadBytes = () => Number(process.env.MAX_UPLOAD_MB || (useDatabaseStorage() ? 4 : 500)) * 1024 * 1024;

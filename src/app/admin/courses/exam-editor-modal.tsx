@@ -41,6 +41,15 @@ export function ExamEditorModal({ courseSlug, courseTitle, onClose }: { courseSl
   const patch = (i: number, p: Partial<QuestionDraft>) => setQuestions((qs) => qs.map((q, idx) => (idx === i ? { ...q, ...p } : q)));
 
   const save = async () => {
+    if (passing < 10 || passing > 100) {
+      toast.error("Passing score must be between 10% and 100%.");
+      return;
+    }
+    const invalid = questions.find((q) => !q.question.trim() || q.options.filter((o) => o.trim()).length < 2);
+    if (invalid) {
+      toast.error("Each question must have question text and at least two options.");
+      return;
+    }
     setSaving(true);
     try {
       const res = await saveCourseExamAction(courseSlug, { passingPercentage: passing, questions });
