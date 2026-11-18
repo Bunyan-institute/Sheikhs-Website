@@ -1,0 +1,46 @@
+[
+  {
+    "lesson_num": 1,
+    "title": "የሙስሊም ስነ-ምግባር — ደርስ 01: ከአላህ ሱብሓነሁ ወተዓላ ጋር",
+    "slug": "akhlaq-al-muslim-lesson-01",
+    "filename": "akhlaq-al-muslim-lesson-01.mp3",
+    "url": "/audio/akhlaq-al-muslim/akhlaq-al-muslim-lesson-01.mp3",
+    "duration": 2316,
+    "file_size": 13895793,
+    "bitrate": 48003,
+    "src": "/run/media/fuayd/disk/druss/خلق المسلم مع الله.m4a"
+  },
+  {
+    "lesson_num": 2,
+    "title": "የሙስሊም ስነ-ምግባር — ደርስ 02: ከመልእክተኛው (ሶ.ዐ.ወ) ጋር",
+    "slug": "akhlaq-al-muslim-lesson-02",
+    "filename": "akhlaq-al-muslim-lesson-02.mp3",
+    "url": "/audio/akhlaq-al-muslim/akhlaq-al-muslim-lesson-02.mp3",
+    "duration": 1106,
+    "file_size": 6635217,
+    "bitrate": 48006,
+    "src": "/run/media/fuayd/disk/druss/خلق المسلم مع الرسول.m4a"
+  },
+  {
+    "lesson_num": 3,
+    "title": "የሙስሊም ስነ-ምግባር — ደርስ 03: ከቅዱስ ቁርኣን ጋር",
+    "slug": "akhlaq-al-muslim-lesson-03",
+    "filename": "akhlaq-al-muslim-lesson-03.mp3",
+    "url": "/audio/akhlaq-al-muslim/akhlaq-al-muslim-lesson-03.mp3",
+    "duration": 890,
+    "file_size": 5340575,
+    "bitrate": 48007,
+    "src": "/run/media/fuayd/disk/druss/خلق المسلم مع القرآن.m4a"
+  },
+  {
+    "lesson_num": 4,
+    "title": "የሙስሊም ስነ-ምግባር — ደርስ 04: ከሰው ልጆች ጋር",
+    "slug": "akhlaq-al-muslim-lesson-04",
+    "filename": "akhlaq-al-muslim-lesson-04.mp3",
+    "url": "/audio/akhlaq-al-muslim/akhlaq-al-muslim-lesson-04.mp3",
+    "duration": 4312,
+    "file_size": 25870031,
+    "bitrate": 48001,
+    "src": "/run/media/fuayd/disk/druss/خلق المسلم مع….m4a"
+  }
+]

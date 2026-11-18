@@ -1,0 +1,189 @@
+[
+  {
+    "lesson_num": 1,
+    "title": "የቂያማ ምልክቶችና መፍትሄው",
+    "slug": "lecture-01",
+    "filename": "lecture-01.mp3",
+    "url": "/audio/lectures/lecture-01.mp3",
+    "duration": 4338,
+    "file_size": 26030968,
+    "bitrate": 48001,
+    "src": "/run/media/fuayd/disk/druss/Ye qiama milkitochina meftihewu.m4a"
+  },
+  {
+    "lesson_num": 2,
+    "title": "የኢስላምና የኢማን መሰረቶች (أركان الإسلام والإيمان)",
+    "slug": "lecture-02",
+    "filename": "lecture-02.mp3",
+    "url": "/audio/lectures/lecture-02.mp3",
+    "duration": 2330,
+    "file_size": 13980591,
+    "bitrate": 48002,
+    "src": "/run/media/fuayd/disk/druss/أركان الإسلام والإيمان.m4a"
+  },
+  {
+    "lesson_num": 3,
+    "title": "ቀብርን እንዴት እንዘይር? (كيف نزور القبور)",
+    "slug": "lecture-03",
+    "filename": "lecture-03.mp3",
+    "url": "/audio/lectures/lecture-03.mp3",
+    "duration": 2545,
+    "file_size": 15273166,
+    "bitrate": 48002,
+    "src": "/run/media/fuayd/disk/druss/كيف نزور القبور  ቀብርን እንዴት እንዘይር.m4a"
+  },
+  {
+    "lesson_num": 4,
+    "title": "ለዲንህ ምን አበርክተሃል? (ماذا قدمت لدينك)",
+    "slug": "lecture-04",
+    "filename": "lecture-04.mp3",
+    "url": "/audio/lectures/lecture-04.mp3",
+    "duration": 2994,
+    "file_size": 17966689,
+    "bitrate": 48002,
+    "src": "/run/media/fuayd/disk/druss/ماذا قدمت لدينك  ለዲንህ ምን አበርክተሃል.m4a"
+  },
+  {
+    "lesson_num": 5,
+    "title": "ወሰደ ወይ (ولو)",
+    "slug": "lecture-05",
+    "filename": "lecture-05.mp3",
+    "url": "/audio/lectures/lecture-05.mp3",
+    "duration": 334,
+    "file_size": 1334857,
+    "bitrate": 32012,
+    "src": "/run/media/fuayd/disk/druss/ولو.mp3"
+  },
+  {
+    "lesson_num": 6,
+    "title": "የተርዊያህ ቀን (يوم التروية)",
+    "slug": "lecture-06",
+    "filename": "lecture-06.mp3",
+    "url": "/audio/lectures/lecture-06.mp3",
+    "duration": 255,
+    "file_size": 1020189,
+    "bitrate": 32018,
+    "src": "/run/media/fuayd/disk/druss/يوم التروية.mp3"
+  },
+  {
+    "lesson_num": 7,
+    "title": "ራስን ፍለጋና መገምገም (محاسبة النفس)",
+    "slug": "lecture-07",
+    "filename": "lecture-07.mp3",
+    "url": "/audio/lectures/lecture-07.mp3",
+    "duration": 3931,
+    "file_size": 23586677,
+    "bitrate": 48001,
+    "src": "/run/media/fuayd/disk/druss/ራስን ፍለጋ محاسبة النفس.m4a"
+  },
+  {
+    "lesson_num": 8,
+    "title": "ነሲሃ ከስደት ለሚመለሱ እህቶች",
+    "slug": "lecture-08",
+    "filename": "lecture-08.mp3",
+    "url": "/audio/lectures/lecture-08.mp3",
+    "duration": 859,
+    "file_size": 5153284,
+    "bitrate": 48008,
+    "src": "/run/media/fuayd/disk/druss/ነሲሃ ከስደት ለሚመለሱ እህቶች.m4a"
+  },
+  {
+    "lesson_num": 9,
+    "title": "ኑ አረጋዊያንን እንንከባከብ",
+    "slug": "lecture-09",
+    "filename": "lecture-09.mp3",
+    "url": "/audio/lectures/lecture-09.mp3",
+    "duration": 456,
+    "file_size": 2734550,
+    "bitrate": 48014,
+    "src": "/run/media/fuayd/disk/druss/ኑ አረጋዊያንን እንንከባከብ.m4a"
+  },
+  {
+    "lesson_num": 10,
+    "title": "ኢስላም ለጤና የሰጠው ቦታ — አርሲ ዩኒቨርሲቲ",
+    "slug": "lecture-10",
+    "filename": "lecture-10.mp3",
+    "url": "/audio/lectures/lecture-10.mp3",
+    "duration": 3982,
+    "file_size": 23893445,
+    "bitrate": 48001,
+    "src": "/run/media/fuayd/disk/druss/አርሲ ዩኒቨርሲቲ የጤና ዶክተሮች ምርቃት ላይ የቀረበ  ኢስላም ለጤና የሰጠው ቦ.m4a"
+  },
+  {
+    "lesson_num": 11,
+    "title": "የጠዋትና የማታ አዝካሮች",
+    "slug": "lecture-11",
+    "filename": "lecture-11.mp3",
+    "url": "/audio/lectures/lecture-11.mp3",
+    "duration": 222,
+    "file_size": 1330324,
+    "bitrate": 48028,
+    "src": "/run/media/fuayd/disk/druss/አዝካር.m4a"
+  },
+  {
+    "lesson_num": 12,
+    "title": "የዋቤ ወንዝ ዳዕዋ",
+    "slug": "lecture-12",
+    "filename": "lecture-12.mp3",
+    "url": "/audio/lectures/lecture-12.mp3",
+    "duration": 92,
+    "file_size": 551695,
+    "bitrate": 48068,
+    "src": "/run/media/fuayd/disk/druss/ዋቤ ወንዝ.m4a"
+  },
+  {
+    "lesson_num": 13,
+    "title": "የሰው ልጅ በሰውነቱ የተከበረ ነው",
+    "slug": "lecture-13",
+    "filename": "lecture-13.mp3",
+    "url": "/audio/lectures/lecture-13.mp3",
+    "duration": 632,
+    "file_size": 3792638,
+    "bitrate": 48011,
+    "src": "/run/media/fuayd/disk/druss/የሰው ልጅ በሰውነቱ የተከበረ ነው ።.m4a"
+  },
+  {
+    "lesson_num": 14,
+    "title": "የዙልሂጃ አስርቱ ቀናቶች ደረጃና ስራዎች",
+    "slug": "lecture-14",
+    "filename": "lecture-14.mp3",
+    "url": "/audio/lectures/lecture-14.mp3",
+    "duration": 1018,
+    "file_size": 6111379,
+    "bitrate": 48006,
+    "src": "/run/media/fuayd/disk/druss/የዙልሂጃ አስርቱ ቀናቶች.m4a"
+  },
+  {
+    "lesson_num": 15,
+    "title": "የጅማ ዩኒቨርሲቲ ተማሪዎች ሙሀደራ",
+    "slug": "lecture-15",
+    "filename": "lecture-15.mp3",
+    "url": "/audio/lectures/lecture-15.mp3",
+    "duration": 5842,
+    "file_size": 35050902,
+    "bitrate": 48001,
+    "src": "/run/media/fuayd/disk/druss/ጅማ ዩኒቨርሲቲ.m4a"
+  },
+  {
+    "lesson_num": 16,
+    "title": "ጊዜና እስልምና",
+    "slug": "lecture-16",
+    "filename": "lecture-16.mp3",
+    "url": "/audio/lectures/lecture-16.mp3",
+    "duration": 677,
+    "file_size": 2708544,
+    "bitrate": 32005,
+    "src": "/run/media/fuayd/disk/druss/ግዜና ኢስላም.mp3"
+  },
+  {
+    "lesson_num": 17,
+    "title": "ጭፍን ተከታይነትና መዘዙ (التقليد الأعمى)",
+    "slug": "lecture-17",
+    "filename": "lecture-17.mp3",
+    "url": "/audio/lectures/lecture-17.mp3",
+    "duration": 3105,
+    "file_size": 18629046,
+    "bitrate": 48002,
+    "src": "/run/media/fuayd/disk/druss/ጭፍን ተከታይነትና መዘዙ التقليد الأعمى.m4a"
+  }
+]

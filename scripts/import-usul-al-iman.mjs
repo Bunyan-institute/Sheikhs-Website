@@ -98,7 +98,7 @@ async function main() {
   // Bump SEED_VERSION_KEY in repository.ts
   const newVersionKey = `_seed_version_20261117_batch4_usul_iman_${Date.now()}`;
   let repoCode = await readFile(REPO_FILE, 'utf-8');
-  repoCode = repoCode.replace(/const SEED_VERSION_KEY = '[^']+';/, `const SEED_VERSION_KEY = '${newVersionKey}';`);
+  repoCode = repoCode.replace(/const SEED_VERSION_KEY = ['"][^'"]+['"];/, `const SEED_VERSION_KEY = "${newVersionKey}";`);
   await writeFile(REPO_FILE, repoCode, 'utf-8');
 
   console.log(`Usul al-Iman Ingestion Complete:`);
