@@ -57,7 +57,7 @@ function revalidate() {
 
 const SEEDED_KEY = "_seeded";
 const SEEDING_KEY = "_seeding";
-const SEED_VERSION_KEY = "_seed_version_20261117_final_all_audio_1794986666641";
+const SEED_VERSION_KEY = "_seed_version_20261118_complete_archive_1794987966791";
 let readyPromise: Promise<void> | null = null;
 
 /**
