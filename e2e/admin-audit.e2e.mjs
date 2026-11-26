@@ -16,7 +16,7 @@ try {
  await page.locator('input[autocomplete="current-password"]').fill(process.env.ADMIN_PASSWORD);
  await page.getByRole('button',{name:'Sign In to Admin',exact:true}).click();await page.waitForURL(base+'/admin');
  const destinations=[...new Set(await page.locator('aside a[href^="/admin"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))))];assert.equal(destinations.length,16);
- await page.goto(base+'/admin/tests');assert.ok((await page.locator('main').innerText()).includes('Event tests'));
+ await page.goto(base+'/admin/tests');assert.ok((await page.getByRole('heading',{name:'Event tests'}).count())===1);
  for(const href of destinations){const response=await page.goto(base+href);assert.equal(response.status(),200,href);assert.ok(!page.url().includes('/login'),href);await page.locator('main h1').first().waitFor();}
  console.log('✓ real administrator login and all 16 sidebar destinations, including event-test import');
  if(!readOnly){
