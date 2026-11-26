@@ -36,15 +36,15 @@ export async function destroySession(token: string | undefined): Promise<void> {
 }
 
 /** Valid signature, unexpired, and not revoked (the session row must still exist). */
-export async function verifySessionToken(token: string | undefined): Promise<{ username: string } | null> {
+export async function verifySessionToken(token: string | undefined): Promise<{ username: string; expiresAt: number } | null> {
   const payload = await verifySessionSignature(token);
   if (!payload) return null;
   await ensureTablesExist();
   const row = await queryOne("SELECT id FROM admin_sessions WHERE id = ? AND expires_at > ?;", [payload.sid, Date.now()]);
-  return row ? { username: payload.username } : null;
+  return row ? { username: payload.username, expiresAt: payload.exp } : null;
 }
 
-export async function getSessionUser(): Promise<{ username: string } | null> {
+export async function getSessionUser(): Promise<{ username: string; expiresAt: number } | null> {
   const cookieStore = await cookies();
   return verifySessionToken(cookieStore.get(SESSION_COOKIE_NAME)?.value);
 }

@@ -856,6 +856,22 @@
       "moveDown": "ወደ ታች ውሰድ",
       "removeFromFolder": "ከአቃፊ አስወጣ",
       "trackNumber": "ደርስ"
+    },
+    "install": {
+      "title": "የሸይኽ አስተዳደር መተግበሪያ ጫን",
+      "iosIntro": "በiPhone ወይም iPad ላይ በSafari አሳሽ የአስተዳደር መተግበሪያውን ይጫኑ።",
+      "iosStep1": "ይህን ገጽ በSafari ይክፈቱና Share ይጫኑ።",
+      "iosStep2": "Add to Home Screen ይምረጡ።",
+      "iosStep3": "Add ይጫኑና ከመነሻ ማያ ገጽዎ መተግበሪያውን ይክፈቱ።",
+      "androidIntro": "በAndroid ስልክዎ ላይ በChrome የአስተዳደር መተግበሪያውን ይጫኑ።",
+      "androidStep1": "ይህን ገጽ በChrome ይክፈቱና የሦስት ነጥብ ምናሌውን ይጫኑ።",
+      "androidStep2": "Install app ወይም Add to Home screen ይምረጡ።",
+      "androidStep3": "Install ይጫኑና በአዲሱ አዶ መተግበሪያውን ይክፈቱ።",
+      "desktopIntro": "መተግበሪያውን በChrome ወይም Edge ይጫኑ።",
+      "desktopStep1": "በአሳሹ አድራሻ አሞሌ ላይ የመጫኛ አዶውን ይምረጡ።",
+      "desktopStep2": "ከአሳሹ ምናሌ Install page as app መምረጥም ይችላሉ።",
+      "desktopStep3": "Install ይጫኑና ከመተግበሪያዎችዎ ይክፈቱት።",
+      "notificationsHint": "የተጫነውን መተግበሪያ ይክፈቱ፣ ይግቡና ማሳወቂያዎችን ለማብራት የደወል አዶውን ይጫኑ። ስልኩ ሲጠይቅ ፍቃድ ይስጡ።"
     }
   },
   "articleDetail": {

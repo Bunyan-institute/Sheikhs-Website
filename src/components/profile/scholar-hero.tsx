@@ -164,7 +164,7 @@ export function ScholarHero({
               {/* Calligraphy Plaque at bottom of Mihrab */}
               <div className="absolute inset-x-4 bottom-6 text-center mihrab-name pointer-events-none z-10">
                 <span className="font-arabic text-lg sm:text-xl text-[#E6D3A3] drop-shadow-md block" dir="rtl" lang="ar">
-                  الشيخ محمد فرج مجنو حفظه الله تعالى
+                  الشيخ محمد فرج مغنو حفظه الله تعالى
                 </span>
                 <span className="font-display text-[11px] sm:text-xs text-[#BF9A45] tracking-[0.2em] uppercase mt-1 block font-semibold drop-shadow-xs">
                   Official Scholar Archive

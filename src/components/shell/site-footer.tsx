@@ -74,7 +74,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
       <div className="relative mx-auto max-w-page px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-8 sm:gap-10">
           <div>
-            <p className="font-arabic text-2xl sm:text-3xl text-[#E6D3A3]" dir="rtl" lang="ar">الشيخ محمد فرج مجنو</p>
+            <p className="font-arabic text-2xl sm:text-3xl text-[#E6D3A3]" dir="rtl" lang="ar">الشيخ محمد فرج مغنو</p>
             <p className="mt-2 font-display text-lg sm:text-xl text-[#EDF4F0]">Sheikh Muhammed Ferej Megeno</p>
             <p className="mt-2 text-sm leading-relaxed max-w-xs text-[#EDF4F0]/75">
               Islamic scholar, educator and Sharia consultant. President of the Al-Fajr Islamic Foundation and member of the African Scholars Union.

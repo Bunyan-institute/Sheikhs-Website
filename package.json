@@ -24,7 +24,9 @@
     "test:sharing": "node --experimental-strip-types --no-warnings --test e2e/sharing.test.mjs",
     "test:sharing:e2e": "node e2e/sharing.e2e.mjs",
     "test:admin-audit": "node e2e/admin-audit.e2e.mjs",
-    "test:admin-publishing": "node e2e/admin-publishing.e2e.mjs"
+    "test:admin-publishing": "node e2e/admin-publishing.e2e.mjs",
+    "test:phone-pwa": "node e2e/phone-pwa.e2e.mjs",
+    "test:session-pwa": "node --experimental-strip-types --no-warnings --test e2e/session-pwa.test.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",

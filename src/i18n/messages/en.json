@@ -856,6 +856,22 @@
       "moveDown": "Move Down",
       "removeFromFolder": "Remove from Folder",
       "trackNumber": "Ders"
+    },
+    "install": {
+      "title": "Install Sheikh Admin",
+      "iosIntro": "Install the admin app on your iPhone or iPad using Safari.",
+      "iosStep1": "Open this page in Safari and tap Share.",
+      "iosStep2": "Choose Add to Home Screen.",
+      "iosStep3": "Tap Add, then open Sheikh Admin from your Home Screen.",
+      "androidIntro": "Install the admin app on your Android phone using Chrome.",
+      "androidStep1": "Open this page in Chrome and tap the three-dot menu.",
+      "androidStep2": "Choose Install app or Add to Home screen.",
+      "androidStep3": "Confirm Install, then open Sheikh Admin using its new app icon.",
+      "desktopIntro": "Install the admin app using Chrome or Edge.",
+      "desktopStep1": "Select the install icon in the browser address bar.",
+      "desktopStep2": "You can also use the browser menu and choose Install page as app.",
+      "desktopStep3": "Confirm Install, then open Sheikh Admin from your apps.",
+      "notificationsHint": "Open the installed app, sign in and tap the bell to turn on notifications. Allow access when your phone asks."
     }
   },
   "articleDetail": {

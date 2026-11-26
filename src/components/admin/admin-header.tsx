@@ -60,6 +60,10 @@ export function AdminHeader({ onOpenMobileSidebar, username = "Admin" }: AdminHe
       </div>
 
       <div className="flex items-center gap-0.5 sm:gap-1">
+        <InstallButton variant="pill" className="max-w-[9rem] text-xs sm:max-w-none" />
+        <button type="button" onClick={() => setNotificationsOpen(true)} aria-label={tNotifications("title")} className="grid size-11 shrink-0 place-items-center rounded-xl text-adm-primary hover:bg-adm-soft">
+          <Bell className="size-5" />
+        </button>
         <Dropdown
           label={tCommon("switchLanguage")}
           width="w-48"

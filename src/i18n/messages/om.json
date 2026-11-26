@@ -856,6 +856,22 @@
       "moveDown": "Gadi Siqsi",
       "removeFromFolder": "Kuusaa Keessaa Baasi",
       "trackNumber": "Darsii"
+    },
+    "install": {
+      "title": "Appii Bulchiinsa Sheekhaa fe’i",
+      "iosIntro": "Appii bulchiinsaa iPhone yookiin iPad irratti Safari fayyadamuun fe’i.",
+      "iosStep1": "Fuula kana Safari keessatti baniitii Share tuqi.",
+      "iosStep2": "Add to Home Screen filadhu.",
+      "iosStep3": "Add tuqiitii appicha iskiriinii jalqabaa irraa bani.",
+      "androidIntro": "Appii bulchiinsaa bilbila Android irratti Chrome fayyadamuun fe’i.",
+      "androidStep1": "Fuula kana Chrome keessatti baniitii tarree tuqaa sadii tuqi.",
+      "androidStep2": "Install app yookiin Add to Home screen filadhu.",
+      "androidStep3": "Install mirkaneessiitii appicha mallattoo haaraa irraa bani.",
+      "desktopIntro": "Appii bulchiinsaa Chrome yookiin Edge fayyadamuun fe’i.",
+      "desktopStep1": "Mallattoo fe’umsaa teessoo biraawzarii irratti filadhu.",
+      "desktopStep2": "Tarree biraawzarii keessaa Install page as app filachuu dandeessa.",
+      "desktopStep3": "Install mirkaneessiitii appicha appiiwwan kee keessaa bani.",
+      "notificationsHint": "Appii fe’ame bani, seeniitii beeksisaaf mallattoo bilbilaa tuqi. Bilbilli kee yeroo gaafatu hayyama kenni."
     }
   },
   "articleDetail": {

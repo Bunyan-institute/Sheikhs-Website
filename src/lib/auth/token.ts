@@ -4,7 +4,7 @@
  */
 
 export const SESSION_COOKIE_NAME = "sheikh_admin_session";
-export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 
 export interface SessionPayload {
   sid: string;
@@ -58,7 +58,9 @@ export async function verifySessionSignature(token: string | undefined): Promise
     const ok = await crypto.subtle.verify("HMAC", await hmacKey("verify"), b64urlDecode(sig) as BufferSource, encoder.encode(body));
     if (!ok) return null;
     const payload = JSON.parse(new TextDecoder().decode(b64urlDecode(body))) as SessionPayload;
-    if (!payload.sid || !payload.username || typeof payload.exp !== "number" || Date.now() > payload.exp) return null;
+    if (!payload.sid || !payload.username || typeof payload.exp !== "number" || Date.now() >= payload.exp) return null;
+    const configuredUsername = process.env.ADMIN_USERNAME?.trim();
+    if (configuredUsername && payload.username !== configuredUsername) return null;
     return payload;
   } catch {
     return null;

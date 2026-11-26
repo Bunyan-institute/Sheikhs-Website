@@ -35,7 +35,7 @@ test("SEO: Scholar entity has full knowledge graph properties", () => {
   assert.equal(scholar["@type"], "Person");
   assert.equal(scholar.name, "Sheikh Muhammed Ferej Megeno");
   assert.ok(scholar.alternateName.includes("ሸይኽ ሙሐመድ ፈረጅ መገኖ"));
-  assert.ok(scholar.alternateName.includes("الشيخ محمد فرج مجنو"));
+  assert.ok(scholar.alternateName.includes("الشيخ محمد فرج مغنو"));
   assert.ok(scholar.sameAs.length >= 4, "Should have YouTube, Facebook, Telegram, TikTok");
   assert.ok(scholar.hasCredential.length >= 4, "Should have degrees and AAOIFI credentials");
   assert.ok(scholar.knowsAbout.includes("Fatwa Issuance & Sharia Rulings"));

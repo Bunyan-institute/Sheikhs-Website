@@ -96,6 +96,24 @@ async function initialize() {
       nowIso(),
     ]);
   }
+
+  const spellingKey = "_arabic_surname_ghayn_v1";
+  if (!(await queryOne("SELECT key FROM site_settings WHERE key = ?;", [spellingKey]))) {
+    const oldName = "محمد فرج مجنو";
+    const correctedName = "محمد فرج مغنو";
+    const textColumns = new Set(["name", "headline", "biography", "title", "summary", "body", "question", "answer", "description", "author", "media_json", "series_json", "lessons_json"]);
+    const definitions = [lectureDef, seriesDef, articleDef, fatwaDef, courseDef, bookDef, eventDef];
+    const tables = [{ table: "scholar_profile", cols: profileCols }, ...definitions];
+    const statements: Statement[] = tables.map(({ table, cols }) => {
+      const fields = cols.filter((column) => textColumns.has(column));
+      return {
+        sql: `UPDATE ${table} SET ${fields.map((column) => `${column} = REPLACE(${column}, ?, ?)`).join(", ")} WHERE ${fields.map((column) => `${column} LIKE ?`).join(" OR ")};`,
+        args: [...fields.flatMap(() => [oldName, correctedName]), ...fields.map(() => `%${oldName}%`)],
+      };
+    });
+    statements.push({ sql: upsertSql("site_settings", ["key", "value_json", "updated_at"], "key"), args: [spellingKey, "true", nowIso()] });
+    await batch(statements);
+  }
 }
 
 /**

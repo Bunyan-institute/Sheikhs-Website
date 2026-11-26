@@ -1,5 +1,6 @@
 "use client";
 
+import { SessionExpiry } from "@/components/admin/session-expiry";
 import { useEffect, useState } from "react";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminHeader } from "@/components/admin/admin-header";
@@ -11,6 +12,7 @@ import { localeDirections, type Locale } from "@/i18n/config";
 interface AdminShellProps {
   children: React.ReactNode;
   username: string;
+  sessionExpiresAt: number;
   pendingInquiriesCount?: number;
   locale?: Locale;
 }
@@ -18,6 +20,7 @@ interface AdminShellProps {
 export function AdminShell({
   children,
   username,
+  sessionExpiresAt,
   pendingInquiriesCount = 0,
   locale = "en",
 }: AdminShellProps) {
@@ -34,6 +37,7 @@ export function AdminShell({
 
   return (
     <AdminFeedbackProvider>
+    <SessionExpiry expiresAt={sessionExpiresAt} />
     <div dir={dir} lang={locale} className="flex min-h-screen bg-adm-bg">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">

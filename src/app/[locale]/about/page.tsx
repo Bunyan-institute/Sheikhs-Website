@@ -121,7 +121,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <div className="space-y-5 bg-white border border-[#0F241C]/10 p-5 sm:p-6 rounded-2xl shadow-xs">
               <div>
                 <p className="font-arabic text-xl text-[#1B6A50] font-bold" dir="rtl">
-                  فضيلة الشيخ محمد فرج مجنو
+                  فضيلة الشيخ محمد فرج مغنو
                 </p>
                 <h2 className="mt-1 font-display text-xl sm:text-2xl text-[#0F241C] break-words">
                   {profile.name}

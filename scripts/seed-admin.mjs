@@ -14,7 +14,7 @@ if (fs.existsSync(credentialFile) && !rotate) {
   const password = crypto.randomBytes(24).toString("base64url");
   const salt = crypto.randomBytes(16).toString("hex");
   credentials = {
-    ADMIN_USERNAME: "sheikh_admin", ADMIN_PASSWORD: password,
+    ADMIN_USERNAME: "Sheiikh", ADMIN_PASSWORD: password,
     ADMIN_PASSWORD_HASH: `${salt}:${crypto.scryptSync(password, salt, 64).toString("hex")}`,
     ADMIN_SESSION_SECRET: crypto.randomBytes(48).toString("base64url"),
   };

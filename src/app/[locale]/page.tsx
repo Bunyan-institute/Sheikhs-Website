@@ -160,7 +160,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
 
                 <p className="font-arabic mt-6 sm:mt-8 text-lg sm:text-xl leading-relaxed text-[#EDF4F0]/90" dir="rtl" lang="ar">
-                  سلسلة الدروس المنهجية والمحاضرات لفضيلة الشيخ محمد فرج مجنو حفظه الله
+                  سلسلة الدروس المنهجية والمحاضرات لفضيلة الشيخ محمد فرج مغنو حفظه الله
                 </p>
                 <p className="mt-3 sm:mt-4 text-[#EDF4F0]/80 text-sm sm:text-base leading-relaxed max-w-lg">
                   {t("featuredDesc")}

@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import { Modal } from "@/components/admin/ui/modal";
 import { useAdminFeedback } from "@/components/admin/ui/feedback";
 import { buttonPrimary, buttonSecondary } from "@/components/admin/ui/form-field";
+import { installPlatform } from "@/lib/pwa";
+import { InstallButton } from "./install-button";
 import { useStandalone } from "@/components/admin/pwa/use-standalone";
 
 interface Device {
@@ -63,7 +65,8 @@ export function NotificationSettings({ open, onClose }: { open: boolean; onClose
   /** Reads the real state of this device and repairs a subscription made with older server keys. */
   const refresh = useCallback(async () => {
     const hasApis = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
-    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const ios = installPlatform(navigator) === "ios";
+    if (ios && !standalone) return setSupport("ios-install");
     if (!hasApis) return setSupport(ios && !standalone ? "ios-install" : "unsupported");
     setSupport("ready");
     setPermission(Notification.permission);
@@ -140,8 +143,11 @@ export function NotificationSettings({ open, onClose }: { open: boolean; onClose
   const sendTest = async () => {
     setBusy(true);
     try {
-      await fetch("/api/admin/push/test", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint }) });
+      const response = await fetch("/api/admin/push/test", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint }) });
+      if (!response.ok) throw new Error("Notification test failed");
       toast.info(t("testSent"));
+    } catch {
+      toast.error(t("failed"));
     } finally {
       setBusy(false);
     }
@@ -163,7 +169,7 @@ export function NotificationSettings({ open, onClose }: { open: boolean; onClose
         <p className="text-sm text-adm-muted">{t("intro")}</p>
 
         {support === "unsupported" && note(t("unsupported"), "warn")}
-        {support === "ios-install" && note(t("iosInstallFirst"), "warn")}
+        {support === "ios-install" && <div className="space-y-3">{note(t("iosInstallFirst"), "warn")}<InstallButton variant="pill" /></div>}
         {support === "ready" && serverReady === false && note(t("notConfigured"), "warn")}
         {support === "ready" && permission === "denied" && note(t("denied"), "warn")}
 

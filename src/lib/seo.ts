@@ -54,7 +54,7 @@ export function getScholarEntity(): ScholarEntity {
     name: "Sheikh Muhammed Ferej Megeno",
     alternateName: [
       "ሸይኽ ሙሐመድ ፈረጅ መገኖ",
-      "الشيخ محمد فرج مجنو",
+      "الشيخ محمد فرج مغنو",
       "Ustaz Muhammad Ferej",
       "Ustaz Muhammed Ferej",
       "Sheikh Muhammad Ferej",
@@ -521,7 +521,7 @@ export const PRIMARY_SITELINKS: SitelinkDefinition[] = [
     description: {
       en: "Academic Islamic papers, Friday reminders, and research articles by Sheikh Muhammed Ferej.",
       am: "የሸይኽ ሙሐመድ ፈረጅ ጥናታዊ ጽሑፎች፣ የጁሙዓ ማስታወሻዎች እና ተከታታይ የዕውቀት ትምህርቶች።",
-      ar: "مقالات علمية وبحوث منهجية وتوجيهات دعوية من كتابات فضيلة الشيخ محمد فرج مجنو.",
+      ar: "مقالات علمية وبحوث منهجية وتوجيهات دعوية من كتابات فضيلة الشيخ محمد فرج مغنو.",
       om: "Barreeffamoota barnootaa fi qorannoowwan Islaamaa Sheekh Muhammad Farajtiin qophaa'an.",
     },
   },
@@ -536,7 +536,7 @@ export const PRIMARY_SITELINKS: SitelinkDefinition[] = [
     description: {
       en: "Complete multi-part audio archives, verified halaqat, and video discourses by Sheikh Muhammed Ferej.",
       am: "በኡስታዝ ሙሐመድ ፈረጅ የተሰጡ የተሟሉ የድምፅ ደርሶች፣ ሀለቃዎች እና ይፋዊ የቪዲዮ ትምህርቶች።",
-      ar: "تسجيلات صوتية ومرئية ودروس منهجية كاملة لفضيلة الشيخ محمد فرج مجنو.",
+      ar: "تسجيلات صوتية ومرئية ودروس منهجية كاملة لفضيلة الشيخ محمد فرج مغنو.",
       om: "Darsiiwwan sagalee fi viidiyoo guutuu Sheekh Muhammad Farajtiin qophaa'an.",
     },
   },
@@ -614,7 +614,7 @@ export function buildWebsiteSchema(locale: string = "en") {
     alternateName: [
       "ሸይኽ ሙሐመድ ፈረጅ መገኖ",
       "ሸይኽ ሙሐመድ ፈረጅ",
-      "الشيخ محمد فرج مجنو",
+      "الشيخ محمد فرج مغنو",
       "الشيخ محمد فرج",
       "Sheikh Muhammed Ferej",
       "Sheekh Muhammad Faraj",
@@ -779,12 +779,12 @@ export function getHomepageMetadata(locale: string): Metadata {
       ],
     },
     ar: {
-      title: "الشيخ محمد فرج مجنو | المنصة العلمية والفتاوى الشرعية الرسمية",
+      title: "الشيخ محمد فرج مغنو | المنصة العلمية والفتاوى الشرعية الرسمية",
       description:
-        "الموقع الرسمي لفضيلة الشيخ محمد فرج مجنو حفظه الله، المستشار الشرعي المعتمد من هيئة أيوفي (AAOIFI). خزانة علمية تضم الفتاوى الشرعية المؤصلة، دروس التفسير، وشروح كتب الحديث والفقه.",
+        "الموقع الرسمي لفضيلة الشيخ محمد فرج مغنو حفظه الله، المستشار الشرعي المعتمد من هيئة أيوفي (AAOIFI). خزانة علمية تضم الفتاوى الشرعية المؤصلة، دروس التفسير، وشروح كتب الحديث والفقه.",
       ogLocale: "ar_SA",
       keywords: [
-        "الشيخ محمد فرج مجنو",
+        "الشيخ محمد فرج مغنو",
         "محمد فرج",
         "فتاوى شرعية",
         "فقه إسلامي",

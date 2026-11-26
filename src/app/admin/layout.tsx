@@ -73,6 +73,7 @@ export default async function AdminLayout({
       <PwaRegister />
       <AdminShell
         username={session.username}
+        sessionExpiresAt={session.expiresAt}
         pendingInquiriesCount={metrics.pendingInquiries}
         locale={locale}
       >
