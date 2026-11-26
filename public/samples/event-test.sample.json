@@ -1,0 +1,16 @@
+{
+  "passing_percentage": 70,
+  "questions": [
+    {
+      "question": "Which source is the primary foundation for Islamic guidance?",
+      "options": ["The Qur'an and authentic Sunnah", "Personal preference alone", "Custom without evidence"],
+      "correct_option_index": 0,
+      "explanation": "The Qur'an and authentic Sunnah are the primary sources of guidance."
+    },
+    {
+      "question": "What should a student do when a question is unclear?",
+      "options": ["Ask for clarification", "Guess without reading", "Skip all remaining questions"],
+      "correct_option_index": 0
+    }
+  ]
+}

@@ -89,6 +89,12 @@ export interface CourseExamConfig {
   questions: ExamQuestion[];
 }
 
+export interface EventTestConfig {
+  event_slug: string;
+  passing_percentage: number;
+  questions: ExamQuestion[];
+}
+
 export interface IssuedCertificateRecord {
   id: string; // Unique serial, e.g. "MFM-2026-TWH-8842"
   verification_token: string; // Cryptographic HMAC digest
@@ -125,5 +131,6 @@ export interface PortalDatabase {
   event_registrations: EventRegistrationRecord[];
   course_enrollments: CourseEnrollmentRecord[];
   course_exams: Record<string, CourseExamConfig>;
+  event_tests?: Record<string, EventTestConfig>;
   certificates: IssuedCertificateRecord[];
 }

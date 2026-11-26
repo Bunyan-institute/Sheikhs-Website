@@ -22,6 +22,7 @@ import {
   X,
   Users,
   Award,
+  ClipboardCheck,
 } from "lucide-react";
 import { InstallButton } from "@/components/admin/pwa/install-button";
 import { useStandalone } from "@/components/admin/pwa/use-standalone";
@@ -52,6 +53,7 @@ export function AdminSidebar({ onCloseMobile, pendingInquiriesCount = 0 }: Admin
     { label: tCommon("qualifications"), href: "/admin/qualifications", icon: Award },
     { label: tCommon("library"), href: "/admin/library", icon: BookOpen },
     { label: tCommon("events"), href: "/admin/events", icon: Calendar },
+    { label: tCommon("tests"), href: "/admin/tests", icon: ClipboardCheck },
     { label: tCommon("media"), href: "/admin/media", icon: ImageIcon },
     {
       label: tCommon("inquiries"),

@@ -27,6 +27,9 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
+      // Camera access is enabled only on the event assessment routes that request it.
+      { source: "/events/:slug/test", headers: [{ key: "Permissions-Policy", value: "camera=(self), microphone=(), geolocation=()" }] },
+      { source: "/:locale/events/:slug/test", headers: [{ key: "Permissions-Policy", value: "camera=(self), microphone=(), geolocation=()" }] },
       // The admin worker and manifest must always be revalidated so updates roll out promptly.
       { source: "/admin-sw.js", headers: [{ key: "Cache-Control", value: "no-cache, no-store, must-revalidate" }, { key: "Service-Worker-Allowed", value: "/admin" }, { key: "Content-Type", value: "application/javascript; charset=utf-8" }] },
       { source: "/admin.webmanifest", headers: [{ key: "Content-Type", value: "application/manifest+json" }, { key: "Cache-Control", value: "no-cache" }] },

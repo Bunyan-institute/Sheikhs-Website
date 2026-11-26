@@ -7,6 +7,7 @@ import { getSiteUrl, buildEventSchema, buildBreadcrumbSchema, buildHreflangAlter
 import { JsonLd } from '@/components/seo/json-ld';
 import type { Metadata } from 'next';
 import { EventRegisterButton } from './event-register-button';
+import { getEventTest } from '@/lib/db/repository';
 
 interface EventDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -50,6 +51,7 @@ export default async function EventDetailPage(props: EventDetailPageProps) {
 
   const event = await getEvent(params.slug, params.locale).catch(() => null);
   if (!event) notFound();
+  const eventTest = await getEventTest(event.slug);
 
   const startDate = new Date(event.starts_at);
   const formattedDate = startDate.toLocaleDateString(params.locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -126,6 +128,11 @@ export default async function EventDetailPage(props: EventDetailPageProps) {
               )}
 
               <div className="mt-4">
+                {eventTest && (
+                  <Link href={`/events/${event.slug}/test`} className="mb-3 flex min-h-11 items-center justify-center rounded-lg bg-[#1B6A50] px-4 py-2 text-center text-sm font-bold text-white hover:bg-[#0D3E2F]">
+                    Open event test ({eventTest.questions.length} questions)
+                  </Link>
+                )}
                 <EventRegisterButton
                   eventId={event.id}
                   eventSlug={event.slug}

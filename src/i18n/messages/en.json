@@ -428,7 +428,8 @@
       "topics": "Topics",
       "keywords": "Keywords",
       "playlists": "Playlists & Folders",
-      "qualifications": "Qualifications"
+      "qualifications": "Qualifications",
+      "tests": "Tests"
     },
     "header": {
       "systemStatus": "System Online • Live Dynamic Sync",

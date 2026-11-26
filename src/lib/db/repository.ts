@@ -10,6 +10,7 @@ import type {
   EventRegistrationRecord,
   CourseEnrollmentRecord,
   CourseExamConfig,
+  EventTestConfig,
   IssuedCertificateRecord,
   PortalDatabase,
 } from "./types";
@@ -726,6 +727,26 @@ const eventDef: Entity<PublicEvent> = {
 export const getAllEvents = () => listAll(eventDef);
 export const getEventByIdOrSlug = (key: string) => findOne(eventDef, key);
 
+export async function getEventTest(slug: string): Promise<EventTestConfig | null> {
+  await ready();
+  const row = await queryOne<Row>("SELECT * FROM event_tests WHERE event_slug = ? LIMIT 1;", [slug]);
+  if (!row) return null;
+  return { event_slug: String(row.event_slug), passing_percentage: Number(row.passing_percentage ?? 70), questions: json(row.questions_json, []) };
+}
+
+export async function saveEventTest(slug: string, test: Omit<EventTestConfig, "event_slug">): Promise<void> {
+  await ready();
+  await execute(`INSERT INTO event_tests (event_slug, passing_percentage, questions_json, updated_at)
+    VALUES (?, ?, ?, ?) ON CONFLICT(event_slug) DO UPDATE SET
+    passing_percentage = excluded.passing_percentage, questions_json = excluded.questions_json, updated_at = excluded.updated_at;`,
+  [slug, test.passing_percentage, JSON.stringify(test.questions), nowIso()]);
+}
+
+export async function deleteEventTest(slug: string): Promise<boolean> {
+  await ready();
+  return (await execute("DELETE FROM event_tests WHERE event_slug = ?;", [slug])).rowsAffected > 0;
+}
+
 export function saveEvent(data: Partial<PublicEvent> & { title: string; slug: string; starts_at: string }) {
   return upsert(eventDef, {
     object: "event",
@@ -753,7 +774,12 @@ export function saveEvent(data: Partial<PublicEvent> & { title: string; slug: st
   });
 }
 
-export const deleteEvent = (id: string) => remove("events", id);
+export async function deleteEvent(id: string) {
+  const event = await getEventByIdOrSlug(id);
+  if (!event) return false;
+  await deleteEventTest(event.slug);
+  return remove("events", id);
+}
 
 // ── Media ──
 
@@ -1437,7 +1463,7 @@ export async function getSystemMetrics() {
 const ALL_TABLES = [
   "scholar_profile", "journey_milestones", "qualifications", "series", "lectures", "articles", "fatwas",
   "courses", "course_exams", "course_enrollments", "certificates", "library_items", "events",
-  "event_registrations", "media_assets", "inquiries",
+  "event_registrations", "event_tests", "media_assets", "inquiries",
 ];
 
 /** Writes a full portal snapshot into SQLite in one transaction, optionally replacing everything. */
@@ -1481,6 +1507,8 @@ async function writeAll(data: PortalDatabase, replace: boolean, only?: Set<strin
     Object.entries(data.course_exams ?? {}).map(([slug, exam]) => [slug, exam.course_id || slug, exam.passing_percentage || 70, JSON.stringify(exam.questions ?? []), nowIso(), nowIso()]),
     "course_slug"
   );
+  add("event_tests", ["event_slug", "passing_percentage", "questions_json", "updated_at"],
+    Object.entries(data.event_tests ?? {}).map(([slug, test]) => [slug, test.passing_percentage || 70, JSON.stringify(test.questions ?? []), nowIso()]), "event_slug");
 
   await batch(statements);
 }
@@ -1493,7 +1521,7 @@ export async function exportDatabase(): Promise<PortalDatabase> {
       getAllFatwas(), getAllCourses(), getAllBooks(), getAllEvents(), getAllMedia(), getAllInquiries(),
       getAllEventRegistrations(), getAllCourseEnrollments(), getAllCertificates(),
     ]);
-  const exams = await queryAll<Row>("SELECT * FROM course_exams;");
+  const [exams, eventTests] = await Promise.all([queryAll<Row>("SELECT * FROM course_exams;"), queryAll<Row>("SELECT * FROM event_tests;")]);
   return {
     version: 2,
     updated_at: nowIso(),
@@ -1502,6 +1530,9 @@ export async function exportDatabase(): Promise<PortalDatabase> {
     course_enrollments: enrollments,
     course_exams: Object.fromEntries(
       exams.map((e) => [String(e.course_slug), { course_id: String(e.course_id), passing_percentage: Number(e.passing_percentage), questions: json(e.questions_json, []) }])
+    ),
+    event_tests: Object.fromEntries(
+      eventTests.map((e) => [String(e.event_slug), { event_slug: String(e.event_slug), passing_percentage: Number(e.passing_percentage), questions: json(e.questions_json, []) }])
     ),
     certificates,
   };

@@ -353,7 +353,16 @@ const MIGRATION_8: string[] = [
   );`,
 ];
 
-const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7, MIGRATION_8];
+const MIGRATION_9: string[] = [
+  `CREATE TABLE IF NOT EXISTS event_tests (
+    event_slug TEXT PRIMARY KEY,
+    passing_percentage INTEGER NOT NULL DEFAULT 70,
+    questions_json TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  );`,
+];
+
+const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7, MIGRATION_8, MIGRATION_9];
 
 /** Re-runs the base CREATE ... IF NOT EXISTS statements (used after a legacy table is set aside). */
 export async function createMissingTables(): Promise<void> {

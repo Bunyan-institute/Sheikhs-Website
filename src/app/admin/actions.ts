@@ -29,6 +29,10 @@ import {
   saveBook,
   deleteBook,
   saveEvent,
+  getEventByIdOrSlug,
+  getEventTest,
+  saveEventTest,
+  deleteEventTest,
   deleteEvent,
   saveMediaItem,
   deleteMediaItem,
@@ -470,6 +474,46 @@ export async function deleteEventAction(id: string) {
   const deleted = await deleteEvent(id);
   refreshCache();
   return { success: deleted };
+}
+
+export async function getEventTestAction(eventSlug: string) {
+  await assertAuthenticated();
+  return getEventTest(eventSlug);
+}
+
+export async function importEventTestAction(eventSlug: string, rawJson: string) {
+  await assertAuthenticated();
+  return guarded(async () => {
+    if (rawJson.length > 1_000_000) throw new UserError("Test file must be smaller than 1 MB.");
+    const event = await getEventByIdOrSlug(eventSlug.trim());
+    if (!event) throw new UserError("Choose an existing event by its slug first.");
+    let input: any;
+    try { input = JSON.parse(rawJson); } catch { throw new UserError("The test file is not valid JSON."); }
+    if (!input || !Array.isArray(input.questions) || input.questions.length < 1 || input.questions.length > 200) {
+      throw new UserError("A test must contain between 1 and 200 questions.");
+    }
+    const passing = Math.round(Number(input.passing_percentage ?? 70));
+    if (passing < 1 || passing > 100) throw new UserError("Passing percentage must be between 1 and 100.");
+    const questions = input.questions.map((q: any, i: number) => {
+      if (!q || typeof q.question !== "string" || !q.question.trim() || !Array.isArray(q.options) || q.options.length < 2 || q.options.length > 10) {
+        throw new UserError(`Question ${i + 1} needs text and 2–10 answer options.`);
+      }
+      const options = q.options.map((o: unknown) => typeof o === "string" ? o.trim() : "");
+      const correct = Number(q.correct_option_index);
+      if (options.some((o: string) => !o) || !Number.isInteger(correct) || correct < 0 || correct >= options.length) {
+        throw new UserError(`Question ${i + 1} has invalid options or correct_option_index.`);
+      }
+      return { id: `q${i + 1}`, question: q.question.trim().slice(0, 2000), options, correct_option_index: correct, ...(typeof q.explanation === "string" && q.explanation.trim() ? { explanation: q.explanation.trim().slice(0, 1000) } : {}) };
+    });
+    await saveEventTest(event.slug, { passing_percentage: passing, questions });
+    refreshCache();
+    return { success: true as const, count: questions.length, eventSlug: event.slug };
+  });
+}
+
+export async function deleteEventTestAction(eventSlug: string) {
+  await assertAuthenticated();
+  return { success: await deleteEventTest(eventSlug) };
 }
 
 // ── Media Actions ──
