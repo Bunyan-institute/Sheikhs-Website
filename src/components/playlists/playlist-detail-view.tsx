@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   FolderKanban,
@@ -13,9 +12,12 @@ import {
   Music,
   ExternalLink,
   ChevronLeft,
+  ChevronRight,
   Volume2,
 } from "lucide-react";
 import type { PublicSeries, PublicLecture } from "@/lib/api/types";
+import { sortPlaylistTracks } from "@/lib/playlists";
+import { parseMediaUrl } from "@/lib/media-source";
 import { formatDuration } from "@/lib/utils";
 
 interface PlaylistDetailViewProps {
@@ -27,14 +29,15 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
   const [searchQuery, setSearchQuery] = useState("");
   const [currentTrackId, setCurrentTrackId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackError, setPlaybackError] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const lectures = playlist.lectures || [];
 
   // Sort lectures strictly by series position
   const sortedLectures = useMemo(() => {
-    return [...lectures].sort((a, b) => (a.series?.position || 0) - (b.series?.position || 0));
-  }, [lectures]);
+    return sortPlaylistTracks(lectures, locale);
+  }, [lectures, locale]);
 
   // Filtered by user search
   const filteredLectures = useMemo(() => {
@@ -55,52 +58,63 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
     return sortedLectures.find((l) => l.id === currentTrackId) || null;
   }, [sortedLectures, currentTrackId]);
 
+  const playableTracks = sortedLectures.filter((l) => {
+    const source = parseMediaUrl(l.media.audio);
+    return source.valid && (source.provider === "direct" || source.provider === "upload");
+  });
+  const currentIndex = playableTracks.findIndex((l) => l.id === currentTrackId);
   const handlePlayTrack = (lecture: PublicLecture) => {
-    if (!lecture.media?.audio) return;
-    if (currentTrackId === lecture.id) {
-      if (audioRef.current) {
-        if (isPlaying) {
-          audioRef.current.pause();
-          setIsPlaying(false);
-        } else {
-          audioRef.current.play();
-          setIsPlaying(true);
-        }
-      }
-    } else {
-      setCurrentTrackId(lecture.id);
-      setIsPlaying(true);
-      if (audioRef.current) {
-        audioRef.current.src = lecture.media.audio;
-        audioRef.current.play().catch(() => setIsPlaying(false));
-      }
+    if (!lecture.media.audio || !audioRef.current) return;
+    setPlaybackError("");
+    const audio = audioRef.current;
+    if (currentTrackId === lecture.id && !audio.paused) {
+      audio.pause();
+      return;
     }
+    if (currentTrackId !== lecture.id) {
+      audio.src = lecture.media.audio;
+      setCurrentTrackId(lecture.id);
+    }
+    audio.play().catch((error: unknown) => {
+      if ((error instanceof DOMException && error.name === "AbortError") || audio.getAttribute("src") !== lecture.media.audio) return;
+      setIsPlaying(false);
+      setPlaybackError(locale === "am" ? "ድምፁን መጫወት አልተቻለም። እንደገና ይሞክሩ ወይም ያውርዱ።" : locale === "ar" ? "تعذر تشغيل الصوت. حاول مجدداً أو حمّل الملف." : locale === "om" ? "Sagaleen hin banamne. Irra deebi'i yookiin buufadhu." : "Audio could not play. Try again or download the file.");
+    });
   };
 
   return (
     <div className="space-y-8">
-      {/* Hidden Audio Element */}
+      {/* One player only; no audio downloads until a lesson is selected. */}
+      <div hidden={!currentTrack} className="sticky top-24 z-30 rounded-2xl bg-[#0D3E2F] p-3 shadow-xl">
       <audio
         ref={audioRef}
+        controls
+        preload="none"
+        hidden={!currentTrack}
+        aria-label={currentTrack?.title || "Audio player"}
+        className="w-full"
+        onError={() => {
+          setIsPlaying(false);
+          setPlaybackError("Audio could not load. Try another lesson or use the download link.");
+        }}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         onEnded={() => {
-          // Auto advance to next ders in sequence
-          if (!currentTrackId) return;
-          const idx = sortedLectures.findIndex((l) => l.id === currentTrackId);
-          if (idx >= 0 && idx < sortedLectures.length - 1) {
-            handlePlayTrack(sortedLectures[idx + 1]);
-          } else {
-            setIsPlaying(false);
+          setIsPlaying(false);
+          if (currentIndex >= 0 && currentIndex < playableTracks.length - 1) {
+            handlePlayTrack(playableTracks[currentIndex + 1]);
           }
         }}
       />
 
+      {playbackError && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">{playbackError}</p>}
+
       {/* Floating Sticky Audio Player when a track is active */}
       {currentTrack && currentTrack.media?.audio && (
-        <div className="sticky top-4 z-40 bg-[#0D3E2F] text-[#EDF4F0] rounded-2xl p-4 sm:p-5 shadow-xl border border-[#BF9A45]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4">
+        <div className="bg-[#0D3E2F] text-[#EDF4F0] rounded-2xl p-4 sm:p-5 shadow-xl border border-[#BF9A45]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4">
           <div className="flex items-center gap-3 min-w-0">
             <button
+              aria-label={isPlaying ? "Pause" : "Play"}
               onClick={() => handlePlayTrack(currentTrack)}
               className="w-11 h-11 rounded-full bg-[#BF9A45] hover:bg-[#d4ac53] text-[#072118] flex items-center justify-center shrink-0 shadow-md transition-colors"
             >
@@ -109,7 +123,7 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
             <div className="min-w-0">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#E6D3A3]">
                 <Volume2 className="w-3.5 h-3.5 animate-pulse" />
-                <span>Now Playing • Ders {currentTrack.series?.position?.toString().padStart(2, "0")}</span>
+                <span>{isPlaying ? "Now playing" : "Selected lesson"} · {sortedLectures.findIndex((l) => l.id === currentTrack.id) + 1}</span>
               </div>
               <p className="font-display font-semibold text-sm sm:text-base text-[#EDF4F0] truncate">
                 {currentTrack.title}
@@ -117,7 +131,9 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+          <div className="flex flex-wrap items-center gap-2 shrink-0 self-end sm:self-auto">
+            <button type="button" aria-label="Previous lesson" disabled={currentIndex <= 0} onClick={() => handlePlayTrack(playableTracks[currentIndex - 1])} className="p-2 disabled:opacity-40"><ChevronLeft className="size-5" /></button>
+            <button type="button" aria-label="Next lesson" disabled={currentIndex < 0 || currentIndex >= playableTracks.length - 1} onClick={() => handlePlayTrack(playableTracks[currentIndex + 1])} className="p-2 disabled:opacity-40"><ChevronRight className="size-5" /></button>
             <a
               href={currentTrack.media.audio}
               download={`${currentTrack.slug}.mp3`}
@@ -127,7 +143,7 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
               <span>{locale === "am" ? "ድምፁን ያውርዱ" : locale === "ar" ? "تحميل الصوت" : "Download Audio"}</span>
             </a>
             <Link
-              href={`/${locale}/lectures/${currentTrack.slug}`}
+              href={currentTrack.slug ? `/${locale}/lectures/${currentTrack.slug}` : currentTrack.media.audio}
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#BF9A45]/20 hover:bg-[#BF9A45]/30 text-[#E6D3A3] text-xs font-semibold transition-colors border border-[#BF9A45]/40"
             >
               <span>{locale === "am" ? "ዝርዝር" : locale === "ar" ? "تفاصيل" : "Details"}</span>
@@ -137,12 +153,15 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
         </div>
       )}
 
+      </div>
+
       {/* Search Filter Strip */}
       <div className="bg-white border border-[#0F241C]/10 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
         <div className="relative flex-1">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0F241C]/50" />
           <input
-            type="text"
+            aria-label="Search lessons"
+            type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={
@@ -155,17 +174,18 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
             className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm border border-[#0F241C]/15 rounded-xl bg-[#FAF8F5]/50 focus:outline-none focus:border-[#1B6A50] focus:bg-white"
           />
         </div>
-        <div className="text-xs font-semibold text-[#0F241C]/70 shrink-0">
+        {playableTracks.length > 0 && <button type="button" onClick={() => handlePlayTrack(playableTracks[0])} className="rounded-xl bg-[#0D3E2F] text-white px-4 py-3 text-sm font-semibold">{locale === "am" ? "ሁሉንም አጫውት" : locale === "ar" ? "تشغيل الكل" : locale === "om" ? "Hunda taphachiisi" : "Play all"}</button>}
+        <div role="status" className="text-sm font-semibold text-[#0F241C]/70 shrink-0">
           {filteredLectures.length} {locale === "am" ? "ደርሶች ተገኝተዋል" : locale === "ar" ? "دروس متوفرة" : "lessons found"}
         </div>
       </div>
 
       {/* Sequential Lessons List */}
       <div className="space-y-3">
-        {filteredLectures.map((lec, index) => {
-          const trackNum = lec.series?.position || index + 1;
+        {filteredLectures.map((lec) => {
+          const trackNum = lec.series?.position || sortedLectures.findIndex((l) => l.id === lec.id) + 1;
           const formattedNum = trackNum.toString().padStart(2, "0");
-          const hasAudio = Boolean(lec.media?.audio);
+          const hasAudio = playableTracks.some((l) => l.id === lec.id);
           const isThisPlaying = isPlaying && currentTrackId === lec.id;
 
           return (
@@ -205,7 +225,7 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
                     ) : null}
                     {hasAudio && (
                       <span className="flex items-center gap-1 text-[#1B6A50] font-medium">
-                        <Music className="w-3.5 h-3.5" /> High-Quality Audio
+                        <Music className="w-3.5 h-3.5" /> Audio
                       </span>
                     )}
                   </div>
@@ -250,7 +270,7 @@ export function PlaylistDetailView({ playlist, locale }: PlaylistDetailViewProps
                 )}
 
                 <Link
-                  href={`/${locale}/lectures/${lec.slug}`}
+                  href={lec.slug ? `/${locale}/lectures/${lec.slug}` : lec.media.audio || "/"}
                   title={locale === "am" ? "የደርሱ የተሟላ ገጽ" : "View Lecture Page"}
                   className="p-2 rounded-xl border border-[#0F241C]/15 text-[#0F241C]/80 hover:text-[#1B6A50] hover:border-[#1B6A50] hover:bg-white transition-colors"
                 >

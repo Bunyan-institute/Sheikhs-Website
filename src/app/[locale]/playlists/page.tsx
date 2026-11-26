@@ -1,8 +1,6 @@
-import { getAllSeries } from "@/lib/db/repository";
+import { getPlaylists } from "@/lib/api/playlists";
+import { PublicPlaylistCatalog } from "@/components/playlists/public-playlist-catalog";
 import { setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import Image from "next/image";
-import { FolderKanban, ArrowRight, Layers, Music, BookOpen } from "lucide-react";
 import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
@@ -63,7 +61,7 @@ export default async function PlaylistsPage({ params }: { params: Promise<{ loca
   setRequestLocale(locale);
   const siteUrl = getSiteUrl();
 
-  const playlists = await getAllSeries();
+  const playlists = await getPlaylists(locale);
   const publishedFolders = playlists.filter((p) => p.status !== "draft");
 
   const totalDerses = publishedFolders.reduce(
@@ -126,67 +124,7 @@ export default async function PlaylistsPage({ params }: { params: Promise<{ loca
 
       {/* Main Content: Folder Grid */}
       <div className="max-w-page mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {publishedFolders.map((folder) => {
-            const count = folder.lectures?.length ?? folder.lecture_count ?? 0;
-            return (
-              <Link
-                key={folder.id}
-                href={`/playlists/${folder.slug}`}
-                className="group bg-white border border-[#0F241C]/10 rounded-2xl overflow-hidden shadow-xs hover:border-[#1B6A50] hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div>
-                  {/* Folder Tab Visual Accent */}
-                  <div className="bg-[#FAF8F5] px-5 py-3 border-b border-[#0F241C]/10 flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#1B6A50]">
-                      <FolderKanban className="w-4 h-4 text-[#BF9A45]" />
-                      <span>{locale === "am" ? "አቃፊ" : locale === "ar" ? "مجلد" : "Folder"}</span>
-                    </div>
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#1B6A50]/10 text-[#1B6A50] font-bold text-xs border border-[#1B6A50]/20">
-                      {count} {locale === "am" ? "ደርሶች" : locale === "ar" ? "دروس" : "Derses"}
-                    </span>
-                  </div>
-
-                  {/* Folder Cover Image (if available) */}
-                  {folder.cover?.url ? (
-                    <div className="relative w-full h-40 bg-[#072118] overflow-hidden">
-                      <Image
-                        src={folder.cover.url}
-                        alt={folder.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                    </div>
-                  ) : null}
-
-                  <div className="p-6">
-                    <h2 className="font-display font-bold text-lg sm:text-xl text-[#0F241C] group-hover:text-[#1B6A50] transition-colors leading-snug break-words">
-                      {folder.title}
-                    </h2>
-
-                    {folder.description && (
-                      <p className="text-xs sm:text-sm text-[#0F241C]/70 mt-2.5 line-clamp-3 leading-relaxed break-words">
-                        {folder.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="px-6 py-4 bg-[#FAF8F5]/60 border-t border-[#0F241C]/10 flex items-center justify-between text-xs font-semibold text-[#1B6A50] group-hover:bg-[#1B6A50] group-hover:text-white transition-colors">
-                  <span>
-                    {locale === "am"
-                      ? "አቃፊውን ክፈትና ደርሶችን አዳምጥ"
-                      : locale === "ar"
-                      ? "فتح المجلد واستماع الدروس"
-                      : "Open Folder & Listen"}
-                  </span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        <PublicPlaylistCatalog locale={locale} />
       </div>
     </div>
   );

@@ -84,10 +84,14 @@ Subscriptions are stored in the database (`push_subscriptions`), so they survive
 ```bash
 npm run test:unit        # pure logic: links, slugs, rich text, XSS, push encryption (no server)
 npm run test:i18n        # all four language files have the same keys
+npm run test:media       # playlist ordering, draft visibility, duplicate audio and file availability
+npm run test:media:e2e   # public catalogue, playback, mobile locales and all audio links (app running)
 npm run test:e2e         # the full admin workflow in a real browser (needs the app running)
 npm run test:pwa         # manifest, service worker, installed-app lock
 npm run test:push        # notifications; start the app with PUSH_TEST_SINK=http://127.0.0.1:4599/sink
 ```
+
+For media browser checks, start the app with `--hostname localhost` and set `BASE_URL=http://localhost:3002`; set `CHROMIUM_PATH` if your Chromium binary is elsewhere.
 
 Set `BASE_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` for a different server, and `E2E_SLOW=4` for a remote database.
 

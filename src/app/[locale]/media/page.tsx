@@ -1,7 +1,9 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getMedia, type MediaItem } from "@/lib/api/media";
+import { getPlaylists } from "@/lib/api/playlists";
 import { getProfile } from "@/lib/api/profile";
+import { PublicPlaylistCatalog } from "@/components/playlists/public-playlist-catalog";
 import { MediaCard } from "@/components/media/media-card";
 import { ArrowRight, FolderKanban } from "lucide-react";
 import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema, buildCollectionSchema } from "@/lib/seo";
@@ -60,7 +62,7 @@ export default async function MediaPage({
   const t = await getTranslations({ locale, namespace: "media" });
   const siteUrl = getSiteUrl();
 
-  const currentKind = kind || "all";
+  const currentKind = ["all", "audio", "videos", "photos", "documents"].includes(kind ?? "") ? kind! : "all";
   let allMedia: MediaItem[] = [];
   try {
     allMedia = await getMedia({ locale });
@@ -72,23 +74,24 @@ export default async function MediaPage({
 
   // URL values are plural (videos, photos, documents); media kinds are singular.
   const kindOf: Record<string, MediaItem["kind"]> = { audio: "audio", videos: "video", photos: "image", documents: "document" };
-  const media = currentKind === "all" ? allMedia : allMedia.filter((m) => m.kind === kindOf[currentKind]);
+  const media = allMedia.filter((m) => m.kind !== "audio" && (currentKind === "all" || m.kind === kindOf[currentKind]));
 
   const breadcrumbs = buildBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
     { name: t("title"), url: `${siteUrl}/${locale}/media` },
   ]);
 
+  const playlists = currentKind === "all" || currentKind === "audio" ? await getPlaylists(locale) : [];
   const collectionSchema = buildCollectionSchema({
     name: `${t("title")} - Sheikh Muhammed Ferej`,
     description: t("subtitle"),
     url: `${siteUrl}/${locale}/media`,
     inLanguage: locale,
-    items: media.slice(0, 30).map((m) => ({
+    items: [...playlists.map((p) => ({ name: p.title, url: `${siteUrl}/${locale}/playlists/${p.slug}`, description: p.description || undefined })), ...media.slice(0, 30).map((m) => ({
       name: m.title,
       url: m.url ? (m.url.startsWith("http") ? m.url : `${siteUrl}${m.url}`) : `${siteUrl}/${locale}/media#${m.id}`,
       description: m.description || undefined,
-    })),
+    }))],
   });
 
   const kinds = [
@@ -213,6 +216,8 @@ export default async function MediaPage({
           ))}
         </div>
 
+        {(currentKind === "all" || currentKind === "audio") && <PublicPlaylistCatalog locale={locale} />}
+
         {/* Media Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {media.map((item) => (
@@ -220,7 +225,7 @@ export default async function MediaPage({
           ))}
         </div>
 
-        {media.length === 0 && (
+        {media.length === 0 && currentKind !== "audio" && currentKind !== "all" && (
           <div className="text-center py-20 bg-white border border-[#0F241C]/10 rounded-2xl p-8">
             <p className="text-[#0F241C]/60 text-sm">No media items available in this category.</p>
           </div>

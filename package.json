@@ -16,7 +16,9 @@
     "test:seo": "node --experimental-strip-types --no-warnings --test e2e/seo.test.mjs",
     "test:i18n": "node scripts/check-i18n-parity.mjs",
     "test:push": "node e2e/push.e2e.mjs",
-    "vapid": "node scripts/generate-vapid.mjs"
+    "vapid": "node scripts/generate-vapid.mjs",
+    "test:media": "node --experimental-strip-types --no-warnings --test e2e/playlists.test.mjs",
+    "test:media:e2e": "node e2e/media.e2e.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",

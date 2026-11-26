@@ -1,8 +1,8 @@
-import { getSeriesByIdOrSlug } from "@/lib/db/repository";
+import { getPlaylist } from "@/lib/api/playlists";
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { ArrowLeft, FolderKanban, Layers, Music, Clock } from "lucide-react";
+import { ArrowLeft, FolderKanban, Clock } from "lucide-react";
 import { getSiteUrl, buildHreflangAlternates, buildBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { notFound } from "next/navigation";
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PlaylistSlugProps): Promise<M
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const siteUrl = getSiteUrl();
-  const playlist = await getSeriesByIdOrSlug(slug);
+  const playlist = await getPlaylist(slug, locale);
 
   if (!playlist) return { title: "Playlist Not Found" };
 
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PlaylistSlugProps): Promise<M
   const description =
     playlist.description ||
     `Complete lesson series and sequential audio lectures: ${playlist.title} by Sheikh Muhammed Ferej Megeno.`;
-  const imageUrl = playlist.cover?.url ? `${siteUrl}${playlist.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
+  const imageUrl = playlist.cover?.url ? new URL(playlist.cover.url, siteUrl).href : `${siteUrl}/images/sheikh-portrait.jpg`;
 
   return {
     title: playlist.title,
@@ -55,7 +55,7 @@ export default async function PlaylistDetailPage({ params }: PlaylistSlugProps) 
   setRequestLocale(locale);
   const siteUrl = getSiteUrl();
 
-  const playlist = await getSeriesByIdOrSlug(slug);
+  const playlist = await getPlaylist(slug, locale);
   if (!playlist) notFound();
 
   const lectures = playlist.lectures || [];
@@ -79,7 +79,7 @@ export default async function PlaylistDetailPage({ params }: PlaylistSlugProps) 
       "@type": "AudioObject",
       position: lec.series?.position || index + 1,
       name: lec.title,
-      url: `${siteUrl}/${locale}/lectures/${lec.slug}`,
+      url: lec.slug ? `${siteUrl}/${locale}/lectures/${lec.slug}` : new URL(lec.media.audio!, siteUrl).href,
     })),
   };
 

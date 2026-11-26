@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Download, Star, ChevronRight, ChevronLeft, WifiOff, Headphones, ShieldCheck, Smartphone } from "lucide-react";
+import { usePathname } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(true);
 
   let t = (key: string) => key;
@@ -30,7 +32,8 @@ export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
   const feat3 = t("adFreeFeature") !== "adFreeFeature" ? t("adFreeFeature") : "100% Free & Ad-Free";
   const ctaBtn = t("downloadButton") !== "downloadButton" ? t("downloadButton") : "Install from Google Play";
 
-  if (!playStoreUrl) return null;
+  // Keep the listening controls and playlist links clear of promotional overlays.
+  if (!playStoreUrl || pathname === "/media" || pathname === "/playlists" || pathname.startsWith("/playlists/")) return null;
 
   return (
     <aside

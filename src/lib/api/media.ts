@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { getAllMedia } from "@/lib/db/repository";
 import { getLectures } from "./lectures";
 import { getLibrary } from "./library";
@@ -13,9 +14,13 @@ export interface MediaItem {
 
 /** Everything shown on /media: lecture audio/video, library documents and admin-managed gallery assets. */
 export async function getMedia(params?: { locale?: string }): Promise<MediaItem[]> {
+  return getMediaForLocale(params?.locale);
+}
+
+const getMediaForLocale = cache(async (locale?: string): Promise<MediaItem[]> => {
   const [lectures, library, assets] = await Promise.all([
-    getLectures({ locale: params?.locale }),
-    getLibrary({ locale: params?.locale }),
+    getLectures({ locale }),
+    getLibrary({ locale }),
     getAllMedia(),
   ]);
 
@@ -48,4 +53,4 @@ export async function getMedia(params?: { locale?: string }): Promise<MediaItem[
   }
 
   return items;
-}
+});
