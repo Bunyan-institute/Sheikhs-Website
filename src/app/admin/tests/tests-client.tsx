@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CheckCircle2, FileUp, Loader2, Download } from "lucide-react";
-import { deleteEventTestAction, getEventTestAction, importEventTestAction } from "../actions";
+import { CheckCircle2, FileUp, Loader2, Download, LockKeyhole, LockKeyholeOpen } from "lucide-react";
+import { deleteEventTestAction, getEventTestAction, importEventTestAction, setEventTestOpenAction } from "../actions";
 import type { PublicEvent } from "@/lib/api/types";
 
 export function TestsClient({ events }: { events: PublicEvent[] }) {
@@ -11,7 +11,9 @@ export function TestsClient({ events }: { events: PublicEvent[] }) {
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [hasTest, setHasTest] = useState(false);
-  useEffect(() => { if (slug) getEventTestAction(slug).then((test) => setHasTest(!!test)).catch(() => setHasTest(false)); }, [slug]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [updatingOpen, setUpdatingOpen] = useState(false);
+  useEffect(() => { setHasTest(false); setIsOpen(false); if (slug) getEventTestAction(slug).then((test) => { setHasTest(!!test); setIsOpen(test?.is_open ?? false); }).catch(() => { setHasTest(false); setIsOpen(false); }); }, [slug]);
   const importFile = async (file?: File) => {
     if (!file) return;
     setStatus("");
@@ -29,6 +31,7 @@ export function TestsClient({ events }: { events: PublicEvent[] }) {
     finally { setBusy(false); }
   };
   const remove = async () => { if (!slug || !window.confirm("Remove the test attached to this event?")) return; const result = await deleteEventTestAction(slug); setHasTest(false); setStatus(result.success ? "Test removed from this event." : "No test was attached to this event."); };
+  const toggleOpen = async () => { if (!slug) return; setUpdatingOpen(true); setStatus(""); try { const result = await setEventTestOpenAction(slug, !isOpen); if (!result.success) throw new Error(result.error); setIsOpen(result.isOpen); setStatus(result.isOpen ? "Exam opened for learners." : "Exam closed. Learners can no longer start or submit it."); } catch (e) { setStatus(e instanceof Error ? e.message : "Could not update exam availability."); } finally { setUpdatingOpen(false); } };
   return <main className="mx-auto max-w-3xl space-y-6 p-4 sm:p-6">
     <header><h1 className="text-2xl font-bold text-[#2D3436]">Event tests</h1><p className="mt-1 text-sm text-[#636E72]">Attach a timed assessment to any event by importing a JSON question file.</p></header>
     <section className="space-y-5 rounded-xl border border-[#E0D8CE] bg-white p-5 shadow-sm sm:p-6">
@@ -38,6 +41,12 @@ export function TestsClient({ events }: { events: PublicEvent[] }) {
         </select>
       </label>
       {hasTest && <p className="flex items-center gap-2 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800"><CheckCircle2 className="size-4"/>A test is attached. Importing another file replaces its question set.</p>}
+      {hasTest && <div className={`flex flex-col gap-3 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between ${isOpen ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}>
+        <div className="flex items-center gap-2 text-sm font-semibold"><span className={`size-2.5 rounded-full ${isOpen ? "bg-emerald-600" : "bg-amber-600"}`} />Exam is {isOpen ? "open" : "closed"}</div>
+        <button type="button" disabled={updatingOpen} onClick={toggleOpen} aria-pressed={isOpen} className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-bold text-white disabled:opacity-60 ${isOpen ? "bg-amber-700 hover:bg-amber-800" : "bg-emerald-700 hover:bg-emerald-800"}`}>
+          {updatingOpen ? <Loader2 className="size-4 animate-spin"/> : isOpen ? <LockKeyhole className="size-4"/> : <LockKeyholeOpen className="size-4"/>}{isOpen ? "Close exam" : "Open exam"}
+        </button>
+      </div>}
       <div className="rounded-lg border border-dashed border-[#BF9A45] bg-[#FCFAF6] p-5">
         <label className="flex cursor-pointer items-center gap-3 text-sm font-semibold text-[#1B6A50]"><FileUp className="size-5"/>Choose test JSON file<input type="file" accept=".json,application/json" className="sr-only" onChange={(e) => importFile(e.target.files?.[0])}/></label>
         {fileText && <p className="mt-3 text-xs text-[#636E72]">File loaded ({new Blob([fileText]).size.toLocaleString()} bytes)</p>}

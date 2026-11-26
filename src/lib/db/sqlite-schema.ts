@@ -362,7 +362,10 @@ const MIGRATION_9: string[] = [
   );`,
 ];
 
-const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7, MIGRATION_8, MIGRATION_9];
+// Admin-controlled availability switch for event tests. Existing exams remain open.
+const MIGRATION_10 = () => addColumnsIfMissing("event_tests", { is_open: "INTEGER NOT NULL DEFAULT 1" });
+
+const MIGRATIONS: Migration[] = [MIGRATION_1, MIGRATION_2, MIGRATION_3, MIGRATION_4, MIGRATION_5, MIGRATION_6, MIGRATION_7, MIGRATION_8, MIGRATION_9, MIGRATION_10];
 
 /** Re-runs the base CREATE ... IF NOT EXISTS statements (used after a legacy table is set aside). */
 export async function createMissingTables(): Promise<void> {

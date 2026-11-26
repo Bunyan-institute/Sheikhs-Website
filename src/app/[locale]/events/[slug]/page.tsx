@@ -128,11 +128,12 @@ export default async function EventDetailPage(props: EventDetailPageProps) {
               )}
 
               <div className="mt-4">
-                {eventTest && (
+                {eventTest?.is_open && (
                   <Link href={`/events/${event.slug}/test`} className="mb-3 flex min-h-11 items-center justify-center rounded-lg bg-[#1B6A50] px-4 py-2 text-center text-sm font-bold text-white hover:bg-[#0D3E2F]">
                     Open event test ({eventTest.questions.length} questions)
                   </Link>
                 )}
+                {eventTest && !eventTest.is_open && <p className="mb-3 rounded-lg bg-[#F5F1EB] px-4 py-3 text-center text-sm font-semibold text-[#636E72]">Exam currently closed</p>}
                 <EventRegisterButton
                   eventId={event.id}
                   eventSlug={event.slug}

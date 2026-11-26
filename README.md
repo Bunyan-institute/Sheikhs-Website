@@ -46,6 +46,8 @@ qualifications, social links, the Play Store link and which public sections are 
 files are stored under `UPLOAD_DIR` and served from `/uploads/…` with range support. **Backup** exports and restores
 everything as JSON.
 
+Event assessments can be imported as JSON from **Admin → Tests**, then opened or closed independently of the event. Closed exams reject both the direct test page and API submissions; existing tests default to open. Camera permission is requested only on the test route and video is not uploaded. Copy/paste/print controls are deterrents, not a guarantee against screenshots or external cameras.
+
 ## Admin as an app (PWA) with notifications
 
 The admin installs like a native app and **only ever opens the admin**: the installed app redirects any public

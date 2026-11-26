@@ -92,6 +92,7 @@ export interface CourseExamConfig {
 export interface EventTestConfig {
   event_slug: string;
   passing_percentage: number;
+  is_open: boolean;
   questions: ExamQuestion[];
 }
 

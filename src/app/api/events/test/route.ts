@@ -9,6 +9,7 @@ export async function GET(req: Request) {
   try {
     const [event, test] = await Promise.all([getEvent(slug), getEventTest(slug)]);
     if (!test) return NextResponse.json({ error: "This event has no test." }, { status: 404 });
+    if (!test.is_open) return NextResponse.json({ error: "This exam is currently closed." }, { status: 409, headers: { "Cache-Control": "no-store" } });
     return NextResponse.json({ event: { title: event.title, slug: event.slug, starts_at: event.starts_at }, passing_percentage: test.passing_percentage,
       questions: test.questions.map(({ id, question, options }) => ({ id, question, options })) }, { headers: { "Cache-Control": "no-store" } });
   } catch { return NextResponse.json({ error: "This test is unavailable." }, { status: 404 }); }
@@ -27,6 +28,7 @@ export async function POST(req: Request) {
     await getEvent(slug);
     const test = await getEventTest(slug);
     if (!test) return NextResponse.json({ error: "This test is unavailable." }, { status: 404 });
+    if (!test.is_open) return NextResponse.json({ error: "This exam is currently closed." }, { status: 409, headers: { "Cache-Control": "no-store" } });
     if (Object.keys(answers).length !== test.questions.length) return NextResponse.json({ error: "Answer every question before submitting." }, { status: 400 });
     let correct = 0;
     for (const q of test.questions) {

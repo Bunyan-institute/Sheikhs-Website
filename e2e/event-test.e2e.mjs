@@ -22,13 +22,36 @@ try {
   await page.locator('input[type=file]').setInputFiles(path.resolve('public/samples/event-test.sample.json'));
   await page.getByRole('button', { name: 'Import test', exact: true }).click();
   await page.getByRole('status').filter({ hasText: 'Imported 2 questions' }).waitFor();
+  await page.getByRole('button', { name: /^(Open|Close) exam$/ }).waitFor();
+  if (await page.getByRole('button', { name: 'Open exam', exact: true }).count()) {
+    await page.getByRole('button', { name: 'Open exam', exact: true }).click();
+    await page.getByRole('status').filter({ hasText: 'Exam opened for learners.' }).waitFor();
+  }
+  await page.getByRole('button', { name: 'Close exam', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: 'Exam closed.' }).waitFor();
   console.log('✓ admin imports the downloadable sample test');
 
   const publicContext = await browser.newContext({ viewport: { width: 390, height: 844 }, permissions: ['camera'] });
   const testPage = await publicContext.newPage();
   const testApi = await testPage.request.get(`${base}/api/events/test?slug=${slug}`);
-  assert.equal(testApi.status(), 200);
-  const payload = await testApi.json();
+  assert.equal(testApi.status(), 409, 'closed exams cannot be loaded through the API');
+  const closedSubmit = await testPage.request.post(`${base}/api/events/test`, { data: { slug, answers: { q1: 0, q2: 0 } } });
+  assert.equal(closedSubmit.status(), 409, 'closed exams cannot be submitted through the API');
+  const closedRoute = await testPage.goto(`${base}/events/${slug}/test`);
+  assert.ok(closedRoute.status() === 404 || closedRoute.ok());
+  assert.equal(await testPage.getByRole('button', { name: /Allow camera and begin/ }).count(), 0, 'closed exams do not render a test start control');
+  const closedEvent = await testPage.goto(`${base}/events/${slug}`);
+  assert.ok((await testPage.locator('body').innerText()).includes('Exam currently closed'));
+  assert.ok(closedEvent.ok());
+
+  await page.goto(`${base}/admin/tests`);
+  await page.getByRole('button', { name: 'Open exam', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: 'Exam opened for learners.' }).waitFor();
+  console.log('✓ closed exam blocks direct page/API access; admin reopens it cleanly');
+
+  const openTestApi = await testPage.request.get(`${base}/api/events/test?slug=${slug}`);
+  assert.equal(openTestApi.status(), 200, 'open exams become available again');
+  const payload = await openTestApi.json();
   assert.equal(payload.questions.length, 2);
   assert.ok(!JSON.stringify(payload).includes('correct_option_index'), 'correct answers are not sent to the browser');
   assert.equal((await testPage.request.post(`${base}/api/events/test`, { data: { slug, answers: { q1: 999, q2: 0 } } })).status(), 400);
@@ -60,6 +83,7 @@ try {
   if (slug) {
     try {
       await page.goto(`${base}/admin/tests`);
+      await page.getByRole('button', { name: 'Remove event test' }).waitFor({ timeout: 10000 });
       if (await page.getByRole('button', { name: 'Remove event test' }).count()) {
         page.once('dialog', (dialog) => dialog.accept());
         await page.getByRole('button', { name: 'Remove event test' }).click();

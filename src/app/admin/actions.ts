@@ -32,6 +32,7 @@ import {
   getEventByIdOrSlug,
   getEventTest,
   saveEventTest,
+  setEventTestOpen,
   deleteEventTest,
   deleteEvent,
   saveMediaItem,
@@ -513,7 +514,19 @@ export async function importEventTestAction(eventSlug: string, rawJson: string) 
 
 export async function deleteEventTestAction(eventSlug: string) {
   await assertAuthenticated();
-  return { success: await deleteEventTest(eventSlug) };
+  const deleted = await deleteEventTest(eventSlug);
+  refreshCache();
+  return { success: deleted };
+}
+
+export async function setEventTestOpenAction(eventSlug: string, isOpen: boolean) {
+  await assertAuthenticated();
+  const event = await getEventByIdOrSlug(eventSlug.trim());
+  if (!event) return { success: false as const, error: "Event not found." };
+  const updated = await setEventTestOpen(event.slug, isOpen);
+  if (!updated) return { success: false as const, error: "No test is attached to this event." };
+  refreshCache();
+  return { success: true as const, isOpen };
 }
 
 // ── Media Actions ──

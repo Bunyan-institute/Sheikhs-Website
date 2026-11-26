@@ -731,15 +731,20 @@ export async function getEventTest(slug: string): Promise<EventTestConfig | null
   await ready();
   const row = await queryOne<Row>("SELECT * FROM event_tests WHERE event_slug = ? LIMIT 1;", [slug]);
   if (!row) return null;
-  return { event_slug: String(row.event_slug), passing_percentage: Number(row.passing_percentage ?? 70), questions: json(row.questions_json, []) };
+  return { event_slug: String(row.event_slug), passing_percentage: Number(row.passing_percentage ?? 70), is_open: Number(row.is_open ?? 1) === 1, questions: json(row.questions_json, []) };
 }
 
-export async function saveEventTest(slug: string, test: Omit<EventTestConfig, "event_slug">): Promise<void> {
+export async function saveEventTest(slug: string, test: Omit<EventTestConfig, "event_slug" | "is_open">): Promise<void> {
   await ready();
   await execute(`INSERT INTO event_tests (event_slug, passing_percentage, questions_json, updated_at)
     VALUES (?, ?, ?, ?) ON CONFLICT(event_slug) DO UPDATE SET
     passing_percentage = excluded.passing_percentage, questions_json = excluded.questions_json, updated_at = excluded.updated_at;`,
   [slug, test.passing_percentage, JSON.stringify(test.questions), nowIso()]);
+}
+
+export async function setEventTestOpen(slug: string, isOpen: boolean): Promise<boolean> {
+  await ready();
+  return (await execute("UPDATE event_tests SET is_open = ?, updated_at = ? WHERE event_slug = ?;", [isOpen ? 1 : 0, nowIso(), slug])).rowsAffected > 0;
 }
 
 export async function deleteEventTest(slug: string): Promise<boolean> {
@@ -1507,8 +1512,8 @@ async function writeAll(data: PortalDatabase, replace: boolean, only?: Set<strin
     Object.entries(data.course_exams ?? {}).map(([slug, exam]) => [slug, exam.course_id || slug, exam.passing_percentage || 70, JSON.stringify(exam.questions ?? []), nowIso(), nowIso()]),
     "course_slug"
   );
-  add("event_tests", ["event_slug", "passing_percentage", "questions_json", "updated_at"],
-    Object.entries(data.event_tests ?? {}).map(([slug, test]) => [slug, test.passing_percentage || 70, JSON.stringify(test.questions ?? []), nowIso()]), "event_slug");
+  add("event_tests", ["event_slug", "passing_percentage", "questions_json", "updated_at", "is_open"],
+    Object.entries(data.event_tests ?? {}).map(([slug, test]) => [slug, test.passing_percentage || 70, JSON.stringify(test.questions ?? []), nowIso(), test.is_open === false ? 0 : 1]), "event_slug");
 
   await batch(statements);
 }
@@ -1532,7 +1537,7 @@ export async function exportDatabase(): Promise<PortalDatabase> {
       exams.map((e) => [String(e.course_slug), { course_id: String(e.course_id), passing_percentage: Number(e.passing_percentage), questions: json(e.questions_json, []) }])
     ),
     event_tests: Object.fromEntries(
-      eventTests.map((e) => [String(e.event_slug), { event_slug: String(e.event_slug), passing_percentage: Number(e.passing_percentage), questions: json(e.questions_json, []) }])
+      eventTests.map((e) => [String(e.event_slug), { event_slug: String(e.event_slug), passing_percentage: Number(e.passing_percentage), is_open: Number(e.is_open ?? 1) === 1, questions: json(e.questions_json, []) }])
     ),
     certificates,
   };
