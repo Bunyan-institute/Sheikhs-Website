@@ -33,8 +33,9 @@ Copy `.env.example` to `.env` (Docker) or `.env.local` (local) and set:
 | `UPLOAD_STORAGE` | `database` or `filesystem`. Defaults to `database` on Vercel + Postgres (no writable disk), `filesystem` elsewhere |
 | `MAX_UPLOAD_MB` | Upload size limit (default 500; 4 when files are stored in the database) |
 
-If admin credentials are not configured, the login uses the mock credentials shown on the login page:
-`admin` / `sheikh_admin_2026!`. Configure `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH` before a public deployment.
+Create a unique administrator with `npm run seed:admin`. This idempotent command saves private login details in the Git-ignored `.env.admin-login.local` (mode 600) and configures a scrypt password hash and random session secret in `.env.local` and `.env.vercel`. Use `npm run seed:admin -- --rotate` only when intentionally rotating the password and invalidating sessions.
+
+On Vercel, configure `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, and `ADMIN_SESSION_SECRET` as encrypted production variables, then deploy. Production refuses login when credentials are missing; demo credentials are available only in unconfigured development environments.
 
 ## What the admin manages
 
@@ -86,6 +87,10 @@ npm run test:unit        # pure logic: links, slugs, rich text, XSS, push encryp
 npm run test:i18n        # all four language files have the same keys
 npm run test:media       # playlist ordering, draft visibility, duplicate audio and file availability
 npm run test:media:e2e   # public catalogue, playback, mobile locales and all audio links (app running)
+npm run test:admin-auth  # production credential and malformed-hash checks
+npm run test:sharing     # safe excerpts, edited translations and landing-page visibility
+npm run test:sharing:e2e # every seeded article/fatwa PNG, downloads, copy links and multilingual previews
+npm run test:admin-audit # real login, all sidebar routes and reversible landing-page/credential edits
 npm run test:e2e         # the full admin workflow in a real browser (needs the app running)
 npm run test:pwa         # manifest, service worker, installed-app lock
 npm run test:push        # notifications; start the app with PUSH_TEST_SINK=http://127.0.0.1:4599/sink
@@ -127,3 +132,9 @@ src/lib/db/repository.ts  all reads/writes    src/lib/db/sqlite-schema.ts  versi
 src/lib/auth/…            sessions and login  src/lib/api/…       public data layer (published content only)
 src/i18n/…                locales and messages
 ```
+
+## Article and fatwa sharing
+
+Every published detail page has native link sharing, a copyable canonical slug URL, WhatsApp/Telegram/Facebook links, and a downloadable 1080 × 1350 PNG post excerpt. Devices supporting file sharing can share the PNG directly. Open Graph previews use a separate 1200 × 630 layout. Images include the title, a clearly labelled excerpt, attribution and the complete source URL. Drafts and unknown slugs have no public image. Bundled fonts and Sharp/Pango support Arabic and Ethiopic without runtime font downloads. Font licenses are included under `public/fonts/`.
+
+Run destructive admin workflow and backup tests only against an isolated test database. `LIVE_ADMIN_AUDIT=1` makes the sidebar audit read-only; it skips profile and qualification changes. Pass test credentials through environment variables without committing private environment files.

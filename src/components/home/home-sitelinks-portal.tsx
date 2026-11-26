@@ -1,3 +1,5 @@
+import type { SectionMap } from "@/lib/api/types";
+import { isPublicSectionLinkEnabled } from "@/lib/sections";
 import { Link } from "@/i18n/navigation";
 import { 
   Scale, 
@@ -11,7 +13,7 @@ import { PRIMARY_SITELINKS } from "@/lib/seo";
 
 const ICONS = [Scale, BookOpen, Video, GraduationCap, HelpCircle];
 
-export function HomeSitelinksPortal({ locale }: { locale: string }) {
+export function HomeSitelinksPortal({ locale, sections }: { locale: string; sections?: Partial<SectionMap> }) {
   const isRtl = locale === "ar";
 
   const badges: Record<string, { en: string; am: string; ar: string; om: string }> = {
@@ -63,6 +65,7 @@ export function HomeSitelinksPortal({ locale }: { locale: string }) {
 
         <nav aria-label="Official Scholar Sitelinks" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {PRIMARY_SITELINKS.map((item, idx) => {
+            if (!isPublicSectionLinkEnabled(item.subpath, sections)) return null;
             const Icon = ICONS[idx] || BookOpen;
             const title = item.name[locale] || item.name.en;
             const description = item.description[locale] || item.description.en;

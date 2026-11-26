@@ -25,7 +25,7 @@ export function buildNavigation(sections?: Partial<SectionMap> | null): NavItem[
   ];
 
   // Media replaces Lectures as primary nav item
-  nav.push({ key: "media", href: "/media", labelKey: "nav.media" });
+  if (s.lectures || s.library) nav.push({ key: "media", href: "/media", labelKey: "nav.media" });
 
   const knowledge: NavItem[] = [];
   if (s.articles) {
@@ -79,4 +79,12 @@ export function buildMoreItems(sections?: Partial<SectionMap> | null): NavItem[]
   items.push({ key: "contact", href: "/contact", labelKey: "nav.contact" });
 
   return items;
+}
+
+/** Shared by landing-page portals and public navigation. */
+export function isPublicSectionLinkEnabled(pathname: string, sections?: Partial<SectionMap>): boolean {
+  const settings = { ...DEFAULT_SECTIONS, ...sections };
+  if (pathname === "/media") return settings.lectures || settings.library;
+  const section: Record<string, keyof SectionMap> = { "/articles": "articles", "/fatwas": "fatwas", "/courses": "courses", "/playlists": "lectures", "/events": "events", "/ask": "questions", "/library": "library" };
+  return section[pathname] ? settings[section[pathname]] : true;
 }

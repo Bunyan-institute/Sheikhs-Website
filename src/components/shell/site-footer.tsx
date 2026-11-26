@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import type { PublicProfile } from '@/lib/api/types';
-import { buildNavigation, type NavItem } from '@/lib/sections';
+import { buildNavigation, isPublicSectionLinkEnabled, type NavItem } from '@/lib/sections';
 
 export interface SiteFooterProps {
   profile: PublicProfile;
@@ -52,7 +52,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
     { href: "/articles", labelKey: "nav.articles", section: "articles" as const },
     { href: "/fatwas", labelKey: "nav.fatwas", section: "fatwas" as const },
     { href: "/courses", labelKey: "nav.courses", section: "courses" as const },
-  ].filter((l) => !l.section || profile.sections[l.section]);
+  ].filter((l) => isPublicSectionLinkEnabled(l.href, profile.sections));
 
   const resourceLinks = [
     { href: "/playlists", labelKey: "nav.playlists" },
@@ -60,7 +60,7 @@ export function SiteFooter({ profile, navItems, locale = 'en' }: SiteFooterProps
     { href: "/verify", labelKey: "nav.verify" },
     { href: "/ask", labelKey: "nav.ask", section: "questions" as const },
     { href: "/search", labelKey: "nav.search" },
-  ].filter((l) => !l.section || profile.sections[l.section]);
+  ].filter((l) => isPublicSectionLinkEnabled(l.href, profile.sections));
 
   const profileLinks = [
     { href: "/about", labelKey: "nav.about" },

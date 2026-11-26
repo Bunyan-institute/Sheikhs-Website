@@ -976,5 +976,18 @@
     "title": "Page Not Found",
     "message": "The page or scholarly document you are seeking cannot be located.",
     "backHome": "Return to Home Page"
+  },
+  "sharing": {
+    "title": "Share this post",
+    "shareLink": "Share link",
+    "copyLink": "Copy link",
+    "downloadImage": "Download post image",
+    "shareImage": "Share as image",
+    "preparing": "Preparing image…",
+    "copied": "Link copied.",
+    "downloaded": "Post image downloaded.",
+    "copyError": "Copy the page address from your browser to share it.",
+    "shareError": "Could not share. Try copying the link.",
+    "imageError": "Could not prepare the image. Please try again."
   }
 }

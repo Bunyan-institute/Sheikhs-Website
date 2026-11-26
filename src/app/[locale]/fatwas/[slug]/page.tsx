@@ -1,8 +1,11 @@
+import { sanitizeArticleHtml } from "@/lib/rich-text-server";
+import { ContentShare } from "@/components/shared/content-share";
+import { shareImagePath } from "@/lib/share";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFatwa } from "@/lib/api/fatwas";
 import { formatDate } from "@/lib/utils";
-import { getSiteUrl, buildFatwaSchema, buildBreadcrumbSchema, buildHreflangAlternates, buildFatwaKeywords } from "@/lib/seo";
+import { getSiteUrl, buildFatwaSchema, buildBreadcrumbSchema, buildHreflangAlternates, getLocalizedUrl, buildFatwaKeywords } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -13,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   try {
     const fatwa = await getFatwa(slug, locale);
     const siteUrl = getSiteUrl();
-    const pageUrl = `${siteUrl}/${locale}/fatwas/${slug}`;
+    const pageUrl = getLocalizedUrl(`/fatwas/${fatwa.slug}`, locale);
     const cleanQuestion = fatwa.question ? fatwa.question.replace(/<[^>]*>?/gm, "").slice(0, 200).trim() : "";
     const description = fatwa.summary || cleanQuestion || "Islamic jurisprudential ruling by Sheikh Muhammed Ferej Megeno.";
 
@@ -34,9 +37,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         tags: [...(fatwa.categories || []), ...(fatwa.tags || [])],
         images: [
           {
-            url: `${siteUrl}/images/sheikh-portrait.jpg`,
+            url: `${siteUrl}${shareImagePath("fatwas", fatwa.slug, locale, true)}`,
             width: 1200,
-            height: 1200,
+            height: 630,
             alt: `Fatwa: ${fatwa.title} by Sheikh Muhammed Ferej`,
           },
         ],
@@ -45,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         card: "summary_large_image",
         title: `${fatwa.title} | Sheikh Muhammed Ferej Megeno`,
         description,
-        images: [`${siteUrl}/images/sheikh-portrait.jpg`],
+        images: [`${siteUrl}${shareImagePath("fatwas", fatwa.slug, locale, true)}`],
       },
     };
   } catch {
@@ -131,6 +134,8 @@ export default async function FatwaDetailPage({
             </h1>
           </header>
 
+          <ContentShare title={fatwa.title} url={getLocalizedUrl(`/fatwas/${fatwa.slug}`, locale)} kind="fatwas" slug={fatwa.slug} locale={locale} />
+
           <div className="space-y-6 sm:space-y-8">
             {fatwa.question && (
               <section className="bg-[#EDF4F0] border border-[#BF9A45]/30 rounded-2xl p-5 sm:p-7">
@@ -139,7 +144,7 @@ export default async function FatwaDetailPage({
                 </h2>
                 <div 
                   className="prose prose-base max-w-none text-[#0F241C] leading-relaxed break-words"
-                  dangerouslySetInnerHTML={{ __html: formatMarkdown(fatwa.question) }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeArticleHtml(formatMarkdown(fatwa.question)) }}
                 />
               </section>
             )}
@@ -151,7 +156,7 @@ export default async function FatwaDetailPage({
                 </h2>
                 <div 
                   className="prose prose-lg max-w-none text-[#0F241C]/85 break-words font-sans leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: formatMarkdown(fatwa.answer) }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeArticleHtml(formatMarkdown(fatwa.answer)) }}
                 />
               </section>
             )}

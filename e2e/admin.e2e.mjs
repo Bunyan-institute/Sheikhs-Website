@@ -26,7 +26,9 @@ const assert = (cond, msg) => {
 };
 // The admin forms use bare <label> siblings, so find the control next to the label text.
 const F = (scope, text) =>
-  scope.locator(`xpath=.//label[normalize-space()="${text}"]/following-sibling::*[self::input or self::textarea or self::select][1]`);
+  text instanceof RegExp
+    ? scope.locator("label").filter({ hasText: text }).locator("xpath=following-sibling::*[self::input or self::textarea or self::select][1]")
+    : scope.locator(`xpath=.//label[normalize-space()="${text}"]/following-sibling::*[self::input or self::textarea or self::select][1]`);
 const fakeIp = `10.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
 const post = (url, data) => page.request.post(BASE + url, { data, headers: { "x-forwarded-for": fakeIp } });
 const html = async (url) => (await page.request.get(BASE + url)).text();
@@ -116,6 +118,7 @@ await step("draft is hidden from the public site", async () => {
   assert(!detail.includes("Body from e2e"), "draft body must not be served");
   const html = await (await page.request.get(BASE + "/articles")).text();
   assert(!html.includes(slug), "draft should not be listed");
+  assert((await page.request.get(`${BASE}/api/share/articles/${slug}?locale=en`)).status() === 404, "draft image must not be public");
 });
 await step("publishing makes it public", async () => {
   await page.goto(BASE + "/admin/articles");

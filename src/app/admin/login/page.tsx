@@ -110,7 +110,7 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs uppercase tracking-wider font-bold text-[#2D3436] mb-1.5">
+              <label htmlFor="admin-username" className="block text-xs uppercase tracking-wider font-bold text-[#2D3436] mb-1.5">
                 {tLogin("username")}
               </label>
               <div className="relative">
@@ -118,6 +118,7 @@ export default function AdminLoginPage() {
                   <User className="w-4 h-4" />
                 </div>
                 <input
+                  id="admin-username"
                   type="text"
                   required
                   value={username}
@@ -130,7 +131,7 @@ export default function AdminLoginPage() {
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider font-bold text-[#2D3436] mb-1.5">
+              <label htmlFor="admin-password" className="block text-xs uppercase tracking-wider font-bold text-[#2D3436] mb-1.5">
                 {tLogin("password")}
               </label>
               <div className="relative">
@@ -138,6 +139,7 @@ export default function AdminLoginPage() {
                   <Lock className="w-4 h-4" />
                 </div>
                 <input
+                  id="admin-password"
                   type={showPassword ? "text" : "password"}
                   required
                   value={password}
@@ -150,7 +152,7 @@ export default function AdminLoginPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 end-0 pe-3 flex items-center text-[#636E72] hover:text-[#2D3436]"
-                  tabIndex={-1}
+                  aria-label={showPassword ? tLogin("password") + " — hide" : tLogin("password") + " — show"}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -173,11 +175,7 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-[#E0D8CE] text-center text-xs text-[#636E72]">
-            <p>
-              Default Setup: <code className="bg-[#FAF8F5] px-1.5 py-0.5 rounded border border-[#E0D8CE] text-[#1B5E20]">admin</code> / <code className="bg-[#FAF8F5] px-1.5 py-0.5 rounded border border-[#E0D8CE] text-[#1B5E20]">sheikh_admin_2026!</code>
-            </p>
-          </div>
+
         </div>
 
         <div className="text-center mt-6">

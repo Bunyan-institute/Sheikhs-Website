@@ -11,54 +11,7 @@ import {
 
 export { SESSION_COOKIE_NAME, SESSION_MAX_AGE_SECONDS };
 
-const sha256 = (v: string) => crypto.createHash("sha256").update(v).digest();
-export const DEFAULT_ADMIN_USERNAME = "admin";
-export const DEFAULT_ADMIN_PASSWORD = "sheikh_admin_2026!";
-
-/**
- * Admin credentials come from the environment:
- *   ADMIN_USERNAME, and either ADMIN_PASSWORD_HASH ("salt:hash", see scripts/hash-password.mjs) or ADMIN_PASSWORD.
- * When credentials are not configured, the demo credentials shown on the login page are used.
- */
-function getConfiguredCredentials(): { username: string; passwordHash?: string; password?: string } | null {
-  const username = process.env.ADMIN_USERNAME;
-  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
-  const password = process.env.ADMIN_PASSWORD;
-  if (username && (passwordHash || password)) return { username, passwordHash, password };
-  const g = globalThis as unknown as { __warnedDevCreds?: boolean };
-  if (!g.__warnedDevCreds) {
-    g.__warnedDevCreds = true;
-    console.warn(`[auth] Admin credentials are not configured: using the mock login (${DEFAULT_ADMIN_USERNAME} / ${DEFAULT_ADMIN_PASSWORD}).`);
-  }
-  return { username: DEFAULT_ADMIN_USERNAME, password: DEFAULT_ADMIN_PASSWORD };
-}
-
-export function isAdminConfigured(): boolean {
-  return getConfiguredCredentials() !== null;
-}
-
-export function hashPassword(password: string, salt = crypto.randomBytes(16).toString("hex")): string {
-  return `${salt}:${crypto.scryptSync(password, salt, 64).toString("hex")}`;
-}
-
-function passwordMatches(input: string, creds: NonNullable<ReturnType<typeof getConfiguredCredentials>>): boolean {
-  if (creds.passwordHash) {
-    const [salt, hash] = creds.passwordHash.split(":");
-    if (!salt || !hash) return false;
-    const expected = Buffer.from(hash, "hex");
-    const actual = crypto.scryptSync(input, salt, expected.length);
-    return actual.length === expected.length && crypto.timingSafeEqual(actual, expected);
-  }
-  return crypto.timingSafeEqual(sha256(input), sha256(creds.password ?? ""));
-}
-
-export function verifyAdminCredentials(user: string, pass: string): boolean {
-  const creds = getConfiguredCredentials();
-  if (!creds) return false;
-  const userOk = crypto.timingSafeEqual(sha256(user.trim()), sha256(creds.username.trim()));
-  const passOk = passwordMatches(pass, creds);
-  return userOk && passOk;
-}
+export { DEFAULT_ADMIN_USERNAME, DEFAULT_ADMIN_PASSWORD, hashPassword, verifyAdminCredentials, isAdminConfigured } from "./credentials";
 
 /** Creates a server-side session record and returns the signed cookie value. */
 export async function createSession(username: string): Promise<string> {

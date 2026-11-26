@@ -1,3 +1,4 @@
+import { getQualifications } from "@/lib/db/repository";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getProfile } from "@/lib/api/profile";
@@ -31,10 +32,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const t = await getTranslations({ locale, namespace: "home" });
 
-  const [profile, articlesRes, eventsRes] = await Promise.all([
+  const [profile, articlesRes, eventsRes, qualifications] = await Promise.all([
     getProfile(locale),
     getArticles({ locale }),
     getEvents({ locale }),
+    getQualifications(),
   ]);
   const { socials } = profile;
 
@@ -65,11 +67,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         headline={profile.headline}
         biography={profile.biography}
         photoUrl={profile.photo?.url ?? null}
+        qualificationTitles={qualifications.slice(0, 4).map((q) => q.title)}
+        showMedia={profile.sections.lectures || profile.sections.library}
+        showQuestions={profile.sections.questions}
         locale={locale}
       />
 
       {/* ============ OFFICIAL GOOGLE SITELINKS PORTAL ============ */}
-      <HomeSitelinksPortal locale={locale} />
+      <HomeSitelinksPortal locale={locale} sections={profile.sections} />
 
       {/* ============ SANAD STRIP ============ */}
       <section className="bg-[#072118] text-[#EDF4F0] border-y border-[#BF9A45]/20" aria-label="At a glance">
@@ -94,6 +99,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* ============ MEDIA SECTION ============ */}
+      {(profile.sections.lectures || profile.sections.library) && (
       <section id="media" className="relative py-16 sm:py-20 lg:py-24">
         <div className="absolute inset-0 lattice-light pointer-events-none" aria-hidden="true" />
         <div className="relative mx-auto max-w-page px-4 sm:px-6 lg:px-8">
@@ -365,8 +371,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </section>
+      )}
 
       {/* ============ ARTICLES & LESSONS ============ */}
+      {(profile.sections.articles) && (
       <section id="knowledge" className="bg-[#EDF4F0]/50 py-16 sm:py-20 lg:py-24 border-t border-[#0F241C]/10">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
@@ -395,6 +403,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </section>
+      )}
 
       {/* ============ HADITH BAND ============ */}
       <section className="relative bg-[#0D3E2F] text-[#EDF4F0] overflow-hidden border-y border-[#BF9A45]/30">
@@ -421,6 +430,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* ============ EVENTS ============ */}
+      {(profile.sections.events) && (
       <section id="events" className="py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
@@ -510,6 +520,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </div>
     </section>
+      )}
 
       {/* ============ APP + ASK ============ */}
       <section className="pb-16 sm:pb-20 lg:pb-24">
@@ -561,7 +572,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </article>
 
           {/* Ask the Sheikh */}
-          <article id="ask" className="rounded-3xl bg-white border border-[#0F241C]/10 p-6 sm:p-10 scroll-mt-24 flex flex-col justify-between shadow-xs">
+          {(profile.sections.questions) && (
+      <article id="ask" className="rounded-3xl bg-white border border-[#0F241C]/10 p-6 sm:p-10 scroll-mt-24 flex flex-col justify-between shadow-xs">
             <div>
               <h2 className="font-display text-2xl sm:text-3xl text-[#0F241C] font-bold">{t("askCardTitle")}</h2>
               <p className="mt-3 text-[#0F241C]/75 text-sm sm:text-base leading-relaxed max-w-md">
@@ -616,6 +628,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </Link>
             </div>
           </article>
+      )}
         </div>
       </section>
     </div>

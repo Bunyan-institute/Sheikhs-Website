@@ -454,8 +454,9 @@ export function PlaylistsClient({ initialPlaylists }: { initialPlaylists: Public
                 const trackNumber = lec.series?.position || index + 1;
                 const formattedNum = trackNumber.toString().padStart(2, "0");
                 const hasAudio = Boolean(lec.media?.audio);
-                const isFirst = index === 0;
-                const isLast = index === (activeManagingPlaylist.lectures?.length ?? 0) - 1;
+                const originalIndex = activeManagingPlaylist.lectures?.findIndex((l) => l.id === lec.id) ?? -1;
+                const isFirst = originalIndex <= 0;
+                const isLast = originalIndex < 0 || originalIndex === (activeManagingPlaylist.lectures?.length ?? 0) - 1;
 
                 return (
                   <div
@@ -492,7 +493,7 @@ export function PlaylistsClient({ initialPlaylists }: { initialPlaylists: Public
                     <div className="flex items-center gap-1.5 shrink-0 self-end sm:self-center">
                       <button
                         type="button"
-                        onClick={() => handleMoveLesson(index, "up")}
+                        onClick={() => handleMoveLesson(originalIndex, "up")}
                         disabled={isFirst || isReordering}
                         title={t("moveUp")}
                         className="p-1.5 rounded border border-[#E0D8CE] bg-[#FAF8F5] text-[#2D3436] hover:bg-emerald-50 hover:text-[#1B5E20] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
@@ -501,7 +502,7 @@ export function PlaylistsClient({ initialPlaylists }: { initialPlaylists: Public
                       </button>
                       <button
                         type="button"
-                        onClick={() => handleMoveLesson(index, "down")}
+                        onClick={() => handleMoveLesson(originalIndex, "down")}
                         disabled={isLast || isReordering}
                         title={t("moveDown")}
                         className="p-1.5 rounded border border-[#E0D8CE] bg-[#FAF8F5] text-[#2D3436] hover:bg-emerald-50 hover:text-[#1B5E20] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"

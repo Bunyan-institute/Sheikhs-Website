@@ -9,6 +9,9 @@ export interface ScholarHeroProps {
   biography?: string | null;
   photoUrl?: string | null;
   locale?: string;
+  showMedia?: boolean;
+  showQuestions?: boolean;
+  qualificationTitles?: string[];
 }
 
 export function ScholarHero({
@@ -17,6 +20,9 @@ export function ScholarHero({
   biography,
   photoUrl,
   locale = "en",
+  showMedia = true,
+  showQuestions = true,
+  qualificationTitles,
 }: ScholarHeroProps) {
   let t = (key: string) => key;
   try {
@@ -25,9 +31,9 @@ export function ScholarHero({
     // fallback
   }
 
-  const badgeText = t("heroBadge") !== "heroBadge" ? t("heroBadge") : (headline || "Islamic scholar, educator and Sharia consultant");
-  const scholarName = t("heroName") !== "heroName" ? t("heroName") : name;
-  const bioText = t("heroBio") !== "heroBio" ? t("heroBio") : (biography || "A prominent Ethiopian scholar who has spent more than thirty-five years teaching in traditional circles of knowledge, designing curricula and educating the public across Ethiopia and the Horn of Africa. He serves as President of the Al-Fajr Islamic Foundation.");
+  const badgeText = headline || (t("heroBadge") !== "heroBadge" ? t("heroBadge") : "Islamic scholar, educator and Sharia consultant");
+  const scholarName = name || t("heroName");
+  const bioText = biography || (t("heroBio") !== "heroBio" ? t("heroBio") : "");
   
   const cred1 = t("heroCred1") !== "heroCred1" ? t("heroCred1") : "AAOIFI certified Sharia auditor";
   const cred2 = t("heroCred2") !== "heroCred2" ? t("heroCred2") : "Sharia consultant, Wegagen Bank (Amanah)";
@@ -64,25 +70,16 @@ export function ScholarHero({
             </p>
 
             <ul className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5 max-w-[34rem] text-sm sm:text-[15px] text-start">
-              <li className="flex items-start gap-3">
-                <span className="star-sep mt-1.5 shrink-0 text-[#BF9A45]" />
-                <span className="font-medium text-[#EDF4F0]/90">{cred1}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="star-sep mt-1.5 shrink-0 text-[#BF9A45]" />
-                <span className="font-medium text-[#EDF4F0]/90">{cred2}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="star-sep mt-1.5 shrink-0 text-[#BF9A45]" />
-                <span className="font-medium text-[#EDF4F0]/90">{cred3}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="star-sep mt-1.5 shrink-0 text-[#BF9A45]" />
-                <span className="font-medium text-[#EDF4F0]/90">{cred4}</span>
-              </li>
+              {(qualificationTitles ?? [cred1, cred2, cred3, cred4]).map((credential, index) => (
+                <li key={`${index}-${credential}`} className="flex items-start gap-3">
+                  <span className="star-sep mt-1.5 shrink-0 text-[#BF9A45]" />
+                  <span className="font-medium text-[#EDF4F0]/90">{credential}</span>
+                </li>
+              ))}
             </ul>
 
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3.5">
+              {showMedia && (
               <Link
                 href="/media"
                 className="inline-flex items-center justify-center gap-2.5 bg-[#BF9A45] text-[#072118] font-bold rounded-full px-7 py-3.5 text-sm sm:text-base hover:bg-[#E6D3A3] transition-all shadow-lg shadow-[#072118]/40 min-h-[46px] cursor-pointer"
@@ -92,12 +89,15 @@ export function ScholarHero({
                 </svg>
                 <span>{watchCta}</span>
               </Link>
+              )}
+              {showQuestions && (
               <Link
                 href="/ask"
                 className="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-[#EDF4F0]/40 text-[#EDF4F0] hover:border-[#E6D3A3] hover:text-[#E6D3A3] text-sm sm:text-base font-semibold transition-all min-h-[46px] cursor-pointer"
               >
                 {askCta}
               </Link>
+              )}
             </div>
           </div>
 

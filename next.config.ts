@@ -16,8 +16,11 @@ const projectRoot = path.resolve(import.meta.dirname);
 const nextConfig: NextConfig = {
   // Self-contained server bundle for Docker (node server.js).
   output: "standalone",
+  // Archive exports exceed the default 1 MB action limit; stay under Vercel’s request ceiling.
+  experimental: { serverActions: { bodySizeLimit: "4mb" } },
   agentRules: false, // do not auto-generate AGENTS.md / CLAUDE.md into the repo
   outputFileTracingRoot: projectRoot,
+  outputFileTracingIncludes: { "/api/share/**/*": ["./public/fonts/*.ttf"] },
   turbopack: { root: projectRoot },
   // NEXT_DIST_DIR lets a production build live beside a running dev server (used for PWA testing).
   distDir: process.env.NEXT_DIST_DIR || ".next",

@@ -33,7 +33,7 @@ export function FloatingAppCard({ playStoreUrl }: { playStoreUrl?: string }) {
   const ctaBtn = t("downloadButton") !== "downloadButton" ? t("downloadButton") : "Install from Google Play";
 
   // Keep the listening controls and playlist links clear of promotional overlays.
-  if (!playStoreUrl || pathname === "/media" || pathname === "/playlists" || pathname.startsWith("/playlists/")) return null;
+  if (!playStoreUrl || pathname === "/media" || pathname === "/playlists" || pathname.startsWith("/playlists/") || pathname.startsWith("/articles/") || pathname.startsWith("/fatwas/")) return null;
 
   return (
     <aside

@@ -58,8 +58,20 @@ const ARTICLE_TRANSLATIONS: Record<string, Record<string, { title: string; summa
   },
 };
 
+const SEEDED_ARTICLE_VERSIONS: Record<string, string> = {
+  "shield-from-fire-charity-good-words": "2026-06-26T15:02:00Z",
+  "virtues-of-salawat-on-friday-ibrahimiyyah": "2026-06-26T15:04:00Z",
+  "do-not-ruin-hereafter-for-people": "2026-06-26T15:06:00Z",
+  "selamawi-qelb-spiritual-purity": "2026-09-30T10:00:00Z",
+  "mercy-and-victory-surah-fath-ahqaf": "2026-09-30T10:00:00Z",
+  "keys-to-accepted-dua-adab": "2026-09-30T10:00:00Z",
+  "islamic-parenting-tarbiyat-al-awlad": "2026-09-30T10:00:00Z",
+  "islamic-unity-manhaj-salaf": "2026-09-30T10:00:00Z",
+  "principles-islamic-finance-ethiopia": "2026-09-30T10:00:00Z"
+};
+
 export function localizeArticle(art: PublicArticle, locale?: string): PublicArticle {
-  if (!locale) return art;
+  if (!locale || art.updated_at !== SEEDED_ARTICLE_VERSIONS[art.slug]) return art;
   const translation = ARTICLE_TRANSLATIONS[art.slug]?.[locale];
   if (!translation) return art;
   return {

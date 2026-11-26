@@ -1,9 +1,11 @@
+import { ContentShare } from "@/components/shared/content-share";
+import { shareImagePath } from "@/lib/share";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getArticle } from "@/lib/api/articles";
 import { formatDate } from "@/lib/utils";
 import { renderArticleBody } from "@/lib/rich-text-server";
-import { getSiteUrl, buildArticleSchema, buildBreadcrumbSchema, buildHreflangAlternates } from "@/lib/seo";
+import { getSiteUrl, buildArticleSchema, buildBreadcrumbSchema, buildHreflangAlternates, getLocalizedUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -14,9 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   try {
     const article = await getArticle(slug, locale);
     const siteUrl = getSiteUrl();
-    const pageUrl = `${siteUrl}/${locale}/articles/${slug}`;
+    const pageUrl = getLocalizedUrl(`/articles/${article.slug}`, locale);
     const description = article.summary || "Read scholarly article by Sheikh Muhammed Ferej Megeno.";
-    const imageUrl = article.cover?.url ? `${siteUrl}${article.cover.url}` : `${siteUrl}/images/sheikh-portrait.jpg`;
+    const imageUrl = `${siteUrl}${shareImagePath("articles", article.slug, locale, true)}`;
 
     return {
       title: article.title,
@@ -128,6 +130,8 @@ export default async function ArticlePage({
               </div>
             )}
           </header>
+
+          <ContentShare title={article.title} url={getLocalizedUrl(`/articles/${article.slug}`, locale)} kind="articles" slug={article.slug} locale={locale} />
 
           {article.body && (
             <div 

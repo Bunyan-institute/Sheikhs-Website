@@ -6,7 +6,7 @@ export async function getProfile(locale?: string): Promise<PublicProfile> {
   const isArabic = locale === "ar";
   return {
     ...stored,
-    name: isArabic ? "الشيخ محمد فرج مجنو" : stored.name,
+    name: isArabic && stored.name === "Sheikh Muhammed Ferej Megeno" ? "الشيخ محمد فرج مجنو" : stored.name,
     locale: locale || stored.locale || "en",
     direction: isArabic ? "rtl" : "ltr",
   };

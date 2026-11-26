@@ -976,5 +976,18 @@
     "title": "Fuulli Hin Argamne (404)",
     "message": "Fuulli ykn galmeen barbaaddan argamuu hin dandeenye.",
     "backHome": "Gara Fuula Jalqabaatti Deebi'aa"
+  },
+  "sharing": {
+    "title": "Maxxansa kana qoodi",
+    "shareLink": "Geessituu qoodi",
+    "copyLink": "Geessituu garagalchi",
+    "downloadImage": "Suuraa maxxansaa buufadhu",
+    "shareImage": "Akka suuraatti qoodi",
+    "preparing": "Suuraa qopheessaa jira…",
+    "copied": "Geessituun garagalfameera.",
+    "downloaded": "Suuraan maxxansaa buufameera.",
+    "copyError": "Qooduuf teessoo fuulaa biraawzarii irraa garagalchi.",
+    "shareError": "Qooduun hin danda’amne. Geessituu garagalchi.",
+    "imageError": "Suuraa qopheessuun hin danda’amne. Irra deebi’i."
   }
 }
