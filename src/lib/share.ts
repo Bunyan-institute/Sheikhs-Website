@@ -20,3 +20,7 @@ export function postExcerpt(value: string, limit: number): string {
 export function shareImagePath(kind: "articles" | "fatwas", slug: string, locale: string, preview = false): string {
   return `/api/share/${kind}/${encodeURIComponent(slug)}?locale=${encodeURIComponent(locale)}${preview ? "&format=preview" : ""}`;
 }
+
+export function sharePagesPath(kind: "articles" | "fatwas", slug: string, locale: string): string {
+  return `/api/share/${kind}/${encodeURIComponent(slug)}/pages?locale=${encodeURIComponent(locale)}`;
+}

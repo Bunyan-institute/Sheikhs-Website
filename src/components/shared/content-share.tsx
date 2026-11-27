@@ -2,13 +2,14 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Copy, Download, Share2 } from "lucide-react";
-import { shareImagePath } from "@/lib/share";
+import { shareImagePath, sharePagesPath } from "@/lib/share";
 
 export function ContentShare({ title, url, kind, slug, locale }: { title: string; url: string; kind: "articles" | "fatwas"; slug: string; locale: string }) {
   const t = useTranslations("sharing");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const imageUrl = shareImagePath(kind, slug, locale);
+  const pagesUrl = sharePagesPath(kind, slug, locale);
   const copyLink = async () => {
     try { await navigator.clipboard.writeText(url); setMessage(t("copied")); }
     catch { setMessage(t("copyError")); }
@@ -43,6 +44,15 @@ export function ContentShare({ title, url, kind, slug, locale }: { title: string
         <button type="button" className={button} onClick={copyLink}><Copy className="size-4" />{t("copyLink")}</button>
         <a className={button} href={`${imageUrl}&download=1`} download={`${slug}.png`}><Download className="size-4" />{t("downloadImage")}</a>
         <button type="button" className={button} disabled={busy} onClick={shareImage}><Share2 className="size-4" />{busy ? t("preparing") : t("shareImage")}</button>
+      </div>
+      <div className="mt-4 flex flex-col gap-3 rounded-xl border border-[#BF9A45]/35 bg-[#F8F6EF] p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <h3 className="text-sm font-bold text-[#0D3E2F]">{t("pagesTitle")}</h3>
+          <p className="mt-1 text-xs leading-relaxed text-[#0F241C]/70">{t("pagesDescription")}</p>
+        </div>
+        <a className={`${button} shrink-0`} href={pagesUrl} download={`${slug}-pages.zip`}>
+          <Download className="size-4" />{t("downloadPages")}
+        </a>
       </div>
       <div className="mt-3 flex flex-wrap gap-4 text-sm text-[#1B6A50]">
         <a href={`https://wa.me/?text=${encodeURIComponent(`${title}\n${url}`)}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>

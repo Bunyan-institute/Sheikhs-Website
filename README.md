@@ -137,7 +137,7 @@ src/i18n/…                locales and messages
 
 ## Article and fatwa sharing
 
-Every published detail page has native link sharing, a copyable canonical slug URL, WhatsApp/Telegram/Facebook links, and a downloadable 1080 × 1350 PNG post excerpt. Devices supporting file sharing can share the PNG directly. Open Graph previews use a separate 1200 × 630 layout. Images include the title, a clearly labelled excerpt, attribution and the complete source URL. Drafts and unknown slugs have no public image. Bundled fonts and Sharp/Pango support Arabic and Ethiopic without runtime font downloads. Font licenses are included under `public/fonts/`.
+Every published detail page has native link sharing, a copyable canonical slug URL, WhatsApp/Telegram/Facebook links, and a downloadable 1080 × 1350 PNG post excerpt. Long articles and fatwas can also be exported as numbered, branded page images; one ZIP download contains every page and preserves headings, paragraphs, questions, answers and image descriptions. Devices supporting file sharing can share the post PNG directly. Open Graph previews use a separate 1200 × 630 layout. Images include attribution and the complete source URL. Drafts and unknown slugs have no public image. Bundled fonts and Sharp/Pango support Arabic and Ethiopic without runtime font downloads. Font licenses are included under `public/fonts/`.
 
 Run destructive admin workflow and backup tests only against an isolated test database. `LIVE_ADMIN_AUDIT=1` makes the sidebar audit read-only; it skips profile and qualification changes. Pass test credentials through environment variables without committing private environment files.
 
