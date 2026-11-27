@@ -33,7 +33,7 @@ Copy `.env.example` to `.env` (Docker) or `.env.local` (local) and set:
 | `UPLOAD_STORAGE` | `database` or `filesystem`. Defaults to `database` on Vercel + Postgres (no writable disk), `filesystem` elsewhere |
 | `MAX_UPLOAD_MB` | Upload size limit (default 500; 4 when files are stored in the database) |
 
-Create a unique administrator with `npm run seed:admin`. This idempotent command saves private login details in the Git-ignored `.env.admin-login.local` (mode 600) and configures a scrypt password hash and random session secret in `.env.local` and `.env.vercel`. Use `npm run seed:admin -- --rotate` only when intentionally rotating the password and invalidating sessions.
+Create a unique administrator with `npm run seed:admin`. This idempotent command saves private login details in the Git-ignored `.env.admin-login.local` (mode 600) and configures a scrypt password hash and random session secret in `.env.local` and `.env.vercel`. To choose credentials, set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in the environment before running the command; the password is stored as a scrypt hash in app configuration. Use `npm run seed:admin -- --rotate` only when intentionally rotating the password and invalidating sessions.
 
 On Vercel, configure `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, and `ADMIN_SESSION_SECRET` as encrypted production variables, then deploy. Production refuses login when credentials are missing; demo credentials are available only in unconfigured development environments.
 
