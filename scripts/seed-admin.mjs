@@ -4,17 +4,19 @@ import crypto from "node:crypto";
 
 const credentialFile = ".env.admin.local";
 const rotate = process.argv.includes("--rotate");
+const requestedUsername = process.env.ADMIN_USERNAME?.trim();
+const requestedPassword = process.env.ADMIN_PASSWORD;
 let credentials;
-if (fs.existsSync(credentialFile) && !rotate) {
+if (fs.existsSync(credentialFile) && !rotate && !requestedUsername && !requestedPassword) {
   credentials = Object.fromEntries(fs.readFileSync(credentialFile, "utf8").trim().split("\n").map((line) => {
     const index = line.indexOf("="); return [line.slice(0, index), line.slice(index + 1)];
   }));
   if (!credentials.ADMIN_USERNAME || !credentials.ADMIN_PASSWORD || !credentials.ADMIN_PASSWORD_HASH || !credentials.ADMIN_SESSION_SECRET) throw new Error("Private credential file is incomplete; review it or explicitly use --rotate.");
 } else {
-  const password = crypto.randomBytes(24).toString("base64url");
+  const password = requestedPassword || crypto.randomBytes(24).toString("base64url");
   const salt = crypto.randomBytes(16).toString("hex");
   credentials = {
-    ADMIN_USERNAME: "Sheiikh", ADMIN_PASSWORD: password,
+    ADMIN_USERNAME: requestedUsername || "Sheiikh", ADMIN_PASSWORD: password,
     ADMIN_PASSWORD_HASH: `${salt}:${crypto.scryptSync(password, salt, 64).toString("hex")}`,
     ADMIN_SESSION_SECRET: crypto.randomBytes(48).toString("base64url"),
   };
